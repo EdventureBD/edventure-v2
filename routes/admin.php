@@ -164,6 +164,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('upload-image', ImageUploadController::class);
 });
 
-
 require __DIR__ . '/auth.php';
-
