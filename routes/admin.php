@@ -167,4 +167,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
 require __DIR__ . '/auth.php';
 
-
