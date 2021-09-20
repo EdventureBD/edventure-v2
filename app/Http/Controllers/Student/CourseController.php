@@ -42,6 +42,7 @@ class CourseController extends Controller
                 ->where('batch_student_enrollments.student_id', auth()->user()->id)
                 ->where('payments.student_id', auth()->user()->id)
                 ->first();
+            // dd($enrolled);
             if (!$enrolled) {
                 $enrolled = Payment::where('course_id', $course->id)
                     ->where('student_id', auth()->user()->id)
@@ -49,6 +50,9 @@ class CourseController extends Controller
             }
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
+                if ($enrolled->accepted == 1) {
+                    return redirect()->route('batch-lecture', $batch->slug);
+                }
             }
         }
         return view('student.pages.course.course_preview', compact(

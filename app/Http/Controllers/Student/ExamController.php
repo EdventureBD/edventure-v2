@@ -300,7 +300,7 @@ class ExamController extends Controller
             $exam_result->status = 1;
             $save = $exam_result->save();
             if ($save) {
-                return view('student.pages.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'courseLecture', 'answers', 'total'));
+                return view('student.pages.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total'));
             }
         }
         if ($exam->exam_type === 'CQ') {

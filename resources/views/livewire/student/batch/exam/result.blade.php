@@ -26,7 +26,7 @@
                                         {{ $question->answer == 1 ? 'checked':'' }} />
                                     <label for="radioStacked{{ $question->id }}">A)
                                         {{ $question->field1 }}
-                                        @if($question->answer == 1)
+                                        {{-- @if($question->answer == 1)
                                             @foreach ($answers as $answer)
                                                 @if ($answer == $question->field1)
                                                     @if ($answer == $specific)
@@ -35,7 +35,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        @endif --}}
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio QAoptions" style="padding-bottom: 10px;">
@@ -44,7 +44,7 @@
                                         {{ $question->answer == 2 ? 'checked':'' }} />
                                     <label for="radioStacked{{ $question->id }}">B)
                                         {{ $question->field2 }}
-                                        @if($question->answer == 2)
+                                        {{-- @if($question->answer == 2)
                                             @foreach ($answers as $answer)
                                                 @if ($answer == $question->field2)
                                                     @if ($answer == $specific)
@@ -53,7 +53,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        @endif --}}
                                     </label>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                         {{ $question->answer == 3 ? 'checked':'' }} />
                                     <label for="radioStacked{{ $question->id }}">C)
                                         {{ $question->field3 }}
-                                        @if($question->answer == 3)
+                                        {{-- @if($question->answer == 3)
                                             @foreach ($answers as $answer)
                                                 @if ($answer == $question->field3)
                                                     @if ($answer == $specific)
@@ -73,7 +73,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        @endif --}}
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio QAoptions" style="padding-bottom: 10px;">
@@ -82,7 +82,7 @@
                                         {{ $question->answer == 4 ? 'checked':'' }} />
                                     <label for="radioStacked{{ $question->id }}">D)
                                         {{ $question->field4 }}
-                                        @if($question->answer == 4)
+                                        {{-- @if($question->answer == 4)
                                             @foreach ($answers as $answer)
                                                 @if ($answer == $question->field4)
                                                     @if ($answer == $specific)
@@ -91,7 +91,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                        @endif
+                                        @endif --}}
                                     </label>
                                 </div>
                             </div>

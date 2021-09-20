@@ -85,9 +85,9 @@
                             <div class="page-separator">
                                 <div class="page-separator__text"></div>
                             </div>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <p>Topic: {{ $courseLecture->title }}</p>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <p>Batch: {{ $batch->title }}</p>
                             </li>
