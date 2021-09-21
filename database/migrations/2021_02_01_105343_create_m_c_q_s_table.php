@@ -15,13 +15,13 @@ class CreateMCQSTable extends Migration
     {
         Schema::create('m_c_q_s', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('slug')->unique();
+            $table->longText('question');
+            $table->longText('slug')->unique();
             $table->string('image')->nullable();
-            $table->string('field1');
-            $table->string('field2');
-            $table->string('field3');
-            $table->string('field4');
+            $table->longText('field1');
+            $table->longText('field2');
+            $table->longText('field3');
+            $table->longText('field4');
             $table->integer('answer');
 
             $table->unsignedBigInteger('exam_id');

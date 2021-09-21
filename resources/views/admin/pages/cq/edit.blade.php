@@ -10,6 +10,9 @@
     <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
 
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
+
     <script>
         function previewFile(input) {
             var file = $("input[type=file]").get(0).files[0];
@@ -49,49 +52,47 @@
                                 {{ csrf_field() }}
                                 <input name="examId" type="hidden" value="{{ $exam->id }}">
                                 <input name="slug" type="hidden" value="{{ $exam->slug }}">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="question" class="col-form-label">Question <span
-                                                    class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" name="question"
-                                                value="{{ $cq->question }}" placeholder="Enter question">
-                                            @error('question')
-                                                <p style="color: red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Choose
-                                                        Image</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" name="image" class="custom-file-input hidden"
-                                                                id="exampleInputFile" onchange="previewFile(this);">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choose
-                                                                image</label>
-                                                        </div>
+                                <div class="form-group">
+                                    <label for="question" class="col-form-label">Question <span
+                                            class="must-filled">*</span></label>
+                                    {{-- <input type="text" class="form-control" name="question"
+                                                value="{{ $cq->question }}" placeholder="Enter question"> --}}
+                                    <textarea input="question" id="question" name="question" placeholder="Enter question"
+                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('question') ? old('question') : $cq->question }}</textarea>
+                                    @error('question')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="exampleInputFile" class="col-form-label">Choose
+                                                    Image</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="image" class="custom-file-input hidden"
+                                                            id="exampleInputFile" onchange="previewFile(this);">
+                                                        <label class="custom-file-label" for="exampleInputFile">Choose
+                                                            image</label>
                                                     </div>
-                                                    @error('image')
-                                                        <p style="color: red;">{{ $message }}</p>
-                                                    @enderror
                                                 </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                @if ($cq->image)
-                                                    <img class="product-image" src="{{ Storage::url($cq->image) }}"
-                                                        id="previewImg" class="avatar" alt="...">
-                                                @else
-                                                    <img class="product-image" src="http://placehold.it/150x100"
-                                                        id="previewImg" class="avatar" alt="...">
-                                                @endif
+                                                @error('image')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
-
+                                        <div class="col-md-4">
+                                            @if ($cq->image)
+                                                <img class="product-image" src="{{ Storage::url($cq->image) }}"
+                                                    id="previewImg" class="avatar" alt="...">
+                                            @else
+                                                <img class="product-image" src="http://placehold.it/150x100"
+                                                    id="previewImg" class="avatar" alt="...">
+                                            @endif
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div class="row">
@@ -180,6 +181,28 @@
     <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- Bootstrap4 Duallistbox -->
     <script src="{{ asset('admin/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+
+    <!-- Summernote -->
+    <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <script>
+        $(function() {
+            // Summernote
+            $('#question').summernote({
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
+                        'strikethrough', 'superscript', 'subscript'
+                    ]],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
+                    ['table', ['table']],
+                    ['insert', ['link']],
+                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
+                ]
+            })
+        })
+    </script>
 @endsection
 
 @section('js2')

@@ -18,8 +18,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><b>Course :</b> {{ $exam->course->title }}<br>
-                                @if(!empty($exam->topic)&&!is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
-                                <b>Exam :</b> {{ $exam->title }}</h3>
+                                @if (!empty($exam->topic) && !is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
+                                <b>Exam :</b> {{ $exam->title }}
+                            </h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
@@ -99,7 +100,7 @@
                                     @foreach ($cqs as $cq)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $cq->question }}</td>
+                                            <td>{!! $cq->question !!}</td>
                                             <td>
                                                 <img class="product-image-thumb" src="{{ Storage::url($cq->image) }}"
                                                     alt="">

@@ -104,25 +104,25 @@
                                     @foreach ($mcqs as $mcq)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $mcq->question }}</td>
+                                            <td>{!! $mcq->question !!}</td>
                                             <td>
                                                 <img class="product-image-thumb" src="{{ Storage::url($mcq->image) }}"
                                                     alt="">
                                                 {{-- <img src="{{ Storage::url($mcq->image) }}" alt="{{ $mcq->question }}"> --}}
                                             </td>
-                                            <td>{{ $mcq->field1 }}</td>
-                                            <td>{{ $mcq->field2 }}</td>
-                                            <td>{{ $mcq->field3 }}</td>
-                                            <td>{{ $mcq->field4 }}</td>
+                                            <td>{!! $mcq->field1 !!}</td>
+                                            <td>{!! $mcq->field2 !!}</td>
+                                            <td>{!! $mcq->field3 !!}</td>
+                                            <td>{!! $mcq->field4 !!}</td>
                                             <td>
                                                 @if ($mcq->answer == 1)
-                                                    {{ $mcq->field1 }}
+                                                    {!! $mcq->field1 !!}
                                                 @elseif(($mcq->answer) == 2)
-                                                    {{ $mcq->field2 }}
+                                                    {!! $mcq->field2 !!}
                                                 @elseif(($mcq->answer) == 3)
-                                                    {{ $mcq->field3 }}
+                                                    {!! $mcq->field3 !!}
                                                 @elseif(($mcq->answer) == 4)
-                                                    {{ $mcq->field4 }}
+                                                    {!! $mcq->field4 !!}
                                                 @endif
                                             </td>
                                             <td>{{ $mcq->examTitle }}</td>

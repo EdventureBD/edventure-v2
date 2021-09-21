@@ -27,7 +27,7 @@
                                 <h3 class="text-primary">Question:</h3>
                                 <h4 class="text-muted">
                                     <span style="text-decoration-color: rgb(115, 87, 242);">
-                                        {{ $cq->question }}
+                                        {!! $cq->question !!}
                                     </span>
                                     @if ($cq->image)
                                         <img class="product-image-thumb" style="width: 300px;"

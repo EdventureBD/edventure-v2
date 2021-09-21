@@ -16,8 +16,9 @@
                         <div class="card card-warning">
                             <div class="card-header">
                                 <h3 class="card-title"><b>Course :</b> {{ $exam->course->title }}<br>
-                                    @if(!empty($exam->topic)&&!is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
-                                    <b>Exam :</b> {{ $exam->title }}</h3>
+                                    @if (!empty($exam->topic) && !is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
+                                    <b>Exam :</b> {{ $exam->title }}
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -27,8 +28,9 @@
                                             <div class="form-group">
                                                 <label for="question" class="col-form-label">Question <span
                                                         class="must-filled"></span></label>
-                                                <input type="text" class="form-control" value="{{ $mcq->question }}"
-                                                    disabled>
+                                                {{-- <input type="text" class="form-control" value="{{ $mcq->question }}"
+                                                    disabled> --}}
+                                                <textarea r>{{ $mcq->question }}</textarea>
                                                 @error('question')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -53,40 +55,28 @@
                                             <div class="form-group">
                                                 <label for="field1" class="col-form-label">Option 1</label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $mcq->field1 }}">
-                                                @error('field1')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                                    value="{!! $mcq->field1 !!}">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field2" class="col-form-label">Option 2</label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $mcq->field2 }}">
-                                                @error('field2')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                                    value="{!! $mcq->field2 !!}">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field3" class="col-form-label">Option 3</label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $mcq->field3 }}">
-                                                @error('field3')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                                    value="{!! $mcq->field3 !!}">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field4" class="col-form-label">Option 4</span></label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $mcq->field4 }}">
-                                                @error('field4')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                                    value="{!! $mcq->field4 !!}">
                                             </div>
                                         </div>
                                     </div>
