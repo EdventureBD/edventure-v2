@@ -23,12 +23,10 @@ class CreateMCQSTable extends Migration
             $table->longText('field3');
             $table->longText('field4');
             $table->integer('answer');
-
             $table->unsignedBigInteger('exam_id');
             $table->foreign('exam_id')
                 ->references('id')->on('exams')
                 ->onDelete('cascade');
-
             $table->integer('number_of_attempt');
             $table->integer('gain_marks');
             $table->integer('success_rate');

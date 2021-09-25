@@ -5,6 +5,7 @@
 ])
 
 @section('css1')
+    <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
     <style>
         html {
             scroll-behavior: smooth;
@@ -130,7 +131,8 @@
 
                                 <div class="card-body align-items-center">
                                     <div class="questionMCQ " style="padding: 20px;">
-                                        <h3>{{ $loop->index + 1 }}. {{ $question->question }}</h3>
+                                        <h3>({{ $loop->index + 1 }})  </h3>
+                                        <p>{!! $question->question!!}</p>
                                         <input type="hidden" name="q[{{ $loop->index + 1 }}]"
                                             value="{{ $question->id }}">
                                         <br>
@@ -151,8 +153,9 @@
                                                         id="r{{ $question->field1 }}{{ $loop->index + 1 }}"
                                                         value="{{ $question->field1 }}"
                                                         name="a[{{ $loop->index + 1 }}]" required />
-                                                    <label for="r{{ $question->field1 }}{{ $loop->index + 1 }}">A)
-                                                        {{ $question->field1 }}</label>
+                                                        <span>A)</span>
+                                                    <label for="r{{ $question->field1 }}{{ $loop->index + 1 }}">
+                                                        {!! $question->field1 !!}</label>
                                                 </div>
                                                 <div class="custom-control custom-radio QAoptions"
                                                     style="padding-bottom: 10px;">
@@ -160,8 +163,9 @@
                                                         id="r{{ $question->field2 }}{{ $loop->index + 1 }}"
                                                         value="{{ $question->field2 }}"
                                                         name="a[{{ $loop->index + 1 }}]" />
-                                                    <label for="r{{ $question->field2 }}{{ $loop->index + 1 }}">B)
-                                                        {{ $question->field2 }}</label>
+                                                        <span>B)</span>
+                                                    <label for="r{{ $question->field2 }}{{ $loop->index + 1 }}">
+                                                        {!! $question->field2 !!}</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
@@ -171,8 +175,9 @@
                                                         id="r{{ $question->field3 }}{{ $loop->index + 1 }}"
                                                         value="{{ $question->field3 }}"
                                                         name="a[{{ $loop->index + 1 }}]" />
-                                                    <label for="r{{ $question->field3 }}{{ $loop->index + 1 }}">C)
-                                                        {{ $question->field3 }}</label>
+                                                        <span>C)</span>
+                                                    <label for="r{{ $question->field3 }}{{ $loop->index + 1 }}">
+                                                        {!! $question->field3 !!}</label>
                                                 </div>
                                                 <div class="custom-control custom-radio QAoptions"
                                                     style="padding-bottom: 10px;">
@@ -180,8 +185,9 @@
                                                         id="r{{ $question->field4 }}{{ $loop->index + 1 }}"
                                                         value="{{ $question->field4 }}"
                                                         name="a[{{ $loop->index + 1 }}]" />
-                                                    <label for="r{{ $question->field4 }}{{ $loop->index + 1 }}">D)
-                                                        {{ $question->field4 }}</label>
+                                                        <span>D)</span>
+                                                    <label for="r{{ $question->field4 }}{{ $loop->index + 1 }}">
+                                                        {!! $question->field4 !!}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,6 +215,8 @@
 @endsection
 
 @section('js1')
+    <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
     <!-- Timer for Quiz -->
     <script>
         var timeleft = '<?php echo $exam->duration * 60; ?>';

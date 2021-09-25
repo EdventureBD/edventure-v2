@@ -3,7 +3,10 @@
 'pageName'=>'MCQ Details',
 'secondPageName'=>'MCQ Details'
 ])
-
+@section('css1')
+<!-- summernote -->
+<link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
+@endsection
 @section('content')
     <div>
         <!-- Main content -->
@@ -30,7 +33,7 @@
                                                         class="must-filled"></span></label>
                                                 {{-- <input type="text" class="form-control" value="{{ $mcq->question }}"
                                                     disabled> --}}
-                                                <textarea r>{{ $mcq->question }}</textarea>
+                                                    <p>{!! $mcq->question !!}</p>
                                                 @error('question')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -54,29 +57,25 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field1" class="col-form-label">Option 1</label>
-                                                <input type="text" class="form-control" disabled
-                                                    value="{!! $mcq->field1 !!}">
+                                                <p>{!! $mcq->field1 !!}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field2" class="col-form-label">Option 2</label>
-                                                <input type="text" class="form-control" disabled
-                                                    value="{!! $mcq->field2 !!}">
+                                                <p>{!! $mcq->field2 !!}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field3" class="col-form-label">Option 3</label>
-                                                <input type="text" class="form-control" disabled
-                                                    value="{!! $mcq->field3 !!}">
+                                                <p>{!! $mcq->field3 !!}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field4" class="col-form-label">Option 4</span></label>
-                                                <input type="text" class="form-control" disabled
-                                                    value="{!! $mcq->field4 !!}">
+                                                <p>{!! $mcq->field4 !!}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -159,5 +158,10 @@
         </section>
         <!-- /.content -->
     </div>
+
+@endsection
+@section('js1')
+  <!-- Summernote -->
+  <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 @endsection
