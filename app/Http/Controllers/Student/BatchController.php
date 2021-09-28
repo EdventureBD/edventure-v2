@@ -40,13 +40,13 @@ class BatchController extends Controller
         $specialExams = BatchExam::where('batch_id', $batch->id)
             ->where('status', '1')
             ->get();
-
+        // dd($specialExams);
         foreach ($specialExams as $specialExam) {
             if ($specialExam->exam->special) {
                 array_push($sExams, $specialExam->exam->id);
             }
         }
-        
+
         $specialExams = BatchExam::where('batch_id', $batch->id)
             ->whereIn('exam_id', $sExams)
             ->where('status', '1')
@@ -64,16 +64,16 @@ class BatchController extends Controller
             ->where('topic_id', $courseLecture->topic_id)
             ->where('status', 1)
             ->latest()->first();
-            $start_date="";
-            $start_time="";
-        if(!empty($liveClass->start_date)&& !is_null($liveClass->start_date)){
+        $start_date = "";
+        $start_time = "";
+        if (!empty($liveClass->start_date) && !is_null($liveClass->start_date)) {
             $start_date = date('m-d-Y', strtotime($liveClass->start_date));
         }
-        if(!empty($liveClass->start_time)&& !is_null($liveClass->start_time)){
+        if (!empty($liveClass->start_time) && !is_null($liveClass->start_time)) {
             $start_time = date('h:m:s', strtotime($liveClass->start_time));
         }
-        
-        
-        return view('student.pages.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass','start_date','start_time'));
+
+
+        return view('student.pages.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time'));
     }
 }

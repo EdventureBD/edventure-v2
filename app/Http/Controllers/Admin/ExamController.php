@@ -98,19 +98,22 @@ class ExamController extends Controller
                 ->select('m_c_q_s.*', 'exams.title as examTitle')
                 ->where('exam_id', $exam->id)
                 ->orderby('id', 'DESC')->get();
-            return view('admin.pages.mcq.index', compact('exam', 'mcqs'));
+            // return view('admin.pages.mcq.index', compact('exam', 'mcqs'));
+            return redirect()->route('mcq.index', [$exam, 'mcqs' => $mcqs]);
         } elseif ($exam->exam_type == 'CQ') {
             $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
                 ->select('c_q_s.*', 'exams.title as examTitle')
                 ->where('exam_id', $exam->id)
                 ->orderby('id', 'DESC')->get();
-            return view('admin.pages.cq.index', compact('exam', 'cqs'));
+            // return view('admin.pages.cq.index', compact('exam', 'cqs'));
+            return redirect()->route('cq.index', [$exam, 'mcqs' => $cqs]);
         } elseif ($exam->exam_type == 'Assignment') {
             $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
                 ->select('assignments.*', 'exams.title as examTitle')
                 ->where('exam_id', $exam->id)
                 ->orderby('id', 'DESC')->get();
-            return view('admin.pages.assignment.index', compact('exam', 'assignments'));
+            // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
+            return redirect()->route('assignment.index', [$exam, 'mcqs' => $assignments]);
         }
     }
 

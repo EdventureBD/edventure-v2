@@ -23,6 +23,7 @@ class QuestionImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
+        // dd($row);
         $content_tag_id = $row['content_tag_id'];
         if ($content_tag_id) {
             $content_tag_id = explode(",", $content_tag_id);

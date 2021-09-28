@@ -14,12 +14,12 @@ use App\Http\Controllers\Admin\ExamController;
 
 class CQController extends Controller
 {
-    public function index()
+    public function index(Exam $exam)
     {
         $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
             ->select('c_q_s.*', 'exams.title as examTitle')
             ->get();
-        return view('admin.pages.cq.index', compact('cqs'));
+        return view('admin.pages.cq.index', compact('cqs', 'exam'));
     }
 
     public function create()

@@ -107,17 +107,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // END OF EXAM
 
     // START OF CQ EXAM
-    Route::resource('/cq', CQController::class);
+    Route::resource('{exam}/cq', CQController::class);
     // Route::resource('/exam/cq', CQController::class, ['except' => ['store', 'update']]);
     // END OF CQ EXAM
 
     // START OF MCQ EXAM
-    Route::resource('/mcq', MCQController::class);
+    Route::resource('{exam}/mcq', MCQController::class);
     // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
     // END OF MCQ EXAM
 
     // START OF ASSIGNMENT
-    Route::resource('/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
+    Route::resource('{exam}/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
     // Route::resource('/exam/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
     // END OF ASSIGNMENT
 

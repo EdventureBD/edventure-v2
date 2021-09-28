@@ -21,6 +21,9 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^29.2.0",
+        "@wiris/mathtype-ckeditor5": "^7.27.0",
+        "katex": "^0.13.18",
         "material-design-icons": "^3.0.1"
     }
 }

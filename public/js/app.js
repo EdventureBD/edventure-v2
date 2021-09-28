@@ -3791,9 +3791,22 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // var ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
+// import MathType from '@wiris/mathtype-ckeditor5';
+// import katex from 'katex'
 
-__webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
+
+__webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js"); // ClassicEditor
+//     .create(document.querySelector('#question'), {
+//         plugins: [MathType],
+//         toolbar: ['MathType', 'ChemType']
+//     })
+//     .then(editor => {
+//         console.log('Editor was initialized', editor);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
 
 /***/ }),
 

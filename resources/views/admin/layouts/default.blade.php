@@ -10,8 +10,7 @@
     <!--favicon-->
     <link rel="icon" type="image/png" href="{{ asset('logo.jpg') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
@@ -21,11 +20,12 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        .must-filled{
+        .must-filled {
             color: red;
             font-weight: 800;
             font-size: 110%;
         }
+
     </style>
     @livewireStyles
 </head>
@@ -42,7 +42,7 @@
             @include('admin.includes.header')
             <div class="container-fluid">
                 @include('admin.includes.status')
-                
+
                 @yield('content')
             </div>
         </div>
@@ -58,10 +58,12 @@
     <!-- ./wrapper -->
 
     @livewireScripts
+
     <!-- jQuery -->
     <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -78,7 +80,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             bsCustomFileInput.init();
         });
     </script>

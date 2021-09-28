@@ -19,7 +19,8 @@
                         <div class="card-header">
                             <h3 class="card-title"> <b>Course :</b> {{ $exam->course->title }}<br>
                                 <b>Topic :</b> {{ $exam->topic->title }} <br>
-                                <b>Assignment :</b> {{ $exam->title }} </h3>
+                                <b>Assignment :</b> {{ $exam->title }}
+                            </h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
@@ -111,13 +112,13 @@
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="mr-1"
-                                                        href="{{ route('assignment.show', $assignment->slug) }}"
+                                                        href="{{ route('assignment.show', [$exam->slug, $assignment->slug]) }}"
                                                         title="See Details">
                                                         <button type="button" class="btn btn-info"><i
                                                                 class="fas fa-eye"></i></button>
                                                     </a>
                                                     <a class="mr-1"
-                                                        href="{{ route('assignment.edit', $assignment->slug) }}"
+                                                        href="{{ route('assignment.edit', [$exam->slug, $assignment->slug]) }}"
                                                         title="Edit {{ $assignment->question }}">
                                                         <button class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
@@ -147,7 +148,7 @@
                                                                     <button type="button" class="btn btn-outline-light"
                                                                         data-dismiss="modal">Close</button>
                                                                     <form
-                                                                        action="{{ route('assignment.destroy', $assignment->slug) }}"
+                                                                        action="{{ route('assignment.destroy', [$exam->slug, $assignment->slug]) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')

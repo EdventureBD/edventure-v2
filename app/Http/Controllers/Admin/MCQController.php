@@ -14,12 +14,12 @@ use App\Http\Controllers\Admin\ExamController;
 
 class MCQController extends Controller
 {
-    public function index()
+    public function index(Exam $exam)
     {
         $mcqs = MCQ::join('exams', 'm_c_q_s.exam_id', 'exams.id')
             ->select('m_c_q_s.*', 'exams.title as examTitle')
             ->get();
-        return view('admin.pages.mcq.index', compact('mcqs'));
+        return view('admin.pages.mcq.index', compact('mcqs', 'exam'));
     }
 
     public function create()

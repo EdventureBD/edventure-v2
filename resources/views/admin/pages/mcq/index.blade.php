@@ -18,8 +18,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><b>Course :</b> {{ $exam->course->title }}<br>
-                                @if(!empty($exam->topic)&&!is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
-                                <b>Exam :</b> {{ $exam->title }}</h3>
+                                @if (!empty($exam->topic) && !is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
+                                <b>Exam :</b> {{ $exam->title }}
+                            </h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
@@ -128,12 +129,14 @@
                                             <td>{{ $mcq->examTitle }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('mcq.show', $mcq->slug) }}"
+                                                    <a class="mr-1"
+                                                        href="{{ route('mcq.show', [$exam->slug, $mcq->slug]) }}"
                                                         title="See Details">
                                                         <button type="button" class="btn btn-info"><i
                                                                 class="fas fa-eye"></i></button>
                                                     </a>
-                                                    <a class="mr-1" href="{{ route('mcq.edit', $mcq->slug) }}"
+                                                    <a class="mr-1"
+                                                        href="{{ route('mcq.edit', [$exam->slug, $mcq->slug]) }}"
                                                         title="Edit {{ $mcq->question }}">
                                                         <button class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
@@ -160,7 +163,8 @@
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-outline-light"
                                                                         data-dismiss="modal">Close</button>
-                                                                    <form action="{{ route('mcq.destroy', $mcq->slug) }}"
+                                                                    <form
+                                                                        action="{{ route('mcq.destroy', [$exam->slug, $mcq->slug]) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')

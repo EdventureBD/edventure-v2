@@ -109,12 +109,14 @@
                                             <td>{{ $cq->examTitle }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('cq.show', $cq->slug) }}"
+                                                    <a class="mr-1"
+                                                        href="{{ route('cq.show', [$exam->slug, $cq->slug]) }}"
                                                         title="See Details">
                                                         <button type="button" class="btn btn-info"><i
                                                                 class="fas fa-eye"></i></button>
                                                     </a>
-                                                    <a class="mr-1" href="{{ route('cq.edit', $cq->slug) }}"
+                                                    <a class="mr-1"
+                                                        href="{{ route('cq.edit', [$exam->slug, $cq->slug]) }}"
                                                         title="Edit {{ $cq->question }}">
                                                         <button class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
@@ -141,7 +143,8 @@
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-outline-light"
                                                                         data-dismiss="modal">Close</button>
-                                                                    <form action="{{ route('cq.destroy', $cq->slug) }}"
+                                                                    <form
+                                                                        action="{{ route('cq.destroy', [$exam->slug, $cq->slug]) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')

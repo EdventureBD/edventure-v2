@@ -9,12 +9,12 @@ use App\Http\Controllers\Controller;
 
 class AssignmentController extends Controller
 {
-    public function index()
+    public function index(Exam $exam)
     {
         $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
             ->select('assignments.*', 'exams.title as examTitle')
             ->get();
-        return view('admin.pages.assignments.index', compact('assignments'));
+        return view('admin.pages.assignments.index', compact('assignments', 'exam'));
     }
 
     public function show(Assignment $assignment)
