@@ -25,7 +25,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mt-5 ml-4">
+                                    <div class="col-md-4 mt-5 ml-4 {{ $showSpecialExam ? '' : 'd-none' }}">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" type="checkbox" id="customCheckbox1"
                                                 wire:model="special" value="1">

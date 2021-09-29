@@ -28,6 +28,7 @@ class Create extends Component
     // public $examTypes;
 
     public $showAssignment = true;
+    public $showSpecialExam = true;
 
     public $showQuestionLimit = true;
 
@@ -42,6 +43,7 @@ class Create extends Component
     {
         if ($this->special) {
             $this->showAssignment = false;
+            $this->topicId = null;
         } else {
             $this->showAssignment = true;
         }
@@ -80,9 +82,11 @@ class Create extends Component
         if (($this->examType) == 'Assignment') {
             $this->quesLimit = 0;
             $this->showQuestionLimit = false;
+            $this->showSpecialExam = false;
         } else {
             $this->quesLimit = '';
             $this->showQuestionLimit = true;
+            $this->showSpecialExam = true;
             $this->validate([
                 'examType' => 'required'
             ]);
