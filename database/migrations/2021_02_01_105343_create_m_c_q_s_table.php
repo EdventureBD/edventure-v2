@@ -16,7 +16,7 @@ class CreateMCQSTable extends Migration
         Schema::create('m_c_q_s', function (Blueprint $table) {
             $table->id();
             $table->longText('question');
-            $table->longText('slug')->unique();
+            $table->longText('slug');
             $table->string('image')->nullable();
             $table->longText('field1');
             $table->longText('field2');
