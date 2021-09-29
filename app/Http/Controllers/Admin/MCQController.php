@@ -87,10 +87,10 @@ class MCQController extends Controller
         return view('admin.pages.mcq.details', compact('mcq', 'exam'));
     }
 
-    public function edit(MCQ $mcq)
+    public function edit(Exam $exam,MCQ $mcq)
     {
         $tagId = [];
-        $exam = Exam::where('id', $mcq->exam_id)->first();
+        // $exam = Exam::where('id', $mcq->exam_id)->first();
         $questionContentTags = QuestionContentTag::where('exam_type', "MCQ")
             ->where('question_id', $mcq->id)
             ->get();
@@ -104,7 +104,7 @@ class MCQController extends Controller
         return view('admin.pages.mcq.edit', compact('mcq', 'exam', 'contentTags', 'questionContentTags'));
     }
 
-    public function update(Request $request, MCQ $mcq)
+    public function update(Request $request,Exam $exam, MCQ $mcq)
     {
         $validaterequest = $request->validate([
             'question' => 'required|min:4',
@@ -161,7 +161,7 @@ class MCQController extends Controller
         }
     }
 
-    public function destroy(MCQ $mcq)
+    public function destroy(Exam $exam,MCQ $mcq)
     {
         $exam = Exam::where('id', $mcq->exam_id)->first();
         $delete = $mcq->delete();

@@ -14,21 +14,21 @@ class AssignmentController extends Controller
         $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
             ->select('assignments.*', 'exams.title as examTitle')
             ->get();
-        return view('admin.pages.assignments.index', compact('assignments', 'exam'));
+        return view('admin.pages.assignment.index', compact('assignments', 'exam'));
     }
 
-    public function show(Assignment $assignment)
+    public function show(Exam $exam,Assignment $assignment)
     {
         $exam = Exam::where('id', $assignment->exam_id)->first();
         return view('admin.pages.assignment.details', compact('assignment', 'exam'));
     }
 
-    public function edit(Assignment $assignment)
+    public function edit(Exam $exam,Assignment $assignment)
     {
         return view('admin.pages.assignment.edit', compact('assignment'));
     }
 
-    public function destroy(Assignment $assignment)
+    public function destroy(Exam $exam,Assignment $assignment)
     {
         $exam = Exam::where('id', $assignment->exam_id)->first();
         $delete = $assignment->delete();

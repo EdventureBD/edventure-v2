@@ -55,7 +55,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" method="POST" action="{{ route('mcq.update', $mcq) }}"
+                            <form role="form" method="POST" action="{{ route('mcq.update', [$exam,$mcq]) }}"
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 {{ csrf_field() }}
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             @if ($mcq->image)
-                                                <img class="product-image" src="{{ Storage::url($cq->image) }}"
+                                                <img class="product-image" src="{{ Storage::url($mcq->image) }}"
                                                     id="previewImg" class="avatar" alt="...">
                                             @else
                                                 <img class="product-image" src="http://placehold.it/150x100"

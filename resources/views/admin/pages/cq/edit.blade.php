@@ -46,7 +46,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" method="POST" action="{{ route('cq.update', $cq) }}"
+                            <form role="form" method="POST" action="{{ route('cq.update', [$exam, $cq]) }}"
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 {{ csrf_field() }}

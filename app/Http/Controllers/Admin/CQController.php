@@ -79,16 +79,16 @@ class CQController extends Controller
         return view('admin.pages.cq.create');
     }
 
-    public function show(CQ $cq)
+    public function show(Exam $exam,CQ $cq)
     {
         $exam = Exam::where('id', $cq->exam_id)->select('title')->first();
         return view('admin.pages.cq.details', compact('cq', 'exam'));
     }
 
-    public function edit(CQ $cq)
+    public function edit(Exam $exam,CQ $cq)
     {
         $tagId = [];
-        $exam = Exam::where('id', $cq->exam_id)->first();
+        // $exam = Exam::where('id', $cq->exam_id)->first();
         $questionContentTags = QuestionContentTag::where('exam_type', "CQ")
             ->where('question_id', $cq->id)
             ->get();
@@ -102,7 +102,7 @@ class CQController extends Controller
         return view('admin.pages.cq.edit', compact('cq', 'exam', 'contentTags', 'questionContentTags'));
     }
 
-    public function update(Request $request, CQ $cq)
+    public function update(Request $request, Exam $exam,CQ $cq)
     {
         $validateData = $request->validate([
             'question' => 'required|min:4',
@@ -161,7 +161,7 @@ class CQController extends Controller
         return view('admin.pages.cq.create');
     }
 
-    public function destroy(CQ $cq)
+    public function destroy(Exam $exam,CQ $cq)
     {
         $exam = Exam::where('id', $cq->exam_id)->first();
         $delete = $cq->delete();
