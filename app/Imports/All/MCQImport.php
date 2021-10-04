@@ -16,7 +16,7 @@ class MCQImport implements ToModel
      */
     public function model(array $row)
     {
-        $slug = Str::slug($row['question']);
+        $slug = (string) Str::uuid();
         $check = MCQ::where('slug', $slug)->first();
         if (!$check) {
             $mcq = new MCQ([

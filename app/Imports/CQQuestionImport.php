@@ -29,7 +29,7 @@ class CQQuestionImport implements ToModel, WithHeadingRow
             if ($content_tag_id) {
                 $content_tag_id = explode(",", $content_tag_id);
             }
-            $slug = Str::slug($row['question']);
+            $slug = (string) Str::uuid();
             $check = CQ::where('slug', $slug)->first();
             if (!$check) {
                 $cq = CQ::create([

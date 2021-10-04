@@ -51,6 +51,7 @@ class Edit extends Component
         $assignment->exam_id = $data['examId'];
 
         $save = $assignment->save();
+        $this->image = null;
 
         if ($save) {
             session()->flash('status', 'Assignment created successfully!');

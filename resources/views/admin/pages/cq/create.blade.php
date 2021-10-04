@@ -53,9 +53,7 @@
                                 <input name="slug" type="hidden" value="{{ $exam->slug }}">
                                 <div class="form-group">
                                     <label for="question" class="col-form-label">Question <span
-                                            class="must-filled">*</span></label>
-                                    {{-- <input type="text" class="form-control" name="question"
-                                                value="{{ old('question') }}" placeholder="Enter question"> --}}
+                                            class="must-filled">*</span></label>                                   
                                     <textarea input="question" id="question" name="question" placeholder="Enter question"
                                         style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('question') }}</textarea>
                                     @error('question')
@@ -180,20 +178,7 @@
     <script>
         $(function() {
             // Summernote
-            $('#question').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
+            $('#question').summernote();
         })
     </script>
 

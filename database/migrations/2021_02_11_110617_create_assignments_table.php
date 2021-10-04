@@ -15,8 +15,8 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
+            $table->uuid('slug');
             $table->longText('question');
-            $table->longText('slug');
             $table->string('image')->nullable();
             $table->integer('marks');
 

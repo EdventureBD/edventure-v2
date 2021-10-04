@@ -30,7 +30,7 @@ class MCQController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
+
         $validaterequest = $request->validate([
             'question' => 'required|min:4|unique:m_c_q_s',
             'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
@@ -46,7 +46,7 @@ class MCQController extends Controller
 
         $mcq = new MCQ();
         $mcq->question = $request['question'];
-        $mcq->slug = Str::slug($request['question']);
+        $mcq->slug =(string) Str::uuid();
         if ($request->hasFile('image')) {
             $mcq->image = $request->image->store('public/question/mcq');
         }

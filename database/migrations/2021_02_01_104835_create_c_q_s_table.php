@@ -15,8 +15,8 @@ class CreateCQSTable extends Migration
     {
         Schema::create('c_q_s', function (Blueprint $table) {
             $table->id();
+            $table->uuid('slug');
             $table->longText('question');
-            $table->longText('slug');
             $table->string('image')->nullable();
             $table->integer('marks');
 

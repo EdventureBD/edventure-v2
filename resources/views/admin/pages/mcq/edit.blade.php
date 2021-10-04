@@ -242,76 +242,11 @@
     <script>
         $(function() {
             // Summernote
-            $('#question').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field1').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field2').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field3').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field4').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
+            $('#question').summernote();
+            $('#field1').summernote();
+            $('#field2').summernote();
+            $('#field3').summernote();
+            $('#field4').summernote();
         })
     </script>
 

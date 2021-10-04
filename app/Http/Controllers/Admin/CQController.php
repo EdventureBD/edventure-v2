@@ -49,7 +49,7 @@ class CQController extends Controller
         }
 
         $cq->question = $request['question'];
-        $cq->slug = Str::slug($request['question']);
+        $cq->slug =(string) Str::uuid();
         $cq->marks = $request['marks'];
         $cq->exam_id = $request['examId'];
         $cq->number_of_attempt = 0;

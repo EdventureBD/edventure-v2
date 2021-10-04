@@ -221,123 +221,13 @@
     <script>
         $(function() {
             // Summernote
-            $('#question').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field1').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field2').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field3').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
-            $('#field4').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic',
-                        'strikethrough', 'superscript', 'subscript'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-                ]
-            })
+            $('#question').summernote();
+            $('#field1').summernote();
+            $('#field2').summernote();
+            $('#field3').summernote();
+            $('#field4').summernote();
         })
     </script>
-
-    {{-- CKEDITOR --}}
-    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#question'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor
-            .create(document.querySelector('#field1'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor
-            .create(document.querySelector('#field2'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor
-            .create(document.querySelector('#field3'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        ClassicEditor
-            .create(document.querySelector('#field4'))
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
 
 
 @endsection

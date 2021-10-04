@@ -44,12 +44,15 @@ class Assignment extends Component
 
         $assignment = new AdminAssignment();
         $assignment->question = $data['question'];
-        $assignment->slug = Str::slug($data['question']);
+        $assignment->slug = (string) Str::uuid();
+
         $assignment->image = $this->image;
         $assignment->marks = $data['marks'];
         $assignment->exam_id = $data['examId'];
 
         $save = $assignment->save();
+
+        $this->image = null;
 
         if ($save) {
             session()->flash('status', 'Assignment created successfully!');
