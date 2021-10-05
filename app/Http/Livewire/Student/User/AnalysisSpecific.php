@@ -70,7 +70,7 @@ class AnalysisSpecific extends Component
 // DON'T DELETE THIS PORTION ->IMPORTANT TO ENAN
 
     // // START OF MCQ ANALYSIS
-    // if ($this->questionContentTag->exam_type === 'MCQ') {
+    // if ($this->questionContentTag->exam_type == 'MCQ') {
     //     $mcqQuestionMark = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)
     //         ->where('content_tag_id', $this->questionContentTag->content_tag_id)
     //         ->where('exam_type', 'MCQ')
@@ -84,7 +84,7 @@ class AnalysisSpecific extends Component
     // }
 
     // // START OF CQ ANALYSIS
-    // if ($this->questionContentTag->exam_type === 'CQ') {
+    // if ($this->questionContentTag->exam_type == 'CQ') {
     //     $cqQuestionMark = $this->questionContentTag->cqQuestion->marks;
     //     $this->totalQuestionMarks = $this->totalQuestionMarks + $cqQuestionMark;
     //     $cqGainMarks = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)

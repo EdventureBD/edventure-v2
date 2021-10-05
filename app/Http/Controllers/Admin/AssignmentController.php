@@ -13,7 +13,8 @@ class AssignmentController extends Controller
     {
         $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
             ->select('assignments.*', 'exams.title as examTitle')
-            ->get();
+            ->where('exam_id', $exam->id)
+            ->orderby('id', 'DESC')->get();
         return view('admin.pages.assignment.index', compact('assignments', 'exam'));
     }
 

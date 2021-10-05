@@ -238,7 +238,7 @@ class ExamController extends Controller
 
     public function submit(Request $request, Batch $batch, Exam $exam)
     {
-        if ($exam->exam_type === 'MCQ') {
+        if ($exam->exam_type == 'MCQ') {
             $questions = $request->q;
             $total = 0;
             $number_of_attempt = 0;
@@ -247,36 +247,36 @@ class ExamController extends Controller
             for ($i = 1; $i <= sizeOf($questions); $i++) {
                 $question = MCQ::Where('id', $questions[$i])->first();
                 $number_of_attempt = $question->number_of_attempt + 1;
-                if ($question->answer === 1) {
+                if ($question->answer == 1) {
                     $specific = $question->field1;
-                } elseif ($question->answer === 2) {
+                } elseif ($question->answer == 2) {
                     $specific = $question->field2;
-                } elseif ($question->answer === 3) {
+                } elseif ($question->answer == 3) {
                     $specific = $question->field3;
-                } elseif ($question->answer === 4) {
+                } elseif ($question->answer == 4) {
                     $specific = $question->field4;
                 }
 
                 for ($j = 1; $j <= sizeOf($answers); $j++) {
                     if (array_key_exists($j, $answers)) {
-                        if ($i === $j) {
-                            if ($answers[$j] === $question->field1) {
-                                if ($answers[$j] === $specific) {
+                        if ($i == $j) {
+                            if ($answers[$j] == $question->field1) {
+                                if ($answers[$j] == $specific) {
                                     $total = $total + 1;
                                     $gain_marks = $question->gain_marks + 1;
                                 }
-                            } else if ($answers[$j] === $question->field2) {
-                                if ($answers[$j] === $specific) {
+                            } else if ($answers[$j] == $question->field2) {
+                                if ($answers[$j] == $specific) {
                                     $total = $total + 1;
                                     $gain_marks = $question->gain_marks + 1;
                                 }
-                            } else if ($answers[$j] === $question->field3) {
-                                if ($answers[$j] === $specific) {
+                            } else if ($answers[$j] == $question->field3) {
+                                if ($answers[$j] == $specific) {
                                     $total = $total + 1;
                                     $gain_marks = $question->gain_marks + 1;
                                 }
-                            } else if ($answers[$j] === $question->field4) {
-                                if ($answers[$j] === $specific) {
+                            } else if ($answers[$j] == $question->field4) {
+                                if ($answers[$j] == $specific) {
                                     $total = $total + 1;
                                     $gain_marks = $question->gain_marks + 1;
                                 }
@@ -303,10 +303,10 @@ class ExamController extends Controller
                 return view('student.pages.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
             }
         }
-        if ($exam->exam_type === 'CQ') {
+        if ($exam->exam_type == 'CQ') {
             return $this->examPaper($request, $batch, $exam);
         }
-        if ($exam->exam_type === 'Assignment') {
+        if ($exam->exam_type == 'Assignment') {
             return $this->examPaper($request, $batch, $exam);
         }
     }
@@ -473,5 +473,5 @@ class ExamController extends Controller
     //         }
     //     }
     // }
-    // 
+    //
 }

@@ -15,7 +15,7 @@ class CourseTopic extends Model
     public function getDescriptionForEvent(string $eventName): string
     {
         // return auth()->user()->name . " has {$eventName} Course Topic";
-        return "Admin has {$eventName} Course Category";
+        return "Admin has {$eventName} Course Topic";
     }
 
     protected $guarded = [];

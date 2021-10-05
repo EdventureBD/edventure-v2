@@ -51,11 +51,11 @@ class Create extends Component
         }
         if (!empty($this->examType)) {
             $this->contentTags = ContentTag::where('topic_id', $this->examType->topic_id)->get();
-            if ($this->examType->exam_type === 'Assignment') {
+            if ($this->examType->exam_type == 'Assignment') {
                 $this->questions = Assignment::where('exam_id', $this->examId)->get();
-            } else if ($this->examType->exam_type === 'CQ') {
+            } else if ($this->examType->exam_type == 'CQ') {
                 $this->questions = CQ::where('exam_id', $this->examId)->get();
-            } else if ($this->examType->exam_type === 'MCQ') {
+            } else if ($this->examType->exam_type == 'MCQ') {
                 $this->questions = MCQ::where('exam_id', $this->examId)->get();
             }
         }

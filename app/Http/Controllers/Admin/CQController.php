@@ -18,7 +18,8 @@ class CQController extends Controller
     {
         $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
             ->select('c_q_s.*', 'exams.title as examTitle')
-            ->get();
+            ->where('exam_id', $exam->id)
+            ->orderby('id', 'DESC')->get();
         return view('admin.pages.cq.index', compact('cqs', 'exam'));
     }
 

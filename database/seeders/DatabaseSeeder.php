@@ -10,6 +10,7 @@ use App\Models\Admin\Course;
 use Illuminate\Database\Seeder;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\BatchLecture;
+use App\Models\Admin\ContentTag;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseCategory;
 use Illuminate\Support\Facades\Hash;
@@ -175,6 +176,7 @@ class DatabaseSeeder extends Seeder
         CourseTopic::factory(20)->create();
         CourseLecture::factory(20)->create();
         // Batch::factory(20)->create();
+        ContentTag::factory(20)->create();
 
         $user_types = [
             [

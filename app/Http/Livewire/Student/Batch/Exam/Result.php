@@ -22,13 +22,13 @@ class Result extends Component
     {
         $this->question = MCQ::Where('id', $this->question)->first();
 
-        if ($this->question->answer === 1) {
+        if ($this->question->answer == 1) {
             $this->specific = $this->question->field1;
-        } elseif ($this->question->answer === 2) {
+        } elseif ($this->question->answer == 2) {
             $this->specific = $this->question->field2;
-        } elseif ($this->question->answer === 3) {
+        } elseif ($this->question->answer == 3) {
             $this->specific = $this->question->field3;
-        } elseif ($this->question->answer === 4) {
+        } elseif ($this->question->answer == 4) {
             $this->specific = $this->question->field4;
         }
 
@@ -40,8 +40,8 @@ class Result extends Component
         $details_result->student_id = auth()->user()->id;
         for ($j = 1; $j <= sizeOf($this->answers); $j++) {
             if (array_key_exists($j, $this->answers)) {
-                if ($this->index === $j) {
-                    if ($this->answers[$j] === $this->question->field1) {
+                if ($this->index == $j) {
+                    if ($this->answers[$j] == $this->question->field1) {
                         if ($this->answers[$j] == $this->specific) {
                             $details_result->gain_marks = 1;
                         } else {
@@ -83,7 +83,7 @@ class Result extends Component
                 $questionContentTagAnalysis->number_of_attempt = 1;
                 for ($j = 1; $j <= sizeOf($this->answers); $j++) {
                     if (array_key_exists($j, $this->answers)) {
-                        if ($this->index === $j) {
+                        if ($this->index == $j) {
                             if ($this->answers[$j] == $this->question->field1) {
                                 if ($this->answers[$j] == $this->specific) {
                                     $questionContentTagAnalysis->gain_marks = 1;

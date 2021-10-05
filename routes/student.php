@@ -7,7 +7,7 @@ use App\Http\Controllers\Student\BatchController;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\PaymentController;
 use App\Http\Controllers\Student\ProgressController;
-use App\Http\Controllers\student\AccountDetailsController;
+use App\Http\Controllers\Student\AccountDetailsController;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile/{user_id}', [AccountDetailsController::class, 'index'])->name('profile');

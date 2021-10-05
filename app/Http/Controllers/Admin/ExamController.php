@@ -94,26 +94,26 @@ class ExamController extends Controller
     private function view(Exam $exam)
     {
         if ($exam->exam_type == 'MCQ') {
-            $mcqs = MCQ::join('exams', 'm_c_q_s.exam_id', 'exams.id')
-                ->select('m_c_q_s.*', 'exams.title as examTitle')
-                ->where('exam_id', $exam->id)
-                ->orderby('id', 'DESC')->get();
+            // $mcqs = MCQ::join('exams', 'm_c_q_s.exam_id', 'exams.id')
+            //     ->select('m_c_q_s.*', 'exams.title as examTitle')
+            //     ->where('exam_id', $exam->id)
+            //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.mcq.index', compact('exam', 'mcqs'));
-            return redirect()->route('mcq.index', [$exam, 'mcqs' => $mcqs]);
+            return redirect()->route('mcq.index', [$exam]);
         } elseif ($exam->exam_type == 'CQ') {
-            $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
-                ->select('c_q_s.*', 'exams.title as examTitle')
-                ->where('exam_id', $exam->id)
-                ->orderby('id', 'DESC')->get();
+            // $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
+            //     ->select('c_q_s.*', 'exams.title as examTitle')
+            //     ->where('exam_id', $exam->id)
+            //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.cq.index', compact('exam', 'cqs'));
-            return redirect()->route('cq.index', [$exam, 'mcqs' => $cqs]);
+            return redirect()->route('cq.index', [$exam]);
         } elseif ($exam->exam_type == 'Assignment') {
-            $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
-                ->select('assignments.*', 'exams.title as examTitle')
-                ->where('exam_id', $exam->id)
-                ->orderby('id', 'DESC')->get();
+            // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
+            //     ->select('assignments.*', 'exams.title as examTitle')
+            //     ->where('exam_id', $exam->id)
+            //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
-            return redirect()->route('assignment.index', [$exam, 'mcqs' => $assignments]);
+            return redirect()->route('assignment.index', [$exam]);
         }
     }
 

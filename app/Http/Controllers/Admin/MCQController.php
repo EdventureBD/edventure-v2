@@ -18,7 +18,8 @@ class MCQController extends Controller
     {
         $mcqs = MCQ::join('exams', 'm_c_q_s.exam_id', 'exams.id')
             ->select('m_c_q_s.*', 'exams.title as examTitle')
-            ->get();
+            ->where('exam_id', $exam->id)
+            ->orderby('id', 'DESC')->get();
         return view('admin.pages.mcq.index', compact('mcqs', 'exam'));
     }
 
@@ -28,7 +29,7 @@ class MCQController extends Controller
         ExamController::addQuestion(); //ignore the error. If you want to see the code just press the Alt key and left mouse button
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Exam $exam)
     {
 
         $validaterequest = $request->validate([
@@ -80,7 +81,7 @@ class MCQController extends Controller
         }
     }
 
-    public function show(MCQ $mcq)
+    public function show(Exam $exam,MCQ $mcq)
     {
 
         $exam = Exam::where('id', $mcq->exam_id)->first();

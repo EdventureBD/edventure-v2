@@ -41,7 +41,7 @@
                             <div class="page-separator__text" style="font-family: 'SiyamRupali', sans-serif;">
                                 <span class="badge badge-secondary">
                                     Question {{ $key + 1 }}:
-                                </span> {{ $question->question }}
+                                </span> {!! $question->question !!}
                             </div>
                             @if ($question->image)
                                 <div class="avatar avatar-xxl avatar-4by3">

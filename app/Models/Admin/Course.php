@@ -18,7 +18,7 @@ class Course extends Model
     public function getDescriptionForEvent(string $eventName): string
     {
         // return auth()->user()->name . " has {$eventName} Course";
-        return "Admin has {$eventName} Course Category";
+        return "Admin has {$eventName} Course";
     }
 
     public function getRouteKeyName()
