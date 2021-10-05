@@ -24,7 +24,7 @@ class CourseLectureFactory extends Factory
     {
         $title = $this->faker->word();
         $slug = $this->faker->slug;
-        $courseId = $this->faker->numberBetween($min = 1, $max = 20);
+        $courseId = $this->faker->numberBetween($min = 1, $max = 7);
         $courseTopic = $this->faker->numberBetween($min = 1, $max = 20);
         $url = $this->faker->numberBetween($min = 1000, $max = 9999999);
         return [

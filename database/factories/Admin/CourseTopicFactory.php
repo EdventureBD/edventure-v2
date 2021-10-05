@@ -24,7 +24,7 @@ class CourseTopicFactory extends Factory
     {
         $title = $this->faker->word();
         $slug = $this->faker->slug;
-        $courseId = $this->faker->numberBetween($min = 1, $max = 20);
+        $courseId = $this->faker->numberBetween($min = 1, $max = 7);
         return [
             'title' => $title,
             'slug' => $slug,

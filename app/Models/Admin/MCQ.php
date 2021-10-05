@@ -23,11 +23,6 @@ class MCQ extends Model
 
     protected $guarded  = [];
 
-    public function exam()
-    {
-        $this->belongsTo(Exam::class);
-    }
-
     public function questionContentTag()
     {
         return $this->hasOne(QuestionContentTag::class);

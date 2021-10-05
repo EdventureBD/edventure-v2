@@ -15,20 +15,15 @@ class CreateCQSTable extends Migration
     {
         Schema::create('c_q_s', function (Blueprint $table) {
             $table->id();
-            $table->uuid('slug');
             $table->longText('question');
+            $table->uuid('slug');
             $table->string('image')->nullable();
             $table->integer('marks');
 
-            $table->unsignedBigInteger('exam_id');
-            $table->foreign('exam_id')
-                ->references('id')->on('exams')
+            $table->unsignedBigInteger('creative_question_id');
+            $table->foreign('creative_question_id')
+                ->references('id')->on('creative_questions')
                 ->onDelete('cascade');
-
-            $table->integer('number_of_attempt');
-            $table->integer('gain_marks');
-            $table->integer('success_rate');
-            $table->string('standard_ans_pdf');
             $table->timestamps();
         });
     }

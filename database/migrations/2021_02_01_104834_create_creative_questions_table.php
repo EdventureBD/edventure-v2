@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMCQSTable extends Migration
+class CreateCreativeQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,21 @@ class CreateMCQSTable extends Migration
      */
     public function up()
     {
-        Schema::create('m_c_q_s', function (Blueprint $table) {
+        Schema::create('creative_questions', function (Blueprint $table) {
             $table->id();
-            $table->longText('question')->nullable();
+            $table->longText('creative_question');
             $table->uuid('slug');
             $table->string('image')->nullable();
-            $table->longText('field1')->nullable();
-            $table->longText('field2')->nullable();
-            $table->longText('field3')->nullable();
-            $table->longText('field4')->nullable();
-            $table->integer('answer');
+
             $table->unsignedBigInteger('exam_id');
             $table->foreign('exam_id')
                 ->references('id')->on('exams')
                 ->onDelete('cascade');
+
             $table->integer('number_of_attempt');
             $table->integer('gain_marks');
             $table->integer('success_rate');
+            $table->string('standard_ans_pdf');
             $table->timestamps();
         });
     }
@@ -41,6 +39,6 @@ class CreateMCQSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('m_c_q_s');
+        Schema::dropIfExists('creative_questions');
     }
 }

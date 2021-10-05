@@ -77,119 +77,104 @@ class DatabaseSeeder extends Seeder
 
 
         // TOTAL->8
-        // $course_category = [
-        //     [
-        //         'title' => 'ict',
-        //         'slug' => 'ict',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'math',
-        //         'slug' => 'math',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'engilsh',
-        //         'slug' => 'engilsh',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'physics',
-        //         'slug' => 'physics',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'chemistry',
-        //         'slug' => 'chemistry',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'biology',
-        //         'slug' => 'biology',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'grammer',
-        //         'slug' => 'grammer',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'economics',
-        //         'slug' => 'economics',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        // ];
-        // foreach ($course_category as $course_category) {
-        //     CourseCategory::create($course_category);
-        // }
-        // Course::factory(20)->create();
-        // CourseTopic::factory(20)->create();
-        // CourseLecture::factory(20)->create();
-        // Batch::factory(20)->create();
+        $course_category = [
+            [
+                'title' => 'HSC',
+                'slug' => 'hsc',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'SSC',
+                'slug' => 'ssc',
+                'status' => 1,
+                'order' => 0
+            ]
+        ];
+        foreach ($course_category as $course_category) {
+            CourseCategory::create($course_category);
+        }
 
-        // $course = [
-        //     [
-        //         'title' => 'ict',
-        //         'course_category_id' => 1,
-        //         'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        //         'price' => 1234,
-        //         'slug' => 'ict',
-        //         'duration' => '23',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'math',
-        //         'course_category_id' => 2,
-        //         'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        //         'price' => 1234,
-        //         'slug' => 'math',
-        //         'duration' => '23',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'english',
-        //         'course_category_id' => 3,
-        //         'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        //         'price' => 1234,
-        //         'slug' => 'english',
-        //         'duration' => '23',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'physics',
-        //         'course_category_id' => 4,
-        //         'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        //         'price' => 1234,
-        //         'slug' => 'physics',
-        //         'duration' => '23',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        //     [
-        //         'title' => 'chemistry',
-        //         'course_category_id' => 5,
-        //         'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        //         'price' => 1234,
-        //         'slug' => 'chemistry',
-        //         'duration' => '23',
-        //         'status' => 1,
-        //         'order' => 0
-        //     ],
-        // ];
-        // foreach ($course as $course) {
-        //     Course::create($course);
-        // }
+        $course = [
+            [
+                'title' => 'Ict',
+                'course_category_id' => 1,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'ict',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'Math',
+                'course_category_id' => 1,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'math',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'English',
+                'course_category_id' => 1,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'english',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'Physics',
+                'course_category_id' => 1,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'physics',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'Chemistry',
+                'course_category_id' => 2,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'chemistry',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'Biology',
+                'course_category_id' => 2,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'biology',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ],
+            [
+                'title' => 'Bangla',
+                'course_category_id' => 2,
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+                'price' => 1234,
+                'slug' => 'bangla',
+                'duration' => '23',
+                'status' => 1,
+                'order' => 0
+            ]
+        ];
+        foreach ($course as $course) {
+            Course::create($course);
+        }
+
+        // Course::factory(20)->create();
+        CourseTopic::factory(20)->create();
+        CourseLecture::factory(20)->create();
+        // Batch::factory(20)->create();
 
         $user_types = [
             [

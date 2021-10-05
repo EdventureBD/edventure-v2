@@ -17,7 +17,8 @@ class Course extends Model
     protected static $logName = 'Course';
     public function getDescriptionForEvent(string $eventName): string
     {
-        return auth()->user()->name . " has {$eventName} Course";
+        // return auth()->user()->name . " has {$eventName} Course";
+        return "Admin has {$eventName} Course Category";
     }
 
     public function getRouteKeyName()
