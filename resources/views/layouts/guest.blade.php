@@ -9,16 +9,20 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        <!-- Font Awesome Icons -->
+        <link type="text/css" href="{{ asset('student/public/css/fontawesome.css') }}" rel="stylesheet">
+        
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-gray-900 antialiased" id="app">
             {{ $slot }}
         </div>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>

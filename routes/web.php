@@ -41,3 +41,7 @@ Route::get('/course/course-preview/{course}/enroll', [CourseController::class, '
 
 
 require __DIR__ . '/auth.php';
+
+Route::get('/landing-1', function(){
+    return view('landing');
+});

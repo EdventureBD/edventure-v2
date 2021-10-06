@@ -5,7 +5,7 @@ require('./bootstrap');
 
 // import katex from 'katex'
 
-require('alpinejs');
+// require('alpinejs');
 
 // ClassicEditor
 //     .create(document.querySelector('#question'), {
