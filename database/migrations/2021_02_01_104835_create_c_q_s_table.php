@@ -24,6 +24,10 @@ class CreateCQSTable extends Migration
             $table->foreign('creative_question_id')
                 ->references('id')->on('creative_questions')
                 ->onDelete('cascade');
+
+            $table->integer('number_of_attempt');
+            $table->integer('gain_marks');
+            $table->integer('success_rate');
             $table->timestamps();
         });
     }

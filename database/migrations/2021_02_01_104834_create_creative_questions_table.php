@@ -24,9 +24,6 @@ class CreateCreativeQuestionsTable extends Migration
                 ->references('id')->on('exams')
                 ->onDelete('cascade');
 
-            $table->integer('number_of_attempt');
-            $table->integer('gain_marks');
-            $table->integer('success_rate');
             $table->string('standard_ans_pdf');
             $table->timestamps();
         });

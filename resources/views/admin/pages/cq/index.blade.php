@@ -90,9 +90,8 @@
                                 <thead>
                                     <tr>
                                         <th>SL. No</th>
-                                        <th>Question</th>
+                                        <th>উদ্দীপক</th>
                                         <th>Image</th>
-                                        <th>Exam</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -100,13 +99,12 @@
                                     @foreach ($cqs as $cq)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{!! $cq->question !!}</td>
+                                            <td>{!! $cq->creative_question !!}</td>
                                             <td>
                                                 <img class="product-image-thumb" src="{{ Storage::url($cq->image) }}"
                                                     alt="">
                                                 {{-- <img src="{{ Storage::url($cq->image) }}" alt="{{ $cq->question }}"> --}}
                                             </td>
-                                            <td>{{ $cq->examTitle }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="mr-1"
@@ -168,7 +166,6 @@
                                         <th>SL. No</th>
                                         <th>Question</th>
                                         <th>Image</th>
-                                        <th>Exam</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
