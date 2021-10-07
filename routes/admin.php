@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // END OF EXAM
 
     // START OF CQ EXAM
+    // Route::get('{exam}/creative-question/{creative-question}', [CQController::class, 'creativeQuestion'])->name('creative-question');
     Route::resource('{exam}/cq', CQController::class);
     // Route::resource('/exam/cq', CQController::class, ['except' => ['store', 'update']]);
     // END OF CQ EXAM

@@ -2,6 +2,8 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Admin\ContentTag;
+use App\Models\Admin\CreativeQuestion;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,4 +23,14 @@ class CQ extends Model
     }
 
     protected $guarded = [];
+
+    public function creativeQuestion()
+    {
+        return $this->belongsTo(CreativeQuestion::class);
+    }
+
+    public function contentTag()
+    {
+        return $this->hasMany(ContentTag::class);
+    }
 }
