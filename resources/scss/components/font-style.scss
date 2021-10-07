@@ -1,0 +1,60 @@
+.font-raleway{
+    font-family: 'Raleway', sans-serif;
+}
+.font-roboto{
+    font-family: 'Roboto', sans-serif;
+}
+.font-bebas{
+    font-family: 'Bebas Neue', cursive;
+}
+.fw-800{
+    font-weight: 800;
+}
+.fw-600{
+    font-weight: 600;
+}
+.fw-400{
+    font-weight: 400;
+}
+
+
+.text-xxsm{
+    font-size: 16px;
+}
+.text-xsm{
+    font-size: 22px;
+}
+.text-sm{
+    font-size: 28px;
+}
+.text-xmd{
+    font-size: 36px;
+}
+.text-md{
+    font-size: 42px;
+    font-weight: 900;
+}
+.text-lg{
+    font-size: 66px;
+    font-weight: 400;
+}
+.text-xl{
+    font-size: 96px;
+    font-weight: 900;
+}
+
+.text-red{
+    color: #ED207A;
+}
+.text-purple{
+    color: $purple;
+}
+.text-purple-half{
+    color: rgba(101, 48, 146, 0.5);
+}
+.text-white{
+    color: #ffffff;
+}
+.text-gray{
+    color: rgba(44, 46, 51, 0.65);
+}

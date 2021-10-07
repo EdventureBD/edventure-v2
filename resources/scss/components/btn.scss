@@ -10,6 +10,16 @@
         padding: 7px 8px;
     }
 }
+.btn-purple{
+    font-size: 14px;
+    font-weight: 800;
+    background-color: $purple;
+    color: #ffffff;
+    &:hover{
+        color: #ffffff;
+        box-shadow: 0 0 5px $purple;
+    }
+}
 .btn.btn-outline{
     border: 2px solid #653092;
     color: #663193;

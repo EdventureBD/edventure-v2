@@ -1,5 +1,9 @@
 require('./bootstrap');
 
+require('slick-carousel');
+
+require('./custom');
+
 // var ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
 // import MathType from '@wiris/mathtype-ckeditor5';
 

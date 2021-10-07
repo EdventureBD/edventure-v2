@@ -1,4 +1,13 @@
+@import "./components/spacing.scss";
+
 @import "~bootstrap/scss/bootstrap";
-@import "./btn.scss";
-@import "./landing.scss";
-@import "./font-style.scss";
+
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
+
+
+@import "./variable";
+@import "./components/btn.scss";
+@import "./components/font-style.scss";
+@import "./components/bootstrap_multi.scss";
+@import "./pages/landing.scss";
