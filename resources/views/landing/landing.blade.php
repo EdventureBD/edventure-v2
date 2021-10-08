@@ -1,34 +1,6 @@
 <x-guest-layout>
     <div class="landing-page">
-        <nav class="navbar navbar-expand-lg position-absolute w-100">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="/img/landing/logo.png" width="180" alt=""></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                    <li class="nav-item has-dot active">
-                    <a class="nav-link text-purple-half" href="#">HOME</a>
-                    </li>
-                    <li class="nav-item has-dot">
-                    <a class="nav-link text-purple-half" href="#">EXAM</a>
-                    </li>
-                    <li class="nav-item has-dot">
-                    <a class="nav-link text-purple-half" href="#">RESOURCES</a>
-                    </li>
-                    <li class="nav-item has-dot">
-                    <a class="nav-link text-purple-half" href="#">CONTACT US</a>
-                    </li>
-                    <li class="nav-item has-dot">
-                    <a class="nav-link text-purple-half" href="#">HELP</a>
-                    </li>
-                </ul>
-                <div class="my-2 my-lg-0">
-                    <a class="nav-item active my-2 my-sm-0 pr-3">SIGN UP</a>
-                    <button class="btn btn-purple my-2 my-sm-0">LOG IN</button>
-                </div>
-            </div>
-        </nav>
+        @include('landing.header')
         <section class="header-banner bg-art pt-7">
             <div class="container-fluid">
                 <div class="row">
@@ -98,7 +70,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="ml-4">
-                                <div class="package-icon"></div>
+                                <div class="package-icon text-left"><img src="/img/landing/exam_icon.png" class="img-fluid" alt="exam" /></div>
                                 <h4 class="text-xmd text-left mt-3">অনলাইন পরীক্ষা</h4>
                                 <p class="text-sm fw-400 text-gray text-left">SpeedExam is the best onlineinstitution to conduct assessments and quizzes with great features and effective analytical reports.</p>
                             </div>
@@ -112,7 +84,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="ml-4">
-                            <div class="package-icon"></div>
+                            <div class="package-icon text-left"><img src="/img/landing/dashboard_icon.png" class="img-fluid" alt="Result" /></div>
                             <h4 class="text-xmd text-left mt-3">Personal Dashboard</h4>
                             <p class="text-sm fw-400 text-gray text-left mt-3">Personal dashboards simplify business communications, offering employees a tailored view that helps them stay on top of their communications with minimal unnecessary distraction.</p>
                             </div>
@@ -126,7 +98,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="ml-4">
-                            <div class="package-icon"></div>
+                            <div class="package-icon text-left"><img src="/img/landing/result_icon.png" class="img-fluid" alt="Result" /></div>
                             <h4 class="text-xmd text-left mt-3">Comparative Analysis</h4>
                             <p class="text-sm fw-400 text-gray text-left mt-3">Comparative studies are the studies to demonstrate ability to examine, compare and contrast subjects or ideas. Comparative study shows how two subjects are similar or shows how two subjects are different.</p>
                             </div>
@@ -143,12 +115,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="ml-4">
-                            <div class="package-icon"></div>
+                            <div class="package-icon text-left"><img src="/img/landing/video_icon.png" class="img-fluid" alt="video" /></div>
                             <h4 class="text-xmd text-left mt-3">Solution Class</h4>
                             <p class="text-sm fw-400 text-gray text-left mt-3">NCTB Textbook Solution National Curriculum and Textbook Board Bangladesh Class 1 to 10 Textbooks Solution for Mathematics, Science & More.</p>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -202,7 +173,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- our reader section end -->
+        @include('landing.footer')
     </div>
 </x-guest-layout>
 

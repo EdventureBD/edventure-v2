@@ -1,3 +1,16 @@
 .h-8{
     height: 8rem;
 }
+
+.bottom-border{
+    position: relative;
+    &:after{
+        height: 2px;
+        position: absolute;
+        background-color: #959595;
+        left: 0;
+        top: 40px;
+        width: 40px;
+        content: "";
+    }
+}
