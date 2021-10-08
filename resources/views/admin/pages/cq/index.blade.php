@@ -99,7 +99,10 @@
                                     @foreach ($cqs as $cq)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{!! $cq->creative_question !!}</td>
+                                            <td>
+                                                {{-- <a href="{{  }}"></a> --}}
+                                                {!! $cq->creative_question !!}
+                                            </td>
                                             <td>
                                                 <img class="product-image-thumb" src="{{ Storage::url($cq->image) }}"
                                                     alt="">
@@ -110,14 +113,14 @@
                                                     <a class="mr-1"
                                                         href="{{ route('cq.show', [$exam->slug, $cq->slug]) }}"
                                                         title="See Details">
-                                                        <button type="button" class="btn btn-info"><i
-                                                                class="fas fa-eye"></i></button>
+                                                        <button type="button" class="btn btn-info">
+                                                            <i class="fas fa-eye"></i></button>
                                                     </a>
                                                     <a class="mr-1"
                                                         href="{{ route('cq.edit', [$exam->slug, $cq->slug]) }}"
                                                         title="Edit {{ $cq->question }}">
-                                                        <button class="btn btn-info"><i
-                                                                class="far fa-edit"></i></button>
+                                                        <button class="btn btn-info">
+                                                            <i class="far fa-edit"></i></button>
                                                     </a>
                                                     <a class="mr-1" href="#deletecq{{ $cq->id }}"
                                                         data-toggle="modal" title="Delete {{ $cq->question }}">

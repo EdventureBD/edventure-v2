@@ -23,7 +23,7 @@ class CQController extends Controller
         //     ->orderby('id', 'DESC')->get();
         $cqs = CreativeQuestion::where('exam_id', $exam->id)
             ->orderby('id', 'DESC')->get();
-        // dd($creative_question);
+        // dd($cqs);
         return view('admin.pages.cq.index', compact('cqs', 'exam'));
     }
 
@@ -56,10 +56,6 @@ class CQController extends Controller
         ]);
 
         $creative_question = new CreativeQuestion();
-        $gyanmulok = new CQ();
-        $onudhabon = new CQ();
-        $proyug = new CQ();
-        $ucchotor = new CQ();
 
         $creative_question->creative_question = $request->creative_question;
         $creative_question->slug = (string) Str::uuid();
@@ -74,6 +70,8 @@ class CQController extends Controller
         $saveCreativeQuestion = $creative_question->save();
         $creative_question_id = CreativeQuestion::latest()->first();
 
+        // জ্ঞানমূলক
+        $gyanmulok = new CQ();
         $gyanmulok->question = $request->gyanmulokquestion;
         $gyanmulok->slug = (string) Str::uuid();
         $gyanmulok->marks = $request->gyanmulokmarks;
@@ -86,22 +84,23 @@ class CQController extends Controller
         }
 
         $savegyanmulok = $gyanmulok->save();
-
-        $question_id1 = CQ::latest()->first();
-
         if ($savegyanmulok) {
-            if (!empty($request->gyanmulokcontentTagIds)) {
-                for ($i = 0; $i < sizeOf($request->gyanmulokcontentTagIds); $i++) {
-                    $question_content_tag1 = new QuestionContentTag();
-                    $question_content_tag1->exam_type = 'CQ';
-                    $question_content_tag1->question_id = $question_id1->id;
-                    $question_content_tag1->content_tag_id = $request->gyanmulokcontentTagIds[$i];
-                    $question_content_tag1->save();
+            $question_id1 = CQ::latest('id')->first();
+            if ($question_id1) {
+                if (!empty($request->gyanmulokcontentTagIds)) {
+                    for ($i = 0; $i < sizeOf($request->gyanmulokcontentTagIds); $i++) {
+                        $question_content_tag1 = new QuestionContentTag();
+                        $question_content_tag1->exam_type = 'CQ';
+                        $question_content_tag1->question_id = $question_id1->id;
+                        $question_content_tag1->content_tag_id = $request->gyanmulokcontentTagIds[$i];
+                        $question_content_tag1->save();
+                    }
                 }
             }
         }
 
-        // onudhabon
+        // অনুধাবন
+        $onudhabon = new CQ();
         $onudhabon->question = $request->onudhabonquestion;
         $onudhabon->slug = (string) Str::uuid();
         $onudhabon->marks = $request->onudhabonmarks;
@@ -114,22 +113,23 @@ class CQController extends Controller
         }
 
         $saveonudhabon = $onudhabon->save();
-
-        $question_id2 = CQ::latest()->first();
-
         if ($saveonudhabon) {
-            if (!empty($request->onudhaboncontentTagIds)) {
-                for ($i = 0; $i < sizeOf($request->onudhaboncontentTagIds); $i++) {
-                    $question_content_tag2 = new QuestionContentTag();
-                    $question_content_tag2->exam_type = 'CQ';
-                    $question_content_tag2->question_id = $question_id2->id;
-                    $question_content_tag2->content_tag_id = $request->onudhaboncontentTagIds[$i];
-                    $question_content_tag2->save();
+            $question_id2 = CQ::latest('id')->first();
+            if ($question_id2) {
+                if (!empty($request->onudhaboncontentTagIds)) {
+                    for ($j = 0; $j < sizeOf($request->onudhaboncontentTagIds); $j++) {
+                        $question_content_tag2 = new QuestionContentTag();
+                        $question_content_tag2->exam_type = 'CQ';
+                        $question_content_tag2->question_id = $question_id2->id;
+                        $question_content_tag2->content_tag_id = $request->onudhaboncontentTagIds[$j];
+                        $question_content_tag2->save();
+                    }
                 }
             }
         }
 
-        // proyug
+        // প্রয়োগমূলক
+        $proyug = new CQ();
         $proyug->question = $request->proyugquestion;
         $proyug->slug = (string) Str::uuid();
         $proyug->marks = $request->proyugmarks;
@@ -142,22 +142,23 @@ class CQController extends Controller
         }
 
         $saveproyug = $proyug->save();
-
-        $question_id3 = CQ::latest()->first();
-
         if ($saveproyug) {
-            if (!empty($request->proyugcontentTagIds)) {
-                for ($i = 0; $i < sizeOf($request->proyugcontentTagIds); $i++) {
-                    $question_content_tag3 = new QuestionContentTag();
-                    $question_content_tag3->exam_type = 'CQ';
-                    $question_content_tag3->question_id = $question_id3->id;
-                    $question_content_tag3->content_tag_id = $request->proyugcontentTagIds[$i];
-                    $question_content_tag3->save();
+            $question_id3 = CQ::latest('id')->first();
+            if ($question_id3) {
+                if (!empty($request->proyugcontentTagIds)) {
+                    for ($i = 0; $i < sizeOf($request->proyugcontentTagIds); $i++) {
+                        $question_content_tag3 = new QuestionContentTag();
+                        $question_content_tag3->exam_type = 'CQ';
+                        $question_content_tag3->question_id = $question_id3->id;
+                        $question_content_tag3->content_tag_id = $request->proyugcontentTagIds[$i];
+                        $question_content_tag3->save();
+                    }
                 }
             }
         }
 
-        // ucchotor
+        // উচ্চতর দক্ষতা
+        $ucchotor = new CQ();
         $ucchotor->question = $request->ucchotorquestion;
         $ucchotor->slug = (string) Str::uuid();
         $ucchotor->marks = $request->ucchotormarks;
@@ -170,17 +171,17 @@ class CQController extends Controller
         }
 
         $saveucchotor = $ucchotor->save();
-
-        $question_id = CQ::latest()->first();
-
         if ($saveucchotor) {
-            if (!empty($request->ucchotorcontentTagIds)) {
-                for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
-                    $question_content_tag = new QuestionContentTag();
-                    $question_content_tag->exam_type = 'CQ';
-                    $question_content_tag->question_id = $question_id->id;
-                    $question_content_tag->content_tag_id = $request->ucchotorcontentTagIds[$i];
-                    $question_content_tag->save();
+            $question_id4 = CQ::latest('id')->first();
+            if ($question_id4) {
+                if (!empty($request->ucchotorcontentTagIds)) {
+                    for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
+                        $question_content_tag4 = new QuestionContentTag();
+                        $question_content_tag4->exam_type = 'CQ';
+                        $question_content_tag4->question_id = $question_id4->id;
+                        $question_content_tag4->content_tag_id = $request->ucchotorcontentTagIds[$i];
+                        $question_content_tag4->save();
+                    }
                 }
             }
         }
@@ -189,86 +190,277 @@ class CQController extends Controller
         return redirect()->route('exam.show', $request->slug);
     }
 
-    public function show(Exam $exam, CQ $cq)
+    public function show(Exam $exam, CreativeQuestion $cq)
     {
-        $exam = Exam::where('id', $cq->exam_id)->select('title')->first();
+        // dd($cq);
         return view('admin.pages.cq.details', compact('cq', 'exam'));
     }
 
-    public function edit(Exam $exam, CQ $cq)
+    public function edit(Exam $exam, CreativeQuestion $cq)
     {
-        $tagId = [];
-        // $exam = Exam::where('id', $cq->exam_id)->first();
-        $questionContentTags = QuestionContentTag::where('exam_type', "CQ")
-            ->where('question_id', $cq->id)
+        // dd($cq->id);
+        $cquestion1 = CreativeQuestion::find($cq->id)->question()->where('marks', 1)->first(); // জ্ঞানমূলক
+        $cquestion2 = CreativeQuestion::find($cq->id)->question()->where('marks', 2)->first(); // অনুধাবন
+        $cquestion3 = CreativeQuestion::find($cq->id)->question()->where('marks', 3)->first(); // প্রয়োগমূলক
+        $cquestion4 = CreativeQuestion::find($cq->id)->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
+        $tagId1 = []; // জ্ঞানমূলক
+        $tagId2 = []; // অনুধাবন
+        $tagId3 = []; // প্রয়োগমূলক
+        $tagId4 = []; // উচ্চতর দক্ষতা
+
+        // dd($cquestion1, $cquestion2, $cquestion3, $cquestion4);
+        // জ্ঞানমূলক
+        $questionContentTags1 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion1->id)
             ->get();
-        foreach ($questionContentTags as $qct) {
-            array_push($tagId, $qct->content_tag_id);
+        foreach ($questionContentTags1 as $qct) {
+            array_push($tagId1, $qct->content_tag_id);
         }
-        $contentTags = ContentTag::where('course_id', $exam->course_id)
+        $contentTags1 = ContentTag::where('course_id', $exam->course_id)
             ->where('topic_id', $exam->topic_id)
-            ->whereNotIn('id', $tagId)
+            ->whereNotIn('id', $tagId1)
             ->get();
-        return view('admin.pages.cq.edit', compact('cq', 'exam', 'contentTags', 'questionContentTags'));
+        // dd($questionContentTags1, $contentTags1);
+
+        // অনুধাবন
+        $questionContentTags2 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion2->id)
+            ->get();
+        foreach ($questionContentTags2 as $qct) {
+            array_push($tagId2, $qct->content_tag_id);
+        }
+        $contentTags2 = ContentTag::where('course_id', $exam->course_id)
+            ->where('topic_id', $exam->topic_id)
+            ->whereNotIn('id', $tagId2)
+            ->get();
+
+        // dd($questionContentTags2, $contentTags2);
+        // প্রয়োগমূলক
+        $questionContentTags3 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion3->id)
+            ->get();
+        foreach ($questionContentTags3 as $qct) {
+            array_push($tagId3, $qct->content_tag_id);
+        }
+        $contentTags3 = ContentTag::where('course_id', $exam->course_id)
+            ->where('topic_id', $exam->topic_id)
+            ->whereNotIn('id', $tagId3)
+            ->get();
+
+        // dd($questionContentTags3, $contentTags3);
+        // উচ্চতর দক্ষতা
+        $questionContentTags4 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion4->id)
+            ->get();
+        foreach ($questionContentTags4 as $qct) {
+            array_push($tagId4, $qct->content_tag_id);
+        }
+        $contentTags4 = ContentTag::where('course_id', $exam->course_id)
+            ->where('topic_id', $exam->topic_id)
+            ->whereNotIn('id', $tagId4)
+            ->get();
+
+        // dd($questionContentTags4, $contentTags4);
+        return view('admin.pages.cq.edit', compact(
+            'cq',
+            'exam',
+            'contentTags1',
+            'questionContentTags1',
+            'contentTags2',
+            'questionContentTags2',
+            'contentTags3',
+            'questionContentTags3',
+            'contentTags4',
+            'questionContentTags4',
+            'cquestion1',
+            'cquestion2',
+            'cquestion3',
+            'cquestion4',
+        ));
     }
 
-    public function update(Request $request, Exam $exam, CQ $cq)
+    public function update(Request $request, Exam $exam, CreativeQuestion $cq)
     {
+        // dd($request);
         $validateData = $request->validate([
-            'question' => 'required|min:4',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
+            'creative_question' => 'required|min:4',
+            'uddipokimage' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
+            'answer' => 'nullable|mimes:pdf|max:10000',
             'examId' => 'required',
-            'marks' => 'required|numeric'
+            'gyanmulokquestion' => 'required|min:4',
+            'gyanmulokmarks' => 'required|numeric',
+            'gyanmulokcontentTagIds' => 'required',
+            'onudhabonquestion' => 'required|min:4',
+            'onudhabonmarks' => 'required|numeric',
+            'onudhaboncontentTagIds' => 'required',
+            'proyugquestion' => 'required|min:4',
+            'proyugmarks' => 'required|numeric',
+            'proyugcontentTagIds' => 'required',
+            'ucchotorquestion' => 'required|min:4',
+            'ucchotormarks' => 'required|numeric',
+            'ucchotorcontentTagIds' => 'required'
         ]);
 
-        $cq = CQ::find($cq->id);
-
-        if ($request->hasFile('image')) {
-            if ($cq->image) {
-                Storage::delete($cq->image);
-            }
-            $cq->image = $request->image->store('public/question/cq');
+        $cq->creative_question = $request->creative_question;
+        $cq->slug = (string) Str::uuid();
+        $cq->exam_id = $request->examId;
+        if ($request->hasFile('uddipokimage')) {
+            Storage::delete('public/question/cq' . $cq->image);
+            $cq->image = $request->uddipokimage->store('public/question/cq');
         }
-
         if ($request->hasFile('answer')) {
+            Storage::delete('public/question/cq/answer' . $cq->standard_ans_pdf);
             $cq->standard_ans_pdf = $request->answer->store('public/question/cq/answer');
         }
 
-        $cq->question = $request['question'];
-        $cq->slug = Str::slug($request['question']);
-        $cq->marks = $request['marks'];
-        $cq->exam_id = $request['examId'];
-        $cq->number_of_attempt = 0;
-        $cq->gain_marks = 0;
-        $cq->success_rate = 0;
+        $saveCreativeQuestion = $cq->save();
+        $creative_question_id = CreativeQuestion::latest()->first();
 
-        $save = $cq->save();
+        // জ্ঞানমূলক
+        $gyanmulok = CQ::where('creative_question_id', $cq->id)->where('marks', 1)->first();
+        $gyanmulok->question = $request->gyanmulokquestion;
+        $gyanmulok->slug = (string) Str::uuid();
+        $gyanmulok->marks = $request->gyanmulokmarks;
+        $gyanmulok->creative_question_id = $creative_question_id->id;
+        $gyanmulok->number_of_attempt = 0;
+        $gyanmulok->gain_marks = 0;
+        $gyanmulok->success_rate = 0;
+        if ($request->hasFile('gyanmulokimage')) {
+            Storage::delete('public/question/cq' . $gyanmulok->image);
+            $gyanmulok->image = $request->gyanmulokimage->store('public/question/cq');
+        }
+
+        $savegyanmulok = $gyanmulok->save();
 
         $deleteContentTags = QuestionContentTag::where('exam_type', "CQ")
-            ->where('question_id', $cq->id)
+            ->where('question_id', $gyanmulok->id)
             ->get();
 
         foreach ($deleteContentTags as $deleteContentTag) {
             $delete = $deleteContentTag->delete();
         }
 
-        if ($save) {
-            if (!empty($request->contentTagIds)) {
-                for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
-                    $question_content_tag = new QuestionContentTag();
-                    $question_content_tag->exam_type = 'CQ';
-                    $question_content_tag->question_id = $cq->id;
-                    $question_content_tag->content_tag_id = $request->contentTagIds[$i];
-                    $question_content_tag->save();
+        if ($savegyanmulok) {
+            if (!empty($request->gyanmulokcontentTagIds)) {
+                for ($i = 0; $i < sizeOf($request->gyanmulokcontentTagIds); $i++) {
+                    $question_content_tag1 = new QuestionContentTag();
+                    $question_content_tag1->exam_type = 'CQ';
+                    $question_content_tag1->question_id = $gyanmulok->id;
+                    $question_content_tag1->content_tag_id = $request->gyanmulokcontentTagIds[$i];
+                    $question_content_tag1->save();
                 }
             }
-            session()->flash('status', 'CQ created successfully!');
-            return redirect()->route('exam.show', $request->slug);
-        } else {
-            session()->flash('failed', 'CQ creation failed!');
-            return redirect()->route('addQuestion');
         }
-        return view('admin.pages.cq.create');
+
+        // অনুধাবন
+        $onudhabon = CQ::where('creative_question_id', $cq->id)->where('marks', 2)->first();
+        $onudhabon->question = $request->onudhabonquestion;
+        $onudhabon->slug = (string) Str::uuid();
+        $onudhabon->marks = $request->onudhabonmarks;
+        $onudhabon->creative_question_id = $creative_question_id->id;
+        $onudhabon->number_of_attempt = 0;
+        $onudhabon->gain_marks = 0;
+        $onudhabon->success_rate = 0;
+        if ($request->hasFile('onudhabonimage')) {
+            Storage::delete('public/question/cq' . $onudhabon->image);
+            $onudhabon->image = $request->onudhabonimage->store('public/question/cq');
+        }
+
+        $saveonudhabon = $onudhabon->save();
+
+        $deleteContentTags = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $onudhabon->id)
+            ->get();
+
+        foreach ($deleteContentTags as $deleteContentTag) {
+            $delete = $deleteContentTag->delete();
+        }
+
+        if ($saveonudhabon) {
+            if (!empty($request->onudhaboncontentTagIds)) {
+                for ($j = 0; $j < sizeOf($request->onudhaboncontentTagIds); $j++) {
+                    $question_content_tag2 = new QuestionContentTag();
+                    $question_content_tag2->exam_type = 'CQ';
+                    $question_content_tag2->question_id = $onudhabon->id;
+                    $question_content_tag2->content_tag_id = $request->onudhaboncontentTagIds[$j];
+                    $question_content_tag2->save();
+                }
+            }
+        }
+
+        // প্রয়োগমূলক
+        $proyug = CQ::where('creative_question_id', $cq->id)->where('marks', 3)->first();
+        $proyug->question = $request->proyugquestion;
+        $proyug->slug = (string) Str::uuid();
+        $proyug->marks = $request->proyugmarks;
+        $proyug->creative_question_id = $creative_question_id->id;
+        $proyug->number_of_attempt = 0;
+        $proyug->gain_marks = 0;
+        $proyug->success_rate = 0;
+        if ($request->hasFile('proyugimage')) {
+            Storage::delete('public/question/cq' . $proyug->image);
+            $proyug->image = $request->proyugimage->store('public/question/cq');
+        }
+
+        $saveproyug = $proyug->save();
+
+        $deleteContentTags = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $proyug->id)
+            ->get();
+
+        foreach ($deleteContentTags as $deleteContentTag) {
+            $delete = $deleteContentTag->delete();
+        }
+
+        if ($saveproyug) {
+            if (!empty($request->proyugcontentTagIds)) {
+                for ($i = 0; $i < sizeOf($request->proyugcontentTagIds); $i++) {
+                    $question_content_tag3 = new QuestionContentTag();
+                    $question_content_tag3->exam_type = 'CQ';
+                    $question_content_tag3->question_id = $proyug->id;
+                    $question_content_tag3->content_tag_id = $request->proyugcontentTagIds[$i];
+                    $question_content_tag3->save();
+                }
+            }
+        }
+
+        // উচ্চতর দক্ষতা
+        $ucchotor = CQ::where('creative_question_id', $cq->id)->where('marks', 4)->first();
+        $ucchotor->question = $request->ucchotorquestion;
+        $ucchotor->slug = (string) Str::uuid();
+        $ucchotor->marks = $request->ucchotormarks;
+        $ucchotor->creative_question_id = $creative_question_id->id;
+        $ucchotor->number_of_attempt = 0;
+        $ucchotor->gain_marks = 0;
+        $ucchotor->success_rate = 0;
+        if ($request->hasFile('ucchotorimage')) {
+            Storage::delete('public/question/cq' . $ucchotor->image);
+            $ucchotor->image = $request->ucchotorimage->store('public/question/cq');
+        }
+
+        $saveucchotor = $ucchotor->save();
+
+        $deleteContentTags = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $ucchotor->id)
+            ->get();
+
+        foreach ($deleteContentTags as $deleteContentTag) {
+            $delete = $deleteContentTag->delete();
+        }
+
+        if ($saveucchotor) {
+            if (!empty($request->ucchotorcontentTagIds)) {
+                for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
+                    $question_content_tag4 = new QuestionContentTag();
+                    $question_content_tag4->exam_type = 'CQ';
+                    $question_content_tag4->question_id = $ucchotor->id;
+                    $question_content_tag4->content_tag_id = $request->ucchotorcontentTagIds[$i];
+                    $question_content_tag4->save();
+                }
+            }
+        }
+        session()->flash('status', 'CQ updateds successfully!');
+        return redirect()->route('exam.show', $request->slug);
     }
 
     public function destroy(Exam $exam, CQ $cq)
@@ -282,3 +474,20 @@ class CQController extends Controller
         }
     }
 }
+
+
+// public function edit(Exam $exam, CreativeQuestion $cq)
+//     {
+//         $tagId = [];
+//         $questionContentTags = QuestionContentTag::where('exam_type', "CQ")
+//             ->where('question_id', $cq->id)
+//             ->get();
+//         foreach ($questionContentTags as $qct) {
+//             array_push($tagId, $qct->content_tag_id);
+//         }
+//         $contentTags = ContentTag::where('course_id', $exam->course_id)
+//             ->where('topic_id', $exam->topic_id)
+//             ->whereNotIn('id', $tagId)
+//             ->get();
+//         return view('admin.pages.cq.edit', compact('cq', 'exam', 'contentTags', 'questionContentTags'));
+//}

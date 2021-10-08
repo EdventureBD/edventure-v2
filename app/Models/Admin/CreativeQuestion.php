@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Admin\CQ;
 use App\Models\Admin\Exam;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -26,5 +27,10 @@ class CreativeQuestion extends Model
     public function exam()
     {
         return $this->belongsTo(Exam::class);
+    }
+
+    public function question()
+    {
+        return $this->hasMany(CQ::class, 'creative_question_id');
     }
 }

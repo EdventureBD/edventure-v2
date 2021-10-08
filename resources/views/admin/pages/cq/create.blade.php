@@ -59,7 +59,8 @@
                                                 class="must-filled">*</span></label> --}}
                                         <textarea input="creative_question" id="creative_question" name="creative_question"
                                             placeholder="Enter question"
-                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('creative_question') }}</textarea>
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                            required>{{ old('creative_question') }}</textarea>
                                         @error('creative_question')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
@@ -153,7 +154,7 @@
                                             <div class="select2-purple">
                                                 <select class="select2" multiple name="gyanmulokcontentTagIds[]"
                                                     data-placeholder="Select a Content Tag"
-                                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                    data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($contentTags as $contentTag)
                                                         <option value="{{ $contentTag->id }}">{{ $contentTag->title }}
                                                         </option>
@@ -175,7 +176,8 @@
                                                 class="must-filled">*</span></label> --}}
                                         <textarea input="question" id="question2" name="onudhabonquestion"
                                             placeholder="Enter question"
-                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('onudhabonquestion') }}</textarea>
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                            required>{{ old('onudhabonquestion') }}</textarea>
                                         @error('onudhabonquestion')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
@@ -225,7 +227,7 @@
                                             <div class="select2-purple">
                                                 <select class="select2" multiple name="onudhaboncontentTagIds[]"
                                                     data-placeholder="Select a Content Tag"
-                                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                    data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($contentTags as $contentTag)
                                                         <option value="{{ $contentTag->id }}">{{ $contentTag->title }}
                                                         </option>
@@ -247,7 +249,8 @@
                                                 class="must-filled">*</span></label> --}}
                                         <textarea input="question" id="question3" name="proyugquestion"
                                             placeholder="Enter question"
-                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('proyugquestion') }}</textarea>
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                            required>{{ old('proyugquestion') }}</textarea>
                                         @error('proyugquestion')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
@@ -298,7 +301,7 @@
                                             <div class="select2-purple">
                                                 <select class="select2" multiple name="proyugcontentTagIds[]"
                                                     data-placeholder="Select a Content Tag"
-                                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                    data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($contentTags as $contentTag)
                                                         <option value="{{ $contentTag->id }}">{{ $contentTag->title }}
                                                         </option>
@@ -321,7 +324,8 @@
                                                 class="must-filled">*</span></label> --}}
                                         <textarea input="question" id="question4" name="ucchotorquestion"
                                             placeholder="Enter question"
-                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('ucchotorquestion') }}</textarea>
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                            required>{{ old('ucchotorquestion') }}</textarea>
                                         @error('ucchotorquestion')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
@@ -372,7 +376,7 @@
                                             <div class="select2-purple">
                                                 <select class="select2" multiple name="ucchotorcontentTagIds[]"
                                                     data-placeholder="Select a Content Tag"
-                                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                    data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($contentTags as $contentTag)
                                                         <option value="{{ $contentTag->id }}">{{ $contentTag->title }}
                                                         </option>
@@ -395,7 +399,7 @@
                                                 <div class="input-group">
                                                     <div class="custom-file">
                                                         <input type="file" name="answer" class="custom-file-input hidden"
-                                                            id="exampleInputFile">
+                                                            id="exampleInputFile" required>
                                                         <label class="custom-file-label" for="exampleInputFile">Choose
                                                             answer
                                                             pdf</label>
