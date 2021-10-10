@@ -59,7 +59,8 @@
                                             class="must-filled">*</span></label>
                                     {{-- <input type="text" class="form-control" name="question" placeholder="Enter question" value="{{ old('question') }}"> --}}
                                     <textarea input="question" id="question" name="question" placeholder="Enter question"
-                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('question') }}</textarea>
+                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                        required>{{ old('question') }}</textarea>
                                     @error('question')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
@@ -97,7 +98,8 @@
                                             {{-- <input type="text" class="form-control" name="field1" placeholder="Option 1"
                                                 value="{{ old('field1') }}"> --}}
                                             <textarea input="field1" id="field1" name="field1" placeholder="Option 1"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field1') }}</textarea>
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                required>{{ old('field1') }}</textarea>
                                             @error('field1')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
@@ -110,7 +112,8 @@
                                             {{-- <input type="text" class="form-control" name="field2" placeholder="Option 2"
                                                 value="{{ old('field2') }}"> --}}
                                             <textarea input="field2" id="field2" name="field2" placeholder="Option 2"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field2') }}</textarea>
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                required>{{ old('field2') }}</textarea>
                                             @error('field2')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
@@ -123,7 +126,8 @@
                                             {{-- <input type="text" class="form-control" name="field3" placeholder="Option 3"
                                                 value="{{ old('field3') }}"> --}}
                                             <textarea input="field3" id="field3" name="field3" placeholder="Option 3"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field3') }}</textarea>
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                required>{{ old('field3') }}</textarea>
                                             @error('field3')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
@@ -136,7 +140,8 @@
                                             {{-- <input type="text" class="form-control" name="field4" placeholder="Option 4"
                                                 value="{{ old('field4') }}"> --}}
                                             <textarea input="field4" id="field4" name="field4" placeholder="Option 4"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field4') }}</textarea>
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                required>{{ old('field4') }}</textarea>
                                             @error('field4')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
@@ -191,6 +196,16 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="explanation" class="col-form-label">Explanation </label>
+                                    <textarea input="explanation" id="explanation" name="explanation"
+                                        placeholder="Enter explanation"
+                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('explanation') }}</textarea>
+                                    @error('explanation')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                     <a href="javascript:history.back()"><button type="button"
@@ -226,6 +241,7 @@
             $('#field2').summernote();
             $('#field3').summernote();
             $('#field4').summernote();
+            $('#explanation').summernote();
         })
     </script>
 

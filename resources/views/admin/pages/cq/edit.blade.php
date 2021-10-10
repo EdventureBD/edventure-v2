@@ -136,8 +136,9 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($cquestion1->image)
-                                                    <img class="product-image" src="{{ Storage::url($cq->image) }}"
-                                                        id="previewImg" class="avatar" alt="...">
+                                                    <img class="product-image"
+                                                        src="{{ Storage::url($cquestion1->image) }}" id="previewImg"
+                                                        class="avatar" alt="...">
                                                 @else
                                                     <img class="product-image" src="http://placehold.it/150x100"
                                                         id="previewImg" class="avatar" alt="...">
@@ -221,8 +222,9 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($cquestion2->image)
-                                                    <img class="product-image" src="{{ Storage::url($cq->image) }}"
-                                                        id="previewImg" class="avatar" alt="...">
+                                                    <img class="product-image"
+                                                        src="{{ Storage::url($cquestion2->image) }}" id="previewImg"
+                                                        class="avatar" alt="...">
                                                 @else
                                                     <img class="product-image" src="http://placehold.it/150x100"
                                                         id="previewImg" class="avatar" alt="...">
@@ -305,8 +307,9 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($cquestion3->image)
-                                                    <img class="product-image" src="{{ Storage::url($cq->image) }}"
-                                                        id="previewImg" class="avatar" alt="...">
+                                                    <img class="product-image"
+                                                        src="{{ Storage::url($cquestion3->image) }}" id="previewImg"
+                                                        class="avatar" alt="...">
                                                 @else
                                                     <img class="product-image" src="http://placehold.it/150x100"
                                                         id="previewImg" class="avatar" alt="...">
@@ -389,8 +392,9 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($cquestion4->image)
-                                                    <img class="product-image" src="{{ Storage::url($cq->image) }}"
-                                                        id="previewImg" class="avatar" alt="...">
+                                                    <img class="product-image"
+                                                        src="{{ Storage::url($cquestion4->image) }}" id="previewImg"
+                                                        class="avatar" alt="...">
                                                 @else
                                                     <img class="product-image" src="http://placehold.it/150x100"
                                                         id="previewImg" class="avatar" alt="...">

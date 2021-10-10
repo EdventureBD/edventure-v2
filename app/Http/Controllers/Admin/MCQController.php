@@ -29,7 +29,7 @@ class MCQController extends Controller
         ExamController::addQuestion(); //ignore the error. If you want to see the code just press the Alt key and left mouse button
     }
 
-    public function store(Request $request,Exam $exam)
+    public function store(Request $request, Exam $exam)
     {
 
         $validaterequest = $request->validate([
@@ -40,6 +40,7 @@ class MCQController extends Controller
             'field3' => 'required',
             'field4' => 'required',
             'answer' => 'required',
+            'explanation' => 'required|min:4',
             'examId' => 'required',
             'slug' => 'required',
             'contentTagIds' => 'required',
@@ -47,7 +48,7 @@ class MCQController extends Controller
 
         $mcq = new MCQ();
         $mcq->question = $request['question'];
-        $mcq->slug =(string) Str::uuid();
+        $mcq->slug = (string) Str::uuid();
         if ($request->hasFile('image')) {
             $mcq->image = $request->image->store('public/question/mcq');
         }
@@ -57,6 +58,7 @@ class MCQController extends Controller
         $mcq->field4 = $request['field4'];
         $mcq->answer = $request['answer'];
         $mcq->exam_id = $request->examId;
+        $mcq->explanation = $request['explanation'];
         $mcq->number_of_attempt = 0;
         $mcq->gain_marks = 0;
         $mcq->success_rate = 0;
@@ -81,14 +83,14 @@ class MCQController extends Controller
         }
     }
 
-    public function show(Exam $exam,MCQ $mcq)
+    public function show(Exam $exam, MCQ $mcq)
     {
 
         $exam = Exam::where('id', $mcq->exam_id)->first();
         return view('admin.pages.mcq.details', compact('mcq', 'exam'));
     }
 
-    public function edit(Exam $exam,MCQ $mcq)
+    public function edit(Exam $exam, MCQ $mcq)
     {
         $tagId = [];
         // $exam = Exam::where('id', $mcq->exam_id)->first();
@@ -105,7 +107,7 @@ class MCQController extends Controller
         return view('admin.pages.mcq.edit', compact('mcq', 'exam', 'contentTags', 'questionContentTags'));
     }
 
-    public function update(Request $request,Exam $exam, MCQ $mcq)
+    public function update(Request $request, Exam $exam, MCQ $mcq)
     {
         $validaterequest = $request->validate([
             'question' => 'required|min:4',
@@ -115,6 +117,7 @@ class MCQController extends Controller
             'field3' => 'required',
             'field4' => 'required',
             'answer' => 'required',
+            'explanation' => 'required|min:4',
             'examId' => 'required',
             'slug' => 'required',
             'contentTagIds' => 'required',
@@ -135,6 +138,7 @@ class MCQController extends Controller
         $mcq->field3 = $request['field3'];
         $mcq->field4 = $request['field4'];
         $mcq->answer = $request['answer'];
+        $mcq->explanation = $request['explanation'];
         $mcq->exam_id = $request['examId'];
 
         $save = $mcq->save();
@@ -162,7 +166,7 @@ class MCQController extends Controller
         }
     }
 
-    public function destroy(Exam $exam,MCQ $mcq)
+    public function destroy(Exam $exam, MCQ $mcq)
     {
         $exam = Exam::where('id', $mcq->exam_id)->first();
         $delete = $mcq->delete();

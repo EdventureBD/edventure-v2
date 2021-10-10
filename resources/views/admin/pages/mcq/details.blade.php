@@ -4,8 +4,8 @@
 'secondPageName'=>'MCQ Details'
 ])
 @section('css1')
-<!-- summernote -->
-<link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
 @endsection
 @section('content')
     <div>
@@ -33,7 +33,7 @@
                                                         class="must-filled"></span></label>
                                                 {{-- <input type="text" class="form-control" value="{{ $mcq->question }}"
                                                     disabled> --}}
-                                                    <p>{!! $mcq->question !!}</p>
+                                                <p>{!! $mcq->question !!}</p>
                                                 @error('question')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -54,26 +54,26 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
+                                        <div class="col-md-5 card ml-4">
+                                            <div class="form-group card-body">
                                                 <label for="field1" class="col-form-label">Option 1</label>
                                                 <p>{!! $mcq->field1 !!}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
+                                        <div class="col-md-5 card ml-4">
+                                            <div class="form-group card-body">
                                                 <label for="field2" class="col-form-label">Option 2</label>
                                                 <p>{!! $mcq->field2 !!}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
+                                        <div class="col-md-5 card ml-4">
+                                            <div class="form-group card-body">
                                                 <label for="field3" class="col-form-label">Option 3</label>
                                                 <p>{!! $mcq->field3 !!}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
+                                        <div class="col-md-5 card ml-4">
+                                            <div class="form-group card-body">
                                                 <label for="field4" class="col-form-label">Option 4</span></label>
                                                 <p>{!! $mcq->field4 !!}</p>
                                             </div>
@@ -141,6 +141,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-12 card">
+                                            <div class="form-group card-body">
+                                                <label for="field4" class="col-form-label">Explanation</span></label>
+                                                <p>{!! $mcq->explanation !!}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="card-footer">
                                         <a href="javascript:history.back()"><button type="button"
                                                 class="btn btn-danger">Back</button></a>
@@ -161,7 +170,7 @@
 
 @endsection
 @section('js1')
-  <!-- Summernote -->
-  <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <!-- Summernote -->
+    <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 @endsection

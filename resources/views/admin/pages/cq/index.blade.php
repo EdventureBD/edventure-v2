@@ -118,12 +118,13 @@
                                                     </a>
                                                     <a class="mr-1"
                                                         href="{{ route('cq.edit', [$exam->slug, $cq->slug]) }}"
-                                                        title="Edit {{ $cq->question }}">
+                                                        title="Edit">
                                                         <button class="btn btn-info">
-                                                            <i class="far fa-edit"></i></button>
+                                                            <i class="far fa-edit"></i>
+                                                        </button>
                                                     </a>
                                                     <a class="mr-1" href="#deletecq{{ $cq->id }}"
-                                                        data-toggle="modal" title="Delete {{ $cq->question }}">
+                                                        data-toggle="modal" title="Delete">
                                                         <button class="btn btn-danger"><i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </a>

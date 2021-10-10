@@ -193,7 +193,36 @@ class CQController extends Controller
     public function show(Exam $exam, CreativeQuestion $cq)
     {
         // dd($cq);
-        return view('admin.pages.cq.details', compact('cq', 'exam'));
+        // dd($cq->id);
+        $cquestion1 = CreativeQuestion::find($cq->id)->question()->where('marks', 1)->first(); // জ্ঞানমূলক
+        $cquestion2 = CreativeQuestion::find($cq->id)->question()->where('marks', 2)->first(); // অনুধাবন
+        $cquestion3 = CreativeQuestion::find($cq->id)->question()->where('marks', 3)->first(); // প্রয়োগমূলক
+        $cquestion4 = CreativeQuestion::find($cq->id)->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
+        $questionContentTags1 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion1->id)
+            ->get();
+        $questionContentTags2 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion2->id)
+            ->get();
+        $questionContentTags3 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion3->id)
+            ->get();
+        $questionContentTags4 = QuestionContentTag::where('exam_type', "CQ")
+            ->where('question_id', $cquestion4->id)
+            ->get();
+
+        return view('admin.pages.cq.details', compact(
+            'cq',
+            'exam',
+            'cquestion1',
+            'cquestion2',
+            'cquestion3',
+            'cquestion4',
+            'questionContentTags1',
+            'questionContentTags2',
+            'questionContentTags3',
+            'questionContentTags4',
+        ));
     }
 
     public function edit(Exam $exam, CreativeQuestion $cq)

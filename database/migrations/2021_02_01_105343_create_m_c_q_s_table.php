@@ -23,6 +23,7 @@ class CreateMCQSTable extends Migration
             $table->longText('field3')->nullable();
             $table->longText('field4')->nullable();
             $table->integer('answer');
+            $table->longText('explanation')->nullable();
             $table->unsignedBigInteger('exam_id');
             $table->foreign('exam_id')
                 ->references('id')->on('exams')

@@ -97,6 +97,7 @@
                                         <th>Field 3</th>
                                         <th>Field 4</th>
                                         <th>Answer</th>
+                                        <th>Explanation</th>
                                         <th>Exam</th>
                                         <th>Action</th>
                                     </tr>
@@ -126,6 +127,7 @@
                                                     {!! $mcq->field4 !!}
                                                 @endif
                                             </td>
+                                            <td>{!! $mcq->explanation !!}</td>
                                             <td>{{ $mcq->examTitle }}</td>
                                             <td>
                                                 <div class="btn-group">
@@ -193,6 +195,7 @@
                                         <th>Field 3</th>
                                         <th>Field 4</th>
                                         <th>Ansewer</th>
+                                        <th>Explanation</th>
                                         <th>Exam</th>
                                         <th>Action</th>
                                     </tr>

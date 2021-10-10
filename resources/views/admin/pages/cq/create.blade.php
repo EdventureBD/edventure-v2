@@ -14,14 +14,16 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
 
     <script>
-        function previewFile(input) {
+        function previewFile(input, image) {
             var file = $("input[type=file]").get(0).files[0];
 
+            var previewImage = "preview" + image;
+            console.log(image, file, previewImage);
             if (file) {
                 var reader = new FileReader();
 
                 reader.onload = function() {
-                    $("#previewImg").attr("src", reader.result);
+                    $('#' + previewImage).attr("src", reader.result);
                 }
 
                 reader.readAsDataURL(file);
@@ -69,13 +71,13 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Choose
+                                                    <label for="creative_question" class="col-form-label">Choose
                                                         Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" name="uddipokimage"
-                                                                class="custom-file-input hidden" id="exampleInputFile"
-                                                                onchange="previewFile(this);">
+                                                                class="custom-file-input hidden" id="creative_question"
+                                                                onchange="previewFile(this, 'creative_question');">
                                                             <label class="custom-file-label" for="exampleInputFile">Choose
                                                                 image</label>
                                                         </div>
@@ -87,7 +89,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <img class="product-image" src="http://placehold.it/150x100"
-                                                    id="previewImg" class="avatar" alt="...">
+                                                    id="previewCreative_question" class="avatar" alt="...">
                                             </div>
                                         </div>
 

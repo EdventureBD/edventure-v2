@@ -55,7 +55,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" method="POST" action="{{ route('mcq.update', [$exam,$mcq]) }}"
+                            <form role="form" method="POST" action="{{ route('mcq.update', [$exam, $mcq]) }}"
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 {{ csrf_field() }}
@@ -210,6 +210,16 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="explanation" class="col-form-label">Explanation </label>
+                                    <textarea input="explanation" id="explanation" name="explanation"
+                                        placeholder="Enter explanation"
+                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('explanation') ? old('explanation') : $mcq->explanation }}</textarea>
+                                    @error('explanation')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                     <a href="javascript:history.back()"><button type="button"
@@ -247,6 +257,7 @@
             $('#field2').summernote();
             $('#field3').summernote();
             $('#field4').summernote();
+            $('#explanation').summernote();
         })
     </script>
 

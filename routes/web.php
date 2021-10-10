@@ -24,7 +24,8 @@ Route::get('/', function () {
     $totalStudent = User::where('user_type', '3')->count();
     $totalTeacher = User::where('user_type', '2')->count();
     $totalExams = Exam::count();
-    return view('student.pages.frontend.student', compact('courses', 'courseCount', 'totalStudent', 'totalTeacher', 'totalExams'));
+    // return view('student.pages.frontend.student', compact('courses', 'courseCount', 'totalStudent', 'totalTeacher', 'totalExams'));
+    return view('landing.landing');
 })->name('/');
 
 Route::get('/error', function () {
@@ -42,6 +43,6 @@ Route::get('/course/course-preview/{course}/enroll', [CourseController::class, '
 
 require __DIR__ . '/auth.php';
 
-Route::get('/landing-1', function(){
-    return view('landing.landing');
-});
+// Route::get('/landing-1', function(){
+//     return view('landing.landing');
+// });
