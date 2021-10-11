@@ -23,4 +23,14 @@
 .btn.btn-outline{
     border: 2px solid #653092;
     color: #663193;
+    border-radius: 10px;
+    &:hover{
+        background-color: #663193;
+        color: #ffffff;
+    }
+}
+.btn.bg-purple{
+    &:hover{
+        box-shadow: 0 0 15px rgba(101,48,146,0.5);
+    }
 }

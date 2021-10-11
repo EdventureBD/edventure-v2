@@ -23,7 +23,9 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased" id="app">
+            <div class="landing-page">
             {{ $slot }}
+            </div>
         </div>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>

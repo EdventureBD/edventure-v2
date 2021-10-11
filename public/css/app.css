@@ -11004,6 +11004,15 @@ h3 {
 .btn.btn-outline {
   border: 2px solid #653092;
   color: #663193;
+  border-radius: 10px;
+}
+.btn.btn-outline:hover {
+  background-color: #663193;
+  color: #ffffff;
+}
+
+.btn.bg-purple:hover {
+  box-shadow: 0 0 15px rgba(101, 48, 146, 0.5);
 }
 
 .font-raleway {
@@ -11081,6 +11090,11 @@ h3 {
   color: rgba(44, 46, 51, 0.65);
 }
 
+@media (max-width: 767px) {
+  .text-xl {
+    font-size: 62px;
+  }
+}
 @media (min-width: 768px) {
   /* show 3 items */
   .carousel-inner .active,
@@ -11176,6 +11190,35 @@ h3 {
   color: #000000;
 }
 
+.navbar .collapse.navbar-collapse.show {
+  background-color: #f8f9fa;
+}
+.navbar .nav-item.active, .navbar .nav-item:hover {
+  position: relative;
+  color: #663193;
+  font-weight: 800;
+}
+.navbar .nav-item.active .nav-link, .navbar .nav-item:hover .nav-link {
+  color: #663193;
+  font-weight: 800;
+}
+.navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 5px;
+  left: calc(50% - 2px);
+  background: #663193;
+  border-radius: 50%;
+  bottom: 0px;
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    background-color: #f8f9fa;
+    z-index: 99;
+  }
+}
 .landing-page {
   font-family: "Raleway", sans-serif;
 }
@@ -11221,26 +11264,6 @@ h3 {
 
 .drop-shadow {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-.navbar .nav-item.active, .navbar .nav-item:hover {
-  position: relative;
-  color: #663193;
-  font-weight: 800;
-}
-.navbar .nav-item.active .nav-link, .navbar .nav-item:hover .nav-link {
-  color: #663193;
-  font-weight: 800;
-}
-.navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
-  position: absolute;
-  content: "";
-  width: 5px;
-  height: 5px;
-  left: calc(50% - 2px);
-  background: #663193;
-  border-radius: 50%;
-  bottom: 0px;
 }
 
 .single-reader iframe {

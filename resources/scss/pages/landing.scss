@@ -48,27 +48,6 @@
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
-.navbar .nav-item {
-    &.active,&:hover{
-        position: relative;
-        color: $purple;
-        font-weight: 800;
-        .nav-link{
-            color: $purple;
-            font-weight: 800;
-        }
-        &.has-dot:after{
-            position: absolute;
-            content: "";
-            width: 5px;
-            height: 5px;
-            left: calc(50% - 2px);
-            background: $purple;
-            border-radius: 50%;
-            bottom: 0px;
-        }
-    }
-}
 
 .single-reader{
     iframe{

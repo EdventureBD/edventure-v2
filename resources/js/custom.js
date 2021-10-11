@@ -18,6 +18,7 @@ $('.slick-carousel').slick({
     centerMode: true,
     centerPadding: '0px',
     slidesToShow: 3,
+    dots: true,
     responsive: [
       {
         breakpoint: 768,
@@ -25,7 +26,8 @@ $('.slick-carousel').slick({
           arrows: false,
           centerMode: true,
           centerPadding: '0px',
-          slidesToShow: 1
+          slidesToShow: 1,
+          dots: true
         }
       },
       {
@@ -34,7 +36,8 @@ $('.slick-carousel').slick({
           arrows: false,
           centerMode: true,
           centerPadding: '40px',
-          slidesToShow: 1
+          slidesToShow: 1,
+          dots: true
         }
       }
     ]

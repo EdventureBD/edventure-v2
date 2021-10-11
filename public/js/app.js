@@ -1884,13 +1884,15 @@ $('.slick-carousel').slick({
   centerMode: true,
   centerPadding: '0px',
   slidesToShow: 3,
+  dots: true,
   responsive: [{
     breakpoint: 768,
     settings: {
       arrows: false,
       centerMode: true,
       centerPadding: '0px',
-      slidesToShow: 1
+      slidesToShow: 1,
+      dots: true
     }
   }, {
     breakpoint: 480,
@@ -1898,7 +1900,8 @@ $('.slick-carousel').slick({
       arrows: false,
       centerMode: true,
       centerPadding: '40px',
-      slidesToShow: 1
+      slidesToShow: 1,
+      dots: true
     }
   }]
 });

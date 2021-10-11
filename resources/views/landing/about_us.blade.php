@@ -5,10 +5,8 @@
             <div class="row">
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
-                    <h4 class="text-red text-md font-roboto">HSC 2021</h4>
-                    <h2 class="text-xl text-purple">প্রস্তুতি হোক<br/>
-                        নিজের মতো</h2>
-                    <a href="#" class="btn btn-register text-white bg-gradient-purple px-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                        <h3 class="text-purple text-lg font-bebas">OUR EXAMS</h3>
+                        <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">An exam or examination is an official test that shows your knowledge or ability in a particular subject</p>
                     </div>
                 </div>
                 <div class="col-md-6">
