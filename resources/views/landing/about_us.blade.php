@@ -1,6 +1,6 @@
 <x-guest-layout>
     @include('landing.header')
-    <section class="header-banner bg-art pt-7">
+    <section class="header-banner pt-7">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 py-5">
@@ -55,7 +55,24 @@
                     </div>
                 </div>
             </div>
+
             <a href="#" class="btn text-xxsm text-white bg-purple px-4 py-2">View More Courses</a>
+        </div>
+    </div> <!-- our exam section end -->
+
+    <div class="our-exams-section text-center py-5">
+        <div class="container">
+            
+            <div class="row my-5">
+                <div class="col-md-3">
+                    <div class="single-exam p-4">
+                        <h5 class="text-sm fw-800 mt-3">Physics</h5>
+                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                    </div>
+                </div>
+                
+            </div>
+            
         </div>
     </div> <!-- our exam section end -->
 
