@@ -8,26 +8,17 @@
         <title>{{ config('app.name', 'eDventure') }}</title>
 
         <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Font Awesome Icons -->
-        <link type="text/css" href="{{ asset('student/public/css/fontawesome.css') }}" rel="stylesheet">
-        
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
+        <link rel="stylesheet" href="{{ asset('css/old_app.css') }}">
 
-        
-    </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased" id="app">
-            <div class="landing-page">
-            {{ $slot }}
-            </div>
-        </div>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+    </head>
+    <body>
+        <div class="font-sans text-gray-900 antialiased">
+            {{ $slot }}
+        </div>
     </body>
 </html>

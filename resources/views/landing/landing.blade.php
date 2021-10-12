@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-landing-layout>
     @include('landing.header')
     <section class="header-banner bg-art pt-7">
         <div class="container-fluid">
@@ -174,6 +174,6 @@
         </div>
     </div><!-- our reader section end -->
     @include('landing.footer')
-</x-guest-layout>
+</x-landing-layout>
 
 

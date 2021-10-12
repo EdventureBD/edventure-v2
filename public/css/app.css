@@ -10977,6 +10977,10 @@ h3 {
   content: "";
 }
 
+.h-30 {
+  height: 30rem;
+}
+
 .btn-register {
   font-size: 30px;
   font-weight: 700;
@@ -11300,4 +11304,8 @@ h3 {
 
 .social-icons img {
   width: 30px;
+}
+
+.single-author {
+  border-radius: 10px 10px 0;
 }
