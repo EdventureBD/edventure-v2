@@ -6,12 +6,10 @@ use App\Models\Admin\CQ;
 use App\Models\Admin\MCQ;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Admin\Assignment;
-use App\Models\Admin\CourseLecture;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\QuestionContentTag;
+use App\Models\Admin\CreativeQuestion;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
@@ -90,8 +88,9 @@ class ExamController extends Controller
             $weakAnalysis = $analysis;
 
             if (!$canAttempt) {
-                $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
-                return view('student.pages.batch.exam.batch_exam_cq_and_assignment', compact('questions', 'exam', 'batch'));
+                // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+                $questions = CreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+                return view('student.pages.batch.exam.batch_exam_cq', compact('questions', 'exam', 'batch'));
             }
             $canAttempt = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
