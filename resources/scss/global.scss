@@ -1,7 +1,12 @@
 .h-8{
     height: 8rem;
 }
-
+.h-30{
+    height: 30rem;
+}
+.w-15{
+    width: 15rem;
+}
 .bottom-border{
     position: relative;
     &:after{
@@ -15,6 +20,3 @@
     }
 }
 
-.h-30{
-    height: 30rem;
-}

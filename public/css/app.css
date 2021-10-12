@@ -10964,6 +10964,14 @@ h3 {
   height: 8rem;
 }
 
+.h-30 {
+  height: 30rem;
+}
+
+.w-15 {
+  width: 15rem;
+}
+
 .bottom-border {
   position: relative;
 }
@@ -10975,10 +10983,6 @@ h3 {
   top: 40px;
   width: 40px;
   content: "";
-}
-
-.h-30 {
-  height: 30rem;
 }
 
 .btn-register {
@@ -11053,6 +11057,10 @@ h3 {
 
 .text-sm {
   font-size: 28px;
+}
+
+.text-xxmd {
+  font-size: 32px;
 }
 
 .text-xmd {
@@ -11307,5 +11315,7 @@ h3 {
 }
 
 .single-author {
-  border-radius: 10px 10px 0;
+  border-radius: 18px 18px 0;
+  background-image: url("/img/about/author_bg.png");
+  background-size: 100% 100%;
 }
