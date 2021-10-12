@@ -24,6 +24,7 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
+    
         $batch = '';
         $enrolled = '';
         $lectures = [];
@@ -34,7 +35,10 @@ class CourseController extends Controller
         }
         $course_lectures = CourseLecture::where('course_id', $course->id)->get();
         foreach ($course_lectures as $course_lecture) {
-            array_push($course_topic_lectures[$course_lecture->topic_id], $course_lecture);
+            //dd($course_lecture->topic_id,$course_lecture);
+            if(!empty($course_lecture->topic_id) && !empty($course_lecture) && !isset($course_lecture->topic_id) && !isset($course_lecture)){
+                array_push($course_topic_lectures[$course_lecture->topic_id], $course_lecture);
+            }
         }
         if (Auth::check()) {
             $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
