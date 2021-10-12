@@ -18,8 +18,8 @@
             </div>
         </div>
     </section> <!--header banner end-->
-    <div class="container-fluid">
-        <img src="/img/about/process.png" class="img-fluid" alt="">
+    <div class="my-5">
+        <img src="/img/about/process.png" class="w-100 img-fluid" alt="">
     </div>
 
     <div class="our-exams-section text-center py-5">
@@ -64,8 +64,8 @@
                 <div class="col-md-4">
                     <div class="single-author p-3">
                         <img src="/img/about/shahriar.png" class="w-15 mb-3 img-fluid"  alt="">
-                        <h3 class="text-xxmd text-white">Md. Shahriar Iftekhar</h3>
-                        <p class="text-sm text-white">CEO</p>
+                        <h3 class="text-sm text-white fw-600">Md. Shahriar Iftekhar</h3>
+                        <p class="text-xsm text-white">CEO</p>
                         <div class="mt-3 mx-4 social-icons d-flex justify-content-between">
                             <a href="#"><img src="/img/about/facebook.png" class="img-fluid"  alt=""></a>
                             <a href="#"><img src="/img/about/instagram.png" class="img-fluid"  alt=""></a>
