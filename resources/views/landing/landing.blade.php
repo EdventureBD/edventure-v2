@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn text-xxsm text-white bg-purple px-4 py-2">Learn more about us</a>
+            <a href="{{route('about_us')}}" class="btn text-xxsm text-white bg-purple px-4 py-2">Learn more about us</a>
         </div>
     </div> <!-- our exam section end -->
 
