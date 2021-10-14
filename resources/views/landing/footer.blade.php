@@ -17,7 +17,6 @@
                     <p class="text-xxsm bottom-border">COMMUNITY</p>
                     <ul class="ml-0 p-0 mt-4">
                         <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Against Discrimination</a></li>
                         <li><a href="#">Linkedin</a></li>
                         <li><a href="#">Instagram</a></li>
                         <li><a href="#">Twitter</a></li>

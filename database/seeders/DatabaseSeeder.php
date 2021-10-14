@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'email' => 'admin@app.com',
+                'phone' => '01521343444',
                 'is_admin' => 1,
                 'user_type' => 1,
                 'password' => Hash::make('password'),
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin2',
                 'email' => 'admin2@app.com',
+                'phone' => '01521343424',
                 'is_admin' => 1,
                 'user_type' => 1,
                 'password' => Hash::make('password'),
@@ -42,6 +44,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Teacher',
                 'email' => 'teacher@app.com',
+                'phone' => '01521343414',
                 'is_admin' => 0,
                 'user_type' => 2,
                 'password' => Hash::make('password'),
@@ -49,6 +52,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Teacher2',
                 'email' => 'teacher2@app.com',
+                'phone' => '01421343444',
                 'is_admin' => 0,
                 'user_type' => 2,
                 'password' => Hash::make('password'),
@@ -56,6 +60,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Student',
                 'email' => 'student@app.com',
+                'phone' => '01621343444',
                 'is_admin' => 0,
                 'user_type' => 3,
                 'password' => Hash::make('password'),
@@ -63,6 +68,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Student2',
                 'email' => 'student2@app.com',
+                'phone' => '01821343444',
                 'is_admin' => 0,
                 'user_type' => 3,
                 'password' => Hash::make('password'),
