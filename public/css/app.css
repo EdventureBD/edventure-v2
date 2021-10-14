@@ -11285,6 +11285,7 @@ h3 {
 .single-exam {
   box-shadow: 0px -2px 87px rgba(0, 0, 0, 0.056545), 0px -0.446726px 19.4326px rgba(0, 0, 0, 0.083455), 0px -0.133002px 5.78559px rgba(0, 0, 0, 0.14);
   border-radius: 30px;
+  background-size: cover;
 }
 .single-exam:hover {
   box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);

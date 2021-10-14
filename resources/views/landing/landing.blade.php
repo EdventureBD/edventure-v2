@@ -25,34 +25,34 @@
             <a href="#" class="btn fw-800 text-xxsm text-white bg-purple px-4">HSC</a>
             <div class="row my-5">
                 <div class="col-md-3">
-                    <div class="single-exam p-4 mb-4 mb-md-0">
+                    <div class="single-exam  p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/physics.png')">
                         <img src="/img/landing/exam_1.png" width="50" alt="">
-                        <h5 class="text-sm fw-800 mt-3">Physics</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        <h5 class="text-sm mt-3">Physics</h5>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4 mb-4 mb-md-0">
+                    <div class="single-exam  p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/chemistry.png')">
                         <img src="/img/landing/exam_2.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Chemistry</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4 mb-4 mb-md-0">
+                    <div class="single-exam p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/math.png')">
                         <img src="/img/landing/exam_3.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Math</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4 mb-md-0">
+                    <div class="single-exam  p-4 mb-md-0" style="background-image: url('/img/landing/bio.png')">
                         <img src="/img/landing/exam_4.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Biology</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/chemistry.jpg" class=" img-fluid" alt="">
+                        <img src="/img/landing/exam.png" class=" img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/dashboard.jpg" class="drop-shadow img-fluid" alt="">
+                        <img src="/img/landing/dashboard.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/result.png" class="drop-shadow img-fluid" alt="">
+                        <img src="/img/landing/result.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
