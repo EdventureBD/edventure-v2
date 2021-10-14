@@ -8,7 +8,7 @@
                     <button class="btn" type="submit"><i class="material-icons">search</i></button>
                 </form>
             </div> --}}
-            <a href="{{ route('/') }}" class="sidebar-brand ">
+            <a href="{{ route('home') }}" class="sidebar-brand ">
                 <!-- <img class="sidebar-brand-icon" src="{{ asset('student/') }}public/images/illustration/student/128/white.svg" alt="Luma"> -->
                 <span class="avatar avatar-xl sidebar-brand-icon h-auto">
                     <span class="avatar-title rounded bg-primary"><img
@@ -27,7 +27,7 @@
             @endauth
             <ul class="sidebar-menu">
                 <li class="sidebar-menu-item {{ request()->is('/') ? 'active':'' }}">
-                    <a class="sidebar-menu-button" href="{{ route('/') }}">
+                    <a class="sidebar-menu-button" href="{{ route('home') }}">
                         <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">home</span>
                         <span class="sidebar-menu-text">Home</span>
                     </a>

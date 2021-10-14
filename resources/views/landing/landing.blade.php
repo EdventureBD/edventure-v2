@@ -1,5 +1,5 @@
 <x-landing-layout>
-    @include('landing.header')
+    
     <section class="header-banner bg-art pt-7">
         <div class="container">
             <div class="row">
@@ -197,7 +197,6 @@
             </div>
         </div>
     </div><!-- our reader section end -->
-    @include('landing.footer')
 </x-landing-layout>
 
 

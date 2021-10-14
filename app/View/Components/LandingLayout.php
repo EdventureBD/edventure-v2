@@ -6,6 +6,11 @@ use Illuminate\View\Component;
 
 class LandingLayout extends Component
 {
+    public function __construct($headerBg='')
+    {
+        $this->headerBg = $headerBg;
+    }
+    
     /**
      * Get the view / contents that represents the component.
      *
@@ -13,6 +18,6 @@ class LandingLayout extends Component
      */
     public function render()
     {
-        return view('layouts.landing');
+        return view('layouts.landing')->with('headerBg', $this->headerBg);
     }
 }

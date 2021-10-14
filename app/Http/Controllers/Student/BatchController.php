@@ -51,7 +51,7 @@ class BatchController extends Controller
             ->whereIn('exam_id', $sExams)
             ->where('status', '1')
             ->get();
-        return view('student.pages.batch.batch_lecture', compact('batch', 'course', 'batchTopics', 'accessedDays', 'specialExams'));
+        return view('student.pages_new.course.preview', compact('batch', 'course', 'batchTopics', 'accessedDays', 'specialExams'));
     }
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
