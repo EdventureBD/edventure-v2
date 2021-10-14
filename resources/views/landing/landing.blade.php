@@ -25,7 +25,7 @@
             <a href="#" class="btn fw-800 text-xxsm text-white bg-purple px-4">HSC</a>
             <div class="row my-5">
                 <div class="col-md-3">
-                    <div class="single-exam  p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/physics.png')">
+                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/physics.png')">
                         <img src="/img/landing/exam_1.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Physics</h5>
                         {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam  p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/chemistry.png')">
+                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/chemistry.png')">
                         <img src="/img/landing/exam_2.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Chemistry</h5>
                         {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/math.png')">
+                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/math.png')">
                         <img src="/img/landing/exam_3.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Math</h5>
                         {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam  p-4 mb-md-0" style="background-image: url('/img/landing/bio.png')">
+                    <div class="single-exam mx-auto p-4 mb-md-0" style="background-image: url('/img/landing/bio.png')">
                         <img src="/img/landing/exam_4.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Biology</h5>
                         {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
