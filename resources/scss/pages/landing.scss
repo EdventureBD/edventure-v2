@@ -88,3 +88,31 @@
         width: 30px;
     }
 }
+
+.single-blog{
+ position: relative;
+ .blog-info{
+     position: absolute;
+     bottom: 0;
+     right: 0;
+     z-index: 1;
+ }
+ &.overlay:after{
+     border-radius: 10px;
+ }
+ &:hover{
+     &.overlay:after{
+         background: rgba(0, 0, 0, 0.056545);
+         transition: 1s;
+     }
+ }
+}
+.blog-author{
+    width: 40px;
+    height: 40px;
+    background-color: #86898C;
+    border-radius: 50%;
+    img{
+        object-fit: cover;
+    }
+}

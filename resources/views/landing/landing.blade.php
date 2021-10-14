@@ -148,31 +148,49 @@
 থেকে এই যাত্রায় যুক্ত হয় নিজস্ব উপলব্ধি। বদলে যেতে থাকা পৃথিবী ও সমাজব্যবস্থার মাঝে প্রতিটি শিক্ষার্থী যেন নিজের মত তার শিখন যাত্রার ধরণ বুঝতে পারে এবং
 সেভাবে কাজ করতে পারে তার প্রয়াস
 থেকেই আমাদের ব্লগ গুলো লেখা</p>
-                    <a href="#" class="btn text-xsm text-white bg-purple px-4 py-2">SEE ALL BLOG</a>
+                    <a href="#" class="btn text-xxsm fw-800 text-white bg-purple px-4 py-2">SEE ALL BLOG</a>
                 </div>
                 <div class="col-md-8">
-                    <div class="row mt-5 mt-md-0 align-items-center">
-                        <div class="col-5">
+                    <div class="row mt-5 mt-md-0 mb-4 align-items-center">
+                        <div class="col-12">
                             <div class="single-reader">
-                                <iframe width="100%" height="auto" src="https://www.youtube.com/embed/vQkXF5__TQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="single-reader">
-                                <iframe class="h-18" width="100%" height="auto" src="https://www.youtube.com/embed/AYDmsaiWY9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                {{-- <iframe  class="h-18" width="100%" height="auto" src="https://www.youtube.com/embed/vQkXF5__TQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
+                                <div class="single-blog overlay  bradius-10">
+                                    <img src="/img/landing/blog1.png" class="img-fluid bradius-10" alt="">
+                                    <div class="blog-info text-right p-3 w-100">
+                                        <h3 class="text-xsm text-white">শেখার যাদু-লার্নিং এনালিটিক্স</h3>
+                                        <h4 class="text-xxxsm text-white">কি এবং কেন দরকার?</h2>
+                                        <div class="blog-author d-inline-block">
+                                            <img src="/img/landing/blog_author.png" class="img-fluid" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row align-items-center">
-                        <div class="col-2"></div>
-                        <div class="col-4">
-                            <div class="single-reader">
-                                <iframe width="100%" height="auto" src="https://www.youtube.com/embed/vQkXF5__TQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="col-6">
+                            <div class="single-blog overlay  bradius-10">
+                                <img src="/img/landing/blog1.png" class="bradius-10 img-fluid" alt="">
+                                <div class="blog-info text-right p-3 w-100">
+                                    <h3 class="text-xxsm text-white">শেখার যাদু-লার্নিং এনালিটিক্স</h3>
+                                    <h4 class="text-xxxsm text-white">কি এবং কেন দরকার?</h2>
+                                    <div class="blog-author d-inline-block">
+                                        <img src="/img/landing/blog_author.png" class="img-fluid" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="single-reader">
-                                <iframe class="h-18" width="100%" height="auto" src="https://www.youtube.com/embed/AYDmsaiWY9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="single-blog overlay  bradius-10">
+                                <img src="/img/landing/blog1.png" class="img-fluid bradius-10" alt="">
+                                <div class="blog-info text-right p-3 w-100">
+                                    <h3 class="text-xxsm text-white">শেখার যাদু-লার্নিং এনালিটিক্স</h3>
+                                    <h4 class="text-xxxsm text-white">কি এবং কেন দরকার?</h2>
+                                    <div class="blog-author d-inline-block">
+                                        <img src="/img/landing/blog_author.png" class="img-fluid" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
