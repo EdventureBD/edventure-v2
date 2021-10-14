@@ -5,10 +5,10 @@
             <div class="row">
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
-                    <h4 class="text-red text-md font-roboto">HSC 2021</h4>
-                    <h2 class="text-xl text-purple">প্রস্তুতি হোক<br/>
+                    <h4 class="text-red  text-md font-roboto">HSC 2021</h4>
+                    <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
                         নিজের মতো</h2>
-                    <a href="#" class="btn btn-register text-white bg-gradient-purple px-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                    <a href="#" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -22,48 +22,48 @@
         <div class="container">
             <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
             <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2021 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
-            <a href="#" class="btn text-xsm text-white bg-purple px-4">HSC</a>
+            <a href="#" class="btn fw-800 text-xxsm text-white bg-purple px-4">HSC</a>
             <div class="row my-5">
                 <div class="col-md-3">
-                    <div class="single-exam p-4">
+                    <div class="single-exam  p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/physics.png')">
                         <img src="/img/landing/exam_1.png" width="50" alt="">
-                        <h5 class="text-sm fw-800 mt-3">Physics</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        <h5 class="text-sm mt-3">Physics</h5>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4">
+                    <div class="single-exam  p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/chemistry.png')">
                         <img src="/img/landing/exam_2.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Chemistry</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4">
+                    <div class="single-exam p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/math.png')">
                         <img src="/img/landing/exam_3.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Math</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="single-exam p-4">
+                    <div class="single-exam  p-4 mb-md-0" style="background-image: url('/img/landing/bio.png')">
                         <img src="/img/landing/exam_4.png" width="50" alt="">
                         <h5 class="text-sm mt-3">Biology</h5>
-                        <p class="text-xxsm fw-400 mt-3">Lorem Ipsum is simply dummy text of the printing</p>
+                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
                         <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn text-xxsm text-white bg-purple px-4 py-2">View More Courses</a>
+            <a href="#" class="btn text-xxsm text-white bg-purple px-4 py-2">Learn more about us</a>
         </div>
     </div> <!-- our exam section end -->
 
     <div class="our-package-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-md font-bebas">কী থাকছে HSC 2021 <br>Last Minute Prep Bundle এ</h3>
+            <h3 class="text-purple text-md font-roboto">কী থাকছে HSC 2021 <br>Last Minute Prep Bundle এ</h3>
             <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- ৩টি পূর্ণাঙ্গ  মডেল টেস্ট
 - স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়
 - ডিজিটাল রিপোর্টের মাধ্যমে দেশের সকল পরীক্ষার্থীদের মাঝে নিজের অবস্থান যাচাই করার সুযোগ
@@ -73,14 +73,13 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                             <div class="package-icon text-left"><img src="/img/landing/exam_icon.png" class="img-fluid" alt="exam" /></div>
-                            <h4 class="text-md text-left mt-3">অনলাইন মডেল টেস্ট</h4>
-                            <p class="text-sm fw-400 text-gray text-left">মাস্টার ট্রেইনার দ্বারা প্রণীত প্রশ্নপত্রে, 
-
+                            <h4 class="text-xmd fw-800 text-left mt-3">অনলাইন মডেল টেস্ট</h4>
+                            <p class="text-xsm fw-400 text-gray text-left">মাস্টার ট্রেইনার দ্বারা প্রণীত প্রশ্নপত্রে, 
 পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, এবং গণিতের ৩টি পূর্ণাঙ্গ মডেল টেস্ট</p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/chemistry.png" class="drop-shadow img-fluid" alt="">
+                        <img src="/img/landing/exam.png" class=" img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -89,12 +88,12 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                         <div class="package-icon text-left"><img src="/img/landing/dashboard_icon.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-md text-left mt-3">স্বয়ংক্রিয় ড্যাশবোর্ড</h4>
-                        <p class="text-sm fw-400 text-gray text-left mt-3">এনালিটিক্স ইঞ্জিন প্রতিটি পরীক্ষার্থীর ড্যাশবোর্ডে তুলে ধরবে তার দুর্বলতা এবং সক্ষমতা, যার মাধ্যমে Preparation হবে সবচেয়ে জোরদার.</p>
+                        <h4 class="text-xmd fw-800  text-left mt-3">স্বয়ংক্রিয় ড্যাশবোর্ড</h4>
+                        <p class="text-xsm fw-400 text-gray text-left mt-3">এনালিটিক্স ইঞ্জিন প্রতিটি পরীক্ষার্থীর ড্যাশবোর্ডে তুলে ধরবে তার দুর্বলতা এবং সক্ষমতা, যার মাধ্যমে Preparation হবে সবচেয়ে জোরদার.</p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/dashboard.png" class="drop-shadow img-fluid" alt="">
+                        <img src="/img/landing/dashboard.jpg" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -103,12 +102,12 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                         <div class="package-icon text-left"><img src="/img/landing/result_icon.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-md text-left mt-3">ডিজিটাল রিপোর্ট</h4>
-                        <p class="text-sm fw-400 text-gray text-left mt-3">পরীক্ষা দেয়া মাত্রই ডিজিটাল রিপোর্টের সাহায্যে জেনে নিতে পারবে বাকি পরীক্ষার্থীদের মধ্যে তুলনামূলক অবস্থান</p>
+                        <h4 class="text-xmd fw-800  text-left mt-3">ডিজিটাল রিপোর্ট</h4>
+                        <p class="text-xsm fw-400 text-gray text-left mt-3">পরীক্ষা দেয়া মাত্রই ডিজিটাল রিপোর্টের সাহায্যে জেনে নিতে পারবে বাকি পরীক্ষার্থীদের মধ্যে তুলনামূলক অবস্থান</p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/result.png" class="drop-shadow img-fluid" alt="">
+                        <img src="/img/landing/result.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -120,8 +119,8 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                         <div class="package-icon text-left"><img src="/img/landing/video_icon.png" class="img-fluid" alt="video" /></div>
-                        <h4 class="text-md text-left mt-3">সল্‌ভ ক্লাস ও সাজেশন</h4>
-                        <p class="text-sm fw-400 text-gray text-left mt-3">প্রতিটি পরীক্ষার পর থাকছে অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
+                        <h4 class="text-xmd fw-800 text-left mt-3">সল্‌ভ ক্লাস ও সাজেশন</h4>
+                        <p class="text-xsm fw-400 text-gray text-left mt-3">প্রতিটি পরীক্ষার পর থাকছে অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
                         </div>
                     </div>
                 </div>
@@ -131,7 +130,7 @@
 
     <div class="our-exams-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-lg font-bebas">Featured Videos</h3>
+            <h3 class="text-purple text-lg fw-400 font-bebas">Featured Videos</h3>
             <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">A few simple steps separate you from your 
                 upcoming journey. See how easy it is to learn.  </p>
             @include('landing.videos')
@@ -142,37 +141,55 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h3 class="text-purple text-lg font-bebas">Blog</h3>
+                    <h3 class="text-purple text-lg fw-400 font-bebas">Blog</h3>
                     <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">বদলে যাচ্ছে পৃথিবী , বাড়ছে জ্ঞানের পরিধি, সেই সাথে বদলে যাচ্ছে আমাদের
 শেখার ধরন । সাধারণত ক্লাস লেকচার আর বই থেকে শুরু হয় আমাদের শেখার যাত্রা , কিন্তু আমাদের আশেপাশের মানুষের অভিজ্ঞতা আর সুচিন্তিত মতামত
 থেকে এই যাত্রায় যুক্ত হয় নিজস্ব উপলব্ধি। বদলে যেতে থাকা পৃথিবী ও সমাজব্যবস্থার মাঝে প্রতিটি শিক্ষার্থী যেন নিজের মত তার শিখন যাত্রার ধরণ বুঝতে পারে এবং
 সেভাবে কাজ করতে পারে তার প্রয়াস
 থেকেই আমাদের ব্লগ গুলো লেখা</p>
-                    <a href="#" class="btn text-xsm text-white bg-purple px-4 py-2">SEE ALL BLOG</a>
+                    <a href="#" class="btn text-xxsm fw-800 text-white bg-purple px-4 py-2">SEE ALL BLOG</a>
                 </div>
                 <div class="col-md-8">
-                    <div class="row mt-5 mt-md-0 align-items-center">
-                        <div class="col-5">
+                    <div class="row mt-5 mt-md-0 mb-4 align-items-center">
+                        <div class="col-12">
                             <div class="single-reader">
-                                <iframe width="100%" height="auto" src="https://www.youtube.com/embed/vQkXF5__TQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="single-reader">
-                                <iframe class="h-18" width="100%" height="auto" src="https://www.youtube.com/embed/AYDmsaiWY9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                {{-- <iframe  class="h-18" width="100%" height="auto" src="https://www.youtube.com/embed/vQkXF5__TQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
+                                <div class="single-blog overlay  bradius-10">
+                                    <img src="/img/landing/blog1.png" class="img-fluid bradius-10" alt="">
+                                    <div class="blog-info text-right p-3 w-100">
+                                        <h3 class="text-xsm text-white">শেখার যাদু-লার্নিং এনালিটিক্স</h3>
+                                        <h4 class="text-xxxsm text-white">কি এবং কেন দরকার?</h2>
+                                        <div class="blog-author d-inline-block">
+                                            <img src="/img/landing/blog_author.png" class="img-fluid" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row align-items-center">
-                        <div class="col-2"></div>
-                        <div class="col-4">
-                            <div class="single-reader">
-                                <iframe width="100%" height="auto" src="https://www.youtube.com/embed/vQkXF5__TQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="col-6">
+                            <div class="single-blog overlay  bradius-10">
+                                <img src="/img/landing/blog1.png" class="bradius-10 img-fluid" alt="">
+                                <div class="blog-info text-right p-3 w-100">
+                                    <h3 class="text-xxsm text-white">শেখার যাদু-লার্নিং এনালিটিক্স</h3>
+                                    <h4 class="text-xxxsm text-white">কি এবং কেন দরকার?</h2>
+                                    <div class="blog-author d-inline-block">
+                                        <img src="/img/landing/blog_author.png" class="img-fluid" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="single-reader">
-                                <iframe class="h-18" width="100%" height="auto" src="https://www.youtube.com/embed/AYDmsaiWY9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="single-blog overlay  bradius-10">
+                                <img src="/img/landing/blog1.png" class="img-fluid bradius-10" alt="">
+                                <div class="blog-info text-right p-3 w-100">
+                                    <h3 class="text-xxsm text-white">শেখার যাদু-লার্নিং এনালিটিক্স</h3>
+                                    <h4 class="text-xxxsm text-white">কি এবং কেন দরকার?</h2>
+                                    <div class="blog-author d-inline-block">
+                                        <img src="/img/landing/blog_author.png" class="img-fluid" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

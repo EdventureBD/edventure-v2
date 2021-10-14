@@ -19,6 +19,9 @@
 .fw-400 {
     font-weight: 400;
 }
+.text-xxxsm {
+    font-size: 12px;
+}
 .text-xxsm {
     font-size: 16px;
 }
@@ -40,7 +43,7 @@
 }
 .text-lg{
     font-size: 56px;
-    font-weight: 400;
+    // font-weight: 400;
 }
 .text-xl{
     font-size: 72px;
@@ -65,7 +68,10 @@
 
 
 @media (max-width: 767px) {
-    .text-xl{
-        font-size: 62px;
+    .text-md{
+        font-size: 28px;
+    }
+    .text-lg{
+        font-size: 35px;
     }
 }

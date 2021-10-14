@@ -10,7 +10,7 @@
     background-size: cover;
 }
 .bg-gradient-purple{
-    background: linear-gradient(to bottom, #A77ACC, #653092);
+    background: linear-gradient(to bottom, #c89aee, #653092);
 }
 .bg-purple{
     background-color: #653092;
@@ -23,9 +23,22 @@
 .single-exam{
     box-shadow: 0px -2px 87px rgba(0, 0, 0, 0.056545), 0px -0.446726px 19.4326px rgba(0, 0, 0, 0.083455), 0px -0.133002px 5.78559px rgba(0, 0, 0, 0.14);
     border-radius: 30px;
+    background-size: cover;
     &:hover{
         box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
     }
+    // &.physics{
+    //     background-image: url('/img/landing/physics.png');
+    // }
+    // &.bio{
+    //     background-image: url('/img/landing/bio.png');
+    // }
+    // &.chemistry{
+    //     background-image: url('/img/landing/chemistry.png');
+    // }
+    // &.math{
+    //     background-image: url('/img/landing/math.png');
+    // }
 }
 
 .single-package{
@@ -89,5 +102,33 @@
 .social-icons {
     img{
         width: 30px;
+    }
+}
+
+.single-blog{
+ position: relative;
+ .blog-info{
+     position: absolute;
+     bottom: 0;
+     right: 0;
+     z-index: 1;
+ }
+ &.overlay:after{
+     border-radius: 10px;
+ }
+ &:hover{
+     &.overlay:after{
+         background: rgba(0, 0, 0, 0.056545);
+         transition: 1s;
+     }
+ }
+}
+.blog-author{
+    width: 40px;
+    height: 40px;
+    background-color: #86898C;
+    border-radius: 50%;
+    img{
+        object-fit: cover;
     }
 }

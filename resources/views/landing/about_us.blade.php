@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
-                        <h3 class="text-purple text-lg font-bebas">WHO WE ARE</h3>
+                        <h3 class="text-purple text-lg fw-400 font-bebas">WHO WE ARE</h3>
                         <p class="fw-600 text-xsm max-w-38 w-100 text-purple-half">A group of passionate educators striving to make 
                             education easy, fun, and personal with the help of technology. We want to increase the accessibility of quality
                              education while empowering learners, parents, and teachers alike.
@@ -24,7 +24,7 @@
 
     <div class="our-exams-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-lg font-bebas">THE EDVENTURE MANIFESTO</h3>
+            <h3 class="text-purple text-lg fw-400 font-bebas">THE EDVENTURE MANIFESTO</h3>
             <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">A group of passionate educators striving to make education easy, 
                 fun, and personal with the help of technology.</p>
             <div class="row my-5">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 pl-3 pl-md-5">
-                    <h3 class="text-purple text-lg font-bebas">MESSAGE FROM THE CEO</h3>
+                    <h3 class="text-purple text-lg fw-400 font-bebas">MESSAGE FROM THE CEO</h3>
                     <p class="fw-600 text-xsm w-100 text-purple-half">Growing up in a country with the highest population density and inadequate resources often leads me to think of alternative solutions to existing problems. The education system of Bangladesh is one of the prime sufferers of the population and resource problem we have in general. Online learning, in this context, comes with a lot of opportunities to be explored. However, as though the term “online learning” sounds really promising in trying to solve the resource problem we have, finding out what works out and what doesn’t in an online learning module is really critical. We, in Edventure, believe online learning to be a facilitator of the existing learning eco-system, not a replacement. Learning is an inter-connected process comprising the student, teacher and guardian where we believe spontaneous participation of every stakeholder is extremely important. Our primary mission is to build an eco-system where all the stakeholders are empowered to spontaneously participate in the learning journey by enabling them with necessary resources and relevant modern technologies. Edventure, in a nutshell, is a group of passionate educators and tech professionals who strive to translate their experiences as both student and teacher into the service we are going to offer in order to make education in general easy, fun and personal”                        
                     </p>
                 </div>

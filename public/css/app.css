@@ -10985,17 +10985,36 @@ h3 {
   content: "";
 }
 
+.overlay:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  left: 0;
+  top: 0;
+  transition: 1s;
+}
+
+.bradius-10 {
+  border-radius: 10px;
+}
+
+.border-none {
+  border: none;
+}
+
 .btn-register {
-  font-size: 30px;
   font-weight: 700;
   border-radius: 40px;
+  padding: 10px;
 }
 .btn-register .icon {
   color: #663193;
-  font-size: 20px;
+  font-size: 12px;
   background: #ffffff;
   border-radius: 50px;
-  padding: 7px 8px;
+  padding: 6px 7px;
 }
 
 .btn-purple {
@@ -11051,6 +11070,10 @@ h3 {
   font-weight: 400;
 }
 
+.text-xxxsm {
+  font-size: 12px;
+}
+
 .text-xxsm {
   font-size: 16px;
 }
@@ -11078,7 +11101,6 @@ h3 {
 
 .text-lg {
   font-size: 56px;
-  font-weight: 400;
 }
 
 .text-xl {
@@ -11107,8 +11129,12 @@ h3 {
 }
 
 @media (max-width: 767px) {
-  .text-xl {
-    font-size: 62px;
+  .text-md {
+    font-size: 28px;
+  }
+
+  .text-lg {
+    font-size: 35px;
   }
 }
 @media (min-width: 768px) {
@@ -11249,7 +11275,7 @@ h3 {
 }
 
 .bg-gradient-purple {
-  background: linear-gradient(to bottom, #A77ACC, #653092);
+  background: linear-gradient(to bottom, #c89aee, #653092);
 }
 
 .bg-purple {
@@ -11263,6 +11289,7 @@ h3 {
 .single-exam {
   box-shadow: 0px -2px 87px rgba(0, 0, 0, 0.056545), 0px -0.446726px 19.4326px rgba(0, 0, 0, 0.083455), 0px -0.133002px 5.78559px rgba(0, 0, 0, 0.14);
   border-radius: 30px;
+  background-size: cover;
 }
 .single-exam:hover {
   box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
@@ -11320,6 +11347,34 @@ h3 {
 
 .social-icons img {
   width: 30px;
+}
+
+.single-blog {
+  position: relative;
+}
+.single-blog .blog-info {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+.single-blog.overlay:after {
+  border-radius: 10px;
+}
+.single-blog:hover.overlay:after {
+  background: rgba(0, 0, 0, 0.056545);
+  transition: 1s;
+}
+
+.blog-author {
+  width: 40px;
+  height: 40px;
+  background-color: #86898C;
+  border-radius: 50%;
+}
+.blog-author img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .single-author {
