@@ -1,7 +1,7 @@
 <x-landing-layout>
     @include('landing.header')
     <section class="header-banner bg-art pt-7">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
