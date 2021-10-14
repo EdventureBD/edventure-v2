@@ -37,10 +37,15 @@
                     <div class="col-lg-12">
                         <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                             <div class="accordion__item">
-                                <a href="#" class="accordion__toggle collapsed h3" data-toggle="collapse"
-                                    data-target="#specialExams1" data-parent="#parent">
-                                    <span class="arrow-up"><i></i></span>
-                                </a>
+                                <div class="bg-purple-light text-center bradius-10">
+                                    <a href="#" class="accordion__toggle collapsed h3" data-toggle="collapse"
+                                        data-target="#specialExams1" data-parent="#parent">
+                                        <span class="flex">Mock Test</span>
+                                        <span class="d-inline-block float-right">
+                                            <span class="arrow-up"><i class="fa"><i class="fas fa-angle-up"></i></span>
+                                        <span class="arrow-down"><i class="fa"><i class="fas fa-angle-down"></i></span></span>
+                                    </a>
+                                </div>
                                 <div class="accordion__menu collapse show" id="specialExams1">
                                     @forelse ($specialExams as $specialExam)
                                         <div class="accordion__menu-link">
