@@ -16,7 +16,7 @@
                 <span class="material-icons">short_text</span>
             </button>
             <!-- Navbar Brand -->
-            <a href="{{ route('/') }}" class="navbar-brand mr-16pt">
+            <a href="{{ route('home') }}" class="navbar-brand mr-16pt">
                 <!-- <img class="navbar-brand-icon" src="../../public/images/logo/white-100@2x.png" width="30" alt="Luma"> -->
                 <!-- <span class="avatar avatar-lg navbar-brand-icon mr-0 mr-lg-8pt"> -->
                 <span class="rounded">
@@ -27,7 +27,7 @@
             </a>
             <ul class="nav navbar-nav text-primary d-none d-sm-flex flex justify-content-start ml-8pt">
                 <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-                    <a href="{{ route('/') }}" class="nav-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('course') }}"

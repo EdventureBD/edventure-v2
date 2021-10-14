@@ -26,7 +26,7 @@ Route::get('/', function () {
     $totalExams = Exam::count();
     // return view('student.pages.frontend.student', compact('courses', 'courseCount', 'totalStudent', 'totalTeacher', 'totalExams'));
     return view('landing.landing');
-})->name('/');
+})->name('home');
 
 Route::get('/error', function () {
     // abort(404);
@@ -45,4 +45,4 @@ require __DIR__ . '/auth.php';
 
 Route::get('/about-us', function(){
     return view('landing.about_us');
-});
+})->name('about_us');
