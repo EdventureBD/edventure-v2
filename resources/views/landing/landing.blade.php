@@ -20,9 +20,9 @@
 
     <div class="our-exams-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-lg font-bebas">OUR EXAMS</h3>
-            <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">An exam or examination is an official test that shows your knowledge or ability in a particular subject</p>
-            <a href="#" class="btn text-xsm text-white bg-purple px-4">College</a>
+            <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
+            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2021 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
+            <a href="#" class="btn text-xsm text-white bg-purple px-4">HSC</a>
             <div class="row my-5">
                 <div class="col-md-3">
                     <div class="single-exam p-4">
@@ -63,15 +63,20 @@
 
     <div class="our-package-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-lg font-bebas">OUR PACKAGE</h3>
-            <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">Each one of our packages has been designed as a base upon which we build your customized collaboration.</p>
+            <h3 class="text-purple text-md font-bebas">কী থাকছে HSC 2021 <br>Last Minute Prep Bundle এ</h3>
+            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- ৩টি পূর্ণাঙ্গ  মডেল টেস্ট
+- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়
+- ডিজিটাল রিপোর্টের মাধ্যমে দেশের সকল পরীক্ষার্থীদের মাঝে নিজের অবস্থান যাচাই করার সুযোগ
+- অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
             <div class="single-package bg-art py-5 px-3 mt-6">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="ml-4">
                             <div class="package-icon text-left"><img src="/img/landing/exam_icon.png" class="img-fluid" alt="exam" /></div>
-                            <h4 class="text-xmd text-left mt-3">অনলাইন পরীক্ষা</h4>
-                            <p class="text-sm fw-400 text-gray text-left">SpeedExam is the best onlineinstitution to conduct assessments and quizzes with great features and effective analytical reports.</p>
+                            <h4 class="text-md text-left mt-3">অনলাইন মডেল টেস্ট</h4>
+                            <p class="text-sm fw-400 text-gray text-left">মাস্টার ট্রেইনার দ্বারা প্রণীত প্রশ্নপত্রে, 
+
+পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, এবং গণিতের ৩টি পূর্ণাঙ্গ মডেল টেস্ট</p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -84,8 +89,8 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                         <div class="package-icon text-left"><img src="/img/landing/dashboard_icon.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-xmd text-left mt-3">Personal Dashboard</h4>
-                        <p class="text-sm fw-400 text-gray text-left mt-3">Personal dashboards simplify business communications, offering employees a tailored view that helps them stay on top of their communications with minimal unnecessary distraction.</p>
+                        <h4 class="text-md text-left mt-3">স্বয়ংক্রিয় ড্যাশবোর্ড</h4>
+                        <p class="text-sm fw-400 text-gray text-left mt-3">এনালিটিক্স ইঞ্জিন প্রতিটি পরীক্ষার্থীর ড্যাশবোর্ডে তুলে ধরবে তার দুর্বলতা এবং সক্ষমতা, যার মাধ্যমে Preparation হবে সবচেয়ে জোরদার.</p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -98,8 +103,8 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                         <div class="package-icon text-left"><img src="/img/landing/result_icon.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-xmd text-left mt-3">Comparative Analysis</h4>
-                        <p class="text-sm fw-400 text-gray text-left mt-3">Comparative studies are the studies to demonstrate ability to examine, compare and contrast subjects or ideas. Comparative study shows how two subjects are similar or shows how two subjects are different.</p>
+                        <h4 class="text-md text-left mt-3">ডিজিটাল রিপোর্ট</h4>
+                        <p class="text-sm fw-400 text-gray text-left mt-3">পরীক্ষা দেয়া মাত্রই ডিজিটাল রিপোর্টের সাহায্যে জেনে নিতে পারবে বাকি পরীক্ষার্থীদের মধ্যে তুলনামূলক অবস্থান</p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -115,8 +120,8 @@
                     <div class="col-md-6">
                         <div class="ml-4">
                         <div class="package-icon text-left"><img src="/img/landing/video_icon.png" class="img-fluid" alt="video" /></div>
-                        <h4 class="text-xmd text-left mt-3">Solution Class</h4>
-                        <p class="text-sm fw-400 text-gray text-left mt-3">NCTB Textbook Solution National Curriculum and Textbook Board Bangladesh Class 1 to 10 Textbooks Solution for Mathematics, Science & More.</p>
+                        <h4 class="text-md text-left mt-3">সল্‌ভ ক্লাস ও সাজেশন</h4>
+                        <p class="text-sm fw-400 text-gray text-left mt-3">প্রতিটি পরীক্ষার পর থাকছে অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
                         </div>
                     </div>
                 </div>
@@ -137,11 +142,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h3 class="text-purple text-lg font-bebas">Mother Earth Hosts Our Reader</h3>
-                    <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s, when an unknown printer.</p>
-                    <a href="#" class="btn text-xxsm text-white bg-purple px-4 py-2">BUY THE BOOK</a>
+                    <h3 class="text-purple text-lg font-bebas">Blog</h3>
+                    <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">বদলে যাচ্ছে পৃথিবী , বাড়ছে জ্ঞানের পরিধি, সেই সাথে বদলে যাচ্ছে আমাদের
+শেখার ধরন । সাধারণত ক্লাস লেকচার আর বই থেকে শুরু হয় আমাদের শেখার যাত্রা , কিন্তু আমাদের আশেপাশের মানুষের অভিজ্ঞতা আর সুচিন্তিত মতামত
+থেকে এই যাত্রায় যুক্ত হয় নিজস্ব উপলব্ধি। বদলে যেতে থাকা পৃথিবী ও সমাজব্যবস্থার মাঝে প্রতিটি শিক্ষার্থী যেন নিজের মত তার শিখন যাত্রার ধরণ বুঝতে পারে এবং
+সেভাবে কাজ করতে পারে তার প্রয়াস
+থেকেই আমাদের ব্লগ গুলো লেখা</p>
+                    <a href="#" class="btn text-xsm text-white bg-purple px-4 py-2">SEE ALL BLOG</a>
                 </div>
                 <div class="col-md-8">
                     <div class="row mt-5 mt-md-0 align-items-center">

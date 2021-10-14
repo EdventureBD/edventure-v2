@@ -6,11 +6,9 @@
                     <p class="text-xxsm bottom-border">CONTACT</p>
                     <ul class="ml-0 p-0 mt-4">
                         <li><a href="#">About</a></li>
-                        <li><a href="#">Newsroom</a></li>
-                        <li><a href="#">InvestorsMade possible by Hosts</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Terms & conditions</a></li>
-                        <li><a href="#">Founders' Letter</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Message From The Ceo</a></li>
+                    
                     </ul>
                 </div>
             </div>
@@ -18,12 +16,11 @@
                 <div class="single-footer-column">
                     <p class="text-xxsm bottom-border">COMMUNITY</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="#">Diversity & Belonging</a></li>
+                        <li><a href="#">Facebook</a></li>
                         <li><a href="#">Against Discrimination</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                        <li><a href="#">Frontline Stays</a></li>
-                        <li><a href="#">Customer Referralss</a></li>
-                        <li><a href="#">Gift cards</a></li>
+                        <li><a href="#">Linkedin</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,12 +28,9 @@
                 <div class="single-footer-column">
                     <p class="text-xxsm bottom-border">INFORMATION</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="#">Customer Service</a></li>
-                        <li><a href="#">Investor Relations</a></li>
-                        <li><a href="#">Content Integrity</a></li>
-                        <li><a href="#">Post</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Explore</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Mock Tests</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
