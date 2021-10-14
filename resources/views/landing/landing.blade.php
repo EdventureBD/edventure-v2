@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/result.png" class="img-fluid" alt="">
+                        <img src="/img/landing/results.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
