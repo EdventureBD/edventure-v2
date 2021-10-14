@@ -24,9 +24,38 @@
             <a class="nav-link text-purple-half" href="#">HELP</a>
             </li>
         </ul>
+        @if (Route::has('login'))
+                @auth
+                    <div class="nav navbar-nav flex-nowrap d-flex mr-16pt">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
+                                data-caret="false">
+                                <span class="avatar avatar-sm mr-8pt2">
+                                    <span class="avatar-title rounded-circle bg-purple text-white" style="padding: 8px 10px"><i class="fas fa-user"></i></span>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-header"><strong>Account</strong></div>
+                                <a class="dropdown-item" href="#">My
+                                    Dashboard</a>
+                                <a class="dropdown-item" href="#">All courses</a>
+                                
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); 
+                                                                            this.closest('form').submit();">
+                                        Log out
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @else
         <div class="my-2 my-lg-0">
             <a class="nav-item active my-2 my-sm-0 pr-3" href="{{route('register')}}">SIGN UP</a>
             <a class="btn btn-purple my-2 my-sm-0" href="{{route('login')}}">LOG IN</a>
         </div>
+        @endauth
+        @endif
     </div>
 </nav>

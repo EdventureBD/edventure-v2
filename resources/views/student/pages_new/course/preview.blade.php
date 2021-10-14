@@ -30,7 +30,7 @@
         </div>
 
     </div>
-    <div class="page-section border-bottom-2">
+    <div class="page-section border-bottom-2 py-5">
         <div class="container page__container w-50">
             @if (count($specialExams) > 0)
                 <div class="row mb-3">
@@ -38,12 +38,12 @@
                         <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                             <div class="accordion__item">
                                 <div class="bg-purple-light text-center bradius-10">
-                                    <a href="#" class="accordion__toggle collapsed h3" data-toggle="collapse"
+                                    <a href="#" class="accordion__toggle collapsed py-3 d-inline-block w-100" data-toggle="collapse"
                                         data-target="#specialExams1" data-parent="#parent">
-                                        <span class="flex">Mock Test</span>
-                                        <span class="d-inline-block float-right">
-                                            <span class="arrow-up"><i class="fa"><i class="fas fa-angle-up"></i></span>
-                                        <span class="arrow-down"><i class="fa"><i class="fas fa-angle-down"></i></span></span>
+                                        <span class="text-gray text-sm fw-700">Mock Test</span>
+                                        <span class="d-inline-block float-right text-gray text-sm">
+                                            <span class="arrow-up text-gray"><i class="fas fa-angle-up"></i></span>
+                                        <span class="arrow-down text-gray"><i class="fas fa-angle-down"></i></span></span>
                                     </a>
                                 </div>
                                 <div class="accordion__menu collapse show" id="specialExams1">

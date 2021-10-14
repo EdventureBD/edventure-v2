@@ -1,0 +1,17 @@
+.accordion__toggle {
+    .arrow-up,.arrow-down{margin-right: 10px;}
+    .arrow-down{
+        display: none;
+    }
+    .arrow-up{
+        display: inline-block;
+    }
+    &.collapsed{
+        .arrow-up{
+            display: none;
+        }
+        .arrow-down{
+            display: inline-block;
+        }
+    }
+}

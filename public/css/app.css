@@ -11232,6 +11232,22 @@ h3 {
   color: #000000;
 }
 
+.accordion__toggle .arrow-up, .accordion__toggle .arrow-down {
+  margin-right: 10px;
+}
+.accordion__toggle .arrow-down {
+  display: none;
+}
+.accordion__toggle .arrow-up {
+  display: inline-block;
+}
+.accordion__toggle.collapsed .arrow-up {
+  display: none;
+}
+.accordion__toggle.collapsed .arrow-down {
+  display: inline-block;
+}
+
 .navbar .collapse.navbar-collapse.show {
   background-color: #f8f9fa;
 }
