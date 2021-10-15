@@ -27,7 +27,7 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-button>
+                <x-button  style="background-color: #663193;">
                     {{ __('Confirm') }}
                 </x-button>
             </div>

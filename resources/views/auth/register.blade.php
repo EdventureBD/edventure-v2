@@ -1,3 +1,5 @@
+<link rel="icon" type="image/png" href="/img/landing/fav.png">
+
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
