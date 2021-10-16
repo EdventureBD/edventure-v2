@@ -1,15 +1,44 @@
-.h-8{
+.h-8 {
     height: 8rem;
 }
-.h-30{
+
+.h-30 {
     height: 30rem;
 }
-.w-15{
+
+.w-15 {
     width: 15rem;
 }
-.bottom-border{
+
+.max-w-38 {
+    max-width: 38rem;
+}
+
+.bg-art {
+    background-image: url('/img/landing/top_background.png');
+    background-size: cover;
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(to bottom, #c89aee, #653092);
+}
+
+.bg-purple {
+    background-color: #653092;
+}
+
+.bg-purple-light {
+    background-color: #D5BDEA;
+}
+
+.bg-light-gray {
+    background-color: $light_gray;
+}
+
+.bottom-border {
     position: relative;
-    &:after{
+
+    &:after {
         height: 2px;
         position: absolute;
         background-color: #959595;
@@ -25,14 +54,28 @@
     content: "";
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
     left: 0;
     top: 0;
     transition: 1s;
 }
-.bradius-10{
+
+.bradius-10 {
     border-radius: 10px;
 }
-.border-none{
+
+.bradius-15 {
+    border-radius: 15px;
+}
+
+.bradius-30 {
+    border-radius: 30px;
+}
+
+.border-none {
     border: none;
+}
+
+.bshadow {
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
 }

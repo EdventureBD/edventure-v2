@@ -38,7 +38,7 @@
                         <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                             <div class="accordion__item">
                                 <div class="bg-purple-light text-center bradius-10">
-                                    <a href="#" class="accordion__toggle collapsed py-3 d-inline-block w-100" data-toggle="collapse"
+                                    <a href="#" class="accordion__toggle py-3 d-inline-block w-100" data-toggle="collapse"
                                         data-target="#specialExams1" data-parent="#parent">
                                         <span class="text-gray text-sm fw-700">Mock Test</span>
                                         <span class="d-inline-block float-right text-gray text-sm">
@@ -48,15 +48,16 @@
                                 </div>
                                 <div class="accordion__menu collapse show" id="specialExams1">
                                     @forelse ($specialExams as $specialExam)
-                                        <div class="accordion__menu-link">
-                                            <span
-                                                class="icon-holder icon-holder--small icon-holder--dark rounded-circle d-inline-flex icon--left">
-                                                <i class="fad fa-pen"></i>
-                                            </span>
-                                            <a class="flex" href="{{ route('question', [$batch->slug, $specialExam->exam->slug]) }}">
-                                                {{ $specialExam->exam->title }}
-                                                <span class="float-right text-primary">{{ $specialExam->exam->exam_type }}</span>
-                                            </a>
+                                        <div class="accordion__menu-link bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <a class="text-dark fw-600" href="{{ route('question', [$batch->slug, $specialExam->exam->slug]) }}">
+                                                    {{ $specialExam->exam->title }}
+                                                </a>
+                                                <div class="text-dark">
+                                                    <span class="d-inline-block bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{ $specialExam->exam->exam_type }}</span>
+                                                    <a href="#" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">View Result</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     @empty
                                         No Topics found
@@ -70,20 +71,25 @@
             @endif
 
             <div class="page-separator mt-5">
-                <div class="page-separator__text">Table of Contents</div>
+                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">Table of Contents</div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                         @forelse ($batchTopics as $batchTopic)
-                            <div class="accordion__item {{ $loop->iteration == 1 ? 'open' : '' }}">
-                                <a href="#" class="accordion__toggle collapsed h3" data-toggle="collapse"
-                                    data-target="#course-toc-{{ $batchTopic->id }} " data-parent="#parent">
-                                    <span class="flex">Topic : {{ $batchTopic->title }} </span>
-                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                </a>
-                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }}"
+                            <div class="accordion__item {{ $loop->iteration == 1 ? 'open' : '' }}  ">
+                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $batchTopic->id }} " data-parent="#parent">
+                                    <div class="col-11 d-inline-flex title align-items-center">
+                                        <span class="">{{ $batchTopic->title }} </span>
+                                    </div>
+                                    <div class="col-1 text-right">
+                                        <span class="d-inline-block text-gray text-sm">
+                                            <span class="arrow-up text-gray"><i class="fas fa-angle-up"></i></span>
+                                            <span class="arrow-down text-gray"><i class="fas fa-angle-down"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
                                     id="course-toc-{{ $batchTopic->id }}">
                                     @livewire('student.batch.lectures', ['batchTopic' => $batchTopic->id, 'batch' =>
                                     $batch], key($batchTopic->id))
