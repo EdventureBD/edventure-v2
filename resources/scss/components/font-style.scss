@@ -1,77 +1,100 @@
-.font-raleway{
+.font-raleway {
     font-family: 'Raleway', sans-serif;
 }
-.font-roboto{
+
+.font-roboto {
     font-family: 'Roboto', sans-serif;
 }
-.font-bebas{
+
+.font-bebas {
     font-family: 'Bebas Neue', cursive;
 }
-.fw-800{
+
+.fw-800 {
     font-weight: 800;
 }
-.fw-700{
+
+.fw-700 {
     font-weight: 700;
 }
+
 .fw-600 {
     font-weight: 600;
 }
+
 .fw-400 {
     font-weight: 400;
 }
+
 .text-xxxsm {
     font-size: 12px;
 }
+
 .text-xxsm {
     font-size: 16px;
 }
+
 .text-xsm {
     font-size: 22px;
 }
+
 .text-sm {
     font-size: 28px;
 }
-.text-xxmd{
+
+.text-xxmd {
     font-size: 32px;
 }
-.text-xmd{
+
+.text-xmd {
     font-size: 36px;
 }
-.text-md{
+
+.text-md {
     font-size: 42px;
     font-weight: 900;
 }
-.text-lg{
+
+.text-lg {
     font-size: 56px;
     // font-weight: 400;
 }
-.text-xl{
+
+.text-xl {
     font-size: 72px;
     font-weight: 900;
 }
 
-.text-red{
+.text-red {
     color: #ED207A;
 }
-.text-purple{
+
+.text-purple {
     color: $purple;
 }
-.text-purple-half{
+
+.text-purple-half {
     color: rgba(101, 48, 146, 0.5);
 }
-.text-white{
+
+.text-white {
     color: #ffffff;
 }
-.text-gray{
+
+.text-gray {
     color: rgba(44, 46, 51, 0.65);
 }
 
+.text-yellow {
+    color: #ffc107;
+}
 
 @media (max-width: 767px) {
-    .text-md{
+    .text-md {
         font-size: 28px;
     }
-    .text-lg{
+
+    .text-lg {
         font-size: 35px;
     }
 }

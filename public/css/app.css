@@ -10960,6 +10960,10 @@ h3 {
   opacity: 0.75;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .h-8 {
   height: 8rem;
 }
@@ -11165,6 +11169,10 @@ h3 {
   color: rgba(44, 46, 51, 0.65);
 }
 
+.text-yellow {
+  color: #ffc107;
+}
+
 @media (max-width: 767px) {
   .text-md {
     font-size: 28px;
@@ -11290,6 +11298,11 @@ h3 {
 }
 .accordion__toggle.collapsed .arrow-down {
   display: inline-block;
+}
+
+.img-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .navbar .collapse.navbar-collapse.show {
@@ -11421,4 +11434,8 @@ h3 {
   border-radius: 18px 18px 0;
   background-image: url("/img/about/author_bg.png");
   background-size: 100% 100%;
+}
+
+.single-course img {
+  border-radius: 10px 10px 0px 0;
 }

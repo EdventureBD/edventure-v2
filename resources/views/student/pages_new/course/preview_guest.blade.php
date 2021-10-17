@@ -168,7 +168,7 @@
     </div>
 
 
-    <div class="page-section border-bottom-2 py-5 bg-light">
+    <div class="page-section border-bottom-2 py-5 bg-light-gray">
         <div class="container page__container w-50">
             <div class="page-separator">
                 <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">Table of Contents</div>

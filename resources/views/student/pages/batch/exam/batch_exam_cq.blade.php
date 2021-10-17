@@ -16,7 +16,7 @@
             <p class="hero__lead measure-hero-lead text-white-50">Exam : {{ $exam->title }}</p>
         </div>
     </div>
-    <div class="bg-light py-5">
+    <div class="bg-light-gray py-5">
         <div class="container page__container">
             <div class="page-section">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
