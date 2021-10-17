@@ -11,9 +11,19 @@
             <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">EXAM</a>
             </li>
+
+            @if (Route::has('login'))
+                @auth
+                    <li class="nav-item has-dot">
+                    <a class="nav-link text-purple-half" href="#">DASHBOARD</a>
+                </li>
+                @endauth     
+            @endif
+
             <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">RESOURCES</a>
             </li>
+
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">
                 <a class="nav-link text-purple-half " href="{{route('about_us')}}">ABOUT US</a>
             </li>
