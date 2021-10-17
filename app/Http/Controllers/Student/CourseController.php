@@ -24,7 +24,7 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
-    
+
         $batch = '';
         $enrolled = '';
         $lectures = [];
@@ -36,7 +36,7 @@ class CourseController extends Controller
         $course_lectures = CourseLecture::where('course_id', $course->id)->get();
         foreach ($course_lectures as $course_lecture) {
             //dd($course_lecture->topic_id,$course_lecture);
-            if(!empty($course_lecture->topic_id) && !empty($course_lecture) && !isset($course_lecture->topic_id) && !isset($course_lecture)){
+            if (!empty($course_lecture->topic_id) && !empty($course_lecture) && !isset($course_lecture->topic_id) && !isset($course_lecture)) {
                 array_push($course_topic_lectures[$course_lecture->topic_id], $course_lecture);
             }
         }
@@ -59,7 +59,8 @@ class CourseController extends Controller
                 }
             }
         }
-        return view('student.pages.course.course_preview', compact(
+        // return view('student.pages.course.course_preview', compact(
+        return view('student.pages_new.course.preview_guest', compact(
             'course',
             'course_topics',
             'course_lectures',
