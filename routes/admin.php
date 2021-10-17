@@ -132,6 +132,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/give-marks', [SubmissionController::class, 'giveMarks'])->name('giveMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/{creative_question}/edit-marks', [SubmissionController::class, 'editMarks'])->name('editMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/update-give-marks', [SubmissionController::class, 'updateGiveMarks'])->name('updateGiveMarks');
+    Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/checkedPaper', [SubmissionController::class, 'checkedPaper'])->name('checkedPaper');
     // END OF EXAM SUBMISSION
 
     Route::get('/activity', [ActivityController::class, 'Index'])->name('admin.activity');

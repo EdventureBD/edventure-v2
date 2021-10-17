@@ -201,8 +201,56 @@ class SubmissionController extends Controller
         $save3 = $detailsResult3->save();
         $save4 = $detailsResult4->save();
 
+        $totals = DetailsResult::where([
+            ['exam_id', $exam->id],
+            ['batch_id', $batch->id],
+            ['student_id', $student->id]
+        ])->get();
+        $totalGainMarks = 0;
+        foreach ($totals as $total) {
+            $totalGainMarks += $total->gain_marks;
+        }
+        $gainMarks = ExamResult::where(
+            [
+                ['exam_id', $exam->id],
+                ['batch_id', $batch->id],
+                ['student_id', $student->id]
+            ]
+        )->first();
+        $gainMarks->gain_marks = $totalGainMarks;
+        $gainMarks->save();
+
         if ($save1 && $save2 && $save3 && $save4) {
             return redirect()->back();
         }
+    }
+
+    public function checkedPaper(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
+    {
+        $validateData = $request->validate([
+            'checkedPaper' => 'required|mimes:pdf|max:10000'
+        ]);
+
+        $checkedPapers = CqExamPaper::where(
+            [
+                ['exam_id', $exam->id],
+                ['batch_id', $batch->id],
+                ['student_id', $student->id]
+            ]
+        )->get();
+        // dd($checkedPapers);
+
+        $path = '';
+
+        if ($request->file('checkedPaper')) {
+            $name = time() . "_" . $request->file('checkedPaper')->getClientOriginalName();
+            $path = $request->file('checkedPaper')->storeAs('public/student/exam/answer/CQ', $name);
+        }
+        foreach ($checkedPapers as $checkedPaper) {
+            $checkedPaper->checked_paper = $path;
+            $checkedPaper->save();
+        }
+
+        return redirect()->back();
     }
 }

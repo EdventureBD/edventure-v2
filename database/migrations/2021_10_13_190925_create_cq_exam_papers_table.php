@@ -33,6 +33,7 @@ class CreateCqExamPapersTable extends Migration
 
             $table->text('submitted_text')->nullable();
             $table->string('submitted_pdf')->nullable();
+            $table->string('checked_paper')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });

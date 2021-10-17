@@ -117,31 +117,6 @@
                                                                     method="POST">
                                                                     {{ csrf_field() }}
                                                                     Question {{ $loop->iteration }}
-                                                                    {{-- @foreach ($exam_paper->creativeQuestion->question as $key => $cq)
-                                                                        <div class="form-group row">
-                                                                            <label for="exampleInputEmail1"
-                                                                                class="h6 col-sm-4">
-                                                                                @if ($cq->marks == 1)
-                                                                                    জ্ঞানমূলক
-                                                                                @elseif($cq->marks == 2) অনুধাবন
-                                                                                @elseif($cq->marks == 3)প্রয়োগমূলক
-                                                                                @elseif($cq->marks == 4)উচ্চতর
-                                                                                    দক্ষতা
-                                                                                @endif
-                                                                            </label>
-                                                                            <div class="col-sm-8">
-                                                                                <input type="number"
-                                                                                    name="m[{{ $cq->id }}]"
-                                                                                    class="form-control"
-                                                                                    id="exampleInputEmail1" value=""
-                                                                                    placeholder="Enter marks for {{ $cq->marks == 1 ? 'জ্ঞানমূলক' : '' }} {{ $cq->marks == 2 ? 'অনুধাবন' : '' }} {{ $cq->marks == 3 ? 'প্রয়োগমূলক' : '' }} {{ $cq->marks == 4 ? 'উচ্চতর দক্ষতা' : '' }}"
-                                                                                    required>
-                                                                            </div>
-                                                                            <input type="hidden" name="q[]"
-                                                                                value="{{ $cq->id }}">
-                                                                        </div>
-                                                                    @endforeach --}}
-
                                                                     @forelse($exam_results as $exam_result)
                                                                         @if ($exam_paper->creative_question_id == $exam_result->cqQuestion->creativeQuestion->id)
                                                                             <div class="form-group row">
@@ -266,11 +241,11 @@
                                         <div class="modal-body">
                                             <form role="form"
                                                 action="{{ route('giveMarks', [
-    'batch' => $batch,
-    'exam' => $exam,
-    'exam_type' => $exam_type,
-    'student' => $student,
-]) }}"
+                                                            'batch' => $batch,
+                                                            'exam' => $exam,
+                                                            'exam_type' => $exam_type,
+                                                            'student' => $student,
+                                                        ]) }}"
                                                 method="POST">
                                                 {{ csrf_field() }}
                                                 @foreach ($exam_papers as $key => $exam_paper)
@@ -327,6 +302,71 @@
                             @endif
                         @endif
                     @endforeach
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Checked Paper
+                        @forelse ($exam_papers as $exam_paper)
+                            @if ($loop->iteration == 1)
+                                <button type="button" class="btn btn-info border border-primary ml-5 h2"
+                                    data-toggle="modal" data-target="#checkedPaper">
+                                    {{ ($exam_paper->checked_paper == null) ? 'Upload':'Update' }} Checked Paper
+                                </button>
+                                <div class="modal fade" id="checkedPaper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">{{ ($exam_paper->checked_paper == null) ? 'Upload':'Update' }} Checked Paper </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form role="form"
+                                                    action="{{ route('checkedPaper', [
+                                                    'batch' => $batch,
+                                                    'exam' => $exam,
+                                                    'exam_type' => $exam_type,
+                                                    'student' => $student,
+                                                ]) }}"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    {{ csrf_field() }}
+                                                    <div class="form-group row">
+                                                        <label for="exampleInputEmail1" class="h6 col-sm-6">
+                                                            {{ ($exam_paper->checked_paper == null) ? 'Upload':'Update' }} Checked Paper
+                                                        </label>
+                                                        <div class="col-sm-6">
+                                                            <input type="file" name="checkedPaper"
+                                                                class="form-control" id="exampleInputEmail1"
+                                                                placeholder="Enter marks for {{ $cq->marks == 1 ? 'জ্ঞানমূলক' : '' }} {{ $cq->marks == 2 ? 'অনুধাবন' : '' }} {{ $cq->marks == 3 ? 'প্রয়োগমূলক' : '' }} {{ $cq->marks == 4 ? 'উচ্চতর দক্ষতা' : '' }}"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="button" class="btn btn-danger float-right"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.modal -->
+                                @if ($exam_paper->checked_paper != null)
+                                    <iframe src="{{ Storage::url($exam_paper->checked_paper) }}" frameborder="0"
+                                        width="100%" height="600px"></iframe>
+                                @endif
+                            @endif
+                        @empty
+
+                        @endforelse
+                    </h3>
                 </div>
             </div>
         </div>

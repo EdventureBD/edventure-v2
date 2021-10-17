@@ -1,8 +1,8 @@
 @extends('admin.layouts.default', [
-                                    'title' => 'Exam Result',
-                                    'pageName'=>'Exam Result', 
-                                    'secondPageName'=>'Exam Result'
-                                ])
+'title' => 'Exam Result',
+'pageName'=>'Exam Result',
+'secondPageName'=>'Exam Result'
+])
 
 @section('css1')
     <!-- DataTables -->
@@ -20,7 +20,7 @@
                             <h3 class="card-title">Exam Result</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0" style="height: auto;" >
+                        <div class="card-body table-responsive p-0" style="height: auto;">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($student_exam_attempts as $student_exam_attempt)
+                                    @foreach ($student_exam_attempts as $student_exam_attempt)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ $student_exam_attempt->student->name }}</td>
@@ -42,9 +42,9 @@
                                             <td class="text-center">{{ $student_exam_attempt->exam->title }}</td>
                                             <td class="text-center">
                                                 <span
-                                                    class="badge {{ $student_exam_attempt->exam->exam_type == 'MCQ' ? 'bg-primary': '' }}
-                                                                 {{ $student_exam_attempt->exam->exam_type == 'CQ' ? 'bg-warning': '' }}
-                                                                 {{ $student_exam_attempt->exam->exam_type == 'Assignment' ? 'bg-danger': '' }}">
+                                                    class="badge {{ $student_exam_attempt->exam->exam_type == 'MCQ' ? 'bg-primary' : '' }}
+                                                                 {{ $student_exam_attempt->exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
+                                                                 {{ $student_exam_attempt->exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}">
                                                     {{ $student_exam_attempt->exam->exam_type }}
                                                 </span>
                                             </td>
@@ -56,12 +56,14 @@
                                                 @endforeach
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('seeDetails', [
-                                                    'batch' => $batch,
-                                                    'student' => $student_exam_attempt->student,
-                                                    'exam' => $student_exam_attempt->exam,
-                                                    'exam_type' => $student_exam_attempt->exam->exam_type
-                                                ]) }}">See Details</a>
+                                                <a
+                                                    href="{{ route('seeDetails', [
+    'batch' => $batch,
+    'student' => $student_exam_attempt->student,
+    'exam' => $student_exam_attempt->exam,
+    'exam_type' => $student_exam_attempt->exam->exam_type,
+]) }}">See
+                                                    Details</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -100,7 +102,7 @@
 
 @section('js2')
     <script>
-        $(function () {
+        $(function() {
             $("#example1").DataTable();
             $('#example2').DataTable({
                 "paging": true,
@@ -111,6 +113,5 @@
                 "autoWidth": false,
             });
         });
-
     </script>
 @endsection
