@@ -1,14 +1,6 @@
 {{--previous student/pages/batch/batch_lecture.blade.php--}}
 
-{{-- @extends('student.layouts.default', [
-'title'=>'Batch Lecture',
-'pageName'=>'Batch Lecture',
-'secondPageName'=>'Batch Lecture'
-]) --}}
-{{-- @extends('layouts.landing')
-@section('content') --}}
 <x-landing-layout headerBg="white">
-    <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
     <div class="course-info bg-gradient-purple py-5">
         <div class="container">
             <div class="row">
@@ -67,7 +59,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- @endif --}}
             @endif
 
             <div class="page-separator mt-5">
@@ -105,7 +96,15 @@
     </div>
 
     
-    <?php /* <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
+    <?php /* 
+@extends('student.layouts.default', [
+'title'=>'Batch Lecture',
+'pageName'=>'Batch Lecture',
+'secondPageName'=>'Batch Lecture'
+])
+@section('content') 
+    
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
     <!-- Header Layout Content -->
     <div class="mdk-header-layout__content page-content ">
 
@@ -134,9 +133,6 @@
                 </div>
             </div>
         </div>
-
-        
-
         <div class="page-section border-bottom-2">
             <div class="container page__container w-50">
                 @if (count($specialExams) > 0)

@@ -1,4 +1,5 @@
 {{--previous student/pages/course/course_preview.blade.php--}}
+
 <?php /*@extends('student.layouts.default', [
 'title'=>'Preview Course',
 'pageName'=>'Preview Course',
@@ -9,7 +10,6 @@
     <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
     <!-- Header Layout Content -->
     <div class="mdk-header-layout__content page-content ">
-
         <div class="mdk-box bg-primary js-mdk-box mb-0" data-effects="blend-background">
             <div class="mdk-box__content">
                 <div class="hero py-64pt text-center text-sm-left">
@@ -125,7 +125,6 @@
 */ ?>
 
 <x-landing-layout headerBg="white">
-    <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
     <div class="course-info bg-gradient-purple py-5">
         <div class="container">
             <div class="row">
