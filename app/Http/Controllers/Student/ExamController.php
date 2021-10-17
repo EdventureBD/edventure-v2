@@ -13,6 +13,7 @@ use App\Models\Admin\CreativeQuestion;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
+use App\Models\Student\exam\CqExamPaper;
 use App\Models\Student\exam\DetailsResult;
 
 class ExamController extends Controller
@@ -71,7 +72,7 @@ class ExamController extends Controller
 
         // START OF CQ
         else if ($exam->exam_type == 'CQ') {
-            $canAttempt = ExamPaper::where('exam_id', $exam->id)
+            $canAttempt = CqExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
                 ->where('exam_type', $exam->exam_type)
@@ -303,7 +304,44 @@ class ExamController extends Controller
             }
         }
         if ($exam->exam_type == 'CQ') {
-            return $this->examPaper($request, $batch, $exam);
+            // dd($request);
+            // return $this->examPaper($request, $batch, $exam);
+            $validateData = $request->validate([
+                'submitted_text' => 'nullable|string',
+                'file' => 'nullable|mimes:pdf|max:10000',
+                'ques' => 'required'
+            ]);
+            // dd($request);
+            $path = '';
+
+            if ($request->file('file')) {
+                $name = time() . "_" . $request->file('file')->getClientOriginalName();
+                $path = $request->file('file')->storeAs('public/student/exam/answer/CQ', $name);
+            }
+
+            for ($i = 1; $i <= sizeof($request->ques); $i++) {
+                $exam_paper = new CqExamPaper();
+                $exam_paper->creative_question_id = $request->ques[$i];
+                $exam_paper->exam_id = $exam->id;
+                $exam_paper->exam_type = $exam->exam_type;
+                $exam_paper->batch_id = $batch->id;
+                $exam_paper->student_id = auth()->user()->id;
+                $exam_paper->submitted_text = $request->submitted_text;
+                $exam_paper->submitted_pdf = $path;
+                $exam_paper->status = 1;
+                $save = $exam_paper->save();
+            }
+
+            $student_exam_attempt = new StudentExamAttempt();
+            $student_exam_attempt->student_id = auth()->user()->id;
+            $student_exam_attempt->exam_id = $exam->id;
+            $student_exam_attempt->is_completed = 1;
+            $student_exam_attempt->attended_at = now();
+            $student_exam_attempt->save();
+
+            if ($save) {
+                return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully complted the CQ exam");
+            }
         }
         if ($exam->exam_type == 'Assignment') {
             return $this->examPaper($request, $batch, $exam);
