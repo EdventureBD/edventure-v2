@@ -1,8 +1,8 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Course Lecture', 
-                                    'pageName'=>'Course Lecture', 
-                                    'secondPageName'=>'Course Lecture'
-                                ])
+'title'=>'Course Lecture',
+'pageName'=>'Course Lecture',
+'secondPageName'=>'Course Lecture'
+])
 
 @section('css1')
     <!-- DataTables -->
@@ -10,27 +10,33 @@
 @endsection
 
 @section('content')
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Course lectures</h3>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Course lectures</h3>
 
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm">
-                                <div>
-                                    <a href="{{ route('course-lecture.create') }}">
-                                        <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Course lecture</button>
-                                    </a>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm">
+                                    <div>
+                                        <a href="{{ route('courseLecturesCSV') }}">
+                                            <button class="btn btn-info"><i class="fas fa-download"></i>&nbsp;&nbsp;
+                                                Export Course Lectures
+                                            </button>
+                                        </a>
+                                        <a href="{{ route('course-lecture.create') }}">
+                                            <button class="btn btn-info"><i
+                                                    class="fas fa-plus-square"></i>&nbsp;&nbsp;Course lecture</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /.card-header -->
-                    {{-- <div class="card-body table-responsive p-0" style="height: auto;" >
+                        <!-- /.card-header -->
+                        {{-- <div class="card-body table-responsive p-0" style="height: auto;" >
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -44,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($lectures as $lecture)
+                                @foreach ($lectures as $lecture)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $lecture->title }}</td>
@@ -109,16 +115,16 @@
                             </tfoot>
                         </table>
                     </div> --}}
-                    @livewire('course-lecture.index')
-                    <!-- /.card-body -->
+                        @livewire('course-lecture.index')
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
             </div>
-        </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 
 @endsection
 
@@ -127,24 +133,26 @@
     <script>
         $(function() {
             $('.customControlInput').change(function() {
-                if(confirm("Do you want to change the status?")){
-                    var status = $(this).prop('checked') == true ? 1 : 0; 
-                    var id = $(this).data('id');     
+                if (confirm("Do you want to change the status?")) {
+                    var status = $(this).prop('checked') == true ? 1 : 0;
+                    var id = $(this).data('id');
                     $.ajax({
                         type: "GET",
                         dataType: "json",
                         url: "changeCourseLectureStatus",
-                        data: {'status': status, 'id': id},
-                        success: function(data){
+                        data: {
+                            'status': status,
+                            'id': id
+                        },
+                        success: function(data) {
                             console.log(data.success);
                         }
                     });
                 } else {
-                    if($("#single-col-"+$(this).data('id')).prop("checked") == true){
-                         $("#single-col-"+$(this).data('id')).prop('checked', false);
-                    }
-                    else if($("#single-col-"+$(this).data('id')).prop("checked") == false){
-                         $("#single-col-"+$(this).data('id')).prop('checked', true);
+                    if ($("#single-col-" + $(this).data('id')).prop("checked") == true) {
+                        $("#single-col-" + $(this).data('id')).prop('checked', false);
+                    } else if ($("#single-col-" + $(this).data('id')).prop("checked") == false) {
+                        $("#single-col-" + $(this).data('id')).prop('checked', true);
                     }
                 }
             })
@@ -158,7 +166,7 @@
 
 @section('js2')
     <script>
-        $(function () {
+        $(function() {
             $("#example1").DataTable();
             $('#example2').DataTable({
                 "paging": true,
@@ -169,6 +177,5 @@
                 "autoWidth": false,
             });
         });
-
     </script>
 @endsection

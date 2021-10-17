@@ -130,6 +130,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission', [SubmissionController::class, 'submission'])->name('submission');
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetails', [SubmissionController::class, 'seeDetails'])->name('seeDetails');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/give-marks', [SubmissionController::class, 'giveMarks'])->name('giveMarks');
+    Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/{creative_question}/edit-marks', [SubmissionController::class, 'editMarks'])->name('editMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/update-give-marks', [SubmissionController::class, 'updateGiveMarks'])->name('updateGiveMarks');
     // END OF EXAM SUBMISSION
 
@@ -155,6 +156,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('assignment-empty-export-csv', [CSVController::class, 'emptyAssignment'])->name('emptyAssignment');
 
     Route::get('download-courses-as-csv', [CSVController::class, 'courseCSV'])->name('courseCSV');
+    Route::get('download-course-lectures-as-csv', [CSVController::class, 'courseLecturesCSV'])->name('courseLecturesCSV');
 
     Route::get('download-content-tag-as-csv', [CSVController::class, 'contentTagExportCSV'])->name('contentTagExportCSV');
     Route::post('upload-content-tag-as-csv', [CSVController::class, 'contentTagImportCSV'])->name('contentTagImportCSV');

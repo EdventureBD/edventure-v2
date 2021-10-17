@@ -6,8 +6,9 @@ use App\Exports\ExamExport;
 use Illuminate\Http\Request;
 use App\Exports\CourseExport;
 use App\Exports\ContentTagExport;
-use App\Http\Controllers\Controller;
 use App\Imports\ContentTagImport;
+use App\Exports\CourseLectureExport;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,6 +37,11 @@ class CSVController extends Controller
     public function courseCSV()
     {
         return Excel::download(new CourseExport, 'courses.xlsx');
+    }
+
+    public function courseLecturesCSV()
+    {
+        return Excel::download(new CourseLectureExport, 'Course Lecture.xlsx');
     }
 
     public function contentTagExportCSV()
