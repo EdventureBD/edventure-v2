@@ -46,3 +46,8 @@ require __DIR__ . '/auth.php';
 Route::get('/about-us', function(){
     return view('landing.about_us');
 })->name('about_us');
+
+
+Route::get('/test-otp', function() {
+    return view('test_otp');
+})->name('send_otp');
