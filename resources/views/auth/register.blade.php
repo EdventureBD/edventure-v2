@@ -150,7 +150,7 @@
                       <div class="mt-2">
                         <form action="">
                             <div class="form-group">
-                                <input type="text" id="codeToVerify" class="w-full rounded" placeholder="code...">
+                                <input type="text" id="codeToVerify" class="w-full rounded" placeholder="OTP">
                             </div>
                         </form>
                       </div>

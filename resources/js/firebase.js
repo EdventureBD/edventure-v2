@@ -38,7 +38,7 @@ function onSignInSubmit() {
         $(this).attr('disabled', 'disabled');
         $(this).text('Processing..');
         confirmationResult.confirm(code).then(function (result) {
-                    alert('Succecss');
+                    // alert('Succecss');
             var user = result.user;
             otpVerified = true;
             $('#registerForm').submit();
