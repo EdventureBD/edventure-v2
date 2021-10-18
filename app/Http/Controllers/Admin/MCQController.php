@@ -31,7 +31,7 @@ class MCQController extends Controller
 
     public function store(Request $request, Exam $exam)
     {
-
+       
         $validaterequest = $request->validate([
             'question' => 'required|min:4|unique:m_c_q_s',
             'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
