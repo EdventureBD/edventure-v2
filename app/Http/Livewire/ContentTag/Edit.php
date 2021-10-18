@@ -41,7 +41,6 @@ class Edit extends Component
         $data = $this->validate();
         $content_tag = ContentTag::find($this->contentTag->id);
         $content_tag->title = $data['title'];
-        $content_tag->slug = Str::slug($data['title']);
         $content_tag->course_id = $data['courseId'];
         $content_tag->topic_id = $data['topicId'];
         $content_tag->lecture_id = $data['lectureId'];
