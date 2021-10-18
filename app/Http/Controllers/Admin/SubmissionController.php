@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use Illuminate\Http\Request;
+use App\Models\Admin\Assignment;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\CreativeQuestion;
 use App\Models\Student\exam\ExamPaper;
@@ -41,11 +42,16 @@ class SubmissionController extends Controller
                 ->get();
             return view('admin.pages.batch_exam.submission.details_exam_result', compact('details_result', 'batch', 'exam', 'exam_type', 'student'));
         } else if ($exam->exam_type == 'Assignment') {
-            $exam_papers = ExamPaper::join('assignments', 'assignments.id', 'exam_papers.question_id')
-                ->where('exam_papers.exam_id', $exam->id)
-                ->where('exam_papers.batch_id', $batch->id)
-                ->where('exam_papers.student_id', $student->id)
-                ->select('exam_papers.*', 'assignments.*')
+            // $exam_papers = ExamPaper::join('assignments', 'assignments.id', 'exam_papers.question_id')
+            //     ->where('exam_papers.exam_id', $exam->id)
+            //     ->where('exam_papers.batch_id', $batch->id)
+            //     ->where('exam_papers.student_id', $student->id)
+            //     ->select('exam_papers.*', 'assignments.*')
+            //     ->get();
+
+            $exam_papers = ExamPaper::where('exam_id', $exam->id)
+                ->where('batch_id', $batch->id)
+                ->where('student_id', $student->id)
                 ->get();
             $exam_results = DetailsResult::join('assignments', 'assignments.id', 'details_results.question_id')
                 ->where('details_results.exam_id', $exam->id)
@@ -53,7 +59,8 @@ class SubmissionController extends Controller
                 ->where('details_results.student_id', $student->id)
                 ->select('assignments.*', 'details_results.*')
                 ->get();
-            return view('admin.pages.batch_exam.submission.exam_paper_review_and_result', compact('exam_papers', 'batch', 'exam', 'exam_type', 'student', 'exam_results'));
+            // dd($exam_papers);
+            return view('admin.pages.batch_exam.submission.assignment_exam_paper_review_and_result', compact('exam_papers', 'batch', 'exam', 'exam_type', 'student', 'exam_results'));
         } else if ($exam->exam_type == 'CQ') {
             // $exam_papers = ExamPaper::join('c_q_s', 'c_q_s.id', 'exam_papers.question_id')
             //     ->where('exam_papers.exam_id', $exam->id)
@@ -142,24 +149,8 @@ class SubmissionController extends Controller
             $details_result->status = 1;
             $total = $total + $details_result->gain_marks;
             $details_result->save();
-
-            if ($exam_type == 'CQ') {
-                $questionContentTags = QuestionContentTag::where('question_id', $request->q[$i])->get();
-                if ($questionContentTags->count() > 0) {
-                    foreach ($questionContentTags as $questionContentTag) {
-                        $questionContentTagAnalysis = new QuestionContentTagAnalysis();
-                        $questionContentTagAnalysis->content_tag_id = $questionContentTag->content_tag_id;
-                        $questionContentTagAnalysis->student_id = $student->id;
-                        $questionContentTagAnalysis->exam_type = 'CQ';
-                        $questionContentTagAnalysis->question_id = $request->q[$i];
-                        $questionContentTagAnalysis->number_of_attempt = 1;
-                        $questionContentTagAnalysis->gain_marks = $request->m[$i];
-                        $questionContentTagAnalysis->status = 1;
-                        $questionContentTagAnalysis->save();
-                    }
-                }
-            }
         }
+
         $exam_result = new ExamResult();
         $exam_result->exam_id = $exam->id;
         $exam_result->batch_id = $batch->id;
@@ -225,7 +216,7 @@ class SubmissionController extends Controller
         }
     }
 
-    public function checkedPaper(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
+    public function checkedPaperOfCQ(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
     {
         $validateData = $request->validate([
             'checkedPaper' => 'required|mimes:pdf|max:10000'
@@ -238,8 +229,27 @@ class SubmissionController extends Controller
                 ['student_id', $student->id]
             ]
         )->get();
-        // dd($checkedPapers);
+        return $this->checkedPaper($request, $checkedPapers);
+    }
 
+    public function checkedPaperOfAssignment(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
+    {
+        $validateData = $request->validate([
+            'checkedPaper' => 'required|mimes:pdf|max:10000'
+        ]);
+
+        $checkedPapers = ExamPaper::where(
+            [
+                ['exam_id', $exam->id],
+                ['batch_id', $batch->id],
+                ['student_id', $student->id]
+            ]
+        )->get();
+        return $this->checkedPaper($request, $checkedPapers);
+    }
+
+    private function checkedPaper($request, $checkedPapers)
+    {
         $path = '';
 
         if ($request->file('checkedPaper')) {
@@ -252,5 +262,37 @@ class SubmissionController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function editAssignmetnMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student, Assignment $assignment)
+    {
+        // dd($request, $batch, $exam, $exam_type, $student, $assignment);
+        $detailsResult = DetailsResult::where('batch_id', $batch->id)
+            ->where('student_id', $student->id)
+            ->where('question_id', $request->questionID)
+            ->where('exam_id', $exam->id)->first();
+        $detailsResult->gain_marks = $request->marks;
+        $save = $detailsResult->save();
+        if ($save) {
+            $totals = DetailsResult::where([
+                ['exam_id', $exam->id],
+                ['batch_id', $batch->id],
+                ['student_id', $student->id]
+            ])->get();
+            $totalGainMarks = 0;
+            foreach ($totals as $total) {
+                $totalGainMarks += $total->gain_marks;
+            }
+            $gainMarks = ExamResult::where(
+                [
+                    ['exam_id', $exam->id],
+                    ['batch_id', $batch->id],
+                    ['student_id', $student->id]
+                ]
+            )->first();
+            $gainMarks->gain_marks = $totalGainMarks;
+            $gainMarks->save();
+            return redirect()->back();
+        }
     }
 }

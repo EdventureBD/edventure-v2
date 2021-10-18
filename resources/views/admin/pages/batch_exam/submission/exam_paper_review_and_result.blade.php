@@ -107,13 +107,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form role="form"
-                                                                    action="{{ route('editMarks', [
-    'batch' => $batch,
-    'exam' => $exam,
-    'exam_type' => $exam_type,
-    'student' => $student,
-    'creative_question' => $exam_paper->creativeQuestion->slug,
-]) }}"
+                                                                    action="{{ route('editMarks', ['batch' => $batch, 'exam' => $exam, 'exam_type' => $exam_type, 'student' => $student, 'creative_question' => $exam_paper->creativeQuestion->slug]) }}"
                                                                     method="POST">
                                                                     {{ csrf_field() }}
                                                                     Question {{ $loop->iteration }}
@@ -240,12 +234,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form role="form"
-                                                action="{{ route('giveMarks', [
-                                                            'batch' => $batch,
-                                                            'exam' => $exam,
-                                                            'exam_type' => $exam_type,
-                                                            'student' => $student,
-                                                        ]) }}"
+                                                action="{{ route('giveMarks', ['batch' => $batch, 'exam' => $exam, 'exam_type' => $exam_type, 'student' => $student]) }}"
                                                 method="POST">
                                                 {{ csrf_field() }}
                                                 @foreach ($exam_papers as $key => $exam_paper)
@@ -310,15 +299,17 @@
                     <h3>Checked Paper
                         @forelse ($exam_papers as $exam_paper)
                             @if ($loop->iteration == 1)
-                                <button type="button" class="btn btn-info border border-primary ml-5 h2"
-                                    data-toggle="modal" data-target="#checkedPaper">
-                                    {{ ($exam_paper->checked_paper == null) ? 'Upload':'Update' }} Checked Paper
+                                <button type="button" class="btn btn-info border border-primary ml-5 h2" data-toggle="modal"
+                                    data-target="#checkedPaper">
+                                    {{ $exam_paper->checked_paper == null ? 'Upload' : 'Update' }} Checked Paper
                                 </button>
                                 <div class="modal fade" id="checkedPaper">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">{{ ($exam_paper->checked_paper == null) ? 'Upload':'Update' }} Checked Paper </h4>
+                                                <h4 class="modal-title">
+                                                    {{ $exam_paper->checked_paper == null ? 'Upload' : 'Update' }}
+                                                    Checked Paper </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -326,21 +317,17 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form role="form"
-                                                    action="{{ route('checkedPaper', [
-                                                    'batch' => $batch,
-                                                    'exam' => $exam,
-                                                    'exam_type' => $exam_type,
-                                                    'student' => $student,
-                                                ]) }}"
+                                                    action="{{ route('checkedPaperOfCQ', ['batch' => $batch, 'exam' => $exam, 'exam_type' => $exam_type, 'student' => $student]) }}"
                                                     method="POST" enctype="multipart/form-data">
                                                     {{ csrf_field() }}
                                                     <div class="form-group row">
                                                         <label for="exampleInputEmail1" class="h6 col-sm-6">
-                                                            {{ ($exam_paper->checked_paper == null) ? 'Upload':'Update' }} Checked Paper
+                                                            {{ $exam_paper->checked_paper == null ? 'Upload' : 'Update' }}
+                                                            Checked Paper
                                                         </label>
                                                         <div class="col-sm-6">
-                                                            <input type="file" name="checkedPaper"
-                                                                class="form-control" id="exampleInputEmail1"
+                                                            <input type="file" name="checkedPaper" class="form-control"
+                                                                id="exampleInputEmail1"
                                                                 placeholder="Enter marks for {{ $cq->marks == 1 ? 'জ্ঞানমূলক' : '' }} {{ $cq->marks == 2 ? 'অনুধাবন' : '' }} {{ $cq->marks == 3 ? 'প্রয়োগমূলক' : '' }} {{ $cq->marks == 4 ? 'উচ্চতর দক্ষতা' : '' }}"
                                                                 required>
                                                         </div>

@@ -60,22 +60,27 @@
                             </div>
                         </div>
                     @endforelse
-                    <p class="h3 text-info">You can write your answer in the textbox or upload your pdf ans paper.</p>
-                    <div class="form-group">
-                        <label for="submitted_text">Answer: </label>
-                        <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
-                    </div>
-                    <p class="mx-auto h5">Or Upload a PDF file:</p>
-                    <div class="form-group m-0">
-                        <div class="custom-file">
-                            <input type="file" id="file" name="file" class="custom-file-input">
-                            <label for="file" class="custom-file-label">Choose file</label>
+                    @if (count($questions) > 0)
+                        <p class="h3 text-info">You can write your answer in the textbox or upload your pdf ans paper.</p>
+                        <div class="form-group">
+                            <label for="submitted_text">Answer: </label>
+                            <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
                         </div>
-                        @error('file')
-                            <p style="color: red;font-weight: bold;">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+                        <p class="mx-auto h5">Or Upload a PDF file:</p>
+                        <div class="form-group m-0">
+                            <div class="custom-file">
+                                <input type="file" id="file" name="file" class="custom-file-input">
+                                <label for="file" class="custom-file-label">Choose file</label>
+                            </div>
+                            @error('file')
+                                <p style="color: red;font-weight: bold;">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+                    @else
+
+                    @endif
+
                 </form>
             </div>
         </div>
