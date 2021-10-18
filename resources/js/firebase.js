@@ -66,8 +66,8 @@ function onSignInSubmit() {
             .then(function (confirmationResult) {
         
                 window.confirmationResult = confirmationResult;
-                coderesult=confirmationResult;
-                // console.log(coderesult);
+                coderesult = confirmationResult;
+                console.log(coderesult);
                 $("#confirmMobile").removeClass("hidden");
             }).catch(function (error) {
                 console.log(error.message);

@@ -82,7 +82,10 @@
                 <x-button class="ml-3" style="background-color: #663193;">
                     {{ __('Login') }}
                 </x-button>
+               
             </div>
+            <a href="" class="block bg-green-800 p-4 font-bold rounded my-5 text-white"><i class="fab fa-facebook"></i> Login With Facebook</a>
+            <a href="" class="block bg-red-800 p-4 font-bold rounded my-5 text-white">Login With Google</a>
         </form>
     </x-auth-card>
 </x-guest-layout>

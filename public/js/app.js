@@ -1962,8 +1962,8 @@ function onSignInSubmit() {
       var appVerifier = window.recaptchaVerifier;
       firebase.auth().signInWithPhoneNumber(phoneNo, appVerifier).then(function (confirmationResult) {
         window.confirmationResult = confirmationResult;
-        coderesult = confirmationResult; // console.log(coderesult);
-
+        coderesult = confirmationResult;
+        console.log(coderesult);
         $("#confirmMobile").removeClass("hidden");
       })["catch"](function (error) {
         console.log(error.message);
