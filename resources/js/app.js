@@ -1,5 +1,5 @@
 require('./bootstrap');
-require('alpinejs');
+// require('alpinejs');
 require('slick-carousel');
 
 require('./firebase')
