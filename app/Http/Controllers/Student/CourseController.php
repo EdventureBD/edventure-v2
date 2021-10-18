@@ -19,7 +19,7 @@ class CourseController extends Controller
     public function course()
     {
         $courses = Course::where('status', 1)->paginate(8)->fragment('courses');
-        return view('student.pages.course.course', compact('courses'));
+        return view('student.pages_new.course.course', compact('courses'));
     }
 
     public function coursePreview(Course $course)

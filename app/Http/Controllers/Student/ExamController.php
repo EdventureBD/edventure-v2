@@ -91,7 +91,7 @@ class ExamController extends Controller
             if (!$canAttempt) {
                 // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                 $questions = CreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
-                return view('student.pages.batch.exam.batch_exam_cq', compact('questions', 'exam', 'batch'));
+                return view('student.pages_new.batch.exam.batch_exam_cq', compact('questions', 'exam', 'batch'));
             }
             $canAttempt = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)

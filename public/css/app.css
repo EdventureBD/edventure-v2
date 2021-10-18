@@ -11439,3 +11439,19 @@ a:hover {
 .single-course img {
   border-radius: 10px 10px 0px 0;
 }
+
+.single-question p {
+  margin-bottom: 0;
+}
+
+.timer {
+  position: fixed;
+  right: 5rem;
+  z-index: 1;
+  background: #942fec;
+  padding: 10px;
+}
+
+svg.eye-icon {
+  display: none;
+}

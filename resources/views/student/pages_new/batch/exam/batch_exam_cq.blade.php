@@ -6,7 +6,7 @@
                     <h3 class="text-white flex m-0">Course : {{ $batch->course->title }}</h3>
                 </div>
                 <div class="col-5 text-right">
-                    <p class="h2 text-white font-weight-light m-0 timer">Time Left : <span id="countdownHour"></span>: <span
+                    <p class="h2 text-white font-weight-light m-0 bradius-15 timer">Time Left : <span id="countdownHour"></span>: <span
                         id="countdownMinuits"></span>:<span id="countdownSecound"></p>
                 </div>
                 {{-- <p class="h1 text-white-50 font-weight-light m-0"> <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p> --}}
@@ -25,30 +25,30 @@
                     {{ csrf_field() }}
                     @forelse($questions as $key => $question)
                         <div class="page-separator">
-                            <div class="page-separator__text" style="font-family: 'SiyamRupali', sans-serif;">
+                            <div class="bg-purple-light bradius-10 p-3">
                                 <span class="badge badge-primary">
                                     Question {{ $key + 1 }}:
                                 </span> {!! $question->creative_question !!}
                             </div>
                             @if ($question->image)
-                                <div class="avatar avatar-xxl avatar-4by3">
+                                <div class="avatar avatar-xxl avatar-4by3 bg-purple-light">
                                     <img src="{{ Storage::url($question->image) }}" alt="Avatar"
-                                        class="avatar-img rounded">
+                                        class="avatar-img rounded img-fluid">
                                 </div>
                             @endif
                             <input type="hidden" name="ques[{{ $loop->iteration }}]" value="{{ $question->id }}">
                         </div>
                         @foreach ($question->question as $key => $cq)
-                            <div class="page-separator ml-5">
-                                <div class="page-separator__text" style="font-family: 'SiyamRupali', sans-serif;">
-                                    <span class="badge badge-info">
+                            <div class="page-separator mt-3">
+                                <div class="page-separator__text bg-light-gray bradius-15 bshadow p-3 single-question">
+                                    <span class="">
                                         {{ $key + 1 }}:
-                                    </span> {!! $cq->question !!}
+                                    </span> <div class="d-inline-block"> {!!$cq->question !!}</div>
                                 </div>
                                 @if ($cq->image)
-                                    <div class="avatar avatar-xxl avatar-4by3">
+                                    <div class=" bg-purple-light p-3 bradius-15 bshadow mt-3">
                                         <img src="{{ Storage::url($cq->image) }}" alt="Avatar"
-                                            class="avatar-img rounded">
+                                            class="avatar-img rounded img-fluid">
                                     </div>
                                 @endif
                             </div>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     @endforelse
-                    <p class="h3 text-info">You can write your answer in the textbox or upload your pdf ans paper.</p>
+                    <p class="h3 text-info py-5">You can write your answer in the textbox or upload your pdf ans paper.</p>
                     <div class="form-group">
                         <label for="submitted_text">Answer: </label>
                         <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
