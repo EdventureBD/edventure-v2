@@ -1905,14 +1905,13 @@ $('.slick-carousel').slick({
 
 $(document).ready(function () {
   var firebaseConfig = {
-    apiKey: "AIzaSyBLJMfAA1z11act31ha-rX4JjOyC3o4_fU",
-    authDomain: "otpapp-3959b.firebaseapp.com",
-    databaseURL: "https://otpapp-3959b.firebaseio.com",
-    projectId: "otpapp-3959b",
-    storageBucket: "otpapp-3959b.appspot.com",
-    messagingSenderId: "913289585739",
-    appId: "1:913289585739:web:eb97d308926763356719ce",
-    measurementId: "G-NM63D5T3K4"
+    apiKey: "AIzaSyCg0U_COBJo8PXRkeOxpjkZAIO5T7YcNSI",
+    authDomain: "edventure-63c00.firebaseapp.com",
+    projectId: "edventure-63c00",
+    storageBucket: "edventure-63c00.appspot.com",
+    messagingSenderId: "734546289418",
+    appId: "1:734546289418:web:322fb87c8eb1f04858d0f3",
+    measurementId: "G-C54WSD0E6H"
   }; // Initialize Firebase
 
   firebase.initializeApp(firebaseConfig);
