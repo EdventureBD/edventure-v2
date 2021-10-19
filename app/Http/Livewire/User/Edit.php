@@ -5,15 +5,22 @@ namespace App\Http\Livewire\User;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\UserType;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
 {
+    use WithFileUploads;
+
     public $user;
 
     public $name;
     public $email;
     public $user_type;
     public $user_types;
+    public $image;
+    public $phone;
+    public $tempImage;
 
     public function updatedName()
     {
@@ -29,6 +36,18 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedphone()
+    {
+        $this->validate([
+            'phone' => 'required|numeric|digits:11',
+        ]);
+    }
+
+    public function updatedImage()
+    {
+        $this->tempImage = $this->image;
+    }
+
     public function updatedUser_type()
     {
         $this->validate([
@@ -39,15 +58,24 @@ class Edit extends Component
     protected $rules = [
         'name' => 'string|required|max:50',
         'email' => 'email:rfc,dns|required',
+        'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
+        'phone' => 'required|numeric|digits:11',
         'user_type' => 'required'
     ];
 
     public function saveUser()
     {
         $data = $this->validate();
+        if ($this->tempImage) {
+            $imageUrl = $this->image->store('public/user');
+            $this->image = $imageUrl;
+            Storage::delete($this->deleteImage);
+        }
         $user = User::find($this->user->id);
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->image = $this->image;
         if (($data['user_type']) == 1) {
             $user->is_admin = 1;
         } else {
@@ -71,6 +99,9 @@ class Edit extends Component
         $this->name = $this->user->name;
         $this->email = $this->user->email;
         $this->user_type = $this->user->user_type;
+        $this->phone = $this->user->phone;
+        $this->image = $this->user->image;
+        $this->deleteImage = $this->user->logo;
 
         $this->user_types = UserType::all();
     }
