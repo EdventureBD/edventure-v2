@@ -11452,6 +11452,29 @@ a:hover {
   padding: 10px;
 }
 
+.question-summary {
+  position: fixed;
+  background: gray;
+  right: 5px;
+  top: 9rem;
+  display: flex;
+  padding: 0.6rem;
+  justify-content: space-around;
+  width: 11rem;
+  flex-wrap: wrap;
+}
+.question-summary .single-qus-summary {
+  width: 25px;
+  height: 25px;
+  display: inline-flex;
+  background: red;
+  border-radius: 13px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px 5px 0;
+  color: #fff;
+}
+
 svg.eye-icon {
   display: none;
 }

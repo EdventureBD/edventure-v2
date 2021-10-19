@@ -1,12 +1,37 @@
-.single-question{
-    p{
+.single-question {
+    p {
         margin-bottom: 0;
     }
 }
+
 .timer {
     position: fixed;
     right: 5rem;
     z-index: 1;
     background: #942fec;
     padding: 10px;
+}
+
+.question-summary {
+    position: fixed;
+    background: gray;
+    right: 5px;
+    top: 9rem;
+    display: flex;
+    padding: 0.6rem;
+    justify-content: space-around;
+    width: 11rem;
+    flex-wrap: wrap;
+
+    .single-qus-summary {
+        width: 25px;
+        height: 25px;
+        display: inline-flex;
+        background: red;
+        border-radius: 13px;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px 5px 0;
+        color: #fff;
+    }
 }

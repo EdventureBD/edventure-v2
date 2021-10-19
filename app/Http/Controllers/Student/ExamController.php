@@ -65,7 +65,7 @@ class ExamController extends Controller
 
             if (!$canAttempt) {
                 $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
-                return view('student.pages.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
+                return view('student.pages_new.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
             }
             return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
         }
