@@ -10997,6 +10997,14 @@ a:hover {
   background-color: #D5BDEA;
 }
 
+.bg-red {
+  background-color: #FE6D86;
+}
+
+.bg-green {
+  background-color: #75E9AA;
+}
+
 .bg-light-gray {
   background-color: #F3F3F3;
 }
@@ -11043,6 +11051,10 @@ a:hover {
 
 .bshadow {
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.c-point {
+  cursor: pointer;
 }
 
 .btn-register {
@@ -11446,29 +11458,32 @@ a:hover {
 
 .timer {
   position: fixed;
-  right: 5rem;
+  right: 5px;
   z-index: 1;
   background: #942fec;
-  padding: 10px;
+  padding: 4px;
+  width: 11rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px 10px 0 0;
 }
 
 .question-summary {
   position: fixed;
   background: gray;
   right: 5px;
-  top: 9rem;
+  top: 11rem;
   display: flex;
   padding: 0.6rem;
   justify-content: space-around;
   width: 11rem;
   flex-wrap: wrap;
+  border-radius: 0px 0px 10px 10px;
 }
 .question-summary .single-qus-summary {
   width: 25px;
   height: 25px;
   display: inline-flex;
-  background: red;
-  border-radius: 13px;
   justify-content: center;
   align-items: center;
   margin: 0 5px 5px 0;

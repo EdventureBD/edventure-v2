@@ -239,6 +239,7 @@ class ExamController extends Controller
     public function submit(Request $request, Batch $batch, Exam $exam)
     {
         if ($exam->exam_type == 'MCQ') {
+            return $this->sendResponse($request->all());
             $questions = $request->q;
             $total = 0;
             $number_of_attempt = 0;
@@ -300,6 +301,9 @@ class ExamController extends Controller
             $exam_result->status = 1;
             $save = $exam_result->save();
             if ($save) {
+                if ($request->ajax()) {
+                    return $this->sendResponse([]);
+                }
                 return view('student.pages.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
             }
         }
