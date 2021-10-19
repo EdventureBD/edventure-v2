@@ -36,7 +36,10 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric|digits:11|unique:users',
+            'verificationId' => 'required|min:200',
             'password' => 'required|string|confirmed|min:8',
+        ], [
+            'verificationId.required' => 'Phone number verification failed!'
         ]);
 
         Auth::login($user = User::create([

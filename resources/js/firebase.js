@@ -39,7 +39,9 @@ function onSignInSubmit() {
         confirmationResult.confirm(code).then(function (result) {
                     // alert('Succecss');
             var user = result.user;
+            console.log(confirmationResult.verificationId);
             otpVerified = true;
+            $('#registerForm').append('<input type="hidden" name="verificationId" value="'+confirmationResult.verificationId+'" >');
             $('#registerForm').submit();
         }.bind($(this))).catch(function (error) {
             // User couldn't sign in (bad verification code?)
