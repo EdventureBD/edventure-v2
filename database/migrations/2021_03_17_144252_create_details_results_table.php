@@ -18,7 +18,7 @@ class CreateDetailsResultsTable extends Migration
             $table->unsignedBigInteger('exam_id');
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
 
-            $table->string('exam_type');
+            $table->string('exam_type'); //in future it should be deleted , suggested by ajith das
             $table->unsignedBigInteger('question_id');
 
             $table->unsignedBigInteger('batch_id');
@@ -28,7 +28,7 @@ class CreateDetailsResultsTable extends Migration
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('gain_marks');
-            $table->integer('ans')->nullable();
+            $table->integer('mcq_ans')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });
