@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title' => 'Content Tag',
-'pageName'=>'Content Tag',
-'secondPageName'=>'Content Tag'
+'title' => 'Blog',
+'pageName'=>'Blog',
+'secondPageName'=>'Blog'
 ])
 
 @section('css1')
@@ -17,69 +17,15 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Content Tag List</h3>
+                            <h3 class="card-title">Blog</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
-                                    <div>
-                                        <a href="{{ route('tagEmptyExportCSV') }}">
-                                            <button class="btn btn-info"><i class="fas fa-download"></i></i>&nbsp;&nbsp;
-                                                Sample input CSV</button>
-                                        </a>
-                                        <a href="{{ route('contentTagExportCSV') }}">
-                                            <button class="btn btn-info"><i class="fas fa-download"></i>&nbsp;&nbsp;
-                                                Export content tags</button>
-                                        </a>
-                                        <button class="btn btn-info" type="button" data-toggle="modal"
-                                            data-target="#modal-default">
-                                            <i class="fas fa-upload"></i>&nbsp;&nbsp; Import content tags
+                                    <a href="{{ route('blog.create') }}">
+                                        <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;
+                                            Blog
                                         </button>
-                                        <div class="modal fade" id="modal-default">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Import Content Tag Excel</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    {{-- <p><span class="must-filled">N.B: </span>PLEASE CAREFULL WHILE SELECTING THE FILE. YOU HAVE TO SELECT THE FILE CONTAINS THIS TOPIC REGARDING THIS TOPIC</p> --}}
-                                                    <form action="{{ route('contentTagImportCSV') }}" method="POST"
-                                                        enctype="multipart/form-data">
-                                                        {{ csrf_field() }}
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputFile">Choose file:</label>
-                                                                <div class="input-group">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="file"
-                                                                            class="custom-file-input" id="exampleInputFile">
-                                                                        <label class="custom-file-label"
-                                                                            for="exampleInputFile">Choose file</label>
-                                                                    </div>
-                                                                </div>
-                                                                @error('file')
-                                                                    <p style="color: red;">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary">Upload</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
-                                        </div>
-                                        <a href="{{ route('content-tag.create') }}">
-                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;
-                                                Content Tag</button>
-                                        </a>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -90,49 +36,45 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Title</th>
-                                        <th>Course</th>
-                                        <th>Topic</th>
-                                        <th>Lecture</th>
+                                        <th>Subtitle</th>
+                                        <th>Author</th>
+                                        <th>Description</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($content_tags as $content_tag)
+                                    @foreach ($blogs as $blog)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $content_tag->title }}</td>
-                                            <td>{{ $content_tag->courseName }}</td>
-                                            <td>{{ $content_tag->topicName }}</td>
-                                            <td>{{ $content_tag->courseLectureName }}</td>
+                                            <td>{{ $blog->title }}</td>
+                                            <td>{{ $blog->subtitle }}</td>
+                                            <td>{{ $blog->author->name }}</td>
+                                            <td>{!! $blog->description !!}</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
-                                                    id="single-col-{{ $content_tag->id }}"
-                                                    data-id="{{ $content_tag->id }}" data-onstyle="success"
-                                                    data-offstyle="danger" data-toggle="toggle" data-on="Active"
-                                                    data-off="InActive" {{ $content_tag->status ? 'checked' : '' }}>
+                                                    id="single-col-{{ $blog->id }}" data-id="{{ $blog->id }}"
+                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                    data-on="Active" data-off="InActive"
+                                                    {{ $blog->status ? 'checked' : '' }}>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1"
-                                                        href="{{ route('content-tag.edit', $content_tag->slug) }}"
-                                                        title="Edit {{ $content_tag->title }}">
+                                                    <a class="mr-1" href="{{ route('blog.edit', $blog->slug) }}"
+                                                        title="Edit {{ $blog->title }}">
                                                         <button class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
                                                     </a>
-                                                    <a class="mr-1"
-                                                        href="#deleteContentTag{{ $content_tag->id }}"
-                                                        data-toggle="modal" title="Delete {{ $content_tag->title }}">
+                                                    <a class="mr-1" href="#deleteBlog{{ $blog->id }}"
+                                                        data-toggle="modal" title="Delete {{ $blog->title }}">
                                                         <button class="btn btn-danger"><i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </a>
-                                                    <div class="modal fade"
-                                                        id="deleteContentTag{{ $content_tag->id }}">
+                                                    <div class="modal fade" id="deleteBlog{{ $blog->id }}">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Delete
-                                                                        {{ $content_tag->title }} content tag</h4>
+                                                                    <h4 class="modal-title">Delete </h4>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -145,7 +87,7 @@
                                                                     <button type="button" class="btn btn-outline-light"
                                                                         data-dismiss="modal">Close</button>
                                                                     <form
-                                                                        action="{{ route('content-tag.destroy', $content_tag->slug) }}"
+                                                                        action="{{ route('blog.destroy', $blog->slug) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')
@@ -168,9 +110,9 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Title</th>
-                                        <th>Course</th>
-                                        <th>Topic</th>
-                                        <th>Lecture</th>
+                                        <th>Subtitle</th>
+                                        <th>Author</th>
+                                        <th>Description</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -199,7 +141,7 @@
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url: "changeContentTagStatus",
+                        url: "changeBlogStatus",
                         data: {
                             'status': status,
                             'id': id

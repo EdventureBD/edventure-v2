@@ -6,6 +6,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\CQController;
 use App\Http\Controllers\Admin\CSVController;
 use App\Http\Controllers\Admin\MCQController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
@@ -125,6 +126,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // START OF ASSIGNMENT
     Route::resource('/request', RequestController::class, ['except' => ['store', 'update']]);
     // END OF ASSIGNMENT
+
+    // START OF BLOG
+    Route::resource('/blog', BlogController::class);
+    Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus']);
+    // END OF BLOG
 
     // START OF EXAM SUBMISSION
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission', [SubmissionController::class, 'submission'])->name('submission');

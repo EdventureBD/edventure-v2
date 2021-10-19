@@ -39,14 +39,16 @@
                 {{-- END OF DASHBOARD --}}
 
                 {{-- START OF USER --}}
-                <li class="nav-item has-treeview {{ request()->is('admin/user') ? 'menu-open' : '' }} 
+                <li
+                    class="nav-item has-treeview {{ request()->is('admin/user') ? 'menu-open' : '' }} 
                                                  {{ request()->is('admin/user/create') ? 'menu-open' : '' }} 
                                                  {{ request()->is('admin/user/*/edit') ? 'menu-open' : '' }}
                                                  {{ request()->is('admin/allAdmin') ? 'menu-open' : '' }} 
                                                  {{ request()->is('admin/allTeacher') ? 'menu-open' : '' }} 
                                                  {{ request()->is('admin/allStudent') ? 'menu-open' : '' }} 
                                                  ">
-                    <a href="#" class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}
                         {{ request()->is('admin/user/create') ? 'active' : '' }} 
                         {{ request()->is('admin/user/*/edit') ? 'active' : '' }} 
                         {{ request()->is('admin/allAdmin') ? 'active' : '' }} 
@@ -108,10 +110,12 @@
                 {{-- END OF BATCH --}}
 
                 {{-- START OF PAYMENTS --}}
-                <li class="nav-item has-treeview {{ request()->is('admin/request') ? 'menu-open' : '' }} 
+                <li
+                    class="nav-item has-treeview {{ request()->is('admin/request') ? 'menu-open' : '' }} 
                                                  {{ request()->is('admin/payment') ? 'menu-open' : '' }} 
                                                  ">
-                    <a href="#" class="nav-link {{ request()->is('admin/request') ? 'active' : '' }} 
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/request') ? 'active' : '' }} 
                                                 {{ request()->is('admin/payment') ? 'active' : '' }} 
                                                 ">
                         <i class="fas fa-boxes"></i>
@@ -138,14 +142,16 @@
                 {{-- END OF PAYMENTS --}}
 
                 {{-- START OF CONTENT TAGS --}}
-                <li class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }} 
+                <li
+                    class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }} 
                                                 {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }} 
                                                 {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }} 
                                                 {{ request()->is('admin/question-content-tag') ? 'menu-open' : '' }} 
                                                 {{ request()->is('admin/question-content-tag/create') ? 'menu-open' : '' }} 
                                                 {{ request()->is('admin/question-content-tag/*/edit') ? 'menu-open' : '' }} 
                                                 ">
-                    <a href="#" class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} 
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} 
                                                 {{ request()->is('admin/content-tag/create') ? 'active' : '' }} 
                                                 {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }} 
                                                 {{ request()->is('admin/question-content-tag') ? 'active' : '' }} 
@@ -180,6 +186,23 @@
                 {{-- START OF EXAM SIDEBAR --}}
                 {{-- @include('admin.includes.sidebar_content.special-exam') --}}
                 {{-- END OF EXAM SIDEBAR --}}
+
+                {{-- START OF BLOG SIDEBAR --}}
+                <li
+                    class="nav-item has-treeview {{ request()->is('admin/blog') ? 'menu-open' : '' }} 
+                                                {{ request()->is('admin/blog/create') ? 'menu-open' : '' }} 
+                                                {{ request()->is('admin/blog/edit') ? 'menu-open' : '' }} 
+                                                ">
+                    <a href="{{ route('blog.index') }}"
+                        class="nav-link {{ request()->is('admin/blog') ? 'active' : '' }} 
+                                                {{ request()->is('admin/blog/create') ? 'active' : '' }} 
+                                                {{ request()->is('admin/blog/edit') ? 'active' : '' }} 
+                                                ">
+                        <i class="fas fa-chart-bar"></i>
+                        <p>&nbsp; Blog<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                </li>
+                {{-- END OF BLOG SIDEBAR --}}
 
                 {{-- START OF SHORTCUT CREATE --}}
                 @include('admin.includes.sidebar_content.shortcut')
