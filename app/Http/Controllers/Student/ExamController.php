@@ -125,7 +125,7 @@ class ExamController extends Controller
             $weakAnalysis = $analysis;
 
             if (!$canAttempt) {
-                $questions = Assignment::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+                $questions = Assignment::where('exam_id', $exam->id)->inRandomOrder()->get();
                 return view('student.pages.batch.exam.batch_exam_cq_and_assignment', compact('questions', 'exam', 'batch'));
             }
             $canAttempt = ExamResult::where('exam_id', $exam->id)
