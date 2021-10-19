@@ -19,6 +19,7 @@ class Create extends Component
     public $duration;
     public $price;
     public $image;
+    public $tempImage;
     public $url;
 
     public function updatedTitle()
@@ -40,6 +41,11 @@ class Create extends Component
         $this->validate([
             'url' => ['nullable', 'string', 'min:3', 'max:9'],
         ]);
+    }
+
+    public function updatedImage()
+    {
+        $this->tempImage = $this->image;
     }
 
     public function updatedCategoryId()

@@ -16,7 +16,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseTitle"> Course Title <span class="must-filled">*</span> </label>
+                                            <label class="col-form-label" for="courseTitle"> Course Title <span
+                                                    class="must-filled">*</span> </label>
                                             <input type="text" wire:model="title"
                                                 class="form-control @error('title') is-invalid @enderror"
                                                 id="courseTitle" placeholder="Enter your course title">
@@ -29,11 +30,14 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Choose Image</label>
+                                                    <label for="exampleInputFile" class="col-form-label">Choose
+                                                        Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" wire:model="image" class="custom-file-input hidden" id="exampleInputFile" >
-                                                            <label class="custom-file-label" for="exampleInputFile">Choose image</label>
+                                                            <input type="file" wire:model="image"
+                                                                class="custom-file-input hidden" id="exampleInputFile">
+                                                            <label class="custom-file-label"
+                                                                for="exampleInputFile">Choose image</label>
                                                         </div>
                                                     </div>
                                                     @error('image')
@@ -42,8 +46,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                @if($image)
-                                                    <img class="product-image" src="{{ $image->temporaryUrl() }}" alt="">
+                                                @if ($tempImage)
+                                                    <img class="product-image" src="{{ $tempImage->temporaryUrl() }}"
+                                                        alt="">
                                                 @else
                                                     <img src="http://placehold.it/150x100" alt="...">
                                                 @endif
@@ -57,7 +62,8 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseprice"> Course Price <span class="must-filled">*</span> </label>
+                                            <label class="col-form-label" for="courseprice"> Course Price <span
+                                                    class="must-filled">*</span> </label>
                                             <input type="number" wire:model="price"
                                                 class="form-control @error('price') is-invalid @enderror"
                                                 id="courseCategoryprice" placeholder="Enter your course price">
@@ -71,10 +77,11 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Category <span class="must-filled">*</span></label>
+                                            <label class="col-form-label" for="courseName">Category <span
+                                                    class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="categoryId">
                                                 <option value="" selected>Select Category</option>
-                                                @foreach($categories as $category)
+                                                @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}
                                                     </option>
                                                 @endforeach
@@ -86,7 +93,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseDuration">Course Duration <span class="must-filled">*</span></label>
+                                            <label class="col-form-label" for="courseDuration">Course Duration <span
+                                                    class="must-filled">*</span></label>
                                             <input type="text" wire:model="duration"
                                                 class="form-control @error('duration') is-invalid @enderror"
                                                 id="courseDuration" placeholder="Enter your course duration in month">
@@ -100,7 +108,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-form-label" for="courseDescription"> Course Description <span class="must-filled">*</span>
+                                    <label class="col-form-label" for="courseDescription"> Course Description <span
+                                            class="must-filled">*</span>
                                     </label>
                                     <textarea rows="5" type="text" wire:model="description"
                                         class="form-control @error('description') is-invalid @enderror"
@@ -118,7 +127,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">https://vimeo.com/</span>
                                         </div>
-                                        <input type="text"  wire:model="url" class="form-control @error('url') is-invalid @enderror" placeholder="Enter your video number as 25753871" /> 
+                                        <input type="text" wire:model="url"
+                                            class="form-control @error('url') is-invalid @enderror"
+                                            placeholder="Enter your video number as 25753871" />
                                     </div>
                                     @error('url')
                                         <p style="color: red;">{{ $message }}</p>
@@ -126,13 +137,16 @@
                                 </div>
                                 <div class="input-group">
                                     @if ($url)
-                                        <iframe src="https://player.vimeo.com/video/{{ $url }}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe src="https://player.vimeo.com/video/{{ $url }}" width="640"
+                                            height="360" frameborder="0"
+                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                                     @endif
                                 </div>
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
-                                    <a href="javascript:history.back()"><button type="button" class="btn btn-danger">Back</button></a>
+                                    <a href="javascript:history.back()"><button type="button"
+                                            class="btn btn-danger">Back</button></a>
                                 </div>
                             </form>
                         </div>
