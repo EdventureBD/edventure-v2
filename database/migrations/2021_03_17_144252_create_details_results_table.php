@@ -28,6 +28,7 @@ class CreateDetailsResultsTable extends Migration
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('gain_marks');
+            $table->integer('ans')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });
