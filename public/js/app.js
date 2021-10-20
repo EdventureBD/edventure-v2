@@ -2097,7 +2097,8 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
               url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
               _context.next = 9;
               return axios.post(url, {
-                answers: state.answers
+                a: state.answers,
+                q: questions
               }).then(function (response) {
                 console.log(response.data);
                 window.location.reload();
@@ -2125,6 +2126,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
     sl = index + 1;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "question mb-5",
+      id: "qus_" + question.id,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "bg-purple-light p-2 mb-3 bshadow bradius-15",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
@@ -2147,7 +2149,8 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       return answer == qus.id + '_' + 1 || answer == qus.id + '_' + 2 || answer == qus.id + '_' + 3 || answer == qus.id + '_' + 4;
     }); // console.log(sanswer);
 
-    questionSummary.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    questionSummary.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
+      href: "#qus_" + qus.id,
       "class": "single-qus-summary ".concat(sanswer ? "bg-red" : "bg-green", " bradius-15 c-point"),
       children: qindex + 1
     }));
@@ -2193,6 +2196,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
           children: "Please answer all the questions!"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
           className: "btn text-xxsm fw-800 text-white bg-purple px-4 py-2 mt-3",
+          onSubmit: submitExam,
           children: "Submit"
         })]
       })]

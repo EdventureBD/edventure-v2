@@ -26,4 +26,9 @@ class StudentExamAttempt extends Model
     {
         return $this->belongsTo(Exam::class);
     }
+
+    public function saveData()
+    {
+        
+    }
 }

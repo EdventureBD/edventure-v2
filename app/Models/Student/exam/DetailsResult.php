@@ -8,14 +8,17 @@ use App\Models\Admin\MCQ;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use App\Models\Admin\Assignment;
+use App\Models\AppModel;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DetailsResult extends Model
+class DetailsResult extends AppModel
 {
     use HasFactory, LogsActivity;
+    protected $fillable = ['exam_id', 'exam_type', 'question_id', 'batch_id', 'student_id', 'gain_marks', 'mcq_ans', 'status'];
     protected static $logName = "Details Result";
+    
     public function getDescriptionForEvent(string $eventName): string
     {
         return "{$eventName}";
