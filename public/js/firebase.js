@@ -1,14 +1,13 @@
 $(document).ready(function() {
 
     const firebaseConfig = {
-        apiKey: "AIzaSyBLJMfAA1z11act31ha-rX4JjOyC3o4_fU",
-        authDomain: "otpapp-3959b.firebaseapp.com",
-        databaseURL: "https://otpapp-3959b.firebaseio.com",
-        projectId: "otpapp-3959b",
-        storageBucket: "otpapp-3959b.appspot.com",
-        messagingSenderId: "913289585739",
-        appId: "1:913289585739:web:eb97d308926763356719ce",
-        measurementId: "G-NM63D5T3K4"
+        apiKey: "AIzaSyCg0U_COBJo8PXRkeOxpjkZAIO5T7YcNSI",
+        authDomain: "edventure-63c00.firebaseapp.com",
+        projectId: "edventure-63c00",
+        storageBucket: "edventure-63c00.appspot.com",
+        messagingSenderId: "734546289418",
+        appId: "1:734546289418:web:322fb87c8eb1f04858d0f3",
+        measurementId: "G-C54WSD0E6H"
       };
 
     // Initialize Firebase
@@ -22,11 +21,15 @@ $(document).ready(function() {
         }
     });
     onSignInSubmit();
+    $("#cancelModal").on("click", function() {
+        $("#confirmMobile").addClass("hidden");
+    })
 });
 
 
 
 function onSignInSubmit() {
+    var otpVerified = false;
     $('#verifPhNum').on('click', function() {
         let phoneNo = '';
         var code = $('#codeToVerify').val();
@@ -34,16 +37,14 @@ function onSignInSubmit() {
         $(this).attr('disabled', 'disabled');
         $(this).text('Processing..');
         confirmationResult.confirm(code).then(function (result) {
-                    alert('Succecss');
+                    // alert('Succecss');
             var user = result.user;
-            console.log(user);
-    
-    
-            // ...
+            console.log(confirmationResult.verificationId);
+            otpVerified = true;
+            $('#registerForm').append('<input type="hidden" name="verificationId" value="'+confirmationResult.verificationId+'" >');
+            $('#registerForm').submit();
         }.bind($(this))).catch(function (error) {
-        
             // User couldn't sign in (bad verification code?)
-            // ...
             $(this).removeAttr('disabled');
             $(this).text('Invalid Code');
             setTimeout(() => {
@@ -54,20 +55,25 @@ function onSignInSubmit() {
     });
     
     
-    $('#getcode').on('click', function () {
-        var phoneNo = $('#number').val();
-        console.log(phoneNo);
-        // getCode(phoneNo);
-        var appVerifier = window.recaptchaVerifier;
-        firebase.auth().signInWithPhoneNumber(phoneNo, appVerifier)
-        .then(function (confirmationResult) {
-    
-            window.confirmationResult=confirmationResult;
-            coderesult=confirmationResult;
-            console.log(coderesult);
-        }).catch(function (error) {
-            console.log(error.message);
-    
-        });
+    $('#registerForm').on('submit', function (e) {
+        if (!otpVerified) {
+
+            e.preventDefault();
+            var phoneNo = '+88'+$('#phone').val();
+            console.log(phoneNo);
+            // getCode(phoneNo);
+            var appVerifier = window.recaptchaVerifier;
+            firebase.auth().signInWithPhoneNumber(phoneNo, appVerifier)
+            .then(function (confirmationResult) {
+        
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                console.log(coderesult);
+                $("#confirmMobile").removeClass("hidden");
+            }).catch(function (error) {
+                console.log(error.message);
+        
+            });
+        }
     });
 }

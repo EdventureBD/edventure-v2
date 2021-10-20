@@ -35,6 +35,15 @@ a:hover {
     background-color: #D5BDEA;
 }
 
+.bg-red {
+    background-color: #FE6D86;
+}
+
+.bg-green {
+    background-color: #75E9AA;
+
+}
+
 .bg-light-gray {
     background-color: $light_gray;
 }
@@ -82,4 +91,8 @@ a:hover {
 
 .bshadow {
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.c-point {
+    cursor: pointer;
 }

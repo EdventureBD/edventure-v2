@@ -178,5 +178,7 @@
                 $(".eye-icon-blind").toggle();
             }
         </script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.0.1/firebase.js"></script>
+        <script src="{{asset("js/firebase.js")}}"></script> --}}
     </x-auth-card>
 </x-guest-layout>
