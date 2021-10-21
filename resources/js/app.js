@@ -8,3 +8,4 @@ require('./custom');
 
 //react pages
 require('./pages/exam/BatchExamMCQ');
+

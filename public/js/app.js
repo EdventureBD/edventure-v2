@@ -1982,6 +1982,11 @@ $('.slick-carousel').slick({
       dots: true
     }
   }]
+}); //init bootstrap custom upload
+
+$(".custom-file-input").on("change", function () {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
 /***/ }),

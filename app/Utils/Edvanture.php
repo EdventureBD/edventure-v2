@@ -2,6 +2,9 @@
 
 namespace App\Utils;
 
-class Edvanture {
+class Edvanture
+{
     const MCQ = "MCQ";
+    const CQ = "CQ";
+    const ASSIGNMENT = "Assignment";
 }

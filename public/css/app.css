@@ -10993,6 +10993,10 @@ a:hover {
   background-color: #653092;
 }
 
+.bg-purple2 {
+  background-color: #7A45A7;
+}
+
 .bg-purple-light {
   background-color: #D5BDEA;
 }
@@ -11055,6 +11059,10 @@ a:hover {
 
 .c-point {
   cursor: pointer;
+}
+
+.v-align-middle {
+  vertical-align: middle !important;
 }
 
 .btn-register {
@@ -11467,6 +11475,10 @@ a:hover {
   justify-content: center;
   border-radius: 10px 10px 0 0;
 }
+.timer.rounded {
+  border-radius: 10px;
+  padding: 10px 10px 15px;
+}
 
 .question-summary {
   position: fixed;
@@ -11488,6 +11500,10 @@ a:hover {
   align-items: center;
   margin: 0 5px 5px 0;
   color: #fff;
+}
+
+.text-white p span {
+  color: #fff !important;
 }
 
 svg.eye-icon {

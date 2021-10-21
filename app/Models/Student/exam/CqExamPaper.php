@@ -35,4 +35,9 @@ class CqExamPaper extends Model
     {
         return $this->belongsTo(CreativeQuestion::class);
     }
+
+    public function getCqExamPaper($exam_id, $batch_id, $student_id)
+    {
+        return CqExamPaper::where('exam_id', $exam_id)->where('batch_id', $batch_id)->where('student_id', $student_id)->first();
+    }
 }
