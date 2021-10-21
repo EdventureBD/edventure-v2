@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Admin\CQ;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use Illuminate\Http\Request;
@@ -103,6 +104,17 @@ class SubmissionController extends Controller
                 $total = $total + $details_result->gain_marks;
                 $details_result->save();
 
+                $cq = CQ::find($request->q[$i]);
+                $numberOfAttempt = $cq->number_of_attempt + 1;
+                $totalCQMarks = $cq->marks * $numberOfAttempt;
+                $cqGainMarks = $cq->gain_marks + $gain_marks;
+                $successRate = ($cqGainMarks * 100) / $totalCQMarks;
+
+                $cq->number_of_attempt = $numberOfAttempt;
+                $cq->gain_marks = $cqGainMarks;
+                $cq->success_rate = $successRate;
+                $cq->save();
+
                 $questionContentTags = QuestionContentTag::where('question_id', $request->q[$i])->get();
                 if ($questionContentTags->count() > 0) {
                     foreach ($questionContentTags as $questionContentTag) {
@@ -166,6 +178,7 @@ class SubmissionController extends Controller
     public function editMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student, CreativeQuestion $creativeQuestion)
     {
         // dd($request, $batch, $exam, $exam_type, $student, $creativeQuestion);
+        // START OF FINDING SPECIFIC QUESTION VALUE
         $detailsResult1 = DetailsResult::where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('question_id', $request->gyanMulokQuestionID)
@@ -181,17 +194,30 @@ class SubmissionController extends Controller
         $detailsResult4 = DetailsResult::where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('question_id', $request->ucchotorQuestionID)
-            ->where('exam_id', $exam->id)->first();
+            ->where('exam_id', $exam->id)
+            ->first();
+        // END OF FINDING SPECIFIC QUESTION VALUE
 
+        // START OF STORING PREVIOUS MARKS OF SPECIFIC QUESTION 
+        $previousMarks1 = $detailsResult1->gain_marks;
+        $previousMarks2 = $detailsResult2->gain_marks;
+        $previousMarks3 = $detailsResult3->gain_marks;
+        $previousMarks4 = $detailsResult4->gain_marks;
+        // END OF STORING PREVIOUS MARKS OF SPECIFIC QUESTION 
+
+        // START OF STORING EDITED MARKS TO DETAILS RESULT TABLE 
         $detailsResult1->gain_marks = $request->gyanMulok;
         $detailsResult2->gain_marks = $request->onudhabon;
         $detailsResult3->gain_marks = $request->proyugMulok;
         $detailsResult4->gain_marks = $request->ucchotor;
+
         $save1 = $detailsResult1->save();
         $save2 = $detailsResult2->save();
         $save3 = $detailsResult3->save();
         $save4 = $detailsResult4->save();
+        // END OF STORING EDITED MARKS TO DETAILS RESULT TABLE 
 
+        // START OF STORING EDITED MARKS TO EXAM RESULT TABLE 
         $totals = DetailsResult::where([
             ['exam_id', $exam->id],
             ['batch_id', $batch->id],
@@ -210,6 +236,44 @@ class SubmissionController extends Controller
         )->first();
         $gainMarks->gain_marks = $totalGainMarks;
         $gainMarks->save();
+        // END OF STORING EDITED MARKS TO EXAM RESULT TABLE 
+
+        // START OF STORING EDITED MARKS TO CQ TABLE
+        $cq1 = CQ::find($request->gyanMulokQuestionID);
+        $cq2 = CQ::find($request->onudhabonQuestionID);
+        $cq3 = CQ::find($request->proyugMulokQuestionID);
+        $cq4 = CQ::find($request->ucchotorQuestionID);
+
+        $newMarks1 = ($cq1->gain_marks - $previousMarks1) + $request->gyanMulok;
+        $newMarks2 = ($cq2->gain_marks - $previousMarks2) + $request->onudhabon;
+        $newMarks3 = ($cq3->gain_marks - $previousMarks3) + $request->proyugMulok;
+        $newMarks4 = ($cq4->gain_marks - $previousMarks4) + $request->ucchotor;
+
+        $totalCQMarks1 = $cq1->number_of_attempt * $cq1->marks;
+        $totalCQMarks2 = $cq2->number_of_attempt * $cq2->marks;
+        $totalCQMarks3 = $cq3->number_of_attempt * $cq3->marks;
+        $totalCQMarks4 = $cq4->number_of_attempt * $cq4->marks;
+
+        $successRate1 = ($newMarks1 * 100) / $totalCQMarks1;
+        $successRate2 = ($newMarks2 * 100) / $totalCQMarks2;
+        $successRate3 = ($newMarks3 * 100) / $totalCQMarks3;
+        $successRate4 = ($newMarks4 * 100) / $totalCQMarks4;
+
+        $cq1->success_rate = $successRate1;
+        $cq2->success_rate = $successRate2;
+        $cq3->success_rate = $successRate3;
+        $cq4->success_rate = $successRate4;
+
+        $cq1->gain_marks = $newMarks1;
+        $cq2->gain_marks = $newMarks2;
+        $cq3->gain_marks = $newMarks3;
+        $cq4->gain_marks = $newMarks4;
+
+        $cq1->save();
+        $cq2->save();
+        $cq3->save();
+        $cq4->save();
+        // END OF STORING EDITED MARKS TO CQ TABLE
 
         if ($save1 && $save2 && $save3 && $save4) {
             return redirect()->back();
