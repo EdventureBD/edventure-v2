@@ -9,7 +9,7 @@
                     <p class="h2 text-white font-weight-light m-0 timer">Time Left : <span id="countdownHour"></span>: <span
                         id="countdownMinuits"></span>:<span id="countdownSecound"></p>
                 </div>
-                {{-- <p class="h1 text-white-50 font-weight-light m-0"> <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p> --}}
+                <p class="h1 text-white-50 font-weight-light m-0"> <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
             <p class="hero__lead measure-hero-lead text-white-50">Batch : {{ $batch->title }}</p>
             {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}

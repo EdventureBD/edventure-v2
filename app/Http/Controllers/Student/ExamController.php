@@ -17,24 +17,28 @@ use App\Models\Student\exam\CqExamPaper;
 use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
 use App\Utils\Edvanture;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
     public function question(Batch $batch, Exam $exam)
     {
         $totalNumber = 0;
-        $detailsResult = DetailsResult::where('student_id', auth()->user()->id)
-                        ->where('exam_id', $exam->id)
-                        ->where('batch_id', $batch->id)
-                        ->get();
+        $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
+            ->where('exam_id', $exam->id)
+            ->where('batch_id', $batch->id)
+            ->get();
+        // foreach ($detailsResult as $result) {
+        //     dd($result->cqQuestion);
+        // }
         foreach ($detailsResult as $details) {
-            if ($details->exam_type == 'CQ') {
+            if ($details->exam_type == Edvanture::CQ) {
                 $number = CQ::where('id', $details->question_id)->select('marks')->first();
                 $totalNumber = $totalNumber + $number->marks;
-            } else if ($details->exam_type == 'MCQ') {
+            } else if ($details->exam_type == Edvanture::MCQ) {
                 $number = 1;
                 $totalNumber = $totalNumber + $number;
-            } else if ($details->exam_type == 'Assignment') {
+            } else if ($details->exam_type == Edvanture::ASSIGNMENT) {
                 $number = Assignment::where('id', $details->question_id)->select('marks')->first();
                 $totalNumber = $totalNumber + $number->marks;
             }
@@ -49,7 +53,7 @@ class ExamController extends Controller
             ->min('gain_marks');
 
         // START OF MCQ
-        if ($exam->exam_type == 'MCQ') {
+        if ($exam->exam_type == Edvanture::MCQ) {
             $canAttempt = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
@@ -64,16 +68,15 @@ class ExamController extends Controller
                 ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
                 ->get();
             $weakAnalysis = $analysis;
-
             if (!$canAttempt) {
                 $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                 return view('student.pages_new.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
             }
-            return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+            return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
         }
 
         // START OF CQ
-        else if ($exam->exam_type == 'CQ') {
+        else if ($exam->exam_type == Edvanture::CQ) {
             $canAttempt = CqExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
@@ -99,12 +102,15 @@ class ExamController extends Controller
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
                 ->first();
-            if (!($canAttempt)) {
+            if (!$canAttempt) {
                 $show = false;
-                return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
             } else {
                 $show = true;
-                return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                $exam_paper = (new CqExamPaper())->getCqExamPaper($exam->id, $batch->id, Auth::user()->id);
+                // CqExamPaper::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', Auth::user()->id)->first();
+
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber', 'exam_paper'));
             }
         }
 
@@ -246,10 +252,10 @@ class ExamController extends Controller
             // $number_of_attempt = 0;
             // $gain_marks = 0;
             $answers = $request->a;
-            $input =[];
-            $input['exam_id'] =$exam->id;
-            $input['batch_id'] =$batch->id;
-            $input['student_id']= auth()->user()->id;
+            $input = [];
+            $input['exam_id'] = $exam->id;
+            $input['batch_id'] = $batch->id;
+            $input['student_id'] = auth()->user()->id;
             $input['status'] = 1;
             $fAns = $this->formatMcqAnswers($answers);
             // dd($questions);
@@ -318,7 +324,7 @@ class ExamController extends Controller
             //             }
             //         }
             //     }
-                
+
             //     $question->number_of_attempt = $number_of_attempt;
             //     $question->gain_marks = $gain_marks;
             //     $success_rate = ($question->gain_marks * 100) / $question->number_of_attempt;
@@ -327,14 +333,14 @@ class ExamController extends Controller
             //     $number_of_attempt = 0;
             //     $gain_marks = 0;
             // }
-           
+
             // $exam_result->exam_id = $exam->id;
             // $exam_result->batch_id = $batch->id;
             // $exam_result->student_id = auth()->user()->id;
             // $exam_result->gain_marks = $total;
             // $exam_result->status = 1;
             // $save = $exam_result->save();
-            
+
             if ($save) {
                 if ($request->ajax()) {
                     return $this->sendResponse([]);
@@ -343,7 +349,7 @@ class ExamController extends Controller
             }
         }
         if ($exam->exam_type == 'CQ') {
-            // dd($request);
+            // dd($request->all());
             // return $this->examPaper($request, $batch, $exam);
             $validateData = $request->validate([
                 'submitted_text' => 'nullable|string',
@@ -379,7 +385,16 @@ class ExamController extends Controller
             $student_exam_attempt->save();
 
             if ($save) {
-                return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully complted the CQ exam");
+                // return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully submitted the CQ exam paper.");
+                $show = false;
+                // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                return view('student.pages_new.batch.exam.canAttemp', compact(
+                    // 'canAttempt',
+                    'exam',
+                    'batch',
+                    'show',
+                    // 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'
+                ));
             }
         }
         if ($exam->exam_type == 'Assignment') {
@@ -552,9 +567,9 @@ class ExamController extends Controller
     //
 
     protected function formatMcqAnswers($answers)
-    {   
+    {
         $for_ans = [];
-        foreach($answers as $answer) {
+        foreach ($answers as $answer) {
             $ans_arr = explode('_', $answer);
             $for_ans[$ans_arr[0]] = $ans_arr[1];
         }

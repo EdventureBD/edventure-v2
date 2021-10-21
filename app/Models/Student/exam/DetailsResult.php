@@ -18,7 +18,7 @@ class DetailsResult extends AppModel
     use HasFactory, LogsActivity;
     protected $fillable = ['exam_id', 'exam_type', 'question_id', 'batch_id', 'student_id', 'gain_marks', 'mcq_ans', 'status'];
     protected static $logName = "Details Result";
-    
+
     public function getDescriptionForEvent(string $eventName): string
     {
         return "{$eventName}";

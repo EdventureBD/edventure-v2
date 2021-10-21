@@ -6,10 +6,13 @@
                     <h3 class="text-white flex m-0">Course : {{ $batch->course->title }}</h3>
                 </div>
                 <div class="col-5 text-right">
-                    <p class="h2 text-white font-weight-light m-0 bradius-15 timer">Time Left : <span id="countdownHour"></span>: <span
-                        id="countdownMinuits"></span>:<span id="countdownSecound"></p>
+                    <p class="h2 text-white font-weight-light m-0 rounded timer">
+                        <span id="countdownHour"></span>: <span
+                        id="countdownMinuits"></span>:<span id="countdownSecound">
+
+                        </p>
                 </div>
-                {{-- <p class="h1 text-white-50 font-weight-light m-0"> <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p> --}}
+                <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span> : <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
             <p class="hero__lead measure-hero-lead text-white-50">Batch : {{ $batch->title }}</p>
             {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}
@@ -20,7 +23,7 @@
         <div class="container page__container">
             <div class="page-section">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
-                <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" method="post"
+                <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" id="cqFormSubmit" method="post"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @forelse($questions as $key => $question)
@@ -62,12 +65,12 @@
                             </div>
                         </div>
                     @endforelse
-                    <p class="h3 text-info py-5">You can write your answer in the textbox or upload your pdf ans paper.</p>
+                    <p class="h3 text-center pt-5 pb-3 text-dark fw-800">উত্তরঃ-</p>
                     <div class="form-group">
-                        <label for="submitted_text">Answer: </label>
+                        <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label>
                         <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
                     </div>
-                    <p class="mx-auto h5">Or Upload a PDF file:</p>
+                    <p class="mx-auto h5">Or Upload a PDF answer file:</p>
                     <div class="form-group m-0">
                         <div class="custom-file">
                             <input type="file" id="file" name="file" class="custom-file-input">
@@ -77,7 +80,7 @@
                             <p style="color: red;font-weight: bold;">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+                    <button type="submit" class="btn text-xsm fw-600 text-white bg-purple px-4 py-2 mx-auto mt-4">Submit</button>
                 </form>
             </div>
         </div>
@@ -117,9 +120,11 @@
         }, 1000);
     </script>
     <script type="text/javascript">
+        // var formSumit
         window.onbeforeunload = function() {
-            return "Dude, are you sure you want to leave? Think of the kittens!";
+            // return "Dude, are you sure you want to leave? Think of the kittens!";
         }
+        
     </script>
 </x-landing-layout>
 
