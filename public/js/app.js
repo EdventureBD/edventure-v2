@@ -2183,7 +2183,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "timer text-white",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Timer__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              initialMinute: 30,
+              initialMinute: exam.duration ? exam.duration : 30,
               initialSeconds: 0
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {

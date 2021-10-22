@@ -33,7 +33,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
             console.log('submit form');
             // $("#exam-form").submit();
             const url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
-            const res = await axios.post(url, { a: state.answers, q : questions})
+            const res = await axios.post(url, { a: state.answers, q: questions })
                 .then(response => {
                     console.log(response.data);
                     window.location.reload();
@@ -45,7 +45,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
 
     questionRows = questions.map((question, index) => {
         sl = index + 1;
-        return <div className="question mb-5" id={"qus_"+question.id}>
+        return <div className="question mb-5" id={"qus_" + question.id}>
             <div className="bg-purple-light p-2 mb-3 bshadow bradius-15"><b>{"Q " + sl + ".  "}</b>{parse(question.question)}</div>
             {
                 fields.map(fieldNo => (<div className={`${state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray"} bshadow bradius-15 w-50 p-2 mb-3`} onClick={() => selectAnswer(question.id, fieldNo)}>{fieldNo + '. '} {parse(question['field' + fieldNo])}</div>))
@@ -57,7 +57,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     questions.map((qus, qindex) => {
         let sanswer = state.answers.find(answer => answer == qus.id + '_' + 1 || answer == qus.id + '_' + 2 || answer == qus.id + '_' + 3 || answer == qus.id + '_' + 4);
         // console.log(sanswer);
-        questionSummary.push(<a href={"#qus_"+qus.id} class={`single-qus-summary ${sanswer ? "bg-red" : "bg-green"} bradius-15 c-point`}>{qindex + 1}</a>)
+        questionSummary.push(<a href={"#qus_" + qus.id} class={`single-qus-summary ${sanswer ? "bg-red" : "bg-green"} bradius-15 c-point`}>{qindex + 1}</a>)
     })
 
     return (<div className="batch-exam">
@@ -66,7 +66,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                 <div className="col-4"><h2 className="text-purple">{exam.title}</h2></div>
                 <div className="col-4"><h2 className="text-purple text-xmd fw-800">{batch.title}</h2></div>
                 <div className="col-4">
-                    <div className="timer text-white"><Timer initialMinute={30} initialSeconds={0} /></div>
+                    <div className="timer text-white"><Timer initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
                     <div className="question-summary">
                         {questionSummary}
                     </div>
