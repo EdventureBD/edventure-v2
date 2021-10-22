@@ -1,3 +1,16 @@
+<x-landing-layout headerBg="white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Hello {{auth()->user()->name}}</h2>
+                <p>Nice to have you back</p>
+            </div>
+            <div class="col-md-8">
+
+            </div>
+        </div>
+    </div>
+</x-landing-layout>
 <?php /*@extends('student.layouts.default', [
                                     'title'=>'Profile', 
                                     'pageName'=>'Profile', 

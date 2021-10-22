@@ -25,7 +25,7 @@ class AccountDetailsController extends Controller
             $batchStudentEnrollment = BatchStudentEnrollment::where('student_id', auth()->user()->id)->get();
             $batchStudentEnroll = $batchStudentEnrollment;
             $batchStudent = $batchStudentEnrollment;
-            return view('student.pages.user.profile', compact(
+            return view('student.pages_new.user.profile', compact(
                 'user',
                 'batchStudentEnrollment',
                 'batchStudentEnroll',
