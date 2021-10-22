@@ -142,10 +142,10 @@ class ExamController extends Controller
                 ->first();
             if (empty($canAttempt)) {
                 $show = false;
-                return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
             } else {
                 $show = true;
-                return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
             }
         }
     }
@@ -180,7 +180,7 @@ class ExamController extends Controller
             ->min('gain_marks');
 
         // START OF MCQ
-        if ($exam->exam_type == 'MCQ') {
+        if ($exam->exam_type == Edvanture::MCQ) {
             $canAttempt = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
@@ -199,14 +199,14 @@ class ExamController extends Controller
             if (!$canAttempt) {
                 $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take(10)->get();
                 // return view('student.pages.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch', 'courseLecture'));
-                return view('student.pages.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
+                return view('student.pages_new.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
             }
             // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
-            return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+            return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
         }
 
         // START OF CQ
-        else if ($exam->exam_type == 'CQ') {
+        else if ($exam->exam_type == Edvanture::MCQ) {
             $canAttempt = ExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
@@ -226,7 +226,7 @@ class ExamController extends Controller
             if (!$canAttempt) {
                 $questions = CQ::where('exam_id', $exam->id)->get();
                 // return view('student.pages.batch.exam.batch_exam_cq_and_assignment', compact('questions', 'exam', 'batch', 'courseLecture'));
-                return view('student.pages.batch.exam.batch_exam_cq_and_assignment', compact('questions', 'exam', 'batch'));
+                return view('student.pages_new.batch.exam.batch_exam_cq_and_assignment', compact('questions', 'exam', 'batch'));
             }
             $canAttempt = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
@@ -235,11 +235,11 @@ class ExamController extends Controller
             if (!($canAttempt)) {
                 $show = false;
                 // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
-                return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
             } else {
                 $show = true;
                 // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
-                return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
             }
         }
     }
