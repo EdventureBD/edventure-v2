@@ -29,7 +29,9 @@ class Create extends Component
         // $this->coursetopicId = null;
 
         $courseId = Batch::find($value);
-        $this->exams = Exam::where('course_id', $courseId->course_id)->get();
+        $previousExamID=BatchExam::where('batch_id',$value)->pluck('exam_id')->toArray();
+        // dd($previousExamID);
+        $this->exams = Exam::where('course_id', $courseId->course_id)->whereNotIn('id', $previousExamID)->get();
     }
 
     // public function updatedCoursetopicId($value)
