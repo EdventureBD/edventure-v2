@@ -1,15 +1,74 @@
 <x-landing-layout headerBg="white">
+    <div id="studentDashboard" data-course-enrolement="{{json_encode($batchStudentEnrollment)}}" data-batch-enrolement="{{json_encode($batchStudentEnroll)}}" data-user="{{json_encode(auth()->user())}}">
+    {{-- @include('student.pages_new.user.sidebar')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <h2>Hello {{auth()->user()->name}}</h2>
-                <p>Nice to have you back</p>
+                <div class="student-info">
+                    <h2>Hello {{auth()->user()->name}}</h2>
+                    <p>Nice to have you back</p>
+                </div>
+                <div class="page-headline text-center">
+                    <h2>Your enrolled courses</h2>
+                </div>
+                @forelse ($batchStudentEnrollment as $batchStudentEnrollment)
+                    <div class="single-course">
+                        <a href="{{ route('course-preview', $batchStudentEnrollment->course->slug) }}" class="avatar avatar-4by3 mr-12pt">
+                            @if ($batchStudentEnrollment->course->logo)
+                                <img src="{{ Storage::url($batchStudentEnrollment->course->logo) }}" class="avatar-img rounded" alt="course">
+                            @else
+                                <img src="{{ asset('student/public/images/paths/mailchimp_430x168.png') }}" class="avatar-img rounded" alt="course">
+                            @endif
+                            <span class="overlay__content"></span>
+                        </a>
+                        <div class="flex">
+                            <a class="card-title mb-4pt" href="{{ route('course-preview', $batchStudentEnrollment->course->slug) }}">{{ $batchStudentEnrollment->course->title }}</a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="single-course">
+                        <a href="#" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                            <span class="overlay__content"></span>
+                        </a>
+                        <div class="flex">
+                            <a class="card-title mb-4pt" href="#">No Enrolled Courses</a>
+                        </div>
+                    </div>
+                @endforelse
+    
+                <div class="page-headline text-center">
+                    <h2>Your Batches</h2>
+                </div>
+                @forelse ($batchStudentEnroll as $batchStudentEnroll)
+                    <div class="single-course">
+                        <a href="{{ route('batch-lecture', $batchStudentEnroll->batch->slug) }}" class="avatar avatar-4by3 mr-12pt">
+                            @if ($batchStudentEnroll->course->logo)
+                                <img src="{{ Storage::url($batchStudentEnroll->course->logo) }}" class="avatar-img rounded" alt="course">
+                            @else
+                                <img src="{{ asset('student/public/images/paths/mailchimp_430x168.png') }}" class="avatar-img rounded" alt="course">
+                            @endif
+                            <span class="overlay__content"></span>
+                        </a>
+                        <div class="flex">
+                            <a class="card-title mb-4pt" href="{{ route('batch-lecture', $batchStudentEnroll->batch->slug) }}">{{ $batchStudentEnroll->batch->title }}</a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="single-course">
+                        <a href="#" class="avatar avatar-4by3 mr-12pt">
+                            <span class="overlay__content"></span>
+                        </a>
+                        <div class="flex">
+                            <a class="card-title mb-4pt" href="#">No batches</a>
+                        </div>
+                    </div>
+                @endforelse
             </div>
             <div class="col-md-8">
 
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-landing-layout>
 <?php /*@extends('student.layouts.default', [
                                     'title'=>'Profile', 
@@ -54,7 +113,7 @@
                     <div class="col-sm-4 card-group-row__col">
                         <div class="card card-sm card-group-row__card">
                             <div class="card-body d-flex align-items-center">
-                                <a href="{{ route('course-preview', $batchStudentEnrollment->course->slug) }}" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                                <a href="{{ route('course-preview', $batchStudentEnrollment->course->slug) }}" class="avatar avatar-4by3 mr-12pt">
                                     @if ($batchStudentEnrollment->course->logo)
                                         <img src="{{ Storage::url($batchStudentEnrollment->course->logo) }}" class="avatar-img rounded" alt="course">
                                     @else
@@ -88,7 +147,7 @@
                     <div class="col-sm-12 card-group-row__col">
                         <div class="card card-sm card-group-row__card">
                             <div class="card-body d-flex align-items-center">
-                                <a href="#" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                                <a href="#" class="avatar avatar-4by3 mr-12pt">
                                     {{-- @if ($batchStudentEnrollment->course->logo)
                                         <img src="{{ Storage::url($batchStudentEnrollment->course->logo) }}" class="avatar-img rounded" alt="course">
                                     @else
@@ -113,7 +172,7 @@
                     <div class="col-sm-4 card-group-row__col">
                         <div class="card card-sm card-group-row__card">
                             <div class="card-body d-flex align-items-center">
-                                <a href="{{ route('batch-lecture', $batchStudentEnroll->batch->slug) }}" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                                <a href="{{ route('batch-lecture', $batchStudentEnroll->batch->slug) }}" class="avatar avatar-4by3 mr-12pt">
                                     @if ($batchStudentEnroll->course->logo)
                                         <img src="{{ Storage::url($batchStudentEnroll->course->logo) }}" class="avatar-img rounded" alt="course">
                                     @else
@@ -131,7 +190,7 @@
                     <div class="col-sm-12 card-group-row__col">
                         <div class="card card-sm card-group-row__card">
                             <div class="card-body d-flex align-items-center">
-                                <a href="#" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                                <a href="#" class="avatar avatar-4by3 mr-12pt">
                                     <span class="overlay__content"></span>
                                 </a>
                                 <div class="flex">
@@ -175,7 +234,7 @@
                 <div class="col-sm-12 card-group-row__col">
                     <div class="card card-sm card-group-row__card">
                         <div class="card-body d-flex align-items-center">
-                            <a href="#" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                            <a href="#" class="avatar avatar-4by3 mr-12pt">
                                 <span class="overlay__content"></span>
                             </a>
                             <div class="flex">

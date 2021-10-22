@@ -22,7 +22,7 @@ class AccountDetailsController extends Controller
             } else {
                 $user = User::where('id', $id)->first();
             }
-            $batchStudentEnrollment = BatchStudentEnrollment::where('student_id', auth()->user()->id)->get();
+            $batchStudentEnrollment = BatchStudentEnrollment::with('course', 'batch')->where('student_id', auth()->user()->id)->get();
             $batchStudentEnroll = $batchStudentEnrollment;
             $batchStudent = $batchStudentEnrollment;
             return view('student.pages_new.user.profile', compact(
