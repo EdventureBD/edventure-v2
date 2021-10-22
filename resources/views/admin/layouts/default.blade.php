@@ -33,16 +33,16 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+    <div class="wrapper" style="background-color: #edf7f4;" >
 
         @include('admin.includes.navbar')
 
         @include('admin.includes.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color: #def0ea;" >
             @include('admin.includes.header')
-            <div class="container-fluid">
+            <div class="container-fluid" style="background-color: #edf7f4;" >
                 @include('admin.includes.status')
 
                 @yield('content')

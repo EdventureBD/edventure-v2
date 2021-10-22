@@ -3,7 +3,7 @@
         @if ($exam->exam_type == 'MCQ')
         <div class="container">
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-            <div class="result-sheet-table">
+            <div class="result-sheet-table overflow-x-scroll">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -64,7 +64,7 @@
             @endphp
             <div class="container">
                 <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-                <div class="result-sheet-table">
+                <div class="result-sheet-table overflow-x-scroll">
                     <table class="table table-bordered">
                         <thead>
                             <tr>

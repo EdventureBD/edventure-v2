@@ -28,9 +28,11 @@ class Create extends Component
     public function updatedBatchId()
     {
         if (!empty($this->batchId)) {
-            $batchessssss = Batch::where('id', $this->batchId)->first();
-            $this->courses = Course::where('id', $batchessssss->course_id)->first();
+            $selectBatch = Batch::where('id', $this->batchId)->first();
+            $this->courses = Course::where('id', $selectBatch->course_id)->first();
             $this->courseId = $this->courses->id;
+            $previousTopicID=BatchLecture::where('batch_id',$this->batchId)->pluck('topic_id')->toArray();
+            $this->topics = CourseTopic::where('course_id', $this->courseId)->whereNotIn('id', $previousTopicID)->get();
         }
         $this->validate([
             'batchId' => 'required'
@@ -67,7 +69,6 @@ class Create extends Component
         $batchLecture->status = 1;
         $url = url()->previous();
         $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
-
         $slug = Batch::where('id', $this->batchId)
             ->select('batches.slug')
             ->first();
@@ -91,20 +92,11 @@ class Create extends Component
         if (!($this->batch)) {
             $this->batches = Batch::orderBy('title')->get();
             $this->show = false;
-        } else {
-            $this->batches = Batch::where('id', $this->batch->id)->first();
-            $this->batchId = $this->batches->id;
-            $this->courses = Course::where('id', $this->batch->course_id)->first();
-            $this->courseId = $this->courses->id;
-            $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
-        }
+        } 
     }
 
     public function render()
     {
-        if (!empty($this->courseId)) {
-            $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
-        }
         return view('livewire.batch-lecture.create');
     }
 }
