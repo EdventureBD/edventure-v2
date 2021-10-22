@@ -19,33 +19,10 @@ class Create extends Component
 
     public function updatedBatchId($value)
     {
-        // $this->validate([
-        //     'batchId' => 'required',
-        // ]);
-
-        // dd($this->batches->firstWhere('id', $value)->course_id);
-
-        // $this->coursetopics = CourseTopic::whereCourseId($this->batches->firstWhere('id', $value)->course_id)->select('id', 'title')->orderBy('id')->get();
-        // $this->coursetopicId = null;
-
         $courseId = Batch::find($value);
         $previousExamID=BatchExam::where('batch_id',$value)->pluck('exam_id')->toArray();
-        // dd($previousExamID);
         $this->exams = Exam::where('course_id', $courseId->course_id)->whereNotIn('id', $previousExamID)->get();
     }
-
-    // public function updatedCoursetopicId($value)
-    // {
-    //     $this->exams = Exam::whereTopicId($value)->select('id', 'title', 'exam_type')->get();
-    //     $this->examId = null;
-    // }
-
-    // public function updatedExamId()
-    // {
-    //     $this->validate([
-    //         'examId' => 'required',
-    //     ]);
-    // }
 
     protected $rules = [
         'batchId' => 'required',

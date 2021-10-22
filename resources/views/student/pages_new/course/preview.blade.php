@@ -23,7 +23,7 @@
 
     </div>
     <div class="page-section border-bottom-2 py-5">
-        <div class="container page__container w-50">
+        <div class="container page__container w-md-50 w-100">
             @if (count($specialExams) > 0)
                 <div class="row mb-3">
                     <div class="col-lg-12">
