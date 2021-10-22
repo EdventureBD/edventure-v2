@@ -110,7 +110,7 @@
                                                                     action="{{ route('editMarks', ['batch' => $batch, 'exam' => $exam, 'exam_type' => $exam_type, 'student' => $student, 'creative_question' => $exam_paper->creativeQuestion->slug]) }}"
                                                                     method="POST">
                                                                     {{ csrf_field() }}
-                                                                    Question {{ $loop->iteration }}
+                                                                    উদ্দীপক {{ $loop->iteration }}
                                                                     @forelse($exam_results as $exam_result)
                                                                         @if ($exam_paper->creative_question_id == $exam_result->cqQuestion->creativeQuestion->id)
                                                                             <div class="form-group row">
@@ -241,7 +241,7 @@
                                                     @php
                                                         $id = 1;
                                                     @endphp
-                                                    Question {{ $loop->iteration }}
+                                                    উদ্দীপক {{ $loop->iteration }}
                                                     @foreach ($exam_paper->creativeQuestion->question as $key => $cq)
                                                         <div class="form-group row">
                                                             <label for="exampleInputEmail1" class="h6 col-sm-4">
@@ -267,9 +267,10 @@
                                                     @endphp
                                                 @endforeach
                                                 <div class="card-footer">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                    <button type="button" class="btn btn-danger float-right"
+                                                    <button type="button" class="btn btn-danger"
                                                         data-dismiss="modal">Cancel</button>
+                                                    <button type="submit"
+                                                        class="btn btn-primary float-right">Submit</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -333,9 +334,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="button" class="btn btn-danger float-right"
+                                                        <button type="button" class="btn btn-danger"
                                                             data-dismiss="modal">Cancel</button>
+                                                        <button type="submit"
+                                                            class="btn btn-primary float-right">Submit</button>
                                                     </div>
                                                 </form>
                                             </div>
