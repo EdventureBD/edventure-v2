@@ -89,6 +89,7 @@
                                 <thead>
                                     <tr>
                                         <th>SL. No</th>
+                                        <th>DB_ID</th>
                                         <th>Title</th>
                                         <th>Course</th>
                                         <th>Topic</th>
@@ -101,6 +102,7 @@
                                     @foreach ($content_tags as $content_tag)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $content_tag->id }}</td>
                                             <td>{{ $content_tag->title }}</td>
                                             <td>{{ $content_tag->courseName }}</td>
                                             <td>{{ $content_tag->topicName }}</td>
@@ -167,6 +169,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>SL. No</th>
+                                        <th>DB_ID</th>
                                         <th>Title</th>
                                         <th>Course</th>
                                         <th>Topic</th>
