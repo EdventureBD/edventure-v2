@@ -1,5 +1,5 @@
-<div class="footer-section">
-    <div class="container mt-6 mb-4">
+<div class="footer-section position-relative bg-white">
+    <div class="container pt-5 pb-4">
         <div class="row">
             <div class="col-md-3">
                 <div class="single-footer-column">

@@ -14,23 +14,28 @@ class AccountDetailsController extends Controller
     public function index($id)
     {
         if (auth()->user()->id == $id) {
-            $studentDetails = StudentDetails::where('user_id', $id)->first();
-            if ($studentDetails) {
-                $user = User::join('student_details', 'student_details.user_id', 'users.id')
-                    ->select('users.*', 'student_details.*')
-                    ->where('users.id', $id)->first();
+            if (request()->ajax()) {
+                $studentDetails = StudentDetails::where('user_id', $id)->first();
+                if ($studentDetails) {
+                    $user = User::join('student_details', 'student_details.user_id', 'users.id')
+                        ->select('users.*', 'student_details.*')
+                        ->where('users.id', $id)->first();
+                } else {
+                    $user = User::where('id', $id)->first();
+                }
+                $batchStudentEnrollment = BatchStudentEnrollment::with('course', 'batch')->where('student_id', auth()->user()->id)->get();
+                $batchStudentEnroll = $batchStudentEnrollment;
+                $batchStudent = $batchStudentEnrollment;
+                return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment]);
             } else {
-                $user = User::where('id', $id)->first();
+                return view('student.pages_new.user.profile');
             }
-            $batchStudentEnrollment = BatchStudentEnrollment::where('student_id', auth()->user()->id)->get();
-            $batchStudentEnroll = $batchStudentEnrollment;
-            $batchStudent = $batchStudentEnrollment;
-            return view('student.pages_new.user.profile', compact(
-                'user',
-                'batchStudentEnrollment',
-                'batchStudentEnroll',
-                'batchStudent'
-            ));
+            // return view('student.pages_new.user.profile', compact(
+            //     'user',
+            //     'batchStudentEnrollment',
+            //     'batchStudentEnroll',
+            //     'batchStudent'
+            // ));
         } else {
             abort(401);
         }

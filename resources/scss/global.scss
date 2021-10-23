@@ -10,6 +10,10 @@ a:hover {
     height: 30rem;
 }
 
+.w-10 {
+    width: 10rem;
+}
+
 .w-15 {
     width: 15rem;
 }
@@ -21,6 +25,10 @@ a:hover {
 .bg-art {
     background-image: url('/img/landing/top_background.png');
     background-size: cover;
+}
+
+.bg-white {
+    background-color: #ffffff;
 }
 
 .bg-gradient-purple {
@@ -37,6 +45,11 @@ a:hover {
 
 .bg-purple-light {
     background-color: #D5BDEA;
+}
+
+.bg-purple-light-50 {
+    background-color: #F7F5FF;
+
 }
 
 .bg-red {
@@ -104,6 +117,11 @@ a:hover {
 .v-align-middle {
     vertical-align: middle !important;
 }
-.overflow-x-scroll{
+
+.overflow-x-scroll {
     overflow-x: scroll;
+}
+
+.opacity-50 {
+    opacity: 0.5;
 }

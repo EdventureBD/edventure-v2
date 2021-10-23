@@ -10972,6 +10972,10 @@ a:hover {
   height: 30rem;
 }
 
+.w-10 {
+  width: 10rem;
+}
+
 .w-15 {
   width: 15rem;
 }
@@ -10983,6 +10987,10 @@ a:hover {
 .bg-art {
   background-image: url("/img/landing/top_background.png");
   background-size: cover;
+}
+
+.bg-white {
+  background-color: #ffffff;
 }
 
 .bg-gradient-purple {
@@ -10999,6 +11007,10 @@ a:hover {
 
 .bg-purple-light {
   background-color: #D5BDEA;
+}
+
+.bg-purple-light-50 {
+  background-color: #F7F5FF;
 }
 
 .bg-red {
@@ -11067,6 +11079,10 @@ a:hover {
 
 .overflow-x-scroll {
   overflow-x: scroll;
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .btn-register {
@@ -11191,6 +11207,10 @@ a:hover {
 
 .text-gray {
   color: rgba(44, 46, 51, 0.65);
+}
+
+.text-black {
+  color: #353535;
 }
 
 .text-yellow {
@@ -11414,6 +11434,7 @@ a:hover {
 .single-input-group input {
   border: none;
   padding: 5px;
+  width: 100%;
 }
 .single-input-group img {
   width: 24px;
@@ -11462,6 +11483,10 @@ a:hover {
 
 .single-course img {
   border-radius: 10px 10px 0px 0;
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .single-question p {
@@ -11521,4 +11546,38 @@ a:hover {
 
 svg.eye-icon {
   display: none;
+}
+
+.student-sidebar {
+  position: absolute;
+  background: purple;
+  height: 100%;
+  color: #fff;
+  top: 65px;
+  width: 68px;
+}
+.student-sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dashboard-content {
+  margin-left: 68px;
+}
+
+@media (max-width: 767px) {
+  .dashboard-content {
+    margin-left: 0px;
+  }
+
+  .student-sidebar {
+    position: relative;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .student-sidebar ul li {
+    display: inline-block;
+  }
 }
