@@ -4,6 +4,7 @@
     height: 100%;
     color: #fff;
     top: 65px;
+    width: 68px;
 
     ul {
         list-style: none;
@@ -12,6 +13,30 @@
 
         li {
             a {}
+        }
+    }
+}
+
+.dashboard-content {
+    margin-left: 68px;
+}
+
+@media (max-width: 767px) {
+    .dashboard-content {
+        margin-left: 0px;
+    }
+
+    .student-sidebar {
+        position: relative;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        ul {
+            li {
+                display: inline-block;
+            }
         }
     }
 }

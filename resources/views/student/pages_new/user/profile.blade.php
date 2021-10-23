@@ -1,5 +1,8 @@
 <x-landing-layout headerBg="white">
-    <div id="studentDashboard" data-course-enrolement="{{json_encode($batchStudentEnrollment)}}" data-batch-enrolement="{{json_encode($batchStudentEnroll)}}" data-user="{{json_encode(auth()->user())}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <div id="studentDashboard" 
+    {{-- data-course-enrolement="{{json_encode($batchStudentEnrollment)}}" data-batch-enrolement="{{json_encode($batchStudentEnroll)}}"  --}}
+    data-user="{{json_encode(auth()->user())}}"></div>
     {{-- @include('student.pages_new.user.sidebar')
     <div class="container-fluid">
         <div class="row">
