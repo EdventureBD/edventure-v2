@@ -25,6 +25,50 @@
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#slug">
+                                            <i class="fas fa-plus-square"></i> Create a slug
+                                        </button>
+
+                                        <div class="modal fade" id="slug">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Created Slug</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <di class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                            @php
+                                                                                $slug = (string) Str::uuid();
+                                                                            @endphp
+                                                                            <input class="form-control form-control-lg"
+                                                                                type="text" readonly
+                                                                                value="{{ $slug }}" id="copy"
+                                                                                style="width: 100%;">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 align-items-center justify-content-between">
+                                                            <button value="copy" onclick="copyFunction('copy')"
+                                                                type="button" class="btn btn-block btn-info">
+                                                                <i class="fas fa-copy"></i> Copy
+                                                            </button>
+                                                        </div>
+                                                    </di>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
                                         <a href="{{ route('emptyCQ') }}">
                                             <button type="button" class="btn btn-info">
                                                 <i class="fas fa-download"></i> Download an empty csv file
@@ -228,5 +272,15 @@
                 "autoWidth": false,
             });
         });
+
+        function copyFunction(id) {
+            console.log(id);
+            var copyText = document.getElementById(id);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            // alert("Copied the text: " + copyText.value);
+            window.location.reload();
+        }
     </script>
 @endsection

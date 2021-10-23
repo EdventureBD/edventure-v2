@@ -26,7 +26,7 @@ class CSVController extends Controller
 
     public function emptyCQ()
     {
-        return Storage::download('public/excels/empty_mcq.xlsx', 'Empty CQ.xlsx');
+        return Storage::download('public/excels/empty_cq.xlsx', 'Empty CQ.xlsx');
     }
 
     public function emptyAssignment()

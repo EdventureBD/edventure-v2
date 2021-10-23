@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Admin\CQ;
 use Illuminate\Support\Str;
 use App\Models\Admin\Assignment;
+use App\Models\Admin\CreativeQuestion;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Models\Admin\QuestionContentTag;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -24,7 +25,21 @@ class CQQuestionImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        if ($this->exam->exam_type === 'CQ') {
+        if ($this->exam->exam_type == 'CQ') {
+            $creativeQuestion = CreativeQuestion::updateOrInsert(
+                [
+                    'slug' => $row['slug'],
+                ],
+                [
+                    'creative_question' => $row['creative_question'],
+                    'slug' => $row['slug'],
+                    'image' => $row['image'],
+                    'exam_id' => $this->exam->id,
+                    'standard_ans_pdf' => "pdf",
+                ]
+            );
+            $creativeQuestionId = CreativeQuestion::where('slug', $row['slug'],)->first();
+
             $content_tag_id = $row['content_tag_id'];
             if ($content_tag_id) {
                 $content_tag_id = explode(",", $content_tag_id);
@@ -37,11 +52,10 @@ class CQQuestionImport implements ToModel, WithHeadingRow
                     'slug' => $slug,
                     'image' => $row['image'],
                     'marks' => $row['marks'],
-                    'exam_id' => $this->exam->id,
+                    'creative_question_id' => $creativeQuestionId->id,
                     'number_of_attempt' => 0,
                     'gain_marks' => 0,
                     'success_rate' => 0,
-                    'standard_ans_pdf' => "pdf",
                 ]);
                 $question_id = CQ::where('slug', $slug)->first();
                 if ($content_tag_id) {
@@ -56,7 +70,7 @@ class CQQuestionImport implements ToModel, WithHeadingRow
                     }
                 }
             }
-        } else if ($this->exam->exam_type === 'Assignment') {
+        } else if ($this->exam->exam_type == 'Assignment') {
             $slug = Str::slug($row['question']);
             $check = Assignment::where('slug', $slug)->first();
             if (!$check) {
