@@ -17,7 +17,8 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('logo')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('banner')->nullable();
             $table->string('trailer')->nullable();
 
             $table->unsignedBigInteger('course_category_id');

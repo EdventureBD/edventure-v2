@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <form role="form" wire:submit.prevent="saveCourse">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseTitle"> Course Title <span
                                                     class="must-filled">*</span> </label>
@@ -26,18 +26,20 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Choose
-                                                        Image</label>
+                                                    <label for="exampleInputFile" class="col-form-label">Course
+                                                        Icon</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" wire:model="image"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Choose image</label>
+                                                                for="exampleInputFile">Course icon</label>
                                                         </div>
                                                     </div>
                                                     @error('image')
@@ -47,18 +49,52 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($tempImage)
-                                                    <img class="product-image" src="{{ $tempImage->temporaryUrl() }}"
+                                                    <img style="width:100px; border-radius: 50%" class="product-image" src="{{ $tempImage->temporaryUrl() }}"
                                                         alt="">
                                                 @else
-                                                    <img src="http://placehold.it/150x100" alt="...">
+                                                    <img style="width:100px; border-radius: 50%" src="http://placehold.it/150x150" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="image">
-                                                    <p style="color: indigo">Uploading Image ....</p>
+                                                    <p style="color: indigo">Uploading icon ....</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile" class="col-form-label">Course
+                                                        Banner</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" wire:model="banner"
+                                                                class="custom-file-input hidden" id="exampleInputFile">
+                                                            <label class="custom-file-label"
+                                                                for="exampleInputFile">Course Banner</label>
+                                                        </div>
+                                                    </div>
+                                                    @error('banner')
+                                                        <p style="color: red;">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                @if ($tempBanner)
+                                                    <img class="product-image" src="{{ $tempBanner->temporaryUrl() }}"
+                                                        alt="">
+                                                @else
+                                                    <img src="http://placehold.it/150x100" alt="...">
+                                                @endif
+                                                <div wire:loading wire:target="banner">
+                                                    <p style="color: indigo">Uploading banner ....</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -95,9 +131,9 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseDuration">Course Duration <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" wire:model="duration"
+                                            <input type="number" wire:model="duration"
                                                 class="form-control @error('duration') is-invalid @enderror"
-                                                id="courseDuration" placeholder="Enter your course duration in month">
+                                                id="courseDuration" placeholder="Enter your course duration (month)">
                                             <small id="passwordHelpBlock" class="form-text text-secondary">
                                                 Enter an aproximate month to finish this course.
                                             </small>

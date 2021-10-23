@@ -80,7 +80,7 @@
                             <p style="color: red;font-weight: bold;">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="btn text-xxxsm fw-600 text-white bg-purple px-4 py-2 mx-auto mt-4">Submit</button>
+                    <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 mx-auto mt-4">Submit</button>
                 </form>
             </div>
         </div>

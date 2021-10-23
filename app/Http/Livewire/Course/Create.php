@@ -19,7 +19,9 @@ class Create extends Component
     public $duration;
     public $price;
     public $image;
+    public $banner;
     public $tempImage;
+    public $tempBanner;
     public $url;
 
     public function updatedTitle()
@@ -48,6 +50,11 @@ class Create extends Component
         $this->tempImage = $this->image;
     }
 
+    public function updatedBanner()
+    {
+        $this->tempBanner = $this->banner;
+    }
+
     public function updatedCategoryId()
     {
         $this->validate([
@@ -71,8 +78,9 @@ class Create extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'max:100', 'unique:courses'],
-        'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
-        'description' => 'required|string|max:500',
+        'banner' => 'nullable|image|mimes:jpeg,jpg,png',
+        'image' => 'nullable|mimes:jpeg,jpg,png',
+        'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3', 'max:9'],
         'price' => 'required|integer|numeric',
         'categoryId' => 'required',
@@ -86,10 +94,15 @@ class Create extends Component
             $imageUrl = $this->image->store('public/course');
             $this->image = $imageUrl;
         }
+        if ($this->banner) {
+            $imageUrl2 = $this->banner->store('public/course');
+            $this->banner = $imageUrl2;
+        }
         $course = new Course();
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
-        $course->logo = $this->image;
+        $course->icon = $this->image;
+        $course->banner = $this->banner;
         $course->course_category_id = $data['categoryId'];
         $course->description = $data['description'];
         $course->duration = $data['duration'];

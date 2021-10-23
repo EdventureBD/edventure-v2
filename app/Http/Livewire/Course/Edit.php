@@ -23,8 +23,11 @@ class Edit extends Component
     public $duration;
     public $url;
     public $image;
+    public $banner;
     public $tempImage;
+    public $tempBanner;
     public $deleteImage;
+    public $deleteBanner;
 
     public function updatedTitle()
     {
@@ -36,6 +39,12 @@ class Edit extends Component
     public function updatedImage()
     {
         $this->tempImage = $this->image;
+    }
+
+    public function updatedBanner()
+    {
+        $this->tempBanner = $this->banner;
+       
     }
 
     public function updatedDuration()
@@ -75,7 +84,6 @@ class Edit extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'max:100'],
-        'image' => 'nullable',
         'description' => 'required|string|max:500',
         'url' => ['nullable', 'string', 'min:3', 'max:9'],
         'price' => 'required|integer|numeric',
@@ -91,8 +99,15 @@ class Edit extends Component
             $this->image = $imageUrl;
             Storage::delete($this->deleteImage);
         }
+        
+        if ($this->tempBanner) {
+            $imageUrl2 = $this->banner->store('public/course');
+            $this->banner = $imageUrl2;
+            Storage::delete($this->deleteBanner);
+        }
         $course = Course::find($this->course->id);
-        $course->logo = $this->image;
+        $course->icon = $this->image;
+        $course->banner = $this->banner;
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
         $course->course_category_id = $data['categoryId'];
@@ -103,10 +118,10 @@ class Edit extends Component
         $save = $course->save();
 
         if ($save) {
-            session()->flash('status', 'Course successfully added!');
+            session()->flash('status', 'Course successfully updated!');
             return redirect()->route('course.index');
         } else {
-            session()->flash('failed', 'Course added failed!');
+            session()->flash('failed', 'Course added updated!');
             return redirect()->route('course.edit', $this->course->id);
         }
     }
@@ -119,8 +134,10 @@ class Edit extends Component
         $this->categoryId = $this->course->course_category_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
-        $this->image = $this->course->logo;
+        $this->image = $this->course->icon;
+        $this->banner = $this->course->banner;
         $this->deleteImage = $this->course->logo;
+        $this->deleteBanner = $this->course->banner;
 
 
         $this->categories = CourseCategory::all();

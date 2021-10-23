@@ -43,8 +43,7 @@
                                         <th>SL. No</th>
                                         <th>Name</th>
                                         <th>Category</th>
-                                        <th>Logo</th>
-                                        <th>Trailer</th>
+                                        <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>
                                         <th>Status</th>
@@ -62,13 +61,10 @@
                                             </td>
                                             <td>{{ $course->name }}</td>
                                             <td>
-                                                <img class="product-image" src="{{ Storage::url($course->logo) }}" alt=""
+                                                <img class="product-image " src="{{ Storage::url($course->icon) }}" alt=""
                                                     srcset="">
                                             </td>
-                                            <td><iframe src="https://player.vimeo.com/video/{{ $course->trailer }}"
-                                                    width="100" frameborder="0"
-                                                    allow="autoplay; fullscreen; picture-in-picture"
-                                                    allowfullscreen></iframe></td>
+
                                             <td>{{ $course->price }} taka</td>
                                             <td>{{ $course->duration }} month</td>
                                             <td>
@@ -139,8 +135,7 @@
                                         <th>SL. No</th>
                                         <th>Name</th>
                                         <th>Category</th>
-                                        <th>Logo</th>
-                                        <th>Trailer</th>
+                                        <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>
                                         <th>Status</th>
