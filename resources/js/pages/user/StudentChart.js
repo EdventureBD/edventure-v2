@@ -7,21 +7,17 @@ class StudentChart extends Component {
       this.options = {
         type: 'line',
         data: {
-          labels: ['1', '2', '3', '4', '5'],
+          labels: props.results.labels,
           datasets: [{
-            label: "My First dataset",
+            label: "MCQ",
             backgroundColor: 'rgba(251, 134, 224, 0.2)',
             borderColor:'#FB86E0',
-            data: [
-              5, 10, 15, 30, 50
-            ]
+            data: props.results.mcq
           }, {
-            label: "My Second dataset",
+            label: "CQ",
             backgroundColor: 'rgba(88, 64, 184, 0.2)',
             borderColor:'#5840B8',
-            data: [
-              300, 500, 100, 40, 120
-            ]
+            data: props.results.cq
           }]
         },
         options: {

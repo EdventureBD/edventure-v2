@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
+use App\Models\Admin\Course;
+use App\Models\Student\exam\ExamResult;
 use App\Models\Student\StudentDetails;
+use Illuminate\Support\Facades\Auth;
 
 class AccountDetailsController extends Controller
 {
@@ -26,7 +29,18 @@ class AccountDetailsController extends Controller
                 $batchStudentEnrollment = BatchStudentEnrollment::with('course', 'batch')->where('student_id', auth()->user()->id)->get();
                 $batchStudentEnroll = $batchStudentEnrollment;
                 $batchStudent = $batchStudentEnrollment;
-                return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment]);
+                $course_ids = [];
+                $course_cat_ids = [];
+                foreach ($batchStudentEnrollment as $enrollment) {
+                    $course_ids[] = $enrollment->course->id;
+                    $course_cat_ids[] = $enrollment->course->course_category_id;
+                }
+
+                $related_courses = (new Course())->getRelatedCourses($course_cat_ids, $course_ids, true);
+
+                $exam_results = (new ExamResult())->getExamResultsForDashboard(Auth::user()->id);
+
+                return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment, 'related_courses' => $related_courses, 'results' => $exam_results]);
             } else {
                 return view('student.pages_new.user.profile');
             }
