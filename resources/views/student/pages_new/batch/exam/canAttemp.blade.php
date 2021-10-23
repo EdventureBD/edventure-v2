@@ -85,6 +85,11 @@
                                 // $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
                                 $cellcolor = "bg-purple2";
                                 if ($n == 1) $creative = $result->cqQuestion->creativeQuestion->creative_question;
+                                $avg = 0;
+                                if ($result->question->gain_marks > 0) {
+                                    $avg = number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2);
+                                }
+                                
                             @endphp
                             <tr>
                                 @if ($n==1 || $creative != $result->cqQuestion->creativeQuestion->creative_question)
@@ -92,7 +97,7 @@
                                 @php $cretive = $result->cqQuestion->creativeQuestion->creative_question; @endphp
                                 @endif
                                 <td class="{{$cellcolor}} text-white">{!! $result->cqQuestion->question !!}</td>
-                                <td class="{{$cellcolor}} text-white text-sm fw-600 bshadow">0%</td>
+                                <td class="{{$cellcolor}} text-white text-sm fw-600 bshadow">{{$avg}}%</td>
                                 @if ($n==1)
                                 <td rowSpan="4" class="{{$cellcolor}} v-align-middle">
                                     <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Pdf</a>
