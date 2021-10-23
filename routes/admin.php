@@ -66,10 +66,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('/batch', BatchController::class, ['except' => ['store', 'update']]);
     Route::get('/changeBatchStatus', [BatchController::class, 'changeBatchStatus']);
     Route::get('/changeStudentStatus', [BatchController::class, 'changeStudentStatus'])->name('changeStudentStatus');
+    Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
     // END OF BATCH
 
     // START OF BATCH LECTURE
-    Route::resource('/batch-lecture', BatchLectureController::class, ['except' => ['show', 'store', 'update']]);
+    Route::resource('/batch-lecture', BatchLectureController::class, ['except' => ['show', 'update']]);
     Route::get('/changeBatchLectureStatus', [BatchLectureController::class, 'changeBatchLectureStatus']);
     // END OF BATCH LECTURE
 

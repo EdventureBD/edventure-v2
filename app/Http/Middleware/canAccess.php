@@ -22,11 +22,14 @@ class canAccess
         $course = Course::where('id', $batch->course_id)->first();
         $batch_student_enrollment = BatchStudentEnrollment::where('batch_id', $batch->id)
             ->where('student_id', auth()->user()->id)
+            ->where('status', 1)
             ->latest()
             ->first();
         // dd($batch_student_enrollment);
-        if ($batch_student_enrollment->individual_batch_days <= $batch_student_enrollment->accessed_days) {
-            return $next($request);
+        if ($batch_student_enrollment) {
+            if ($batch_student_enrollment->individual_batch_days <= $batch_student_enrollment->accessed_days) {
+                return $next($request);
+            }
         }
         return redirect()->route('enroll', $course);
     }

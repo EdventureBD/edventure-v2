@@ -23,6 +23,29 @@ class BatchLectureController extends Controller
         return view('admin.pages.batch_lectures.create');
     }
 
+    public function store(Request $request)
+    {
+        // dd($request);
+        $validateData = $request->validate([
+            'batchId' => 'required',
+            'courseId' => 'required',
+            'topicId' => 'required',
+        ]);
+        $batchLecture = new BatchLecture();
+        $batchLecture->batch_id = $request->batchId;
+        $batchLecture->course_id = $request->courseId;
+        $batchLecture->topic_id = $request->topicId;
+        $batchLecture->status = 1;
+        $save = $batchLecture->save();
+        if ($save) {
+            session()->flash('status', 'Batch lecture successfully added!');
+            return back();
+        } else {
+            session()->flash('failed', 'Batch lecture created failed!');
+            return back();
+        }
+    }
+
     public function destroy(BatchLecture $batchLecture)
     {
         $delete = $batchLecture->delete();

@@ -1,8 +1,8 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Batch', 
-                                    'pageName'=>'Batch', 
-                                    'secondPageName'=>'Batch'
-                                ])
+'title'=>'Batch',
+'pageName'=>'Batch',
+'secondPageName'=>'Batch'
+])
 
 @section('css1')
     <!-- DataTables -->
@@ -18,8 +18,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h1 class="card-title">Batch: <span style="color: lightskyblue">{{ $batch->title }}</span></h1> <br>
-                            <h1 class="card-title">Course: <span style="color: lightskyblue">{{ $batch->course->title }}</span></h1>
+                            <h1 class="card-title">Batch: <span style="color: lightskyblue">{{ $batch->title }}</span>
+                            </h1> <br>
+                            <h1 class="card-title">Course: <span
+                                    style="color: lightskyblue">{{ $batch->course->title }}</span></h1>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -29,8 +31,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="row">
-                           <div class="col-md-12">
-                                <button class="btn btn-info float-right mt-2 mb-2 mr-2" data-toggle="modal" data-target="#course-topic">
+                            <div class="col-md-12">
+                                <button class="btn btn-info float-right mt-2 mb-2 mr-2" data-toggle="modal"
+                                    data-target="#course-topic">
                                     <i class="fas fa-plus-square"></i>
                                     Add batch lecture
                                 </button>
@@ -38,10 +41,74 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
-                                                @livewire('batch-lecture.create', ['batch' => $batch])
+                                                {{-- @livewire('batch-lecture.create', ['batch' => $batch]) --}}
+                                                <form role="form" action="{{ route('batch-lecture.store') }}"
+                                                    method="POST">
+                                                    {{ csrf_field() }}
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="col-form-label" for="batch">Batch
+                                                                    <span class="must-filled">*</span>
+                                                                </label>
+                                                                <select class="form-control" name="batchId" disabled>
+                                                                    <option value="{{ $batch->id }}" selected>
+                                                                        {{ $batch->title }}
+                                                                    </option>
+                                                                </select>
+                                                                @error('batchId')
+                                                                    <p style="color: red;">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="col-form-label" for="course">Course
+                                                                    <span class="must-filled">*</span>
+                                                                </label>
+                                                                <select class="form-control" name="courseId" id="course"
+                                                                    disabled>
+                                                                    <option value="{{ $batch->course->id }}" selected>
+                                                                        {{ $batch->course->title }}
+                                                                    </option>
+                                                                </select>
+                                                                @error('courseId')
+                                                                    <p style="color: red;">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="topic">Topics
+                                                            <span class="must-filled">*</span>
+                                                        </label>
+                                                        <select class="form-control" name="topicId" id="topic">
+                                                            <option value="" selected hidden> Select topic </option>
+                                                            @foreach ($topics as $topic)
+                                                                <option value="{{ $topic->id }}">
+                                                                    {{ $topic->title }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('topicId')
+                                                            <p style="color: red;">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <input type="hidden" value="{{ $batch->id }}" name="batchId">
+                                                    <input type="hidden" value="{{ $batch->course->id }}"
+                                                        name="courseId">
+
+
+                                                    <div class="card-footer">
+                                                        <button type="submit" class="btn btn-primary">Create</button>
+                                                        <a href="javascript:history.back()"><button type="button"
+                                                                class="btn btn-danger">Back</button></a>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -49,9 +116,9 @@
                                     <!-- /.modal-dialog -->
                                 </div>
                                 <!-- /.modal -->
-                           </div>
+                            </div>
                         </div>
-                        <div class="card-body table-responsive p-0" style="height: auto;" >
+                        <div class="card-body table-responsive p-0" style="height: auto;">
                             <table class="table table-bordered table-striped example1">
                                 <thead>
                                     <tr>
@@ -62,17 +129,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($batch_lectures as $batch_lecture)
+                                    @foreach ($batch_lectures as $batch_lecture)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                               {{ $batch->title }}
+                                                {{ $batch->title }}
                                             </td>
                                             <td>
-                                               {{ $batch_lecture->courseTitle }}
+                                                {{ $batch_lecture->courseTitle }}
                                             </td>
                                             <td>
-                                               {{ $batch_lecture->courseTopicsTitle }}
+                                                {{ $batch_lecture->courseTopicsTitle }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -107,31 +174,130 @@
                             <h1 class="card-title">Students</h1>
 
                             <div class="card-tools">
-                               <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                  <i class="fas fa-minus"></i>
-                               </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="row">
-                           <div class="col-md-12">
-                                <div class="modal fade" id="courseLecture">
-                                    <div class="modal-dialog modal-lg">
+                            <div class="col-md-12">
+                                <button class="btn btn-info float-right mt-2 mb-2 mr-2" data-toggle="modal"
+                                    data-target="#addStudent">
+                                    <i class="fas fa-plus-square"></i>
+                                    Add student to batch
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="addStudent" tabindex="-1" role="dialog"
+                                    aria-labelledby="addStudent" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <div class="modal-body">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addStudent">Add student to batch</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
+                                            <div class="modal-body">
+                                                <form action="{{ route('addStudentToBatch', [$batch->course, $batch]) }}"
+                                                    method="POST">
+                                                    {{ csrf_field() }}
+                                                    <div class="form-group">
+                                                        <label for="studentId">Example select</label>
+                                                        <select class="form-control" id="studentId" name="studentId">
+                                                            <option value="" hidden required>
+                                                                Select Student
+                                                            </option>
+                                                            @foreach ($studentsToAdd as $studentsAdd)
+                                                                <option value="{{ $studentsAdd->id }}"
+                                                                    {{ old('studentId') == $studentsAdd->id ? 'selected' : '' }}>
+                                                                    {{ $studentsAdd->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('studentId')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="trx_id">TRX id</label>
+                                                                <input type="text" class="form-control" id="trx_id"
+                                                                    name="trx_id" required value="{{ old('trx_id') }}">
+                                                                <small id="emailHelp" class="form-text text-muted">
+                                                                    If no trx id is provided. type free
+                                                                </small>
+                                                            </div>
+                                                            @error('trx_id')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="paymentType">Payment Type</label>
+                                                                <input type="text" class="form-control" id="paymentType"
+                                                                    name="paymentType" required
+                                                                    value="{{ old('paymentType') }}">
+                                                                <small id="emailHelp" class="form-text text-muted">
+                                                                    If no payment type is provided. type free
+                                                                </small>
+                                                            </div>
+                                                            @error('paymentType')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="amount">Amount</label>
+                                                                <input type="number" class="form-control" id="amount"
+                                                                    name="amount" required value="{{ old('amount') }}">
+                                                                <small id="emailHelp" class="form-text text-muted">
+                                                                    if no amount input 0
+                                                                </small>
+                                                            </div>
+                                                            @error('amount')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="accesddedDays">Accessed Days</label>
+                                                                <input type="number" class="form-control"
+                                                                    id="accesddedDays" placeholder="e.g 30"
+                                                                    name="accesddedDays" required
+                                                                    value="{{ old('accesddedDays') }}">
+                                                                <small id="emailHelp" class="form-text text-muted">
+                                                                    Input how many days this user can access this batch
+                                                                </small>
+                                                            </div>
+                                                            @error('accesddedDays')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="note">Note</label>
+                                                        <textarea class="form-control" id="note" rows="3"
+                                                            name="note">{{ old('note') }}</textarea>
+                                                    </div>
+                                                    @error('note')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                    <button type="submit"
+                                                        class="btn btn-primary float-right">Submit</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <!-- /.modal-content -->
                                     </div>
-                                    <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.modal -->
-                           </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0" style="height: auto;" >
+                        <div class="card-body table-responsive p-0" style="height: auto;">
                             <table class="table table-bordered table-striped example1">
                                 <thead>
                                     <tr>
@@ -145,7 +311,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($students as $student)
+                                    @foreach ($students as $student)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $student->student->name }}</td>
@@ -154,11 +320,15 @@
                                             <td>{{ $student->individual_batch_days }}</td>
                                             <td>
                                                 @php
-                                                    echo $student->accessed_days - $student->individual_batch_days. ' days';
+                                                    echo $student->accessed_days - $student->individual_batch_days . ' days';
                                                 @endphp
                                             </td>
                                             <td>
-                                                <input type="checkbox" class="customControlInput" id="single-col-{{ $student->id }}" data-id="{{ $student->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $student->status ? 'checked' : '' }} >
+                                                <input type="checkbox" class="customControlInput"
+                                                    id="single-col-{{ $student->id }}" data-id="{{ $student->id }}"
+                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                    data-on="Active" data-off="InActive"
+                                                    {{ $student->status ? 'checked' : '' }}>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -192,24 +362,26 @@
     <script>
         $(function() {
             $('.customControlInput').change(function() {
-                if(confirm("Do you want to change the status?")){
-                    var status = $(this).prop('checked') == true ? 1 : 0; 
-                    var id = $(this).data('id');     
+                if (confirm("Do you want to change the status?")) {
+                    var status = $(this).prop('checked') == true ? 1 : 0;
+                    var id = $(this).data('id');
                     $.ajax({
                         type: "GET",
                         dataType: "json",
                         url: "{{ route('changeStudentStatus') }}",
-                        data: {'status': status, 'id': id},
-                        success: function(data){
+                        data: {
+                            'status': status,
+                            'id': id
+                        },
+                        success: function(data) {
                             console.log(data.success);
                         }
                     });
                 } else {
-                    if($("#single-col-"+$(this).data('id')).prop("checked") == true){
-                         $("#single-col-"+$(this).data('id')).prop('checked', false);
-                    }
-                    else if($("#single-col-"+$(this).data('id')).prop("checked") == false){
-                         $("#single-col-"+$(this).data('id')).prop('checked', true);
+                    if ($("#single-col-" + $(this).data('id')).prop("checked") == true) {
+                        $("#single-col-" + $(this).data('id')).prop('checked', false);
+                    } else if ($("#single-col-" + $(this).data('id')).prop("checked") == false) {
+                        $("#single-col-" + $(this).data('id')).prop('checked', true);
                     }
                 }
             })
@@ -222,7 +394,7 @@
 
 @section('js2')
     <script>
-        $(function () {
+        $(function() {
             $(".example1").DataTable();
             $('.example2').DataTable({
                 "paging": true,
@@ -233,6 +405,5 @@
                 "autoWidth": false,
             });
         });
-
     </script>
 @endsection
