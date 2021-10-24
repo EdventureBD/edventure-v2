@@ -27,7 +27,10 @@
             font-weight: 800;
             font-size: 110%;
         }
-
+        table.table-bordered.dataTable tbody th div, table.table-bordered.dataTable tbody td div {
+    border-bottom-width: 0;
+    max-width: 100% !important;
+    width: 100% !important;
     </style>
     @livewireStyles
 </head>

@@ -52,7 +52,7 @@ class QuestionContentTagAnalysis extends AppModel
     public function saveQuesConTagAnalysis($input)
     {
         if (empty($input['question_id'])) return;
-        $tags = (new QuestionContentTag())->where('question_id', $input['question_id'])->get();
+        $tags = (new QuestionContentTag())->where('exam_type', $input['exam_type'])->where('question_id', $input['question_id'])->get();
         if ($tags->count()) {
             foreach($tags as $tag) {
                 $tagAnalaysis = new QuestionContentTagAnalysis();
