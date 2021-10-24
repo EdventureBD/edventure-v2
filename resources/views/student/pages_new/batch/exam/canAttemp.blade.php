@@ -86,7 +86,8 @@
                                 $cellcolor = "bg-purple2";
                                 if ($n == 1) $creative = $result->cqQuestion->creativeQuestion->creative_question;
                                 $avg = 0;
-                                if ($result->question->gain_marks > 0) {
+                                
+                                if (!empty($result->question) && $result->question->gain_marks > 0) {
                                     $avg = number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2);
                                 }
                                 
