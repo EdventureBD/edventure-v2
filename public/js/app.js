@@ -2487,7 +2487,9 @@ var Dashboard = function Dashboard(_ref) {
     getProfileData();
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    getBatchResults();
+    if (state.active_batch) {
+      getBatchResults();
+    }
   }, [state.active_batch]);
 
   var getProfileData = /*#__PURE__*/function () {
@@ -2601,7 +2603,7 @@ var Dashboard = function Dashboard(_ref) {
         data: state,
         benrolement: benrolement,
         goCourse: true
-      });
+      }, "bt_en_" + benrolement.id);
     });
   }
 
@@ -2613,7 +2615,7 @@ var Dashboard = function Dashboard(_ref) {
         data: state,
         benrolement: renrolement,
         goCourse: false
-      });
+      }, "bt_en_" + renrolement.id);
     });
   }
 
@@ -2826,7 +2828,7 @@ var Sidebar = function Sidebar(props) {
           href: "",
           className: "text-white p-4 d-inline-block",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-            "class": "fas fa-signal"
+            className: "fas fa-signal"
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
@@ -2835,7 +2837,7 @@ var Sidebar = function Sidebar(props) {
           href: "",
           className: "text-white p-4 d-inline-block",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-            "class": "fas fa-calendar"
+            className: "fas fa-calendar"
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {

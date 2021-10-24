@@ -20,7 +20,9 @@ const Dashboard = ({ user }) => {
     }, []);
 
     useEffect(() => {
-        getBatchResults();
+        if (state.active_batch) {
+            getBatchResults();
+        }
     }, [state.active_batch])
 
     const getProfileData = async () => {
@@ -68,14 +70,14 @@ const Dashboard = ({ user }) => {
 
     if (batch_enrolement.length > 0) {
         enroledBatches = batch_enrolement.map(benrolement => {
-            return <CourseCard changeActiveBatch={changeActiveBatch} data={state} benrolement={benrolement} goCourse={true} />
+            return <CourseCard key={"bt_en_" + benrolement.id} changeActiveBatch={changeActiveBatch} data={state} benrolement={benrolement} goCourse={true} />
         })
     }
 
     let relatedCourses = '';
     if (related_courses.length > 0) {
         relatedCourses = related_courses.map(renrolement => {
-            return <CourseCard data={state} benrolement={renrolement} goCourse={false} />
+            return <CourseCard key={"bt_en_" + renrolement.id} data={state} benrolement={renrolement} goCourse={false} />
         })
     }
 
