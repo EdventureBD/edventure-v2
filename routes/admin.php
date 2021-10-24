@@ -172,6 +172,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('upload-content-tag-as-csv', [CSVController::class, 'contentTagImportCSV'])->name('contentTagImportCSV');
 
     Route::get('download-exam-as-csv', [CSVController::class, 'examExportCSV'])->name('examExportCSV');
+    Route::get('download-slug', [CSVController::class, 'slugExport'])->name('slugExport');
 
     // START OF IMAGE UPLOAD
     Route::resource('upload-image', ImageUploadController::class);

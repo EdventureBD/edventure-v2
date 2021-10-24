@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\ExamExport;
+use App\Exports\SlugExport;
 use Illuminate\Http\Request;
 use App\Exports\CourseExport;
 use App\Exports\ContentTagExport;
@@ -63,5 +64,14 @@ class CSVController extends Controller
         if ($excel) {
             return back()->with('status', 'Successfully uploaded content tags');
         }
+    }
+
+    public function slugExport(Request $request)
+    {
+        $request->validate([
+            'slug' => 'required|numeric',
+        ]);
+        $slug = $request->slug;
+        return Excel::download(new SlugExport($slug), 'Slugs.xlsx');
     }
 }

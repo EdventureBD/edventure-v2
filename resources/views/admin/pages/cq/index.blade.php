@@ -25,10 +25,15 @@
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#slug">
-                                            <i class="fas fa-plus-square"></i> Create a slug
-                                        </button>
+                                        {{-- <a href="{{ route('slugExport') }}">
+                                            <button class="btn btn-info">
+                                                <i class="fas fa-download"></i>&nbsp;&nbsp;Export Slug
+                                            </button>
+                                        </a> --}}
 
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#slug">
+                                            <i class="fas fa-plus-square"></i> Create slugs
+                                        </button>
                                         <div class="modal fade" id="slug">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -40,28 +45,20 @@
                                                         </button>
                                                     </div>
                                                     <di class="row">
-                                                        <div class="col-md-10">
-                                                            <div class="modal-body">
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('slugExport') }}">
+                                                                {{ csrf_field() }}
                                                                 <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <div class="custom-file">
-                                                                            @php
-                                                                                $slug = (string) Str::uuid();
-                                                                            @endphp
-                                                                            <input class="form-control form-control-lg"
-                                                                                type="text" readonly
-                                                                                value="{{ $slug }}" id="copy"
-                                                                                style="width: 100%;">
-                                                                        </div>
-                                                                    </div>
+                                                                    <label for="slug">Slug Creations</label>
+                                                                    <input class="form-control form-control-lg"
+                                                                        type="number" name="slug" id="slug" required>
+                                                                    <small class="form-text text-muted">
+                                                                        Enter how many slugs do you need
+                                                                    </small>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 align-items-center justify-content-between">
-                                                            <button value="copy" onclick="copyFunction('copy')"
-                                                                type="button" class="btn btn-block btn-info">
-                                                                <i class="fas fa-copy"></i> Copy
-                                                            </button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary float-right">Export</button>
+                                                            </form>
                                                         </div>
                                                     </di>
                                                 </div>
@@ -176,8 +173,7 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Delete cq
-                                                                        {{ $cq->question }}</h4>
+                                                                    <h4 class="modal-title">Delete cq</h4>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -192,10 +188,11 @@
                                                                     <form
                                                                         action="{{ route('cq.destroy', [$exam->slug, $cq->slug]) }}"
                                                                         method="POST">
-                                                                        @csrf
+                                                                        {{ csrf_field() }}
                                                                         @method('delete')
                                                                         <button type="submit"
-                                                                            class="btn btn-outline-light">Delete</button>
+                                                                            class="btn btn-outline-light">Delete
+                                                                        </button>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -272,15 +269,5 @@
                 "autoWidth": false,
             });
         });
-
-        function copyFunction(id) {
-            console.log(id);
-            var copyText = document.getElementById(id);
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            // alert("Copied the text: " + copyText.value);
-            window.location.reload();
-        }
     </script>
 @endsection
