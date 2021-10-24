@@ -46,7 +46,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><strong>Account</strong></div>
-                                <a class="dropdown-item" href="#">My
+                                <a class="dropdown-item" href="{{route('profile', auth()->user()->id)}}">My
                                     Dashboard</a>
                                 <a class="dropdown-item" href="#">All courses</a>
                                 
