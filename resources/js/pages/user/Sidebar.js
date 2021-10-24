@@ -7,10 +7,10 @@ const Sidebar = props => {
                     <a href="" className="text-white p-4 d-inline-block"><i className="fas fa-th-large"></i></a>
                 </li>
                 <li className="opacity-50">
-                    <a href="" className="text-white p-4 d-inline-block"><i class="fas fa-signal"></i></a>
+                    <a href="" className="text-white p-4 d-inline-block"><i className="fas fa-signal"></i></a>
                 </li>
                 <li className="opacity-50">
-                    <a href="" className="text-white p-4 d-inline-block"><i class="fas fa-calendar"></i></a>
+                    <a href="" className="text-white p-4 d-inline-block"><i className="fas fa-calendar"></i></a>
                 </li>
                 <li className="opacity-50">
                     <a href="" className="text-white p-4 d-inline-block"><i className="fas fa-cog"></i></a>

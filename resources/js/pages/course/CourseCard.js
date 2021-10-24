@@ -1,11 +1,11 @@
 import React from "react";
 
-const CourseCard = ({benrolement, goCourse=false}) => {
-    console.log(goCourse);
+const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
+    // console.log(benrolement);
     const courseUrl = "/batch/" + goCourse === true ? benrolement.batch.slug : benrolement.slug;
     const course = goCourse ? benrolement.course : benrolement;
-    return <div className="single-course bshadow bradius-15 mb-4 p-4">
-    <a href={courseUrl} className="avatar avatar-4by3 mr-12pt">
+
+    return <div className={`single-course bshadow bradius-15 mb-4 c-point p-4 ${ data.active_batch.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""}`} onClick={()=>changeActiveBatch(benrolement)}>
         <div className="row">
             <div className="col-lg-4">
                 {course.icon ?
@@ -38,7 +38,6 @@ const CourseCard = ({benrolement, goCourse=false}) => {
                 <a href={courseUrl} className="btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4">{goCourse ? "Go to course" : "Enroll this course"}</a>
             </div>
         </div>
-    </a>
 </div>;
     
 

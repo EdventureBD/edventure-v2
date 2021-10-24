@@ -1858,6 +1858,37 @@ ProfileApis.profile = /*#__PURE__*/function () {
   };
 }();
 
+ProfileApis.batchResults = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+  var params,
+      url,
+      res,
+      _args2 = arguments;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          params = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : null;
+          url = "/batch-results";
+          _context2.next = 4;
+          return axios.get(url, {
+            params: params
+          }).then(function (response) {
+            return response.data;
+          })["catch"](function (error) {
+            return [];
+          });
+
+        case 4:
+          res = _context2.sent;
+          return _context2.abrupt("return", res);
+
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _callee2);
+}));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileApis);
 
 /***/ }),
@@ -2076,70 +2107,71 @@ __webpack_require__.r(__webpack_exports__);
 var CourseCard = function CourseCard(_ref) {
   var benrolement = _ref.benrolement,
       _ref$goCourse = _ref.goCourse,
-      goCourse = _ref$goCourse === void 0 ? false : _ref$goCourse;
-  console.log(goCourse);
+      goCourse = _ref$goCourse === void 0 ? false : _ref$goCourse,
+      data = _ref.data,
+      changeActiveBatch = _ref.changeActiveBatch;
+  // console.log(benrolement);
   var courseUrl = "/batch/" + goCourse === true ? benrolement.batch.slug : benrolement.slug;
   var course = goCourse ? benrolement.course : benrolement;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "single-course bshadow bradius-15 mb-4 p-4",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-      href: courseUrl,
-      className: "avatar avatar-4by3 mr-12pt",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "row",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "col-lg-4",
-          children: course.icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-            src: "/storage/" + course.icon,
-            className: "rounded-circle img-fluid",
-            alt: "course"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-            src: "/student/public/images/paths/mailchimp_430x168.png",
-            className: " rounded-circle img-fluid",
-            alt: "course"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-          className: "col-lg-8",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
-            className: "text-xsm text-black fw-600 mb-2",
-            children: course.title
-          }), goCourse ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h5", {
-            className: "text-xxsm text-black fw-600 mb-3",
-            children: ["Batch: ", benrolement.batch.title]
-          }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "row text-gray text-xxxsm",
+    className: "single-course bshadow bradius-15 mb-4 c-point p-4 ".concat(data.active_batch.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""),
+    onClick: function onClick() {
+      return changeActiveBatch(benrolement);
+    },
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "col-lg-4",
+        children: course.icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+          src: "/storage/" + course.icon,
+          className: "rounded-circle img-fluid",
+          alt: "course"
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+          src: "/student/public/images/paths/mailchimp_430x168.png",
+          className: " rounded-circle img-fluid",
+          alt: "course"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "col-lg-8",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
+          className: "text-xsm text-black fw-600 mb-2",
+          children: course.title
+        }), goCourse ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h5", {
+          className: "text-xxsm text-black fw-600 mb-3",
+          children: ["Batch: ", benrolement.batch.title]
+        }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "row text-gray text-xxxsm",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "col-6 pr-0",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-6 pr-0",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-                className: "mb-3",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-                  className: "fas fa-book-open"
-                }), " 24 Lesson"]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-                  className: "fas fa-file-alt"
-                }), " 6 Assignments"]
-              })]
+              className: "mb-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                className: "fas fa-book-open"
+              }), " 24 Lesson"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-6 pr-0",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-                className: "mb-3",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-                  className: "far fa-clock"
-                }), " ", course.duration, " Months"]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-                  className: "fas fa-user-friends"
-                }), " 312 Students"]
-              })]
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                className: "fas fa-file-alt"
+              }), " 6 Assignments"]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: courseUrl,
-            className: "btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4",
-            children: goCourse ? "Go to course" : "Enroll this course"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "col-6 pr-0",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "mb-3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                className: "far fa-clock"
+              }), " ", course.duration, " Months"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                className: "fas fa-user-friends"
+              }), " 312 Students"]
+            })]
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          href: courseUrl,
+          className: "btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4",
+          children: goCourse ? "Go to course" : "Enroll this course"
         })]
-      })
+      })]
     })
   });
 };
@@ -2445,7 +2477,7 @@ var Dashboard = function Dashboard(_ref) {
     batch_enrolement: [],
     related_courses: [],
     results: null,
-    active_course: null
+    active_batch: null
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -2454,6 +2486,11 @@ var Dashboard = function Dashboard(_ref) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getProfileData();
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (state.active_batch) {
+      getBatchResults();
+    }
+  }, [state.active_batch]);
 
   var getProfileData = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2472,8 +2509,8 @@ var Dashboard = function Dashboard(_ref) {
                 setState({
                   batch_enrolement: res.data.batchStudentEnrollment,
                   related_courses: res.data.related_courses,
-                  results: res.data.results,
-                  active_course: res.data.batchStudentEnrollment[0]
+                  // results: res.data.results,
+                  active_batch: res.data.batchStudentEnrollment[0]
                 });
               }
 
@@ -2488,34 +2525,50 @@ var Dashboard = function Dashboard(_ref) {
     return function getProfileData() {
       return _ref2.apply(this, arguments);
     };
-  }(); // console.log(course_enrolement, batch_enrolement, user);
-  // let enroledCourses = <div className="single-course">
-  //     <a href="#" className="avatar avatar-4by3 overlay overlay--primary mr-12pt">
-  //         <span className="overlay__content"></span>
-  //     </a>
-  //     <div className="flex">
-  //         <a className="card-title mb-4pt" href="#">No Enrolled Courses</a>
-  //     </div>
-  // </div>;
-  // if (course_enrolement.length > 0) {
-  //     enroledCourses = course_enrolement.map(cenrolement => {
-  //         const courseUrl = "/course/course-preview/" + cenrolement.course.slug;
-  //         return <div className="single-course">
-  //             <a href={courseUrl} className="avatar avatar-4by3 mr-12pt">
-  //                 {cenrolement.course.logo ?
-  //                     <img src={"/storage/" + cenrolement.course.logo} className="avatar-img rounded" alt="course" />
-  //                     :
-  //                     <img src="/student/public/images/paths/mailchimp_430x168.png" className="avatar-img rounded" alt="course" />
-  //                 }
-  //                 <span className="overlay__content"></span>
-  //             </a>
-  //             <div className="flex">
-  //                 <a className="card-title mb-4pt" href={courseUrl}>{cenrolement.course.title}</a>
-  //             </div>
-  //         </div>
-  //     })
-  // }
+  }();
 
+  var getBatchResults = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _apis_ProfileApis__WEBPACK_IMPORTED_MODULE_3__["default"].batchResults({
+                active_batch_id: state.active_batch.batch_id
+              });
+
+            case 2:
+              res = _context2.sent;
+
+              if (res.success) {
+                setState({
+                  // batch_enrolement: res.data.batchStudentEnrollment,
+                  // related_courses: res.data.related_courses,
+                  results: res.data.batch_results // active_batch: res.data.batchStudentEnrollment[0]
+
+                });
+              }
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getBatchResults() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var changeActiveBatch = function changeActiveBatch(batch) {
+    setState({
+      active_batch: batch
+    });
+  };
 
   var batch_enrolement = state.batch_enrolement,
       related_courses = state.related_courses,
@@ -2546,9 +2599,11 @@ var Dashboard = function Dashboard(_ref) {
   if (batch_enrolement.length > 0) {
     enroledBatches = batch_enrolement.map(function (benrolement) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_course_CourseCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        changeActiveBatch: changeActiveBatch,
+        data: state,
         benrolement: benrolement,
         goCourse: true
-      });
+      }, "bt_en_" + benrolement.id);
     });
   }
 
@@ -2557,9 +2612,10 @@ var Dashboard = function Dashboard(_ref) {
   if (related_courses.length > 0) {
     relatedCourses = related_courses.map(function (renrolement) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_course_CourseCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        data: state,
         benrolement: renrolement,
         goCourse: false
-      });
+      }, "bt_en_" + renrolement.id);
     });
   }
 
@@ -2704,7 +2760,7 @@ var Dashboard = function Dashboard(_ref) {
                   })]
                 })]
               })]
-            }), results ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            }), results && results.mcq.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
               className: " mt-5",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h3", {
                 className: "text-sm text-black fw-600 mb-3",
@@ -2772,7 +2828,7 @@ var Sidebar = function Sidebar(props) {
           href: "",
           className: "text-white p-4 d-inline-block",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-            "class": "fas fa-signal"
+            className: "fas fa-signal"
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
@@ -2781,7 +2837,7 @@ var Sidebar = function Sidebar(props) {
           href: "",
           className: "text-white p-4 d-inline-block",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-            "class": "fas fa-calendar"
+            className: "fas fa-calendar"
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {

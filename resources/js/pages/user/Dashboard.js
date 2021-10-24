@@ -12,12 +12,18 @@ const Dashboard = ({ user }) => {
             batch_enrolement: [],
             related_courses: [],
             results: null,
-            active_course: null,
+            active_batch: null,
         });
 
     useEffect(() => {
         getProfileData();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (state.active_batch) {
+            getBatchResults();
+        }
+    }, [state.active_batch])
 
     const getProfileData = async () => {
         const res = await ProfileApis.profile(user.id);
@@ -25,39 +31,29 @@ const Dashboard = ({ user }) => {
             setState({
                 batch_enrolement: res.data.batchStudentEnrollment,
                 related_courses: res.data.related_courses,
-                results: res.data.results,
-                active_course: res.data.batchStudentEnrollment[0]
+                // results: res.data.results,
+                active_batch: res.data.batchStudentEnrollment[0]
+            });
+        }
+    }
+
+    const getBatchResults = async () => {
+        const res = await ProfileApis.batchResults({ active_batch_id: state.active_batch.batch_id });
+        if (res.success) {
+            setState({
+                // batch_enrolement: res.data.batchStudentEnrollment,
+                // related_courses: res.data.related_courses,
+                results: res.data.batch_results,
+                // active_batch: res.data.batchStudentEnrollment[0]
             })
         }
     }
 
-    // console.log(course_enrolement, batch_enrolement, user);
-    // let enroledCourses = <div className="single-course">
-    //     <a href="#" className="avatar avatar-4by3 overlay overlay--primary mr-12pt">
-    //         <span className="overlay__content"></span>
-    //     </a>
-    //     <div className="flex">
-    //         <a className="card-title mb-4pt" href="#">No Enrolled Courses</a>
-    //     </div>
-    // </div>;
-    // if (course_enrolement.length > 0) {
-    //     enroledCourses = course_enrolement.map(cenrolement => {
-    //         const courseUrl = "/course/course-preview/" + cenrolement.course.slug;
-    //         return <div className="single-course">
-    //             <a href={courseUrl} className="avatar avatar-4by3 mr-12pt">
-    //                 {cenrolement.course.logo ?
-    //                     <img src={"/storage/" + cenrolement.course.logo} className="avatar-img rounded" alt="course" />
-    //                     :
-    //                     <img src="/student/public/images/paths/mailchimp_430x168.png" className="avatar-img rounded" alt="course" />
-    //                 }
-    //                 <span className="overlay__content"></span>
-    //             </a>
-    //             <div className="flex">
-    //                 <a className="card-title mb-4pt" href={courseUrl}>{cenrolement.course.title}</a>
-    //             </div>
-    //         </div>
-    //     })
-    // }
+    const changeActiveBatch = (batch) => {
+        setState({
+            active_batch: batch
+        })
+    }
 
     const { batch_enrolement, related_courses, results } = state;
 
@@ -74,14 +70,14 @@ const Dashboard = ({ user }) => {
 
     if (batch_enrolement.length > 0) {
         enroledBatches = batch_enrolement.map(benrolement => {
-            return <CourseCard benrolement={benrolement} goCourse={true} />
+            return <CourseCard key={"bt_en_" + benrolement.id} changeActiveBatch={changeActiveBatch} data={state} benrolement={benrolement} goCourse={true} />
         })
     }
 
     let relatedCourses = '';
     if (related_courses.length > 0) {
         relatedCourses = related_courses.map(renrolement => {
-            return <CourseCard benrolement={renrolement} goCourse={false} />
+            return <CourseCard key={"bt_en_" + renrolement.id} data={state} benrolement={renrolement} goCourse={false} />
         })
     }
 
@@ -96,12 +92,6 @@ const Dashboard = ({ user }) => {
                                 <h2 className="text-black text-md">Hello {user.name}</h2>
                                 <p className="text-gray text-xxsm">Nice to have you back, what an exciting day! Get ready and continue your lesson today.</p>
                             </div>
-                            {/* <div className="page-headline text-left">
-                    <h2 className="text-xsm text-gray">Your enrolled courses</h2>
-                </div>
-                <div className="mb-4">
-                {enroledCourses}
-                </div> */}
 
                             <div className="page-headline text-left">
                                 <h2 className="text-sm mb-3 text-black fw-600">Enrolled Courses</h2>
@@ -165,7 +155,7 @@ const Dashboard = ({ user }) => {
 
                             </div>
                         </div>
-                        {results ? <div className=" mt-5">
+                        {results && results.mcq.length > 0 ? <div className=" mt-5">
                             <h3 className="text-sm text-black fw-600 mb-3">Progress curve</h3>
                             <StudentChart results={results} />
                         </div> : ''}

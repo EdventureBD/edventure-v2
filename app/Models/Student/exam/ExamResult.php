@@ -38,9 +38,9 @@ class ExamResult extends AppModel
         return $this->belongsTo(User::class);
     }
 
-    public function getExamResultsForDashboard($user_id)
+    public function getExamResultsForDashboard($user_id, $batch_id)
     {
-        $results = $this->with('exam')->where('student_id', $user_id)->get();
+        $results = $this->with('exam')->where('batch_id', $batch_id)->where('student_id', $user_id)->get();
         $mcq_labels = [];
         $cq_labels = [];
         $mcq = [];

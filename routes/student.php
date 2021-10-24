@@ -11,6 +11,8 @@ use App\Http\Controllers\Student\AccountDetailsController;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile/{user_id}', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/batch-results', [AccountDetailsController::class, 'batchResults'])->name('batch-results'); //getting batch results
+
     Route::get('/edit-profile/{user_id}', [AccountDetailsController::class, 'edit'])->name('edit-profile');
     Route::post('/edit-profile/{user_id}', [AccountDetailsController::class, 'update'])->name('edit-profile');
 
