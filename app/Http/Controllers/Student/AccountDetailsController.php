@@ -38,21 +38,28 @@ class AccountDetailsController extends Controller
 
                 $related_courses = (new Course())->getRelatedCourses($course_cat_ids, $course_ids, true);
 
-                $exam_results = (new ExamResult())->getExamResultsForDashboard(Auth::user()->id);
-
-                return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment, 'related_courses' => $related_courses, 'results' => $exam_results]);
+                return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment, 'related_courses' => $related_courses]);
             } else {
                 return view('student.pages_new.user.profile');
             }
-            // return view('student.pages_new.user.profile', compact(
-            //     'user',
-            //     'batchStudentEnrollment',
-            //     'batchStudentEnroll',
-            //     'batchStudent'
-            // ));
         } else {
             abort(401);
         }
+    }
+
+    /*
+    * batch wise result for dashboard
+    */
+    public function batchResults()
+    {
+        if (request()->ajax()) {
+            if (request()->active_batch_id) {
+                $exam_results = (new ExamResult())->getExamResultsForDashboard(Auth::user()->id, request()->active_batch_id);
+                return $this->sendResponse(['batch_results' => $exam_results]);
+            }
+            return $this->sendError(['Not found']);
+        }
+        abort(401);
     }
 
     public function edit($id)
