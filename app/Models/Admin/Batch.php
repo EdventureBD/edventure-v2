@@ -8,9 +8,10 @@ use App\Models\Admin\BatchLecture;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Admin\BatchStudentEnrollment;
+use App\Models\AppModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Batch extends Model
+class Batch extends AppModel
 {
     use HasFactory, LogsActivity;
     protected static $logName = 'Batch';
