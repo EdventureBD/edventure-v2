@@ -492,11 +492,11 @@ class CQController extends Controller
         return redirect()->route('exam.show', $request->slug);
     }
 
-    public function destroy(Exam $exam, CQ $cq)
+    public function destroy(Exam $exam, CreativeQuestion $cq)
     {
-        $exam = Exam::where('id', $cq->exam_id)->first();
-        $delete = $cq->delete();
-        if ($delete) {
+        $deleteCreativeQuestion = $cq->delete();
+
+        if ($deleteCreativeQuestion) {
             return redirect()->route('exam.show', $exam)->with('status', 'CQ deleted successfully!');
         } else {
             return redirect()->route('exam.show', $exam)->with('failed', 'CQ deletion failed!');
