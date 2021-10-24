@@ -4,6 +4,7 @@ import ProfileApis from '../../apis/ProfileApis';
 import StudentChart from './StudentChart';
 import Sidebar from './Sidebar';
 import CourseCard from '../course/CourseCard';
+import Analysis from './Analysis';
 
 const Dashboard = ({ user }) => {
     const [state, setState] = useReducer((state, newState) => ({ ...state, ...newState }),
@@ -13,6 +14,7 @@ const Dashboard = ({ user }) => {
             related_courses: [],
             results: null,
             active_batch: null,
+            tag_reports: null
         });
 
     useEffect(() => {
@@ -44,6 +46,7 @@ const Dashboard = ({ user }) => {
                 // batch_enrolement: res.data.batchStudentEnrollment,
                 // related_courses: res.data.related_courses,
                 results: res.data.batch_results,
+                tag_reports: res.data.tag_reports
                 // active_batch: res.data.batchStudentEnrollment[0]
             })
         }
@@ -55,7 +58,7 @@ const Dashboard = ({ user }) => {
         })
     }
 
-    const { batch_enrolement, related_courses, results } = state;
+    const { batch_enrolement, related_courses, results, tag_reports, active_batch } = state;
 
     if (batch_enrolement?.length == 0) return <div className="w-100 h-100 p-5 text-center text-md">Loading...</div>;
 
@@ -111,10 +114,10 @@ const Dashboard = ({ user }) => {
                                     <img src={user.image ? "/storage/" + user.image : "/admin/dist/img/avatar.png"} className="w-10 img-thumbnail bshadow bradius-10" alt="" />
                                 </div>
                                 <h3 className="pt-2 text-sm text-black fw-600 mb-4">{user.name}</h3>
-                                <div className="p-3 bshadow text-xxsm text-gray bradius-10 text-left bg-purple-light-50">
+                                {/* <div className="p-3 bshadow text-xxsm text-gray bradius-10 text-left bg-purple-light-50">
                                     <i className="fas fa-book-open"></i><br />
                                     <span className="text-purple fw-600">{batch_enrolement.length}</span> courses
-                                </div>
+                                </div> */}
                             </div>
                             <div className="col-7">
                                 <div className="p-3 bshadow text-xxsm text-gray bradius-10 d-flex justify-content-between">
@@ -126,35 +129,9 @@ const Dashboard = ({ user }) => {
                                         <h4 className="text-purple text-md fw-600"># 12th</h4>
                                     </div>
                                 </div>
-                                <div className="row mt-4">
-                                    <div className="col-lg-6 mb-lg-0 mb-4">
-                                        <div className="p-3 bshadow text-xxsm text-gray bradius-10 bg-green">
-                                            <div className="d-flex justify-content-between">
-                                                <img src="/img/profile/strenth.svg" className="d-block" alt="" />
-                                                <a href="#" className="d-block">
-                                                    <img src="/img/profile/link.svg" className="d-block" alt="" />
-                                                </a>
-                                            </div>
-                                            <h3 className="text-white text-xsm mt-3 fw-600">Strength</h3>
-                                            <p className="text-white text-xxsm mb-0">ক্ষমতা,কাজ,ভেক্টর</p>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="p-3 bshadow text-xxsm text-gray bradius-10 bg-red">
-                                            <div className="d-flex justify-content-between">
-                                                <img src="/img/profile/weekness.svg" className="d-block" alt="" />
-                                                <a href="#" className="d-block">
-                                                    <img src="/img/profile/link.svg" className="d-block" alt="" />
-                                                </a>
-                                            </div>
-                                            <h3 className="text-white text-xsm mt-3 fw-600">Weekness</h3>
-                                            <p className="text-white text-xxsm mb-0">ক্ষমতা,কাজ,ভেক্টর</p>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
+                        {tag_reports ? <Analysis {...tag_reports} course={active_batch.course} /> : ""}
                         {results && results.mcq.length > 0 ? <div className=" mt-5">
                             <h3 className="text-sm text-black fw-600 mb-3">Progress curve</h3>
                             <StudentChart results={results} />

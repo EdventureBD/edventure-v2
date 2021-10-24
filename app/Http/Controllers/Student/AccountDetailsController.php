@@ -6,9 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Batch;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\Course;
+use App\Models\Admin\CourseTopic;
 use App\Models\Student\exam\ExamResult;
+use App\Models\Student\exam\QuestionContentTagAnalysis;
 use App\Models\Student\StudentDetails;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,12 +57,30 @@ class AccountDetailsController extends Controller
     {
         if (request()->ajax()) {
             if (request()->active_batch_id) {
-                $exam_results = (new ExamResult())->getExamResultsForDashboard(Auth::user()->id, request()->active_batch_id);
-                return $this->sendResponse(['batch_results' => $exam_results]);
+                $batch_id = request()->active_batch_id;
+                $tag_reports = (new QuestionContentTagAnalysis())->getTagAnalysisReport(Auth::user()->id, $batch_id);
+                $exam_results = (new ExamResult())->getExamResultsForDashboard(Auth::user()->id, $batch_id);
+                return $this->sendResponse(['batch_results' => $exam_results, 'tag_reports' => $tag_reports]);
             }
             return $this->sendError(['Not found']);
         }
         abort(401);
+    }
+
+    /**
+     * Tag analysis report
+     * 
+     */
+
+    public function tagAnalysisReport(Course $course)
+    {
+        // dd($course);
+        // $course->topic;
+        $course_topics = (new CourseTopic())->where("course_id", $course->id)->get();
+        // dd($course_topics);
+        $tag_details = (new QuestionContentTagAnalysis())->getTagAnalysisReport(Auth::user()->id, null, $course->id);
+        // dd($tag_details);
+        return view('student.pages_new.user.analysis', compact('course', 'course_topics', 'tag_details'));
     }
 
     public function edit($id)
