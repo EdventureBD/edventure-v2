@@ -40,6 +40,7 @@ class QuestionImport implements ToModel, WithHeadingRow
                 'field3' => $row['field3'],
                 'field4' => $row['field4'],
                 'answer' => $row['answer'],
+                'explanation' => $row['explanation'],
                 'exam_id' => $this->exam->id,
                 'number_of_attempt' => 0,
                 'gain_marks' => 0,
