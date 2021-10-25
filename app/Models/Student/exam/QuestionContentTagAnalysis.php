@@ -108,8 +108,8 @@ class QuestionContentTagAnalysis extends AppModel
         $cq_weakness = [];
 
         foreach ($gain_marks as $tag => $value) {
-            $mcq = round(($value[Edvanture::MCQ] * 100) / $total_marks[$tag][Edvanture::MCQ]);
-            $cq = round(($value[Edvanture::CQ] * 100) / $total_marks[$tag][Edvanture::CQ]);
+            $mcq = !empty($value[Edvanture::MCQ]) ? round(($value[Edvanture::MCQ] * 100) / $total_marks[$tag][Edvanture::MCQ]) : 0;
+            $cq = !empty($value[Edvanture::CQ]) ? round(($value[Edvanture::CQ] * 100) / $total_marks[$tag][Edvanture::CQ]) : 0;
             if ($mcq >= 80) array_push($mcq_strength, $tag);
             else array_push($mcq_weakness, $tag);
 
