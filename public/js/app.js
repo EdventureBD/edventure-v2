@@ -1819,45 +1819,37 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var ProfileApis = {};
+ProfileApis.profile = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+  var params,
+      url,
+      res,
+      _args = arguments;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          params = _args.length > 0 && _args[0] !== undefined ? _args[0] : null;
+          url = "/profile";
+          _context.next = 4;
+          return axios.get(url, {
+            params: params
+          }).then(function (response) {
+            return response.data;
+          })["catch"](function (error) {
+            return [];
+          });
 
-ProfileApis.profile = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(user_id) {
-    var params,
-        url,
-        res,
-        _args = arguments;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            params = _args.length > 1 && _args[1] !== undefined ? _args[1] : null;
-            url = "/profile/" + user_id;
-            _context.next = 4;
-            return axios.get(url, {
-              params: params
-            }).then(function (response) {
-              return response.data;
-            })["catch"](function (error) {
-              return [];
-            });
+        case 4:
+          res = _context.sent;
+          return _context.abrupt("return", res);
 
-          case 4:
-            res = _context.sent;
-            return _context.abrupt("return", res);
-
-          case 6:
-          case "end":
-            return _context.stop();
-        }
+        case 6:
+        case "end":
+          return _context.stop();
       }
-    }, _callee);
-  }));
-
-  return function (_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
+    }
+  }, _callee);
+}));
 ProfileApis.batchResults = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
   var params,
       url,
@@ -2105,6 +2097,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CourseCard = function CourseCard(_ref) {
+  var _data$active_batch;
+
   var benrolement = _ref.benrolement,
       _ref$goCourse = _ref.goCourse,
       goCourse = _ref$goCourse === void 0 ? false : _ref$goCourse,
@@ -2114,7 +2108,7 @@ var CourseCard = function CourseCard(_ref) {
   var courseUrl = "/batch/" + goCourse === true ? benrolement.batch.slug : benrolement.slug;
   var course = goCourse ? benrolement.course : benrolement;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "single-course bshadow bradius-15 mb-4 c-point p-4 ".concat(data.active_batch.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""),
+    className: "single-course bshadow bradius-15 mb-4 c-point p-4 ".concat(((_data$active_batch = data.active_batch) === null || _data$active_batch === void 0 ? void 0 : _data$active_batch.batch_id) == benrolement.batch_id ? "bg-purple-light-50" : ""),
     onClick: function onClick() {
       return changeActiveBatch(benrolement);
     },
@@ -2632,6 +2626,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var Dashboard = function Dashboard(_ref) {
   var user = _ref.user;
 
@@ -2639,7 +2634,7 @@ var Dashboard = function Dashboard(_ref) {
     return _objectSpread(_objectSpread({}, state), newState);
   }, {
     user: user,
-    batch_enrolement: [],
+    batch_enrolement: null,
     related_courses: [],
     results: null,
     active_batch: null,
@@ -2666,7 +2661,7 @@ var Dashboard = function Dashboard(_ref) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _apis_ProfileApis__WEBPACK_IMPORTED_MODULE_3__["default"].profile(user.id);
+              return _apis_ProfileApis__WEBPACK_IMPORTED_MODULE_3__["default"].profile();
 
             case 2:
               res = _context.sent;
@@ -2742,9 +2737,13 @@ var Dashboard = function Dashboard(_ref) {
       results = state.results,
       tag_reports = state.tag_reports,
       active_batch = state.active_batch;
-  if ((batch_enrolement === null || batch_enrolement === void 0 ? void 0 : batch_enrolement.length) == 0) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+  if (!batch_enrolement) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
     className: "w-100 h-100 p-5 text-center text-md",
-    children: "Loading..."
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+      height: "100px",
+      src: "/img/landing/loading.gif",
+      alt: ""
+    })
   });
 
   var enroledBatches = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -2765,7 +2764,7 @@ var Dashboard = function Dashboard(_ref) {
     })]
   });
 
-  if (batch_enrolement.length > 0) {
+  if ((batch_enrolement === null || batch_enrolement === void 0 ? void 0 : batch_enrolement.length) > 0) {
     enroledBatches = batch_enrolement.map(function (benrolement) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_course_CourseCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
         changeActiveBatch: changeActiveBatch,
@@ -2808,13 +2807,15 @@ var Dashboard = function Dashboard(_ref) {
                   className: "text-gray text-xxsm",
                   children: "Nice to have you back, what an exciting day! Get ready and continue your lesson today."
                 })]
+              }), (batch_enrolement === null || batch_enrolement === void 0 ? void 0 : batch_enrolement.length) > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+                  className: "page-headline text-left",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
+                    className: "text-sm mb-3 text-black fw-600",
+                    children: "Enrolled Courses"
+                  })
+                }), enroledBatches]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                className: "page-headline text-left",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
-                  className: "text-sm mb-3 text-black fw-600",
-                  children: "Enrolled Courses"
-                })
-              }), enroledBatches, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
                 className: "page-headline text-left",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
                   className: "text-sm mb-3 text-black fw-600",
@@ -2866,7 +2867,7 @@ var Dashboard = function Dashboard(_ref) {
               })]
             }), tag_reports ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Analysis__WEBPACK_IMPORTED_MODULE_7__["default"], _objectSpread(_objectSpread({}, tag_reports), {}, {
               course: active_batch.course
-            })) : "", results && results.mcq.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            })) : "", results && (results.mcq.length > 0 || results.cq.length > 0) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: " mt-5",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
                 className: "text-sm text-black fw-600 mb-3",

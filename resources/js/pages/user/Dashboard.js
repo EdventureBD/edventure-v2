@@ -10,7 +10,7 @@ const Dashboard = ({ user }) => {
     const [state, setState] = useReducer((state, newState) => ({ ...state, ...newState }),
         {
             user: user,
-            batch_enrolement: [],
+            batch_enrolement: null,
             related_courses: [],
             results: null,
             active_batch: null,
@@ -28,7 +28,7 @@ const Dashboard = ({ user }) => {
     }, [state.active_batch])
 
     const getProfileData = async () => {
-        const res = await ProfileApis.profile(user.id);
+        const res = await ProfileApis.profile();
         if (res.success) {
             setState({
                 batch_enrolement: res.data.batchStudentEnrollment,
@@ -60,7 +60,7 @@ const Dashboard = ({ user }) => {
 
     const { batch_enrolement, related_courses, results, tag_reports, active_batch } = state;
 
-    if (batch_enrolement?.length == 0) return <div className="w-100 h-100 p-5 text-center text-md">Loading...</div>;
+    if (!batch_enrolement) return <div className="w-100 h-100 p-5 text-center text-md"><img height="100px" src="/img/landing/loading.gif" alt="" /></div>;
 
     let enroledBatches = <div className="single-course">
         <a href="#" className="avatar avatar-4by3 mr-12pt">
@@ -71,7 +71,7 @@ const Dashboard = ({ user }) => {
         </div>
     </div>;
 
-    if (batch_enrolement.length > 0) {
+    if (batch_enrolement?.length > 0) {
         enroledBatches = batch_enrolement.map(benrolement => {
             return <CourseCard key={"bt_en_" + benrolement.id} changeActiveBatch={changeActiveBatch} data={state} benrolement={benrolement} goCourse={true} />
         })
@@ -96,10 +96,10 @@ const Dashboard = ({ user }) => {
                                 <p className="text-gray text-xxsm">Nice to have you back, what an exciting day! Get ready and continue your lesson today.</p>
                             </div>
 
-                            <div className="page-headline text-left">
+                            {batch_enrolement?.length > 0 && <><div className="page-headline text-left">
                                 <h2 className="text-sm mb-3 text-black fw-600">Enrolled Courses</h2>
                             </div>
-                            {enroledBatches}
+                            {enroledBatches}</>}
                             <div className="page-headline text-left">
                                 <h2 className="text-sm mb-3 text-black fw-600">Related Courses</h2>
                             </div>
@@ -132,7 +132,7 @@ const Dashboard = ({ user }) => {
                             </div>
                         </div>
                         {tag_reports ? <Analysis {...tag_reports} course={active_batch.course} /> : ""}
-                        {results && results.mcq.length > 0 ? <div className=" mt-5">
+                        {results && (results.mcq.length > 0 || results.cq.length > 0) ? <div className=" mt-5">
                             <h3 className="text-sm text-black fw-600 mb-3">Progress curve</h3>
                             <StudentChart results={results} />
                         </div> : ''}

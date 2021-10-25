@@ -17,9 +17,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountDetailsController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        if (auth()->user()->id == $id) {
+        $id = auth()->user()->id;
+        // if (auth()->user()->id == $id) {
             if (request()->ajax()) {
                 $studentDetails = StudentDetails::where('user_id', $id)->first();
                 if ($studentDetails) {
@@ -45,9 +46,9 @@ class AccountDetailsController extends Controller
             } else {
                 return view('student.pages_new.user.profile');
             }
-        } else {
-            abort(401);
-        }
+        // } else {
+        //     abort(401);
+        // }
     }
 
     /*

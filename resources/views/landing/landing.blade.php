@@ -10,7 +10,7 @@
                         নিজের মতো</h2>
                     @if (Route::has('login'))
                         @auth
-                        <a href="#" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
+                        <a href="{{route('profile')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
                         @else
                         <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
                         @endauth

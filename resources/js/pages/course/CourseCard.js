@@ -5,7 +5,7 @@ const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
     const courseUrl = "/batch/" + goCourse === true ? benrolement.batch.slug : benrolement.slug;
     const course = goCourse ? benrolement.course : benrolement;
 
-    return <div className={`single-course bshadow bradius-15 mb-4 c-point p-4 ${ data.active_batch.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""}`} onClick={()=>changeActiveBatch(benrolement)}>
+    return <div className={`single-course bshadow bradius-15 mb-4 c-point p-4 ${ data.active_batch?.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""}`} onClick={()=>changeActiveBatch(benrolement)}>
         <div className="row">
             <div className="col-lg-4">
                 {course.icon ?

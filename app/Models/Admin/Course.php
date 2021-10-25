@@ -56,11 +56,11 @@ class Course extends Model
         return $this->hasMany(BatchStudentEnrollment::class, 'course_id');
     }
 
-    public function getRelatedCourses($category_ids, $excluded_courses = null, $random = false)
+    public function getRelatedCourses($category_ids = null, $excluded_courses = null, $random = false)
     {
-        $courses = $this->whereIn('course_category_id', $category_ids);
+        $courses = !empty($category_ids) ? $this->whereIn('course_category_id', $category_ids) : $this;
         if (!empty($excluded_courses)) $courses = $courses->whereNotIn('id', $excluded_courses);
-        if ($random) return $courses->inRandomOrder(2)->get();
+        if ($random) return $courses->inRandomOrder()->take(2)->get();
         else return $courses->get();
     }
 }
