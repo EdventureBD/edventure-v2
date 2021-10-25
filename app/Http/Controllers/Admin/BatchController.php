@@ -130,4 +130,9 @@ class BatchController extends Controller
         );
         return redirect()->route('batch.show', $batch)->with('status', 'Course category successfully deleted!');
     }
+
+    public function batchStudent()
+    {
+        return view('admin.pages.batch.batch_student');
+    }
 }

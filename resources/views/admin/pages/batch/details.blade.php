@@ -305,7 +305,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         {{-- <th>Contact</th> --}}
-                                        <th>Indeividual Batch Days</th>
+                                        <th>Individual Batch Days</th>
                                         <th>Reamining Batch Days</th>
                                         <th>Status</th>
                                     </tr>
@@ -339,7 +339,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         {{-- <th>Contact</th> --}}
-                                        <th>Indeividual Batch Days</th>
+                                        <th>Individual Batch Days</th>
                                         <th>Reamining Batch Days</th>
                                         <th>Status</th>
                                     </tr>

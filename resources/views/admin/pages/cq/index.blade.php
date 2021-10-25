@@ -39,7 +39,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">Created Slug</h4>
+                                                        <h4 class="modal-title">Create Slug</h4>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -58,7 +58,8 @@
                                                                     </small>
                                                                 </div>
                                                                 <button type="submit"
-                                                                    class="btn btn-primary float-right">Export</button>
+                                                                    class="btn btn-primary float-right">Create &
+                                                                    Export</button>
                                                             </form>
                                                         </div>
                                                     </di>
@@ -167,10 +168,13 @@
                                                     </a>
                                                     <a class="mr-1" href="#deletecq{{ $cq->id }}"
                                                         data-toggle="modal" title="Delete">
-                                                        <button class="btn btn-danger"><i
-                                                                class="far fa-trash-alt"></i></button>
+                                                        <button class="btn btn-danger">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </button>
                                                     </a>
-                                                    <div class="modal fade" id="deletecq{{ $cq->id }}">
+                                                    <div class="modal fade" id="deletecq{{ $cq->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">

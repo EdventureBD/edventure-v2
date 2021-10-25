@@ -192,12 +192,10 @@ class CQController extends Controller
 
     public function show(Exam $exam, CreativeQuestion $cq)
     {
-        // dd($cq);
-        // dd($cq->id);
-        $cquestion1 = CreativeQuestion::find($cq->id)->question()->where('marks', 1)->first(); // জ্ঞানমূলক
-        $cquestion2 = CreativeQuestion::find($cq->id)->question()->where('marks', 2)->first(); // অনুধাবন
-        $cquestion3 = CreativeQuestion::find($cq->id)->question()->where('marks', 3)->first(); // প্রয়োগমূলক
-        $cquestion4 = CreativeQuestion::find($cq->id)->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
+        $cquestion1 = $cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
+        $cquestion2 = $cq->question()->where('marks', 2)->first(); // অনুধাবন
+        $cquestion3 = $cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
+        $cquestion4 = $cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
         $questionContentTags1 = QuestionContentTag::where('exam_type', "CQ")
             ->where('question_id', $cquestion1->id)
             ->get();
@@ -227,11 +225,10 @@ class CQController extends Controller
 
     public function edit(Exam $exam, CreativeQuestion $cq)
     {
-        // dd($cq->id);
-        $cquestion1 = CreativeQuestion::find($cq->id)->question()->where('marks', 1)->first(); // জ্ঞানমূলক
-        $cquestion2 = CreativeQuestion::find($cq->id)->question()->where('marks', 2)->first(); // অনুধাবন
-        $cquestion3 = CreativeQuestion::find($cq->id)->question()->where('marks', 3)->first(); // প্রয়োগমূলক
-        $cquestion4 = CreativeQuestion::find($cq->id)->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
+        $cquestion1 = $cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
+        $cquestion2 = $cq->question()->where('marks', 2)->first(); // অনুধাবন
+        $cquestion3 = $cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
+        $cquestion4 = $cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
         $tagId1 = []; // জ্ঞানমূলক
         $tagId2 = []; // অনুধাবন
         $tagId3 = []; // প্রয়োগমূলক
@@ -331,7 +328,6 @@ class CQController extends Controller
         ]);
 
         $cq->creative_question = $request->creative_question;
-        $cq->slug = (string) Str::uuid();
         $cq->exam_id = $request->examId;
         if ($request->hasFile('uddipokimage')) {
             Storage::delete('public/question/cq' . $cq->image);
@@ -343,14 +339,13 @@ class CQController extends Controller
         }
 
         $saveCreativeQuestion = $cq->save();
-        $creative_question_id = CreativeQuestion::latest()->first();
 
         // জ্ঞানমূলক
         $gyanmulok = CQ::where('creative_question_id', $cq->id)->where('marks', 1)->first();
         $gyanmulok->question = $request->gyanmulokquestion;
         $gyanmulok->slug = (string) Str::uuid();
         $gyanmulok->marks = $request->gyanmulokmarks;
-        $gyanmulok->creative_question_id = $creative_question_id->id;
+        $gyanmulok->creative_question_id = $cq->id;
         $gyanmulok->number_of_attempt = 0;
         $gyanmulok->gain_marks = 0;
         $gyanmulok->success_rate = 0;
@@ -386,7 +381,7 @@ class CQController extends Controller
         $onudhabon->question = $request->onudhabonquestion;
         $onudhabon->slug = (string) Str::uuid();
         $onudhabon->marks = $request->onudhabonmarks;
-        $onudhabon->creative_question_id = $creative_question_id->id;
+        $onudhabon->creative_question_id = $cq->id;
         $onudhabon->number_of_attempt = 0;
         $onudhabon->gain_marks = 0;
         $onudhabon->success_rate = 0;
@@ -422,7 +417,7 @@ class CQController extends Controller
         $proyug->question = $request->proyugquestion;
         $proyug->slug = (string) Str::uuid();
         $proyug->marks = $request->proyugmarks;
-        $proyug->creative_question_id = $creative_question_id->id;
+        $proyug->creative_question_id = $cq->id;
         $proyug->number_of_attempt = 0;
         $proyug->gain_marks = 0;
         $proyug->success_rate = 0;
@@ -458,7 +453,7 @@ class CQController extends Controller
         $ucchotor->question = $request->ucchotorquestion;
         $ucchotor->slug = (string) Str::uuid();
         $ucchotor->marks = $request->ucchotormarks;
-        $ucchotor->creative_question_id = $creative_question_id->id;
+        $ucchotor->creative_question_id = $cq->id;
         $ucchotor->number_of_attempt = 0;
         $ucchotor->gain_marks = 0;
         $ucchotor->success_rate = 0;
