@@ -1829,7 +1829,7 @@ ProfileApis.profile = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtim
       switch (_context.prev = _context.next) {
         case 0:
           params = _args.length > 0 && _args[0] !== undefined ? _args[0] : null;
-          url = "/profile";
+          url = "/profile-data";
           _context.next = 4;
           return axios.get(url, {
             params: params

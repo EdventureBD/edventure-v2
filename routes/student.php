@@ -10,7 +10,8 @@ use App\Http\Controllers\Student\ProgressController;
 use App\Http\Controllers\Student\AccountDetailsController;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
-    Route::get('/profile/', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/profile-data', [AccountDetailsController::class, 'profileData'])->name('profile-data');
     Route::get('/batch-results', [AccountDetailsController::class, 'batchResults'])->name('batch-results'); //getting batch results
     Route::get('/tag-analysis-report/{course}', [AccountDetailsController::class, 'tagAnalysisReport'])->name('tag-analysis-report');
 

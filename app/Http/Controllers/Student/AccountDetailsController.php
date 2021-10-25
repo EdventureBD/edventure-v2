@@ -19,36 +19,34 @@ class AccountDetailsController extends Controller
 {
     public function index()
     {
+        return view('student.pages_new.user.profile');
+         
+    }
+
+    public function profileData()
+    {
         $id = auth()->user()->id;
-        // if (auth()->user()->id == $id) {
-            if (request()->ajax()) {
-                $studentDetails = StudentDetails::where('user_id', $id)->first();
-                if ($studentDetails) {
-                    $user = User::join('student_details', 'student_details.user_id', 'users.id')
-                        ->select('users.*', 'student_details.*')
-                        ->where('users.id', $id)->first();
-                } else {
-                    $user = User::where('id', $id)->first();
-                }
-                $batchStudentEnrollment = BatchStudentEnrollment::with('course', 'batch')->where('student_id', auth()->user()->id)->get();
-                $batchStudentEnroll = $batchStudentEnrollment;
-                $batchStudent = $batchStudentEnrollment;
-                $course_ids = [];
-                $course_cat_ids = [];
-                foreach ($batchStudentEnrollment as $enrollment) {
-                    $course_ids[] = $enrollment->course->id;
-                    $course_cat_ids[] = $enrollment->course->course_category_id;
-                }
+        $studentDetails = StudentDetails::where('user_id', $id)->first();
+        if ($studentDetails) {
+            $user = User::join('student_details', 'student_details.user_id', 'users.id')
+                ->select('users.*', 'student_details.*')
+                ->where('users.id', $id)->first();
+        } else {
+            $user = User::where('id', $id)->first();
+        }
+        $batchStudentEnrollment = BatchStudentEnrollment::with('course', 'batch')->where('student_id', auth()->user()->id)->get();
+        $batchStudentEnroll = $batchStudentEnrollment;
+        $batchStudent = $batchStudentEnrollment;
+        $course_ids = [];
+        $course_cat_ids = [];
+        foreach ($batchStudentEnrollment as $enrollment) {
+            $course_ids[] = $enrollment->course->id;
+            $course_cat_ids[] = $enrollment->course->course_category_id;
+        }
 
-                $related_courses = (new Course())->getRelatedCourses($course_cat_ids, $course_ids, true);
+        $related_courses = (new Course())->getRelatedCourses($course_cat_ids, $course_ids, true);
 
-                return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment, 'related_courses' => $related_courses]);
-            } else {
-                return view('student.pages_new.user.profile');
-            }
-        // } else {
-        //     abort(401);
-        // }
+        return $this->sendResponse(['user' => $user, 'batchStudentEnrollment' => $batchStudentEnrollment, 'related_courses' => $related_courses]);
     }
 
     /*
