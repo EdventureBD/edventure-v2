@@ -10984,6 +10984,10 @@ a:hover {
   max-width: 38rem;
 }
 
+.max-w-50 {
+  max-width: 50rem;
+}
+
 .bg-art {
   background-image: url("/img/landing/top_background.png");
   background-size: cover;
@@ -11509,15 +11513,6 @@ a:hover {
   padding: 10px 10px 15px;
 }
 
-@media (max-width: 767px) {
-  .timer {
-    width: 6rem;
-    font-size: 22px;
-  }
-  .timer.rounded {
-    padding: 5px 7px 7px;
-  }
-}
 .question-summary {
   position: fixed;
   background: gray;
@@ -11544,6 +11539,24 @@ a:hover {
   color: #fff !important;
 }
 
+@media (max-width: 767px) {
+  .timer {
+    width: 6rem;
+    font-size: 22px;
+    top: 7rem;
+  }
+  .timer h1 {
+    font-size: 22px;
+  }
+  .timer.rounded {
+    padding: 5px 7px 7px;
+  }
+
+  .question-summary {
+    width: 6rem;
+    top: 9.5rem;
+  }
+}
 svg.eye-icon {
   display: none;
 }
