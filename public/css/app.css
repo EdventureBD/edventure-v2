@@ -11564,10 +11564,11 @@ svg.eye-icon {
 .student-sidebar {
   position: absolute;
   background: purple;
-  height: 150%;
+  height: 100%;
   color: #fff;
   top: 65px;
   width: 68px;
+  min-height: 100vh;
 }
 .student-sidebar ul {
   list-style: none;
