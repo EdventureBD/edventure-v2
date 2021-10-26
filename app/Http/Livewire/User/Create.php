@@ -36,7 +36,7 @@ class Create extends Component
     public function updatedphone()
     {
         $this->validate([
-            'phone' => 'required|numeric|digits:11',
+            'phone' => 'required||unique:users|numeric|digits:11',
         ]);
     }
 

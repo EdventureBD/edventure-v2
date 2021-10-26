@@ -83,7 +83,7 @@
                                                     @endif
                                                 @endif
                                             </td>
-                                            <td>{{$user->created_at->diffForHumans() }}</td>
+                                            <td>{{$user->created_at->format('d M y - g:i A') }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="mr-1" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->title }}">
