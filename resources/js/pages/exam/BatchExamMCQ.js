@@ -63,9 +63,9 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     return (<div className="batch-exam">
         <div className="container">
             <div className="row py-5">
-                <div className="col-4"><h2 className="text-purple">{exam.title}</h2></div>
-                <div className="col-4"><h2 className="text-purple text-xmd fw-800">{batch.title}</h2></div>
-                <div className="col-4">
+                <div className="col-md-4"><h2 className="text-purple">{exam.title}</h2></div>
+                <div className="col-md-4"><h2 className="text-purple text-xmd fw-800">{batch.title}</h2></div>
+                <div className="col-md-4">
                     <div className="timer text-white"><Timer initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
                     <div className="question-summary">
                         {questionSummary}
