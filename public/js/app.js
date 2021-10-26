@@ -2319,14 +2319,14 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
         className: "bg-purple-light p-2 mb-3 bshadow bradius-15",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
           children: "Q " + sl + ".  "
-        }), (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question.question)]
+        }), question.question ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question.question) : ""]
       }), fields.map(function (fieldNo) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "".concat(state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray", " bshadow bradius-15 w-50 p-2 mb-3"),
           onClick: function onClick() {
             return selectAnswer(question.id, fieldNo);
           },
-          children: [fieldNo + '. ', " ", (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo])]
+          children: [fieldNo + '. ', " ", question['field' + fieldNo] ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo]) : '']
         });
       })]
     });

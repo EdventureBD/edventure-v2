@@ -107,6 +107,7 @@
                                         <th>Amount</th>
                                         <th>Account number</th>
                                         <th>Days</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

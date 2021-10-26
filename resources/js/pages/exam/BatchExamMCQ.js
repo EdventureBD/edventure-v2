@@ -46,9 +46,9 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     questionRows = questions.map((question, index) => {
         sl = index + 1;
         return <div className="question mb-5" id={"qus_" + question.id}>
-            <div className="bg-purple-light p-2 mb-3 bshadow bradius-15"><b>{"Q " + sl + ".  "}</b>{parse(question.question)}</div>
+            <div className="bg-purple-light p-2 mb-3 bshadow bradius-15"><b>{"Q " + sl + ".  "}</b>{question.question ? parse(question.question) : ""}</div>
             {
-                fields.map(fieldNo => (<div className={`${state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray"} bshadow bradius-15 w-50 p-2 mb-3`} onClick={() => selectAnswer(question.id, fieldNo)}>{fieldNo + '. '} {parse(question['field' + fieldNo])}</div>))
+                fields.map(fieldNo => (<div className={`${state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray"} bshadow bradius-15 w-50 p-2 mb-3`} onClick={() => selectAnswer(question.id, fieldNo)}>{fieldNo + '. '} {question['field' + fieldNo] ? parse(question['field' + fieldNo]) : ''}</div>))
             }
         </div>
     })
