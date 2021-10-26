@@ -2320,14 +2320,34 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
           children: "Q " + sl + ".  "
         }), question.question ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question.question) : ""]
-      }), fields.map(function (fieldNo) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "".concat(state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray", " bshadow bradius-15 w-50 p-2 mb-3"),
-          onClick: function onClick() {
-            return selectAnswer(question.id, fieldNo);
-          },
-          children: [fieldNo + '. ', " ", question['field' + fieldNo] ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo]) : '']
-        });
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "col-md-6 d-block d-md-none",
+          children: question.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+            className: "img-fluid  bradius-15 mb-2",
+            src: question.image,
+            alt: ""
+          }) : ""
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "col-md-6",
+          children: fields.map(function (fieldNo) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "".concat(state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray", " bshadow bradius-15 p-2 mb-3"),
+              onClick: function onClick() {
+                return selectAnswer(question.id, fieldNo);
+              },
+              children: [fieldNo + '. ', " ", question['field' + fieldNo] ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo]) : '']
+            });
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "col-md-6 d-none d-md-block",
+          children: question.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+            className: "img-fluid bradius-15",
+            src: question.image,
+            alt: ""
+          }) : ""
+        })]
       })]
     });
   });

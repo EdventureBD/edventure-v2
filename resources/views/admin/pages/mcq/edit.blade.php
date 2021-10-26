@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             @if ($mcq->image)
-                                                <img class="product-image" src="{{ Storage::url($mcq->image) }}"
+                                                <img class="product-image" src="{{ $mcq->image}}"
                                                     id="previewImg" class="avatar" alt="...">
                                             @else
                                                 <img class="product-image" src="http://placehold.it/150x100"
