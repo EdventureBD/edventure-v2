@@ -61,7 +61,7 @@
                                             </td>
                                             <td>{{ $course->name }}</td>
                                             <td>
-                                                <img class="product-image " src="{{ Storage::url($course->icon) }}" alt=""
+                                                <img class="product-image " src="{{$course->icon}}" alt=""
                                                     srcset="">
                                             </td>
 

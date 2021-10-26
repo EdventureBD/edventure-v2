@@ -15,13 +15,13 @@
             @if (Route::has('login'))
                 @auth
                     <li class="nav-item has-dot">
-                    <a class="nav-link text-purple-half" href="#">DASHBOARD</a>
+                    <a class="nav-link text-purple-half"  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
                 @endauth     
             @endif
 
             <li class="nav-item has-dot">
-            <a class="nav-link text-purple-half" href="#">RESOURCES</a>
+            <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>
             </li>
 
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Admin\Course;
 use Livewire\WithFileUploads;
 use App\Models\Admin\CourseCategory;
+use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
@@ -92,11 +93,11 @@ class Create extends Component
         $data = $this->validate();
         if ($this->image) {
             $imageUrl = $this->image->store('public/course');
-            $this->image = $imageUrl;
+            $this->image = Storage::url($imageUrl);
         }
         if ($this->banner) {
             $imageUrl2 = $this->banner->store('public/course');
-            $this->banner = $imageUrl2;
+            $this->banner = Storage::url($imageUrl2);
         }
         $course = new Course();
         $course->title = $data['title'];

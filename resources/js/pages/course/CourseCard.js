@@ -9,7 +9,7 @@ const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
         <div className="row">
             <div className="col-lg-4">
                 {course.icon ?
-                    <img src={"/storage/" + course.icon} className="rounded-circle img-fluid" alt="course" />
+                    <img src={ course.icon} className="rounded-circle img-fluid" alt="course" />
                     :
                     <img src="/student/public/images/paths/mailchimp_430x168.png" className=" rounded-circle img-fluid" alt="course" />
                 }

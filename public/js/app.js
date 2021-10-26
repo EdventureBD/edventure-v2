@@ -2117,7 +2117,7 @@ var CourseCard = function CourseCard(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "col-lg-4",
         children: course.icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-          src: "/storage/" + course.icon,
+          src: course.icon,
           className: "rounded-circle img-fluid",
           alt: "course"
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
