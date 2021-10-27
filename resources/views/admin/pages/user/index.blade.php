@@ -51,6 +51,7 @@
                                         <th>Email</th>
                                         <th>User Type</th>
                                         <th>Image</th>
+                                        <th>Created</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -59,7 +60,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->email }}<br> {{$user->phone}}</td>
                                             <td>
                                                 @if (($user->user_type) == 1)
                                                     Admin
@@ -74,7 +75,7 @@
                                                     <img src="{{ Storage::url($user->image) }}" class="product-image-thumb" alt="{{ $user->name }}" height="70px !important" srcset="">
                                                 @else
                                                     @if (($user->user_type) == 1)
-                                                        <img src="https://pics.freeicons.io/uploads/icons/png/16096534681582799504-512.png" class="product-image-thumb" alt="Admin" height="70px !important" srcset="">
+                                                        <img src="{{asset("/img/landing/admin.png")}}" class="product-image-thumb" alt="Admin" height="70px !important" srcset="">
                                                     @elseif(($user->user_type) == 2)
                                                         <img src="https://cdn0.iconfinder.com/data/icons/scenarium-vol-11/128/042_teacher_blackboard_teaching_school-256.png" class="product-image-thumb" alt="teacher" height="70px !important" srcset="">
                                                     @else
@@ -82,6 +83,7 @@
                                                     @endif
                                                 @endif
                                             </td>
+                                            <td>{{$user->created_at->format('d M y - g:i A') }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="mr-1" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->title }}">
@@ -138,6 +140,7 @@
                                         <th>Email</th>
                                         <th>User Type</th>
                                         <th>Image</th>
+                                        <th>Created</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

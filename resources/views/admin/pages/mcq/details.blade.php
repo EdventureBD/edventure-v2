@@ -45,7 +45,7 @@
                                                 <div class="input-group">
                                                     <div class="___class_+?18___">
                                                         <img class="product-image-thumb"
-                                                            src='{{ Storage::url("$mcq->image") }}' alt="">
+                                                            src='{{ $mcq->image }}' alt="">
 
                                                     </div>
                                                 </div>

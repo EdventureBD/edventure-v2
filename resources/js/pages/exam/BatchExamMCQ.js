@@ -46,10 +46,19 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     questionRows = questions.map((question, index) => {
         sl = index + 1;
         return <div className="question mb-5" id={"qus_" + question.id}>
-            <div className="bg-purple-light p-2 mb-3 bshadow bradius-15"><b>{"Q " + sl + ".  "}</b>{parse(question.question)}</div>
-            {
-                fields.map(fieldNo => (<div className={`${state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray"} bshadow bradius-15 w-50 p-2 mb-3`} onClick={() => selectAnswer(question.id, fieldNo)}>{fieldNo + '. '} {parse(question['field' + fieldNo])}</div>))
-            }
+            <div className="bg-purple-light p-2 mb-3 bshadow bradius-15"><b>{"Q " + sl + ".  "}</b>{question.question ? parse(question.question) : ""}</div>
+            <div className="row">
+            <div className="col-md-6 d-block d-md-none">
+                {question.image ? <img className="img-fluid  bradius-15 mb-2" src={question.image} alt="" /> : ""}
+            </div>
+            
+            <div className="col-md-6">{
+                fields.map(fieldNo => (<div className={`${state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray"} bshadow bradius-15 p-2 mb-3`} onClick={() => selectAnswer(question.id, fieldNo)}>{fieldNo + '. '} {question['field' + fieldNo] ? parse(question['field' + fieldNo]) : ''}</div>))
+            }</div>
+            <div className="col-md-6 d-none d-md-block">
+                {question.image ? <img className="img-fluid bradius-15" src={question.image} alt="" /> : ""}
+            </div>
+            </div>
         </div>
     })
 
@@ -63,9 +72,11 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     return (<div className="batch-exam">
         <div className="container">
             <div className="row py-5">
-                <div className="col-md-4"><h2 className="text-purple">{exam.title}</h2></div>
-                <div className="col-md-4"><h2 className="text-purple text-xmd fw-800">{batch.title}</h2></div>
-                <div className="col-md-4">
+                <div className="col-md-10">
+                    <h2 className="text-purple text-xmd fw-800">Batch: {batch.title}</h2>
+                    <h2 className="text-purple">Exam: {exam.title}</h2>
+                </div>
+                <div className="col-md-2">
                     <div className="timer text-white"><Timer initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
                     <div className="question-summary">
                         {questionSummary}

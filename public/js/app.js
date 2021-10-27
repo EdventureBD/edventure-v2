@@ -2319,15 +2319,35 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
         className: "bg-purple-light p-2 mb-3 bshadow bradius-15",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
           children: "Q " + sl + ".  "
-        }), (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question.question)]
-      }), fields.map(function (fieldNo) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "".concat(state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray", " bshadow bradius-15 w-50 p-2 mb-3"),
-          onClick: function onClick() {
-            return selectAnswer(question.id, fieldNo);
-          },
-          children: [fieldNo + '. ', " ", (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo])]
-        });
+        }), question.question ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question.question) : ""]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "col-md-6 d-block d-md-none",
+          children: question.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+            className: "img-fluid  bradius-15 mb-2",
+            src: question.image,
+            alt: ""
+          }) : ""
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "col-md-6",
+          children: fields.map(function (fieldNo) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "".concat(state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray", " bshadow bradius-15 p-2 mb-3"),
+              onClick: function onClick() {
+                return selectAnswer(question.id, fieldNo);
+              },
+              children: [fieldNo + '. ', " ", question['field' + fieldNo] ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo]) : '']
+            });
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "col-md-6 d-none d-md-block",
+          children: question.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+            className: "img-fluid bradius-15",
+            src: question.image,
+            alt: ""
+          }) : ""
+        })]
       })]
     });
   });
@@ -2349,20 +2369,17 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       className: "container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "row py-5",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "col-md-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
-            className: "text-purple",
-            children: exam.title
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "col-md-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "col-md-10",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
             className: "text-purple text-xmd fw-800",
-            children: batch.title
-          })
+            children: ["Batch: ", batch.title]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
+            className: "text-purple",
+            children: ["Exam: ", exam.title]
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "col-md-4",
+          className: "col-md-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "timer text-white",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Timer__WEBPACK_IMPORTED_MODULE_4__["default"], {

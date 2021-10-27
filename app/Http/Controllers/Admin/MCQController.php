@@ -40,7 +40,7 @@ class MCQController extends Controller
             'field3' => 'required',
             'field4' => 'required',
             'answer' => 'required',
-            'explanation' => 'required|min:4',
+            'explanation' => 'nullable',
             'examId' => 'required',
             'slug' => 'required',
             'contentTagIds' => 'required',
@@ -51,6 +51,7 @@ class MCQController extends Controller
         $mcq->slug = (string) Str::uuid();
         if ($request->hasFile('image')) {
             $mcq->image = $request->image->store('public/question/mcq');
+            $mcq->image=Storage::url( $mcq->image);
         }
         $mcq->field1 = $request['field1'];
         $mcq->field2 = $request['field2'];
@@ -117,7 +118,7 @@ class MCQController extends Controller
             'field3' => 'required',
             'field4' => 'required',
             'answer' => 'required',
-            'explanation' => 'required|min:4',
+            'explanation' => 'nullable',
             'examId' => 'required',
             'slug' => 'required',
             'contentTagIds' => 'required',
@@ -130,6 +131,7 @@ class MCQController extends Controller
                 Storage::delete($mcq->image);
             }
             $mcq->image = $request->image->store('public/question/mcq');
+            $mcq->image=Storage::url( $mcq->image);
         }
 
         $mcq->question = $request['question'];

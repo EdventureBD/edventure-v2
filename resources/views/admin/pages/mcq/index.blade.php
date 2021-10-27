@@ -107,9 +107,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{!! $mcq->question !!}</td>
                                             <td>
-                                                <img class="product-image-thumb" src="{{ Storage::url($mcq->image) }}"
+                                                <img class="product-image-thumb" src="{{ $mcq->image }}"
                                                     alt="">
-                                                {{-- <img src="{{ Storage::url($mcq->image) }}" alt="{{ $mcq->question }}"> --}}
                                             </td>
                                             <td>{!! $mcq->field1 !!}</td>
                                             <td>{!! $mcq->field2 !!}</td>
