@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import parse from 'html-react-parser';
 import Timer from '../../components/Timer';
@@ -12,7 +12,8 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
         (state, newState) => ({ ...state, ...newState }),
         {
             answers: [],
-            error: false
+            error: false,
+            timeOut: false
         });
 
     let questionRows = '';
@@ -25,22 +26,34 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
         setState({ answers: answers, error: false });
     }
 
-    const submitExam = async (e) => {
+    // useEffect(()=>{
+    //     if (timeOut) {
+    //         pro()
+    //     }
+    // }, [])
+
+    // const submitOnTimOut = () => {
+    //     setState({timeOut: true});
+    // }
+
+    const submitExam = (e) => {
         e.preventDefault();
         if (state.answers.length < questions.length) {
             setState({ error: true })
         } else {
-            console.log('submit form');
-            // $("#exam-form").submit();
-            const url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
-            const res = await axios.post(url, { a: state.answers, q: questions })
-                .then(response => {
-                    console.log(response.data);
-                    window.location.reload();
-                }).catch(error => {
-                    console.log(error);
-                });
+            processSubmit();
         }
+    }
+
+    const processSubmit = async() => {
+        const url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
+        const res = await axios.post(url, { a: state.answers, q: questions })
+            .then(response => {
+                console.log(response.data);
+                window.location.reload();
+            }).catch(error => {
+                console.log(error);
+            });
     }
 
     questionRows = questions.map((question, index) => {
@@ -77,7 +90,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                     <h2 className="text-purple">Exam: {exam.title}</h2>
                 </div>
                 <div className="col-md-2">
-                    <div className="timer text-white"><Timer initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
+                    <div className="timer text-white"><Timer timeOutAction={processSubmit} initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
                     <div className="question-summary">
                         {questionSummary}
                     </div>

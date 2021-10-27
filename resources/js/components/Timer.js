@@ -12,7 +12,8 @@ const Timer = (props) => {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
-                    clearInterval(myInterval)
+                    props.timeOutAction();
+                    clearInterval(myInterval);
                 } else {
                     setMinutes(minutes - 1);
                     setSeconds(59);
@@ -23,6 +24,12 @@ const Timer = (props) => {
             clearInterval(myInterval);
           };
     });
+
+    // useEffect(()=>{
+    //     if (minutes == 0 && seconds == 0 && props.timeOutAction) {
+    //         props.timeOutAction();
+    //     }
+    // }, [minutes, seconds]);
 
     return (
         <div>

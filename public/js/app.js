@@ -2004,6 +2004,7 @@ var Timer = function Timer(props) {
 
       if (seconds === 0) {
         if (minutes === 0) {
+          props.timeOutAction();
           clearInterval(myInterval);
         } else {
           setMinutes(minutes - 1);
@@ -2014,7 +2015,12 @@ var Timer = function Timer(props) {
     return function () {
       clearInterval(myInterval);
     };
-  });
+  }); // useEffect(()=>{
+  //     if (minutes == 0 && seconds == 0 && props.timeOutAction) {
+  //         props.timeOutAction();
+  //     }
+  // }, [minutes, seconds]);
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     children: minutes === 0 && seconds === 0 ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
       children: [" ", minutes, ":", seconds < 10 ? "0".concat(seconds) : seconds]
@@ -2238,7 +2244,8 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
     return _objectSpread(_objectSpread({}, state), newState);
   }, {
     answers: [],
-    error: false
+    error: false,
+    timeOut: false
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -2257,33 +2264,37 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       answers: answers,
       error: false
     });
+  }; // useEffect(()=>{
+  //     if (timeOut) {
+  //         pro()
+  //     }
+  // }, [])
+  // const submitOnTimOut = () => {
+  //     setState({timeOut: true});
+  // }
+
+
+  var submitExam = function submitExam(e) {
+    e.preventDefault();
+
+    if (state.answers.length < questions.length) {
+      setState({
+        error: true
+      });
+    } else {
+      processSubmit();
+    }
   };
 
-  var submitExam = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
+  var processSubmit = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var url, res;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-
-              if (!(state.answers.length < questions.length)) {
-                _context.next = 5;
-                break;
-              }
-
-              setState({
-                error: true
-              });
-              _context.next = 10;
-              break;
-
-            case 5:
-              console.log('submit form'); // $("#exam-form").submit();
-
               url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
-              _context.next = 9;
+              _context.next = 3;
               return axios.post(url, {
                 a: state.answers,
                 q: questions
@@ -2294,10 +2305,10 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
                 console.log(error);
               });
 
-            case 9:
+            case 3:
               res = _context.sent;
 
-            case 10:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -2305,7 +2316,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       }, _callee);
     }));
 
-    return function submitExam(_x) {
+    return function processSubmit() {
       return _ref2.apply(this, arguments);
     };
   }();
@@ -2383,6 +2394,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "timer text-white",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Timer__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              timeOutAction: processSubmit,
               initialMinute: exam.duration ? exam.duration : 30,
               initialSeconds: 0
             })
