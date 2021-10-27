@@ -15,9 +15,13 @@ class BatchStudent extends Component
     public $batchId;
     public $students;
 
+    public $batch;
+    public $course;
+
     public function updatedCourseId()
     {
         $this->batches = Batch::where('status', 1)->where('course_id', $this->courseId)->get();
+        $this->course = Course::find($this->courseId);
     }
 
     public function updatedBatchId()
@@ -26,6 +30,7 @@ class BatchStudent extends Component
             ->where('course_id', $this->courseId)
             ->where('batch_id', $this->batchId)
             ->get();
+        $this->batch = Batch::find($this->batchId);
     }
 
     public function mount()
