@@ -84,7 +84,6 @@ class BatchController extends Controller
 
     public function addStudentToBatch(Request $request, Course $course, Batch $batch)
     {
-        // dd($request, $course, $batch);
         $validateDate = $request->validate([
             'studentId' => 'numeric|required',
             'accesddedDays' => 'numeric|required',
