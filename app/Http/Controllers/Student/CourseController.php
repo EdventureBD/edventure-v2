@@ -46,35 +46,71 @@ class CourseController extends Controller
                 ->where('batch_student_enrollments.student_id', auth()->user()->id)
                 ->where('payments.student_id', auth()->user()->id)
                 ->first();
-            // dd($enrolled);
-            if (!$enrolled) {
-                $enrolled = Payment::where('course_id', $course->id)
-                    ->where('student_id', auth()->user()->id)
-                    ->first();
-            }
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
                 if ($enrolled->accepted == 1) {
                     return redirect()->route('batch-lecture', $batch->slug);
                 }
+            } else {
+                return view('student.pages_new.course.preview_guest', compact(
+                    'course',
+                    'course_topics',
+                    'course_lectures',
+                    'course_topic_lectures',
+                    'enrolled',
+                    'batch'
+                ));
             }
         }
-        // return view('student.pages.course.course_preview', compact(
-        return view('student.pages_new.course.preview_guest', compact(
-            'course',
-            'course_topics',
-            'course_lectures',
-            'course_topic_lectures',
-            'enrolled',
-            'batch'
-        ));
+     
+        
     }
 
     public function enroll(Course $course)
     {
-        $paymentsNumber = PaymentNumber::all();
-        $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
-        return view('student.pages.course.confirm_enroll', compact('course', 'paymentsNumber', 'studentDetails'));
+        if($course->price<=0){
+            $courseFirstBatch = Batch::where('course_id', $course->id)->orderby('created_at','ASC')->select('id','slug')->first();
+            if(!$courseFirstBatch){
+                return redirect()->back();
+            }
+            $student=auth()->user();
+            $payment = new Payment();
+            $payment->student_id = $student->id;
+            $payment->course_id = $course->id;
+            $payment->name = $student->name;
+            $payment->email = $student->email;
+            $payment->contact = $student->phone;
+            $payment->trx_id =  "FREE";
+            $payment->payment_type =  "FREE";
+            $payment->amount =  0;
+            $payment->payment_account_number = 000;
+            $payment->days_for = 365;
+            $payment->accepted = 1;
+            $payment->save();
+            $lastPayment = Payment::latest()->first();
+            $batchStudentEnrollment = BatchStudentEnrollment::updateOrCreate(
+                [
+                    'course_id' => $course->id,
+                    'student_id' => $student->id,
+                    'course_id' => $course->id
+                ],
+                [
+                    'batch_id' => $courseFirstBatch->id,
+                    'payment_id' => $lastPayment->id,
+                    'course_id' => $course->id,
+                    'note_list' => "Free enrolment",
+                    'student_id' => $student->id,
+                    'individual_batch_days' => 0,
+                    'accessed_days' =>  365,
+                    'status' => 1,
+                ]
+            );
+            return redirect()->route('batch-lecture', $courseFirstBatch->slug);
+        } else {
+            $paymentsNumber = PaymentNumber::all();
+            $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
+            return view('student.pages.course.confirm_enroll', compact('course', 'paymentsNumber', 'studentDetails'));
+        }
     }
 
     public function invoice(Course $course, Payment $payments)
