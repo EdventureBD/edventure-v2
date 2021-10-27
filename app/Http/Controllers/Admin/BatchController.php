@@ -134,4 +134,13 @@ class BatchController extends Controller
     {
         return view('admin.pages.batch.batch_student');
     }
+
+    public function deleteStudentFromBatch(Course $course, Batch $batch, BatchStudentEnrollment $batchStudentEnrollment)
+    {
+        $paymentId = $batchStudentEnrollment->payment_id;
+        $deleteBatchStudent = $batchStudentEnrollment->delete();
+        $deletePayment = Payment::find($paymentId);
+        $deletePayment->delete();
+        return back();
+    }
 }

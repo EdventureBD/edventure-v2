@@ -65,7 +65,7 @@ class RegisteredUserController extends Controller
                 ]));
                 Cache::forget(request()->ip . '_otp');
                 Cache::forget(request()->ip . '_input');
-                event(new Registered($user));
+                // event(new Registered($user));
 
                 return redirect(RouteServiceProvider::StudentHOME);
             }

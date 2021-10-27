@@ -126,6 +126,7 @@
                                         <th>Batch</th>
                                         <th>Course</th>
                                         <th>Topic</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,6 +142,43 @@
                                             <td>
                                                 {{ $batch_lecture->courseTopicsTitle }}
                                             </td>
+                                            <td>
+                                                <a href="#deleteBatchlecture{{ $batch_lecture->id }}" data-toggle="modal"
+                                                    title="Delete {{ $batch_lecture->title }}">
+                                                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                </a>
+                                                <div class="modal fade"
+                                                    id="deleteBatchlecture{{ $batch_lecture->id }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-danger">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Delete batch lecture</h4>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure??</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <form
+                                                                    action="{{ route('batch-lecture.destroy', $batch_lecture->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-light">Delete</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -150,6 +188,7 @@
                                         <th>Batch</th>
                                         <th>Course</th>
                                         <th>Topic</th>
+                                        <th>Action</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -308,6 +347,7 @@
                                         <th>Individual Batch Days</th>
                                         <th>Reamining Batch Days</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -330,6 +370,45 @@
                                                     data-on="Active" data-off="InActive"
                                                     {{ $student->status ? 'checked' : '' }}>
                                             </td>
+                                            <td>
+                                                <a class="mr-1" href="#deleteBatchStudent{{ $student->id }}"
+                                                    data-toggle="modal" title="Delete {{ $batch->title }}">
+                                                    <button class="btn btn-danger"><i
+                                                            class="far fa-trash-alt"></i></button>
+                                                </a>
+                                                <div class="modal fade" id="deleteBatchStudent{{ $student->id }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-danger">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">
+                                                                    Delete {{ $student->student->name }}
+                                                                </h4>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure??</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-outline-light"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <form
+                                                                    action="{{ route('deleteStudentFromBatch', [$batch->course, $batch, $student]) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-light">Delete</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -342,6 +421,7 @@
                                         <th>Individual Batch Days</th>
                                         <th>Reamining Batch Days</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -66,8 +66,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('/batch', BatchController::class, ['except' => ['store', 'update']]);
     Route::get('/changeBatchStatus', [BatchController::class, 'changeBatchStatus']);
     Route::get('/changeStudentStatus', [BatchController::class, 'changeStudentStatus'])->name('changeStudentStatus');
-    Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
     Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
+    Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
+    Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
     // END OF BATCH
 
     // START OF BATCH LECTURE
