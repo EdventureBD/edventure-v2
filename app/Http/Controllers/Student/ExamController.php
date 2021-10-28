@@ -54,11 +54,7 @@ class ExamController extends Controller
 
         // START OF MCQ
         if ($exam->exam_type == Edvanture::MCQ) {
-            $canAttempt = ExamResult::where('exam_id', $exam->id)
-                ->where('batch_id', $batch->id)
-                ->where('student_id', auth()->user()->id)
-                ->first();
-
+            $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
             $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
                 ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
                 ->where('question_content_tags.exam_type', "MCQ")

@@ -32,7 +32,7 @@ class CourseTopic extends Model
 
     public function CourseLecture()
     {
-        return $this->hasMany(CourseLecture::class);
+        return $this->hasMany(CourseLecture::class, 'topic_id', 'id');
     }
 
     public function batchLecture()

@@ -28,30 +28,35 @@ class BatchController extends Controller
         $sExams = [];
 
         $course = Course::where('id', $batch->course_id)->first();
-        $batchTopics = BatchLecture::join('course_topics', 'batch_lectures.topic_id', 'course_topics.id')
-            ->where('batch_lectures.batch_id', $batch->id)
-            ->where('batch_lectures.course_id', $course->id)
+        // $batchTopics = BatchLecture::with('course_topics', 'batch_lectures.topic_id', 'course_topics.id')
+        //     ->where('batch_id', $batch->id)
+        //     ->where('course_id', $course->id)
+        //     ->get();
+        $batchTopics = BatchLecture::with('courseTopic', 'courseTopic.CourseLecture')
+            ->where('batch_id', $batch->id)
+            ->where('course_id', $course->id)
             ->get();
+        // dd($batchTopics);
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->first();
 
-        $specialExams = BatchExam::where('batch_id', $batch->id)
-            ->where('status', '1')
-            ->get();
-        // dd($specialExams);
-        foreach ($specialExams as $specialExam) {
-            if ($specialExam->exam->special) {
-                array_push($sExams, $specialExam->exam->id);
-            }
-        }
+        list($exams, $specialExams) = (new BatchExam())->getBatchExams($batch->id);
 
-        $specialExams = BatchExam::where('batch_id', $batch->id)
-            ->whereIn('exam_id', $sExams)
-            ->where('status', '1')
-            ->get();
-        return view('student.pages_new.course.preview', compact('batch', 'course', 'batchTopics', 'accessedDays', 'specialExams'));
+        $courseLectures = CourseLecture::where('topic_id', $batchTopics)->get();
+        // dd($specialExams);
+        // foreach ($specialExams as $specialExam) {
+        //     if ($specialExam->exam->special) {
+        //         array_push($sExams, $specialExam->exam->id);
+        //     }
+        // }
+
+        // $specialExams = BatchExam::with('cqExamPaper', 'examResult')->where('batch_id', $batch->id)
+        //     ->whereIn('exam_id', $sExams)
+        //     ->where('status', '1')
+        //     ->get();
+        return view('student.pages_new.course.preview', compact('batch', 'course', 'batchTopics', 'accessedDays', 'specialExams', 'exams', 'courseLectures'));
     }
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)

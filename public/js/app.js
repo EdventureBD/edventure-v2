@@ -2473,7 +2473,7 @@ var Analysis = function Analysis(_ref) {
             className: "d-block",
             alt: ""
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "#",
+            href: "/tag-analysis-report/" + course.slug + "?type=mcq&analysis=strength",
             className: "d-block",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
               src: "/img/profile/link.svg",
@@ -2502,7 +2502,7 @@ var Analysis = function Analysis(_ref) {
             className: "d-block",
             alt: ""
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "#",
+            href: "/tag-analysis-report/" + course.slug + "?type=mcq&analysis=weakness",
             className: "d-block",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
               src: "/img/profile/link.svg",
@@ -2531,7 +2531,7 @@ var Analysis = function Analysis(_ref) {
             className: "d-block",
             alt: ""
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "#",
+            href: "/tag-analysis-report/" + course.slug + "?type=cq&analysis=strength",
             className: "d-block",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
               src: "/img/profile/link.svg",
@@ -2560,7 +2560,7 @@ var Analysis = function Analysis(_ref) {
             className: "d-block",
             alt: ""
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "#",
+            href: "/tag-analysis-report/" + course.slug + "?type=cq&analysis=weakness",
             className: "d-block",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
               src: "/img/profile/link.svg",

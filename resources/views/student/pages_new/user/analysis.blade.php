@@ -9,6 +9,20 @@
                 <div class="col-lg-12">
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                         @forelse ($course_topics as $topic)
+                                @php
+                                    $analysis_tag = true;
+                                    $atag_details = request()->type == "mcq" ? $tag_details['mcq_tag_details'] : $tag_details['cq_tag_details'];
+                                    foreach($atag_details as $tag=>$details) {
+                                        if (!empty(request()->analysis) ) {
+                                            $analysis_tag = false;
+                                            // print_r($tag_details[request()->type][request()->analysis]);
+                                            if ( $details['topic_id'] == $topic->id && in_array($tag, $tag_details[request()->type][request()->analysis])) {
+                                                $analysis_tag = true;
+                                            }
+                                        }
+                                    }
+                                @endphp
+                                @if ($analysis_tag )
                             <div class="accordion__item ">
                                 <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600 {{ $loop->iteration == 1 ? 'collapsed' : '' }}  " data-toggle="collapse" data-target="#course-toc-{{ $topic->id }} " data-parent="#parent">
                                     <div class="col-11 d-inline-flex title align-items-center">
@@ -23,10 +37,7 @@
                                 </div>
                                 <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
                                     id="course-toc-{{ $topic->id }}">
-                                    @php
-                                    // dd($tag_details['cq_tag_details']);
-                                        $atag_details = request()->type == "mcq" ? $tag_details['mcq_tag_details'] : $tag_details['cq_tag_details'];
-                                    @endphp
+                                    
                                     @foreach($atag_details as $tag=>$details)
                                         @if($details['topic_id'] == $topic->id)
                                         <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600">
@@ -39,6 +50,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @endif
                         @empty
                             No Topics found
                         @endforelse
