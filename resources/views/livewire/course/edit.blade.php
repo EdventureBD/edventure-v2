@@ -41,7 +41,7 @@
                                                             <input type="file" wire:model="image"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course icon</label>
+                                                                for="exampleInputFile">Course icon (240px*240px)</label>
                                                         </div>
                                                     </div>
                                                     @error('image')
@@ -54,7 +54,7 @@
                                                     <img style="width:100px; border-radius: 50%" class="product-image" src="{{ $tempImage->temporaryUrl() }}"
                                                         alt="">
                                                 @else
-                                                    <img style="width:100px; border-radius: 50%" src="{{ Storage::url($image) }}" alt="...">
+                                                    <img style="width:100px; border-radius: 50%" src="{{ $image }}" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="image">
                                                     <p style="color: indigo">Uploading icon ....</p>
@@ -73,7 +73,7 @@
                                                             <input type="file" wire:model="banner"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course Banner</label>
+                                                                for="exampleInputFile">Course Banner (576px*642px)</label>
                                                         </div>
                                                     </div>
                                                     @error('banner')
@@ -83,10 +83,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($tempBanner)
-                                                    <img style="width:100px;" class="product-image" src="{{ $tempBanner->temporaryUrl() }}"
+                                                    <img style="width:100px;" class="img-fluid product-image" src="{{ $tempBanner->temporaryUrl() }}"
                                                         alt="">
                                                 @else
-                                                    <img style="width:100px;" src="{{ Storage::url($banner) }}" alt="...">
+                                                    <img style="width:100px;"  class="img-fluid" src="{{ $banner }}" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>

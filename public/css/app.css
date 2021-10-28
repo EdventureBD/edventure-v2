@@ -11392,6 +11392,11 @@ a:hover {
   background-size: cover;
   max-width: 250px;
 }
+.single-exam h5 {
+  min-height: 7rem;
+  font-size: 25px;
+  font-weight: 600;
+}
 .single-exam:hover {
   box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
 }

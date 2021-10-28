@@ -9,7 +9,11 @@
     border-radius: 30px;
     background-size: cover;
     max-width: 250px;
-
+   h5 {
+        min-height: 7rem;
+        font-size: 25px;
+        font-weight: 600;
+    }
     &:hover {
         box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
     }

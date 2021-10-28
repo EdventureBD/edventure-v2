@@ -19,13 +19,9 @@ use App\Http\Controllers\Student\CourseController;
 */
 
 Route::get('/', function () {
-    $courses = Course::where('status', 1)->orderBy('order')->take(5)->get();
-    $courseCount = Course::where('status', 1)->count();
-    $totalStudent = User::where('user_type', '3')->count();
-    $totalTeacher = User::where('user_type', '2')->count();
-    $totalExams = Exam::count();
-    // return view('student.pages.frontend.student', compact('courses', 'courseCount', 'totalStudent', 'totalTeacher', 'totalExams'));
-    return view('landing.landing');
+    $courses = Course::where('status', 1)->orderBy('order')->take(2)->get();
+    // return view('student.pages.frontend.student', compact('courses'));
+    return view('landing.landing', compact('courses'));
 })->name('home');
 
 Route::get('/error', function () {
