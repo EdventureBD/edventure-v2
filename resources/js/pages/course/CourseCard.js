@@ -2,7 +2,7 @@ import React from "react";
 
 const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
     // console.log(benrolement);
-    const courseUrl = "/batch/" + goCourse === true ? benrolement.batch.slug : benrolement.slug;
+    const courseUrl = goCourse === true ? "/batch/" +  benrolement.batch.slug : "/batch/"+benrolement.slug;
     const course = goCourse ? benrolement.course : benrolement;
 
     return <div className={`single-course bshadow bradius-15 mb-4 c-point p-4 ${ data.active_batch?.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""}`} onClick={()=>changeActiveBatch(benrolement)}>
@@ -20,10 +20,10 @@ const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
                 <div className="row text-gray text-xxxsm">
                     <div className="col-6 pr-0">
                         <div className="mb-3">
-                            <i className="fas fa-book-open"></i> 24 Lesson
+                            <i className="fas fa-book-open"></i> 8 Exams
                         </div>
                         <div>
-                            <i className="fas fa-file-alt"></i> 6 Assignments
+                            <i className="fas fa-file-alt"></i> Strength, Weakness
                         </div>
                     </div>
                     <div className="col-6 pr-0">

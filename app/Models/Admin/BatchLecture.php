@@ -37,5 +37,9 @@ class BatchLecture extends Model
     {
         return $this->belongsTo(User::class, 'id', 'teacher_id');
     }
-    
+
+    public function courseTopic()
+    {
+        return $this->belongsTo(CourseTopic::class, 'topic_id');
+    }
 }

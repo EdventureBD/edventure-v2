@@ -60,4 +60,12 @@ class ExamResult extends AppModel
         $labels = count($mcq_labels) > count($cq_labels) ? $mcq_labels : $cq_labels;
         return ['labels' => $labels, 'mcq' => $mcq, 'cq' => $cq];
     }
+
+    public function getExamResult($exam_id, $batch_id, $user_id)
+    {
+        return ExamResult::where('exam_id', $exam_id)
+            ->where('batch_id', $batch_id)
+            ->where('student_id', $user_id)
+            ->first();
+    }
 }

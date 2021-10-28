@@ -6,7 +6,7 @@ const Analysis = ({cq, mcq, course}) => {
             <div className="p-3 bshadow text-xxsm text-gray bradius-10 bg-green">
                 <div className="d-flex justify-content-between">
                     <img src="/img/profile/strenth.svg" className="d-block" alt="" />
-                    <a href="#" className="d-block">
+                    <a href={"/tag-analysis-report/"+course.slug+"?type=mcq&analysis=strength"} className="d-block">
                         <img src="/img/profile/link.svg" className="d-block" alt="" />
                     </a>
                 </div>
@@ -19,7 +19,7 @@ const Analysis = ({cq, mcq, course}) => {
             <div className="p-3 bshadow text-xxsm text-gray bradius-10 bg-red">
                 <div className="d-flex justify-content-between">
                     <img src="/img/profile/weekness.svg" className="d-block" alt="" />
-                    <a href="#" className="d-block">
+                    <a href={"/tag-analysis-report/"+course.slug+"?type=mcq&analysis=weakness"} className="d-block">
                         <img src="/img/profile/link.svg" className="d-block" alt="" />
                     </a>
                 </div>
@@ -31,7 +31,7 @@ const Analysis = ({cq, mcq, course}) => {
             <div className="p-3 bshadow text-xxsm text-gray bradius-10 bg-green">
                 <div className="d-flex justify-content-between">
                     <img src="/img/profile/strenth.svg" className="d-block" alt="" />
-                    <a href="#" className="d-block">
+                    <a href={"/tag-analysis-report/"+course.slug+"?type=cq&analysis=strength"} className="d-block">
                         <img src="/img/profile/link.svg" className="d-block" alt="" />
                     </a>
                 </div>
@@ -44,7 +44,7 @@ const Analysis = ({cq, mcq, course}) => {
             <div className="p-3 bshadow text-xxsm text-gray bradius-10 bg-red">
                 <div className="d-flex justify-content-between">
                     <img src="/img/profile/weekness.svg" className="d-block" alt="" />
-                    <a href="#" className="d-block">
+                    <a href={"/tag-analysis-report/"+course.slug+"?type=cq&analysis=weakness"} className="d-block">
                         <img src="/img/profile/link.svg" className="d-block" alt="" />
                     </a>
                 </div>

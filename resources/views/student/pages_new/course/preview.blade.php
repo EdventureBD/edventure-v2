@@ -39,15 +39,20 @@
                                     </a>
                                 </div>
                                 <div class="accordion__menu collapse show" id="specialExams1">
+                                    
                                     @forelse ($specialExams as $specialExam)
+                                        @php
+                                            $sp_view_result = "Start Exam";
+                                            if (($specialExam->exam->exam_type == \App\Utils\Edvanture::MCQ && $specialExam->examResult->count() > 0) || ($specialExam->exam->exam_type == \App\Utils\Edvanture::CQ && $specialExam->cqExamPaper->count() > 0)) {
+                                                $sp_view_result = "View Result";
+                                            }
+                                        @endphp
                                         <div class="accordion__menu-link bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <a class="text-dark fw-600" href="{{ route('question', [$batch->slug, $specialExam->exam->slug]) }}">
-                                                    {{ $specialExam->exam->title }}
-                                                </a>
+                                                <a class="text-dark fw-600" href="#">{{ $specialExam->exam->title }}</a>
                                                 <div class="text-dark">
                                                     <span class="d-inline-block bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{ $specialExam->exam->exam_type }}</span>
-                                                    <a href="#" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">View Result</a>
+                                                    <a href="{{ route('question', [$batch->slug, $specialExam->exam->slug]) }}" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{$sp_view_result}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,7 +76,7 @@
                             <div class="accordion__item {{ $loop->iteration == 1 ? 'open' : '' }}  ">
                                 <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $batchTopic->id }} " data-parent="#parent">
                                     <div class="col-11 d-inline-flex title align-items-center">
-                                        <span class="">{{ $batchTopic->title }} </span>
+                                        <span class="">{{ $batchTopic->courseTopic->title }} </span>
                                     </div>
                                     <div class="col-1 text-right">
                                         <span class="d-inline-block text-gray text-sm">
@@ -82,8 +87,50 @@
                                 </div>
                                 <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
                                     id="course-toc-{{ $batchTopic->id }}">
-                                    @livewire('student.batch.lectures', ['batchTopic' => $batchTopic->id, 'batch' =>
-                                    $batch], key($batchTopic->id))
+                                    {{-- @livewire('student.batch.lectures', ['batchTopic' => $batchTopic->id, 'batch' =>
+                                    $batch], key($batchTopic->id)) --}}
+                                    <div>
+                                        @forelse($batchTopic->courseTopic->CourseLecture as $courseLecture)
+                                            <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
+                                                <a class="flex text-dark fw-600" href="{{ route('topic_lecture', [$batch->slug, $courseLecture->slug]) }}">
+                                                    {{ $courseLecture->title }}
+                                                </a>
+                                                <a href="#" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">View Lecture</a>
+                                            </div>
+                                        @empty
+                                            <div class="accordion__menu-link">
+                                                <span class="icon-holder icon-holder--small icon-holder--dark rounded-circle d-inline-flex icon--left">
+                                                    <i class="fad fa-empty-set"></i>
+                                                </span>
+                                                <a class="flex" href="#">No lectures found </a>
+                                            </div>
+                                        @endforelse
+                                        <p class="h6 pt-3" style="text-align: center;">Exams or Assignment</p>
+                                        @forelse($exams as $exam)
+                                            @php
+                                                $view_result = "Start Exam";
+                                                if (($exam->exam->exam_type == \App\Utils\Edvanture::MCQ && $exam->examResult->count() > 0) || ($exam->exam->exam_type == \App\Utils\Edvanture::CQ && $exam->cqExamPaper->count() > 0)) {
+                                                    $view_result = "View Result";
+                                                }
+                                            @endphp
+                                            <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
+                                                 <a class="flex text-dark" href="#">
+                                                    {{ $exam->exam->title }}
+                                                </a>
+                                                <div>
+                                                    <span class="text-dark bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{ $exam->exam->exam_type }}</span>
+                                                    <a href="{{ route('question', [$batch->slug, $exam->exam->slug]) }}" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{$view_result}}</a>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <div class="accordion__menu-link">
+                                                <span class="icon-holder icon-holder--small icon-holder--dark rounded-circle d-inline-flex icon--left">
+                                                    <i class="fad fa-empty-set"></i>
+                                                </span>
+                                                <a class="flex" href="#">No exams found </a>
+                                            </div>
+                                        @endforelse
+                                    </div>
                                 </div>
                             </div>
                         @empty
