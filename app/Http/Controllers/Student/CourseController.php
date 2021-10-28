@@ -61,6 +61,15 @@ class CourseController extends Controller
                     'batch'
                 ));
             }
+        } else {
+            return view('student.pages_new.course.preview_guest', compact(
+                'course',
+                'course_topics',
+                'course_lectures',
+                'course_topic_lectures',
+                'enrolled',
+                'batch'
+            ));
         }
      
         

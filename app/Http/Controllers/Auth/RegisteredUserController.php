@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use GuzzleHttp\Client;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
@@ -67,7 +68,8 @@ class RegisteredUserController extends Controller
                 Cache::forget(request()->ip . '_input');
                 // event(new Registered($user));
 
-                return redirect(RouteServiceProvider::StudentHOME);
+               // return redirect(RouteServiceProvider::StudentHOME);
+               return redirect(Redirect::intended(RouteServiceProvider::StudentHOME)->getTargetUrl());
             }
         }
 

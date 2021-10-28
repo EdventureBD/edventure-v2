@@ -52,7 +52,7 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => 'required|string|max:50',
+        'title' => 'required|string|max:200',
         'courseId' => 'required',
         'topicId' => 'required',
         'lectureId' => 'required',
