@@ -2865,7 +2865,7 @@ var Dashboard = function Dashboard(_ref) {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
                   className: "profile-photo",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
-                    src: user.image ? "/storage/" + user.image : "/admin/dist/img/avatar.png",
+                    src: user.image ? "/storage/" + user.image : "/img/landing/student.png",
                     className: "w-10 img-thumbnail bshadow bradius-10",
                     alt: ""
                   })

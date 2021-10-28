@@ -111,7 +111,7 @@ const Dashboard = ({ user }) => {
                         <div className="row pt-5">
                             <div className="col-5">
                                 <div className="profile-photo">
-                                    <img src={user.image ? "/storage/" + user.image : "/admin/dist/img/avatar.png"} className="w-10 img-thumbnail bshadow bradius-10" alt="" />
+                                    <img src={user.image ? "/storage/" + user.image : "/img/landing/student.png"} className="w-10 img-thumbnail bshadow bradius-10" alt="" />
                                 </div>
                                 <h3 className="pt-2 text-sm text-black fw-600 mb-4">{user.name}</h3>
                                 {/* <div className="p-3 bshadow text-xxsm text-gray bradius-10 text-left bg-purple-light-50">
