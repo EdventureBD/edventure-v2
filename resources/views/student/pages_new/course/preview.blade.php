@@ -67,7 +67,7 @@
             @endif
 
             <div class="page-separator mt-5">
-                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">Table of Contents</div>
+                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">Solution Of The Exams</div>
             </div>
             <div class="row">
                 <div class="col-lg-12">

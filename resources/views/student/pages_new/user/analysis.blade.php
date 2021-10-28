@@ -1,9 +1,11 @@
 <x-landing-layout headerBg="white">
     <div class="page-section border-bottom-2 py-5 bg-light-gray">
         <div class="container page__container w-50">
-            <h3 class="text-center text-sm mb-3 fw-600">Topic-Wise Analysis</h3>
+            <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('profile')}}"><i class="fas fa-angle-double-left"></i> Dashbord</a>
+            <h3 class="text-center text-sm mb-3 fw-600">Topic-Wise {{strtoupper(request()->type)}} {{!empty(request()->analysis) ? ucwords(request()->analysis) : ""}} Analysis</h3>
             <div class="page-separator">
-                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">{{$course->title}}</div>
+                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">
+                    {{$course->title}}</div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -42,9 +44,9 @@
                                         @if($details['topic_id'] == $topic->id)
                                         <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600">
                                             <a class="flex text-dark" href="">
-                                                {{$tag}}
+                                                <b>Topic:</b> {{$tag}}
                                             </a>
-                                            <div>{{$details['score'] ?? $details['score']}}%</div>
+                                            <div><b>Accuracy:</b> {{$details['score'] ?? $details['score']}}%</div>
                                         </div>
                                         @endif
                                     @endforeach

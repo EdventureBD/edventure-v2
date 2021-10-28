@@ -2169,7 +2169,7 @@ var CourseCard = function CourseCard(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
           href: courseUrl,
           className: "btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4",
-          children: goCourse ? "Go to course" : "Enroll this course"
+          children: goCourse ? "Go to course" : "Enroll in course"
         })]
       })]
     })
