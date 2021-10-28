@@ -2111,7 +2111,7 @@ var CourseCard = function CourseCard(_ref) {
       data = _ref.data,
       changeActiveBatch = _ref.changeActiveBatch;
   // console.log(benrolement);
-  var courseUrl = "/batch/" + goCourse === true ? benrolement.batch.slug : benrolement.slug;
+  var courseUrl = goCourse === true ? "/batch/" + benrolement.batch.slug : "/batch/" + benrolement.slug;
   var course = goCourse ? benrolement.course : benrolement;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "single-course bshadow bradius-15 mb-4 c-point p-4 ".concat(((_data$active_batch = data.active_batch) === null || _data$active_batch === void 0 ? void 0 : _data$active_batch.batch_id) == benrolement.batch_id ? "bg-purple-light-50" : ""),
@@ -2147,11 +2147,11 @@ var CourseCard = function CourseCard(_ref) {
               className: "mb-3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
                 className: "fas fa-book-open"
-              }), " 24 Lesson"]
+              }), " 8 Exams"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
                 className: "fas fa-file-alt"
-              }), " 6 Assignments"]
+              }), " Strength, Weakness"]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "col-6 pr-0",
