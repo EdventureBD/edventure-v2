@@ -22,7 +22,6 @@ class CourseTopicController extends Controller
 
     public function customCourseTopic($course_category, $course)
     {
-        echo "akib";
         dd($course_category);
     }
 

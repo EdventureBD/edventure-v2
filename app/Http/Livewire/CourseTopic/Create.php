@@ -27,7 +27,7 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => 'required|string|max:50|unique:course_topics,title',
+        'title' => 'required|string|max:200|unique:course_topics,title',
         'course_id' => ['required'],
         'categories' => ['required']
     ];
@@ -37,7 +37,7 @@ class Create extends Component
         $data = $this->validate();
         $course_topic = new CourseTopic;
         $course_topic->title = $data['title'];
-        $course_topic->slug = Str::slug($data['title']);
+        $course_topic->slug = (string) Str::uuid();
         $course_topic->course_id = $data['course_id'];
         $course_topic->order = 0;
         $course_topic->status = 1;
