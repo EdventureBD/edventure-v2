@@ -18,7 +18,7 @@ class Edit extends Component
     public function updatedTitle()
     {
         $this->validate([
-            'title' => ['required', 'string', 'max:50', 'regex:[^[a-zA-Z][a-zA-Z0-9. ,$;]+$]'],
+            'title' => ['required', 'string', 'max:50'],
         ]);
     }
 
@@ -30,7 +30,7 @@ class Edit extends Component
     }
 
     protected $rules = [
-        'title' => ['required', 'string', 'max:50', 'regex:[^[a-zA-Z][a-zA-Z0-9. ,$;]+$]'],
+        'title' => ['required', 'string', 'max:50'],
         'courseId' => ['required']
     ];
 

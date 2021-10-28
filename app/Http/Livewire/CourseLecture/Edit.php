@@ -49,7 +49,7 @@ class Edit extends Component
     }
 
     protected $rules = [
-        'title' => ['required', 'string', 'max:50', 'regex:[^[a-zA-Z][a-zA-Z0-9. ,$;]+$]'],
+        'title' => ['required', 'string', 'max:50'],
         'url' => ['required', 'string', 'max:9'],
         'courseId' => 'required',
         'topicId' => 'required',
