@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\URL;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,8 @@ class LoginController extends Controller
         $user = User::where('email', $data->email)->first();
         if ($user) {
             Auth::login($user);
-            return redirect(RouteServiceProvider::StudentHOME);
+            return redirect(URL::previous());
+           // return redirect(RouteServiceProvider::StudentHOME);
         } else {
             return redirect(route('login'))->withErrors(['msg' => 'Email not registered yet!']);
         }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
@@ -37,7 +38,10 @@ class AuthenticatedSessionController extends Controller
         }
 
         if (auth()->user()->is_admin == 0) {
-            return redirect(RouteServiceProvider::StudentHOME);
+
+            return redirect(Redirect::intended(RouteServiceProvider::StudentHOME)->getTargetUrl());
+            // return redirect(URL::previous());
+            // return redirect(RouteServiceProvider::StudentHOME);
         }
     }
 
