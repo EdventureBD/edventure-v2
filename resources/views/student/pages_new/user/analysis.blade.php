@@ -39,14 +39,21 @@
                                 </div>
                                 <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
                                     id="course-toc-{{ $topic->id }}">
-                                    
+                                    <div class="row">
+                                        <div class="col-6 text-left">
+                                            <div class="pl-3 pt-2"><b>Topic</b></div>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <div class="pr-3 pt-2"> <b  >Accuracy</b></div>
+                                            </div>
+                                    </div>
                                     @foreach($atag_details as $tag=>$details)
                                         @if($details['topic_id'] == $topic->id)
                                         <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600">
                                             <a class="flex text-dark" href="">
-                                                <b>Topic:</b> {{$tag}}
+                                                 {{$tag}}
                                             </a>
-                                            <div><b>Accuracy:</b> {{$details['score'] ?? $details['score']}}%</div>
+                                            <div> {{$details['score'] ?? $details['score']}}%</div>
                                         </div>
                                         @endif
                                     @endforeach
