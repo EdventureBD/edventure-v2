@@ -128,14 +128,17 @@ const Dashboard = ({ user }) => {
                                 </div> */}
                             </div>
                             <div className="col-7">
-                                <div className="p-3 bshadow text-xxsm text-gray bradius-10 d-flex justify-content-between">
+                                <div className="bshadow bradius-10 ">
+                                <div className="p-3  text-xxsm text-gray d-flex justify-content-between">
                                     <div className="p-3 bshadow text-xxsm text-gray bradius-10 w-auto d-inline-block">
                                         <img src="/img/profile/badge_rank.svg" alt="" />
                                     </div>
                                     <div>
                                         <h4 className="text-purple text-sm text-right">Rank</h4>
                                         <h4 className="text-purple text-md fw-600"># 12th</h4>
+                                        <p className="text-right">Updates daily.</p>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
