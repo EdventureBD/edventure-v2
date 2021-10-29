@@ -9,7 +9,6 @@
             <a class="nav-link text-purple-half" href="{{route('home')}}">HOME</a>
             </li>
             <li class="nav-item has-dot">
-            <a class="nav-link text-purple-half" href="#">EXAM</a>
             </li>
 
             @if (Route::has('login'))
@@ -21,7 +20,7 @@
             @endif
 
             <li class="nav-item has-dot">
-            <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>
+            <a class="nav-link text-purple-half" href="{{route('course')}}">EXAMS</a>
             </li>
 
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">

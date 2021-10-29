@@ -30,39 +30,18 @@
             <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
             <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2021 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
             <a href="#" class="btn fw-800 text-xxsm text-white bg-purple px-4">HSC</a>
-            <div class="row my-5">
-                <div class="col-md-3">
-                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/physics.png')">
-                        <img src="/img/landing/exam_1.png" width="50" alt="">
-                        <h5 class="text-sm mt-3">Physics</h5>
+            <div class="row justify-content-center my-5 ">
+                @foreach ($courses as $course)
+                <div class="col-md-4 col-lg-3">
+                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url({{asset($course->banner)}}); " >
+                        <img src="{{asset($course->icon)}}" width="50" alt="">
+                        <h5 class="text-sm mt-3">{{$course->title}}</h5>
                         {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
-                        <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
+                        <a href="{{route('course-preview', $course->slug)}}" class="btn btn-outline text-purple mt-4">Go To Exam</a>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/chemistry.png')">
-                        <img src="/img/landing/exam_2.png" width="50" alt="">
-                        <h5 class="text-sm mt-3">Chemistry</h5>
-                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
-                        <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url('/img/landing/math.png')">
-                        <img src="/img/landing/exam_3.png" width="50" alt="">
-                        <h5 class="text-sm mt-3">Math</h5>
-                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
-                        <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-exam mx-auto p-4 mb-md-0" style="background-image: url('/img/landing/bio.png')">
-                        <img src="/img/landing/exam_4.png" width="50" alt="">
-                        <h5 class="text-sm mt-3">Biology</h5>
-                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
-                        <a href="#" class="btn btn-outline text-purple mt-4">Go To Exam</a>
-                    </div>
-                </div>
+               @endforeach
+                
             </div>
             <a href="{{route('about_us')}}" class="btn text-xxsm text-white bg-purple px-4 py-2">Learn more about us</a>
         </div>
