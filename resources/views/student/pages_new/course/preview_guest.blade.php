@@ -127,24 +127,28 @@
 <x-landing-layout headerBg="white">
     <div class="course-info bg-gradient-purple py-5 px-3 px-md-0">
         <div class="container">
-            <div class="row">
-                <h1 class="text-white">{{ $course->title }}</h1>
-                <p class="lead text-white-50 measure-hero-lead">{{ $course->description }}</p>
-                <div class="d-flex align-items-center justify-content-start">
-                    <a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2">Watch
-                        trailer <i class="fas fa-play ml-2"></i>
-                    </a>
-                    @if ($enrolled)
-                        @if ($enrolled->accepted == 1)
-                            <a href="{{ route('batch-lecture', $batch->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Go to your
-                                batch</a>
-                        @elseif($enrolled->accepted == 0)
-                            <a href="#" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Admin will accept your request. Please wait</a>
-                        @endif
-                    @else
-                        <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Enroll Now</a>
-                    @endif
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="text-white">{{ $course->title }}</h1>
+                    <p class="lead text-white-50 measure-hero-lead">{{ $course->description }}</p>
                 </div>
+               <div class="col-md-4">
+                   <div class="d-flex align-items-center justify-content-start">
+                       <a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2">Watch
+                           trailer <i class="fas fa-play ml-2"></i>
+                       </a>
+                       @if ($enrolled)
+                           @if ($enrolled->accepted == 1)
+                               <a href="{{ route('batch-lecture', $batch->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Go to your
+                                   batch</a>
+                           @elseif($enrolled->accepted == 0)
+                               <a href="#" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Admin will accept your request. Please wait</a>
+                           @endif
+                       @else
+                           <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Enroll Now</a>
+                       @endif
+                   </div>
+               </div>
             </div>
         </div>
     </div>

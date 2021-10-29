@@ -9,7 +9,7 @@
                     <p class="text-white">{{ $course->description }}</p>
                 </div>
                 <div class="col-md-5">
-                    <p class="text-xsm text-white-50 font-weight-light m-0">
+                    <p class="text-xsm text-white font-weight-light m-0">
                         Your batch days running : {{ $accessedDays->individual_batch_days }} days <br>
                         You have bought : {{ $accessedDays->accessed_days }} days <br>
                         Days remaining :
