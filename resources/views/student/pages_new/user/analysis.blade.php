@@ -49,7 +49,7 @@
                                     </div>
                                     @foreach($atag_details as $tag=>$details)
                                         @if($details['topic_id'] == $topic->id)
-                                        <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600">
+                                        <div class="bg-purple-light accordion__menu-link d-flex justify-content-between align-items-center  mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600">
                                             <a class="flex text-dark" href="">
                                                  {{$tag}}
                                             </a>
