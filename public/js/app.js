@@ -3062,12 +3062,14 @@ var StudentChart = /*#__PURE__*/function (_Component) {
       options: {
         scales: {
           xAxes: [{
-            display: false
+            display: true,
+            beginAtZero: true
           }],
           yAxes: [{
             type: "linear",
             display: true,
-            position: "left"
+            position: "left",
+            beginAtZero: true
           }]
         },
         responsive: true
