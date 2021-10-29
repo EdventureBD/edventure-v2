@@ -44,7 +44,7 @@ class BatchController extends Controller
 
         list($exams, $specialExams) = (new BatchExam())->getBatchExams($batch->id);
 
-        $courseLectures = CourseLecture::where('topic_id', $batchTopics)->get();
+        // $courseLectures = CourseLecture::where('topic_id', $batchTopics)->get();
         // dd($specialExams);
         // foreach ($specialExams as $specialExam) {
         //     if ($specialExam->exam->special) {
