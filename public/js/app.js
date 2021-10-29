@@ -2275,15 +2275,11 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
 
 
   var submitExam = function submitExam(e) {
-    e.preventDefault();
+    e.preventDefault(); // if (state.answers.length < questions.length) {
+    //     setState({ error: true })
+    // } else {
 
-    if (state.answers.length < questions.length) {
-      setState({
-        error: true
-      });
-    } else {
-      processSubmit();
-    }
+    processSubmit(); // }
   };
 
   var processSubmit = /*#__PURE__*/function () {

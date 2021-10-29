@@ -38,11 +38,11 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
 
     const submitExam = (e) => {
         e.preventDefault();
-        if (state.answers.length < questions.length) {
-            setState({ error: true })
-        } else {
+        // if (state.answers.length < questions.length) {
+        //     setState({ error: true })
+        // } else {
             processSubmit();
-        }
+        // }
     }
 
     const processSubmit = async() => {
