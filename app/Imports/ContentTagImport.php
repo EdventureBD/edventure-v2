@@ -16,7 +16,7 @@ class ContentTagImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $slug = Str::slug($row['title']);
+        $slug = (string) Str::uuid();;
         $check = ContentTag::where('slug', $slug)->first();
         if (!$check) {
             return new ContentTag([
