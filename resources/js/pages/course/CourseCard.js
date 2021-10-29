@@ -2,7 +2,7 @@ import React from "react";
 
 const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
     // console.log(benrolement);
-    const courseUrl = goCourse === true ? "/batch/" +  benrolement.batch.slug : "/batch/"+benrolement.slug;
+    const courseUrl = goCourse === true ? "/batch/" +  benrolement.batch.slug : "/course/course-preview/"+benrolement.slug;
     const course = goCourse ? benrolement.course : benrolement;
 
     return <div className={`single-course bshadow bradius-15 mb-4 c-point p-4 ${ data.active_batch?.batch_id == benrolement.batch_id ? "bg-purple-light-50" : ""}`} onClick={()=>changeActiveBatch(benrolement)}>
