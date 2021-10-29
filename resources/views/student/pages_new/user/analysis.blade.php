@@ -53,7 +53,7 @@
                                             <a class="flex text-dark" href="">
                                                  {{$tag}}
                                             </a>
-                                            <div> {{$details['score'] ?? $details['score']}}%</div>
+                                            <div> {{!empty($details['score']) ? $details['score'] : 0}}%</div>
                                         </div>
                                         @endif
                                     @endforeach
