@@ -14,7 +14,8 @@ const Dashboard = ({ user }) => {
             related_courses: [],
             results: null,
             active_batch: null,
-            tag_reports: null
+            tag_reports: null,
+            chart: false
         });
 
     useEffect(() => {
@@ -23,6 +24,8 @@ const Dashboard = ({ user }) => {
 
     useEffect(() => {
         if (state.active_batch) {
+            
+            state.chart = '';
             getBatchResults();
         }
     }, [state.active_batch])
@@ -40,6 +43,8 @@ const Dashboard = ({ user }) => {
     }
 
     const getBatchResults = async () => {
+        // setState({results :{labels: ["Exam"], mcq: [0], cq: [0]}});
+
         const res = await ProfileApis.batchResults({ active_batch_id: state.active_batch.batch_id });
         if (res.success) {
             setState({
@@ -55,7 +60,7 @@ const Dashboard = ({ user }) => {
     const changeActiveBatch = (batch) => {
         setState({
             active_batch: batch
-        })
+        });
     }
 
     const { batch_enrolement, related_courses, results, tag_reports, active_batch } = state;
@@ -83,6 +88,9 @@ const Dashboard = ({ user }) => {
             return <CourseCard key={"bt_en_" + renrolement.id} data={state} benrolement={renrolement} goCourse={false} />
         })
     }
+    // console.log(results);
+    
+    if (results?.mcq.length > 0 || results?.mcq.length > 0) state.chart = <StudentChart results={results} />;
 
     return <div>
         <Sidebar />
@@ -132,10 +140,10 @@ const Dashboard = ({ user }) => {
                             </div>
                         </div>
                         {tag_reports ? <Analysis {...tag_reports} course={active_batch.course} /> : ""}
-                        {results && (results.mcq.length > 0 || results.cq.length > 0) ? <div className=" mt-5">
+                        <div className=" mt-5">
                             <h3 className="text-sm text-black fw-600 mb-3">Progress curve</h3>
-                            <StudentChart results={results} />
-                        </div> : ''}
+                            {state.chart}
+                        </div>
                     </div>
                 </div>
             </div>

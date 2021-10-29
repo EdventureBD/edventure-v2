@@ -2667,7 +2667,8 @@ var Dashboard = function Dashboard(_ref) {
     related_courses: [],
     results: null,
     active_batch: null,
-    tag_reports: null
+    tag_reports: null,
+    chart: false
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -2678,6 +2679,7 @@ var Dashboard = function Dashboard(_ref) {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (state.active_batch) {
+      state.chart = '';
       getBatchResults();
     }
   }, [state.active_batch]);
@@ -2814,8 +2816,12 @@ var Dashboard = function Dashboard(_ref) {
         goCourse: false
       }, "bt_en_" + renrolement.id);
     });
-  }
+  } // console.log(results);
 
+
+  if ((results === null || results === void 0 ? void 0 : results.mcq.length) > 0 || (results === null || results === void 0 ? void 0 : results.mcq.length) > 0) state.chart = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_StudentChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    results: results
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       className: "dashboard-content",
@@ -2896,15 +2902,13 @@ var Dashboard = function Dashboard(_ref) {
               })]
             }), tag_reports ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Analysis__WEBPACK_IMPORTED_MODULE_7__["default"], _objectSpread(_objectSpread({}, tag_reports), {}, {
               course: active_batch.course
-            })) : "", results && (results.mcq.length > 0 || results.cq.length > 0) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            })) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: " mt-5",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
                 className: "text-sm text-black fw-600 mb-3",
                 children: "Progress curve"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_StudentChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                results: results
-              })]
-            }) : '']
+              }), state.chart]
+            })]
           })]
         })
       })
@@ -3007,103 +3011,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+var _this = undefined;
 
 
 
 
-var StudentChart = /*#__PURE__*/function (_Component) {
-  _inherits(StudentChart, _Component);
-
-  var _super = _createSuper(StudentChart);
-
-  function StudentChart(props) {
-    var _this;
-
-    _classCallCheck(this, StudentChart);
-
-    _this = _super.call(this, props);
-    _this.options = {
-      type: 'line',
-      data: {
-        labels: props.results.labels,
-        datasets: [{
-          label: "MCQ",
-          backgroundColor: 'rgba(251, 134, 224, 0.2)',
-          borderColor: '#FB86E0',
-          data: props.results.mcq
-        }, {
-          label: "CQ",
-          backgroundColor: 'rgba(88, 64, 184, 0.2)',
-          borderColor: '#5840B8',
-          data: props.results.cq
+var StudentChart = function StudentChart(props) {
+  var chart = '';
+  var canvas = '';
+  var ctx = '';
+  var options = {
+    type: 'line',
+    data: {
+      labels: props.results.labels,
+      datasets: [{
+        label: "MCQ",
+        backgroundColor: 'rgba(251, 134, 224, 0.2)',
+        borderColor: '#FB86E0',
+        data: props.results.mcq
+      }, {
+        label: "CQ",
+        backgroundColor: 'rgba(88, 64, 184, 0.2)',
+        borderColor: '#5840B8',
+        data: props.results.cq
+      }]
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          display: true,
+          beginAtZero: true
+        }],
+        yAxes: [{
+          type: "linear",
+          display: true,
+          position: "left",
+          beginAtZero: true
         }]
       },
-      options: {
-        scales: {
-          xAxes: [{
-            display: true,
-            beginAtZero: true
-          }],
-          yAxes: [{
-            type: "linear",
-            display: true,
-            position: "left",
-            beginAtZero: true
-          }]
-        },
-        responsive: true
-      }
-    };
-    _this.toggleChart = _this.toggleChart.bind(_assertThisInitialized(_this));
-    return _this;
-  }
+      responsive: true
+    }
+  };
 
-  _createClass(StudentChart, [{
-    key: "toggleChart",
-    value: function toggleChart() {
-      this.options.type = this.options.type === 'line' ? 'bar' : 'line';
-      this.chart.destroy();
-      this.chart = new Chart(this.ctx, this.options);
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.canvas = document.querySelector('canvas');
-      this.ctx = this.canvas.getContext('2d');
-      this.chart = new Chart(this.ctx, this.options);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("canvas", {})
-      });
-    }
-  }]);
+  var toggleChart = function toggleChart() {
+    options.type = options.type === 'line' ? 'bar' : 'line';
+    chart.destroy();
+    chart = new Chart(_this.ctx, _this.options);
+  };
 
-  return StudentChart;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    canvas = document.querySelector('canvas');
+    ctx = canvas.getContext('2d');
+    chart = new Chart(ctx, options);
+  }, [props.results]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("canvas", {})
+  });
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StudentChart);
 
