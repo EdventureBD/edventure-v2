@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Admin;
 
+use Illuminate\Support\Str;
 use App\Models\Admin\ContentTag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class ContentTagFactory extends Factory
     public function definition()
     {
         $title = $this->faker->word();
-        $slug = $this->faker->slug;
+        $slug = (string) Str::uuid();
         $courseId = $this->faker->numberBetween($min = 1, $max = 7);
         $courseTopic = $this->faker->numberBetween($min = 1, $max = 20);
         $courseLecture = $this->faker->numberBetween($min = 1, $max = 20);
