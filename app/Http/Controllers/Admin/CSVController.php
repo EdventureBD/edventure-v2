@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\ExamExport;
 use App\Exports\SlugExport;
+use App\Imports\UserImport;
 use Illuminate\Http\Request;
 use App\Exports\CourseExport;
 use App\Exports\ContentTagExport;
@@ -63,6 +64,17 @@ class CSVController extends Controller
         $excel = Excel::import(new ContentTagImport, $request->file('file'));
         if ($excel) {
             return back()->with('status', 'Successfully uploaded content tags');
+        }
+    }
+
+    public function UserImportCSV(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,xsl,xlsx',
+        ]);
+        $excel = Excel::import(new UserImport, $request->file('file'));
+        if ($excel) {
+            return back()->with('status', 'Successfully imported user');
         }
     }
 

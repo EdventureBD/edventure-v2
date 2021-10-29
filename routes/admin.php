@@ -172,6 +172,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     Route::get('download-content-tag-as-csv', [CSVController::class, 'contentTagExportCSV'])->name('contentTagExportCSV');
     Route::post('upload-content-tag-as-csv', [CSVController::class, 'contentTagImportCSV'])->name('contentTagImportCSV');
+    Route::post('upload-user-as-csv', [CSVController::class, 'userImportCSV'])->name('userImportCSV');
 
     Route::get('download-exam-as-csv', [CSVController::class, 'examExportCSV'])->name('examExportCSV');
     Route::get('download-slug', [CSVController::class, 'slugExport'])->name('slugExport');
