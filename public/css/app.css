@@ -11089,6 +11089,14 @@ a:hover {
   opacity: 0.5;
 }
 
+.page-link {
+  color: #653092;
+}
+
+.page-link:hover {
+  color: #9f63d5;
+}
+
 .btn-register {
   font-weight: 700;
   border-radius: 40px;
@@ -11596,6 +11604,7 @@ svg.eye-icon {
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: auto;
   }
   .student-sidebar ul li {
     display: inline-block;

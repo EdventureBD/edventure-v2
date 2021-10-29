@@ -2370,7 +2370,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
 
     questionSummary.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
       href: "#qus_" + qus.id,
-      "class": "single-qus-summary ".concat(sanswer ? "bg-red" : "bg-green", " bradius-15 c-point"),
+      "class": "single-qus-summary ".concat(sanswer ? "bg-green" : "bg-red", " bradius-15 c-point"),
       children: qindex + 1
     }));
   });

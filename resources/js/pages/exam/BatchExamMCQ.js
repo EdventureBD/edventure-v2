@@ -79,7 +79,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     questions.map((qus, qindex) => {
         let sanswer = state.answers.find(answer => answer == qus.id + '_' + 1 || answer == qus.id + '_' + 2 || answer == qus.id + '_' + 3 || answer == qus.id + '_' + 4);
         // console.log(sanswer);
-        questionSummary.push(<a href={"#qus_" + qus.id} class={`single-qus-summary ${sanswer ? "bg-red" : "bg-green"} bradius-15 c-point`}>{qindex + 1}</a>)
+        questionSummary.push(<a href={"#qus_" + qus.id} class={`single-qus-summary ${sanswer ? "bg-green" : "bg-red"} bradius-15 c-point`}>{qindex + 1}</a>)
     })
 
     return (<div className="batch-exam">
