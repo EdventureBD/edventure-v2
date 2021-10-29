@@ -40,11 +40,17 @@ class batchRank extends Command
     public function handle()
     {
         $batches = Batch::where('status', 1)->get();
+        $batch_results = [] ;
         foreach ($batches as $batch) {
-            $allResultOfBatch = ExamResult::where('batch_id', $batch->id)
-                ->groupby('student_id')
-                ->sum('gain_marks');
+           $batch_exam_results = ExamResult::where('batch_id', $batch->id)->get();
+           $batch_results[$batch->id] = [];
+           foreach($batch_exam_results as $result) {
+            //    if (!isset($batch_results[$batch->id])) {
+            //         $batch_results[$batch->id] = [];
+            //    }
+            $batch_results[$batch->id][$result->student_id] += $result->gain_marks;
+           }
         }
-        return $batches;
+        dd($batch_results);
     }
 }

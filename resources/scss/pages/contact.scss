@@ -1,0 +1,411 @@
+
+
+.contact{
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.contact h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 60px;
+    color: #653092;
+    font-weight: 400;
+    margin-top: 130px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.contact p {
+    font-family: 'Zen Kurenaido', sans-serif;
+    color: #B298C9;
+    font-size: 26px;
+    margin-bottom: 60px;
+    font-weight: bold;
+}
+
+
+
+.shape-a{
+    width: 62.3%;
+    height: auto;
+    background-color: rgba(176, 125, 219, 0.17);
+    border-radius: 448.5px 0px 0px 0px;
+    z-index: 1;
+}
+
+.shape-b{
+    width: 37.7%;
+    height: auto;
+    background-color: rgba(101, 48, 146, 0.26);
+    border-radius: 0px;
+    z-index: 1;
+}
+
+.form-box{
+    width: 70%;
+    height: auto;
+    background-color: rgba(48, 48, 48, 0.97);
+    border-radius: 98px;
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-bottom: 10%;
+}
+
+.form-box h3 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 36px;
+    padding-top: 15%;
+    padding-bottom: 10%;
+}
+
+.contact-box{
+    width: 95%;
+    height: auto;
+    background-color: rgba(48, 48, 48, 0.9);
+    border-radius: 98px;
+    margin-top: 40%;
+    margin-left: 3%;
+}
+
+.btn-submit {
+    padding: 11px 68px;
+    background-color: #996FBC;
+    color: white;
+    border: 0;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10%;
+    transition: all .4s;
+    margin-bottom: 15%;
+}
+
+
+.btn-submit:hover{
+    opacity: 0.8;
+}
+
+.icon-box {
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 15%;
+}
+
+
+
+
+.form-box h3 span {
+    color: #996FBC;
+}
+
+.form-group {
+    padding-left: 60px;
+}
+
+
+.form-group label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 20px;
+    color: #7B7B7B;
+
+}
+
+form input {
+        outline: 0;
+        border: 0;
+        border-bottom-color: currentcolor;
+        border-bottom-style: none;
+        border-bottom-width: 0px;
+        background-color: transparent;
+        border-bottom: 2px solid #474747;
+        width: calc(100% - 80px);
+        padding-top: 20px;
+        color: white;
+        font-size: 20px;
+}
+
+#name{
+    margin-bottom: 20px;
+}
+
+#e-mail{
+    margin-bottom: 20px;
+}
+
+#message{
+    margin-bottom: 20px;
+}
+
+.contact-box h3 {
+    font-size: 45px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    color: #653092;
+}
+
+.contact-box h3 span{
+    font-size: 45px;
+    font-weight: 400;
+    color: white;
+}
+
+.contact-box p {
+    color: white;
+    font-size: 23px;
+    font-family: 'Zen Kurenaido', sans-serif;
+    font-weight: 400;
+    margin-top: 25px;
+}
+
+.contact-box h4 {
+    font-family: 'Oswald', sans-serif;
+    color: #CECECE;
+    font-size: 36px;
+    font-weight: 400;
+    margin-top: 25px;
+}
+
+.text-box {
+    padding-top: 20%;
+    padding-left: 10%;
+}
+
+.fa.fa-twitter {
+    color: rgba(48, 48, 48, 0.9);
+    font-size: 40px;
+    background-color: #CECECE;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+.fa.fa-linkedin {
+    color: rgba(48, 48, 48, 0.9);
+    font-size: 40px;
+    background-color: #996FBC;
+    padding: 15px;
+    border-radius: 50%;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.fa-facebook-official {
+    color: #CECECE;
+    font-size: 70px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.fa.fa-twitter:hover{
+    opacity: 0.5;
+}
+
+.fa.fa-linkedin:hover{
+    opacity: 0.5;
+}
+
+.fa-facebook-official:hover{
+    opacity: 0.5;
+}
+.map-container{
+    width: 100%;
+    height: auto;
+}
+
+.map {
+    margin-top: -20%;
+    position: relative;
+}
+
+.building {
+    position: absolute;
+    top: 20%;
+    right: 0;
+    z-index: 1;
+}
+
+@media screen and (min-width: 1700px) {
+
+    .form-box h3 {
+        font-size: 50px;
+    }
+
+    .contact-box h3 {
+        font-size: 50px;
+    }
+
+    .contact-box h3 span {
+        font-size: 50px;
+    }
+
+    .btn-submit {
+        padding: 15px 68px;
+    }
+
+    .contact p {
+        font-size: 30px;
+    }
+
+    .contact-box h4 {
+        font-size: 50px;
+    }
+
+}
+
+@media screen and (max-width:1200px) {
+
+    .contact p {
+        font-size: 24px;
+    }
+
+    .contact-box p {
+        font-size: 20px;
+    }
+
+    .fa.fa-linkedin {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+    
+}
+
+@media screen and (max-width:992px) {
+
+    .contact p {
+        font-size: 20px;
+    }
+    .contact-box h3 {
+        font-size: 35px;
+    }
+    .contact-box h3 span {
+        font-size: 35px;
+    }
+
+    .fa.fa-linkedin {
+
+        font-size: 30px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .fa.fa-twitter {
+        font-size: 30px;
+    }
+    
+    .fa-facebook-official {
+
+        font-size: 60px;
+
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .contact p {
+        font-size: 20px;
+    }
+
+        .shape-a {
+        width: 100%;
+        height: auto;
+    }
+
+    .shape-b {
+        width: 100%;
+        height: auto;
+        border-radius: 0px 0px 448.5px 0px;
+    }
+
+    .contact-box {
+        width: 60%;
+         margin-top: 10%;
+        margin-left: 25%;
+        margin-bottom: 30%;
+    }
+    
+}
+
+@media screen and (max-width: 576px) {
+
+    .form-box {
+        margin-left: 25%;
+    }
+
+    .form-box h3 {
+        font-size: 30px;
+    }
+    
+}
+
+
+@media screen and (max-width: 575px) {
+    .shape-a{
+        border-radius: 250px 0px 0px 0px;
+}
+
+    .form-box {
+    width: 85%;
+    border-radius: 70px;
+    margin-left: 12%;
+    margin-top: 25%;
+}
+
+.form-box h3{
+    font-size: 25px;
+}
+
+.shape-b {
+    border-radius: 0px 0px 250.5px 0px;
+}
+
+.contact-box {
+    width: 80%;
+    margin-top: 12%;
+    margin-left: 12%;
+    border-radius: 70px;
+}
+
+.form-box h3{
+    font-size: 25px;
+    }
+
+    form input {
+        width: calc(100% - 41px);
+        padding-top: 5%;
+        color: white;
+        font-size: 20px;
+    }
+
+    .form-group {
+        padding-left: 15%;
+    }
+
+    .btn-submit {
+        padding: 10px 50px;
+        margin-left: 10%;
+    }
+
+    .fa.fa-linkedin {
+
+        font-size: 27px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .fa.fa-twitter {
+        font-size: 25px;
+    }
+    
+    .fa-facebook-official {
+
+        font-size: 55px;
+
+    }
+
+    .icon-box {
+        padding-bottom: 15%;
+    }
+
+}
