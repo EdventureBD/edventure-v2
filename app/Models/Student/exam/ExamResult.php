@@ -45,19 +45,22 @@ class ExamResult extends AppModel
         $cq_labels = ['Exam'];
         $mcq = [0];
         $cq = [0];
-        $n =1;
+        $n_mcq =1;
+        $n_cq =1;
         foreach ($results as $result) {
 
             if ($result->exam->exam_type == Edvanture::MCQ) {
-                array_push($mcq_labels, 'Exam-'.$n);
+                array_push($mcq_labels, 'Exam-'.$n_mcq);
                 $mpercentage = round(($result->gain_marks * 100) / $result->exam->marks);
                 array_push($mcq, $mpercentage);
+                $n_mcq++;
             } else if ($result->exam->exam_type == Edvanture::CQ) {
-                array_push($cq_labels, 'Exam-'.$n);
+                array_push($cq_labels, 'Exam-'.$n_cq);
                 $percentage = round(($result->gain_marks * 100) / $result->exam->marks);
                 array_push($cq, $percentage);
+                $n_cq++;
             }
-            $n++;
+           
         }
         $labels = count($mcq_labels) > count($cq_labels) ? $mcq_labels : $cq_labels;
         return ['labels' => $labels, 'mcq' => $mcq, 'cq' => $cq];
