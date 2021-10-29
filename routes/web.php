@@ -43,6 +43,10 @@ Route::get('/about-us', function(){
     return view('landing.about_us');
 })->name('about_us');
 
+Route::get('/contact-us', function(){
+    return view('landing.contact_us');
+})->name('contact_us');
+
 
 Route::get('/test-otp', function() {
     return view('test_otp');
