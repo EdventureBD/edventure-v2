@@ -42,9 +42,9 @@
                                     
                                     @forelse ($specialExams as $specialExam)
                                         @php
-                                            $sp_view_result = "Start Exam";
-                                            if (($specialExam->exam->exam_type == \App\Utils\Edvanture::MCQ && $specialExam->examResult->count() > 0) || ($specialExam->exam->exam_type == \App\Utils\Edvanture::CQ && $specialExam->cqExamPaper->count() > 0)) {
-                                                $sp_view_result = "View Result";
+                                           $sp_view_result = "View Result";
+                                            if ($specialExam->canAttemp ) {
+                                                $sp_view_result = "Start Exam";
                                             }
                                         @endphp
                                         <div class="accordion__menu-link bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow">
@@ -108,9 +108,9 @@
                                         <p class="h6 pt-3" style="text-align: center;">Exams or Assignment</p>
                                         @forelse($exams as $exam)
                                             @php
-                                                $view_result = "Start Exam";
-                                                if (($exam->exam->exam_type == \App\Utils\Edvanture::MCQ && $exam->examResult->count() > 0) || ($exam->exam->exam_type == \App\Utils\Edvanture::CQ && $exam->cqExamPaper->count() > 0)) {
-                                                    $view_result = "View Result";
+                                            $view_result = "View Result";
+                                                if ($exam->canAttemp ) {
+                                                    $view_result = "Start Exam";
                                                 }
                                             @endphp
                                             <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">

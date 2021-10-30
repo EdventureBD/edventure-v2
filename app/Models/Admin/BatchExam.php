@@ -5,9 +5,11 @@ namespace App\Models\Admin;
 use App\Models\Admin\Exam;
 use App\Models\Student\exam\CqExamPaper;
 use App\Models\Student\exam\ExamResult;
+use App\Utils\Edvanture;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class BatchExam extends Model
 {
@@ -46,7 +48,39 @@ class BatchExam extends Model
                 $exams[] = $exam;
             }
         }
-        // dd($specialExams);
+        foreach ($specialExams as $spExam) {
+            $spExam->canAttemp = true;
+            if ($spExam->exam->exam_type == Edvanture::MCQ && $spExam->examResult->count() > 0) {
+                foreach ($spExam->examResult as $exResult) {
+                    if ($exResult->student_id == Auth::user()->id) {
+                        $spExam->canAttemp = false;
+                    }
+                }
+            } else if ($spExam->exam->exam_type == Edvanture::CQ && $spExam->cqExamPaper->count() > 0) {
+                foreach ($spExam->cqExamPaper as $cqResult) {
+                    if ($cqResult->student_id == Auth::user()->id) {
+                        $spExam->canAttemp = false;
+                    }
+                }
+            }
+        }
+        foreach ($exams as $exam) {
+            $exam->canAttemp = true;
+            if ($exam->exam->exam_type == Edvanture::MCQ && $exam->examResult->count() > 0) {
+                foreach ($exam->examResult as $eexResult) {
+                    if ($eexResult->student_id == Auth::user()->id) {
+                        $exam->canAttemp = false;
+                    }
+                }
+            } else if ($exam->exam->exam_type == Edvanture::CQ && $exam->cqExamPaper->count() > 0) {
+                foreach ($exam->cqExamPaper as $ecqResult) {
+                    if ($ecqResult->student_id == Auth::user()->id) {
+                        $exam->canAttemp = false;
+                    }
+                }
+            }
+        }
+        // dd($exams);
         return [$exams, $specialExams];
     }
 }
