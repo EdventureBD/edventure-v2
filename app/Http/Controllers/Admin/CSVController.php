@@ -69,9 +69,9 @@ class CSVController extends Controller
 
     public function UserImportCSV(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:csv,xsl,xlsx',
-        ]);
+        // $request->validate([
+        //     'file' => 'required|mimes:csv,xsl,xlsx',
+        // ]);
         $excel = Excel::import(new UserImport, $request->file('file'));
         if ($excel) {
             return back()->with('status', 'Successfully imported user');
