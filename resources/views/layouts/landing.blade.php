@@ -22,6 +22,11 @@
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
     </head>
     <body>
+        <script>
+            if (location.protocol !== 'https:' && location.hostname !== '127.0.0.1') {  
+                location.replace(`https:${location.href.substring(location.protocol.length)}`);
+            }
+        </script>
         <div class="font-sans text-gray-900 antialiased" id="app">
             <div class="landing-page">
                 @include('landing.header', ['headerBg'=>$headerBg])
