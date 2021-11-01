@@ -112,7 +112,7 @@ const Dashboard = ({ user }) => {
                                 <h2 className="text-sm mb-3 text-black fw-600">Related Courses</h2>
                             </div>
                             {relatedCourses}
-                            <a href="/course" className="btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4">View all courses</a>
+                            <a href="/course" className="btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4">View all exams</a>
                         </div>
                     </div>
                     <div className="col-md-7 pl-lg-4">
@@ -135,7 +135,7 @@ const Dashboard = ({ user }) => {
                                     </div>
                                     <div>
                                         <h4 className="text-purple text-sm text-right">Rank</h4>
-                                        <h4 className="text-purple text-md fw-600"># 12th</h4>
+                                        <h4 className="text-purple text-md fw-600"># 00</h4>
                                         <p className="text-right">Updates daily.</p>
                                     </div>
                                 </div>
