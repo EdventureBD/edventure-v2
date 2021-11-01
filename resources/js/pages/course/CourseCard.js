@@ -35,7 +35,7 @@ const CourseCard = ({benrolement, goCourse=false, data, changeActiveBatch}) => {
                         </div>
                     </div>
                 </div>
-                <a href={courseUrl} className="btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4">{goCourse ? "Go to course" : "Enroll in course"}</a>
+                <a href={courseUrl} className="btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4">{goCourse ? "Go to Exam" : "Enroll in course"}</a>
             </div>
         </div>
 </div>;
