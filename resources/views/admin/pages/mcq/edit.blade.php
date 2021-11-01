@@ -163,10 +163,10 @@
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" name="answer">
                                                 <option value="" selected>Select Answer</option>
-                                                <option value="1" {{ $mcq->field1 ? 'selected' : '' }}>Option 1</option>
-                                                <option value="2" {{ $mcq->field2 ? 'selected' : '' }}>Option 2</option>
-                                                <option value="3" {{ $mcq->field3 ? 'selected' : '' }}>Option 3</option>
-                                                <option value="4" {{ $mcq->field4 ? 'selected' : '' }}>Option 4</option>
+                                                <option value="1" {{ $mcq->answer == 1 ? 'selected' : '' }}>Option 1</option>
+                                                <option value="2" {{ $mcq->answer == 2 ? 'selected' : '' }}>Option 2</option>
+                                                <option value="3" {{ $mcq->answer == 3 ? 'selected' : '' }}>Option 3</option>
+                                                <option value="4" {{ $mcq->answer == 4 ? 'selected' : '' }}>Option 4</option>
                                             </select>
                                             @error('answer')
                                                 <p style="color: red;">{{ $message }}</p>
