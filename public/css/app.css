@@ -10964,6 +10964,10 @@ a:hover {
   text-decoration: none;
 }
 
+.lh-1 {
+  line-height: 1rem;
+}
+
 .h-8 {
   height: 8rem;
 }

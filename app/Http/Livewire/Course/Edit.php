@@ -138,8 +138,6 @@ class Edit extends Component
         $this->banner = $this->course->banner;
         $this->deleteImage = $this->course->logo;
         $this->deleteBanner = $this->course->banner;
-
-
         $this->categories = CourseCategory::all();
     }
 

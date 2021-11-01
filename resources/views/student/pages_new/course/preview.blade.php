@@ -67,7 +67,8 @@
             @endif
 
             <div class="page-separator mt-5">
-                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">Solution Of The Exams</div>
+                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm"><span class="fw-700">Solution Of The Exams</span>
+                    <p class="text-gray text-xxsm fw-200 lh-1">Solution videos and PDFs will appear here after everyone has completed all the exams</p></div>
             </div>
             <div class="row">
                 <div class="col-lg-12">

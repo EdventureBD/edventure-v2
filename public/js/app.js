@@ -2169,7 +2169,7 @@ var CourseCard = function CourseCard(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
           href: courseUrl,
           className: "btn d-inline-block mt-4 fw-800 text-xxsm btn-outline text-purple px-4",
-          children: goCourse ? "Go to course" : "Enroll in course"
+          children: goCourse ? "Go to Exam" : "Enroll in course"
         })]
       })]
     })
@@ -2855,7 +2855,7 @@ var Dashboard = function Dashboard(_ref) {
               }), relatedCourses, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("a", {
                 href: "/course",
                 className: "btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4",
-                children: "View all courses"
+                children: "View all exams"
               })]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
@@ -2893,7 +2893,7 @@ var Dashboard = function Dashboard(_ref) {
                         children: "Rank"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
                         className: "text-purple text-md fw-600",
-                        children: "# 12th"
+                        children: "# 00"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
                         className: "text-right",
                         children: "Updates daily."

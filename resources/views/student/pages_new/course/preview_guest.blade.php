@@ -175,7 +175,9 @@
     <div class="page-section border-bottom-2 py-5 bg-light-gray">
         <div class="container page__container max-w-50 w-100">
             <div class="page-separator">
-                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm fw-700">Solution Of The Exams</div>
+                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm"><span class="fw-700">Solution Of The Exams</span>
+                    <p class="text-gray text-xxsm fw-200  lh-5">Solution videos and PDFs will appear here after everyone has completed all the exams</p>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -183,7 +185,7 @@
                         @forelse ($course_topics as $batchTopic)
                             <div class="accordion__item  ">
                                 <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $batchTopic->id }} " data-parent="#parent">
-                                    <div class="col-11 title text-left">
+                                    <div class="col-11 title text-md-left text-center">
                                         <span class="pl-4">{{ $batchTopic->title }} </span>
                                     </div>
                                     {{-- <div class="col-1 text-right">
