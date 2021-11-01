@@ -183,7 +183,7 @@
                         @forelse ($course_topics as $batchTopic)
                             <div class="accordion__item  ">
                                 <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $batchTopic->id }} " data-parent="#parent">
-                                    <div class="col-11 title text-left">
+                                    <div class="col-11 title text-md-left text-center">
                                         <span class="pl-4">{{ $batchTopic->title }} </span>
                                     </div>
                                     {{-- <div class="col-1 text-right">
