@@ -64,7 +64,7 @@ class CQQuestionImport implements ToModel, WithHeadingRow
                             $question_content_tag = new QuestionContentTag();
                             $question_content_tag->exam_type = 'CQ';
                             $question_content_tag->question_id = $question_id->id;
-                            $question_content_tag->content_tag_id = $content_tag_id[$i];
+                            $question_content_tag->content_tag_id = intval($content_tag_id[$i]);
                             $question_content_tag->save();
                         }
                     }
@@ -78,7 +78,7 @@ class CQQuestionImport implements ToModel, WithHeadingRow
                     'question' => $row['question'],
                     'slug' => $slug,
                     'image' => $row['image'],
-                    'marks' => $row['marks'],
+                    'marks' => intval($row['marks']),
                     'exam_id' => $this->exam->id,
                 ]);
             }

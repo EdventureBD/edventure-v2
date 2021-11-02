@@ -22,8 +22,8 @@ class UserImport implements ToModel, WithHeadingRow
                 'name' => $row['name'],
                 'email' => $row['email'],
                 'phone' => $row['phone'],
-                'is_admin' => $row['is_admin'],
-                'user_type' => $row['user_type'],
+                'is_admin' => intval($row['is_admin']),
+                'user_type' => intval($row['user_type']),
                 'password' => $row['password'],
             ]);
         }

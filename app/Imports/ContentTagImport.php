@@ -22,9 +22,9 @@ class ContentTagImport implements ToModel, WithHeadingRow
             return new ContentTag([
                 'title' => $row['title'],
                 'slug' => $slug,
-                'course_id' => $row['course_id'],
-                'topic_id' => $row['topic_id'],
-                'lecture_id' => $row['lecture_id'],
+                'course_id' => intval($row['course_id']),
+                'topic_id' => intval($row['topic_id']),
+                'lecture_id' => intval($row['lecture_id']),
                 'status' => 1,
             ]);
         }
