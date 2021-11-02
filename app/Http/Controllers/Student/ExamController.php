@@ -243,6 +243,10 @@ class ExamController extends Controller
     public function submit(Request $request, Batch $batch, Exam $exam)
     {
         if ($exam->exam_type == Edvanture::MCQ) {
+            $attempt = ExamResult::where(['student_id' => auth()->user()->id, 'exam_id' => $exam->id, 'batch_id' => $batch->id])->get();
+            if ($attempt->count() > 0) {
+                return $this->sendResponse([]);
+            }
             $questions = $request->q;
             $total = 0;
             // $number_of_attempt = 0;
@@ -259,7 +263,7 @@ class ExamController extends Controller
                 $qus_input = [];
                 $qus_input['number_of_attempt'] = $question['number_of_attempt'] + 1;
                 $qus_input['gain_marks'] = 0;
-                if ($fAns[$question['id']] == $question['answer']) {
+                if (!empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer']) {
                     $total = $total + 1;
                     $qus_input['gain_marks'] = $question['gain_marks'] + 1;
                 }
@@ -268,8 +272,8 @@ class ExamController extends Controller
 
                 //saving in the DetailsResuls
                 $input['exam_type'] = Edvanture::MCQ;
-                $input['gain_marks'] = $fAns[$question['id']] == $question['answer'] ? 1 : 0;
-                $input['mcq_ans'] = $fAns[$question['id']];
+                $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
+                $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
                 $input['question_id'] = $question['id'];
                 (new DetailsResult())->saveData($input);
 
@@ -565,9 +569,11 @@ class ExamController extends Controller
     protected function formatMcqAnswers($answers)
     {
         $for_ans = [];
-        foreach ($answers as $answer) {
-            $ans_arr = explode('_', $answer);
-            $for_ans[$ans_arr[0]] = $ans_arr[1];
+        if (!empty($answers)) {
+            foreach ($answers as $answer) {
+                $ans_arr = explode('_', $answer);
+                $for_ans[$ans_arr[0]] = $ans_arr[1];
+            }
         }
         return $for_ans;
     }
