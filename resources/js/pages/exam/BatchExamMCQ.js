@@ -3,6 +3,26 @@ import ReactDOM from 'react-dom';
 import parse from 'html-react-parser';
 import Timer from '../../components/Timer';
 import Axios from 'axios';
+import { useBeforeunload } from 'react-beforeunload';
+
+const useOnPageLeave = (handler) => {
+    useEffect(() => {
+      window.onunload = () => handler();
+  
+      window.addEventListener('onunload', (event) => {
+        handler();
+      });
+      
+      setTimeout(()=>{
+
+      return () => {
+        handler();
+              document.removeEventListener('onunload', handler);
+      };
+    }, 1000);
+
+    });
+  };
 
 const BatchExamMCQ = ({ questions, batch, exam }) => {
     console.log(questions);
@@ -16,6 +36,20 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
             timeOut: false
         });
 
+    useBeforeunload((event) => {
+        console.log(event);
+        if (!state.timeOut) {
+            event.preventDefault();
+            console.log("in prevent not");
+        }
+        console.log("in prevent");
+    });
+
+    useOnPageLeave(()=>{
+        console.log("leave page");
+        processSubmit();
+    }, 3000);
+
     let questionRows = '';
     const fields = [1, 2, 3, 4];
     let sl = 1;
@@ -27,14 +61,41 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     }
 
     // useEffect(()=>{
-    //     if (timeOut) {
-    //         pro()
-    //     }
-    // }, [])
+    //     window.addEventListener('beforeunload', (event) => {
+    //         event.returnValue = `Are you sure you want to leave fds?`;
+    //       });
+    //       return () => {
+    //               window.removeEventListener('beforeunload', handleUnload);
+    //             }
+    // }, []);
+    
+    //   return <div>Try closing the window.</div>;
 
-    // const submitOnTimOut = () => {
-    //     setState({timeOut: true});
-    // }
+    // useEffect(()=>{
+    //     // if (!state.timeOut) {
+    //         // window.location.reload(false);
+    //         window.onbeforeunload = (event) => {
+    //             const e = event || window.event;
+    //             // Cancel the event
+    //             e.preventDefault();
+    //             if (e) {
+    //                 // return;
+    //                 console.log('before submit');
+    //                e.returnValue = 'herefds'; // Legacy method for cross browser support
+    //             } else {
+    //                 console.log('after submit');
+    //                 return ' dsfew'; // Legacy method for cross browser support
+    //             }
+    //         };
+    //     // }
+    //     window.addEventListener('beforeunload', () =>{
+    //         // this.setState({appended:true});
+    //         console.log('how to face log');
+    //     });
+    //  }, [])
+
+
+
 
     const submitExam = (e) => {
         e.preventDefault();
@@ -46,6 +107,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     }
 
     const processSubmit = async() => {
+        setState({timeOut: true});
         const url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
         const res = await axios.post(url, { a: state.answers, q: questions })
             .then(response => {
