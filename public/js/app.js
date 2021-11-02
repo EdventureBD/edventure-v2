@@ -2236,6 +2236,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var useOnPageLeave = function useOnPageLeave(handler) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    // console.log("before leave fdsfds")
     window.onunload = function () {
       return handler();
     };
@@ -2243,12 +2244,10 @@ var useOnPageLeave = function useOnPageLeave(handler) {
     window.addEventListener('onunload', function (event) {
       handler();
     });
-    setTimeout(function () {
-      return function () {
-        handler();
-        document.removeEventListener('onunload', handler);
-      };
-    }, 1000);
+    return function () {
+      handler();
+      document.removeEventListener('onunload', handler);
+    };
   });
 };
 
@@ -2265,7 +2264,8 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
   }, {
     answers: [],
     error: false,
-    timeOut: false
+    timeOut: false,
+    submit: false
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -2277,14 +2277,16 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
     if (!state.timeOut) {
       event.preventDefault();
       console.log("in prevent not");
+    } else {
+      return "";
     }
 
     console.log("in prevent");
-  });
-  useOnPageLeave(function () {
-    console.log("leave page");
-    processSubmit();
-  }, 3000);
+  }); // useOnPageLeave( ()=> {
+  //     console.log('using hook')
+  //     processSubmit()
+  // }, []);
+
   var questionRows = '';
   var fields = [1, 2, 3, 4];
   var sl = 1;
@@ -2298,15 +2300,26 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       answers: answers,
       error: false
     });
-  }; // useEffect(()=>{
-  //     window.addEventListener('beforeunload', (event) => {
-  //         event.returnValue = `Are you sure you want to leave fds?`;
-  //       });
-  //       return () => {
-  //               window.removeEventListener('beforeunload', handleUnload);
-  //             }
-  // }, []);
-  //   return <div>Try closing the window.</div>;
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (!state.submit) {
+      window.addEventListener('unload', function (event) {
+        event.preventDefault();
+        processSubmit();
+        console.log('adding on unload');
+        event.returnValue = "";
+      }, true);
+      return function () {
+        console.log("removing on unload");
+        window.removeEventListener('unload', handleUnload);
+      };
+    }
+  });
+
+  var handleUnload = function handleUnload() {
+    processSubmit();
+  }; //   return <div>Try closing the window.</div>;
   // useEffect(()=>{
   //     // if (!state.timeOut) {
   //         // window.location.reload(false);
@@ -2347,7 +2360,8 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
           switch (_context.prev = _context.next) {
             case 0:
               setState({
-                timeOut: true
+                timeOut: true,
+                submit: true
               });
               url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
               _context.next = 4;
@@ -2426,7 +2440,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
 
     questionSummary.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
       href: "#qus_" + qus.id,
-      "class": "single-qus-summary ".concat(sanswer ? "bg-green" : "bg-red", " bradius-15 c-point"),
+      className: "single-qus-summary ".concat(sanswer ? "bg-green" : "bg-red", " bradius-15 c-point"),
       children: qindex + 1
     }));
   });

@@ -7,48 +7,47 @@ import { useBeforeunload } from 'react-beforeunload';
 
 const useOnPageLeave = (handler) => {
     useEffect(() => {
-      window.onunload = () => handler();
-  
-      window.addEventListener('onunload', (event) => {
-        handler();
-      });
-      
-      setTimeout(()=>{
-
-      return () => {
-        handler();
-              document.removeEventListener('onunload', handler);
-      };
-    }, 1000);
-
+        // console.log("before leave fdsfds")
+        window.onunload = () => handler();
+        window.addEventListener('onunload', (event) => {
+            handler();
+        });
+        return () => {
+            handler();
+            document.removeEventListener('onunload', handler);
+        };
     });
-  };
+};
 
 const BatchExamMCQ = ({ questions, batch, exam }) => {
     console.log(questions);
     console.log(batch);
     console.log(exam);
     const [state, setState] = useReducer(
-        (state, newState) => ({ ...state, ...newState }),
-        {
-            answers: [],
-            error: false,
-            timeOut: false
-        });
+    (state, newState) => ({ ...state, ...newState }),
+    {
+        answers: [],
+        error: false,
+        timeOut: false,
+        submit: false
+    });
 
     useBeforeunload((event) => {
         console.log(event);
         if (!state.timeOut) {
             event.preventDefault();
             console.log("in prevent not");
+        } else {
+            return "";
         }
         console.log("in prevent");
+        
     });
 
-    useOnPageLeave(()=>{
-        console.log("leave page");
-        processSubmit();
-    }, 3000);
+    // useOnPageLeave( ()=> {
+    //     console.log('using hook')
+    //     processSubmit()
+    // }, []);
 
     let questionRows = '';
     const fields = [1, 2, 3, 4];
@@ -60,14 +59,24 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
         setState({ answers: answers, error: false });
     }
 
-    // useEffect(()=>{
-    //     window.addEventListener('beforeunload', (event) => {
-    //         event.returnValue = `Are you sure you want to leave fds?`;
-    //       });
-    //       return () => {
-    //               window.removeEventListener('beforeunload', handleUnload);
-    //             }
-    // }, []);
+    useEffect(()=>{
+        if (!state.submit) {
+            window.addEventListener('unload', (event) => {
+                event.preventDefault();
+                processSubmit();
+                console.log('adding on unload');
+                    event.returnValue = "";
+              }, true);
+                return () => {
+                    console.log("removing on unload");
+                    window.removeEventListener('unload', handleUnload);
+                }
+        }
+    });
+
+    const handleUnload = () => {
+        processSubmit();
+    }
     
     //   return <div>Try closing the window.</div>;
 
@@ -107,7 +116,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     }
 
     const processSubmit = async() => {
-        setState({timeOut: true});
+        setState({timeOut: true, submit: true});
         const url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
         const res = await axios.post(url, { a: state.answers, q: questions })
             .then(response => {
@@ -141,7 +150,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     questions.map((qus, qindex) => {
         let sanswer = state.answers.find(answer => answer == qus.id + '_' + 1 || answer == qus.id + '_' + 2 || answer == qus.id + '_' + 3 || answer == qus.id + '_' + 4);
         // console.log(sanswer);
-        questionSummary.push(<a href={"#qus_" + qus.id} class={`single-qus-summary ${sanswer ? "bg-green" : "bg-red"} bradius-15 c-point`}>{qindex + 1}</a>)
+        questionSummary.push(<a href={"#qus_" + qus.id} className={`single-qus-summary ${sanswer ? "bg-green" : "bg-red"} bradius-15 c-point`}>{qindex + 1}</a>)
     })
 
     return (<div className="batch-exam">

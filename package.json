@@ -27,6 +27,7 @@
         "html-react-parser": "^1.4.0",
         "jquery": "^3.6.0",
         "popper.js": "^1.16.1",
+        "react-beforeunload": "^2.5.2",
         "slick-carousel": "^1.8.1"
     }
 }
