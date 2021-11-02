@@ -39,7 +39,7 @@ class QuestionImport implements ToModel, WithHeadingRow
                 'field2' => $row['field2'],
                 'field3' => $row['field3'],
                 'field4' => $row['field4'],
-                'answer' => $row['answer'],
+                'answer' => intval($row['answer']),
                 'explanation' => $row['explanation'],
                 'exam_id' => $this->exam->id,
                 'number_of_attempt' => 0,
