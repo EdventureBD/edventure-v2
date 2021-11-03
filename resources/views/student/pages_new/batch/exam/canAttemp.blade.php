@@ -2,7 +2,11 @@
     <div class="page-section ">
         @if ($exam->exam_type == 'MCQ')
         <div class="container">
+            
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
+            <div class="text-right">
+                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+            </div>
             <div class="result-sheet-table overflow-x-scroll">
                 <table class="table table-bordered">
                     <thead>
