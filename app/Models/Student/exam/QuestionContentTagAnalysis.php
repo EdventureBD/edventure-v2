@@ -78,26 +78,27 @@ class QuestionContentTagAnalysis extends AppModel
         $cq_tag_details = [];
         foreach ($analysis as $analyst) {
             if ($analyst->contentTag->course_id == $course_id) {
+                $contentTag = trim($analyst->contentTag->title);
                 if ($analyst->exam_type == Edvanture::MCQ) {
-                    if (!isset($gain_marks[$analyst->contentTag->title])) $gain_marks[$analyst->contentTag->title] = [];
-                    if (!isset($total_marks[$analyst->contentTag->title])) $total_marks[$analyst->contentTag->title] = [];
-                    if (!isset($gain_marks[$analyst->contentTag->title][Edvanture::MCQ])) $gain_marks[$analyst->contentTag->title][Edvanture::MCQ] = 0;
-                    if (!isset($total_marks[$analyst->contentTag->title][Edvanture::MCQ])) $total_marks[$analyst->contentTag->title][Edvanture::MCQ] = 0;
-                    $gain_marks[$analyst->contentTag->title][Edvanture::MCQ] += $analyst->gain_marks;
-                    $total_marks[$analyst->contentTag->title][Edvanture::MCQ] += 1;
+                    if (!isset($gain_marks[$contentTag])) $gain_marks[$contentTag] = [];
+                    if (!isset($total_marks[$contentTag])) $total_marks[$contentTag] = [];
+                    if (!isset($gain_marks[$contentTag][Edvanture::MCQ])) $gain_marks[$contentTag][Edvanture::MCQ] = 0;
+                    if (!isset($total_marks[$contentTag][Edvanture::MCQ])) $total_marks[$contentTag][Edvanture::MCQ] = 0;
+                    $gain_marks[$contentTag][Edvanture::MCQ] += $analyst->gain_marks;
+                    $total_marks[$contentTag][Edvanture::MCQ] += 1;
 
-                    if (!isset($mcq_tag_details[$analyst->contentTag->title])) $mcq_tag_details[$analyst->contentTag->title] = [];
-                    $mcq_tag_details[$analyst->contentTag->title]['topic_id'] = $analyst->contentTag->topic_id;
+                    if (!isset($mcq_tag_details[$contentTag])) $mcq_tag_details[$contentTag] = [];
+                    $mcq_tag_details[$contentTag]['topic_id'] = $analyst->contentTag->topic_id;
                 } else if (($analyst->exam_type == Edvanture::CQ)) {
-                    if (!isset($gain_marks[$analyst->contentTag->title])) $gain_marks[$analyst->contentTag->title] = [];
-                    if (!isset($total_marks[$analyst->contentTag->title])) $total_marks[$analyst->contentTag->title] = [];
-                    if (!isset($gain_marks[$analyst->contentTag->title][Edvanture::CQ])) $gain_marks[$analyst->contentTag->title][Edvanture::CQ] = 0;
-                    if (!isset($total_marks[$analyst->contentTag->title][Edvanture::CQ])) $total_marks[$analyst->contentTag->title][Edvanture::CQ] = 0;
-                    $gain_marks[$analyst->contentTag->title][Edvanture::CQ] += $analyst->gain_marks;
-                    $total_marks[$analyst->contentTag->title][Edvanture::CQ] += $analyst->cqQuestion->marks;
+                    if (!isset($gain_marks[$contentTag])) $gain_marks[$contentTag] = [];
+                    if (!isset($total_marks[$contentTag])) $total_marks[$contentTag] = [];
+                    if (!isset($gain_marks[$contentTag][Edvanture::CQ])) $gain_marks[$contentTag][Edvanture::CQ] = 0;
+                    if (!isset($total_marks[$contentTag][Edvanture::CQ])) $total_marks[$contentTag][Edvanture::CQ] = 0;
+                    $gain_marks[$contentTag][Edvanture::CQ] += $analyst->gain_marks;
+                    $total_marks[$contentTag][Edvanture::CQ] += $analyst->cqQuestion->marks;
 
-                    if (!isset($cq_tag_details[$analyst->contentTag->title])) $cq_tag_details[$analyst->contentTag->title] = [];
-                    $cq_tag_details[$analyst->contentTag->title]['topic_id'] = $analyst->contentTag->topic_id;
+                    if (!isset($cq_tag_details[$contentTag])) $cq_tag_details[$contentTag] = [];
+                    $cq_tag_details[$contentTag]['topic_id'] = $analyst->contentTag->topic_id;
                 }
             }
         }
@@ -108,6 +109,7 @@ class QuestionContentTagAnalysis extends AppModel
         $cq_weakness = [];
 
         foreach ($gain_marks as $tag => $value) {
+            $tag = trim($tag);
             if (!empty($value[Edvanture::MCQ])) {
                 $mcq = round(($value[Edvanture::MCQ] * 100) / $total_marks[$tag][Edvanture::MCQ]);
                 $mcq_tag_details[$tag]['score'] = $mcq;

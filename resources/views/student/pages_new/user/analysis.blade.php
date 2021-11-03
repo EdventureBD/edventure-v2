@@ -14,12 +14,15 @@
                                 @php
                                     $analysis_tag = true;
                                     $atag_details = request()->type == "mcq" ? $tag_details['mcq_tag_details'] : $tag_details['cq_tag_details'];
-                                    foreach($atag_details as $tag=>$details) {
-                                        if (!empty(request()->analysis) ) {
-                                            $analysis_tag = false;
-                                            // print_r($tag_details[request()->type][request()->analysis]);
-                                            if ( $details['topic_id'] == $topic->id && in_array($tag, $tag_details[request()->type][request()->analysis])) {
-                                                $analysis_tag = true;
+                                    if (!empty(request()->analysis) ) {
+                                        $analysis_tag = false;
+                                        foreach($atag_details as $tag=>$details) {
+                                            if ( $details['topic_id'] == $topic->id) {
+                                                foreach ($tag_details[request()->type][request()->analysis] as $stag) {
+                                                    if (trim($tag) === trim($stag)) {
+                                                        $analysis_tag = true;
+                                                    }
+                                                }
                                             }
                                         }
                                     }
