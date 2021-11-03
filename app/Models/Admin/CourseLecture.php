@@ -5,18 +5,12 @@ namespace App\Models\Admin;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CourseLecture extends Model
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Course Lecture';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        // return auth()->user()->name . " has {$eventName} Course Lecture";
-        return "Admin has {$eventName} Course Lecture";
-    }
+    use HasFactory;
 
     public function getRouteKeyName()
     {

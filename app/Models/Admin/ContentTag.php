@@ -6,19 +6,12 @@ use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ContentTag extends Model
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Content Tag';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        // return auth()->user()->name . " has {$eventName} Content Tag";
-
-        return "Admin has {$eventName} Content Tag";
-    }
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -41,5 +34,4 @@ class ContentTag extends Model
     {
         return $this->belongsTo(CourseTopic::class);
     }
-
 }

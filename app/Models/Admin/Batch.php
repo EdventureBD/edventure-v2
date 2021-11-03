@@ -6,19 +6,13 @@ use App\Models\User;
 use App\Models\Admin\LiveClass;
 use App\Models\Admin\BatchLecture;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\AppModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Batch extends AppModel
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Batch';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return auth()->user()->name . " has {$eventName} Batch";
-    }
+    use HasFactory;
 
     public function getRouteKeyName()
     {

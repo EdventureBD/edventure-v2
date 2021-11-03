@@ -4,17 +4,11 @@ namespace App\Models\Admin;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BatchStudentEnrollment extends Model
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Batch Student Enrollment';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return auth()->user()->name . " has {$eventName} Batch Student Enrollment";
-    }
+    use HasFactory;
 
     protected $guarded = [];
 

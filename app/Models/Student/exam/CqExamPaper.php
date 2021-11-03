@@ -4,7 +4,7 @@ namespace App\Models\Student\exam;
 
 use App\Models\Admin\CreativeQuestion;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CqExamPaper extends Model

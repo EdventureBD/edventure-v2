@@ -11,7 +11,7 @@ use App\Models\Admin\QuestionContentTag;
 use App\Models\AppModel;
 use App\Utils\Edvanture;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class QuestionContentTagAnalysis extends AppModel

@@ -5,17 +5,12 @@ namespace App\Models\Admin;
 use App\Models\Admin\CQ;
 use App\Models\Admin\Exam;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CreativeQuestion extends Model
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Creative Question';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return auth()->user()->name . " has {$eventName} Creative Question";
-    }
+    use HasFactory;
 
     protected $guarded = [];
 
