@@ -5,20 +5,6 @@ import Timer from '../../components/Timer';
 import Axios from 'axios';
 import { useBeforeunload } from 'react-beforeunload';
 
-const useOnPageLeave = (handler) => {
-    useEffect(() => {
-        // console.log("before leave fdsfds")
-        window.onunload = () => handler();
-        window.addEventListener('onunload', (event) => {
-            handler();
-        });
-        return () => {
-            handler();
-            document.removeEventListener('onunload', handler);
-        };
-    });
-};
-
 const BatchExamMCQ = ({ questions, batch, exam }) => {
     console.log(questions);
     console.log(batch);
@@ -37,17 +23,9 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
         if (!state.timeOut) {
             event.preventDefault();
             console.log("in prevent not");
-        } else {
-            return "";
-        }
+        } 
         console.log("in prevent");
-        
     });
-
-    // useOnPageLeave( ()=> {
-    //     console.log('using hook')
-    //     processSubmit()
-    // }, []);
 
     let questionRows = '';
     const fields = [1, 2, 3, 4];
@@ -59,23 +37,23 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
         setState({ answers: answers, error: false });
     }
 
-    useEffect(()=>{
-        if (!state.submit) {
-            window.addEventListener('unload', (event) => {
-                event.preventDefault();
-                processSubmit();
-                console.log('adding on unload');
-                    event.returnValue = "";
-              }, true);
-                return () => {
-                    console.log("removing on unload");
-                    window.removeEventListener('unload', handleUnload);
-                }
-        }
-    });
+    // useEffect(()=>{
+    //     if (!state.timeOut) {
+    //         window.addEventListener('beforeunload', (event) => {
+    //             event.preventDefault();
+    //             // processSubmit();
+    //             console.log('adding on unload');
+    //             event.returnValue = "";
+    //         }, true);
+    //         return () => {
+    //             console.log("removing on unload");
+    //             window.removeEventListener('beforeunload', handleUnload);
+    //         }
+    //     }
+    // });
 
     const handleUnload = () => {
-        processSubmit();
+        // processSubmit();
     }
     
     //   return <div>Try closing the window.</div>;
@@ -172,6 +150,9 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                 <p className={state.error ? "text-red" : "text-red d-none"}>Please answer all the questions!</p>
                 <button className="btn text-xxsm fw-800 text-white bg-purple px-4 py-2 mt-3" onSubmit={submitExam}>Submit</button>
             </form>
+            <div className="alert alert-danger my-4 text-center">
+            If you refresh this page or try to go to another page/window, your answer will not be accepted and overall mark will be counted 0.
+            </div>
         </div>
     </div>)
 }

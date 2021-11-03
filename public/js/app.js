@@ -2234,23 +2234,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var useOnPageLeave = function useOnPageLeave(handler) {
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    // console.log("before leave fdsfds")
-    window.onunload = function () {
-      return handler();
-    };
-
-    window.addEventListener('onunload', function (event) {
-      handler();
-    });
-    return function () {
-      handler();
-      document.removeEventListener('onunload', handler);
-    };
-  });
-};
-
 var BatchExamMCQ = function BatchExamMCQ(_ref) {
   var questions = _ref.questions,
       batch = _ref.batch,
@@ -2277,16 +2260,10 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
     if (!state.timeOut) {
       event.preventDefault();
       console.log("in prevent not");
-    } else {
-      return "";
     }
 
     console.log("in prevent");
-  }); // useOnPageLeave( ()=> {
-  //     console.log('using hook')
-  //     processSubmit()
-  // }, []);
-
+  });
   var questionRows = '';
   var fields = [1, 2, 3, 4];
   var sl = 1;
@@ -2300,25 +2277,23 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       answers: answers,
       error: false
     });
-  };
+  }; // useEffect(()=>{
+  //     if (!state.timeOut) {
+  //         window.addEventListener('beforeunload', (event) => {
+  //             event.preventDefault();
+  //             // processSubmit();
+  //             console.log('adding on unload');
+  //             event.returnValue = "";
+  //         }, true);
+  //         return () => {
+  //             console.log("removing on unload");
+  //             window.removeEventListener('beforeunload', handleUnload);
+  //         }
+  //     }
+  // });
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (!state.submit) {
-      window.addEventListener('unload', function (event) {
-        event.preventDefault();
-        processSubmit();
-        console.log('adding on unload');
-        event.returnValue = "";
-      }, true);
-      return function () {
-        console.log("removing on unload");
-        window.removeEventListener('unload', handleUnload);
-      };
-    }
-  });
 
-  var handleUnload = function handleUnload() {
-    processSubmit();
+  var handleUnload = function handleUnload() {// processSubmit();
   }; //   return <div>Try closing the window.</div>;
   // useEffect(()=>{
   //     // if (!state.timeOut) {
@@ -2486,6 +2461,9 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
           onSubmit: submitExam,
           children: "Submit"
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "alert alert-danger my-4 text-center",
+        children: "If you refresh this page or try to go to another page/window, your answer will not be accepted and overall mark will be counted 0."
       })]
     })
   });
