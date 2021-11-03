@@ -146,7 +146,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/assignment-checkedPaper', [SubmissionController::class, 'checkedPaperOfAssignment'])->name('checkedPaperOfAssignment');
     // END OF EXAM SUBMISSION
 
-    Route::get('/activity', [ActivityController::class, 'Index'])->name('admin.activity');
+    // Route::get('/activity', [ActivityController::class, 'Index'])->name('admin.activity');
 
     //custom create
     Route::get('single/user/create', [UserController::class, 'Create'])->name('singleUser.create');

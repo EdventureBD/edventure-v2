@@ -10,15 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, LogsActivity;
 
-    protected static $logName = 'User';
-    protected static $logAttributes = ['name', 'email'];
-    protected static $ignoreChangedAttributes = ['password'];
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return "{$eventName}";
-    }
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
