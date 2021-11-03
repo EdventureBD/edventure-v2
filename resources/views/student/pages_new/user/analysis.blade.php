@@ -10,6 +10,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
+                        @php $open = 1; @endphp
                         @forelse ($course_topics as $topic)
                                 @php
                                     $analysis_tag = true;
@@ -29,7 +30,7 @@
                                 @endphp
                                 @if ($analysis_tag )
                             <div class="accordion__item ">
-                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600 {{ $loop->iteration == 1 ? 'collapsed' : '' }}  " data-toggle="collapse" data-target="#course-toc-{{ $topic->id }} " data-parent="#parent">
+                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600 {{ $open == 1 ? 'collapsed' : '' }}  " data-toggle="collapse" data-target="#course-toc-{{ $topic->id }} " data-parent="#parent">
                                     <div class="col-11 d-inline-flex title align-items-center">
                                         <span class="">{{ $topic->title }} </span>
                                     </div>
@@ -40,7 +41,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
+                                <div class="accordion__menu collapse {{ $open == 1 ? 'show' : '' }} "
                                     id="course-toc-{{ $topic->id }}">
                                     <div class="row">
                                         <div class="col-6 text-left">
@@ -62,6 +63,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @php $open = 2 @endphp
                             @endif
                         @empty
                             No Topics found
