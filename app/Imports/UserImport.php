@@ -19,9 +19,9 @@ class UserImport implements ToModel, WithHeadingRow
         $checkPhone = User::where('phone', $row['phone'])->first();
         if (!$checkEmail && !$checkPhone) {
             return new User([
-                'name' => $row['name'],
-                'email' => $row['email'],
-                'phone' => $row['phone'],
+                'name' => trim($row['name']),
+                'email' => trim($row['email']),
+                'phone' => trim($row['phone']),
                 'is_admin' => intval($row['is_admin']),
                 'user_type' => intval($row['user_type']),
                 'password' => $row['password'],

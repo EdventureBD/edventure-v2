@@ -20,7 +20,7 @@ class ContentTagImport implements ToModel, WithHeadingRow
         $check = ContentTag::where('slug', $slug)->first();
         if (!$check) {
             return new ContentTag([
-                'title' => $row['title'],
+                'title' => trim($row['title']),
                 'slug' => $slug,
                 'course_id' => intval($row['course_id']),
                 'topic_id' => intval($row['topic_id']),
