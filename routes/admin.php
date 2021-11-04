@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\CourseLectureController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\QuestionContentTagController;
 use App\Http\Controllers\Admin\StudentExamAttemptController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], function () {
     Route::get('/index', [AdminController::class, 'AdminIndex'])->name('admin.index');
@@ -69,6 +71,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
     Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
     Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
+    Route::get('/batch-rank-update', function() {
+        Artisan::call("update:batch-rank");
+        Session::put('status', 'Batch rank updated successful!');
+        return redirect()->back();
+    })->name('batch-rank');
     // END OF BATCH
 
     // START OF BATCH LECTURE
