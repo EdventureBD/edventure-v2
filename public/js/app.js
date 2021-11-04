@@ -2945,7 +2945,7 @@ var Dashboard = function Dashboard(_ref) {
                         children: "Rank"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h4", {
                         className: "text-purple text-md fw-600",
-                        children: ["# ", state.active_batch ? state.active_batch.batch_rank : "00", " of ", state.active_batch.batch.student_limit]
+                        children: ["# ", state.active_batch && state.active_batch.batch_rank ? state.active_batch.batch_rank + " of " + state.active_batch.batch.student_limit : "00"]
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
                         className: "text-right",
                         children: "Updates daily."
