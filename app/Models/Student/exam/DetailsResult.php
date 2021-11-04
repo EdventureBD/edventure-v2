@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailsResult extends AppModel
 {
-    use HasFactory, LogsActivity;
+    use HasFactory;
     protected $fillable = ['exam_id', 'exam_type', 'question_id', 'batch_id', 'student_id', 'gain_marks', 'mcq_ans', 'status'];
     protected static $logName = "Details Result";
 

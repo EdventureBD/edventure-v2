@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ExamPaper extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory ;
     protected static $logName = "Exam Paper";
     public function getDescriptionForEvent(string $eventName): string
     {

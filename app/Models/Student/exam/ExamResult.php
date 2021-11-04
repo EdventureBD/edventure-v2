@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ExamResult extends AppModel
 {
-    use HasFactory, LogsActivity;
+    use HasFactory;
     protected static $logName = "Exam Result";
 
     protected $fillable = ['exam_id', 'batch_id', 'student_id', 'gain_marks', 'status'];

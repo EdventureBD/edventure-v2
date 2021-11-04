@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class QuestionContentTagAnalysis extends AppModel
 {
-    use HasFactory, LogsActivity;
+    use HasFactory;
     protected $fillable = ['content_tag_id', 'student_id', 'exam_type', 'question_id', 'number_of_attempt', 'gain_marks', 'status'];
     protected static $logName = "Question content tag analysis";
 
