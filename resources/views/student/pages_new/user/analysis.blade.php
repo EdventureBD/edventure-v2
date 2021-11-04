@@ -53,12 +53,25 @@
                                     </div>
                                     @foreach($atag_details as $tag=>$details)
                                         @if($details['topic_id'] == $topic->id)
+                                        @php
+                                            $showTag = true;
+                                            if (!empty(request()->analysis) ) {
+                                                $showTag = false;
+                                                if (!empty($details['score'])) {
+                                                    if ((request()->analysis == 'weakness' && $details['score'] <= 50 && $details['score'] >= 0) || (request()->analysis == 'strength' && $details['score'] >= 80 && $details['score'] <= 100)) {
+                                                    $showTag = true;
+                                                    } 
+                                                }
+                                            }
+                                        @endphp
+                                        @if($showTag)
                                         <div class="bg-purple-light accordion__menu-link d-flex justify-content-between align-items-center  mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600">
                                             <a class="flex text-dark" href="">
                                                  {{$tag}}
                                             </a>
                                             <div> {{!empty($details['score']) ? $details['score'] : 0}}%</div>
                                         </div>
+                                        @endif
                                         @endif
                                     @endforeach
                                 </div>
