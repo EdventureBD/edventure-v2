@@ -135,7 +135,7 @@ const Dashboard = ({ user }) => {
                                     </div>
                                     <div>
                                         <h4 className="text-purple text-sm text-right">Rank</h4>
-                                        <h4 className="text-purple text-md fw-600"># {state.active_batch ? state.active_batch.batch_rank : "00"}</h4>
+                                        <h4 className="text-purple text-md fw-600"># {state.active_batch ? state.active_batch.batch_rank : "00"} of {state.active_batch.batch.student_limit}</h4>
                                         <p className="text-right">Updates daily.</p>
                                     </div>
                                 </div>
