@@ -229,13 +229,13 @@
                 {{-- END OF SETTINGS --}}
 
                 {{-- START OF ACTIVITY --}}
-                <li class="nav-item {{ request()->is('admin/activity') ? 'menu-open' : '' }}">
+                {{-- <li class="nav-item {{ request()->is('admin/activity') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.activity') }}"
                         class="nav-link {{ request()->is('admin/activity') ? 'active' : '' }}">
                         <i class="fas fa-hiking"></i>
                         <p>&nbsp; Activity</p>
                     </a>
-                </li>
+                </li> --}}
                 {{-- END OF ACTIVITY --}}
             </ul>
         </nav>

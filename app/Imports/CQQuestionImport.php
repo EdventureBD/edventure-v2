@@ -31,9 +31,9 @@ class CQQuestionImport implements ToModel, WithHeadingRow
                     'slug' => $row['slug'],
                 ],
                 [
-                    'creative_question' => $row['creative_question'],
-                    'slug' => $row['slug'],
-                    'image' => $row['image'],
+                    'creative_question' => trim($row['creative_question']),
+                    'slug' => trim($row['slug']),
+                    'image' => trim($row['image']),
                     'exam_id' => $this->exam->id,
                     'standard_ans_pdf' => "pdf",
                 ]
@@ -48,9 +48,9 @@ class CQQuestionImport implements ToModel, WithHeadingRow
             $check = CQ::where('slug', $slug)->first();
             if (!$check) {
                 $cq = CQ::create([
-                    'question' => $row['question'],
+                    'question' => trim($row['question']),
                     'slug' => $slug,
-                    'image' => $row['image'],
+                    'image' => trim($row['image']),
                     'marks' => $row['marks'],
                     'creative_question_id' => $creativeQuestionId->id,
                     'number_of_attempt' => 0,
@@ -75,9 +75,9 @@ class CQQuestionImport implements ToModel, WithHeadingRow
             $check = Assignment::where('slug', $slug)->first();
             if (!$check) {
                 return new Assignment([
-                    'question' => $row['question'],
+                    'question' => trim($row['question']),
                     'slug' => $slug,
-                    'image' => $row['image'],
+                    'image' => trim($row['image']),
                     'marks' => intval($row['marks']),
                     'exam_id' => $this->exam->id,
                 ]);

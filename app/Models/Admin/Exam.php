@@ -6,17 +6,12 @@ use App\Models\Admin\Course;
 use App\Models\Admin\BatchExam;
 use App\Models\Admin\CourseTopic;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Exam extends Model
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Exam';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return auth()->user()->name . " has {$eventName} Exam";
-    }
+    use HasFactory;
 
     public function getRouteKeyName()
     {

@@ -77,6 +77,7 @@ class CourseController extends Controller
 
     public function enroll(Course $course)
     {
+       
         if($course->price<=0){
             $courseFirstBatch = Batch::where('course_id', $course->id)->orderby('created_at','ASC')->select('id','slug')->first();
             if(!$courseFirstBatch){
@@ -116,6 +117,17 @@ class CourseController extends Controller
             );
             return redirect()->route('batch-lecture', $courseFirstBatch->slug);
         } else {
+            $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
+            ->where('batch_student_enrollments.course_id', $course->id)
+            ->where('batch_student_enrollments.student_id', auth()->user()->id)
+            ->where('payments.student_id', auth()->user()->id)
+            ->first();
+            if ($enrolled) {
+                $batch = Batch::where('id', $enrolled->batch_id)->first();
+                if ($enrolled->accepted == 1) {
+                    return redirect()->route('batch-lecture', $batch->slug);
+                }
+            }
             $paymentsNumber = PaymentNumber::all();
             $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
             return view('student.pages.course.confirm_enroll', compact('course', 'paymentsNumber', 'studentDetails'));

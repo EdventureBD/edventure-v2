@@ -32,13 +32,13 @@ class QuestionImport implements ToModel, WithHeadingRow
         $check = MCQ::where('slug', $slug)->first();
         if (!$check) {
             $mcq = MCQ::create([
-                'question' => $row['question'],
+                'question' => trim($row['question']),
                 'slug' => $slug,
-                'image' => $row['image'],
-                'field1' => $row['field1'],
-                'field2' => $row['field2'],
-                'field3' => $row['field3'],
-                'field4' => $row['field4'],
+                'image' => trim($row['image']),
+                'field1' => trim($row['field1']),
+                'field2' => trim($row['field2']),
+                'field3' => trim($row['field3']),
+                'field4' => trim($row['field4']),
                 'answer' => intval($row['answer']),
                 'explanation' => $row['explanation'],
                 'exam_id' => $this->exam->id,

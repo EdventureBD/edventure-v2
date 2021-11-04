@@ -2,23 +2,17 @@
 
 namespace App\Models\Admin;
 
-use App\Models\Admin\Exam;
-use App\Models\Student\exam\CqExamPaper;
-use App\Models\Student\exam\ExamResult;
 use App\Utils\Edvanture;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Admin\Exam;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student\exam\ExamResult;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Student\exam\CqExamPaper;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BatchExam extends Model
 {
-    use HasFactory, LogsActivity;
-    protected static $logName = 'Batch Exam';
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return auth()->user()->name . " has {$eventName} Batch Exam";
-    }
+    use HasFactory;
 
     public function exam()
     {

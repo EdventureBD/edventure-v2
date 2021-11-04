@@ -8,7 +8,7 @@ use App\Models\AppModel;
 use App\Models\User;
 use App\Utils\Edvanture;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ExamResult extends AppModel
@@ -45,22 +45,21 @@ class ExamResult extends AppModel
         $cq_labels = ['Exam'];
         $mcq = [0];
         $cq = [0];
-        $n_mcq =1;
-        $n_cq =1;
+        $n_mcq = 1;
+        $n_cq = 1;
         foreach ($results as $result) {
 
             if ($result->exam->exam_type == Edvanture::MCQ) {
-                array_push($mcq_labels, 'Exam-'.$n_mcq);
+                array_push($mcq_labels, 'Exam-' . $n_mcq);
                 $mpercentage = round(($result->gain_marks * 100) / $result->exam->marks);
                 array_push($mcq, $mpercentage);
                 $n_mcq++;
             } else if ($result->exam->exam_type == Edvanture::CQ) {
-                array_push($cq_labels, 'Exam-'.$n_cq);
+                array_push($cq_labels, 'Exam-' . $n_cq);
                 $percentage = round(($result->gain_marks * 100) / $result->exam->marks);
                 array_push($cq, $percentage);
                 $n_cq++;
             }
-           
         }
         $labels = count($mcq_labels) > count($cq_labels) ? $mcq_labels : $cq_labels;
         return ['labels' => $labels, 'mcq' => $mcq, 'cq' => $cq];
