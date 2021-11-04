@@ -133,6 +133,9 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
 
     return (<div className="batch-exam">
         <div className="container">
+            <div className="alert alert-danger bg-red my-4 text-center">
+                If you refresh this page or try to go to another page/window, your answer will not be accepted and overall mark will be counted 0.
+            </div>
             <div className="row py-5">
                 <div className="col-md-10">
                     <h2 className="text-purple text-xmd fw-800">Batch: {batch.title}</h2>
@@ -145,14 +148,13 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                     </div>
                 </div>
             </div>
+           
             {questionRows}
             <form action={"/batch/" + batch.slug + "/" + exam.slug + "/result"} method="post" id="exam-form" onSubmit={submitExam}>
                 <p className={state.error ? "text-red" : "text-red d-none"}>Please answer all the questions!</p>
                 <button className="btn text-xxsm fw-800 text-white bg-purple px-4 py-2 mt-3" onSubmit={submitExam}>Submit</button>
             </form>
-            <div className="alert alert-danger my-4 text-center">
-            If you refresh this page or try to go to another page/window, your answer will not be accepted and overall mark will be counted 0.
-            </div>
+            
         </div>
     </div>)
 }
