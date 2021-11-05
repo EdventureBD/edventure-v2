@@ -1,18 +1,5 @@
-@extends('admin.layouts.default', [
-'title' => 'Content Tag',
-'pageName'=>'Content Tag',
-'secondPageName'=>'Content Tag'
-])
-
-@section('css1')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
-@endsection
-
-@section('content')
-    <!-- Main content -->
-    @livewire('content-tag.index')
-    {{-- <section class="content">
+<div>
+    <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -24,7 +11,8 @@
                                 <div class="input-group input-group-sm">
                                     <div>
                                         <a href="{{ route('tagEmptyExportCSV') }}">
-                                            <button class="btn btn-info"><i class="fas fa-download"></i></i>&nbsp;&nbsp;
+                                            <button class="btn btn-info"><i
+                                                    class="fas fa-download"></i></i>&nbsp;&nbsp;
                                                 Sample input CSV</button>
                                         </a>
                                         <a href="{{ route('contentTagExportCSV') }}">
@@ -40,12 +28,12 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h4 class="modal-title">Import Content Tag Excel</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    
+
                                                     <form action="{{ route('contentTagImportCSV') }}" method="POST"
                                                         enctype="multipart/form-data">
                                                         {{ csrf_field() }}
@@ -55,7 +43,8 @@
                                                                 <div class="input-group">
                                                                     <div class="custom-file">
                                                                         <input type="file" name="file"
-                                                                            class="custom-file-input" id="exampleInputFile">
+                                                                            class="custom-file-input"
+                                                                            id="exampleInputFile">
                                                                         <label class="custom-file-label"
                                                                             for="exampleInputFile">Choose file</label>
                                                                     </div>
@@ -68,7 +57,8 @@
                                                         <div class="modal-footer justify-content-between">
                                                             <button type="button" class="btn btn-default"
                                                                 data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Upload</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -77,7 +67,8 @@
                                             <!-- /.modal-dialog -->
                                         </div>
                                         <a href="{{ route('content-tag.create') }}">
-                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;
+                                            <button class="btn btn-info"><i
+                                                    class="fas fa-plus-square"></i>&nbsp;&nbsp;
                                                 Content Tag</button>
                                         </a>
                                     </div>
@@ -105,9 +96,9 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $content_tag->id }}</td>
                                             <td>{{ $content_tag->title }}</td>
-                                            <td>{{ $content_tag->courseName }}</td>
-                                            <td>{{ $content_tag->topicName }}</td>
-                                            <td>{{ $content_tag->courseLectureName }}</td>
+                                            <td>{{ $content_tag->course->title }}</td>
+                                            <td>{{ $content_tag->topic->title }}</td>
+                                            <td>{{ $content_tag->course->title }}</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
                                                     id="single-col-{{ $content_tag->id }}"
@@ -180,6 +171,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            <div class="d-flex justify-content-center">{{ $content_tags->links() }}</div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -188,58 +180,5 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-    </section> --}}
-    <!-- /.content -->
-@endsection
-
-@section('js1')
-    <script src="{{ asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('.customControlInput').change(function() {
-                if (confirm("Do you want to change the status?")) {
-                    var status = $(this).prop('checked') == true ? 1 : 0;
-                    var id = $(this).data('id');
-                    $.ajax({
-                        type: "GET",
-                        dataType: "json",
-                        url: "changeContentTagStatus",
-                        data: {
-                            'status': status,
-                            'id': id
-                        },
-                        success: function(data) {
-                            console.log(data.success);
-                        }
-                    });
-                } else {
-                    if ($("#single-col-" + $(this).data('id')).prop("checked") == true) {
-                        $("#single-col-" + $(this).data('id')).prop('checked', false);
-                    } else if ($("#single-col-" + $(this).data('id')).prop("checked") == false) {
-                        $("#single-col-" + $(this).data('id')).prop('checked', true);
-                    }
-                }
-            })
-        })
-    </script>
-    <!-- DataTables -->
-    {{-- <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}">
-    </script> --}}
-@endsection
-
-@section('js2')
-    {{-- <script>
-        $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": false,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
-    </script> --}}
-@endsection
+    </section>
+</div>
