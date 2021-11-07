@@ -134,7 +134,7 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
     return (<div className="batch-exam">
         <div className="container">
             <div className="alert alert-danger bg-red my-4 text-center">
-                If you refresh this page or try to go to another page/window, your answer will not be accepted and overall mark will be counted 0.
+            If you refresh this page or try to go to another page/window, your previous answers will be lost.
             </div>
             <div className="row py-5">
                 <div className="col-md-10">

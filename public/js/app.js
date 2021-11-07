@@ -2425,7 +2425,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
       className: "container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "alert alert-danger bg-red my-4 text-center",
-        children: "If you refresh this page or try to go to another page/window, your answer will not be accepted and overall mark will be counted 0."
+        children: "If you refresh this page or try to go to another page/window, your previous answers will be lost."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "row py-5",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
