@@ -17,14 +17,18 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Batch List</h3>
+                            <h3 class="card-title">Batch List <b class="bg-success">@php echo !empty(session()->get('status') )?session()->get('status'):" " ; Session::forget('status')@endphp</b></h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
+                                        <a href="{{ route('batch-rank') }}">
+                                            <button class="btn btn-success"><i class="fas fa-sync-alt"></i></i>&nbsp;&nbsp;Batch Rank Update</button>
+                                        </a>
                                         <a href="{{ route('batch.create') }}">
                                             <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Batch</button>
                                         </a>
+                                        
                                     </div>
                                 </div>
                             </div>

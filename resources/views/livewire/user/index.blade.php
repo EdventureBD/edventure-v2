@@ -1,18 +1,5 @@
-@extends('admin.layouts.default', [
-'title'=>'User',
-'pageName'=>'User',
-'secondPageName'=>'User'
-])
-
-@section('css1')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
-@endsection
-
-@section('content')
-    <!-- Main content -->
-    @livewire('user.index', ['type' => $type])
-    {{-- <section class="content">
+<div>
+    <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -32,8 +19,8 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h4 class="modal-title">Import User Excel</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -46,7 +33,8 @@
                                                                 <div class="input-group">
                                                                     <div class="custom-file">
                                                                         <input type="file" name="file"
-                                                                            class="custom-file-input" id="exampleInputFile">
+                                                                            class="custom-file-input"
+                                                                            id="exampleInputFile">
                                                                         <label class="custom-file-label"
                                                                             for="exampleInputFile">Choose file</label>
                                                                     </div>
@@ -73,10 +61,12 @@
                                             <button class="btn btn-info"><i class="fas fa-users"></i> All </button>
                                         </a>
                                         <a href="{{ route('allAdmin') }}">
-                                            <button class="btn btn-info"><i class="fas fa-users-cog"></i> Admin </button>
+                                            <button class="btn btn-info"><i class="fas fa-users-cog"></i> Admin
+                                            </button>
                                         </a>
                                         <a href="{{ route('allTeacher') }}">
-                                            <button class="btn btn-info"><i class="fas fa-chalkboard-teacher"></i> Teacher
+                                            <button class="btn btn-info"><i class="fas fa-chalkboard-teacher"></i>
+                                                Teacher
                                             </button>
                                         </a>
                                         <a href="{{ route('allStudent') }}">
@@ -128,8 +118,8 @@
                                                 @else
                                                     @if ($user->user_type == 1)
                                                         <img src="{{ asset('/img/landing/admin.png') }}"
-                                                            class="product-image-thumb" alt="Admin" height="70px !important"
-                                                            srcset="">
+                                                            class="product-image-thumb" alt="Admin"
+                                                            height="70px !important" srcset="">
                                                     @elseif(($user->user_type) == 2)
                                                         <img src="https://cdn0.iconfinder.com/data/icons/scenarium-vol-11/128/042_teacher_blackboard_teaching_school-256.png"
                                                             class="product-image-thumb" alt="teacher"
@@ -144,7 +134,8 @@
                                             <td>{{ $user->created_at->format('d M y - g:i A') }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('user.edit', $user->id) }}"
+                                                    <a class="mr-1"
+                                                        href="{{ route('user.edit', $user->id) }}"
                                                         title="Edit {{ $user->title }}">
                                                         <button class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
@@ -166,7 +157,8 @@
                                                                                 Teacher
                                                                             @else
                                                                                 Student
-                                                                            @endif {{ $user->name }}
+                                                                            @endif
+                                                                            {{ $user->name }}
                                                                         </h4>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
@@ -177,7 +169,8 @@
                                                                         <p>Are you sure??</p>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
-                                                                        <button type="button" class="btn btn-outline-light"
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-light"
                                                                             data-dismiss="modal">Close</button>
                                                                         <form
                                                                             action="{{ route('user.destroy', $user->id) }}"
@@ -212,6 +205,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            <div class="d-flex justify-content-center">{{ $users->links() }}.</div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -220,51 +214,5 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-    </section> --}}
-    <!-- /.content -->
-@endsection
-
-@section('js1')
-    <script src="{{ asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('.customControlInput').change(function() {
-                var status = $(this).prop('checked') == true ? 1 : 0;
-                var id = $(this).data('id');
-                // console.log(id);
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "changeUserStatus",
-                    data: {
-                        'status': status,
-                        'id': id
-                    },
-                    success: function(data) {
-                        console.log(data.success);
-                    }
-                });
-            })
-        })
-    </script>
-    <!-- DataTables -->
-    {{-- <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}">
-    </script> --}}
-@endsection
-
-@section('js2')
-    {{-- <script>
-        $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
-    </script> --}}
-@endsection
+    </section>
+</div>
