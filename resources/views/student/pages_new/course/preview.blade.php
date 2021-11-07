@@ -93,10 +93,10 @@
                                     <div>
                                         @forelse($batchTopic->courseTopic->CourseLecture as $courseLecture)
                                             <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
-                                                <a class="flex text-dark fw-600" href="{{ route('topic_lecture', [$batch->slug, $courseLecture->slug]) }}">
+                                                <a class="flex text-dark fw-600" href="">
                                                     {{ $courseLecture->title }}
                                                 </a>
-                                                <a href="#" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">View Lecture</a>
+                                                <a href="{{ route('topic_lecture', [$batch->slug, $courseLecture->slug]) }}" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">View Lecture</a>
                                             </div>
                                         @empty
                                             <div class="accordion__menu-link">

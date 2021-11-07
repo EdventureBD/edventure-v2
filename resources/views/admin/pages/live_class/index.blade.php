@@ -50,7 +50,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $liveclass->title }}</td>
                                             <td>{{ $liveclass->batch->title }}</td>
-                                            <td>{{ $liveclass->course->title }}</td>
+                                            <td>{{ $liveclass->batch->course->title }}</td>
                                             <td><a href="{{ $liveclass->live_link }}">Link</a></td>
                                             <td>{{ $liveclass->start_date }} at {{$liveclass->start_time}}</td>
                                             <td>

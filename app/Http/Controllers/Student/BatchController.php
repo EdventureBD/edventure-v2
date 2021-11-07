@@ -10,6 +10,7 @@ use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
+use DateTime;
 
 class BatchController extends Controller
 {
@@ -61,24 +62,28 @@ class BatchController extends Controller
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {
-        // dd($courseLecture);
-        // dd($batch);
+        //setting next lecture & prev lecture
+        $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'asc')->first();
+        $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
+        $next_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '>', $courseLecture->id)->orderBy('created_at', 'asc')->first();
+        $next_lecture_link = $next_lecture ? route('topic_lecture', [$batch->slug, $next_lecture->slug]) : null;
+        // dd($next_lecture);
+
         $course = Course::where('id', $batch->course_id)->first();
         $liveClass = LiveClass::where('batch_id', $batch->id)
-            ->where('course_id', $batch->course_id)
+            // ->where('course_id', $batch->course_id)
             ->where('topic_id', $courseLecture->topic_id)
             ->where('status', 1)
             ->latest()->first();
         $start_date = "";
         $start_time = "";
-        if (!empty($liveClass->start_date) && !is_null($liveClass->start_date)) {
-            $start_date = date('m-d-Y', strtotime($liveClass->start_date));
+        $timeleft = 3000;
+        if (!empty($liveClass->start_date)) {
+            $start_date_time = new DateTime($liveClass->start_date.' '.$liveClass->start_time);
+            $today_time = new DateTime();
+            $timeleft_seconds = $start_date_time->format('U') - $today_time->format('U');
+            $timeleft = $timeleft_seconds;
         }
-        if (!empty($liveClass->start_time) && !is_null($liveClass->start_time)) {
-            $start_time = date('h:m:s', strtotime($liveClass->start_time));
-        }
-
-
-        return view('student.pages.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time'));
+        return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_lecture_link', 'next_lecture_link'));
     }
 }

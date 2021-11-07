@@ -21,8 +21,9 @@ class LiveClass extends Model
     {
         return $this->belongsTo(Batch::class);
     }
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
+
+    // public function course()
+    // {
+    //     return $this->belongsTo(Course::class, 'course_id');
+    // }
 }

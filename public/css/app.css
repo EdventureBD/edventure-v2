@@ -11510,6 +11510,18 @@ a:hover {
      object-fit: cover;
 }
 
+.count-timer {
+  font-size: 32px;
+  font-weight: 600;
+}
+.count-timer span {
+  margin: 4px;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(165, 165, 42, 0.2);
+}
+
 .single-question p {
   margin-bottom: 0;
 }
@@ -11995,5 +12007,28 @@ form input {
 
   .icon-box {
     padding-bottom: 15%;
+  }
+}
+.lecture-page .nav-tabs .nav-link {
+  border-radius: 7px 7px 0 0;
+  font-weight: 600;
+}
+.lecture-page .nav-tabs .nav-link:hover {
+  color: inherit;
+}
+.lecture-page .lecture-tab.card-header {
+  border-bottom: none;
+}
+.lecture-page a.lecture-navigation {
+  font-size: 18px;
+  color: #663193;
+}
+.lecture-page a.lecture-navigation.next {
+  left: auto;
+  right: -25px;
+}
+@media (max-width: 767px) {
+  .lecture-page .nav-tabs .nav-link {
+    font-size: 20px;
   }
 }

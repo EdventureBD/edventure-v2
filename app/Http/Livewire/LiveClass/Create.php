@@ -15,7 +15,7 @@ class Create extends Component
     public $title;
     public $batchId;
     public $categoryId;
-    public $course_id = 0;
+    // public $course_id = 0;
     public $topicId;
     public $liveLink;
     public $startTime;
@@ -106,8 +106,8 @@ class Create extends Component
 
     public function saveLiveClass()
     {
-
         $data = $this->validate();
+        // dd($data);
         $live_class = new LiveClass();
         $live_class->title = $data['title'];
         $live_class->slug = Str::slug($data['title']);
@@ -120,7 +120,7 @@ class Create extends Component
         $live_class->is_always_show = $data['isAlwaysShow'];
         $live_class->live_link = $data['liveLink'];
         $live_class->is_special = $data['isSpecial'];
-        $live_class->course_id = 1;
+        // $live_class->course_id = 1;
         $live_class->order = 0;
         $live_class->status = 1;
 
