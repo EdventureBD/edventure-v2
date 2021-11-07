@@ -52,17 +52,18 @@ class ExamController extends Controller
         // START OF MCQ
         if ($exam->exam_type == Edvanture::MCQ) {
             $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
-            if (!empty($canAttempt) && $canAttempt->status == 0) {
-                $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
-                // dd($questions->toArray());
-                $save = $this->processMCQ($questions->toArray(), [], $batch, $exam, 1, $canAttempt);
-                if ($save) {
-                    $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
-                        ->where('exam_id', $exam->id)
-                        ->where('batch_id', $batch->id)
-                        ->get();
-                }
-            }
+            //Code for blocking student page refresh
+            // if (!empty($canAttempt) && $canAttempt->status == 0) {
+            //     $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+            //     // dd($questions->toArray());
+            //     $save = $this->processMCQ($questions->toArray(), [], $batch, $exam, 1, $canAttempt);
+            //     if ($save) {
+            //         $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
+            //             ->where('exam_id', $exam->id)
+            //             ->where('batch_id', $batch->id)
+            //             ->get();
+            //     }
+            // }
             $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
                 ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
                 ->where('question_content_tags.exam_type', "MCQ")
@@ -72,7 +73,8 @@ class ExamController extends Controller
                 ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
                 ->get();
             $weakAnalysis = $analysis;
-            if (!$canAttempt) {
+            //Giving access to student if they miss for first time or reload page
+            if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
                 $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                 //Inserting in the exam result as first attempt
                 (new ExamResult())->saveData(['exam_id' => $exam->id, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);

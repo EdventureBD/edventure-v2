@@ -57,9 +57,10 @@ class AccountDetailsController extends Controller
         if (request()->ajax()) {
             if (request()->active_batch_id) {
                 $batch_id = request()->active_batch_id;
+                $total_enrolled = BatchStudentEnrollment::where('batch_id', $batch_id)->count();
                 $tag_reports = (new QuestionContentTagAnalysis())->getTagAnalysisReport(Auth::user()->id, $batch_id);
                 $exam_results = (new ExamResult())->getExamResultsForDashboard(Auth::user()->id, $batch_id);
-                return $this->sendResponse(['batch_results' => $exam_results, 'tag_reports' => $tag_reports]);
+                return $this->sendResponse(['batch_results' => $exam_results, 'tag_reports' => $tag_reports, 'total_enrolled'=>$total_enrolled]);
             }
             return $this->sendError(['Not found']);
         }

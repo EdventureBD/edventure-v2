@@ -15,7 +15,8 @@ const Dashboard = ({ user }) => {
             results: null,
             active_batch: null,
             tag_reports: null,
-            chart: false
+            chart: false,
+            total_enrolled: 0
         });
 
     useEffect(() => {
@@ -51,7 +52,8 @@ const Dashboard = ({ user }) => {
                 // batch_enrolement: res.data.batchStudentEnrollment,
                 // related_courses: res.data.related_courses,
                 results: res.data.batch_results,
-                tag_reports: res.data.tag_reports
+                tag_reports: res.data.tag_reports,
+                total_enrolled: res.data.total_enrolled
                 // active_batch: res.data.batchStudentEnrollment[0]
             })
         }
@@ -135,7 +137,7 @@ const Dashboard = ({ user }) => {
                                     </div>
                                     <div>
                                         <h4 className="text-purple text-sm text-right">Rank</h4>
-                                        <h4 className="text-purple text-md fw-600"># {state.active_batch && state.active_batch.batch_rank ? state.active_batch.batch_rank + " of " +state.active_batch.batch.student_limit : "00"}</h4>
+                                        <h4 className="text-purple text-md fw-600"># {state.active_batch && state.active_batch.batch_rank ? state.active_batch.batch_rank + " of " +state.total_enrolled : "00"}</h4>
                                         <p className="text-right">Updates daily.</p>
                                     </div>
                                 </div>

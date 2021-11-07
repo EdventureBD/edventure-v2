@@ -2716,7 +2716,8 @@ var Dashboard = function Dashboard(_ref) {
     results: null,
     active_batch: null,
     tag_reports: null,
-    chart: false
+    chart: false,
+    total_enrolled: 0
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -2787,7 +2788,8 @@ var Dashboard = function Dashboard(_ref) {
                   // batch_enrolement: res.data.batchStudentEnrollment,
                   // related_courses: res.data.related_courses,
                   results: res.data.batch_results,
-                  tag_reports: res.data.tag_reports // active_batch: res.data.batchStudentEnrollment[0]
+                  tag_reports: res.data.tag_reports,
+                  total_enrolled: res.data.total_enrolled // active_batch: res.data.batchStudentEnrollment[0]
 
                 });
               }
@@ -2945,7 +2947,7 @@ var Dashboard = function Dashboard(_ref) {
                         children: "Rank"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h4", {
                         className: "text-purple text-md fw-600",
-                        children: ["# ", state.active_batch && state.active_batch.batch_rank ? state.active_batch.batch_rank + " of " + state.active_batch.batch.student_limit : "00"]
+                        children: ["# ", state.active_batch && state.active_batch.batch_rank ? state.active_batch.batch_rank + " of " + state.total_enrolled : "00"]
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
                         className: "text-right",
                         children: "Updates daily."
