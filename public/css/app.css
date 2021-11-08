@@ -11518,18 +11518,6 @@ a:hover {
      object-fit: cover;
 }
 
-.count-timer {
-  font-size: 32px;
-  font-weight: 600;
-}
-.count-timer span {
-  margin: 4px;
-  display: inline-block;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgba(165, 165, 42, 0.2);
-}
-
 .single-question p {
   margin-bottom: 0;
 }
@@ -12035,7 +12023,21 @@ form input {
   left: auto;
   right: -25px;
 }
+.lecture-page .count-timer {
+  font-size: 32px;
+  font-weight: 600;
+}
+.lecture-page .count-timer span {
+  margin: 4px;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(165, 165, 42, 0.2);
+}
 @media (max-width: 767px) {
+  .lecture-page .count-timer {
+    font-size: 22px;
+  }
   .lecture-page .nav-tabs .nav-link {
     font-size: 20px;
   }

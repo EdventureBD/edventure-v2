@@ -94,7 +94,7 @@
         var hours = 0;
         var minH = 0;
         var min = 0;
-        var sec = timeleft;
+        var sec = timeleft > 0 ? timeleft : 0;
         if (timeleft >=3600) {
              hours = Math.floor(timeleft/3600);
              minH = parseInt(timeleft % 3600) ;
@@ -110,7 +110,10 @@
             // document.getElementById('countdownMinuits').textContent = min;
             // document.getElementById('countdownSecound').textContent = sec;
         // } 
-        document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
+        if (timeleft > 0) {
+            document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
+        } 
+        
 
         if (timeleft <= 0) {
             // document.getElementById('exam-form').submit();
