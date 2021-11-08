@@ -43,6 +43,18 @@ Route::get('/about-us', function(){
     return view('landing.about_us');
 })->name('about_us');
 
+Route::get('/privacy-policy', function(){
+    return view('landing.privacypolicy');
+})->name('privacy_policy');
+
+Route::get('/refund-return-policy', function(){
+    return view('landing.refundandreturnpolicy');
+})->name('refund_return_policy');
+
+Route::get('/terms-condition', function(){
+    return view('landing.termsandcondition');
+})->name('terms_condition');
+
 Route::get('/contact-us', function(){
     return view('landing.contact_us');
 })->name('contact_us');

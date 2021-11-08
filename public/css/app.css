@@ -11101,6 +11101,14 @@ a:hover {
   color: #9f63d5;
 }
 
+.font-number {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-Raleway {
+  font-family: "Raleway", sans-serif;
+}
+
 .btn-register {
   font-weight: 700;
   border-radius: 40px;

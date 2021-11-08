@@ -1,3 +1,4 @@
+
 <div class="footer-section position-relative bg-white">
     <div class="container pt-5 pb-4">
         <div class="row">
@@ -27,9 +28,9 @@
                 <div class="single-footer-column">
                     <p class="text-xxsm bottom-border">INFORMATION</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Mock Tests</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="{{route('terms_condition')}}">Terms & Condition</a></li>
+                        <li><a href="{{route('privacy_policy')}}">Privacy Policy</a></li>
+                        <li><a href="{{route('refund_return_policy')}}">Refund and Return Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,6 +54,7 @@
                 </div>
             </div>
         </div>
+       
         <div class="row mt-5">
             <div class="col-md-6 text-left">
                 <div class="single-footer-column">
@@ -61,11 +63,16 @@
             </div>
             <div class="col-md-6 text-right">
                 <div class="single-footer-column">
-                    <a href="#" class="mr-4">Terms & services</a>
-                    <a href="#">Privacy policy</a>
+                    <a href="tel:+8801746483678"  class="font-arial mr-4">+8801746483678</a>
+                    <a href = "mailto: business@edventurebd.com" class="mr-4">business@edventurebd.com</a>
                 </div>
             </div>
         </div>
+        <div class="mt-5">
+            <img class="img-fluid" src="/img/landing/edventurepay.png" alt="">
+        </div>
         
     </div>
+
+   
 </div>
