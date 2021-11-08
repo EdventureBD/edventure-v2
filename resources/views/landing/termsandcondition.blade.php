@@ -6,7 +6,7 @@
                     <div class="pl-3">
                         <h3 class="text-purple text-lg fw-400 text-center font-bebas">Terms and Conditions</h3>
                         
-                        <pre class=" fw-600 text-xsm w-100 text-purple-half font-raleway">
+                        <pre class="overflow-hidden fw-600 text-xsm w-100 text-purple-half font-raleway">
 <span class=" fw-600 text-xsm w-200 text-purple">1. Welcome</span>
 Welcome to www.edventurebd.com. The following terms and conditions govern your (and any person or
 entity you enable/allow access through your access) access and use of this website (“Site”), the contents
