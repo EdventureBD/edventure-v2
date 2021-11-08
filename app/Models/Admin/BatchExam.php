@@ -46,7 +46,7 @@ class BatchExam extends Model
             $spExam->canAttemp = true;
             if ($spExam->exam->exam_type == Edvanture::MCQ && $spExam->examResult->count() > 0) {
                 foreach ($spExam->examResult as $exResult) {
-                    if ($exResult->student_id == Auth::user()->id) {
+                    if ($exResult->student_id == Auth::user()->id && $exResult->status == 1) {
                         $spExam->canAttemp = false;
                     }
                 }
