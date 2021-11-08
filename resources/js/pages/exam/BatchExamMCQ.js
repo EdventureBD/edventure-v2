@@ -154,7 +154,6 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                 <p className={state.error ? "text-red" : "text-red d-none"}>Please answer all the questions!</p>
                 <button className="btn text-xxsm fw-800 text-white bg-purple px-4 py-2 mt-3" onSubmit={submitExam}>Submit</button>
             </form>
-            
         </div>
     </div>)
 }
