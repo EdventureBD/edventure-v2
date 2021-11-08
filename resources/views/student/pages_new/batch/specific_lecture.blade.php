@@ -63,16 +63,10 @@
                                                 <div class="col-sm-12" >
                                                     <div class="">
                                                         <div class="mx-auto mt-5 mb-5 text-center">
-                                                            <p class="h2 text-gray-50 font-weight-light m-0 text-center">Time Left </p>
-                                                            <div id="countdownTimer" class="text-center text-gray-50 count-timer my-4"></div>
-                                                            {{-- <p class="h2 text-gray-50 font-weight-light m-0">
-                                                                You have Live Class on 
-                                                                @php
-                                                                    echo $start_date . ' at ';
-                                                                    echo $start_time;
-                                                                @endphp
-                                                            </p> --}}
-                                                            <button class="btn btn-purple h3 mx-auto">Join Live Class</button>
+                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">Topic: {{$liveClass->title}}</p>
+                                                            <p class="h2 text-xsm text-gray-50 font-weight-light m-0 text-center my-4">Time Left </p>
+                                                            <div id="countdownTimer" class="text-center text-gray-50 count-timer my-4 font-arial"></div>
+                                                            <a class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20" href="{{$liveClass->live_link}}">View Live Class </a>
                                                         </div>
                                                     </div>
                                                 </div>
