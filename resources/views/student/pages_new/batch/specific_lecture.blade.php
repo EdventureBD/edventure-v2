@@ -4,8 +4,12 @@
             <div class="container lecture-page page__container page-section position-relative">
                 <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-angle-double-left"></i> Back to course</a>
                 <div class="d-flex justify-content-between">
+                    <div>
                 @if(!empty($prev_lecture_link))<a href="{{$prev_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif
+                    </div>
+                <div>
                 @if(!empty($next_lecture_link))<a href="{{$next_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20">Next Lecture <i class="fas fa-angle-right"></i></a>@endif
+                </div>
                 </div>
                 <div class="row justify-content-center my-3">
                     <div class="col-lg-12">
