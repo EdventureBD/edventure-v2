@@ -63,7 +63,7 @@ class BatchController extends Controller
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {
         //setting next lecture & prev lecture
-        $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'asc')->first();
+        $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'desc')->first();
         $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
         $next_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '>', $courseLecture->id)->orderBy('created_at', 'asc')->first();
         $next_lecture_link = $next_lecture ? route('topic_lecture', [$batch->slug, $next_lecture->slug]) : null;
@@ -79,7 +79,7 @@ class BatchController extends Controller
         $start_time = "";
         $timeleft = 3000;
         if (!empty($liveClass->start_date)) {
-            $start_date_time = new DateTime($liveClass->start_date.' '.$liveClass->start_time);
+            $start_date_time = new DateTime($liveClass->start_date . ' ' . $liveClass->start_time);
             $today_time = new DateTime();
             $timeleft_seconds = $start_date_time->format('U') - $today_time->format('U');
             $timeleft = $timeleft_seconds;
