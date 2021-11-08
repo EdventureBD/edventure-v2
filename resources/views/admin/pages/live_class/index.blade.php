@@ -51,16 +51,13 @@
                                             <td>{{ $liveclass->title }}</td>
                                             <td>{{ $liveclass->batch->title }}</td>
                                             <td>{{ $liveclass->batch->course->title }}</td>
-                                            <td><a href="{{ $liveclass->live_link }}">Link</a></td>
+                                            <td><a href="{{ $liveclass->live_link }}" target="blank">Link</a></td>
                                             <td>{{ $liveclass->start_date }} at {{$liveclass->start_time}}</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput" id="single-col-{{ $liveclass->id }}" data-id="{{ $liveclass->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $liveclass->status ? 'checked' : '' }} >
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('batch-lecture.edit', $liveclass->slug) }}" title="Edit {{ $liveclass->title }}">
-                                                        <button class="btn btn-info"><i class="far fa-edit"></i></button>
-                                                    </a>
                                                     <a class="mr-1" href="#deleteLiveclass{{ $liveclass->id }}" data-toggle="modal" title="Delete {{ $liveclass->title }}">
                                                         <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </a>

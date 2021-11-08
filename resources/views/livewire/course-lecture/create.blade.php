@@ -127,17 +127,7 @@
                 onChange: function(contents, $editable) {
                     @this.set('markdownText', contents);
                 }
-            },
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear', ' fontsize', 'fontsizeunit', 'italic', 'strikethrough', 'superscript', 'subscript']],
-                ['fontname', ['fontname']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph', 'height', 'style']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['fullscreen', 'codeview', 'help', 'undo', 'redo']],
-            ],
+            }
         })
     })
   </script>
