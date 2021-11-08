@@ -97,20 +97,26 @@
     var timeleft = "<?php echo $timeleft; ?>";
     var downloadTimer = setInterval(function () {
         timeleft--;
+        var hours = 0;
+        var minH = 0;
+        var min = 0;
+        var sec = timeleft;
         if (timeleft >=3600) {
-            var hours = Math.floor(timeleft/3600);
-            var minH = parseInt(timeleft % 3600) ;
-            var min = Math.floor(minH / 60);
-            var sec = parseInt(minH % 60);
-            document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
+             hours = Math.floor(timeleft/3600);
+             minH = parseInt(timeleft % 3600) ;
+             min = Math.floor(minH / 60);
+             sec = parseInt(minH % 60);
+        } else if (timeleft >= 60) {
+            min = Math.floor(timeleft / 60);
+             sec = parseInt(timeleft % 60);
+        }
+            // var min = Math.floor(minH / 60);
+            // var sec = parseInt(minH % 60);
+            // document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
             // document.getElementById('countdownMinuits').textContent = min;
             // document.getElementById('countdownSecound').textContent = sec;
-        } else {
-            document.getElementById('countdownMinuits').textContent = 0;
-            document.getElementById("countdownSecound").textContent = timeleft;
-            document.getElementById('countdownMinuits-xs').textContent = 0;
-            document.getElementById("countdownSecound-xs").textContent = timeleft;
-        }
+        // } 
+        document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
 
         if (timeleft <= 0) {
             // document.getElementById('exam-form').submit();
