@@ -23,11 +23,6 @@ class CreateLiveClassesTable extends Migration
                 ->references('id')->on('batches')
                 ->onDelete('cascade');
 
-            // $table->unsignedBigInteger('course_id');
-            // $table->foreign('course_id')
-            //     ->references('id')->on('courses')
-            //     ->onDelete('cascade');
-
             $table->unsignedBigInteger('topic_id')->nullable();
             $table->foreign('topic_id')
                 ->references('id')->on('course_topics')
