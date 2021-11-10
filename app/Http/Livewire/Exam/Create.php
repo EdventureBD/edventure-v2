@@ -83,18 +83,29 @@ class Create extends Component
             $this->quesLimit = 0;
             $this->showQuestionLimit = false;
             $this->showSpecialExam = false;
+            $this->marks=10;
+            $this->duration=1440;
         } else {
             $this->quesLimit = '';
             $this->showQuestionLimit = true;
             $this->showSpecialExam = true;
+            $this->marks=null;
             $this->validate([
                 'examType' => 'required'
             ]);
+            $this->duration=null;
         }
     }
 
     public function updatedQuesLimit()
     {
+        if (!empty ($this->examType) && ($this->examType) == 'MCQ') {
+            $this->marks=$this->quesLimit;
+            $this->duration=$this->quesLimit;
+        } else if (!empty ($this->examType) && ($this->examType) == 'CQ') {
+            $this->marks=$this->quesLimit*10;
+            $this->duration=$this->quesLimit*30;
+        }
         $this->validate([
             'quesLimit' => 'required'
         ]);

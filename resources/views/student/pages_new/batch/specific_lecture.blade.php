@@ -62,12 +62,19 @@
                                             <div class="row mb-lg-8pt">
                                                 <div class="col-sm-12" >
                                                     <div class="">
+                                                        @if(isset($liveClass) && !empty($liveClass))
+                                                 
                                                         <div class="mx-auto mt-5 mb-5 text-center">
                                                             <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">Topic: {{$liveClass->title}}</p>
-                                                            <p class="h2 text-xsm text-gray-50 font-weight-light m-0 text-center my-4">Time Left </p>
+                                                            
                                                             <div id="countdownTimer" class="text-center text-gray-50 count-timer my-4 font-arial"></div>
                                                             <a class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20" href="{{$liveClass->live_link}}">View Live Class </a>
                                                         </div>
+                                                        @else 
+                                                        <div class="mx-auto mt-5 mb-5 text-center">
+                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">When live class will be scheduled, you will get the class link here</p>                                                            
+                                                        </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,15 +110,9 @@
         } else if (timeleft >= 60) {
             min = Math.floor(timeleft / 60);
              sec = parseInt(timeleft % 60);
-        }
-            // var min = Math.floor(minH / 60);
-            // var sec = parseInt(minH % 60);
-            // document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
-            // document.getElementById('countdownMinuits').textContent = min;
-            // document.getElementById('countdownSecound').textContent = sec;
-        // } 
+        } 
         if (timeleft > 0) {
-            document.getElementById('countdownTimer').innerHTML = "<span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
+            document.getElementById('countdownTimer').innerHTML = "<p class='h2 text-xsm text-gray-50 font-weight-light m-0 text-center my-4'>Time Left </p><span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
         } 
         
 
