@@ -9,12 +9,13 @@
                     <p class="text-white">{{ $course->description }}</p>
                 </div>
                 <div class="col-md-5">
+                    
                     <p class="text-xsm text-white font-weight-light m-0">
-                        Your batch days running : {{ $accessedDays->individual_batch_days }} days <br>
+                        Your batch days running : {{ $batch->batch_running_days }} days <br>
                         You have bought : {{ $accessedDays->accessed_days }} days <br>
                         Days remaining :
                         @php
-                            echo $accessedDays->accessed_days - $accessedDays->individual_batch_days . ' days';
+                            echo $accessedDays->accessed_days - $batch->batch_running_days . ' days';
                         @endphp
                     </p>
                 </div>
@@ -22,8 +23,14 @@
         </div>
 
     </div>
+    
     <div class="page-section border-bottom-2 py-5">
         <div class="container page__container max-w-50 w-100">
+            @if(session()->has('payment_success'))
+                <div class="alert alert-info text-center ">
+                    <p class="mb-0 text-xxsm">{{session()->get('payment_success')}}</p>
+                </div>
+            @endif
             @if (count($specialExams) > 0)
                 <div class="row mb-3">
                     <div class="col-lg-12">

@@ -27,7 +27,7 @@ class canAccess
             ->first();
         // dd($batch_student_enrollment);
         if ($batch_student_enrollment) {
-            if ($batch_student_enrollment->individual_batch_days <= $batch_student_enrollment->accessed_days) {
+            if ($batch->batch_running_days <= $batch_student_enrollment->accessed_days) {
                 return $next($request);
             }
         }

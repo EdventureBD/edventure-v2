@@ -52,7 +52,7 @@ class Course extends Model
 
     public function getRelatedCourses($category_ids = null, $excluded_courses = null, $random = false)
     {
-        $courses = !empty($category_ids) ? $this->whereIn('course_category_id', $category_ids) : $this;
+        $courses = !empty($category_ids) ? $this->whereIn('course_category_id', $category_ids)->where('status', 1) : $this->where('status', 1);
         if (!empty($excluded_courses)) $courses = $courses->whereNotIn('id', $excluded_courses);
         if ($random) return $courses->inRandomOrder()->take(2)->get();
         else return $courses->get();

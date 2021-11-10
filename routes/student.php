@@ -8,6 +8,7 @@ use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\PaymentController;
 use App\Http\Controllers\Student\ProgressController;
 use App\Http\Controllers\Student\AccountDetailsController;
+use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
@@ -44,6 +45,11 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
 
     // PAYMENTS
     Route::get('/payments/{user_id}', [PaymentController::class, 'payments'])->name('payments');
+
+    //Process Payment
+    Route::post('/process-payment/{course}', [CourseController::class, 'processPayment'])->name('payment.process');
+    //Payment success
+    Route::get('/payment-success/{course}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 });
 
 require __DIR__ . '/auth.php';

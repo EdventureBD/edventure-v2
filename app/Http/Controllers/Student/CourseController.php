@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
+use App\Utils\Payment as UtilsPayment;
+use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 class CourseController extends Controller
 {
@@ -77,7 +79,7 @@ class CourseController extends Controller
 
     public function enroll(Course $course)
     {
-       
+    //    dd($course);
         if($course->price<=0){
             $courseFirstBatch = Batch::where('course_id', $course->id)->orderby('created_at','ASC')->select('id','slug')->first();
             if(!$courseFirstBatch){
@@ -117,6 +119,7 @@ class CourseController extends Controller
             );
             return redirect()->route('batch-lecture', $courseFirstBatch->slug);
         } else {
+           
             $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
             ->where('batch_student_enrollments.course_id', $course->id)
             ->where('batch_student_enrollments.student_id', auth()->user()->id)
@@ -124,18 +127,64 @@ class CourseController extends Controller
             ->first();
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-                if ($enrolled->accepted == 1) {
+                if ($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) {
                     return redirect()->route('batch-lecture', $batch->slug);
                 }
+                $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
+            } else {
+                $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
+                $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
             }
-            $paymentsNumber = PaymentNumber::all();
-            $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
-            return view('student.pages.course.confirm_enroll', compact('course', 'paymentsNumber', 'studentDetails'));
+            // $paymentsNumber = PaymentNumber::all();
+            // $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
+            // dd($studentDetails);
+            $student = auth()->user();
+           
+            return view('student.pages_new.course.confirm_enroll', compact('course', 'student', 'batch', 'enroll_months'));
         }
+    }
+
+    public function processPayment(Course $course)
+    {
+        // dd(request()->all());
+        $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id, auth()->user()->id);
+        if ($enrolled) {
+            $batch = (new Batch())->getById($enrolled->batch_id);
+            $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
+        } else {
+            $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
+            $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
+        }
+        
+        request()->validate([
+            'months'=>'numeric|min:'.$enroll_months
+        ]);
+        
+        $price = $course->price * request()->months;
+        // dd($price);
+        $days = request()->months * 30;
+        $shurjopay_service = new ShurjopayService(); 
+        $trx_id = $shurjopay_service->generateTxId(); 
+
+        //Creating payment with accepted =0 ;
+        $payOpt = ['batch_id'=>$batch->id, 'accepted'=> 0, "trx"=>$trx_id, "payment_type"=>Payment::SHURJO_PAY, "days"=>$days, 'price'=>$price];
+        $payment = (new Payment())->savePayment(auth()->user(), $course, $payOpt);
+        //Process Payment with ShurjoPay
+        $success_url = route('payment.success', $course->slug);
+        $shurjopay_service->sendPayment($price, $success_url, []); 
     }
 
     public function invoice(Course $course, Payment $payments)
     {
         return view('student.pages.course.invoice', compact('course', 'payments'));
+    }
+
+    public function calculateEnrolMonths($days=0)
+    {
+        $months = 1;
+        if($days > 30) {
+            $months = ceil($days/30);
+        }
+        return $months;
     }
 }

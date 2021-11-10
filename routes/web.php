@@ -6,6 +6,8 @@ use App\Models\Admin\Course;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
+use App\Utils\Payment;
+use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use App\Http\Controllers\Student\CourseController;
 */
 
 Route::get('/', function () {
-    $courses = Course::where('status', 1)->orderBy('order')->take(2)->get();
+    $courses = Course::where('status', 1)->orderBy('order')->take(8)->get();
     // return view('student.pages.frontend.student', compact('courses'));
     return view('landing.landing', compact('courses'));
 })->name('home');
@@ -60,6 +62,11 @@ Route::get('/contact-us', function(){
 })->name('contact_us');
 
 
-Route::get('/test-otp', function() {
-    return view('test_otp');
-})->name('send_otp');
+// Route::get('/test-payment', function() {
+    
+    
+//     // You can call simply $shurjopay_service->sendPayment(2) without success route
+// });
+
+
+

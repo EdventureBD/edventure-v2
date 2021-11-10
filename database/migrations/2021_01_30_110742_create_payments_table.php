@@ -26,6 +26,11 @@ class CreatePaymentsTable extends Migration
                 ->references('id')->on('courses')
                 ->onDelete('cascade');
 
+            $table->unsignedBigInteger('batch_id');
+            $table->foreign('batch_id')
+                    ->references('id')->on('batches')
+                    ->onDelete('cascade');
+
             $table->string('name');
             $table->string('email');
             $table->string('contact');

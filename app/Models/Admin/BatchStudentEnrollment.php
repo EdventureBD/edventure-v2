@@ -31,4 +31,10 @@ class BatchStudentEnrollment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getEnrollment($course_id, $student_id)
+    {
+        return $this->where(['course_id' => $course_id, 'student_id' => $student_id,
+        ])->first();
+    }
 }
