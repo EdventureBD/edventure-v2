@@ -15,7 +15,6 @@ class Index extends Component
 
     public function render()
     {
-        // dd($this->type);
         return view('livewire.user.index', [
             'users' => User::orderBy('user_type')->whereIn('user_type', $this->type)->paginate(10)
         ]);

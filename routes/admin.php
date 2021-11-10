@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
     Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
     Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
-    Route::get('/batch-rank-update', function() {
+    Route::get('/batch-rank-update', function () {
         Artisan::call("update:batch-rank");
         Session::put('status', 'Batch rank updated successful!');
         return redirect()->back();
@@ -176,6 +176,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     Route::get('download-courses-as-csv', [CSVController::class, 'courseCSV'])->name('courseCSV');
     Route::get('download-course-lectures-as-csv', [CSVController::class, 'courseLecturesCSV'])->name('courseLecturesCSV');
+    Route::get('download-users-as-csv', [CSVController::class, 'usersExportCSV'])->name('usersExportCSV');
 
     Route::get('download-content-tag-as-csv', [CSVController::class, 'contentTagExportCSV'])->name('contentTagExportCSV');
     Route::post('upload-content-tag-as-csv', [CSVController::class, 'contentTagImportCSV'])->name('contentTagImportCSV');
