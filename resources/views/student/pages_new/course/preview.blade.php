@@ -116,11 +116,13 @@
                                         <p class="h6 pt-3" style="text-align: center;">Exams or Assignment</p>
                                         @forelse($exams as $exam)
                                             @php
+                                            // dd($batchTopic);
                                             $view_result = "View Result";
                                                 if ($exam->canAttemp ) {
                                                     $view_result = "Start Exam";
                                                 }
                                             @endphp
+                                            @if ($exam->exam->topic_id == $batchTopic->topic_id)
                                             <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
                                                  <a class="flex text-dark" href="#">
                                                     {{ $exam->exam->title }}
@@ -130,6 +132,7 @@
                                                     <a href="{{ route('question', [$batch->slug, $exam->exam->slug]) }}" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{$view_result}}</a>
                                                 </div>
                                             </div>
+                                            @endif
                                         @empty
                                             <div class="accordion__menu-link">
                                                 <span class="icon-holder icon-holder--small icon-holder--dark rounded-circle d-inline-flex icon--left">
