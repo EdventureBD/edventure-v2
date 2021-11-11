@@ -129,8 +129,10 @@ class CourseController extends Controller
             ->first();
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-                if ($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) {
-                    return redirect()->route('batch-lecture', $batch->slug);
+                
+                if (($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) || $enrolled->status == 0) {
+                    // dd($enrolled);
+                    return redirect()->route('course-preview', $course->slug);
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
             } else {
