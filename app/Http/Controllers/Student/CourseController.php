@@ -134,7 +134,7 @@ class CourseController extends Controller
             } else {
                 $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
                 if (!$batch) {
-                    return back()->withErrors(['message', 'No batch is available now, please try again later!']);
+                    return back()->withErrors('message', 'No batch is available now, please try again later!');
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
             }
