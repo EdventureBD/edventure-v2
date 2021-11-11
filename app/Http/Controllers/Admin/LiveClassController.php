@@ -18,7 +18,14 @@ class LiveClassController extends Controller
     {
         return view('admin.pages.live_class.create');
     }
-    
+
+
+    public function edit(LiveClass $liveClass)
+    {
+        // dd($liveClass);
+        return view('admin.pages.live_class.edit', compact('liveClass'));
+    }
+
     public function destroy(LiveClass $liveClass)
     {
         $delete = $liveClass->delete();
