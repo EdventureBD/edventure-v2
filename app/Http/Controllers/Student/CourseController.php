@@ -50,10 +50,10 @@ class CourseController extends Controller
                 ->first();
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
+                if (request()->test) {
+                    dd($enrolled);
+                }
                 if ($enrolled->accepted == 1) {
-                    if (request()->test) {
-                        dd($batch);
-                    }
                     return redirect()->route('batch-lecture', $batch->slug);
                 }
             } else {
