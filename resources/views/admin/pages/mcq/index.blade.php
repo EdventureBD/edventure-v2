@@ -97,7 +97,6 @@
                                         <th>Field 3</th>
                                         <th>Field 4</th>
                                         <th>Answer</th>
-                                        <th>Exam</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -125,7 +124,6 @@
                                                     {!! $mcq->field4 !!}
                                                 @endif
                                             </td>
-                                            <td>{{ $mcq->examTitle }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="mr-1"
@@ -137,7 +135,7 @@
                                                     <a class="mr-1"
                                                         href="{{ route('mcq.edit', [$exam->slug, $mcq->slug]) }}"
                                                         title="Edit {{ $mcq->question }}">
-                                                        <button class="btn btn-info"><i
+                                                        <button class="btn btn-primary"><i
                                                                 class="far fa-edit"></i></button>
                                                     </a>
                                                     <a class="mr-1" href="#deleteMCQ{{ $mcq->id }}"
@@ -192,7 +190,6 @@
                                         <th>Field 3</th>
                                         <th>Field 4</th>
                                         <th>Ansewer</th>
-                                        <th>Exam</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

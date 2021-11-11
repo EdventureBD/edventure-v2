@@ -31,7 +31,7 @@ class MCQController extends Controller
 
     public function store(Request $request, Exam $exam)
     {
-       
+
         $validaterequest = $request->validate([
             'question' => 'required|min:4|unique:m_c_q_s',
             'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
@@ -51,7 +51,7 @@ class MCQController extends Controller
         $mcq->slug = (string) Str::uuid();
         if ($request->hasFile('image')) {
             $mcq->image = $request->image->store('public/question/mcq');
-            $mcq->image=Storage::url( $mcq->image);
+            $mcq->image = Storage::url($mcq->image);
         }
         $mcq->field1 = $request['field1'];
         $mcq->field2 = $request['field2'];
@@ -101,10 +101,16 @@ class MCQController extends Controller
         foreach ($questionContentTags as $qct) {
             array_push($tagId, $qct->content_tag_id);
         }
-        $contentTags = ContentTag::where('course_id', $exam->course_id)
-            ->where('topic_id', $exam->topic_id)
-            ->whereNotIn('id', $tagId)
-            ->get();
+        if ($exam->special == 1) {
+            $contentTags = ContentTag::where('course_id', $exam->course_id)
+                ->whereNotIn('id', $tagId)
+                ->get();
+        } else {
+            $contentTags = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->whereNotIn('id', $tagId)
+                ->get();
+        }
         return view('admin.pages.mcq.edit', compact('mcq', 'exam', 'contentTags', 'questionContentTags'));
     }
 
@@ -131,7 +137,7 @@ class MCQController extends Controller
                 Storage::delete($mcq->image);
             }
             $mcq->image = $request->image->store('public/question/mcq');
-            $mcq->image=Storage::url( $mcq->image);
+            $mcq->image = Storage::url($mcq->image);
         }
 
         $mcq->question = $request['question'];
