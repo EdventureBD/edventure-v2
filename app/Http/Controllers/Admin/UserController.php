@@ -10,10 +10,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        // $users = User::orderBy('user_type')->get();
-        // return view('admin.pages.user.index', compact('users'));
-        $type = [1, 2, 3];
-        return view('admin.pages.user.index', compact('type'));
+        // WITHOUT LIVEWIRE
+        $users = User::orderBy('user_type')->get();
+        return view('admin.pages.user.index', compact('users'));
+
+        // FOR LIVEWIRE
+        // $type = [1, 2, 3];
+        // return view('admin.pages.user.index', compact('type'));
     }
 
     public function create()
