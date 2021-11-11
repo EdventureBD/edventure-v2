@@ -29,7 +29,6 @@ class BlogController extends Controller
     public function create()
     {
         $users = User::whereUserType(2)->get();
-        // dd($users);
         return view('admin.pages.blog.create', compact('users'));
     }
 
@@ -41,7 +40,6 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $validateData = $request->validate([
             'title' => 'required|string',
             'subTitle' => 'required|string',
@@ -134,5 +132,28 @@ class BlogController extends Controller
         $obj->save();
 
         return response()->json(['success' => 'Status change successfully.']);
+    }
+
+
+    public function readBlog(Blog $blog){
+        if($blog->status==0){
+            return redirect()->route('home');
+        } else {
+            $author=User::where('id',$blog->author_id)->select('name','image')->first();
+            $author_name=$author->name;
+            $author_image=$author->image;
+            $title=$blog->title;
+            $banner=$blog->banner;
+            $subtitle=$blog->subtitle;
+            $description=$blog->description;
+            return view('landing.read_blog', compact(
+                'author_name',
+                'author_image',
+                 'title',
+                 'banner',
+                 'subtitle',
+                 'description'
+                ));
+        }
     }
 }

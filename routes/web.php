@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Models\User;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Course;
@@ -58,6 +59,10 @@ Route::get('/terms-condition', function(){
 Route::get('/contact-us', function(){
     return view('landing.contact_us');
 })->name('contact_us');
+
+
+Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
+
 
 
 Route::get('/test-otp', function() {

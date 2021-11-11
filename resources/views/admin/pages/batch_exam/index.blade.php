@@ -64,14 +64,15 @@
                                             </td>
                
                                             <td >
+                                                @if ($batch_exam->exam->special)
+                                                    <span class="badge bg-primary" > Special {{ $batch_exam->exam->exam_type }} </span>
+                                                @else
                                                 <span
-                                                class="badge {{ $batch_exam->exam->exam_type == 'MCQ' ? 'bg-primary' : '' }}
+                                                class="badge {{ $batch_exam->exam->exam_type == 'MCQ' ? 'bg-success' : '' }}
                                                                 {{ $batch_exam->exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
                                                                 {{ $batch_exam->exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}">
-                                                @if ($batch_exam->exam->special)
-                                                    Special
-                                                @endif
                                                 {{ $batch_exam->exam->exam_type }}
+                                                @endif
                                             </span>
                                             </td>
                                   

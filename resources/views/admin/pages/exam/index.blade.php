@@ -69,15 +69,17 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                <span
-                                                    class="badge {{ $exam->exam_type == 'MCQ' ? 'bg-primary' : '' }}
-                                                                 {{ $exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
-                                                                 {{ $exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}">
-                                                    @if ($exam->special)
-                                                        Special
-                                                    @endif
-                                                    {{ $exam->exam_type }}
-                                                </span>
+                                                @if ($exam->special)
+                                                    <span class="badge bg-primary" > Special {{ $exam->exam_type }} </span>
+                                                @else
+                                                    <span                                                   
+                                                        class="badge {{ $exam->exam_type == 'MCQ' ? 'bg-success' : '' }}
+                                                                    {{ $exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
+                                                                    {{ $exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}">
+                                                        
+                                                        {{ $exam->exam_type }}
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td class="text-center">{{ $exam->marks }}</td>
                                             <td class="text-center">{{ $exam->duration }}</td>

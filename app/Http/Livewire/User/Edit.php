@@ -68,7 +68,7 @@ class Edit extends Component
         $data = $this->validate();
         if ($this->tempImage) {
             $imageUrl = $this->image->store('public/user');
-            $this->image = $imageUrl;
+            $this->image = Storage::url( $imageUrl);
             Storage::delete($this->deleteImage);
         }
         $user = User::find($this->user->id);

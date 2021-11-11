@@ -12042,3 +12042,11 @@ form input {
     font-size: 18px;
   }
 }
+
+.blog-single-author img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}

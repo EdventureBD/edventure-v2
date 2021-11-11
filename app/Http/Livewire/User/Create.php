@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\UserType;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
@@ -60,7 +61,7 @@ class Create extends Component
         $data = $this->validate();
         if ($this->image) {
             $imageUrl = $this->image->store('public/user');
-            $this->image = $imageUrl;
+            $this->image = Storage::url($imageUrl);
         }
         $user = new User();
         $user->name = $data['name'];
