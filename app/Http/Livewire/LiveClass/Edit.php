@@ -4,13 +4,13 @@ namespace App\Http\Livewire\LiveClass;
 
 use Livewire\Component;
 use App\Models\Admin\Batch;
-use Illuminate\Support\Str;
 use App\Models\Admin\LiveClass;
 use App\Models\Admin\CourseTopic;
-use App\Models\Admin\CourseCategory;
 
-class Create extends Component
+class Edit extends Component
 {
+    public $liveClass;
+
     public $title;
     public $batchId;
     public $categoryId;
@@ -21,8 +21,7 @@ class Create extends Component
     public $startDate;
     public $isSpecial;
 
-    public $batches;
-    public $categories;
+    public $batch;
     public $courses;
     public $topics = [];
 
@@ -44,6 +43,7 @@ class Create extends Component
 
     public function updatedTopicId()
     {
+        // dd($this->topicId);
         $this->validate([
             'topicId' => 'required'
         ]);
@@ -59,7 +59,7 @@ class Create extends Component
     public function updatedStartTime()
     {
         $this->validate([
-            'startTime' => 'required|date_format:H:i|'
+            'startTime' => 'required'
         ]);
     }
 
@@ -72,7 +72,7 @@ class Create extends Component
 
     public function updatedisSpecial()
     {
-        if ($this->isSpecial == true) {
+        if ($this->isSpecial) {
             $this->topicId = null;
         }
     }
@@ -82,44 +82,50 @@ class Create extends Component
         'batchId' => 'required',
         'topicId' => 'nullable',
         'liveLink' => 'required|url',
-        'startTime' => 'required|date_format:H:i|',
+        'startTime' => 'required|',
         'startDate' => 'required|date|',
         'isSpecial' => 'nullable',
         'course_id' => 'required'
     ];
 
-    public function saveLiveClass()
+    public function updateLiveClass()
     {
         $data = $this->validate();
-        $live_class = new LiveClass();
+        $live_class = LiveClass::find($this->liveClass->id);
         $live_class->title = $data['title'];
-        $live_class->slug = Str::slug($data['title']);
 
-        $live_class->batch_id = $data['batchId'][0];
+        $live_class->batch_id = $data['batchId'];
         $live_class->topic_id = $data['topicId'];
         $live_class->start_time = $data['startTime'];
         $live_class->start_date = $data['startDate'];
         $live_class->live_link = $data['liveLink'];
         $live_class->is_special = $data['isSpecial'];
         $live_class->course_id = $data['course_id'];
-        $live_class->order = 0;
-        $live_class->status = 1;
 
         $save = $live_class->save();
 
         if ($save) {
-            session()->flash('status', 'Live class successfully added!');
+            session()->flash('status', 'Live class successfully updated!');
             return redirect()->route('live-class.index');
         } else {
-            session()->flash('failed', 'Live class added failed!');
-            return redirect()->route('live-class.create');
+            session()->flash('failed', 'Live class update failed!');
+            return redirect()->route('live-class.edit');
         }
     }
 
     public function mount()
     {
-        $this->batches = Batch::orderBy('title')->where('status', 1)->get();
-        $this->categories = CourseCategory::orderBy('title')->get();
+        // dd($this->liveClass);
+        $this->title = $this->liveClass->title;
+        $this->batchId = $this->liveClass->batch_id;
+        $this->course_id = $this->liveClass->course_id;
+        $this->topicId = $this->liveClass->topic_id;
+        $this->liveLink = $this->liveClass->live_link;
+        $this->startTime = $this->liveClass->start_time;
+        $this->startDate = $this->liveClass->start_date;
+        $this->isSpecial = $this->liveClass->is_special;
+
+        $this->batch = Batch::find($this->batchId);
     }
 
     public function render()
@@ -128,6 +134,7 @@ class Create extends Component
             $batch_data = Batch::select('course_id')->where('id', $this->batchId)->first();
             $this->topics = CourseTopic::where('course_id', $batch_data->course_id)->get();
         }
-        return view('livewire.live-class.create');
+
+        return view('livewire.live-class.edit');
     }
 }
