@@ -11,8 +11,10 @@
 
 @section('content')
     <!-- Main content -->
-    @livewire('user.index', ['type' => $type])
-    {{-- <section class="content">
+    {{-- @livewire('user.index', ['type' => $type]) //WITHOUT DATA TABLE --}}
+
+    {{-- WITH DATA TABLE --}}
+    <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -220,7 +222,8 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-    </section> --}}
+    </section>
+    {{-- WITH DATA TABLE --}}
     <!-- /.content -->
 @endsection
 
@@ -248,13 +251,13 @@
         })
     </script>
     <!-- DataTables -->
-    {{-- <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}">
-    </script> --}}
+    </script>
 @endsection
 
 @section('js2')
-    {{-- <script>
+    <script>
         $(function() {
             $("#example1").DataTable();
             $('#example2').DataTable({
@@ -266,5 +269,5 @@
                 "autoWidth": false,
             });
         });
-    </script> --}}
+    </script>
 @endsection
