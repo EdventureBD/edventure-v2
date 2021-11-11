@@ -37,7 +37,7 @@ class PaymentController extends Controller
         //update payment
         $payment = (new Payment())->saveData(['accepted'=>1, 'payment_account_number'=>request()->bank_tx_id], $payment->id);
         $student = auth()->user();
-        $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id,$student->id)->first();
+        $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id,$student->id);
         $access_days = $enrolled ? $enrolled->accessed_days + $payment->days_for : $payment->days_for;
         $batchStudentEnrollment = BatchStudentEnrollment::updateOrCreate(
             [
