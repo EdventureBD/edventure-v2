@@ -43,19 +43,18 @@ class CourseController extends Controller
             }
         }
         if (Auth::check()) {
-            $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
-                ->where('batch_student_enrollments.course_id', $course->id)
-                ->where('batch_student_enrollments.student_id', auth()->user()->id)
-                ->where('payments.student_id', auth()->user()->id)
+            $enrolled = BatchStudentEnrollment::where('course_id', $course->id)
+                ->where('student_id', auth()->user()->id)
                 ->first();
+                // dd($enrolled);
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-                if (request()->test) {
-                    dd($enrolled);
-                }
-                if ($enrolled->accepted == 1) {
+                // if (request()->test) {
+                //     dd($enrolled);
+                // }
+                // if ($enrolled->accepted == 1) {
                     return redirect()->route('batch-lecture', $batch->slug);
-                }
+                // }
             } else {
                 return view('student.pages_new.course.preview_guest', compact(
                     'course',

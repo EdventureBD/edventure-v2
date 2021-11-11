@@ -137,16 +137,9 @@
                        <a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2">Watch
                            trailer <i class="fas fa-play ml-2"></i>
                        </a>
-                       @if ($enrolled)
-                           @if ($enrolled->accepted == 1)
-                               <a href="{{ route('batch-lecture', $batch->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Go to your
-                                   batch</a>
-                           @elseif($enrolled->accepted == 0)
-                               <a href="#" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Admin will accept your request. Please wait</a>
-                           @endif
-                       @else
-                           <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">Enroll Now</a>
-                       @endif
+                       
+                        <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($course->price > 0) Enroll Now (free) @else Enroll Now @endif</a>
+                        
                    </div>
                </div>
             </div>
