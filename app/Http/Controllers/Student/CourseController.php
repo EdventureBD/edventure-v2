@@ -54,7 +54,7 @@ class CourseController extends Controller
                
                 return redirect()->route('batch-lecture', $batch->slug);
             } else {
-                if ($enrolled->status == 0 ) {
+                if ($enrolled && $enrolled->status == 0 ) {
                     Session::flash('message', 'Please contact admin to access your course!');
                 }
                 return view('student.pages_new.course.preview_guest', compact(

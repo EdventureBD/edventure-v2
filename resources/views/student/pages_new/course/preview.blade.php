@@ -116,7 +116,6 @@
                                         <p class="h6 pt-3" style="text-align: center;">Exams or Assignment</p>
                                         @forelse($exams as $exam)
                                             @php
-                                            // dd($batchTopic);
                                             $view_result = "View Result";
                                                 if ($exam->canAttemp ) {
                                                     $view_result = "Start Exam";
