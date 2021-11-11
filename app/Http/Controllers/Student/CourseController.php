@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Utils\Payment as UtilsPayment;
+use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 class CourseController extends Controller
@@ -47,22 +48,21 @@ class CourseController extends Controller
                 ->where('student_id', auth()->user()->id)
                 ->first();
                 // dd($enrolled);
-            if ($enrolled) {
+            if ($enrolled && $enrolled->status == 1) {
+               
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-                // if (request()->test) {
-                //     dd($enrolled);
-                // }
-                // if ($enrolled->accepted == 1) {
-                    return redirect()->route('batch-lecture', $batch->slug);
-                // }
+               
+                return redirect()->route('batch-lecture', $batch->slug);
             } else {
+                if ($enrolled->status == 0 ) {
+                    Session::flash('message', 'Please contact admin to access your course!');
+                }
                 return view('student.pages_new.course.preview_guest', compact(
                     'course',
                     'course_topics',
                     'course_lectures',
                     'course_topic_lectures',
-                    'enrolled',
-                    'batch'
+                    'enrolled'
                 ));
             }
         } else {
