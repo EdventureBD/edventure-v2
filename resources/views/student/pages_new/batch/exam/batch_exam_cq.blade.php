@@ -90,34 +90,61 @@
 
     <script type="text/javascript">
         var timeleft = '<?php echo $exam->duration * 60; ?>';
-        var downloadTimer = setInterval(function() {
-            timeleft--;
-            let hour = Math.floor(timeleft / 3600);
-            let min = Math.floor(timeleft / 60) >= 60 ? Math.floor(timeleft / 60) - 60 : Math.floor(timeleft / 60);
-            let sec = timeleft % 60;
-            if (hour < 10) {
-                hour = `0${hour}`;
-            }
-            if (min < 10) {
-                min = `0${min}`;
-            }
-            if (sec < 10) {
-                sec = `0${sec}`;
-            }
-
+        var downloadTimer = setInterval(function () {
+        timeleft--;
+        var hours = 0;
+        var minH = 0;
+        var min = 0;
+        var sec = timeleft > 0 ? timeleft : 0;
+        if (timeleft >=3600) {
+             hours = Math.floor(timeleft/3600);
+             minH = parseInt(timeleft % 3600) ;
+             min = Math.floor(minH / 60);
+             sec = parseInt(minH % 60);
+        } else if (timeleft >= 60) {
+            min = Math.floor(timeleft / 60);
+             sec = parseInt(timeleft % 60);
+        } 
+        if (timeleft > 0) {
             document.getElementById('countdownMinuits').textContent = min;
             document.getElementById('countdownSecound').textContent = sec;
-            document.getElementById('countdownHour').textContent = hour;
-            document.getElementById('countdownMinuits-xs').textContent = min;
-            document.getElementById('countdownSecound-xs').textContent = sec;
-            document.getElementById('countdownHour-xs').textContent = hour;
+            document.getElementById('countdownHour').textContent = hours;
+        } 
+        
 
-            if (timeleft <= 0) {
-                document.getElementById('exam-form').submit();
-                clearInterval(downloadTimer);
-            }
+        if (timeleft <= 0) {
+            clearInterval(downloadTimer);
+        }
 
-        }, 1000);
+    }, 1000);
+        // var downloadTimer = setInterval(function() {
+        //     timeleft--;
+        //     let hour = Math.floor(timeleft / 3600);
+        //     let min = Math.floor(timeleft / 60) >= 60 ? Math.floor(timeleft % 3600) : Math.floor(timeleft / 60);
+        //     let sec = timeleft % 60;
+        //     if (hour < 10) {
+        //         hour = `0${hour}`;
+        //     }
+        //     if (min < 10) {
+        //         min = `0${min}`;
+        //     }
+        //     if (sec < 10) {
+        //         sec = `0${sec}`;
+        //     }
+
+        //     document.getElementById('countdownMinuits').textContent = min;
+        //     document.getElementById('countdownSecound').textContent = sec;
+        //     document.getElementById('countdownHour').textContent = hour;
+        //     document.getElementById('countdownMinuits-xs').textContent = min;
+        //     document.getElementById('countdownSecound-xs').textContent = sec;
+        //     document.getElementById('countdownHour-xs').textContent = hour;
+
+        //     if (timeleft <= 0) {
+        //         document.getElementById('exam-form').submit();
+        //         clearInterval(downloadTimer);
+        //     }
+
+        // }, 1000);
     </script>
     <script type="text/javascript">
         // var formSumit
