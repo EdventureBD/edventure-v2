@@ -242,10 +242,16 @@ class CQController extends Controller
         foreach ($questionContentTags1 as $qct) {
             array_push($tagId1, $qct->content_tag_id);
         }
-        $contentTags1 = ContentTag::where('course_id', $exam->course_id)
-            ->where('topic_id', $exam->topic_id)
-            ->whereNotIn('id', $tagId1)
-            ->get();
+        if ($exam->special == 1) {
+            $contentTags1 = ContentTag::where('course_id', $exam->course_id)
+                ->whereNotIn('id', $tagId1)
+                ->get();
+        } else {
+            $contentTags1 = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->whereNotIn('id', $tagId1)
+                ->get();
+        }
         // dd($questionContentTags1, $contentTags1);
 
         // অনুধাবন
@@ -255,10 +261,16 @@ class CQController extends Controller
         foreach ($questionContentTags2 as $qct) {
             array_push($tagId2, $qct->content_tag_id);
         }
-        $contentTags2 = ContentTag::where('course_id', $exam->course_id)
-            ->where('topic_id', $exam->topic_id)
-            ->whereNotIn('id', $tagId2)
-            ->get();
+        if ($exam->special == 1) {
+            $contentTags2 = ContentTag::where('course_id', $exam->course_id)
+                ->whereNotIn('id', $tagId2)
+                ->get();
+        } else {
+            $contentTags2 = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->whereNotIn('id', $tagId2)
+                ->get();
+        }
 
         // dd($questionContentTags2, $contentTags2);
         // প্রয়োগমূলক
@@ -268,10 +280,16 @@ class CQController extends Controller
         foreach ($questionContentTags3 as $qct) {
             array_push($tagId3, $qct->content_tag_id);
         }
-        $contentTags3 = ContentTag::where('course_id', $exam->course_id)
-            ->where('topic_id', $exam->topic_id)
-            ->whereNotIn('id', $tagId3)
-            ->get();
+        if ($exam->special == 1) {
+            $contentTags3 = ContentTag::where('course_id', $exam->course_id)
+                ->whereNotIn('id', $tagId3)
+                ->get();
+        } else {
+            $contentTags3 = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->whereNotIn('id', $tagId3)
+                ->get();
+        }
 
         // dd($questionContentTags3, $contentTags3);
         // উচ্চতর দক্ষতা
@@ -281,10 +299,17 @@ class CQController extends Controller
         foreach ($questionContentTags4 as $qct) {
             array_push($tagId4, $qct->content_tag_id);
         }
-        $contentTags4 = ContentTag::where('course_id', $exam->course_id)
-            ->where('topic_id', $exam->topic_id)
-            ->whereNotIn('id', $tagId4)
-            ->get();
+
+        if ($exam->special == 1) {
+            $contentTags4 = ContentTag::where('course_id', $exam->course_id)
+                ->whereNotIn('id', $tagId4)
+                ->get();
+        } else {
+            $contentTags4 = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->whereNotIn('id', $tagId4)
+                ->get();
+        }
 
         // dd($questionContentTags4, $contentTags4);
         return view('admin.pages.cq.edit', compact(
