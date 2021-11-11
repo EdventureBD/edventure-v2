@@ -27,11 +27,12 @@
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @forelse($questions as $key => $question)
+                    {{-- @php dd($question); @endphp --}}
                         <div class="page-separator">
                             <div class="bg-purple-light bradius-10 p-3">
                                 <span class="badge badge-primary">
                                     Question {{ $key + 1 }}:
-                                </span> {!! $question->creative_question !!}
+                                </span> {!! $question->question !!}
                             </div>
                             @if ($question->image)
                                 <div class="avatar avatar-xxl avatar-4by3 bg-purple-light">
@@ -41,8 +42,8 @@
                             @endif
                             <input type="hidden" name="ques[{{ $loop->iteration }}]" value="{{ $question->id }}">
                         </div>
-                        @foreach ($question->question as $key => $cq)
-                            <div class="page-separator mt-3">
+                        {{-- @foreach ($question->assignment as $key => $cq) --}}
+                            {{-- <div class="page-separator mt-3">
                                 <div class="page-separator__text bg-light-gray bradius-15 bshadow p-3 single-question">
                                     <span class="">
                                         {{ $key + 1 }}:
@@ -54,8 +55,8 @@
                                             class="avatar-img rounded img-fluid">
                                     </div>
                                 @endif
-                            </div>
-                        @endforeach
+                            </div> --}}
+                        {{-- @endforeach --}}
                     @empty
                         <div class="page-separator">
                             <div class="page-separator__text" style="font-family: 'SiyamRupali', sans-serif;">

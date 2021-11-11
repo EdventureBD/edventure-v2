@@ -143,7 +143,8 @@ class ExamController extends Controller
 
             if (!$canAttempt) {
                 $questions = Assignment::where('exam_id', $exam->id)->inRandomOrder()->get();
-                return view('student.pages_new.batch.exam.batch_exam_cq', compact('questions', 'exam', 'batch'));
+                // dd($questions);
+                return view('student.pages_new.batch.exam.batch_exam_assignment', compact('questions', 'exam', 'batch'));
             }
             $canAttempt = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
