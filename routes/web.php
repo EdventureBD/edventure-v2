@@ -7,6 +7,8 @@ use App\Models\Admin\Course;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
+use App\Utils\Payment;
+use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,7 @@ use App\Http\Controllers\Student\CourseController;
 */
 
 Route::get('/', function () {
-    $courses = Course::where('status', 1)->orderBy('order')->take(2)->get();
+    $courses = Course::where('status', 1)->orderBy('order')->take(8)->get();
     // return view('student.pages.frontend.student', compact('courses'));
     return view('landing.landing', compact('courses'));
 })->name('home');

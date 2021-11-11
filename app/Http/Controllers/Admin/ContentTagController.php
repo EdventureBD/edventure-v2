@@ -10,14 +10,14 @@ class ContentTagController extends Controller
 {
     public function index()
     {
-        // $content_tags = ContentTag::join('courses', 'content_tags.course_id', 'courses.id')
-        //     ->join('course_topics', 'content_tags.topic_id', 'course_topics.id')
-        //     ->join('course_lectures', 'content_tags.lecture_id', 'course_lectures.id')
-        //     ->select('content_tags.*', 'courses.title as courseName', 'course_topics.title as topicName', 'course_lectures.title as courseLectureName')
-        //     ->orderBy('content_tags.created_at', 'DESC')
-        //     ->get();
-        // return view('admin.pages.content_tag.index', compact('content_tags'));
-        return view('admin.pages.content_tag.index');
+        $content_tags = ContentTag::join('courses', 'content_tags.course_id', 'courses.id')
+            ->join('course_topics', 'content_tags.topic_id', 'course_topics.id')
+            ->join('course_lectures', 'content_tags.lecture_id', 'course_lectures.id')
+            ->select('content_tags.*', 'courses.title as courseName', 'course_topics.title as topicName', 'course_lectures.title as courseLectureName')
+            ->orderBy('content_tags.created_at', 'DESC')
+            ->get();
+        return view('admin.pages.content_tag.index', compact('content_tags'));
+        // return view('admin.pages.content_tag.index'); // FOR LIVEWIRE
     }
 
     public function create()

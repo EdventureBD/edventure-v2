@@ -1,8 +1,8 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Live Class', 
-                                    'pageName'=>'Batch live class', 
-                                    'secondPageName'=>'Batch live class'
-                                ])
+'title'=>'Live Class',
+'pageName'=>'Batch live class',
+'secondPageName'=>'Batch live class'
+])
 
 @section('css1')
     <!-- DataTables -->
@@ -23,14 +23,15 @@
                                 <div class="input-group input-group-sm">
                                     <div>
                                         <a href="{{ route('live-class.create') }}">
-                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Btach live class </button>
+                                            <button class="btn btn-info"><i
+                                                    class="fas fa-plus-square"></i>&nbsp;&nbsp;Btach live class </button>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0" style="height: auto;" >
+                        <div class="card-body table-responsive p-0" style="height: auto;">
                             <table id="example1" class="table table-bordered ">
                                 <thead>
                                     <tr>
@@ -45,28 +46,43 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($liveclasses as $liveclass)
-                                        <tr @if($liveclass->is_special)  class="table-info" @endif>
+                                    @foreach ($liveclasses as $liveclass)
+                                        <tr @if ($liveclass->is_special)  class="table-info" @endif>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $liveclass->title }}</td>
                                             <td>{{ $liveclass->batch->title }}</td>
                                             <td>{{ $liveclass->batch->course->title }}</td>
                                             <td><a href="{{ $liveclass->live_link }}" target="blank">Link</a></td>
-                                            <td>{{ $liveclass->start_date }} at {{$liveclass->start_time}}</td>
+                                            <td>{{ $liveclass->start_date }} at
+                                                {{ $liveclass->start_time }}</td>
                                             <td>
-                                                <input type="checkbox" class="customControlInput" id="single-col-{{ $liveclass->id }}" data-id="{{ $liveclass->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $liveclass->status ? 'checked' : '' }} >
+                                                <input type="checkbox" class="customControlInput"
+                                                    id="single-col-{{ $liveclass->id }}" data-id="{{ $liveclass->id }}"
+                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                    data-on="Active" data-off="InActive"
+                                                    {{ $liveclass->status ? 'checked' : '' }}>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="#deleteLiveclass{{ $liveclass->id }}" data-toggle="modal" title="Delete {{ $liveclass->title }}">
-                                                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                    <a class="mr-1"
+                                                        href="{{ route('live-class.edit', $liveclass->slug) }}"
+                                                        title="Edit {{ $liveclass->title }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="far fa-edit"></i></button>
+                                                    </a>
+                                                    <a class="mr-1" href="#deleteLiveclass{{ $liveclass->id }}"
+                                                        data-toggle="modal" title="Delete {{ $liveclass->title }}">
+                                                        <button class="btn btn-danger"><i
+                                                                class="far fa-trash-alt"></i></button>
                                                     </a>
                                                     <div class="modal fade" id="deleteLiveclass{{ $liveclass->id }}">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Delete {{ $liveclass->title }}</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <h4 class="modal-title">Delete
+                                                                        {{ $liveclass->title }}</h4>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
@@ -74,11 +90,15 @@
                                                                     <p>Are you sure??</p>
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
-                                                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                    <form action="{{ route('batch-lecture.destroy', $liveclass->slug) }}" method="POST">
+                                                                    <button type="button" class="btn btn-outline-light"
+                                                                        data-dismiss="modal">Close</button>
+                                                                    <form
+                                                                        action="{{ route('live-class.destroy', $liveclass->slug) }}"
+                                                                        method="POST">
                                                                         @csrf
                                                                         @method('delete')
-                                                                            <button type="submit" class="btn btn-outline-light">Delete</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-light">Delete</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -122,24 +142,26 @@
     <script>
         $(function() {
             $('.customControlInput').change(function() {
-                if(confirm("Do you want to change the status?")){
-                    var status = $(this).prop('checked') == true ? 1 : 0; 
-                    var id = $(this).data('id');     
+                if (confirm("Do you want to change the status?")) {
+                    var status = $(this).prop('checked') == true ? 1 : 0;
+                    var id = $(this).data('id');
                     $.ajax({
                         type: "GET",
                         dataType: "json",
                         url: "changeLiveClassStatus",
-                        data: {'status': status, 'id': id},
-                        success: function(data){
+                        data: {
+                            'status': status,
+                            'id': id
+                        },
+                        success: function(data) {
                             console.log(data.success);
                         }
                     });
                 } else {
-                    if($("#single-col-"+$(this).data('id')).prop("checked") == true){
-                         $("#single-col-"+$(this).data('id')).prop('checked', false);
-                    }
-                    else if($("#single-col-"+$(this).data('id')).prop("checked") == false){
-                         $("#single-col-"+$(this).data('id')).prop('checked', true);
+                    if ($("#single-col-" + $(this).data('id')).prop("checked") == true) {
+                        $("#single-col-" + $(this).data('id')).prop('checked', false);
+                    } else if ($("#single-col-" + $(this).data('id')).prop("checked") == false) {
+                        $("#single-col-" + $(this).data('id')).prop('checked', true);
                     }
                 }
             })
@@ -153,7 +175,7 @@
 
 @section('js2')
     <script>
-        $(function () {
+        $(function() {
             $("#example1").DataTable();
             $('#example2').DataTable({
                 "paging": true,
@@ -164,6 +186,5 @@
                 "autoWidth": false,
             });
         });
-
     </script>
 @endsection

@@ -9,12 +9,13 @@
                     <p class="text-white">{{ $course->description }}</p>
                 </div>
                 <div class="col-md-5">
+                    
                     <p class="text-xsm text-white font-weight-light m-0">
-                        Your batch days running : {{ $accessedDays->individual_batch_days }} days <br>
+                        Your batch days running : {{ $batch->batch_running_days }} days <br>
                         You have bought : {{ $accessedDays->accessed_days }} days <br>
                         Days remaining :
                         @php
-                            echo $accessedDays->accessed_days - $accessedDays->individual_batch_days . ' days';
+                            echo $accessedDays->accessed_days - $batch->batch_running_days . ' days';
                         @endphp
                     </p>
                 </div>
@@ -22,8 +23,14 @@
         </div>
 
     </div>
+    
     <div class="page-section border-bottom-2 py-5">
         <div class="container page__container max-w-50 w-100">
+            @if(session()->has('payment_success'))
+                <div class="alert alert-info text-center ">
+                    <p class="mb-0 text-xxsm">{{session()->get('payment_success')}}</p>
+                </div>
+            @endif
             @if (count($specialExams) > 0)
                 <div class="row mb-3">
                     <div class="col-lg-12">
@@ -114,6 +121,7 @@
                                                     $view_result = "Start Exam";
                                                 }
                                             @endphp
+                                            @if ($exam->exam->topic_id == $batchTopic->topic_id)
                                             <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
                                                  <a class="flex text-dark" href="#">
                                                     {{ $exam->exam->title }}
@@ -123,6 +131,7 @@
                                                     <a href="{{ route('question', [$batch->slug, $exam->exam->slug]) }}" class="d-inline-block text-dark ml-4 bg-light-gray bradius-15 bshadow px-2 fw-600 py-1">{{$view_result}}</a>
                                                 </div>
                                             </div>
+                                            @endif
                                         @empty
                                             <div class="accordion__menu-link">
                                                 <span class="icon-holder icon-holder--small icon-holder--dark rounded-circle d-inline-flex icon--left">

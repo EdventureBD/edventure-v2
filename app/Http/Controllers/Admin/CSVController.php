@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\ExamExport;
 use App\Exports\SlugExport;
 use App\Imports\UserImport;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use App\Exports\CourseExport;
 use App\Exports\ContentTagExport;
@@ -44,6 +45,11 @@ class CSVController extends Controller
     public function courseLecturesCSV()
     {
         return Excel::download(new CourseLectureExport, 'Course Lecture.xlsx');
+    }
+
+    public function usersExportCSV()
+    {
+        return Excel::download(new UsersExport, 'Users.xlsx');
     }
 
     public function contentTagExportCSV()

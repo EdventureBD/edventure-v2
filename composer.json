@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
-        "smukhidev/shurjopay-laravel-package": "dev-master",
+        "smasif/shurjopay-laravel-package": "^1.0",
         "spatie/laravel-activitylog": "^3.16"
     },
     "require-dev": {
