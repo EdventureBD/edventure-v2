@@ -138,7 +138,7 @@
                            trailer <i class="fas fa-play ml-2"></i>
                        </a>
                        
-                        <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($course->price > 0) Enroll Now (free) @else Enroll Now @endif</a>
+                        <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($course->price > 0) Enroll Now(free) @else Enroll Now @endif</a>
                         
                    </div>
                </div>
