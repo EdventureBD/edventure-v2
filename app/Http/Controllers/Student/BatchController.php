@@ -27,7 +27,6 @@ class BatchController extends Controller
     public function batchLecture(Batch $batch)
     {
         $sExams = [];
-
         $course = Course::where('id', $batch->course_id)->first();
         // $batchTopics = BatchLecture::with('course_topics', 'batch_lectures.topic_id', 'course_topics.id')
         //     ->where('batch_id', $batch->id)
@@ -42,6 +41,10 @@ class BatchController extends Controller
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->first();
+            // dd($accessedDays);
+        if ($accessedDays->status == 0) {
+            return redirect()->route('course-preview', $course->slug);
+        }
 
         list($exams, $specialExams) = (new BatchExam())->getBatchExams($batch->id);
 

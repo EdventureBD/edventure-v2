@@ -125,23 +125,23 @@ class ExamController extends Controller
 
         // START OF Assignment
         else if ($exam->exam_type == 'Assignment') {
-            $canAttempt = ExamPaper::where('exam_id', $exam->id)
+            $exam_paper = ExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
                 ->where('exam_type', $exam->exam_type)
                 ->first();
 
-            $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
-                ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
-                ->where('question_content_tags.exam_type', "MCQ")
-                ->where('details_results.student_id', auth()->user()->id)
-                ->where('details_results.batch_id', $batch->id)
-                ->where('details_results.exam_id', $exam->id)
-                ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
-                ->get();
-            $weakAnalysis = $analysis;
+            // $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+            //     ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+            //     ->where('question_content_tags.exam_type', "MCQ")
+            //     ->where('details_results.student_id', auth()->user()->id)
+            //     ->where('details_results.batch_id', $batch->id)
+            //     ->where('details_results.exam_id', $exam->id)
+            //     ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+            //     ->get();
+            // $weakAnalysis = $analysis;
 
-            if (!$canAttempt) {
+            if (!$exam_paper) {
                 $questions = Assignment::where('exam_id', $exam->id)->inRandomOrder()->get();
                 // dd($questions);
                 return view('student.pages_new.batch.exam.batch_exam_assignment', compact('questions', 'exam', 'batch'));
@@ -152,10 +152,10 @@ class ExamController extends Controller
                 ->first();
             if (empty($canAttempt)) {
                 $show = false;
-                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'max', 'min'));
             } else {
                 $show = true;
-                return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+                return view('student.pages_new.batch.exam.assignment_result', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'exam_paper', 'max', 'min'));
             }
         }
     }
@@ -216,7 +216,7 @@ class ExamController extends Controller
         }
 
         // START OF CQ
-        else if ($exam->exam_type == Edvanture::MCQ) {
+        else if ($exam->exam_type == Edvanture::CQ) {
             $canAttempt = ExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
