@@ -1,3 +1,4 @@
+
 <x-landing-layout>
 
     <section class="header-banner pt-7">
@@ -7,7 +8,7 @@
                 <p class="fw-600 text-xsm text-purple-half">{!!$subtitle!!}
                 </p>
             </div>
-            <div  >
+            <div class="text-center blog-banner" >
                 <img src="{{$banner}}" class="img-fluid" alt="">
             </div>
             <div class="mt-3">

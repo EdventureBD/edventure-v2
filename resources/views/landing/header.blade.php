@@ -45,8 +45,11 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><strong>Account</strong></div>
-                                <a class="dropdown-item" href="{{route('profile')}}">My
-                                    Dashboard</a>
+                                @if(Auth::user()->is_admin==1)
+                                    <a class="dropdown-item" href="{{route('admin.index')}}">Admin Dashboard</a>
+                                @else
+                                <a class="dropdown-item" href="{{route('profile')}}">My Dashboard</a>
+                                @endif
                                 <a class="dropdown-item" href="#">All courses</a>
                                 
                                 <form method="POST" action="{{ route('logout') }}">

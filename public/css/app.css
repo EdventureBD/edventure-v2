@@ -12050,3 +12050,8 @@ form input {
   height: 70px;
   border-radius: 50%;
 }
+
+.blog-banner img {
+  margin: 0 auto;
+  border-radius: 10px;
+}

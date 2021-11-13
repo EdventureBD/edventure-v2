@@ -6,6 +6,7 @@
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
                         @auth
+                        <h4 class="text-purple  text-sm font-roboto">Hello, {{Auth::user()->name}} !</h4>
                         <h4 class="text-red  text-sm font-roboto">You have Successfully logged into HSC 2021 Last Minute Preparation Bundle.</h4>
                         <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To give exam, Visit Your Dashboard.<h2>
                         <a href="{{route('profile')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
