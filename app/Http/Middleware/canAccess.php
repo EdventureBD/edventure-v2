@@ -32,6 +32,6 @@ class canAccess
                 return $next($request);
             }
         }
-        return redirect()->route('enroll', $course);
+        return redirect()->route('course-preview', $course->slug);
     }
 }

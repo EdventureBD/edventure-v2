@@ -27,7 +27,6 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
-
         $batch = '';
         $enrolled = '';
         $lectures = [];
@@ -49,7 +48,7 @@ class CourseController extends Controller
                 ->first();
                 // dd($enrolled);
             if ($enrolled && $enrolled->status == 1) {
-               
+                
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
                
                 return redirect()->route('batch-lecture', $batch->slug);
@@ -81,16 +80,25 @@ class CourseController extends Controller
 
     public function enroll(Course $course)
     {
-    //    dd($course);
+        $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
+            ->where('batch_student_enrollments.course_id', $course->id)
+            ->where('batch_student_enrollments.student_id', auth()->user()->id)
+            ->where('payments.student_id', auth()->user()->id)
+            ->first();
+        if ($enrolled && $enrolled->status == 0) {
+            return redirect()->route('course-preview', $course->slug);
+        }
         if($course->price<=0){
+
             $courseFirstBatch = Batch::where('course_id', $course->id)->orderby('created_at','ASC')->select('id','slug')->first();
             if(!$courseFirstBatch){
-                return redirect()->back();
+                return redirect()->back()->withErrors([ 'No batch is available now, please try again later!']);
             }
             $student=auth()->user();
             $payment = new Payment();
             $payment->student_id = $student->id;
             $payment->course_id = $course->id;
+            $payment->batch_id = $courseFirstBatch->id;
             $payment->name = $student->name;
             $payment->email = $student->email;
             $payment->contact = $student->phone;
@@ -105,8 +113,7 @@ class CourseController extends Controller
             $batchStudentEnrollment = BatchStudentEnrollment::updateOrCreate(
                 [
                     'course_id' => $course->id,
-                    'student_id' => $student->id,
-                    'course_id' => $course->id
+                    'student_id' => $student->id
                 ],
                 [
                     'batch_id' => $courseFirstBatch->id,
@@ -122,16 +129,11 @@ class CourseController extends Controller
             return redirect()->route('batch-lecture', $courseFirstBatch->slug);
         } else {
            
-            $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
-            ->where('batch_student_enrollments.course_id', $course->id)
-            ->where('batch_student_enrollments.student_id', auth()->user()->id)
-            ->where('payments.student_id', auth()->user()->id)
-            ->first();
+            
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
                 
                 if (($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) || $enrolled->status == 0) {
-                    // dd($enrolled);
                     return redirect()->route('course-preview', $course->slug);
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);

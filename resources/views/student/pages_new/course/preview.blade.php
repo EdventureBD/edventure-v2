@@ -50,9 +50,14 @@
                                     @forelse ($specialExams as $specialExam)
                                         @php
                                            $sp_view_result = "View Result";
-                                            if ($specialExam->canAttemp ) {
-                                                $sp_view_result = "Start Exam";
-                                            }
+                                            // if ($specialExam->canAttemp ) {
+                                            //     $sp_view_result = "Start Exam";
+                                            // }
+                                            if ($specialExam->canAttemp && $specialExam->exam->exam_type == 'Assignment') {
+                                                    $sp_view_result = "Submit Assignment";
+                                                } else if ($specialExam->canAttemp){
+                                                    $sp_view_result = "Start Exam";
+                                                }
                                         @endphp
                                         <div class="accordion__menu-link bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -117,7 +122,9 @@
                                         @forelse($exams as $exam)
                                             @php
                                             $view_result = "View Result";
-                                                if ($exam->canAttemp ) {
+                                                if ($exam->canAttemp && $exam->exam->exam_type == 'Assignment') {
+                                                    $view_result = "Submit Assignment";
+                                                } else if ($exam->canAttemp){
                                                     $view_result = "Start Exam";
                                                 }
                                             @endphp
