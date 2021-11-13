@@ -23,9 +23,16 @@
         @else
         @php
         //  dd($detailsResult->question);
+        $total_marks = 0;
+        $total_gain_marks = 0;
+        foreach($detailsResult as $result) {
+            $total_marks += $result->assignment->marks;
+            $total_gain_marks += $result->gain_marks;
+        }
         @endphp
         <div class="container">
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
+            <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
             <div class="result-sheet-table overflow-x-scroll">
                 <table class="table table-bordered">
                     <thead>
