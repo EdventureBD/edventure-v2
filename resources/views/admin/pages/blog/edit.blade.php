@@ -94,6 +94,51 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="meta_tag" class="col-form-label">Meta Tag</label>
+                                    <input type="text" class="form-control" name="meta_tag" id="meta_tag"
+                                        placeholder="Enter meta tag"
+                                        value="{{ old('meta_tag') ? old('meta_tag') : $blog->meta_tag }}">
+                                    @error('meta_tag')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meta_description" class="col-form-label">Meta Description</label>
+                                    <textarea input="meta_description" id="meta_description" name="meta_description"
+                                        placeholder="Enter meta description"
+                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                        required>{!! old('meta_description') ? old('meta_description') : $blog->meta_description !!}</textarea>
+                                    @error('meta_description')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="imgInp" class="col-form-label">Choose
+                                                Banner</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="banner" class="custom-file-input hidden"
+                                                        id="imgInp">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose
+                                                        Banner</label>
+                                                </div>
+                                            </div>
+                                            @error('banner')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img class="product-image" src="{{ $blog->banner }}" id="previewImg"
+                                            class="avatar" alt="...">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="description" class="col-form-label">Description
                                         <span class="must-filled">*</span>
                                     </label>
@@ -137,6 +182,7 @@
         $(function() {
             // Summernote
             $('#description').summernote();
+            $('#meta_description').summernote();
         })
     </script>
 
@@ -155,5 +201,13 @@
             })
 
         })
+    </script>
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                previewImg.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 @endsection

@@ -7,6 +7,7 @@ use App\Models\Admin\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -45,12 +46,20 @@ class BlogController extends Controller
             'subTitle' => 'required|string',
             'description' => 'required|',
             'authorId' => 'required|',
+            'banner' => 'required|image|mimes:jpeg,jpg,png|',
+            'meta_tag' => 'nullable|',
+            'meta_description' => 'nullable|',
         ]);
 
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->slug = (string) Str::uuid();
         $blog->subTitle = $request->subTitle;
+        if ($request->hasFile('banner')) {
+            $blog->banner = Storage::url($request->banner->store('public/blog'));
+        }
+        $blog->meta_tag = $request->meta_tag;
+        $blog->meta_description = $request->meta_description;
         $blog->description = $request->description;
         $blog->author_id = $request->authorId;
         $blog->status = 1;
@@ -98,10 +107,22 @@ class BlogController extends Controller
             'subTitle' => 'required|string',
             'description' => 'required|',
             'authorId' => 'required|',
+            'banner' => 'image|mimes:jpeg,jpg,png|',
+            'meta_tag' => 'nullable|',
+            'meta_description' => 'nullable|',
         ]);
 
         $blog->title = $request->title;
         $blog->subtitle = $request->subTitle;
+        if ($request->hasFile('banner')) {
+            $fileName = substr($blog->banner, 14);
+            $delete = Storage::delete('public/blog/' . $fileName);
+            if ($delete) {
+                $blog->banner = Storage::url($request->banner->store('public/blog'));
+            }
+        }
+        $blog->meta_tag = $request->meta_tag;
+        $blog->meta_description = $request->meta_description;
         $blog->description = $request->description;
         $blog->author_id = $request->authorId;
 
@@ -135,25 +156,26 @@ class BlogController extends Controller
     }
 
 
-    public function readBlog(Blog $blog){
-        if($blog->status==0){
+    public function readBlog(Blog $blog)
+    {
+        if ($blog->status == 0) {
             return redirect()->route('home');
         } else {
-            $author=User::where('id',$blog->author_id)->select('name','image')->first();
-            $author_name=$author->name;
-            $author_image=$author->image;
-            $title=$blog->title;
-            $banner=$blog->banner;
-            $subtitle=$blog->subtitle;
-            $description=$blog->description;
+            $author = User::where('id', $blog->author_id)->select('name', 'image')->first();
+            $author_name = $author->name;
+            $author_image = $author->image;
+            $title = $blog->title;
+            $banner = $blog->banner;
+            $subtitle = $blog->subtitle;
+            $description = $blog->description;
             return view('landing.read_blog', compact(
                 'author_name',
                 'author_image',
-                 'title',
-                 'banner',
-                 'subtitle',
-                 'description'
-                ));
+                'title',
+                'banner',
+                'subtitle',
+                'description'
+            ));
         }
     }
 }

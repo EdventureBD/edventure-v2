@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropColumnsFromLiveClassTable extends Migration
+class AddBannerMetaTagToBlog extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class DropColumnsFromLiveClassTable extends Migration
      */
     public function up()
     {
-        Schema::table('live_classes', function (Blueprint $table) {
-            // $table->dropColumn(['show_link_limit_time', 'is_always_show']);
+        Schema::table('blogs', function (Blueprint $table) {
+            $table->string('banner')->after('subtitle');
+            $table->string('meta_tag')->nullable()->after('banner');
+            $table->string('meta_description')->nullable()->after('meta_tag');
         });
     }
 
@@ -25,7 +27,7 @@ class DropColumnsFromLiveClassTable extends Migration
      */
     public function down()
     {
-        Schema::table('live_class', function (Blueprint $table) {
+        Schema::table('blogs', function (Blueprint $table) {
             //
         });
     }

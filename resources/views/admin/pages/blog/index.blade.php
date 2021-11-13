@@ -38,6 +38,9 @@
                                         <th>Title</th>
                                         <th>Subtitle</th>
                                         <th>Author</th>
+                                        <th>Banner</th>
+                                        <th>Meta Tag</th>
+                                        <th>Meta Description</th>
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -50,6 +53,11 @@
                                             <td>{{ $blog->title }}</td>
                                             <td>{{ $blog->subtitle }}</td>
                                             <td>{{ $blog->author->name }}</td>
+                                            <td>
+                                                <img class="product-image " src="{{ $blog->banner }}" alt="" srcset="">
+                                            </td>
+                                            <td>{{ $blog->meta_tag }}</td>
+                                            <td>{!! $blog->meta_description !!}</td>
                                             <td>{!! $blog->description !!}</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
@@ -60,7 +68,8 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('blog.edit', $blog->slug) }}"
+                                                    <a class="mr-1"
+                                                        href="{{ route('blog.edit', $blog->slug) }}"
                                                         title="Edit {{ $blog->title }}">
                                                         <button class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
@@ -112,6 +121,9 @@
                                         <th>Title</th>
                                         <th>Subtitle</th>
                                         <th>Author</th>
+                                        <th>Banner</th>
+                                        <th>Meta Tag</th>
+                                        <th>Meta Description</th>
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Action</th>

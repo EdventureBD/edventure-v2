@@ -190,17 +190,33 @@
                 {{-- START OF BLOG SIDEBAR --}}
                 <li
                     class="nav-item has-treeview {{ request()->is('admin/blog') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/blog/create') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/blog/edit') ? 'menu-open' : '' }} 
-                                                ">
-                    <a href="{{ route('blog.index') }}"
-                        class="nav-link {{ request()->is('admin/blog') ? 'active' : '' }} 
-                                                {{ request()->is('admin/blog/create') ? 'active' : '' }} 
-                                                {{ request()->is('admin/blog/edit') ? 'active' : '' }} 
-                                                ">
+                                                 {{ request()->is('admin/blog/create') ? 'menu-open' : '' }} 
+                                                 {{ request()->is('admin/blog/*/edit') ? 'menu-open' : '' }}
+                                                 ">
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/blog') ? 'active' : '' }}
+                        {{ request()->is('admin/blog/create') ? 'active' : '' }} 
+                        {{ request()->is('admin/blog/*/edit') ? 'active' : '' }} 
+                        ">
                         <i class="fas fa-chart-bar"></i>
-                        <p>&nbsp; Blog<i class="right fas fa-angle-left"></i></p>
+                        <p>&nbsp; Blog <i class="right fas fa-angle-left"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('blog.index') }}"
+                                class="nav-link {{ request()->is('admin/blog') ? 'active' : '' }} ">
+                                <i class="fas fa-align-center"></i>
+                                <p>&nbsp; Index</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('blog.create') }}"
+                                class="nav-link {{ request()->is('admin/blog/create') ? 'active' : '' }} ">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <p>&nbsp; Create</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 {{-- END OF BLOG SIDEBAR --}}
 

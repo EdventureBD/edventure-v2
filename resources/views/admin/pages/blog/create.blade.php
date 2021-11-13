@@ -13,23 +13,14 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
 
-    <script>
-        function previewFile(input, image) {
-            var file = $("input[type=file]").get(0).files[0];
-
-            var previewImage = "preview" + image;
-            console.log(image, file, previewImage);
+    {{-- <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
             if (file) {
-                var reader = new FileReader();
-
-                reader.onload = function() {
-                    $('#' + previewImage).attr("src", reader.result);
-                }
-
-                reader.readAsDataURL(file);
+                previewImg.src = URL.createObjectURL(file)
             }
         }
-    </script>
+    </script> --}}
 @endsection
 
 @section('content')
@@ -56,7 +47,7 @@
                                         <span class="must-filled">*</span>
                                     </label>
                                     <input type="text" class="form-control" name="title" id="title"
-                                        value="{{ old('title') }}">
+                                        placeholder="Enter title" value="{{ old('title') }}">
                                     @error('title')
                                         <p style=" color: red;">{{ $message }}</p>
                                     @enderror
@@ -67,7 +58,7 @@
                                         <span class="must-filled">*</span>
                                     </label>
                                     <input type="text" class="form-control" name="subTitle" id="subTitle"
-                                        value="{{ old('title') }}">
+                                        placeholder="Enter subtitle" value="{{ old('title') }}">
                                     @error('subTitle')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
@@ -78,7 +69,7 @@
                                         <span class="must-filled">*</span>
                                     </label>
                                     <select class="form-control" name="authorId">
-                                        <option disabled selected value>Select Author</option>
+                                        <option disabled selected>Select Author</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}"
                                                 {{ old('authorId') == $user->id ? 'selected' : '' }}>{{ $user->name }}
@@ -91,11 +82,55 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="meta_tag" class="col-form-label">Meta Tag</label>
+                                    <input type="text" class="form-control" name="meta_tag" id="meta_tag"
+                                        placeholder="Enter meta tag" value="{{ old('meta_tag') }}">
+                                    @error('meta_tag')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meta_description" class="col-form-label">Meta Description</label>
+                                    <textarea input="meta_description" id="meta_description" name="meta_description"
+                                        placeholder="Enter meta description"
+                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                        required>{{ old('meta_description') }}</textarea>
+                                    @error('meta_description')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="imgInp" class="col-form-label">Choose
+                                                Banner</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="banner" class="custom-file-input hidden"
+                                                        id="imgInp">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose
+                                                        Banner</label>
+                                                </div>
+                                            </div>
+                                            @error('banner')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img class="product-image" src="http://placehold.it/150x100" id="previewImg"
+                                            class="avatar" alt="...">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="description" class="col-form-label">Description
                                         <span class="must-filled">*</span>
                                     </label>
                                     <textarea input="description" id="description" name="description"
-                                        placeholder="Enter question"
+                                        placeholder="Enter Description"
                                         style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
                                         required>{{ old('description') }}</textarea>
                                     @error('description')
@@ -134,6 +169,7 @@
         $(function() {
             // Summernote
             $('#description').summernote();
+            $('#meta_description').summernote();
         })
     </script>
 
@@ -152,5 +188,13 @@
             })
 
         })
+    </script>
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                previewImg.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 @endsection
