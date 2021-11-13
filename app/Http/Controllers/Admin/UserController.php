@@ -41,25 +41,31 @@ class UserController extends Controller
 
     public function allAdmin()
     {
-        // $users = User::where('user_type', 1)->get();
-        // return view('admin.pages.user.index', compact('users'));
+        $users = User::where('user_type', 1)->get();
+        return view('admin.pages.user.index', compact('users'));
+
+        // for LIVEWIRE
         $type = [1];
         return view('admin.pages.user.index', compact('type'));
     }
 
     public function allTeacher()
     {
-        // $users = User::where('user_type', 2)->get();
-        // return view('admin.pages.user.index', compact('users'));
-        $type = [2];
-        return view('admin.pages.user.index', compact('type'));
+        $users = User::where('user_type', 2)->get();
+        return view('admin.pages.user.index', compact('users'));
+
+        // for LIVEWIRE
+        // $type = [2];
+        // return view('admin.pages.user.index', compact('type'));
     }
 
     public function allStudent()
     {
-        // $users = User::where('user_type', 3)->get();
-        // return view('admin.pages.user.index', compact('users'));
-        $type = [3];
-        return view('admin.pages.user.index', compact('type'));
+        $users = User::where('user_type', 3)->get();
+        return view('admin.pages.user.index', compact('users'));
+
+        // for LIVEWIRE
+        // $type = [3];
+        // return view('admin.pages.user.index', compact('type'));
     }
 }
