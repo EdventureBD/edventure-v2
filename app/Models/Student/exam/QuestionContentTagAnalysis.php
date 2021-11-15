@@ -95,7 +95,7 @@ class QuestionContentTagAnalysis extends AppModel
                     if (!isset($gain_marks[$contentTag][Edvanture::CQ])) $gain_marks[$contentTag][Edvanture::CQ] = 0;
                     if (!isset($total_marks[$contentTag][Edvanture::CQ])) $total_marks[$contentTag][Edvanture::CQ] = 0;
                     $gain_marks[$contentTag][Edvanture::CQ] += $analyst->gain_marks;
-                    $total_marks[$contentTag][Edvanture::CQ] += $analyst->cqQuestion->marks;
+                    $total_marks[$contentTag][Edvanture::CQ] += !empty($analyst->cqQuestion->marks) ? $analyst->cqQuestion->marks : 0;
 
                     if (!isset($cq_tag_details[$contentTag])) $cq_tag_details[$contentTag] = [];
                     $cq_tag_details[$contentTag]['topic_id'] = $analyst->contentTag->topic_id;
@@ -116,7 +116,7 @@ class QuestionContentTagAnalysis extends AppModel
                 if ($mcq >= 80) array_push($mcq_strength, $tag);
                 else array_push($mcq_weakness, $tag);
             }
-            if (!empty($value[Edvanture::CQ])) {
+            if (!empty($value[Edvanture::CQ]) && $total_marks[$tag][Edvanture::CQ] > 0) {
                 $cq = round(($value[Edvanture::CQ] * 100) / $total_marks[$tag][Edvanture::CQ]);
                 $cq_tag_details[$tag]['score'] = $cq;
                 if ($cq >= 80) array_push($cq_strength, $tag);
