@@ -16,22 +16,22 @@
                     @endif
                 @endforeach 
             </div>
-            <div class="row py-5 card-group-row mb-lg-8pt">
+            <div class="py-3 text-center d-flex justify-content-center">
+               <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p> 
+            </div>
+            <div class="row py-3 card-group-row mb-lg-8pt">
                 @foreach ($courses as $course)
                 <div class="col-md-3 mb-4">
                     <div class="single-exam mx-auto p-4 mb-md-0" style="background-image: url({{asset($course->banner)}});">
                         <img src="{{asset($course->icon)}}" width="50" alt="">
-                        <h5 class="text-center text-sm mt-3">{{ $course->title }} </h5>
-                        <p class=" text-center text-md mt-3 fw-600 text-price">{{$course->price}}৳</p>
+                        <h5 class="text-center text-sm mt-2">{{ $course->title }} </h5>
+                        <p class=" text-center text-md mt-2 fw-600 text-price">{{$course->price}}৳</p>
                         <div class=" text-center d-block "">
-                            <a href="{{ route('course-preview', $course->slug) }}"  class="btn btn-outline text-purple mt-4">Go To Exam</a>
+                            <a href="{{ route('course-preview', $course->slug) }}"  class="btn btn-outline text-purple mt-2">Go To Exam</a>
                         </div>
                     </div>
                 </div>
                 @endforeach
-            </div>
-            <div class="mb-32pt">
-                {{ $courses->links('vendor.pagination.custom') }}
             </div>
         </div>
     </div>
