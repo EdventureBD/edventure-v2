@@ -27,8 +27,8 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>                                                               
-                              
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row">
@@ -51,10 +51,11 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($tempImage)
-                                                    <img style="width:100px; border-radius: 50%" class="product-image" src="{{ $tempImage->temporaryUrl() }}"
-                                                        alt="">
+                                                    <img style="width:100px; border-radius: 50%" class="product-image"
+                                                        src="{{ $tempImage->temporaryUrl() }}" alt="">
                                                 @else
-                                                    <img style="width:100px; border-radius: 50%" src="{{ $image }}" alt="...">
+                                                    <img style="width:100px; border-radius: 50%"
+                                                        src="{{ $image }}" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="image">
                                                     <p style="color: indigo">Uploading icon ....</p>
@@ -73,7 +74,8 @@
                                                             <input type="file" wire:model="banner"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course Banner (576px*642px)</label>
+                                                                for="exampleInputFile">Course Banner
+                                                                (576px*642px)</label>
                                                         </div>
                                                     </div>
                                                     @error('banner')
@@ -83,10 +85,11 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($tempBanner)
-                                                    <img style="width:100px;" class="img-fluid product-image" src="{{ $tempBanner->temporaryUrl() }}"
-                                                        alt="">
+                                                    <img style="width:100px;" class="img-fluid product-image"
+                                                        src="{{ $tempBanner->temporaryUrl() }}" alt="">
                                                 @else
-                                                    <img style="width:100px;"  class="img-fluid" src="{{ $banner }}" alt="...">
+                                                    <img style="width:100px;" class="img-fluid"
+                                                        src="{{ $banner }}" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>
@@ -94,7 +97,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -116,7 +119,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="Category">Category <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="course_category_id" disabled>
+                                            <select class="form-control" wire:model="categoryId">
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}
                                                     </option>
