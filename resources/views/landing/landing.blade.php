@@ -30,15 +30,27 @@
         <div class="container">
             <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
             <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2021 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
-            <a href="#" class="btn fw-800 text-xxsm text-white bg-purple px-4">HSC</a>
-            <div class="row justify-content-center my-5 ">
+            <div class="course-category-js">
+                @foreach($categories as $category)
+                    @if($category->slug==$selected_category_slug)
+                        <button id="{{$category->slug}}" onclick="myFunction(this.id)" class="course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple px-4">{{$category->title}}</button>
+                    @else
+                        <button id="{{$category->slug}}" onclick="myFunction(this.id)" class="course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white px-4">{{$category->title}}</button>
+                    @endif
+                @endforeach
+
+            </div>
+            <div id="loading_gif" class="container" style="display: none">
+                <img src="/img/landing/loading.gif" alt="">
+            </div>
+            <div id="show-course-js" class="row justify-content-center my-5 ">
                 @foreach ($courses as $course)
                 <div class="col-md-4 col-lg-3 mb-3">
                     <div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url({{asset($course->banner)}}); " >
                         <img src="{{asset($course->icon)}}" width="50" alt="">
-                        <h5 class="text-sm mt-3">{{$course->title}}</h5>
-                        {{-- <p class="text-xxsm fw-400 mt-3">Course details</p> --}}
-                        <a href="{{route('course-preview', $course->slug)}}" class="btn btn-outline text-purple mt-4">Go To Exam</a>
+                        <h5 class="text-sm mt-2">{{$course->title}}</h5>
+                        <p class="text-md mt-2 fw-600 text-price">{{$course->price}}৳</p>
+                        <a href="{{route('course-preview', $course->slug)}}" class="btn btn-outline text-purple mt-2">Go To Exam</a>
                     </div>
                 </div>
                @endforeach
