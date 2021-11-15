@@ -13,16 +13,44 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
+use App\Models\Admin\CourseCategory;
 use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 class CourseController extends Controller
 {
-    public function course()
+    public function course($category_slug=null)
     {
-        $courses = Course::where('status', 1)->paginate(8)->fragment('courses');
-        return view('student.pages_new.course.course', compact('courses'));
+        if(isset($category_slug)&&!empty($category_slug)){
+            $caretory=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
+        }else{
+            $caretory=CourseCategory::where('status',1)->first();
+        }
+        $courses = Course::where('status', 1)
+                        ->where('course_category_id',$caretory->id)
+                        ->select('title','slug','icon','banner','course_category_id','price')
+                        ->paginate(8)
+                        ->fragment('courses');
+
+        $selected_category_slug=$caretory->slug;
+        $categories=CourseCategory::where('status',1)
+                                ->orderBy('id', "ASC")
+                                ->select('title','slug')
+                                ->get();
+               
+        return view('student.pages_new.course.course', compact('courses','categories','selected_category_slug'));
+    }
+
+    public function courseByCategory($category_slug){
+        $caretory=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
+        $courses=Course::where('status', 1)
+                ->where('course_category_id',$caretory->id)
+                ->orderBy('order')
+                ->take(8)
+                ->select('title','slug','icon','banner','course_category_id','price')
+                ->get();
+        return response()->json($courses);
     }
 
     public function coursePreview(Course $course)

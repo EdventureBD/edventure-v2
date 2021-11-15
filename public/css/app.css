@@ -11077,6 +11077,10 @@ a:hover {
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
 }
 
+.bshadow-medium {
+  box-shadow: 0 1px 13px -2px rgba(66, 16, 153, 0.555);
+}
+
 .c-point {
   cursor: pointer;
 }
@@ -11219,6 +11223,10 @@ a:hover {
 
 .text-purple {
   color: #663193;
+}
+
+.text-price {
+  color: #00B9A0;
 }
 
 .text-purple-half {

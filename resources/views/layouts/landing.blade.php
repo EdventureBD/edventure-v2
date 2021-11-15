@@ -38,7 +38,7 @@
         </div>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-
+        @include('partials.custom_sctipt')
         @include('partials.after_body_analytics')
     </body>
 </html>
