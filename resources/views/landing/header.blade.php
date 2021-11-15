@@ -13,13 +13,16 @@
 
             @if (Route::has('login'))
                 @auth
-                    <li class="nav-item has-dot">
-                    <a class="nav-link text-purple-half"  href="{{route('profile')}}">DASHBOARD</a>
+                    <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}">
+                    <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
                 @endauth     
             @endif
 
-            <li class="nav-item has-dot {{Route::current()->getName() == 'course' ? 'active' : ''}}">
+            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
+                                         {{ request()->is('course/course-preview/*') ? 'active' : '' }}
+                                         {{ request()->is('batch/*') ? 'active' : '' }}"
+            >
             <a class="nav-link text-purple-half" href="{{route('course')}}">EXAMS</a>
             </li>
 
