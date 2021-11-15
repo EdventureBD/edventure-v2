@@ -120,7 +120,7 @@ class QuestionContentTagAnalysis extends AppModel
                 $cq = round(($value[Edvanture::CQ] * 100) / $total_marks[$tag][Edvanture::CQ]);
                 $cq_tag_details[$tag]['score'] = $cq;
                 if ($cq >= 80) array_push($cq_strength, $tag);
-                else if ($mcq <= 50) array_push($cq_weakness, $tag);
+                else if ($cq <= 50) array_push($cq_weakness, $tag);
             }
         }
         return [
