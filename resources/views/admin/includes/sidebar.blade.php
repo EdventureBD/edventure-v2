@@ -111,30 +111,33 @@
 
                 {{-- START OF PAYMENTS --}}
                 <li
-                    class="nav-item has-treeview {{ request()->is('admin/request') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/payment') ? 'menu-open' : '' }} 
+                    class="nav-item has-treeview {{ request()->is('admin/payment') ? 'menu-open' : '' }} 
+                                                 {{ request()->is('admin/payment/create') ? 'menu-open' : '' }} 
+                                                 {{ request()->is('admin/payment/*/edit') ? 'menu-open' : '' }} 
                                                  ">
                     <a href="#"
-                        class="nav-link {{ request()->is('admin/request') ? 'active' : '' }} 
-                                                {{ request()->is('admin/payment') ? 'active' : '' }} 
-                                                ">
+                        class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }} 
+                                        {{ request()->is('admin/payment/create') ? 'active' : '' }} 
+                                        {{ request()->is('admin/payment/*/edit') ? 'active' : '' }} 
+                                        ">
                         <i class="fas fa-boxes"></i>
-                        <p>&nbsp; Enrollment<i class="right fas fa-angle-left"></i>
+                        <p>&nbsp; Payments<i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('request.index') }}"
-                                class="nav-link {{ request()->is('admin/request') ? 'active' : '' }}">
-                                <i class="fas fa-archive"></i>
-                                <p>&nbsp; Enrollment request</p>
-                            </a>
-                        </li>
                         <li class="nav-item {{ request()->is('admin/payment') ? 'menu-open' : '' }}">
                             <a href="{{ route('payment.index') }}"
-                                class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }} {{ request()->is('admin/payment/create') ? 'active' : '' }} {{ request()->is('admin/payment/*/edit') ? 'active' : '' }}">
+                                class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }} 
+                                                {{ request()->is('admin/payment/*/edit') ? 'active' : '' }}">
                                 <i class="fas fa-file-invoice"></i>
-                                <p>&nbsp; Payments</p>
+                                <p>&nbsp; Payment index</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('payment.create') }}"
+                                class="nav-link {{ request()->is('admin/payment/create') ? 'active' : '' }}">
+                                <i class="fas fa-archive"></i>
+                                <p>&nbsp; Create Payment</p>
                             </a>
                         </li>
                     </ul>

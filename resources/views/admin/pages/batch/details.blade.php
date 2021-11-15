@@ -344,8 +344,6 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         {{-- <th>Contact</th> --}}
-                                        <th>Individual Batch Days</th>
-                                        <th>Reamining Batch Days</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -357,11 +355,39 @@
                                             <td>{{ $student->student->name }}</td>
                                             <td>{{ $student->student->email }}</td>
                                             {{-- <td>{{ $student->user->studentDetails->contact }}</td> --}}
-                                            <td>{{ $student->individual_batch_days }}</td>
                                             <td>
-                                                @php
-                                                    echo $student->accessed_days - $student->individual_batch_days . ' days';
-                                                @endphp
+                                                {{ $student->accessed_days }}
+                                                <button class="btn btn-info mt-2 mb-2 mr-2" data-toggle="modal"
+                                                    data-target="#addAccessDays{{ $student->id }}">
+                                                    <i class="fas fa-plus-square"></i>
+                                                </button>
+                                                <div class="modal fade" id="addAccessDays{{ $student->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="addAccessDays{{ $student->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog  modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="addStudent">Add more access
+                                                                    days </h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                {{-- Are you sure want to add more access days to
+                                                                {{ $student->student->name }} --}}
+                                                                @livewire('payment.create', ['batch'=> $batch->id, 'student'
+                                                                => $student->student->id],, key($student->student->id))
+                                                            </div>
+                                                            {{-- <div class="modal-footer">
+                                                                <a href="" type="button" class="btn btn-primary">Yes</a>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                            </div> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
@@ -418,7 +444,6 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         {{-- <th>Contact</th> --}}
-                                        <th>Individual Batch Days</th>
                                         <th>Reamining Batch Days</th>
                                         <th>Status</th>
                                         <th>Action</th>
