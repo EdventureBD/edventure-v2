@@ -19,7 +19,7 @@
                 @endauth     
             @endif
 
-            <li class="nav-item has-dot">
+            <li class="nav-item has-dot {{Route::current()->getName() == 'course' ? 'active' : ''}}">
             <a class="nav-link text-purple-half" href="{{route('course')}}">EXAMS</a>
             </li>
 
