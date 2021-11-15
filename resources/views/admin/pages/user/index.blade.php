@@ -25,6 +25,10 @@
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
+                                        <a href="{{ route('usersExportCSV') }}" class="btn btn-info">
+                                            <i class="fas fa-download"></i>&nbsp;&nbsp;
+                                            Export Users
+                                        </a>
                                         <button class="btn btn-info" type="button" data-toggle="modal"
                                             data-target="#modal-default">
                                             <i class="fas fa-upload"></i>&nbsp;&nbsp; Import user
