@@ -97,10 +97,7 @@
                             @php $n = 1; @endphp
                             @foreach($detailsResult as $result)
                             @php
-                                // dd($result->cqQuestion->creativeQuestion->creative_question);
-                                // $field = 'field'.$result->mcq_ans;
-                                // $cfield = 'field'.$result->question->answer;
-                                // $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
+                                
                                 $cellcolor = "bg-purple2";
                                 if ($n == 1) $creative = $result->cqQuestion->creativeQuestion->creative_question;
                                 $avg = 0;
@@ -126,7 +123,12 @@
                                 </td>
                                 @endif
                             </tr>
-                            @php $n++; @endphp
+                            @php 
+                                $n++; 
+                                if ($n == 5) {
+                                    $n = 1;
+                                }
+                            @endphp
                             @endforeach
                         </tbody>
                     </table>
