@@ -11353,6 +11353,30 @@ a:hover {
   color: #000000;
 }
 
+.course-category-js .slick-next {
+  margin-top: -18px;
+}
+.course-category-js .slick-prev {
+  margin-top: -18px;
+}
+.course-category-js .slick-slide {
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .course-category-js .slick-next {
+    margin-top: 50px;
+    margin-right: 220px;
+  }
+  .course-category-js .slick-prev {
+    margin-top: 50px;
+    margin-left: 220px;
+  }
+
+  .slick-initialized .slick-slide {
+    height: auto;
+  }
+}
 .accordion__toggle .arrow-up,
 .accordion__toggle .arrow-down {
   margin-right: 10px;

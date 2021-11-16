@@ -1,18 +1,22 @@
-// $('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
-//     var next = $(this).next();
-//     if (!next.length) {
-//       next = $(this).siblings(':first');
-//     }
-//     next.children(':first-child').clone().appendTo($(this));
-  
-//     for (var i=0;i<4;i++) {
-//       next=next.next();
-//       if (!next.length) {
-//         next=$(this).siblings(':first');
-//       }
-//       next.children(':first-child').clone().appendTo($(this));
-//     }
-//   });
+$('.course-category-js').slick({
+  slidesToShow: 7,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      }
+    }
+  ]
+});
+
+
 
 $('.slick-carousel').slick({
     centerMode: true,
@@ -48,3 +52,5 @@ $('.slick-carousel').slick({
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+
+

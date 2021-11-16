@@ -8,15 +8,15 @@
             <div class="text-center course-category-js">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
-                        <a href="{{route('course',$category->slug)}}"  class="course-category-single-js btn fw-800 text-xxsm text-white 
+                        <a href="{{route('course',$category->slug)}}"  class="mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm text-white 
                             mx-1 bradius-15 bshadow-medium bg-purple px-4">{{$category->title}}</a>
                     @else
-                        <a href="{{route('course',$category->slug)}}"  class="course-category-single-js btn fw-800 text-xxsm text-purple 
+                        <a href="{{route('course',$category->slug)}}"  class="mb-3  d-inline-block course-category-single-js btn fw-800 text-xxsm text-purple 
                             mx-1 bradius-15 bshadow-medium bg-white px-4">{{$category->title}}</a>
                     @endif
                 @endforeach 
             </div>
-            <div class="py-3 text-center d-flex justify-content-center">
+            <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p> 
             </div>
             <div class="row py-3 card-group-row mb-lg-8pt">

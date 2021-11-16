@@ -33,12 +33,11 @@
             <div class="course-category-js">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
-                        <button id="{{$category->slug}}" onclick="myFunction(this.id)" class="course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple px-4">{{$category->title}}</button>
+                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3  course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple px-4">{{$category->title}}</div>
                     @else
-                        <button id="{{$category->slug}}" onclick="myFunction(this.id)" class="course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white px-4">{{$category->title}}</button>
+                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3  course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white px-4">{{$category->title}}</div>
                     @endif
                 @endforeach
-
             </div>
             <div id="loading_gif" class="container" style="display: none">
                 <img src="/img/landing/loading.gif" alt="">
