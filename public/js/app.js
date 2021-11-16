@@ -2043,6 +2043,7 @@ $('.course-category-js').slick({
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+  variableWidth: true,
   responsive: [{
     breakpoint: 768,
     settings: {

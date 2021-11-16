@@ -33,9 +33,9 @@
             <div class="course-category-js">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
-                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3  course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple px-4">{{$category->title}}</div>
+                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple ">{{$category->title}}</div>
                     @else
-                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3  course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white px-4">{{$category->title}}</div>
+                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white ">{{$category->title}}</div>
                     @endif
                 @endforeach
             </div>

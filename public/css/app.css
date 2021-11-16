@@ -11354,13 +11354,14 @@ a:hover {
 }
 
 .course-category-js .slick-next {
-  margin-top: -18px;
+  margin-top: -8px;
 }
 .course-category-js .slick-prev {
-  margin-top: -18px;
+  margin-top: -8px;
 }
 .course-category-js .slick-slide {
   height: auto;
+  margin-left: 15px;
 }
 
 @media (max-width: 768px) {
@@ -11375,6 +11376,7 @@ a:hover {
 
   .slick-initialized .slick-slide {
     height: auto;
+    margin-left: 15px;
   }
 }
 .accordion__toggle .arrow-up,
