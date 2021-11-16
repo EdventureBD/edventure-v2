@@ -1,4 +1,4 @@
-$('.course-category').slick({
+$('.course-category-js').slick({
   slidesToShow: 7,
   slidesToScroll: 1,
   autoplay: true,
@@ -11,7 +11,8 @@ $('.course-category').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
+         variableWidth: true,
       }
     }
   ]

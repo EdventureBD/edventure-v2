@@ -95,7 +95,7 @@
     color: #000000;
 }
 
-.course-category{
+.course-category-js{
     .slick-next {
         margin-top: -8px;
     }
@@ -109,7 +109,7 @@
 }
 
 @media (max-width: 768px){
-    .course-category{
+    .course-category-js{
         .slick-next {
             margin-top: 50px;
             margin-right: 220px;
@@ -123,22 +123,5 @@
         height: auto;
         margin-left: 15px;
     }    
-    
-    .course-category-ms{
-        .slick-next {
-            margin-top: 50px;
-            margin-right: 220px;
-        }
-        .slick-prev{
-            margin-top: 50px;
-            margin-left:220px;
-        }
-    }
-    .slick-initialized .slick-slide{
-        height: auto;
-        margin-left: 15px;
-    }
-
-
 
 } 

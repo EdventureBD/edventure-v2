@@ -17,8 +17,8 @@
                 } else {
                             
                         $.map(response, function(val, key) {
-                            courseHtml += '<div class="col-md-4 col-lg-3 mb-3"><div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url(http://127.0.0.1:8000'+val.banner+');">';
-                            courseHtml += '<img src="http://127.0.0.1:8000'+val.icon+'" width="50" alt="">';
+                            courseHtml += '<div class="col-md-4 col-lg-3 mb-3"><div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url(https://edventurebd.com/'+val.banner+');">';
+                            courseHtml += '<img src="https://edventurebd.com/'+val.icon+'" width="50" alt="">';
                             courseHtml += '<h5 class="text-sm mt-2">'+val.title+'</h5>';
                             courseHtml += '<p class="text-md mt-2 fw-600 text-price">'+val.price+'৳</p>';
                             courseHtml += '<a href="/course/course-preview/'+val.slug+'" class="btn btn-outline text-purple mt-2">Go To Exam</a></div></div>';
