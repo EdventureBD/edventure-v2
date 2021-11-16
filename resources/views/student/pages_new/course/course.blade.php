@@ -22,7 +22,7 @@
             <div class="row py-3 card-group-row mb-lg-8pt">
                 @foreach ($courses as $course)
                 <div class="col-md-3 mb-4">
-                    <div class="single-exam mx-auto p-4 mb-md-0" style="background-image: url({{asset($course->banner)}});">
+                    <div class="single-exam text-center mx-auto p-4 mb-md-0" style="background-image: url({{asset($course->banner)}});">
                         <img src="{{asset($course->icon)}}" width="50" alt="">
                         <h5 class="text-center text-sm mt-2">{{ $course->title }} </h5>
                         <p class=" text-center text-md mt-2 fw-600 text-price">{{$course->price}}৳</p>
