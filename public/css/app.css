@@ -11353,23 +11353,37 @@ a:hover {
   color: #000000;
 }
 
-.course-category-js .slick-next {
+.course-category .slick-next {
   margin-top: -8px;
 }
-.course-category-js .slick-prev {
+.course-category .slick-prev {
   margin-top: -8px;
 }
-.course-category-js .slick-slide {
+.course-category .slick-slide {
   height: auto;
   margin-left: 15px;
 }
 
 @media (max-width: 768px) {
-  .course-category-js .slick-next {
+  .course-category .slick-next {
     margin-top: 50px;
     margin-right: 220px;
   }
-  .course-category-js .slick-prev {
+  .course-category .slick-prev {
+    margin-top: 50px;
+    margin-left: 220px;
+  }
+
+  .slick-initialized .slick-slide {
+    height: auto;
+    margin-left: 15px;
+  }
+
+  .course-category-ms .slick-next {
+    margin-top: 50px;
+    margin-right: 220px;
+  }
+  .course-category-ms .slick-prev {
     margin-top: 50px;
     margin-left: 220px;
   }
