@@ -35,7 +35,7 @@ class Create extends Component
     public function updatedTitle()
     {
         $this->validate([
-            'title' => 'required|string|max:50|unique:exams'
+            'title' => 'required|string|max:200'
         ]);
     }
 
@@ -131,7 +131,8 @@ class Create extends Component
         $data = $this->validate();
         $exam = new Exam;
         $exam->title = $data['title'];
-        $exam->slug = Str::slug($data['title']);
+        // $exam->slug = Str::slug($data['title']);
+        $exam->slug = (string) Str::uuid();
         $exam->course_id = $data['courseId'];
         $exam->topic_id = $data['topicId'];
         $exam->exam_type = $data['examType'];
