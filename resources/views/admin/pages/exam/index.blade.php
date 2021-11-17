@@ -47,8 +47,6 @@
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
                                         <th class="text-center">Marks</th>
-                                        <th class="text-center">Duration</th>
-                                        <th class="text-center">Question Limit</th>
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -62,7 +60,7 @@
                                                      @if($exam->special)<b>{{ $exam->title }}</b> @else{{ $exam->title }} @endif
                                             </td>
                                             </a>
-                                            <td class="text-center">{{ $exam->course->title }}</td>
+                                            <td class="text-center"><a target="blank" href="/admin/course/{{ $exam->course->slug }}">{{ $exam->course->title }}</a></td>
                                             <td class="text-center">
                                                 @if (!empty($exam->topic_id))
                                                     {{ $exam->topic->title }}
@@ -81,9 +79,7 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="text-center">{{ $exam->marks }}</td>
-                                            <td class="text-center">{{ $exam->duration }}</td>
-                                            <td class="text-center">{{ $exam->question_limit }}</td>
+                                            <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->marks }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('addQuestion', $exam->slug) }}">
                                                     <button class="btn btn-info"><i
@@ -147,9 +143,7 @@
                                         <th class="text-center">Course</th>
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
-                                        <th class="text-center">Marks</th>
-                                        <th class="text-center">Duration</th>
-                                        <th class="text-center">Question Limit</th>
+                                        <th class="text-center">Marks</th>                                       
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
                                     </tr>
