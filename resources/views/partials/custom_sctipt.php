@@ -10,7 +10,7 @@
         if(id in loadedCategory ){
             document.getElementById('loading_gif').style.display = "none";
             document.getElementById('stop-click').style.display = "none";
-            courseHtml=divPresention(loadedCategory[id]);
+            courseHtml=htmlMaker(loadedCategory[id]);
             div.innerHTML += courseHtml;
             removeAddSelector(id); 
         } else{
@@ -22,15 +22,10 @@
                 loadedCategory[id]=response;
                 document.getElementById('loading_gif').style.display = "none";
                 document.getElementById('stop-click').style.display = "none";
-                if(!$.trim(response)){
-                    courseHtml += '<h5 class="text-xxsm fw-600 text-purple mt-2">Course will publish soon, Try another category</h5>';
-                    div.innerHTML += courseHtml;
-                     removeAddSelector(id);
-                } else {
-                        courseHtml=divPresention(response);
-                        div.innerHTML += courseHtml;
-                        removeAddSelector(id); 
-                }
+                courseHtml=htmlMaker(response);
+                div.innerHTML += courseHtml;
+                removeAddSelector(id); 
+
             }
             },
             error: function(error) {
@@ -62,10 +57,10 @@
                 });
     }
 
-    function divPresention(response){
+    function htmlMaker(response){
         html="";
         if(!$.trim(response)){
-                    courseHtml += '<h5 class="text-xxsm fw-600 text-purple mt-2">Course will publish soon, Try another category</h5>';
+                html += '<h5 class="text-xxsm fw-600 text-purple mt-2">Course will publish soon, Try another category</h5>';
         } else{
             $.map(response, function(val, key) {
                 html += '<div class="col-md-4 col-lg-3 mb-3"><div class="single-exam mx-auto p-4 mb-4 mb-md-0" style="background-image: url(https://edventurebd.com/'+val.banner+');">';
