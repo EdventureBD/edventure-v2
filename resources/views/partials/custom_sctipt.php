@@ -16,6 +16,7 @@
                 if(!$.trim(response)){
                     courseHtml += '<h5 class="text-xxsm fw-600 text-purple mt-2">Course will publish soon, Try another category</h5>';
                     div.innerHTML += courseHtml;
+                     removeAddSelector(id);
                 } else {
                             
                         $.map(response, function(val, key) {
@@ -27,30 +28,35 @@
                             });
                     
                         div.innerHTML += courseHtml;
-                        var removestyle = document.querySelectorAll(".course-category-single-js");
-                            [].forEach.call(removestyle, function(el) {
-                                el.classList.remove("text-white");
-                                el.classList.remove("bg-purple");
-                                el.classList.add("bg-white");
-                                el.classList.add("text-purple");
-                            });           
-                            
-                            var addstyle = document.querySelectorAll("#"+id);
-                            [].forEach.call(addstyle, function(el) {                   
-                                el.classList.remove("bg-white");
-                                el.classList.remove("text-purple");
-                                el.classList.add("text-white");
-                                el.classList.add("bg-purple");
-                            });
+                        removeAddSelector(id);
                 }
             }
             },
             error: function(error) {
-            document.getElementById('loading_gif').style.display = "none";
-            courseHtml += '<h5 class="text-xxsm fw-600 mt-2">Try again</h5>';
-            div.innerHTML += courseHtml;
+                document.getElementById('loading_gif').style.display = "none";
+                removeAddSelector(id);
+                courseHtml += '<h5 class="text-xxsm fw-600 mt-2">Try again</h5>';
+                div.innerHTML += courseHtml;
             }
         });
+    }
+
+    function removeAddSelector(id){
+        var removestyle = document.querySelectorAll(".course-category-single-js");
+                                [].forEach.call(removestyle, function(el) {
+                                    el.classList.remove("text-white");
+                                    el.classList.remove("bg-purple");
+                                    el.classList.add("bg-white");
+                                    el.classList.add("text-purple");
+                                });           
+                                
+                var addstyle = document.querySelectorAll("#"+id);
+                [].forEach.call(addstyle, function(el) {                   
+                    el.classList.remove("bg-white");
+                    el.classList.remove("text-purple");
+                    el.classList.add("text-white");
+                    el.classList.add("bg-purple");
+                });
     }
 
 </script>
