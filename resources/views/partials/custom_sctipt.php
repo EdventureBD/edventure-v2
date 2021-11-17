@@ -5,12 +5,14 @@
         courseHtml= '';
         div.innerHTML="";
         document.getElementById('loading_gif').style.display = "block";
+        document.getElementById('stop-click').style.display = "block";
         $.ajax({
             url: "/ajax-course-request/"+id,
             type:"GET",
             success:function(response){
             if(response) {
                 document.getElementById('loading_gif').style.display = "none";
+                document.getElementById('stop-click').style.display = "none";
                 if(!$.trim(response)){
                     courseHtml += '<h5 class="text-xxsm fw-600 text-purple mt-2">Course will publish soon, Try another category</h5>';
                     div.innerHTML += courseHtml;
