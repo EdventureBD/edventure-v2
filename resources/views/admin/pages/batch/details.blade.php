@@ -343,6 +343,7 @@
                                         <th>SL. No</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Reamining Batch Days</th>
                                         {{-- <th>Contact</th> --}}
                                         <th>Status</th>
                                         <th>Action</th>
