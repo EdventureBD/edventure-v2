@@ -4,6 +4,22 @@
     }
 }
 
+.question {
+    img {
+        max-width: 100%;
+    }
+
+    table,
+    table td,
+    table tr,
+    span,
+    div,
+    p {
+        max-width: 100%;
+    }
+}
+
+
 .timer {
     position: fixed;
     right: 5px;
@@ -15,6 +31,7 @@
     justify-content: center;
     border-radius: 10px 10px 0 0;
     top: 7rem;
+
     &.rounded {
         border-radius: 10px;
         padding: 10px 10px 15px;
