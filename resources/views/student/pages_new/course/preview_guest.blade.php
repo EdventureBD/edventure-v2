@@ -10,19 +10,21 @@
                 </div>
                <div class="col-md-4">
                    <div class="d-flex align-items-center justify-content-start">
-                    @if(!empty($course->trailer))<a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2" data-toggle="modal" data-target="#showTrailer">Watch
+                    @if(!empty($course->trailer))<a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2"  data-toggle="modal" data-target="#showTrailer">Watch
                            trailer <i class="fas fa-play ml-2"></i>
                        </a>@endif
                        <div class="modal fade" id="showTrailer" tabindex="-1" role="dialog" aria-labelledby="showTrailer" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                           <div class="modal-content">
                               <div class="text-right">
-                              <button type="button" class="close pr-2 text-sm" data-dismiss="modal" aria-label="Close">
+                              <button type="button" class="close pr-2 text-sm" data-dismiss="modal" aria-label="Close" onclick="closeVideo()">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                               </div>
                             <div class="modal-body">
-                                <iframe width="100%" height="460" src="https://www.youtube.com/embed/{{$course->trailer ? $course->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                
+                                <iframe  src="https://www.youtube.com/embed/{{$course->trailer ? $course->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" width="100%" height="420px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    
                             </div>
                           </div>
                         </div>
@@ -95,4 +97,10 @@
             </div>
         </div>
     </div>
+    <script>
+    function closeVideo(){
+        var modalIframe = document.querySelector("#showTrailer iframe");
+        modalIframe.src = modalIframe.src;
+    }
+    </script>
 </x-landing-layout>
