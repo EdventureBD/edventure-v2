@@ -68,9 +68,9 @@
                                     <div class="input-group">
                                         {{-- <label class="col-form-label" for="courseurl"> Video Url </label> <br> --}}
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">https://vimeo.com/</span>
+                                            <span class="input-group-text">https://youtube.com/watch?v=</span>
                                         </div>
-                                        <input type="text"  wire:model="url" class="form-control @error('url') is-invalid @enderror" placeholder="Enter your video number as 25753871" /> 
+                                        <input type="text"  wire:model="url" class="form-control @error('url') is-invalid @enderror" placeholder="Enter your youtube video id" /> 
                                     </div>
                                     @error('url')
                                         <p style="color: red;">{{ $message }}</p>
@@ -78,7 +78,13 @@
                                 </div>
                                 <div class="input-group">
                                     @if ($url)
+                                        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ $url }}"
+                                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                        clipboard-write; encrypted-media; gyroscope;
+                                        picture-in-picture" allowfullscreen></iframe>
+                                        {{-- vimeo player
                                         <iframe src="https://player.vimeo.com/video/{{ $url }}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                     --}}
                                     @endif
                                 </div>
                                 <div class="card-footer">

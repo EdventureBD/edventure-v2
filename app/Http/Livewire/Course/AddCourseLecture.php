@@ -28,7 +28,7 @@ class AddCourseLecture extends Component
     public function updatedUrl()
     {
         $this->validate([
-            'url' => ['required', 'string', 'max:9'],
+            'url' => ['required', 'string', 'min:3'],
         ]);
     }
 
@@ -48,7 +48,7 @@ class AddCourseLecture extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'min:1', 'max:200'],
-        'url' => ['required', 'string', 'max:9'],
+        'url' => ['required', 'string', 'min:3'],
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',

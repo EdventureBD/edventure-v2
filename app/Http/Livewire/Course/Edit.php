@@ -57,7 +57,7 @@ class Edit extends Component
     public function updatedUrl()
     {
         $this->validate([
-            'url' => ['nullable', 'string', 'min:3', 'max:9'],
+            'url' => ['nullable', 'string', 'min:3'],
         ]);
     }
 
@@ -85,7 +85,7 @@ class Edit extends Component
     protected $rules = [
         'title' => ['required', 'string', 'max:100'],
         'description' => 'required|string|max:500',
-        'url' => ['nullable', 'string', 'min:3', 'max:9'],
+        'url' => ['nullable', 'string', 'min:3'],
         'price' => 'required|integer|numeric',
         'categoryId' => 'required',
         'duration' => 'required|numeric|between:1,36',

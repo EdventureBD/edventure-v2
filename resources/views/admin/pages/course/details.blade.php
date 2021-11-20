@@ -132,7 +132,14 @@
                                             <td>
                                                {{ $lecture->title }}
                                             </td>
-                                            <td><iframe src="https://player.vimeo.com/video/{{ $lecture->url}}" width="100" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></td>
+                                            <td class="text-center">
+                                                <iframe width="224" height="126" src="https://www.youtube-nocookie.com/embed/{{$lecture->url }}"
+                                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                                    clipboard-write; encrypted-media; gyroscope;
+                                                    picture-in-picture" allowfullscreen></iframe>
+                                                {{-- <iframe src="https://player.vimeo.com/video/{{ $lecture->url}}" width="100" frameborder="0" 
+                                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

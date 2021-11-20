@@ -71,7 +71,12 @@
                                                     <td>{{ $lecture->title }}</td>
                                                     <td>{{ $lecture->courseName }}</td>
                                                     <td>{{ $lecture->topicName }}</td>
-                                                    <td><iframe src="https://player.vimeo.com/video/{{ $lecture->url}}" width="100" height="200" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></td>
+                                                    <td> 
+                                                        <iframe width="224" height="126" src="https://www.youtube-nocookie.com/embed/{{$lecture->url }}"
+                                                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                                            clipboard-write; encrypted-media; gyroscope;
+                                                            picture-in-picture" allowfullscreen></iframe>
+                                                    </td>
                                                     <td>
                                                         <input type="checkbox" class="customControlInput" id="single-col-{{ $lecture->id }}" data-id="{{ $lecture->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $lecture->status ? 'checked' : '' }} >
                                                     </td>
