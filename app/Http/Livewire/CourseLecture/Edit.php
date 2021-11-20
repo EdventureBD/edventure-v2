@@ -30,7 +30,7 @@ class Edit extends Component
     public function updatedUrl()
     {
         $this->validate([
-            'url' => ['required', 'string', 'max:9'],
+            'url' => ['required', 'string'],
         ]);
     }
 
@@ -50,7 +50,7 @@ class Edit extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'max:50'],
-        'url' => ['required', 'string', 'max:9'],
+        'url' => ['required', 'string'],
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',

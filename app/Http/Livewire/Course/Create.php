@@ -42,7 +42,7 @@ class Create extends Component
     public function updatedUrl()
     {
         $this->validate([
-            'url' => ['nullable', 'string', 'min:3', 'max:9'],
+            'url' => ['nullable', 'string', 'min:3'],
         ]);
     }
 
@@ -82,7 +82,7 @@ class Create extends Component
         'banner' => 'nullable|image|mimes:jpeg,jpg,png',
         'image' => 'nullable|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
-        'url' => ['nullable', 'string', 'min:3', 'max:9'],
+        'url' => ['nullable', 'string', 'min:3'],
         'price' => 'required|integer|numeric',
         'categoryId' => 'required',
         'duration' => 'required|numeric|between:1,36',

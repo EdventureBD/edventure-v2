@@ -32,7 +32,7 @@ class Create extends Component
     public function updatedUrl()
     {
         $this->validate([
-            'url' => ['required', 'string', 'min:3', 'max:9'],
+            'url' => ['required', 'string', 'min:3'],
         ]);
     }
 
@@ -52,7 +52,7 @@ class Create extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'max:50'],
-        'url' => ['required', 'string', 'min:3', 'max:9'],
+        'url' => ['required', 'string', 'min:3'],
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',
