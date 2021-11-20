@@ -10,9 +10,9 @@
                 </div>
                <div class="col-md-4">
                    <div class="d-flex align-items-center justify-content-start">
-                       <a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2" data-toggle="modal" data-target="#showTrailer">Watch
+                    @if(!empty($course->trailer))<a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2" data-toggle="modal" data-target="#showTrailer">Watch
                            trailer <i class="fas fa-play ml-2"></i>
-                       </a>
+                       </a>@endif
                        <div class="modal fade" id="showTrailer" tabindex="-1" role="dialog" aria-labelledby="showTrailer" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                           <div class="modal-content">
