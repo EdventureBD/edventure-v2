@@ -6,9 +6,9 @@
                 <div class="single-footer-column">
                     <p class="text-xxsm bottom-border">CONTACT</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="#">About</a></li>
+                        <li><a href="{{route('about_us')}}">About</a></li>
                         <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Message From The Ceo</a></li>
+                        <li><a href="{{route('about_us')}}#ceo_message">Message From The Ceo</a></li>
                     
                     </ul>
                 </div>
@@ -17,10 +17,9 @@
                 <div class="single-footer-column">
                     <p class="text-xxsm bottom-border">COMMUNITY</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Linkedin</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
+                        <li><a target="blank" href="https://www.facebook.com/edventurebd">Facebook</a></li>
+                        <li><a target="blank" href="https://www.linkedin.com/company/edventurebd/">Linkedin</a></li>
+                        <li><a target="blank" href="https://www.instagram.com/edventurebd/">Instagram</a></li>
                     </ul>
                 </div>
             </div>

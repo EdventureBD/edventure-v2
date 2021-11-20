@@ -57,7 +57,7 @@
         <img src="/img/about/ecosystem.png" class="w-100 img-fluid" alt="">
     </div>
 
-    <div class="our-exams-section py-5">
+    <div id="ceo_message" class=" our-exams-section py-5">
         <div class="container">
             
             <div class="row my-5">
