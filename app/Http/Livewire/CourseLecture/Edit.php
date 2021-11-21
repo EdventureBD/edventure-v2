@@ -2,14 +2,18 @@
 
 namespace App\Http\Livewire\CourseLecture;
 
-use App\Models\Admin\Course;
 use Livewire\Component;
+use App\Models\Admin\Course;
+use Livewire\WithFileUploads;
+use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseCategory;
-use App\Models\Admin\CourseTopic;
+use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
 {
+    use WithFileUploads;
+
     public $courseLecture;
     public $courses;
     public $topics;
@@ -19,6 +23,8 @@ class Edit extends Component
     public $topicId;
     public $url;
     public $markdownText;
+    public $pdf;
+    public $prevpdf;
 
     public function updatedTitle()
     {
@@ -41,6 +47,14 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedPdf()
+    {
+        $this->validate([
+            'pdf' => 'mimes:pdf|max:10000',
+        ]);
+    }
+
+
     public function updatedTopicId()
     {
         $this->validate([
@@ -54,6 +68,7 @@ class Edit extends Component
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',
+        'pdf' => 'nullable|mimes:pdf|max:10000',
     ];
 
     public function updateCourseLecture()
@@ -65,6 +80,13 @@ class Edit extends Component
         $lecture->topic_id = $data['topicId'];
         $lecture->markdown_text = $data['markdownText'];
         $lecture->url = $data['url'];
+        if (!empty($this->pdf)) {
+            $fileName = substr($this->prevpdf, 22);
+            $delete = Storage::delete('public/lectures/pdf/' . $fileName);
+            if ($delete) {
+                $lecture->pdf = Storage::url($this->pdf->store('public/lectures/pdf'));
+            }
+        }
         $save = $lecture->save();
 
         if ($save) {
@@ -83,6 +105,8 @@ class Edit extends Component
         $this->topicId = $this->courseLecture->topic_id;
         $this->url = $this->courseLecture->url;
         $this->markdownText = $this->courseLecture->markdown_text;
+        $this->pdf = $this->courseLecture->pdf;
+        $this->prevpdf = $this->courseLecture->pdf;
 
         $this->courses = Course::all();
         $this->topics = CourseTopic::all();
