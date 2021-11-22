@@ -12,7 +12,7 @@
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Course Lecture </h3>
+                            <h3 class="card-title">Edit Course Lecture2 </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Update</button>
-                                    <a href="javascript:history.back()"><button type="button"
+                                    <a href="{{ URL::previous() }}"><button type="button"
                                             class="btn btn-danger">Back</button></a>
                                 </div>
                             </form>

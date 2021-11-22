@@ -96,7 +96,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <a href="javascript:history.back()"><button type="button" class="btn btn-danger">Back</button></a>
+                <a href="{{ URL::previous() }}"><button type="button" class="btn btn-danger">Back</button></a>
             </div>
         </div>
         <!-- /.card -->

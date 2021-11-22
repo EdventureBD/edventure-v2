@@ -286,7 +286,7 @@
                                     </div> --}}
 
                                     <div class="card-footer">
-                                        <a href="javascript:history.back()"><button type="button"
+                                        <a href="{{ URL::previous() }}"><button type="button"
                                                 class="btn btn-danger">Back</button></a>
                                     </div>
                                 </form>

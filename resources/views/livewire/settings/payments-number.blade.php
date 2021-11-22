@@ -41,7 +41,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="javascript:history.back()"><button type="button" class="btn btn-danger">Back</button></a>
+                            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-danger">Back</button></a>
                         </div>
                     </form>
                 </div>

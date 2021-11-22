@@ -105,6 +105,6 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Save changes</button>
-        <a href="javascript:history.back()"><button type="button" class="btn btn-danger">Back</button></a>
+        <a href="{{ URL::previous() }}"><button type="button" class="btn btn-danger">Back</button></a>
     </form>
 </div>

@@ -81,15 +81,21 @@
                                 <label class="col-form-label" for="courseurl">Lecture Video </label> <br>
                                 <div class="form-group container">
                                     @if ($courseLecture->url)
-                                        <iframe src="https://player.vimeo.com/video/{{ $courseLecture->url }}"
+                                        <iframe width="560" height="315"
+                                            src="https://www.youtube-nocookie.com/embed/{{ $courseLecture->url }}"
+                                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                            clipboard-write; encrypted-media; gyroscope;
+                                            picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                        {{-- <iframe src="https://player.vimeo.com/video/{{ $courseLecture->url }}"
                                             width="640" height="360" frameborder="0"
-                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
                                     @endif
                                 </div>
                             </div>
 
                             <div class="card-footer">
-                                <a href="javascript:history.back()"><button type="button"
+                                <a href="{{ URL::previous() }}"><button type="button"
                                         class="btn btn-danger">Back</button></a>
                             </div>
 
