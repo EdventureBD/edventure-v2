@@ -22,7 +22,7 @@ class Create extends Component
     public function updated()
     {
         $this->validate([
-            'title' => 'required|string|max:50|unique:course_topics,title',
+            'title' => 'required|string|max:325|unique:course_topics,title',
         ]);
     }
 

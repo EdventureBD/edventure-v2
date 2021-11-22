@@ -23,7 +23,7 @@ class Create extends Component
     public function updatedName()
     {
         $this->validate([
-            'name' => 'string|required|max:50',
+            'name' => 'string|required|max:325',
         ]);
     }
 
@@ -49,7 +49,7 @@ class Create extends Component
     }
 
     protected $rules = [
-        'name' => 'string|required|max:50',
+        'name' => 'string|required|max:325',
         'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
         'email' => 'email:rfc,dns|unique:users|required',
         'phone' => 'required|numeric|digits:11',

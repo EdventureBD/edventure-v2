@@ -89,7 +89,7 @@ class Edit extends Component
     }
 
     protected $rules = [
-        'title' => 'required|string|max:50',
+        'title' => 'required|string|max:325',
         'courseId' => 'required',
         'topicId' => 'nullable',
         'examType' => 'required',

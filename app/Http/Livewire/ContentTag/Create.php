@@ -26,7 +26,7 @@ class Create extends Component
     public function updatedTitle()
     {
         $this->validate([
-            'title' => 'required|string|max:50'
+            'title' => 'required|string|max:325'
         ]);
     }
 

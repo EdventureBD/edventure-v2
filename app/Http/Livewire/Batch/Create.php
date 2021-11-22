@@ -25,7 +25,7 @@ class Create extends Component
     public function updatedTitle()
     {
         $this->validate([
-            'title' => ['required', 'string', 'max:50'],
+            'title' => ['required', 'string', 'max:325'],
         ]);
     }
 
@@ -58,7 +58,7 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => ['required', 'string', 'max:50'],
+        'title' => ['required', 'string', 'max:325'],
         'student_limit' => ['required', 'numeric'],
         'batch_running_days' => ['required', 'numeric', 'gt:-1'],
         'teacher_id' => ['required'],

@@ -25,7 +25,7 @@ class Edit extends Component
     public function updatedName()
     {
         $this->validate([
-            'name' => 'string|required|max:50',
+            'name' => 'string|required|max:325',
         ]);
     }
 
@@ -56,7 +56,7 @@ class Edit extends Component
     }
 
     protected $rules = [
-        'name' => 'string|required|max:50',
+        'name' => 'string|required|max:325',
         'email' => 'email:rfc,dns|required',
         'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
         'phone' => 'required|numeric|digits:11',

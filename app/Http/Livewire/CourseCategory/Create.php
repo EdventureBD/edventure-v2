@@ -15,14 +15,14 @@ class Create extends Component
     public function updatedTitle()
     {
         $this->validate([
-            'title' => 'required|string|max:50'
+            'title' => 'required|string|max:325'
         ]);
     }
 
     public function saveCategory()
     {
         $data = $this->validate([
-            'title' => 'required|string|max:50'
+            'title' => 'required|string|max:325'
         ]);
         $courseCategory = new CourseCategory;
         $courseCategory->title = $data['title'];
