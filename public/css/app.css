@@ -11057,6 +11057,10 @@ a:hover {
   transition: 1s;
 }
 
+.bradius-20 {
+  border-radius: 20px;
+}
+
 .bradius-10 {
   border-radius: 10px;
 }
