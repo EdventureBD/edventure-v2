@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title strong">|Student: {{ $student->name }}&nbsp;&nbsp;|
+                            <h3 class="card-title strong">Student: {{ $student->name }}&nbsp;&nbsp;|
                                 Exam: {{ $exam->title }}&nbsp;&nbsp;|
                                 Exam Type: {{ $exam_type }}&nbsp;</h3>|
                         </div>
@@ -35,7 +35,7 @@
                                     @foreach($details_result as $details_result)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td title="View questions">{{ $details_result->mcq }}</td>
+                                            <td title="View questions">{!! $details_result->mcq !!}</td>
                                             <td class="text-center">{{ $details_result->gain_marks }}</td>
                                         </tr>
                                     @endforeach

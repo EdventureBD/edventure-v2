@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title strong">|Student: {{ $student->name }}&nbsp;&nbsp;|
+                            <h3 class="card-title strong">Student: {{ $student->name }}&nbsp;&nbsp;|
                                 Exam: {{ $exam->title }}&nbsp;&nbsp;|
                                 Exam Type: {{ $exam_type }}&nbsp;</h3>|
                         </div>
@@ -36,7 +36,7 @@
                                     @foreach ($exam_papers as $exam_paper)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td title="View questions">{{ $exam_paper->question }}</td>
+                                            <td title="View questions">{!! $exam_paper->question !!}</td>
                                             <td class="text-center">
                                                 @forelse($exam_results as $exam_result)
                                                     @if ($exam_result->question_id == $exam_paper->question_id)
