@@ -2039,17 +2039,19 @@ var Timer = function Timer(props) {
 /***/ (() => {
 
 $('.course-category-js').slick({
-  slidesToShow: 7,
+  slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
   variableWidth: true,
+  infinite: false,
   responsive: [{
     breakpoint: 768,
     settings: {
       slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: true,
+      infinite: false,
       autoplaySpeed: 3000,
       variableWidth: true
     }

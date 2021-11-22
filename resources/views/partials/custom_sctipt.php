@@ -1,12 +1,12 @@
 <script type="text/javascript">
     var loadedCategory={};
     function myFunction(id) {
-     
         var div = document.getElementById('show-course-js');
         courseHtml= '';
         div.innerHTML="";
         document.getElementById('loading_gif').style.display = "block";
         document.getElementById('stop-click').style.display = "block";
+        
         if(id in loadedCategory ){
             document.getElementById('loading_gif').style.display = "none";
             document.getElementById('stop-click').style.display = "none";

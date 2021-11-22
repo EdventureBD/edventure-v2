@@ -30,7 +30,7 @@
         <div class="container">
             <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
             <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2021 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
-            <div class="course-category-js-temp course-category">
+            <div class=" @if($categories->count()>=7) course-category-js @endif course-category">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
                         <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple ">{{$category->title}}</div>
@@ -38,7 +38,7 @@
                         <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white ">{{$category->title}}</div>
                     @endif
                 @endforeach
-                <div id="stop-click" style="display: none">
+                <div id="stop-click" >
                    
                 </div>
             </div>

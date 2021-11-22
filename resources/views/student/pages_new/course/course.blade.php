@@ -5,7 +5,7 @@
             <div class="py-4">
                 <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Courses Category</div>
             </div>
-            <div class="text-center course-category-js-temp">
+            <div class="text-center @if($categories->count()>=7) course-category-js @endif ">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
                         <a href="{{route('course',$category->slug)}}"  class="mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm text-white 
