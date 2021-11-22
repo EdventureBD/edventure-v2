@@ -12,8 +12,9 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><b>Course :</b> {{ $exam->course->title }}<br>
-                    @if(!empty($exam->topic)&&!is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
-                    <b>Assignment :</b> {{ $exam->title }}</h3>
+                    @if (!empty($exam->topic) && !is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
+                    <b>Assignment :</b> {{ $exam->title }}
+                </h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -27,10 +28,9 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <h4 class="text-muted">
-                                    <span
-                                        style="font-weight: bolder">
+                                    <span style="font-weight: bolder">
                                         Question
-                                    </span>: {{ $assignment->question }}
+                                    </span>: {!! $assignment->question !!}
                                     @if ($assignment->image)
                                         <img class="product-image-thumb" style="width: 30%;height: 30%;"
                                             src="{{ Storage::url($assignment->image) }}" alt="">

@@ -100,7 +100,7 @@
                                     @foreach ($assignments as $assignment)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $assignment->question }}</td>
+                                            <td>{!! $assignment->question !!}</td>
                                             <td>
                                                 @if ($assignment->image)
                                                     <img class="product-image-thumb"

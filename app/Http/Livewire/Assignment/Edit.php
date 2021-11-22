@@ -7,6 +7,7 @@ use App\Models\Admin\Exam;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use App\Models\Admin\Assignment;
+use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
 {
@@ -16,10 +17,16 @@ class Edit extends Component
 
     public $question;
     public $image;
+    public $tempImage;
     public $marks;
     public $examId;
 
     public $exam;
+
+    public function updatedImage()
+    {
+        $this->tempImage = $this->image;
+    }
 
     protected $rules = [
         'question' => 'required|min:4',
@@ -40,7 +47,7 @@ class Edit extends Component
         $data = $this->validate();
         if ($this->image) {
             $imageUrl = $this->image->store('public/question/assignment');
-            $this->image = $imageUrl;
+            $this->image = Storage::url($imageUrl);
         }
 
         $assignment = Assignment::find($this->assignment->id);

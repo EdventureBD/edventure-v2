@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Exam;
 
-use App\Models\Admin\Assignment as AdminAssignment;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Admin\Assignment as AdminAssignment;
 
 class Assignment extends Component
 {
@@ -39,7 +40,7 @@ class Assignment extends Component
         $data = $this->validate();
         if ($this->image) {
             $imageUrl = $this->image->store('public/question/assignment');
-            $this->image = $imageUrl;
+            $this->image = Storage::url($imageUrl);
         }
 
         $assignment = new AdminAssignment();
