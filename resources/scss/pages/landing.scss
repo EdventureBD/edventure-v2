@@ -9,27 +9,37 @@
     border-radius: 30px;
     background-size: cover;
     max-width: 250px;
-   h5 {
+
+    h5 {
         min-height: 7rem;
         font-size: 25px;
         font-weight: 600;
     }
+
     &:hover {
         box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
     }
 
-    // &.physics{
-    //     background-image: url('/img/landing/physics.png');
-    // }
-    // &.bio{
-    //     background-image: url('/img/landing/bio.png');
-    // }
-    // &.chemistry{
-    //     background-image: url('/img/landing/chemistry.png');
-    // }
-    // &.math{
-    //     background-image: url('/img/landing/math.png');
-    // }
+    &.about {
+        max-width: 100%;
+
+        img {
+            height: 180px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        h5 {
+            min-height: auto;
+        }
+
+        @media (max-width: 767px) {
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 }
 
 .single-package {
@@ -138,9 +148,10 @@
     }
 }
 
-.course-category{
+.course-category {
     position: relative;
-    #stop-click{
+
+    #stop-click {
         position: absolute;
         height: 100%;
         width: 100%;
@@ -149,4 +160,3 @@
         background: transparent;
     }
 }
-
