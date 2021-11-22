@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title strong">
-                                |Student: {{ $student->name }}&nbsp;&nbsp;|
+                                Student: {{ $student->name }}&nbsp;&nbsp;|
                                 Exam: {{ $exam->title }}&nbsp;&nbsp;|
                                 Exam Type: {{ $exam_type }}&nbsp;
                             </h3>|
