@@ -52,7 +52,7 @@
                                             <td>{{ $liveclass->title }}</td>
                                             <td>{{ $liveclass->batch->title }}</td>
                                             <td>{{ $liveclass->batch->course->title }}</td>
-                                            <td><a href="{{ $liveclass->live_link }}" target="blank">Link</a></td>
+                                            <td><a href="{{ $liveclass->live_link }}" target="blank">View link</a></td>
                                             <td>{{ $liveclass->start_date }} at
                                                 {{ $liveclass->start_time }}</td>
                                             <td>

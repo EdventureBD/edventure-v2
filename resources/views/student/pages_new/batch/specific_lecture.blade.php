@@ -17,7 +17,7 @@
                             <div class="card card-primary card-tabs">
                                 <div class="lecture-tab card-header bg-purple-light p-0 pt-1">
                                     <ul class="nav nav-tabs justify-content-center" id="custom-tabs-one-tab" role="tablist">
-                                        <li class="nav-item mr-md-5 mr-2">
+                                        {{-- <li class="nav-item mr-md-5 mr-2">
                                             <a class="nav-link active h3 text-purple" id="markdownText" data-toggle="pill" href="#custom-tabs-one-note" role="tab" aria-controls="custom-tabs-one-note" aria-selected="true">Note</a>
                                         </li>
                                         <li class="nav-item mx-md-5 mx-2">
@@ -25,17 +25,25 @@
                                         </li>
                                         <li class="nav-item ml-md-5 ml-2">
                                             <a class="nav-link h3 text-purple" id="liveClass" data-toggle="pill" href="#custom-tabs-one-liveClass" role="tab" aria-controls="custom-tabs-one-liveClass" aria-selected="false">Live Class</a>
-                                        </li>
-                                        {{-- <li class="nav-item">
-                                            <a class="nav-link h3 text-purple" id="otherLectures" data-toggle="pill" href="#custom-tabs-one-otherLectures" role="tab" aria-controls="custom-tabs-one-otherLectures" aria-selected="false">Other Lectures</a>
                                         </li> --}}
+                                        <li class="nav-item mr-md-5 mr-2">
+                                            <a class="nav-link active h3 text-purple" id="markdownText" data-toggle="pill" href="#custom-tabs-one-note" role="tab" aria-controls="custom-tabs-one-note" aria-selected="true">Solution pdf</a>
+                                        </li>
+                                        <li class="nav-item mx-md-5 mx-2">
+                                            <a class="nav-link h3 text-purple" id="lecture" data-toggle="pill" href="#custom-tabs-one-lecture" role="tab" aria-controls="custom-tabs-one-lecture" aria-selected="false">Solution Video</a>
+                                        </li>
+                                        <li class="nav-item ml-md-5 ml-2">
+                                            <a class="nav-link h3 text-purple" id="liveClass" data-toggle="pill" href="#custom-tabs-one-liveClass" role="tab" aria-controls="custom-tabs-one-liveClass" aria-selected="false">Relevant Notes</a>
+                                        </li>
+                                 
                                     </ul>
+                                    
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-one-tabContent">
                                         <div class="tab-pane fade show active" id="custom-tabs-one-note" role="tabpanel" aria-labelledby="markdownText">
                                             @if ($courseLecture->pdf != null)
-                                                <iframe src="{{ Storage::url($courseLecture->pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
+                                                <iframe src="{{ $courseLecture->pdf }}" frameborder="0" width="100%" height="600px"></iframe>
                                             @else
                                                 {!! $courseLecture->markdown_text !!}
                                             @endif
@@ -53,7 +61,11 @@
                                                         </a>
                                                     </div> --}}
                                                     <div class="player__embed ">
-                                                        <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/66140585" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                                        <iframe width="100%" height="315"
+                                                            src="https://www.youtube-nocookie.com/embed/{{ $courseLecture->url }}"
+                                                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                                        clipboard-write; encrypted-media; gyroscope;
+                                                        picture-in-picture" allowfullscreen></iframe>
                                                         {{-- <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/{{ $courseLecture->url }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
                                                         {{-- <iframe class="embed-responsive-item"
                                                                 src="https://player.vimeo.com/video/{{ $courseLecture->url }}"
@@ -69,10 +81,10 @@
                                                         @if(isset($liveClass) && !empty($liveClass))
                                                  
                                                         <div class="mx-auto mt-5 mb-5 text-center">
-                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">Topic: {{$liveClass->title}}</p>
+                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">{{$liveClass->title}}</p>
                                                             
                                                             <div id="countdownTimer" class="text-center text-gray-50 count-timer my-4 font-arial"></div>
-                                                            <a class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20" href="{{$liveClass->live_link}}">View Live Class </a>
+                                                            <a class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20" target="blank" href="{{$liveClass->live_link}}">View Content </a>
                                                         </div>
                                                         @else 
                                                         <div class="mx-auto mt-5 mb-5 text-center">

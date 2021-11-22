@@ -14,7 +14,7 @@ class DropColumnsFromLiveClassTable extends Migration
     public function up()
     {
         Schema::table('live_classes', function (Blueprint $table) {
-            // $table->dropColumn(['show_link_limit_time', 'is_always_show']);
+            $table->dropColumn(['show_link_limit_time', 'is_always_show']);
         });
     }
 

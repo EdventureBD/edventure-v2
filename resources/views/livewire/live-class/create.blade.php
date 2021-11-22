@@ -84,24 +84,14 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="startTime">Start Time</label>
-                                            <input class="form-control" type="time" wire:model="startTime"
+                                            <input class="form-control" type="time" value="13:30" wire:model="startTime"
                                                 id="startTime">
                                         </div>
                                         @error('startTime')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    {{-- <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="showLinkLimitTime">Link Visible
-                                                limit</label>
-                                            <input class="form-control" type="time" wire:model="showLinkLimitTime"
-                                                id="showLinkLimitTime" @if ($isAlwaysShow) disabled @endif>
-                                        </div>
-                                        @error('showLinkLimitTime')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div> --}}
+                                 
                                 </div>
 
                                 <div class="row">
@@ -114,17 +104,7 @@
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    {{-- <div class="col-md-3">
-                                        <div class="form-group mt-5">
-                                            <input type="checkbox" id="isAlwaysShow" wire:model="isAlwaysShow">
-                                            <label for="isAlwaysShow">
-                                                Link Always Visible
-                                            </label>
-                                            @error('isAlwaysShow')
-                                                <p style="color: red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
+                              
                                 </div>
 
                                 <div class="card-footer">
