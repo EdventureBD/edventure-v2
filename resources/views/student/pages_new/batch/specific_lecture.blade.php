@@ -34,7 +34,11 @@
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-one-tabContent">
                                         <div class="tab-pane fade show active" id="custom-tabs-one-note" role="tabpanel" aria-labelledby="markdownText">
-                                            {!! $courseLecture->markdown_text !!}
+                                            @if ($courseLecture->pdf != null)
+                                                <iframe src="{{ Storage::url($courseLecture->pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
+                                            @else
+                                                {!! $courseLecture->markdown_text !!}
+                                            @endif
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-one-lecture" role="tabpanel" aria-labelledby="lecture">
                                             <div class="embed-responsive embed-responsive-16by9 mb-32pt">
