@@ -14,7 +14,7 @@ class Edit extends Component
     public $title;
     public $batchId;
     public $categoryId;
-    public $course_id;
+    // public $course_id;
     public $topicId;
     public $liveLink;
     public $startTime;
@@ -34,8 +34,8 @@ class Edit extends Component
 
     public function updatedBatchId()
     {
-        $courseId = Batch::select('course_id')->where('id', $this->batchId)->first();
-        $this->course_id = $courseId->course_id;
+        // $courseId = Batch::select('course_id')->where('id', $this->batchId)->first();
+        // $this->course_id = $courseId->course_id;
         $this->validate([
             'batchId' => 'required'
         ]);
@@ -85,7 +85,7 @@ class Edit extends Component
         'startTime' => 'required|',
         'startDate' => 'required|date|',
         'isSpecial' => 'nullable',
-        'course_id' => 'required'
+        // 'course_id' => 'required'
     ];
 
     public function updateLiveClass()
@@ -100,7 +100,7 @@ class Edit extends Component
         $live_class->start_date = $data['startDate'];
         $live_class->live_link = $data['liveLink'];
         $live_class->is_special = $data['isSpecial'];
-        $live_class->course_id = $data['course_id'];
+        // $live_class->course_id = $data['course_id'];
 
         $save = $live_class->save();
 
@@ -118,7 +118,7 @@ class Edit extends Component
         // dd($this->liveClass);
         $this->title = $this->liveClass->title;
         $this->batchId = $this->liveClass->batch_id;
-        $this->course_id = $this->liveClass->course_id;
+        // $this->course_id = $this->liveClass->course_id;
         $this->topicId = $this->liveClass->topic_id;
         $this->liveLink = $this->liveClass->live_link;
         $this->startTime = $this->liveClass->start_time;

@@ -81,11 +81,11 @@ class Edit extends Component
         $lecture->markdown_text = $data['markdownText'];
         $lecture->url = $data['url'];
         if (!empty($this->pdf)) {
-            $fileName = substr($this->prevpdf, 22);
-            $delete = Storage::delete('public/lectures/pdf/' . $fileName);
-            if ($delete) {
-                $lecture->pdf = Storage::url($this->pdf->store('public/lectures/pdf'));
-            }
+            $fileName = "public/lectures/pdf/".substr($this->prevpdf, 22);
+            $delete = Storage::delete($fileName);
+            $lecture->pdf = Storage::url($this->pdf->store('public/lectures/pdf'));
+            $this->pdf=$lecture->pdf;
+
         }
         $save = $lecture->save();
 

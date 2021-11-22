@@ -14,7 +14,7 @@ class Create extends Component
     public $title;
     public $batchId;
     public $categoryId;
-    public $course_id;
+    // public $course_id;
     public $topicId;
     public $liveLink;
     public $startTime;
@@ -35,8 +35,8 @@ class Create extends Component
 
     public function updatedBatchId()
     {
-        $courseId = Batch::select('course_id')->where('id', $this->batchId)->first();
-        $this->course_id = $courseId->course_id;
+        //$courseId = Batch::select('course_id')->where('id', $this->batchId)->first();
+        //$this->course_id = $courseId->course_id;
         $this->validate([
             'batchId' => 'required'
         ]);
@@ -85,7 +85,7 @@ class Create extends Component
         'startTime' => 'required|date_format:H:i|',
         'startDate' => 'required|date|',
         'isSpecial' => 'nullable',
-        'course_id' => 'required'
+        // 'course_id' => 'required'
     ];
 
     public function saveLiveClass()
@@ -101,7 +101,7 @@ class Create extends Component
         $live_class->start_date = $data['startDate'];
         $live_class->live_link = $data['liveLink'];
         $live_class->is_special = $data['isSpecial'];
-        $live_class->course_id = $data['course_id'];
+        // $live_class->course_id = $data['course_id'];
         $live_class->order = 0;
         $live_class->status = 1;
 
@@ -119,7 +119,7 @@ class Create extends Component
     public function mount()
     {
         $this->batches = Batch::orderBy('title')->where('status', 1)->get();
-        $this->categories = CourseCategory::orderBy('title')->get();
+        // $this->categories = CourseCategory::orderBy('title')->get();
     }
 
     public function render()

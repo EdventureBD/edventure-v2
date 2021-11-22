@@ -28,7 +28,10 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="row">
-                           <div class="col-md-12">
+                           <div class="col-md-12">                                
+                                    <a href="{{ URL::previous() }}"><button type="button"
+                                        class="ml-2 mt-2 btn btn-danger">Back</button></a>
+
                                 <button class="btn btn-info float-right mt-2 mb-2 mr-2" data-toggle="modal" data-target="#course-topic">
                                     <i class="fas fa-plus-square"></i>
                                     Add Course Topic

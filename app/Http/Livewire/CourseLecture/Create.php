@@ -58,7 +58,7 @@ class Create extends Component
     public function updatedPdf()
     {
         $this->validate([
-            'pdf' => 'mimes:pdf|max:10000',
+            'pdf' => 'mimes:pdf|max:50000',
         ]);
     }
 
@@ -68,7 +68,7 @@ class Create extends Component
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',
-        'pdf' => 'nullable|mimes:pdf|max:10000',
+        'pdf' => 'nullable|mimes:pdf|max:50000',
     ];
 
     public function saveCourseLecture()

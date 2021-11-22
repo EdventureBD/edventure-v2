@@ -4,11 +4,15 @@ namespace App\Http\Livewire\Course;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
+use App\Models\Admin\Course;
+use Livewire\WithFileUploads;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
+use Illuminate\Support\Facades\Storage;
 
 class AddCourseLecture extends Component
 {
+    use WithFileUploads;
     public $course;
 
     public $course_topics;
@@ -17,6 +21,7 @@ class AddCourseLecture extends Component
     public $topicId;
     public $url;
     public $markdownText;
+    public $pdf;
 
     public function updatedTitle()
     {
@@ -45,6 +50,12 @@ class AddCourseLecture extends Component
             'topicId' => 'required',
         ]);
     }
+    public function updatedPdf()
+    {
+        $this->validate([
+            'pdf' => 'mimes:pdf|max:50000',
+        ]);
+    }
 
     protected $rules = [
         'title' => ['required', 'string', 'min:1', 'max:200'],
@@ -52,6 +63,8 @@ class AddCourseLecture extends Component
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',
+        'pdf' => 'nullable|mimes:pdf|max:50000',
+
     ];
 
     public function saveCourseLecture()
@@ -66,6 +79,9 @@ class AddCourseLecture extends Component
         $lecture->slug = Str::slug($data['title']);
         $lecture->status = 1;
         $lecture->order = 0;
+        if (!empty($this->pdf)) {
+            $lecture->pdf = Storage::url($this->pdf->store('public/lectures/pdf'));
+        }
 
         $save = $lecture->save();
 

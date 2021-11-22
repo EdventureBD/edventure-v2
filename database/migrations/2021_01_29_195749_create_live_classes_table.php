@@ -31,8 +31,6 @@ class CreateLiveClassesTable extends Migration
             $table->string('live_link');
             $table->time('start_time');
             $table->date('start_date');
-            $table->time('show_link_limit_time')->nullable();
-            $table->boolean('is_always_show')->nullable();
             $table->boolean('is_special')->nullable();;
             $table->integer('order');
             $table->tinyInteger('status');

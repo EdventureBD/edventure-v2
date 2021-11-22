@@ -61,6 +61,16 @@
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                <div class="form-group" wire:ignore>
+                                    <label class="col-form-label" for="pdf">Pdf</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" wire:model="pdf">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                    @error('pdf')
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
                                 <div>
                                     <label class="col-form-label" for="courseurl">Lecture Video </label> <br>
                                     <div class="input-group">

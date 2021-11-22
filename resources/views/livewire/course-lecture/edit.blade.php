@@ -75,6 +75,12 @@
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                @if ($this->courseLecture->pdf)
+                                    <div class="form-group container">
+                                        <iframe src="{{$this->courseLecture->pdf}} " width="100%"
+                                        height="360" frameborder="0"></iframe>
+                                    </div>
+                                @endif
                                 <div>
                                     <label class="col-form-label" for="courseurl">Lecture Video </label> <br>
                                     <div class="input-group">
