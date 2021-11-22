@@ -71,7 +71,7 @@
                                 <label class="col-form-label" for="courseurl">Lecture Pdf </label> <br>
                                 <div class="form-group container">
                                     @if ($courseLecture->pdf)
-                                        <iframe src="{{ $courseLecture->pdf }}" width="1000"
+                                        <iframe src="{{ $courseLecture->pdf }}" width="100%"
                                             height="360" frameborder="0"></iframe>
                                     @endif
                                 </div>

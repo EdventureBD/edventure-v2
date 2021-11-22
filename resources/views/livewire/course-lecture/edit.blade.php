@@ -77,7 +77,7 @@
                                 </div>
                                 @if ($this->courseLecture->pdf)
                                     <div class="form-group container">
-                                        <iframe src="{{$this->courseLecture->pdf}}" width="1000"
+                                        <iframe src="{{$this->courseLecture->pdf}} " width="100%"
                                         height="360" frameborder="0"></iframe>
                                     </div>
                                 @endif
