@@ -148,7 +148,6 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                     </div>
                 </div>
             </div>
-           
             {questionRows}
             <form action={"/batch/" + batch.slug + "/" + exam.slug + "/result"} method="post" id="exam-form" onSubmit={submitExam}>
                 <p className={state.error ? "text-red" : "text-red d-none"}>Please answer all the questions!</p>

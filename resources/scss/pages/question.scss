@@ -70,7 +70,7 @@
     .timer {
         width: 6rem;
         font-size: 22px;
-        top: 2rem;
+        top: 4rem;
 
         h1 {
             font-size: 22px;
@@ -83,7 +83,7 @@
 
     .question-summary {
         width: 6rem;
-        top: 4.5rem;
+        top: 6.5rem;
         padding: 5px;
 
         .single-qus-summary {
@@ -94,7 +94,7 @@
         }
 
         &.more-than-50 {
-            max-height: calc(100vh - 4rem);
+            max-height: calc(100vh - 6.5rem);
             overflow-y: scroll;
         }
     }

@@ -11678,7 +11678,7 @@ a:hover {
   .timer {
     width: 6rem;
     font-size: 22px;
-    top: 2rem;
+    top: 4rem;
   }
   .timer h1 {
     font-size: 22px;
@@ -11689,7 +11689,7 @@ a:hover {
 
   .question-summary {
     width: 6rem;
-    top: 4.5rem;
+    top: 6.5rem;
     padding: 5px;
   }
   .question-summary .single-qus-summary {
@@ -11699,7 +11699,7 @@ a:hover {
     font-size: 11px;
   }
   .question-summary.more-than-50 {
-    max-height: calc(100vh - 4rem);
+    max-height: calc(100vh - 6.5rem);
     overflow-y: scroll;
   }
 }
