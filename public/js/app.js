@@ -2452,7 +2452,7 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
               initialSeconds: 0
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "question-summary",
+            className: questions.length > 50 ? "question-summary more-than-50" : "question-summary",
             children: questionSummary
           })]
         })]
