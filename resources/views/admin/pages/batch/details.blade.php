@@ -5,6 +5,12 @@
 ])
 
 @section('css1')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
 @endsection
@@ -242,8 +248,22 @@
                                                     method="POST">
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
-                                                        <label for="studentId">Example select</label>
-                                                        <select class="form-control" id="studentId" name="studentId">
+                                                        <label for="studentId">Select Student</label>
+                                                        {{-- <select class="form-control" id="studentId" name="studentId">
+                                                            <option value="" hidden required>
+                                                                Select Student
+                                                            </option>
+                                                            @foreach ($studentsToAdd as $studentsAdd)
+                                                                <option value="{{ $studentsAdd->id }}"
+                                                                    {{ old('studentId') == $studentsAdd->id ? 'selected' : '' }}>
+                                                                    {{ $studentsAdd->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select> --}}
+                                                        <select class="select2" id="studentId" name="studentId"
+                                                            data-placeholder="Select Student"
+                                                            data-dropdown-css-class="select2-purple" style="width: 100%;"
+                                                            required>
                                                             <option value="" hidden required>
                                                                 Select Student
                                                             </option>
@@ -464,6 +484,11 @@
 @endsection
 
 @section('js1')
+    <!-- Select2 -->
+    <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="{{ asset('admin/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+
     <script src="{{ asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     <script>
         $(function() {
@@ -511,5 +536,18 @@
                 "autoWidth": false,
             });
         });
+    </script>
+
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+        })
     </script>
 @endsection

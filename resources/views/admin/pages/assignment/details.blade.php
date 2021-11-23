@@ -60,6 +60,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <a href="{{ URL::previous() }}"><button type="button" class="btn btn-danger">Back</button></a>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
