@@ -11704,7 +11704,7 @@ a:hover {
     font-size: 11px;
   }
   .question-summary.more-than-50 {
-    max-height: calc(100vh - 8rem);
+    max-height: calc(100vh - 10rem);
     overflow-y: scroll;
   }
 }
