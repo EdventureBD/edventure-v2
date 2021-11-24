@@ -16,7 +16,7 @@ class AddBannerMetaTagToBlog extends Migration
         Schema::table('blogs', function (Blueprint $table) {
             $table->string('banner')->after('subtitle');
             $table->string('meta_tag')->nullable()->after('banner');
-            $table->string('meta_description')->nullable()->after('meta_tag');
+            $table->longText('meta_description')->nullable()->after('meta_tag');
         });
     }
 
