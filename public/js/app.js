@@ -2452,8 +2452,11 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
               initialSeconds: 0
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: questions.length > 50 ? "question-summary more-than-50" : "question-summary",
-            children: questionSummary
+            className: questions.length > 40 ? "question-summary more-than-50" : "question-summary",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "overflow-hidden",
+              children: questionSummary
+            })
           })]
         })]
       }), questionRows, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {

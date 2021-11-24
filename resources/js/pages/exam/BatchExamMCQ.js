@@ -143,8 +143,10 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                 </div>
                 <div className="col-md-2">
                     <div className="timer text-white"><Timer timeOutAction={processSubmit} initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
-                    <div className={questions.length > 50 ? "question-summary more-than-50" : "question-summary"}>
+                    <div className={questions.length > 40 ? "question-summary more-than-50" : "question-summary"}>
+                        <div className="overflow-hidden">
                         {questionSummary}
+                        </div>
                     </div>
                 </div>
             </div>
