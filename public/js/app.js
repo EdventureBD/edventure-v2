@@ -2023,6 +2023,7 @@ var Timer = function Timer(props) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     children: minutes === 0 && seconds === 0 ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
+      className: "mb-0",
       children: [" ", minutes, ":", seconds < 10 ? "0".concat(seconds) : seconds]
     })
   });
@@ -2243,9 +2244,11 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
   var questions = _ref.questions,
       batch = _ref.batch,
       exam = _ref.exam;
-  console.log(questions);
-  console.log(batch);
-  console.log(exam);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      showSummary = _useState2[0],
+      setShowSummary = _useState2[1];
 
   var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useReducer)(function (state, newState) {
     return _objectSpread(_objectSpread({}, state), newState);
@@ -2444,15 +2447,25 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "col-md-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "timer text-white",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Timer__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "".concat(!showSummary && "hide-summary", " timer text-white text-center"),
+            onClick: function onClick() {
+              return setShowSummary(!showSummary);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Timer__WEBPACK_IMPORTED_MODULE_4__["default"], {
               timeOutAction: processSubmit,
               initialMinute: exam.duration ? exam.duration : 30,
               initialSeconds: 0
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: questions.length > 40 ? "question-summary more-than-50" : "question-summary",
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "text-xsm text-center text-white icon",
+              children: showSummary ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                className: "c-point fas fa-angle-up"
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                className: "c-point fas fa-angle-down"
+              })
+            })]
+          }), showSummary && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "".concat(questions.length > 40 && "more-than-50", " question-summary ").concat(showSummary ? "show-sum" : "hide-sum"),
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
               className: "overflow-hidden",
               children: questionSummary
