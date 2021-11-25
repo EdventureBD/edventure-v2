@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import parse from 'html-react-parser';
 import Timer from '../../components/Timer';
@@ -6,9 +6,7 @@ import Axios from 'axios';
 import { useBeforeunload } from 'react-beforeunload';
 
 const BatchExamMCQ = ({ questions, batch, exam }) => {
-    console.log(questions);
-    console.log(batch);
-    console.log(exam);
+    const [showSummary, setShowSummary] = useState(true);
     const [state, setState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -142,12 +140,17 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
                     <h2 className="text-purple">Exam: {exam.title}</h2>
                 </div>
                 <div className="col-md-2">
-                    <div className="timer text-white"><Timer timeOutAction={processSubmit} initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} /></div>
-                    <div className={questions.length > 40 ? "question-summary more-than-50" : "question-summary"}>
+                    <div className={`${!showSummary && "hide-summary"} timer text-white text-center`} onClick={()=>setShowSummary(!showSummary)}>
+                        <Timer timeOutAction={processSubmit} initialMinute={exam.duration ? exam.duration : 30} initialSeconds={0} />
+                        <div className="text-xsm text-center text-white icon">
+                            {showSummary ? <i className="c-point fas fa-angle-up"></i> : <i className="c-point fas fa-angle-down"></i>}
+                        </div>
+                    </div>
+                    {showSummary && <div className={`${questions.length > 40 && "more-than-50"} question-summary ${showSummary ? "show-sum" : "hide-sum"}`} >
                         <div className="overflow-hidden">
                         {questionSummary}
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
             {questionRows}
