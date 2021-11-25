@@ -168,7 +168,7 @@ class BlogController extends Controller
             $banner = $blog->banner;
             $subtitle = $blog->subtitle;
             $description = $blog->description;
-            return view('landing.read_blog', compact(
+            return view('landing.single_blog', compact(
                 'author_name',
                 'author_image',
                 'title',
