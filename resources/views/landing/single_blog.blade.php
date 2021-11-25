@@ -29,7 +29,8 @@
                 <p class="text-purple text-xsm fw-600 text-center">{{$author_name}}</p>
 
             </div>
-            <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="1000"></div>
+            {{-- <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="1000"></div> --}}
+            <div class="fb-comments" data-href="https://edventurebd.com/blog/single/cdf3ad3a-d9a0-4f09-8faa-c24bccfd2743" data-width="" data-numposts="1000"></div>
 
         </div>
 
