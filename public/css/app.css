@@ -12199,3 +12199,10 @@ form input {
   margin: 0 auto;
   border-radius: 10px;
 }
+
+.all-blog .single-blog img.blog-banner {
+  height: 20vw;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}

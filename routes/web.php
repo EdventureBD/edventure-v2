@@ -75,6 +75,7 @@ Route::get('/contact-us', function(){
 
 
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
+Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');
 
 
 

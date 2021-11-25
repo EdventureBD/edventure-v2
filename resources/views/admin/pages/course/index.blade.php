@@ -79,7 +79,7 @@
                                                     <a class="mr-1"
                                                         href="{{ route('course.show', $course->slug) }}"
                                                         title="See Details">
-                                                        <button type="button" class="btn btn-info"><i
+                                                        <button type="button" class="btn btn-success"><i
                                                                 class="fas fa-eye"></i></button>
                                                     </a>
                                                     <a class="mr-1"

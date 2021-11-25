@@ -16,3 +16,11 @@
         border-radius: 10px;
     }
 }
+
+.all-blog {
+    .single-blog img.blog-banner{
+        height: 20vw;
+        width: 100%;
+        object-fit: cover;
+    }
+}

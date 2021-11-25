@@ -128,7 +128,7 @@
                                             </td>
                                             <td>
                                                 @if ($user->image)
-                                                    <img src="{{ Storage::url($user->image) }}"
+                                                    <img src="{{ $user->image }}"
                                                         class="product-image-thumb" alt="{{ $user->name }}"
                                                         height="70px !important" srcset="">
                                                 @else

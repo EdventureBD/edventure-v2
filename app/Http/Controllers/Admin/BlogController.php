@@ -48,7 +48,8 @@ class BlogController extends Controller
             'authorId' => 'required|',
             'banner' => 'required|image|mimes:jpeg,jpg,png|',
             'meta_tag' => 'nullable|',
-            'meta_description' => 'nullable|',
+            // 'meta_description' => 'nullable|',
+
         ]);
 
         $blog = new Blog();
@@ -105,11 +106,12 @@ class BlogController extends Controller
         $validateData = $request->validate([
             'title' => 'required|string',
             'subTitle' => 'required|string',
-            'description' => 'required|',
-            'authorId' => 'required|',
-            'banner' => 'image|mimes:jpeg,jpg,png|',
-            'meta_tag' => 'nullable|',
-            'meta_description' => 'nullable|',
+            'description' => 'required',
+            'authorId' => 'required',
+            'banner' => 'image|mimes:jpeg,jpg,png',
+            'meta_tag' => 'nullable',
+            // 'meta_description' => 'nullable|',
+
         ]);
 
         $blog->title = $request->title;
@@ -155,20 +157,28 @@ class BlogController extends Controller
         return response()->json(['success' => 'Status change successfully.']);
     }
 
+    public function allBlogs(){
+        $blogs=Blog::Where('status',1)
+                    ->select('title','slug','subtitle','banner','author_id' )
+                    ->paginate(4)
+                    ->fragment('courses');
+        return view('student.pages_new.blogs.allblogs', compact('blogs'));
+    }
 
     public function readBlog(Blog $blog)
     {
         if ($blog->status == 0) {
             return redirect()->route('home');
         } else {
-            $author = User::where('id', $blog->author_id)->select('name', 'image')->first();
-            $author_name = $author->name;
-            $author_image = $author->image;
+            $author_name = $blog->author->name;
+            $author_image = $blog->author->image;
             $title = $blog->title;
             $banner = $blog->banner;
             $subtitle = $blog->subtitle;
             $description = $blog->description;
-            return view('landing.single_blog', compact(
+            $meta_description = $blog->meta_description;
+            $meta_tag = $blog->meta_tag;
+            return view('student.pages_new.blogs.single_blog', compact(
                 'author_name',
                 'author_image',
                 'title',

@@ -20,18 +20,18 @@
             <div class="mt-3">
                 <div class="text-center blog-single-author">
                     @if(!empty($author_image))
-                        <img src="{{$author_image}}" class="text-center d-inline-block  img-fluid" alt="">
+                        <img src="{{$author_image}}" class="text-center d-inline-block img-fluid" alt="">
                     @else
                         <img src="/img/landing/subscribe_user.png" class="text-center d-inline-block img-fluid" alt="">
                     @endif
                 </div>
-                <p class="text-purple text-xxsm fw-600 text-center mb-0">AUTHOR</p>
+                <p class="text-purple text-xxsm fw-600 text-center mt-2 mb-0">AUTHOR</p>
                 <p class="text-purple text-xsm fw-600 text-center">{{$author_name}}</p>
 
             </div>
             {{-- <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="1000"></div> --}}
             <div class="text-center">
-                <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="5"></div>   
+                <div class="fb-comments" lazy="true" data-href="{{Request::url()}}" data-width="" data-numposts="5"></div>   
             </div>     
         </div>
 

@@ -40,8 +40,6 @@
                                         <th>Author</th>
                                         <th>Banner</th>
                                         <th>Meta Tag</th>
-                                        <th>Meta Description</th>
-                                        <th>Description</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -57,8 +55,6 @@
                                                 <img class="product-image " src="{{ $blog->banner }}" alt="" srcset="">
                                             </td>
                                             <td>{{ $blog->meta_tag }}</td>
-                                            <td>{!! $blog->meta_description !!}</td>
-                                            <td>{!! $blog->description !!}</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
                                                     id="single-col-{{ $blog->id }}" data-id="{{ $blog->id }}"
@@ -68,6 +64,12 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
+                                                    <a class="mr-1"
+                                                       target="blank" href="{{ route('read-blog', $blog->slug) }}"
+                                                        title="Edit {{ $blog->title }}">
+                                                        <button class="btn btn-success"><i
+                                                                class="far fa-eye"></i></button>
+                                                    </a>
                                                     <a class="mr-1"
                                                         href="{{ route('blog.edit', $blog->slug) }}"
                                                         title="Edit {{ $blog->title }}">
@@ -123,8 +125,6 @@
                                         <th>Author</th>
                                         <th>Banner</th>
                                         <th>Meta Tag</th>
-                                        <th>Meta Description</th>
-                                        <th>Description</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
