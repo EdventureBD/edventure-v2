@@ -30,7 +30,9 @@
 
             </div>
             {{-- <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="1000"></div> --}}
-            <div class="fb-comments" data-href="https://edventurebd.com/blog/single/cdf3ad3a-d9a0-4f09-8faa-c24bccfd2743" data-width="" data-numposts="1000"></div>
+            <div class="text-center">
+                <div class="fb-comments" data-href="{{Request::url()}}" data-width="" data-numposts="5"></div>   
+            </div>     
         </div>
 
     
