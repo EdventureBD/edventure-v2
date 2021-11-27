@@ -11,7 +11,7 @@
             <div class="text-center blog-banner" >
                 <img src="{{$banner}}" class="img-fluid" alt="">
             </div>
-            <div class="mt-3">
+            <div class="mt-3 description">
                 <p>
                     {!! $description !!}
                 </p>

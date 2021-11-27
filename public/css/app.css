@@ -12216,3 +12216,15 @@ form input {
     height: 40vw;
   }
 }
+.description img {
+  max-width: 100%;
+}
+.description table,
+.description table td,
+.description table tr,
+.description span,
+.description div,
+.description p {
+  max-width: 100%;
+  word-break: break-all;
+}

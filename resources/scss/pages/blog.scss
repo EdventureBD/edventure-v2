@@ -38,3 +38,19 @@
         }
     }
 }
+
+.description{
+    img {
+        max-width: 100%;
+    }
+
+    table,
+    table td,
+    table tr,
+    span,
+    div,
+    p {
+        max-width: 100%;
+        word-break: break-all;
+    }
+}
