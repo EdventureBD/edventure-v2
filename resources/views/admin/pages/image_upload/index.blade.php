@@ -38,7 +38,6 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Image</th>
-                                        <th>Image Link</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -54,7 +53,6 @@
                                                         width="150px" height="150px" />
                                                 </a>
                                             </td>
-                                            <td>{{ $image->title }}</td>
                                             <td>
                                                 <input type="text" readonly value="{{ asset($image->image) }}"
                                                     id="copy{{ $image->id }}" style="width: 100%;" />
@@ -65,7 +63,7 @@
                                             </td>
                                             <td>
                                                 <a href="#deleteImage{{ $image->id }}" data-toggle="modal"
-                                                    title="Delete {{ $image->title }}">
+                                                    title="Delete {{ $image->id }}">
                                                     <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                 </a>
                                                 <div class="modal fade" id="deleteImage{{ $image->id }}">
@@ -107,7 +105,6 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Image</th>
-                                        <th>Image Link</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

@@ -23,7 +23,7 @@ class Create extends Component
 
     protected $rules = [
         'images.*' => 'image|max:4096|required',
-        'title.*' => 'string'
+        // 'title.*' => 'string'
     ];
 
     public function saveImages()
@@ -35,10 +35,10 @@ class Create extends Component
 
             $imageUpload = new ImageUpload;
             $imageUpload->image =  Storage::url($imageUrl);
-            if (!empty($this->title[$key])) {
-                $imageUpload->title = $this->title[$key];
-                $imageUpload->slug = Str::uuid();
-            }
+            $imageUpload->slug = Str::uuid();
+            // if (!empty($this->title[$key])) {
+            //     $imageUpload->title = $this->title[$key];
+            // }
             $save = $imageUpload->save();
         }
         return redirect()->route('upload-image.index');
