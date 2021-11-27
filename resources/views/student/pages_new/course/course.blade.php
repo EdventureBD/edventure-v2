@@ -19,7 +19,7 @@
             <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p> 
             </div>
-            <div class="row py-3 card-group-row mb-lg-8pt">
+            <div class="row justify-content-center py-3 card-group-row mb-lg-8pt">
                 @foreach ($courses as $course)
                 <div class="col-md-3 mb-4">
                     <div class="single-exam text-center mx-auto p-4 mb-md-0" style="background-image: url({{asset($course->banner)}});">

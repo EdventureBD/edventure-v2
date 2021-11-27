@@ -5,7 +5,7 @@
             <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                <p class="text-center">{{ $blogs->links('vendor.pagination.custom') }}</p> 
             </div>
-            <div class="row all-blog py-3 card-group-row mb-lg-8pt">
+            <div class="row justify-content-center all-blog py-3 card-group-row mb-lg-8pt">
                 @foreach ($blogs as $blog)
                 <div class="col-md-3">
                 <div class=" mb-4 single-blog overlay  bradius-10">
