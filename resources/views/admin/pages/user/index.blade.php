@@ -127,7 +127,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($user->image)
+                                                @if (!empty($user->image))
                                                     <img src="{{ $user->image }}"
                                                         class="product-image-thumb" alt="{{ $user->name }}"
                                                         height="70px !important" srcset="">
