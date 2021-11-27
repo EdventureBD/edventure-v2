@@ -12223,7 +12223,9 @@ form input {
 .description table td,
 .description table tr,
 .description span,
-.description div,
+.description div {
+  max-width: 100%;
+}
 .description p {
   max-width: 100%;
   text-align: justify !important;
