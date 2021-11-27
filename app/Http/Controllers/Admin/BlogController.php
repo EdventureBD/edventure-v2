@@ -167,9 +167,8 @@ class BlogController extends Controller
 
     public function readBlog(Blog $blog)
     {
-        if ($blog->status == 0) {
-            return redirect()->route('home');
-        } else {
+        $user=Auth()->user();
+        if($blog->status == 1 || (!empty($user)&& $user->is_admin==1)){
             $author_name = $blog->author->name;
             $author_image = $blog->author->image;
             $title = $blog->title;
@@ -184,8 +183,13 @@ class BlogController extends Controller
                 'title',
                 'banner',
                 'subtitle',
-                'description'
+                'description',
+                'meta_description',
+                'meta_tag'
             ));
+        } else {
+            return redirect()->route('home');
         }
+
     }
 }

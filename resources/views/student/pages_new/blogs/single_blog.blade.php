@@ -1,5 +1,5 @@
 
-<x-landing-layout>
+<x-landing-layout metatag="{{$meta_tag}}" metadesc="{{$meta_description}}" >
 
     <section class="header-banner pt-7">
         <div class="container">

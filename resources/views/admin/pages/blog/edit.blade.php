@@ -182,7 +182,7 @@
         $(function() {
             // Summernote
             $('#description').summernote();
-            $('#meta_description').summernote();
+            // $('#meta_description').summernote();
         })
     </script>
 
