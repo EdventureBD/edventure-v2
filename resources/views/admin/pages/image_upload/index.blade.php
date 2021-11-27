@@ -38,7 +38,6 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Image</th>
-                                        <th>Question</th>
                                         <th>Image Link</th>
                                         <th>Action</th>
                                     </tr>
@@ -108,7 +107,6 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Image</th>
-                                        <th>Question</th>
                                         <th>Image Link</th>
                                         <th>Action</th>
                                     </tr>
