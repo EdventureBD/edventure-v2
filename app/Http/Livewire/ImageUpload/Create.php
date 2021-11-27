@@ -6,6 +6,8 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use App\Models\Admin\ImageUpload;
+use Illuminate\Support\Facades\Storage;
+
 
 class Create extends Component
 {
@@ -32,10 +34,10 @@ class Create extends Component
             $imageUrl = $image->store('public/uploadImages');
 
             $imageUpload = new ImageUpload;
-            $imageUpload->image = $imageUrl;
+            $imageUpload->image =  Storage::url($imageUrl);
             if (!empty($this->title[$key])) {
                 $imageUpload->title = $this->title[$key];
-                $imageUpload->slug = Str::slug($this->title[$key]);
+                $imageUpload->slug = Str::uuid();
             }
             $save = $imageUpload->save();
         }

@@ -48,16 +48,16 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <a href="{{ Storage::url($image->image) }}" data-toggle="lightbox"
+                                                <a href="{{ $image->image}}" data-toggle="lightbox"
                                                     data-title="{{ $image->title }}" data-gallery="gallery">
-                                                    <img src="{{ Storage::url($image->image) }}"
+                                                    <img src="{{ $image->image }}"
                                                         class="img-fluid mb-2 rounded" alt="{{ $image->title }}"
                                                         width="150px" height="150px" />
                                                 </a>
                                             </td>
                                             <td>{{ $image->title }}</td>
                                             <td>
-                                                <input type="text" readonly value="{{ $image->image }}"
+                                                <input type="text" readonly value="{{ asset($image->image) }}"
                                                     id="copy{{ $image->id }}" style="width: 100%;" />
                                                 <button value="copy" onclick="copyFunction('copy{{ $image->id }}')"
                                                     type="button" class="btn btn-block btn-info">
