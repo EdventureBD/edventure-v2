@@ -1,8 +1,10 @@
 <x-landing-layout headerBg="white">
     <div class="page-section ">
         <div class="container ">
-
-            <div class="py-5 py-md-1 text-center d-flex justify-content-center">
+            <div class="py-4">
+                <div class=" text-center bradius-10 w-100 text-gray text-sm fw-700"> All Blogs</div>
+            </div>
+            <div class="py-2 py-md-1 text-center d-flex justify-content-center">
                <p class="text-center">{{ $blogs->links('vendor.pagination.custom') }}</p> 
             </div>
             <div class="row justify-content-center all-blog py-3 card-group-row mb-lg-8pt">

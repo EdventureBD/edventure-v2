@@ -24,3 +24,17 @@
         object-fit: cover;
     }
 }
+
+@media (max-width: 767px){
+
+    .all-blog {
+
+        .single-blog{
+            width: 300px;
+            margin: 0 auto;
+        }
+        .single-blog img.blog-banner{
+            height: 40vw;
+        }
+    }
+}

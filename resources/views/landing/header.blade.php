@@ -29,6 +29,11 @@
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">
                 <a class="nav-link text-purple-half " href="{{route('about_us')}}">ABOUT US</a>
             </li>
+            <li class="nav-item has-dot {{Route::current()->getName() == 'read-blog' ? 'active' : ''}}
+                                        {{Route::current()->getName() == 'all-blogs' ? 'active' : ''}}
+                ">
+                <a class="nav-link text-purple-half " href="{{route('all-blogs')}}">BLOGS</a>
+            </li>
             <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">CONTACT US</a>
             </li>
