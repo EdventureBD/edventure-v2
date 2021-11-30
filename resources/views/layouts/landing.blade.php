@@ -27,9 +27,12 @@
         @include('partials.facebook_pixel')
     </head>
     <body>
+                
         <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=554702885532768&autoLogAppEvents=1" 
-        nonce="QThp190A"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=842032013135226&autoLogAppEvents=1" 
+        nonce="2W2mmhKE"></script>
+
+
         <script>
             if (location.protocol !== 'https:' && location.hostname !== '127.0.0.1') {  
                 location.replace(`https:${location.href.substring(location.protocol.length)}`);

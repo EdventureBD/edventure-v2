@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="mt-5">
-            <img class="img-fluid" src="/img/landing/edventurepay.png" alt="">
+            <img class="img-fluid" src="/img/landing/shurjoPayFooter.webp" alt="">
         </div>
         
     </div>
