@@ -68,7 +68,7 @@ class Edit extends Component
         'courseId' => 'required',
         'topicId' => 'required',
         'markdownText' => 'nullable',
-        'pdf' => 'nullable|mimes:pdf|max:10000',
+        'pdf' => 'nullable|max:10000',
     ];
 
     public function updateCourseLecture()
@@ -81,11 +81,9 @@ class Edit extends Component
         $lecture->markdown_text = $data['markdownText'];
         $lecture->url = $data['url'];
         if (!empty($this->pdf)) {
-            $fileName = "public/lectures/pdf/".substr($this->prevpdf, 22);
+            $fileName = "public/lectures/pdf/" . substr($this->prevpdf, 22);
             $delete = Storage::delete($fileName);
             $lecture->pdf = Storage::url($this->pdf->store('public/lectures/pdf'));
-            $this->pdf=$lecture->pdf;
-
         }
         $save = $lecture->save();
 
@@ -105,7 +103,7 @@ class Edit extends Component
         $this->topicId = $this->courseLecture->topic_id;
         $this->url = $this->courseLecture->url;
         $this->markdownText = $this->courseLecture->markdown_text;
-        $this->pdf = $this->courseLecture->pdf;
+        // $this->pdf = $this->courseLecture->pdf;
         $this->prevpdf = $this->courseLecture->pdf;
 
         $this->courses = Course::all();
