@@ -1,7 +1,7 @@
 {{--previous student/pages/course/course_preview.blade.php--}}
 
 <x-landing-layout headerBg="white">
-    <div class="course-info bg-gradient-purple py-5 px-3 px-md-0">
+    <div class="page-section course-info bg-gradient-purple py-5 px-3 px-md-0">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
@@ -56,7 +56,7 @@
     </div>
 
 
-    <div class="page-section border-bottom-2 py-5 bg-light-gray">
+    <div class="border-bottom-2 py-5 bg-light-gray">
         <div class="container page__container max-w-50 w-100">
             @if(Session::has('message'))
             <div class="alert alert-warning">{{ Session::get('message') }}</div>

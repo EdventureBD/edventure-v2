@@ -1,7 +1,7 @@
 
 <x-landing-layout metatag="{{$meta_tag}}" metadesc="{{$meta_description}}" >
 
-    <section class="header-banner pt-7">
+    <section class="page-section header-banner pt-7">
         <div class="container">
             <div class="pl-3">
                 <h3 class="text-purple text-sm fw-600 ">{!!$title!!}</h3>

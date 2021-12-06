@@ -1,5 +1,5 @@
 <x-landing-layout headerBg="white">
-    <div class="course-info bg-gradient-purple py-5">
+    <div class="page-section course-info bg-gradient-purple py-5">
         <div class="container">
             <div class="row">
                 <div class="col-7">
@@ -21,7 +21,7 @@
     </div>
     <div class="bg-light-gray py-5">
         <div class="container page__container">
-            <div class="page-section">
+            <div class="">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
                 <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" id="cqFormSubmit" method="post"
                     enctype="multipart/form-data">

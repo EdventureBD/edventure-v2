@@ -1,6 +1,6 @@
 <x-landing-layout headerBg="white">
     <!-- Header Layout Content -->
-    <div class="container py-6">
+    <div class="page-section container py-6">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h2 class="text-sm text-center">Course : <b>{{$course->title}}</b></h2>

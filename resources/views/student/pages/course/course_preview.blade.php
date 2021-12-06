@@ -7,7 +7,7 @@
 @section('content')
     <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
     <!-- Header Layout Content -->
-    <div class="mdk-header-layout__content page-content ">
+    <div class="page-section mdk-header-layout__content page-content ">
 
         <div class="mdk-box bg-primary js-mdk-box mb-0" data-effects="blend-background">
             <div class="mdk-box__content">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="page-section border-bottom-2">
+        <div class="border-bottom-2">
             <div class="container page__container w-50">
 
                 <div class="page-separator">

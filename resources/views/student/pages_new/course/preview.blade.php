@@ -1,7 +1,7 @@
 {{--previous student/pages/batch/batch_lecture.blade.php--}}
 
 <x-landing-layout headerBg="white">
-    <div class="course-info bg-gradient-purple py-5">
+    <div class="page-section course-info bg-gradient-purple py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
@@ -24,7 +24,7 @@
 
     </div>
     
-    <div class="page-section border-bottom-2 py-5">
+    <div class=" border-bottom-2 py-5">
         <div class="container page__container max-w-50 w-100">
             @if(session()->has('payment_success'))
                 <div class="alert alert-info text-center ">
