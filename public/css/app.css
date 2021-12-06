@@ -11444,6 +11444,18 @@ a:hover {
   font-family: "Raleway", sans-serif;
 }
 
+.top-nav-fixed {
+  height: 65px;
+  background-color: #ffff;
+  position: fixed !important;
+  z-index: 3;
+  top: 0;
+}
+
+.page-section {
+  margin-top: 65px;
+}
+
 .single-exam {
   box-shadow: 0px -2px 87px rgba(0, 0, 0, 0.056545), 0px -0.446726px 19.4326px rgba(0, 0, 0, 0.083455), 0px -0.133002px 5.78559px rgba(0, 0, 0, 0.14);
   border-radius: 30px;
