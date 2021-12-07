@@ -40,7 +40,7 @@ Route::get('/ajax-course-request/{category}', [CourseController::class, 'courseB
 
 Route::get('/error', function () {
     // abort(404);
-    return view('student.pages.frontend.error');
+    return view('student.pages_new.error');
 });
 
 Route::view('/dashboard', 'dashboard')->middleware(['auth'])->name('dashboard');
