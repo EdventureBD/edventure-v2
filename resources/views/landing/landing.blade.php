@@ -7,11 +7,11 @@
                     <div class="pl-3">
                         @auth
                         <h4 class="text-purple  text-sm font-roboto">Hello, {{Auth::user()->name}} !</h4>
-                        <h4 class="text-red  text-sm font-roboto">You have Successfully logged into HSC 2021 Last Minute Preparation Bundle.</h4>
+                        <h4 class="text-red  text-sm font-roboto">You have Successfully logged into HSC 2022 Last Minute Preparation Bundle.</h4>
                         <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To give exam, Visit Your Dashboard.<h2>
                         <a href="{{route('profile')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
                         @else
-                        <h4 class="text-red  text-md font-roboto">HSC 2021</h4>
+                        <h4 class="text-red  text-md font-roboto">HSC 2022</h4>
                         <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
                         নিজের মতো</h2>
                         <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
@@ -29,7 +29,7 @@
     <div class="our-exams-section text-center py-5">
         <div class="container">
             <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
-            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2021 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
+            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2022 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
             <div class=" @if($categories->count()>=7) course-category-js @endif course-category">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
@@ -66,7 +66,7 @@
 
     <div class="our-package-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-md font-roboto">কী থাকছে HSC 2021 <br>Last Minute Prep Bundle এ</h3>
+            <h3 class="text-purple text-md font-roboto">কী থাকছে HSC 2022 <br>Last Minute Prep Bundle এ</h3>
             <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- ৩টি পূর্ণাঙ্গ  মডেল টেস্ট
 - স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়
 - ডিজিটাল রিপোর্টের মাধ্যমে দেশের সকল পরীক্ষার্থীদের মাঝে নিজের অবস্থান যাচাই করার সুযোগ
