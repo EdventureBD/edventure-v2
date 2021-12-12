@@ -14,7 +14,7 @@
                         <h4 class="text-red  text-md font-roboto">HSC 2022</h4>
                         <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
                         নিজের মতো</h2>
-                        <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                        <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-5 my-4 py-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
                         @endauth
                         
                     </div>
