@@ -45,11 +45,11 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-between social-icons mt-3">
-                    <a href="#"><img src="/img/landing/facebook.png" alt=""></a>
+                    <a href="https://www.facebook.com/edventurebd"><img src="/img/landing/facebook.png" alt="Facebook Image Icon"></a>
             
-                    <a href="#"><img src="/img/landing/instagram.png" alt=""></a>
+                    <a href="https://www.instagram.com/edventurebd/?utm_medium=copy_link"><img src="/img/landing/instagram.png" alt="Instagram Image Icon"></a>
                 
-                    <a href="#"><img src="/img/landing/twitter.png" alt=""></a>
+                    <a href="https://www.linkedin.com/company/edventurebd/"><img src="/img/landing/linkedIn.png" alt="LinkedIn Image Icon"></a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="row mt-5">
             <div class="col-md-6 text-left">
                 <div class="single-footer-column">
-                    <a href="#">Copyright © 1996–2021 RENTLY™. All rights reserved.</a>
+                    <a href="#">Copyright © 2021 Edventure Ltd . All rights reserved.</a>
                 </div>
             </div>
             <div class="col-md-6 text-right">
