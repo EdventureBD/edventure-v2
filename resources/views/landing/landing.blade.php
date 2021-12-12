@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="">
+                    <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="Top banner Image">
                 </div>
             </div>
         </div>
