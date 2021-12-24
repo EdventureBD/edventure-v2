@@ -1,0 +1,3 @@
+<div>
+    {{ $weakness }}
+</div>

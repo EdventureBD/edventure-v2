@@ -1,0 +1,33 @@
+.accordion__toggle {
+
+    .arrow-up,
+    .arrow-down {
+        margin-right: 10px;
+    }
+
+    .arrow-down {
+        display: none;
+    }
+
+    .arrow-up {
+        display: inline-block;
+    }
+
+    .title {
+        justify-content: center;
+    }
+
+    &.collapsed {
+        .title {
+            justify-content: flex-start;
+        }
+
+        .arrow-up {
+            display: none;
+        }
+
+        .arrow-down {
+            display: inline-block;
+        }
+    }
+}

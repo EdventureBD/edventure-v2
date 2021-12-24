@@ -1,0 +1,153 @@
+a:hover {
+    text-decoration: none;
+}
+.lh-1 {
+    line-height: 1rem;
+}
+
+.h-8 {
+    height: 8rem;
+}
+
+.h-30 {
+    height: 30rem;
+}
+
+.w-10 {
+    width: 10rem;
+}
+
+.w-15 {
+    width: 15rem;
+}
+
+.max-w-38 {
+    max-width: 38rem;
+}
+
+.max-w-50 {
+    max-width: 50rem;
+}
+
+.bg-art {
+    background-image: url('/img/landing/top_background.png');
+    background-size: cover;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(to bottom, #c89aee, #653092);
+}
+
+.bg-purple {
+    background-color: #653092;
+}
+
+.bg-purple2 {
+    background-color: #7A45A7;
+}
+
+.bg-purple-light {
+    background-color: #D5BDEA;
+}
+
+.bg-purple-light-50 {
+    background-color: #eeeafd;
+
+}
+
+.bg-red {
+    background-color: #FE6D86;
+}
+
+.bg-green {
+    background-color: #75E9AA;
+
+}
+
+.bg-light-gray {
+    background-color: $light_gray;
+}
+
+.bottom-border {
+    position: relative;
+
+    &:after {
+        height: 2px;
+        position: absolute;
+        background-color: #959595;
+        left: 0;
+        top: 40px;
+        width: 40px;
+        content: "";
+    }
+}
+
+.overlay:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    left: 0;
+    top: 0;
+    transition: 1s;
+}
+
+.bradius-20 {
+    border-radius: 20px;
+}
+.bradius-10 {
+    border-radius: 10px;
+}
+
+.bradius-15 {
+    border-radius: 15px;
+}
+
+.bradius-30 {
+    border-radius: 30px;
+}
+
+.border-none {
+    border: none;
+}
+
+.bshadow {
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+}
+.bshadow-medium {
+    box-shadow: 0 1px 13px -2px rgba(66, 16, 153, 0.555);
+}
+
+.c-point {
+    cursor: pointer;
+}
+
+.v-align-middle {
+    vertical-align: middle !important;
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.page-link{
+    color:#653092;
+}
+.page-link:hover{
+    color: #9f63d5;
+}
+.font-arial{
+    font-family: Arial, Helvetica, sans-serif ;
+}
+.font-raleway{
+    font-family: "Raleway", sans-serif;
+}

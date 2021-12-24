@@ -1,0 +1,60 @@
+/* <!-----  Responsive  ---------->	
+
+		<!-- /*============= Small devices (landscape phones, less than 768px)================*/ --> */
+
+
+		@media (min-width: 768px) and (max-width: 979px){
+			#last-carousel{
+				height: 400px;
+			
+			
+			}
+
+			.img-wh11{
+						width: 50px !important;
+						height: 50px !important;
+						margin-left:0px !important;
+					
+
+					}/* <!-----big carousel before footer  start----------> */
+
+				#2ndcarousel-desktop{
+				display:none;
+				}
+
+					
+		}
+		
+		@media (min-width: 320px) and (max-width: 480px){
+			#myCarousel3{
+				height: 300px;
+			}
+			
+			#last-carousel{
+				height: 400px;
+			
+			
+			}
+
+			.img-wh11{
+						width: 50px !important;
+						height: 50px !important;
+						margin-left:0px !important;
+					
+
+					}/* <!-----big carousel before footer  start----------> */	
+					
+
+					
+		}
+		
+
+
+
+
+
+
+
+
+
+		
