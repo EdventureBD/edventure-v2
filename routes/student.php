@@ -55,7 +55,6 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::post('/process-payment/{course}', [CourseController::class, 'processPayment'])->name('payment.process');
     //Payment success
     Route::get('/payment-success/{course}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-
 });
 
 require __DIR__ . '/auth.php';
