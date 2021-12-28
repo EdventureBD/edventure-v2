@@ -35,7 +35,7 @@
                 <a class="nav-link text-purple-half " href="{{route('all-blogs')}}">BLOGS</a>
             </li>
             <li class="nav-item has-dot">
-            <a class="nav-link text-purple-half" href="#">CONTACT US</a>
+            <a class="nav-link text-purple-half" href="{{route('contact_us')}}">CONTACT US</a>
             </li>
             <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">HELP</a>
