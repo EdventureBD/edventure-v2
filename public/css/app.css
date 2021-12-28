@@ -11843,7 +11843,7 @@ svg.eye-icon {
   height: auto;
   background-color: rgba(48, 48, 48, 0.9);
   border-radius: 98px;
-  margin-top: 40%;
+  margin-top: 30%;
   margin-left: 3%;
 }
 
@@ -11868,6 +11868,10 @@ svg.eye-icon {
   position: relative;
   padding-top: 10%;
   padding-bottom: 15%;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  column-gap: 10%;
 }
 
 .form-box h3 span {
@@ -11911,21 +11915,21 @@ form input {
 }
 
 .contact-box h3 {
-  font-size: 45px;
+  font-size: 40px;
   font-family: "Oswald", sans-serif;
   font-weight: 400;
-  color: #653092;
+  color: #996FBC;
 }
 
 .contact-box h3 span {
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 400;
   color: white;
 }
 
 .contact-box p {
   color: white;
-  font-size: 23px;
+  font-size: 20px;
   font-family: "Zen Kurenaido", sans-serif;
   font-weight: 400;
   margin-top: 25px;
@@ -11934,7 +11938,7 @@ form input {
 .contact-box h4 {
   font-family: "Oswald", sans-serif;
   color: #CECECE;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 400;
   margin-top: 25px;
 }
@@ -12159,6 +12163,7 @@ form input {
 
   .icon-box {
     padding-bottom: 15%;
+    width: 50%;
   }
 }
 .lecture-page .nav-tabs .nav-link {

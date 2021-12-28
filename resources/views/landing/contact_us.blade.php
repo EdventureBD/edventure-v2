@@ -23,28 +23,28 @@
 
         <div class="shape-a">
             <div class="form-box">
-                <h3>We’d love to hear from <span>You</span></h3>
+                <h3>We’d love to hear from <span>You!</span></h3>
                 
                 <form action="#" class="form-group">
-                    <label for="name">name</label>
-                    <br>
-                    <input type="text" id="name"/>
+                   {{--  <label for="name">Name</label>
+                    <br> --}}
+                    <input type="text" id="name" placeholder="Enter your Name"/>
 
                     <br>
                     
-                    <label for="e-mail">e-mail</label>
-                    <br>
-                    <input type="email"  id="e-mail">
+                    {{-- <label for="e-mail">E-mail</label>
+                    <br> --}}
+                    <input type="email"  id="e-mail" placeholder="Enter your Email">
 
                     <br>
 
-                    <label for="message">Message</label>
+                    {{-- <label for="message">Message</label>
                     <br>
-                    <input type="text" id="message"/>
-                    <input type="text" id="message"/>
+                    <input type="text" id="message"/> --}}
+                    <input type="text" id="message" placeholder="Write a Message"/>
                     <br>
                     
-                    <button type="submit" data-target="#" class="btn-submit">Submit</button>
+                    <button type="submit" data-target="#" class="btn-submit" style="border: 1px solid black">Submit</button>
                 </form>
 
             </div>
@@ -57,7 +57,7 @@
                 
                 <div class="text-box">
 
-                    <h3>Contact <span>Information</span> </h3>
+                    <h3>Contact <span>Information:</span> </h3>
                     <p>117, Kazi Nazrul Islam<br>
                     Avenue 1000 Dhaka, Dhaka
                     <br>Division, Bangladesh</p>
@@ -71,9 +71,18 @@
 
                     <div class="icon-box">
                         
-                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook-official allign" aria-hidden="true"></i></i></a>
+                        <a href="https://www.facebook.com/edventurebd" style="width: auto" target="_blank">{{-- <i class="fa fa-twitter" aria-hidden="true"></i> --}}
+                        <img src="/images/follow_us/FacebookWhite.png" alt="Facebook Logo" {{-- class="fa fa-twitter" --}}>
+                        </a>
+
+                        <a href="https://www.instagram.com/edventurebd/" target="_blank">{{-- <i class="fa fa-linkedin" aria-hidden="true"></i> --}}
+                        <img src="/images/follow_us/InstagramWhite.png" alt="Instagram Logo">
+                        </a>
+
+                        <a href="https://www.linkedin.com/company/edventurebd/" target="_blank">{{-- <i class="fa fa-linkedin" aria-hidden="true"></i> --}}
+                        <img src="/images/follow_us/LinkedInWhite.png" alt="LinkedIn Logo">
+                        </a>
+                        {{-- <a href="#"><i class="fa fa-facebook-official allign" aria-hidden="true"></i></i></a> --}}
                     </div>
 
                 </div>
@@ -89,7 +98,7 @@
 <div class="map-container">
     <div class="map">
         <img src="img/contact/image3.png" alt="map" width="100%" class="img-fluid" >
-        <img src="img/contact/imageopt_2.png" alt="map" width="50%" class="img-fluid building">
+        <img src="img/contact/imageopt_2.png" alt="building" width="50%" class="img-fluid building">
     </div>
 </div>
 
