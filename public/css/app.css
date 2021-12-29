@@ -11924,21 +11924,21 @@ form input {
 }
 
 .contact-box h3 {
-  font-size: 40px;
+  font-size: 30px;
   font-family: "Oswald", sans-serif;
   font-weight: 400;
   color: #996FBC;
 }
 
 .contact-box h3 span {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 400;
   color: white;
 }
 
 .contact-box p {
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Zen Kurenaido", sans-serif;
   font-weight: 400;
   margin-top: 25px;
@@ -11947,7 +11947,7 @@ form input {
 .contact-box h4 {
   font-family: "Oswald", sans-serif;
   color: #CECECE;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 400;
   margin-top: 25px;
 }
@@ -12020,15 +12020,23 @@ form input {
 
 @media screen and (min-width: 1700px) {
   .form-box h3 {
-    font-size: 50px;
+    font-size: 40px;
+  }
+  .form-box span{
+    font-size: 40px;
+  }
+  .form-box {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .contact-box h3 {
-    font-size: 50px;
+    font-size: 45px;
   }
 
   .contact-box h3 span {
-    font-size: 50px;
+    font-size: 45px;
   }
 
   .btn-submit {
@@ -12038,9 +12046,13 @@ form input {
   .contact p {
     font-size: 30px;
   }
-
+.contact-box {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
   .contact-box h4 {
-    font-size: 50px;
+    font-size: 40px;
   }
    
   .btn-cancel{
