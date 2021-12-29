@@ -44,7 +44,11 @@
                     <input type="text" id="message" placeholder="Write a Message"/>
                     <br>
                     
-                    <button type="submit" data-target="#" class="btn-submit" style="border: 1px solid black">Submit</button>
+                    <div id="Contact_us_action_button">
+                        <button type="submit" data-target="#" class="btn-submit" style="border: 1px solid black">Submit</button>
+                        
+                        <button type="reset" data-target="#" class="btn-submit" style="border: 1px solid black">Cancel</button>
+                    </div>
                 </form>
 
             </div>
@@ -97,8 +101,14 @@
 <!--map-->
 <div class="map-container">
     <div class="map">
+        {{-- map image --}}
         <img src="img/contact/image3.png" alt="map" width="100%" class="img-fluid" >
+        {{-- building image --}}
         <img src="img/contact/imageopt_2.png" alt="building" width="50%" class="img-fluid building">
+        {{-- parl owl iconic image  --}}
+        <a href="https://goo.gl/maps/tprUtZb5SED5XcTh9" target="_blank">
+            <img src="img/contact/Group824.png" alt="Parl Owl Iconic Logo" width="8%" class="img-fluid parlowlIconicLogo">
+        </a>
     </div>
 </div>
 

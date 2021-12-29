@@ -11866,12 +11866,15 @@ svg.eye-icon {
 
 .icon-box {
   position: relative;
-  padding-top: 10%;
+  padding-top: 0;
   padding-bottom: 15%;
   display: flex;
   flex-direction: row;
   width: 50%;
-  column-gap: 10%;
+  /* column-gap: 10%; */
+}
+.icon-box img{
+  width: 50%;
 }
 
 .form-box h3 span {
@@ -11990,6 +11993,13 @@ form input {
   height: auto;
 }
 
+.parlowlIconicLogo{
+  position: absolute;
+  top: 31%;
+  left: 28%;
+  z-index: 1;
+}
+
 .map {
   margin-top: -20%;
   position: relative;
@@ -11997,7 +12007,7 @@ form input {
 
 .building {
   position: absolute;
-  top: 30%;
+  top: 18%;
   right: 0;
   z-index: 1;
 }
