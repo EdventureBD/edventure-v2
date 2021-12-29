@@ -44,10 +44,10 @@
                     <input type="text" id="message" placeholder="Write a Message"/>
                     <br>
                     
-                    <div id="Contact_us_action_button">
+                    <div id="Contact_us_action_button" class="mx-auto">
                         <button type="submit" data-target="#" class="btn-submit" style="border: 1px solid black">Submit</button>
                         
-                        <button type="reset" data-target="#" class="btn-submit" style="border: 1px solid black">Cancel</button>
+                        <button type="reset" data-target="#" class="btn-submit btn-cancel" style="border: 1px solid black">Cancel</button>
                     </div>
                 </form>
 

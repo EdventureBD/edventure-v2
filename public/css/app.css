@@ -11820,13 +11820,19 @@ svg.eye-icon {
 }
 
 .form-box {
-  width: 70%;
+  width: 60%;
   height: auto;
   background-color: rgba(48, 48, 48, 0.97);
   border-radius: 98px;
   margin-top: 20%;
   margin-left: 20%;
   margin-bottom: 10%;
+}
+
+.Contact_us_action_button{
+  display: flex;
+  flex-direction: row;
+  row-gap: 15%;
 }
 
 .form-box h3 {
@@ -12036,6 +12042,10 @@ form input {
   .contact-box h4 {
     font-size: 50px;
   }
+   
+  .btn-cancel{
+    margin-left: 15%;
+  }
 }
 @media screen and (max-width: 1200px) {
   .contact p {
@@ -12050,6 +12060,7 @@ form input {
     margin-left: 50px;
     margin-right: 50px;
   }
+
 }
 @media screen and (max-width: 992px) {
   .contact p {
@@ -12109,6 +12120,7 @@ form input {
   .form-box h3 {
     font-size: 30px;
   }
+  
 }
 @media screen and (max-width: 575px) {
   .shape-a {
