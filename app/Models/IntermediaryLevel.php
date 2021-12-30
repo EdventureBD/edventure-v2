@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Models\Admin;
-
-use App\Models\IntermediaryLevel;
-use Illuminate\Database\Eloquent\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class CourseCategory extends Model
+class IntermediaryLevel extends Model
 {
     use HasFactory;
 
@@ -19,10 +17,5 @@ class CourseCategory extends Model
     public function course()
     {
         return $this->hasMany(Course::class);
-    }
-
-    public function intermediary_level()
-    {
-        return $this->hasMany(IntermediaryLevel::class);
     }
 }

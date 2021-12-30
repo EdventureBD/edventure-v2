@@ -50,7 +50,7 @@
                                        </div>
                                        <div id="{{ $course_topic->title }}{{ $course_topic->id }}" class="panel-collapse collapse">
                                           <div class="card-body">
-                                             {{-- @livewire('course.course-details', ['course_topic' => $course_topic], key($course_topic->id)) --}}
+                                             {{-- @('course.course-details', ['course_topic' => $course_topic], key($course_topic->id)) --}}
                                              <div class="row">
                                                 @foreach ($lectures as $lecture)
                                                    @if ($lecture)
