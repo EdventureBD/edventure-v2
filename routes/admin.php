@@ -17,6 +17,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\CourseController;
+
+use App\Http\Controllers\Admin\IntermediaryLevelController;
+
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\BatchExamController;
@@ -54,6 +57,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/changeCourseStatus', [CourseController::class, 'changeCourseStatus']);
     Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
     // END OF COURSE
+
+
+
+
+    // START OF COURSE
+    Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
+    Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus']);
+    // Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
+    // END OF COURSE
+
+
+
 
     // START OF COURSE CATEGORY
     Route::resource('/course-category', CourseCategoryController::class, ['except' => ['store', 'update']]);

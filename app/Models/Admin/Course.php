@@ -6,6 +6,7 @@ use App\Models\Admin\CourseTopic;
 use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Admin\BatchStudentEnrollment;
@@ -23,6 +24,11 @@ class Course extends Model
     public function courseCategory()
     {
         return $this->belongsTo(CourseCategory::class);
+    }
+
+    public function intermediaryLevel()
+    {
+        return $this->belongsTo(IntermediaryLevel::class, 'id', 'intermediary_level_id');
     }
 
     public function CourseTopic()

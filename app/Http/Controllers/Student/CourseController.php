@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
-use App\Models\IntermediaryLevel;
+use App\Models\Admin\IntermediaryLevel;
 use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;

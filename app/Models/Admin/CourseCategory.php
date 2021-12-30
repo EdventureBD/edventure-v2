@@ -2,7 +2,7 @@
 
 namespace App\Models\Admin;
 
-use App\Models\IntermediaryLevel;
+use App\Models\Admin\IntermediaryLevel;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
