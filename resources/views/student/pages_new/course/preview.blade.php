@@ -42,14 +42,15 @@
                                         <span class="text-gray text-sm fw-700">Mock Test</span>
                                         <span class="d-inline-block float-right text-gray text-sm">
                                             <span class="arrow-up text-gray"><i class="fas fa-angle-up"></i></span>
-                                        <span class="arrow-down text-gray"><i class="fas fa-angle-down"></i></span></span>
+                                            <span class="arrow-down text-gray"><i class="fas fa-angle-down"></i></span>
+                                        </span>
                                     </a>
                                 </div>
                                 <div class="accordion__menu collapse show" id="specialExams1">
                                     
                                     @forelse ($specialExams as $specialExam)
                                         @php
-                                           $sp_view_result = "View Result";
+                                            $sp_view_result = "View Result";
                                             // if ($specialExam->canAttemp ) {
                                             //     $sp_view_result = "Start Exam";
                                             // }
