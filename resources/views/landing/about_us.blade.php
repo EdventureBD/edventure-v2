@@ -69,7 +69,7 @@
                         <div class="mt-3 mx-4 social-icons d-flex justify-content-between">
                             <a href="https://www.facebook.com/shahriariftekher.tasfiq" target="_blank"><img src="/img/about/facebook.png" class="img-fluid"  alt="Facebook Logo"></a>
                             <a href="https://www.instagram.com/shahriar.tasfiq/" target="_blank"><img src="/img/about/instagram.png" class="img-fluid"  alt="Instagram Logo"></a>
-                            <a href="#" target="_blank"><img src="/img/about/twitter.png" class="img-fluid"  alt="Twitter Logo"></a>
+                            <a href="https://www.linkedin.com/in/shahriar-iftekhar-53884a125/" target="_blank"><img src="/images/follow_us/LinkedInWhite.png" class="img-fluid"  alt="LinkedIn Logo"></a>
                         </div>
                     </div>
                 </div>
