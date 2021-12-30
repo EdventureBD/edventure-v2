@@ -6,7 +6,7 @@
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
                         <h3 class="text-purple text-lg fw-400 font-bebas">CONTACT</h3>
-                        <p class="fw-600 text-xsm max-w-38 w-100 text-purple-half">A group of passionate educators striving to make education easy, fun, and personal with the help of technology. We want to increase the accessibility of quality education while empowering learners, parents, and teachers alike.
+                        <p id="contact-us-banner-text" class="fw-600 text-xsm max-w-38 w-100 text-purple-half">A group of passionate educators striving to make education easy, fun, and personal with the help of technology. We want to increase the accessibility of quality education while empowering learners, parents, and teachers alike.
                         </p>
                     </div>
                 </div>

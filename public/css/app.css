@@ -12132,7 +12132,15 @@ form input {
   .form-box h3 {
     font-size: 30px;
   }
-  
+  .contact-box .text-box p{
+    font-size: 18px;
+  }
+  .contact-box .text-box h3, .contact-box .text-box span{
+    font-size: 25px;
+  }
+  #contact-us-banner-text{
+    font-size: 20px;
+  }
 }
 @media screen and (max-width: 575px) {
   .shape-a {
