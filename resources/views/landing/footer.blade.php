@@ -38,7 +38,7 @@
                     <p class="text-xxsm bottom-border">SUBSCRIBE NOW</p>
                     <form action="" class="subscribe-form mt-5">
                         <div class="d-flex single-input-group justify-content-between">
-                            <input type="text" name="email" placeholder="Your email" />
+                            <input type="text" name="email" placeholder="Your email" style="color: black; font-size: 14px;"/>
                             <img src="/img/landing/subscribe_user.png" alt="">
                         </div>
                         <button type="submit" class="btn text-xxsm text-white bg-purple fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>

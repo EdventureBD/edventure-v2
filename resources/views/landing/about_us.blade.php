@@ -67,9 +67,9 @@
                         <h3 class="text-sm text-white fw-600">Md. Shahriar Iftekhar</h3>
                         <p class="text-xsm text-white">CEO</p>
                         <div class="mt-3 mx-4 social-icons d-flex justify-content-between">
-                            <a href="#"><img src="/img/about/facebook.png" class="img-fluid"  alt=""></a>
-                            <a href="#"><img src="/img/about/instagram.png" class="img-fluid"  alt=""></a>
-                            <a href="#"><img src="/img/about/twitter.png" class="img-fluid"  alt=""></a>
+                            <a href="https://www.facebook.com/shahriariftekher.tasfiq" target="_blank"><img src="/img/about/facebook.png" class="img-fluid"  alt="Facebook Logo"></a>
+                            <a href="https://www.instagram.com/shahriar.tasfiq/" target="_blank"><img src="/img/about/instagram.png" class="img-fluid"  alt="Instagram Logo"></a>
+                            <a href="#" target="_blank"><img src="/img/about/twitter.png" class="img-fluid"  alt="Twitter Logo"></a>
                         </div>
                     </div>
                 </div>
