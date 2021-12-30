@@ -34,14 +34,11 @@
                         @endif
                 @endforeach
             @else
-                <h1>No Levels For This Course Category Exists !!</h1>
+                <h1>No Levels For This Course Category Exist !!</h1>
             @endif
             </div>
 
-            <div class="py-4">
-                <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Intermediary Levels </div>
-            </div>
-            @if ( count($courses) )
+            @if ( count($courses) > 0 )
                 <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                 <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>
                 </div>
@@ -52,19 +49,18 @@
                                 <img src="{{asset($course->icon)}}" width="50" alt="">
                                 <h5 class="text-center text-sm mt-2">{{ $course->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{$course->price}}৳</p>
-                                <div class="text-center d-block ">
-                                <a href="{{ route('course-preview', $course->slug ) }}" class="btn btn-outline text-purple mt-2">See Course</a>
+                                <div class=" text-center d-block ">
+                                <a href="{{ route('course-preview', $course->slug ) }}"  class="btn btn-outline text-purple mt-2">See Course</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
             @else
-                <div class="text-center mx-auto p-4 mb-md-0">
-                    <h1>No Courses For This Level Exists !!</h1>
+                <div class="text-center">
+                    <h1>No Courses For This Level Exist !!</h1>
                 </div>
             @endif
-
         </div>
     </div>
 </x-landing-layout>
