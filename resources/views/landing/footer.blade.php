@@ -7,7 +7,7 @@
                     <p class="text-xxsm bottom-border">CONTACT</p>
                     <ul class="ml-0 p-0 mt-4">
                         <li><a href="{{route('about_us')}}">About</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="{{route('contact_us')}}#shape-b-contact-box">Contact Us</a></li>
                         <li><a href="{{route('about_us')}}#ceo_message">Message From The Ceo</a></li>
                     
                     </ul>
@@ -38,7 +38,7 @@
                     <p class="text-xxsm bottom-border">SUBSCRIBE NOW</p>
                     <form action="" class="subscribe-form mt-5">
                         <div class="d-flex single-input-group justify-content-between">
-                            <input type="text" name="email" placeholder="Your email" style="color: black; font-size: 14px;"/>
+                            <input type="text" name="email" placeholder="Enter your email address" style="color: black; font-size: 14px;"/>
                             <img src="/img/landing/subscribe_user.png" alt="">
                         </div>
                         <button type="submit" class="btn text-xxsm text-white bg-purple fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="mt-5">
-            <img class="img-fluid" src="/img/landing/shurjoPayFooter.webp" alt="">
+            <img class="img-fluid" src="/img/landing/shurjoPayFooter.webp" alt="shurjopay banner">
         </div>
         
     </div>

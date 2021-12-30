@@ -56,7 +56,7 @@
 
         <!--address box-->
 
-        <div class="shape-b">
+        <div class="shape-b" id="shape-b-contact-box">
             <div class="contact-box">
                 
                 <div class="text-box">
