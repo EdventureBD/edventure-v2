@@ -45,10 +45,10 @@ Route::get('/error', function () {
 
 Route::view('/dashboard', 'dashboard')->middleware(['auth'])->name('dashboard');
 
+Route::get('/course/course-preview/{course}', [CourseController::class, 'coursePreview'])->name('course-preview');
 // Courses Page
 Route::get('/course/{category?}/{intermediary_level?}', [CourseController::class, 'course'])->name('course');
 // Preview Course
-Route::get('/course/course-preview/{course}', [CourseController::class, 'coursePreview'])->name('course-preview');
 Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
 // Route::get('/course/course-preview/{course}/enroll/confirm', [CourseController::class, 'confirm'])->name('confirm');
 
