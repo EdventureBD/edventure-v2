@@ -37,9 +37,9 @@
             <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="{{route('contact_us')}}">CONTACT US</a>
             </li>
-            <li class="nav-item has-dot">
+            {{-- <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">HELP</a>
-            </li>
+            </li> --}}
         </ul>
         @if (Route::has('login'))
                 @auth
