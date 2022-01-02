@@ -106,7 +106,7 @@
         {{-- building image
         <img src="img/contact/imageopt_2.png" alt="building" width="50%" class="img-fluid building"> --}}
         {{-- parl owl iconic image  --}}
-        <a href="https://goo.gl/maps/zWsBhtSGmc3SMmBB9" target="_blank">
+        <a href="https://goo.gl/maps/zWsBhtSGmc3SMmBB9" title="Click me to find us on map" target="_blank">
             <img src="img/contact/Group824.png" alt="Parl Owl Iconic Logo" width="8%" class="img-fluid parlowlIconicLogo">
         </a>
     </div>
