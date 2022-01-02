@@ -11829,14 +11829,14 @@ svg.eye-icon {
   margin-bottom: 10%;
 }
 
-.Contact_us_action_button{
+/* .Contact_us_action_button{
   display: flex;
   flex-direction: row;
   row-gap: 15%;
-}
+} */
 
 .form-box h3 {
-  font-family: "Oswald", sans-serif;
+  /* font-family: "Oswald", sans-serif; */
   text-align: center;
   color: white;
   font-size: 36px;
@@ -11858,16 +11858,18 @@ svg.eye-icon {
 }
 
 .btn-submit {
-  padding: 11px 68px;
+  padding: 12px 24px;
   background-color: #996FBC;
   color: white;
   border: 0;
   border-radius: 50px;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 10%;
+  margin-top: 5%;
   transition: all 0.4s;
   margin-bottom: 15%;
+  font-family: "Raleway";
+  line-height: 21px;
 }
 
 .btn-submit:hover {
@@ -11886,9 +11888,16 @@ svg.eye-icon {
 .icon-box img{
   width: 50%;
 }
-
+.form-box h3{
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+}
 .form-box h3 span {
   color: #996FBC;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
 }
 
 .form-group {
@@ -11929,27 +11938,30 @@ form input {
 
 .contact-box h3 {
   font-size: 30px;
-  font-family: "Oswald", sans-serif;
-  font-weight: 400;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
   color: #996FBC;
 }
 
 .contact-box h3 span {
   font-size: 30px;
-  font-weight: 400;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
   color: white;
 }
 
 .contact-box p {
   color: white;
   font-size: 18px;
-  font-family: "Zen Kurenaido", sans-serif;
+  font-family: "Raleway","Zen Kurenaido", sans-serif;
   font-weight: 400;
   margin-top: 25px;
 }
 
 .contact-box h4 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Raleway","Oswald", sans-serif;
   color: #CECECE;
   font-size: 25px;
   font-weight: 400;
@@ -12044,7 +12056,7 @@ form input {
   }
 
   .btn-submit {
-    padding: 15px 50px;
+    padding: 15px 24px;
   }
 
   .contact p {
@@ -12189,8 +12201,8 @@ form input {
   }
 
   .btn-submit {
-    padding: 10px 50px;
-    margin-left: 10%;
+    padding: 10px 24px;
+    /* margin-left: 10%; */
   }
 
   .fa.fa-linkedin {

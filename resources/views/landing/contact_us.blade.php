@@ -50,10 +50,10 @@
                     <input type="text" id="message" placeholder="Write a Message"/>
                     <br>
                     
-                    <div id="Contact_us_action_button" class="mx-auto">
-                        <button type="submit" data-target="#" class="btn-submit" style="border: 1px solid black">Submit</button>
+                    <div id="Contact_us_action_button" class="w-80 row">
+                        <button type="submit" data-target="#" class="btn-submit col-4 mx-3" style="border: 1px solid black">Submit</button>
                         
-                        {{-- <button type="reset" data-target="#" class="btn-submit btn-cancel" style="border: 1px solid black">Cancel</button> --}}
+                        <button type="reset" data-target="#" class="btn-submit btn-cancel col-4 mx-3" style="border: 1px solid black">Cancel</button>
                     </div>
                 </form>
 
@@ -67,7 +67,7 @@
                 
                 <div class="text-box">
 
-                    <h3>Contact <span>Information:</span> </h3>
+                    <h3>Contact <span>Information</span> </h3>
                     <p>117, Kazi Nazrul Islam<br>
                     Avenue 1000 Dhaka, Dhaka
                     <br>Division, Bangladesh</p>
