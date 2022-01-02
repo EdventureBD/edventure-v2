@@ -1,8 +1,8 @@
 <x-landing-layout>
 
-    <section class="header-banner pt-7">
+    <section class="header-banner pt-7 container">
         <div class="container-fluid">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6 py-5">
                     <div class="pl-3">
                         <h3 class="text-purple text-lg fw-400 font-bebas">CONTACT</h3>
@@ -13,13 +13,19 @@
                 <div class="col-md-6">
                     <img src="/img/about/aboutus.png" class="img-fluid" alt="AboutUs Image">
                 </div>
+            </div> --}}
+            {{-- edited contact description --}}
+            <div class="pl-3">
+                <h3 class="text-purple text-lg fw-400 font-bebas">CONTACT</h3>
+                <p id="contact-us-banner-text" class="fw-600 text-xsm  w-100 text-purple-half">A group of passionate educators striving to make education easy, fun, and personal with the help of technology. We want to increase the accessibility of quality education while empowering learners, parents, and teachers alike.
+                </p>
             </div>
         </div>
     </section> <!--header banner end-->
 
 <!--Contact form -->
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid container">
+    <div class="row px-3">
 
         <div class="shape-a">
             <div class="form-box">
@@ -47,7 +53,7 @@
                     <div id="Contact_us_action_button" class="mx-auto">
                         <button type="submit" data-target="#" class="btn-submit" style="border: 1px solid black">Submit</button>
                         
-                        <button type="reset" data-target="#" class="btn-submit btn-cancel" style="border: 1px solid black">Cancel</button>
+                        {{-- <button type="reset" data-target="#" class="btn-submit btn-cancel" style="border: 1px solid black">Cancel</button> --}}
                     </div>
                 </form>
 
@@ -99,10 +105,10 @@
 </div>
 
 <!--map-->
-<div class="map-container">
+<div class="map-container container">
     <div class="map">
         {{-- map image --}}
-        <img src="img/contact/image3.png" alt="map" width="100%" class="img-fluid" >
+        <img src="img/contact/map.webp" alt="map" width="100%" class="img-fluid" >
         {{-- building image
         <img src="img/contact/imageopt_2.png" alt="building" width="50%" class="img-fluid building"> --}}
         {{-- parl owl iconic image  --}}
