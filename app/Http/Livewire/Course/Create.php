@@ -13,8 +13,8 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    public $categories;
-    public $categoryId;
+    public $intermediary_levels;
+    public $intermediaryLevelId;
     public $title;
     public $description;
     public $duration;
@@ -56,10 +56,10 @@ class Create extends Component
         $this->tempBanner = $this->banner;
     }
 
-    public function updatedCategoryId()
+    public function updatedIntermediaryLevelId()
     {
         $this->validate([
-            'categoryId' => 'required'
+            'intermediaryLevelId' => 'required'
         ]);
     }
 
@@ -83,8 +83,8 @@ class Create extends Component
         'image' => 'nullable|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric',
-        'categoryId' => 'required',
+        'price' => 'required|integer|numeric|gt:0',
+        'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
     ];
 
@@ -104,7 +104,7 @@ class Create extends Component
         $course->slug = Str::slug($data['title']);
         $course->icon = $this->image;
         $course->banner = $this->banner;
-        $course->course_category_id = $data['categoryId'];
+        $course->intermediary_level_id = $data['intermediaryLevelId'];
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];

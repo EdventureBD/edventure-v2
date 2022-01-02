@@ -5,5 +5,5 @@
                                 ])
 
 @section('content')
-    @livewire('course.create', ['categories' => $categories])
+    @livewire('course.create', ['intermediary_levels' => $intermediary_levels])
 @endsection

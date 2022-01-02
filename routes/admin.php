@@ -58,17 +58,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
     // END OF COURSE
 
-
-
-
     // START OF COURSE
     Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
     Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus']);
-    // Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
     // END OF COURSE
-
-
-
 
     // START OF COURSE CATEGORY
     Route::resource('/course-category', CourseCategoryController::class, ['except' => ['store', 'update']]);

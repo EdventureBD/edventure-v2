@@ -21,11 +21,6 @@ class Course extends Model
         return 'slug';
     }
 
-    public function courseCategory()
-    {
-        return $this->belongsTo(CourseCategory::class);
-    }
-
     public function intermediaryLevel()
     {
         return $this->belongsTo(IntermediaryLevel::class, 'id', 'intermediary_level_id');
