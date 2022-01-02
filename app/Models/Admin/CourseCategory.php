@@ -16,11 +16,6 @@ class CourseCategory extends Model
         return 'slug';
     }
 
-    public function course()
-    {
-        return $this->hasMany(Course::class);
-    }
-
     public function intermediary_level()
     {
         return $this->hasMany(IntermediaryLevel::class);
