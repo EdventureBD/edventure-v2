@@ -11886,11 +11886,12 @@ svg.eye-icon {
   padding-bottom: 15%;
   display: flex;
   flex-direction: row;
-  width: 50%;
+  width: 100%;
+  justify-content: space-between;
   /* column-gap: 10%; */
 }
 .icon-box img{
-  width: 50%;
+  width: 30%;
 }
 .form-box h3{
   font-family: Raleway;
@@ -12225,7 +12226,7 @@ form input {
 
   .icon-box {
     padding-bottom: 15%;
-    width: 50%;
+    width: 100%;
   }
 }
 .lecture-page .nav-tabs .nav-link {
