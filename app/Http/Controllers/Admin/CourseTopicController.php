@@ -11,8 +11,9 @@ class CourseTopicController extends Controller
 {
     public function index()
     {
-        $categories = CourseCategory::where('status', 1)->get();
-        return view('admin.pages.course_topic.index', compact('categories'));
+        // $categories = CourseCategory::where('status', 1)->get();    
+        // , compact('categories')
+        return view('admin.pages.course_topic.index');
     }
 
     public function create()
