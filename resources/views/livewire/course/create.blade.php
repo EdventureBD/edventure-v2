@@ -100,7 +100,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseprice"> Course Price <span
                                                     class="must-filled">*</span> </label>
-                                            <input type="number" min="1" wire:model="price"
+                                            <input type="number" min="0" wire:model="price"
                                                 class="form-control @error('price') is-invalid @enderror"
                                                 id="courseCategoryprice" placeholder="Enter your course price">
                                             <small id="passwordHelpBlock" class="form-text text-secondary">

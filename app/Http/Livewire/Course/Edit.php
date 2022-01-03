@@ -85,7 +85,7 @@ class Edit extends Component
         'title' => ['required', 'string', 'max:100'],
         'description' => 'required|string|max:500',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric',
+        'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
     ];

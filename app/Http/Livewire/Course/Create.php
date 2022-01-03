@@ -83,7 +83,7 @@ class Create extends Component
         'image' => 'nullable|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric|gt:0',
+        'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
     ];

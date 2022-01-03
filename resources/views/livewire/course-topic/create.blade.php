@@ -22,40 +22,60 @@
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                @if (!($show))
+                                {{-- @if (!($show)) --}}
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseName">Category <span class="must-filled">*</span></label>
-                                                <select class="form-control" wire:model="categoryId">
+                                                <label class="col-form-label" for="courseCategory"> Category <span class="must-filled">*</span></label>
+                                                <select class="form-control" wire:model="categoryId" id="courseCategory">
                                                     <option value="" selected>Select course category</option>
                                                     @foreach($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->title }}
-                                                        </option>
+                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('categoryId')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                                <div>
+                                                    @error('categoryId')
+                                                        <p style="color: red;">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseName">Course <span class="must-filled">*</span></label>
-                                                <select class="form-control" wire:model="course_id">
-                                                    <option value="" selected>Select Course</option>
-                                                    @foreach($courses as $course)
-                                                        <option value="{{ $course->id }}">{{ $course->title }}
-                                                        </option>
-                                                    @endforeach
+                                                <label class="col-form-label" for="intermediaryLevel"> Intermediate Levels <span class="must-filled">*</span></label>
+                                                <select class="form-control" wire:model="intermediaryLevelId" id="intermediaryLevel">
+                                                    <option value="" selected>Select Intermediary Level</option>
+                                                        @foreach($intermediaryLevels as $intermediaryLevel)
+                                                            <option wire:key="lang{{$intermediaryLevel}}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                                        @endforeach
                                                 </select>
-                                                @error('course_id')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                                <div>
+                                                    @error('intermediaryLevelId')
+                                                        <p style="color: red;">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="course"> Course <span class="must-filled">*</span></label>
+                                                <select class="form-control" wire:model="courseId" id="course">
+                                                    <option value="" selected>Select Course</option>
+                                                        @foreach($courses as $course)
+                                                            <option wire:key="lang{{$course}}" value="{{ $course->id }}">{{ $course->title }}</option>
+                                                        @endforeach
+                                                </select>
+                                                <div>
+                                                    @error('courseId')
+                                                        <p style="color: red;">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                @else
+                                {{-- @else
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -83,7 +103,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+                                @endif --}}
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
