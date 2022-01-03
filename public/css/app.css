@@ -11892,6 +11892,10 @@ svg.eye-icon {
 }
 .icon-box img{
   width: 30%;
+  border-radius: 15px;
+}
+.icon-box img:hover{
+  background: black;
 }
 .form-box h3{
   font-family: Raleway;
