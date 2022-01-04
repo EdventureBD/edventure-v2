@@ -4,24 +4,27 @@ namespace App\Http\Livewire\ContentTag;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
+use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
 use App\Models\Admin\Course;
 use App\Models\Admin\ContentTag;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
-use App\Models\Admin\CourseCategory;
+
 
 class Create extends Component
 {
     public $title;
-    public $categoryId;
-    public $courseId;
-    public $topicId;
-    public $lectureId;
-
     public $categories;
+    public $categoryId;
+    public $intermediaryLevels;
+    public $intermediaryLevelId;
     public $courses;
+    public $courseId;
     public $topics;
+    public $topicId;
     public $lectures;
+    public $lectureId;
 
     public function updatedTitle()
     {
@@ -30,11 +33,23 @@ class Create extends Component
         ]);
     }
 
+    public function updatedCategoryId()
+    {
+        $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
+    }
+
+    public function updatedIntermediaryLevelId()
+    {
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
+
     public function updatedCourseId()
     {
         $this->validate([
             'courseId' => 'required'
         ]);
+
+        $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
     }
 
     public function updatedTopicId()
@@ -42,6 +57,8 @@ class Create extends Component
         $this->validate([
             'topicId' => 'required'
         ]);
+
+        $this->lectures = CourseLecture::where('topic_id', $this->topicId)->get();
     }
 
     public function updatedLectureId()
@@ -83,19 +100,23 @@ class Create extends Component
     public function mount()
     {
         $this->categories = CourseCategory::orderBy('title')->get();
+        $this->intermediaryLevels = collect();
+        $this->courses = collect();
+        $this->topics = collect();
+        $this->lectures = collect();
     }
 
     public function render()
     {
-        if (!empty($this->categories)) {
-            $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        }
-        if (!empty($this->courses)) {
-            $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
-        }
-        if (!empty($this->topics)) {
-            $this->lectures = CourseLecture::where('topic_id', $this->topicId)->get();
-        }
+        // if (!empty($this->categories)) {
+        //     $this->courses = Course::where('course_category_id', $this->categoryId)->get();
+        // }
+        // if (!empty($this->courses)) {
+        //     $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
+        // }
+        // if (!empty($this->topics)) {
+        //     $this->lectures = CourseLecture::where('topic_id', $this->topicId)->get();
+        // }
         return view('livewire.content-tag.create');
     }
 }

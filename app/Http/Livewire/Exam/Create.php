@@ -8,29 +8,42 @@ use Illuminate\Support\Str;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
 
 class Create extends Component
 {
     public $title;
-    public $courseId;
-    public $topicId;
     public $lectureId;
     public $examType;
     public $marks;
     public $duration;
     public $quesLimit;
     public $special;
-
+    
     public $categories;
     public $categoryId;
+    public $intermediaryLevels;
+    public $intermediaryLevelId;
     public $courses;
+    public $courseId;
     public $topics;
+    public $topicId;
     // public $examTypes;
 
     public $showAssignment = true;
     public $showSpecialExam = true;
 
     public $showQuestionLimit = true;
+
+    public function updatedCategoryId()
+    {
+        $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
+    }
+
+    public function updatedIntermediaryLevelId()
+    {
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
 
     public function updatedTitle()
     {
@@ -43,9 +56,12 @@ class Create extends Component
     {
         if ($this->special) {
             $this->showAssignment = false;
-            $this->topicId = null;
+            // $this->topicId = null;
         } else {
             $this->showAssignment = true;
+            $this->validate([
+                'topicId' => 'required'
+            ]);
         }
     }
 
@@ -54,14 +70,18 @@ class Create extends Component
         $this->validate([
             'courseId' => 'required'
         ]);
+
+        $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
     }
 
-    // public function updatedTopicId()
-    // {
-    //     $this->validate([
-    //         'topicId' => 'required'
-    //     ]);
-    // }
+    public function updatedTopicId()
+    {
+        if(!$this->special){
+            $this->validate([
+                'topicId' => 'required'
+            ]);
+        }
+    }
 
     public function updatedMarks()
     {
@@ -119,16 +139,21 @@ class Create extends Component
         'marks' => 'required|numeric|integer|gt:0',
         'duration' => 'required|numeric|integer|gt:0',
         'quesLimit' => 'required|numeric|integer',
-        'special' => 'nullable|'
+        'special' => 'nullable|',
+        'topicId' => 'nullable',
     ];
 
     protected $messages = [
-        'title.unique' => 'The exam name is already exist. Choose a different name',
+        'title.unique' => 'The exam name already exists. Choose a different name',
     ];
 
     public function saveExam()
     {
+        if(!$this->special){
+            $this->rules['topicId'] = 'required';
+        }
         $data = $this->validate();
+
         $exam = new Exam;
         $exam->title = $data['title'];
         // $exam->slug = Str::slug($data['title']);
@@ -156,17 +181,20 @@ class Create extends Component
     public function mount()
     {
         $this->categories = CourseCategory::orderBy('title')->get();
+        $this->intermediaryLevels = collect();
+        $this->courses = collect();
+        $this->topics = collect();
         // $this->examTypes = ExamType::orderBy('title')->get();
     }
 
     public function render()
     {
-        if (!empty($this->categories)) {
-            $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        }
-        if (!empty($this->courses)) {
-            $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
-        }
+        // if (!empty($this->categories)) {
+        //     $this->courses = Course::where('course_category_id', $this->categoryId)->get();
+        // }
+        // if (!empty($this->courses)) {
+        //     $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
+        // }
         return view('livewire.exam.create');
     }
 }

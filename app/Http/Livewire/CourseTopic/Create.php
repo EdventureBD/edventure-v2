@@ -44,7 +44,7 @@ class Create extends Component
 
         $course_topic = new CourseTopic;
         $course_topic->title = $data['title'];
-        $course_topic->slug = Str::slug($data['title']);
+        $course_topic->slug = (string) Str::uuid();
         $course_topic->intermediary_level_id = $data['intermediaryLevelId'];
         $course_topic->course_id = $data['courseId'];
         $course_topic->order = 0;

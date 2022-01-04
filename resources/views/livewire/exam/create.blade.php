@@ -38,16 +38,28 @@
                                 <div class="row">
                                     <div class="col-md-{{ $showAssignment ? '3' : '4' }}">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="batch">Course Category <span
-                                                    class="must-filled">*</span></label>
+                                            <label class="col-form-label" for="batch">Course Category</label>
                                             <select class="form-control" wire:model="categoryId">
                                                 <option value="" selected>Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}
-                                                    </option>
+                                                    <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('categoryId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-{{ $showAssignment ? '3' : '4' }}">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="batch">Intermediary Level</label>
+                                            <select class="form-control" wire:model="intermediaryLevelId">
+                                                <option value="" selected>Select intermediary level</option>
+                                                @foreach ($intermediaryLevels as $intermediaryLevel)
+                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>  
+                                                @endforeach
+                                            </select>
+                                            @error('intermedairyLevelId')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -59,7 +71,7 @@
                                             <select class="form-control" wire:model="courseId">
                                                 <option value="" selected>Select Course</option>
                                                 @foreach ($courses as $course)
-                                                    <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                                    <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}">{{ $course->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('courseId')
@@ -74,7 +86,7 @@
                                             <select class="form-control" wire:model="topicId">
                                                 <option value="" selected>Select Topic</option>
                                                 @foreach ($topics as $topic)
-                                                    <option value="{{ $topic->id }}">{{ $topic->title }}</option>
+                                                    <option wire:key="{{ $topic->slug.$topic->id }}" value="{{ $topic->id }}">{{ $topic->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('topicId')
