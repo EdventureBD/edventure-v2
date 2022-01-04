@@ -8,7 +8,6 @@ use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
-// use Illuminate\Support\Facades\Redirect;
 
 class Create extends Component
 {
@@ -22,13 +21,6 @@ class Create extends Component
 
     public $show = false;
 
-    // public function updated()
-    // {
-    //     $this->validate([
-    //         'title' => 'required|string|max:325|unique:course_topics,title',
-    //     ]);
-    // }
-
     protected $rules = [
         'title' => 'required|string|max:200|unique:course_topics,title',
         'categoryId' => ['required'],
@@ -36,11 +28,13 @@ class Create extends Component
         'courseId' => ['required']
     ];
 
-    public function updatedCategoryId(){
+    public function updatedCategoryId()
+    {
         $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
     }
 
-    public function updatedIntermediaryLevelId(){
+    public function updatedIntermediaryLevelId()
+    {
         $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
     }
 
@@ -82,22 +76,10 @@ class Create extends Component
         $this->categories = CourseCategory::all();
         $this->intermediaryLevels = collect();
         $this->courses = collect();
-
-        // if (!($this->courses)) {
-        //     $this->categories = CourseCategory::all();
-        //     $this->show = false;
-        // } else {
-        //     $this->categories = CourseCategory::where('id', $this->courses->course_category_id)->first();
-        //     $this->categoryId = $this->categories->id;
-        //     $this->course_id = $this->courses->id;
-        // }
     }
 
     public function render()
     {
-        // if (!empty($this->categories)) {
-        //     $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        // }
         return view('livewire.course-topic.create');
     }
 }

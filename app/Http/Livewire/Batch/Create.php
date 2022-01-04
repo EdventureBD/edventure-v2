@@ -6,21 +6,25 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\Admin\Batch;
 use Illuminate\Support\Str;
-use App\Models\Admin\Course;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Course;
+
 
 class Create extends Component
 {
     public $title;
     public $student_limit;
     public $batch_running_days = 0;
-    public $teacher_id;
-    public $courseId;
-
-    public $teachers;
-    public $courses;
+    
     public $categories;
     public $categoryId;
+    public $intermediaryLevels;
+    public $intermediaryLevelId;
+    public $courses;
+    public $courseId;
+    public $teachers;
+    public $teacher_id;
 
     public function updatedTitle()
     {
@@ -29,10 +33,20 @@ class Create extends Component
         ]);
     }
 
+    public function updatedCategoryId()
+    {
+        $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
+    }
+
+    public function updatedIntermediaryLevelId()
+    {
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
+
     public function updatedStudent_limit()
     {
         $this->validate([
-            'student_limit' => ['required', 'numeric'],
+            'student_limit' => ['required', 'numeric', 'gt:-1'],
         ]);
     }
 
@@ -59,7 +73,7 @@ class Create extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'max:325'],
-        'student_limit' => ['required', 'numeric'],
+        'student_limit' => ['required', 'numeric', 'gt:-1'],
         'batch_running_days' => ['required', 'numeric', 'gt:-1'],
         'teacher_id' => ['required'],
         'courseId' => ['required'],
@@ -84,7 +98,7 @@ class Create extends Component
             session()->flash('status', 'Batch successfully added!');
             return redirect()->route('batch.index');
         } else {
-            session()->flash('failed', 'Batch added failed!');
+            session()->flash('failed', 'Batch add failed!');
             return redirect()->route('batch.create');
         }
     }
@@ -96,11 +110,12 @@ class Create extends Component
             ->get();
 
         $this->categories = CourseCategory::all();
+        $this->intermediaryLevels = collect();
+        $this->courses = collect();
     }
 
     public function render()
-    {
-        $this->courses = Course::where('course_category_id', $this->categoryId)->get();
+    {   
         return view('livewire.batch.create');
     }
 }

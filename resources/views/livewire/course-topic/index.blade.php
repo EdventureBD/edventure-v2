@@ -19,7 +19,7 @@
                                         <select class="form-control" wire:model="categoryId" id="courseCategory">
                                             <option value="" selected>Select course category</option>
                                             @foreach($categories as $category)
-                                                <option wire:key="lang{{$category->slug}}" value="{{ $category->id }}">{{ $category->title }}
+                                                <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -32,7 +32,7 @@
                                         <select class="form-control" wire:model="intermediaryLevelId" id="intermediateLevel">
                                             <option value="" selected>Select Intermediary Level</option>
                                                 @foreach($intermediaryLevels as $intermediaryLevel)
-                                                    <option wire:key="lang{{$intermediaryLevel->slug}}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
                                                 @endforeach
                                         </select>
                                     </div>
@@ -44,7 +44,7 @@
                                         <select class="form-control" wire:model="courseId">
                                             <option value="" selected>Select Course</option>
                                             @foreach($courses as $course)
-                                                <option wire:key="lang{{$course->slug}}" value="{{ $course->id }}">{{ $course->title }}</option>
+                                                <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
