@@ -61,16 +61,6 @@ class Index extends Component
 
     public function render()
     {
-        // if(isset($this->categoryId)){
-        //     $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
-        // }
-
-        // if (!empty($this->categories)) {
-        //     $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
-        // }
-
-        // dump($this->categoryId, $this->intermediaryLevelId, $this->intermediaryLevels);
-
         return view('livewire.course-topic.index');
     }
 }

@@ -26,7 +26,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseTitle"> Student Limit  <span class="must-filled">*</span></label>
-                                            <input type="number" wire:model.lazy="student_limit"
+                                            <input type="number" min="0" wire:model.lazy="student_limit"
                                                 class="form-control @error('student_limit') is-invalid @enderror"
                                                 id="courseTitle" placeholder="Enter batch student limit">
                                             @error('student_limit')
@@ -39,7 +39,7 @@
                                             <label class="col-form-label" for="courseTitle"> Batch running days  <span class="must-filled">*</span></label>
                                             <input type="number" wire:model.lazy="batch_running_days"
                                                 class="form-control @error('batch_running_days') is-invalid @enderror"
-                                                id="courseTitle" placeholder="Enter how many days the batch are running">
+                                                id="courseTitle" placeholder="Enter how many days the batch are running" disabled>
                                             @error('batch_running_days')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror

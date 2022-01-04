@@ -9,23 +9,25 @@ use Livewire\WithFileUploads;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
 use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
     use WithFileUploads;
 
-    public $course_topics;
+    public $categories;
+    public $categoryId;
+    public $intermediaryLevels;
+    public $intermediaryLevelId;
     public $courses;
-    public $title;
     public $courseId;
+    public $course_topics;
     public $topicId;
+    public $title;
     public $url;
     public $markdownText;
     public $pdf;
-
-    public $categories;
-    public $categoryId;
 
     public function updatedTitle()
     {
@@ -41,11 +43,23 @@ class Create extends Component
         ]);
     }
 
+    public function updatedCategoryId()
+    {
+        $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
+    }
+
+    public function updatedIntermediaryLevelId()
+    {
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
+
     public function updatedCourseId()
     {
         $this->validate([
             'courseId' => 'required',
         ]);
+
+        $this->course_topics = CourseTopic::where('course_id', $this->courseId)->get();
     }
 
     public function updatedTopicId()
@@ -101,16 +115,13 @@ class Create extends Component
     public function mount()
     {
         $this->categories = CourseCategory::all();
+        $this->intermediaryLevels = collect();
+        $this->courses = collect();
+        $this->course_topics = collect();
     }
 
     public function render()
     {
-        if (!empty($this->categories)) {
-            $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        }
-        if (!empty($this->courses)) {
-            $this->course_topics = CourseTopic::where('course_id', $this->courseId)->get();
-        }
         return view('livewire.course-lecture.create');
     }
 }
