@@ -36,11 +36,25 @@
                             $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
                         @endphp
                         <tr>
-                            <td class="{{$cellcolor}}">{{$n}}</td>
+                            {{-- previous result sheet code --}}
+
+                           {{--  <td class="{{$cellcolor}}">{{$n}}</td>
                             <td class="{{$cellcolor}}">{!! $result->question->question !!}</td>
                             <td class="{{$cellcolor}}">{!! $result->question->$field !!}</td>
                             <td class="{{$cellcolor}}">{!! $result->question->$cfield !!}</td>
                             <td class="{{$cellcolor}}">{!! $result->question->explanation !!}</td>
+                            <td class="{{$cellcolor}}">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td> --}}
+                            {{-- serial number  --}}
+                            <td class="{{$cellcolor}}">{{$n}}</td>
+                            {{-- Question  --}}
+                            <td class="">{!! $result->question->question !!}</td>
+                            {{-- Your answer  --}}
+                            <td class="{{$cellcolor}}">{!! $result->question->$field !!}</td>
+                            {{-- Correct answer  --}}
+                            <td class="">{!! $result->question->$cfield !!}</td>
+                            {{-- Explaination --}}
+                            <td class="">{!! $result->question->explanation !!}</td>
+                            {{-- Percentage --}}
                             <td class="{{$cellcolor}}">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td>
                         </tr>
                         @php $n++; @endphp
