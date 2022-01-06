@@ -1646,8 +1646,7 @@ pre code {
   }
 }
 .table {
-  /* width: 100%; */
-  width: 55%;
+  width: 100%;
   margin-bottom: 1rem;
   color: #212529;
 }

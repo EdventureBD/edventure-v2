@@ -36,6 +36,7 @@ class BatchExam extends Model
         $specialExams = [];
         $exams = [];
         foreach ($allExams as $exam) {
+            // dd($exam);
             if ($exam->exam->special) {
                 $specialExams[] = $exam;
             } else {
