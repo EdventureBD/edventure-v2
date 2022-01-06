@@ -105,8 +105,11 @@
                                                     Assignment</option>
                                                 <option value="CQ">CQ</option>
                                                 <option value="MCQ">MCQ</option>
+                                                <option value="Aptitude Test">Aptitude Test</option>
+                                                <option value="Pop Quiz">Pop Quiz</option>
+                                                <option value="Topic End Exam">Topic End Exam</option>
                                             </select>
-                                            @error('examTypeId')
+                                            @error('examType')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -117,7 +120,7 @@
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Question Limit <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="quesLimit"
+                                            <input type="number" min="1" class="form-control" wire:model="quesLimit"
                                                 placeholder="Enter question limit" @if (!$showQuestionLimit) disabled @endif>
                                             @error('quesLimit')
                                                 <p style="color: red;">{{ $message }}</p>
@@ -128,7 +131,7 @@
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Marks <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="marks"
+                                            <input type="number" min="1" class="form-control" wire:model="marks"
                                                 placeholder="Enter marks">
                                             @error('marks')
                                                 <p style="color: red;">{{ $message }}</p>
@@ -139,7 +142,7 @@
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Duration <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="duration"
+                                            <input type="number" min="1" class="form-control" wire:model="duration"
                                                 placeholder="Enter exam duration">
                                             <small id="passwordHelpBlock" class="form-text text-muted">
                                                 <span class="must-filled">N.B:</span>

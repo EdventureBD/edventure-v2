@@ -6,6 +6,10 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\CQController;
 use App\Http\Controllers\Admin\CSVController;
 use App\Http\Controllers\Admin\MCQController;
+use App\Http\Controllers\Admin\AptitudeTestMCQController;
+use App\Http\Controllers\Admin\PopQuizMCQController;
+use App\Http\Controllers\Admin\PopQuizCQController;
+
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\UserController;
@@ -114,6 +118,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/all-mcq', [ExamController::class, 'allMCQ'])->name('showAllMCQ');
     Route::get('/all-cq', [ExamController::class, 'allCQ'])->name('showAllCQ');
     Route::get('/all-assignment', [ExamController::class, 'allAssignment'])->name('showAllAssignment');
+    Route::get('/all-aptitude-test', [ExamController::class, 'allAT'])->name('showAllAT');
+
+
+
+    // NEW STUFF
+    Route::get('/all-pop-quiz', [ExamController::class, 'allPQ'])->name('showAllPQ');
+    Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
+
+
+    Route::get('/exam/{exam}/add-question-CQ-only', [ExamController::class, 'addQuestion_CQ_only'])->name('addQuestion_CQ_only');
+    Route::get('/exam/{exam}/add-question-MCQ-only', [ExamController::class, 'addQuestion_MCQ_only'])->name('addQuestion_MCQ_only');
+    //
+
+
+
     // END OF EXAM
 
     // START OF EXAM
@@ -140,6 +159,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('{exam}/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
     // Route::resource('/exam/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
     // END OF ASSIGNMENT
+
+    // START OF Aptitude Test MCQ EXAM
+    Route::resource('{exam}/aptitude-test-mcqs', AptitudeTestMCQController::class);
+    // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
+    // END OF Aptitude Test MCQ EXAM
+
+
+
+
+    // START OF pop-quiz MCQ EXAM
+    Route::resource('{exam}/pop-quiz-mcq', PopQuizMCQController::class);
+    // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
+    // END OF Pop Quiz MCQ EXAM
+
+    // START OF pop-quiz CQ EXAM
+    Route::resource('{exam}/pop-quiz-cq', PopQuizCQController::class);
+    // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
+    // END OF Pop Quiz CQ EXAM
+
+
+
 
     // START OF ASSIGNMENT
     Route::resource('/request', RequestController::class, ['except' => ['store', 'update']]);
