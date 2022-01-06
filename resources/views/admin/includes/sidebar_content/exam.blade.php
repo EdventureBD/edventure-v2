@@ -10,6 +10,16 @@
                                 {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }} 
                                 {{ request()->is('admin/all-cq') ? 'menu-open' : '' }} 
                                 {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }} 
+
+                                {{-- NEW --}}
+                                {{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }} 
+                                {{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }} 
+                                {{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }} 
+
+                                {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }} 
+                                {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }} 
+                                {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }} 
+                                {{-- END NEW --}}
 ">
     <a href="#"
         class="nav-link {{ request()->is('admin/exam') ? 'active' : '' }} 
@@ -23,6 +33,16 @@
 {{ request()->is('admin/all-mcq') ? 'active' : '' }} 
 {{ request()->is('admin/all-cq') ? 'active' : '' }} 
 {{ request()->is('admin/all-assignment') ? 'active' : '' }} 
+
+{{-- NEW --}}
+{{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }} 
+{{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }} 
+{{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }} 
+
+{{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }} 
+{{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }} 
+{{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }} 
+{{-- END NEW --}}
 ">
         <i class="fas fa-paste"></i>
         <p>&nbsp; Exam<i class="right fas fa-angle-left"></i></p>
@@ -55,6 +75,35 @@
                 <p>Assignment</p>
             </a>
         </li>
+
+
+
+        {{-- NEW --}}
+        <li class="nav-item">
+            <a href="{{ route('showAllAT') }}"
+                class="nav-link {{ request()->is('admin/all-aptitude-test') ? 'active' : '' }} ">
+                <i class="far fa-dot-circle nav-icon"></i>
+                <p>Aptitude Test</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('showAllPQ') }}"
+                class="nav-link {{ request()->is('admin/all-pop-quiz') ? 'active' : '' }} ">
+                <i class="far fa-dot-circle nav-icon"></i>
+                <p>Pop Quiz</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('showAllTEE') }}"
+                class="nav-link {{ request()->is('admin/all-topic-end-exam') ? 'active' : '' }} ">
+                <i class="far fa-dot-circle nav-icon"></i>
+                <p>Topic End Exam</p>
+            </a>
+        </li>
+        {{-- ENDNEW --}}
+
+
+
         <li class="nav-item">
             <a href="{{ route('exam.index') }}"
                 class="nav-link {{ request()->is('admin/exam') ? 'active' : '' }}">

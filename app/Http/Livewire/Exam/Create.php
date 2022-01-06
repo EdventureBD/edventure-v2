@@ -59,9 +59,9 @@ class Create extends Component
             // $this->topicId = null;
         } else {
             $this->showAssignment = true;
-            $this->validate([
-                'topicId' => 'required'
-            ]);
+            // $this->validate([
+            //     'topicId' => 'required'
+            // ]);
         }
     }
 
@@ -105,7 +105,7 @@ class Create extends Component
             $this->showSpecialExam = false;
             $this->marks=10;
             $this->duration=1440;
-        } else {
+        } elseif( ($this->examType) == 'MCQ' || ($this->examType) == 'Aptitude Test') {
             $this->quesLimit = '';
             $this->showQuestionLimit = true;
             $this->showSpecialExam = true;
@@ -119,7 +119,7 @@ class Create extends Component
 
     public function updatedQuesLimit()
     {
-        if (!empty ($this->examType) && ($this->examType) == 'MCQ') {
+        if (!empty ($this->examType) && ( ($this->examType) == 'MCQ' || ($this->examType) == 'Aptitude Test' )) {
             $this->marks=$this->quesLimit;
             $this->duration=$this->quesLimit;
         } else if (!empty ($this->examType) && ($this->examType) == 'CQ') {
@@ -138,7 +138,7 @@ class Create extends Component
         'examType' => 'required',
         'marks' => 'required|numeric|integer|gt:0',
         'duration' => 'required|numeric|integer|gt:0',
-        'quesLimit' => 'required|numeric|integer',
+        'quesLimit' => 'required|numeric|integer|gt:0',
         'special' => 'nullable|',
         'topicId' => 'nullable',
     ];
@@ -195,6 +195,7 @@ class Create extends Component
         // if (!empty($this->courses)) {
         //     $this->topics = CourseTopic::where('course_id', $this->courseId)->get();
         // }
+
         return view('livewire.exam.create');
     }
 }

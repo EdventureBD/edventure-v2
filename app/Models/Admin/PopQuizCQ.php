@@ -5,10 +5,10 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Admin\PopQuizCreativeQuestion;
 use App\Models\Admin\ContentTag;
-use App\Models\Admin\CreativeQuestion;
 
-class CQ extends Model
+class PopQuizCQ extends Model
 {
     use HasFactory;
 
@@ -19,9 +19,9 @@ class CQ extends Model
 
     protected $guarded = [];
 
-    public function creativeQuestion()
+    public function PopQuizCreativeQuestion()
     {
-        return $this->belongsTo(CreativeQuestion::class);
+        return $this->belongsTo(PopQuizCreativeQuestion::class);
     }
 
     public function contentTag()

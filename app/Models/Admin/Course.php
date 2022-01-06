@@ -25,7 +25,17 @@ class Course extends Model
     {
         return $this->belongsTo(IntermediaryLevel::class, 'id', 'intermediary_level_id');
     }
+    /////////////////////
+    public function Exam()
+    {
+        return $this->hasMany(Exam::class);
+    }
 
+    public function Batch()
+    {
+        return $this->hasMany(Batch::class);
+    }
+    /////////////////////
     public function CourseTopic()
     {
         return $this->hasMany(CourseTopic::class);
