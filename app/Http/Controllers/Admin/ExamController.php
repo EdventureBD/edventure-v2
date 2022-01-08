@@ -94,7 +94,7 @@ class ExamController extends Controller
         }
 
         if (($exam->exam_type) == 'Pop Quiz') {
-            dd($exam, "Pop Quiz CQ only");
+            // dd($exam, "Pop Quiz CQ only");
             return view('admin.pages.mcq_and_cq.create_cq', compact('exam', 'contentTags'));
         } elseif (($exam->exam_type) == 'Topic End Exam') {
             dd($exam, "Topic End Exam CQ only");
@@ -193,7 +193,6 @@ class ExamController extends Controller
             //     ->where('exam_id', $exam->id)
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
-            // dd("Aptitude Boi");
             return redirect()->route('aptitude-test-mcqs.index', [$exam]);
         } elseif ($exam->exam_type == 'Pop Quiz') {
             // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
@@ -201,8 +200,7 @@ class ExamController extends Controller
             //     ->where('exam_id', $exam->id)
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
-            // dd("Pop Quiz Boi in ExamController", $exam);
-            return redirect()->route('pop-quiz-mcq.index', [$exam]);
+            return redirect()->route('pop-quiz-all', [$exam]);
         } elseif ($exam->exam_type == 'Topic End Exam') {
             // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
             //     ->select('assignments.*', 'exams.title as examTitle')

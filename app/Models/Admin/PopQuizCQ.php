@@ -12,6 +12,8 @@ class PopQuizCQ extends Model
 {
     use HasFactory;
 
+    protected $table = "pop_quiz_cqs";
+
     public function getRouteKeyName()
     {
         return 'slug';
