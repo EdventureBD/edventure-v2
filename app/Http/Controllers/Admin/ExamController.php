@@ -70,7 +70,7 @@ class ExamController extends Controller
             return view('admin.pages.assignment.create', compact('exam'));
         } elseif (($exam->exam_type) == 'Aptitude Test') {
             return view('admin.pages.aptitude_test.create', compact('exam', 'contentTags'));
-        }         
+        }
         
         // elseif (($exam->exam_type) == 'Pop Quiz') {
 
