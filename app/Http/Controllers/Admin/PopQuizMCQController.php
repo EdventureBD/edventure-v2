@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
  //models
- use App\Models\Admin\PopQuizMCQ;
- use App\Models\Admin\QuestionContentTag;
- use App\Models\Admin\Exam;
- use App\Models\Admin\ContentTag;
+use App\Models\Admin\PopQuizMCQ;
+use App\Models\Admin\QuestionContentTag;
+use App\Models\Admin\Exam;
+use App\Models\Admin\ContentTag;
 
 class PopQuizMCQController extends Controller
 {
@@ -25,7 +25,7 @@ class PopQuizMCQController extends Controller
         return view('admin.pages.mcq_and_cq.index_mcq', compact('pop_quiz_mcqs', 'exam'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Exam $exam)
     {
         $validaterequest = $request->validate([
             'question' => 'required|min:4|unique:pop_quiz_mcqs',
@@ -61,15 +61,12 @@ class PopQuizMCQController extends Controller
 
         $save = $pop_quiz_mcqs->save();
 
-        // dd($pop_quiz_mcqs);
-
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = 'Pop Quiz';
+                $question_content_tag->exam_type = $exam->exam_type;
                 $question_content_tag->question_id = $pop_quiz_mcqs->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
-                // dd($question_content_tag);
                 $question_content_tag->save();
             }
             session()->flash('status', 'Pop Quiz MCQ created successfully!');
@@ -82,22 +79,21 @@ class PopQuizMCQController extends Controller
 
     public function show(Exam $exam, PopQuizMCQ $pop_quiz_mcq)
     {
-        dd("PopQuizMCQController Show Hit");
         $exam = Exam::where('id', $pop_quiz_mcq->exam_id)->first();
-        return view('admin.pages.aptitude_test.details', compact('pop_quiz_mcq', 'exam'));
+        return view('admin.pages.mcq_and_cq.details_mcq', compact('pop_quiz_mcq', 'exam'));
     }
 
     public function edit(Exam $exam, PopQuizMCQ $pop_quiz_mcq)
     {
-        dd("PopQuizMCQController Edit Hit");
         $tagId = [];
-        // $exam = Exam::where('id', $pop_quiz_mcq->exam_id)->first();
-        $questionContentTags = QuestionContentTag::where('exam_type', "Aptitude Test")
+        $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $pop_quiz_mcq->id)
             ->get();
+
         foreach ($questionContentTags as $qct) {
             array_push($tagId, $qct->content_tag_id);
         }
+
         if ($exam->special == 1) {
             $contentTags = ContentTag::where('course_id', $exam->course_id)
                 ->whereNotIn('id', $tagId)
@@ -109,7 +105,7 @@ class PopQuizMCQController extends Controller
                 ->get();
         }
 
-        return view('admin.pages.aptitude_test.edit', compact('pop_quiz_mcq', 'exam', 'contentTags', 'questionContentTags'));
+        return view('admin.pages.mcq_and_cq.edit_mcq', compact('pop_quiz_mcq', 'exam', 'contentTags', 'questionContentTags'));
     }
 
     public function update(Request $request, Exam $exam, PopQuizMCQ $pop_quiz_mcq)
@@ -128,9 +124,6 @@ class PopQuizMCQController extends Controller
             'contentTagIds' => 'required',
         ]);
 
-        // dump($pop_quiz_mcq);
-        // $pop_quiz_mcq = PopQuizMCQ::find($pop_quiz_mcq->id);
-
         if ($request->hasFile('image')) {
             if ($pop_quiz_mcq->image) {
                 Storage::delete($pop_quiz_mcq->image);
@@ -148,29 +141,28 @@ class PopQuizMCQController extends Controller
         $pop_quiz_mcq->explanation = $request['explanation'];
         $pop_quiz_mcq->exam_id = $request['examId'];        
 
-        // dd($pop_quiz_mcq);
-
         $save = $pop_quiz_mcq->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', "Aptitude Test")
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $pop_quiz_mcq->id)
             ->get();
+
         foreach ($deleteContentTags as $deleteContentTag) {
-            $delete = $deleteContentTag->delete();
+            $deleteContentTag->delete();
         }
 
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = 'Aptitude Test';
+                $question_content_tag->exam_type = $exam->exam_type;
                 $question_content_tag->question_id = $pop_quiz_mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
             }
-            session()->flash('status', 'Aptitude Test MCQ edited successfully!');
+            session()->flash('status', 'Pop Quiz MCQ edited successfully!');
             return redirect()->route('exam.show', $request->slug);
         } else {
-            session()->flash('failed', 'Aptitude Test MCQ edit failed!');
+            session()->flash('failed', 'Pop Quiz MCQ edit failed!');
             return redirect()->route('aptitude-test-mcqs.create');
         }
     }
@@ -187,9 +179,9 @@ class PopQuizMCQController extends Controller
 
         $delete = $pop_quiz_mcq->delete();
         if ($delete) {
-            return redirect()->route('exam.show', $exam)->with('status', 'Aptitude Test MCQ deleted successfully!');
+            return redirect()->route('exam.show', $exam)->with('status', 'Pop Quiz MCQ deleted successfully!');
         } else {
-            return redirect()->route('exam.show', $exam)->with('failed', 'Aptitude Test MCQ deletion failed!');
+            return redirect()->route('exam.show', $exam)->with('failed', 'Pop Quiz MCQ deletion failed!');
         }
     }
 }

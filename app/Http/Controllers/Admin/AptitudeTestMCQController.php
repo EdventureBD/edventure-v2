@@ -26,7 +26,7 @@ class AptitudeTestMCQController extends Controller
         return view('admin.pages.aptitude_test.index', compact('aptitude_test_mcqs', 'exam'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Exam $exam)
     {
         $validaterequest = $request->validate([
             'question' => 'required|min:4|unique:aptitude_test_mcqs',
@@ -65,7 +65,7 @@ class AptitudeTestMCQController extends Controller
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = 'Aptitude Test';
+                $question_content_tag->exam_type = $exam->exam_type;
                 $question_content_tag->question_id = $aptitude_test_mcqs->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
@@ -88,7 +88,7 @@ class AptitudeTestMCQController extends Controller
     {
         $tagId = [];
         // $exam = Exam::where('id', $aptitude_test_mcq->exam_id)->first();
-        $questionContentTags = QuestionContentTag::where('exam_type', "Aptitude Test")
+        $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $aptitude_test_mcq->id)
             ->get();
         foreach ($questionContentTags as $qct) {
@@ -148,7 +148,7 @@ class AptitudeTestMCQController extends Controller
 
         $save = $aptitude_test_mcq->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', "Aptitude Test")
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $aptitude_test_mcq->id)
             ->get();
         foreach ($deleteContentTags as $deleteContentTag) {
@@ -158,7 +158,7 @@ class AptitudeTestMCQController extends Controller
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = 'Aptitude Test';
+                $question_content_tag->exam_type = $exam->exam_type;
                 $question_content_tag->question_id = $aptitude_test_mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
@@ -174,6 +174,12 @@ class AptitudeTestMCQController extends Controller
     public function destroy(Exam $exam, AptitudeTestMCQ $aptitude_test_mcq)
     {
         $exam = Exam::where('id', $aptitude_test_mcq->exam_id)->first();
+
+        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type)->where('question_id', $aptitude_test_mcq->id)->get();
+
+        foreach($question_content_tags as $question_content_tag){
+            $question_content_tag->delete();
+        }
 
         $delete = $aptitude_test_mcq->delete();
         if ($delete) {
