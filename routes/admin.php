@@ -129,6 +129,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
 
 
+
     // NEW STUFF
     Route::get('/all-pop-quiz', [ExamController::class, 'allPQ'])->name('showAllPQ');
     Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
@@ -137,10 +138,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/exam/{exam}/add-question-CQ-only', [ExamController::class, 'addQuestion_CQ_only'])->name('addQuestion_CQ_only');
     Route::get('/exam/{exam}/add-question-MCQ-only', [ExamController::class, 'addQuestion_MCQ_only'])->name('addQuestion_MCQ_only');
     //
-
-
-
     // END OF EXAM
+
+
+
 
     // START OF EXAM
     Route::resource('/batch-exam', BatchExamController::class, ['except' => ['show', 'store', 'update']]);
@@ -175,15 +176,29 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
 
 
+
     // START OF pop-quiz MCQ EXAM
-    Route::resource('{exam}/pop-quiz-mcq', PopQuizMCQController::class);
+    Route::resource('{exam}/pop-quiz-mcq', PopQuizMCQController::class)->except(['index']);
+    Route::get('{exam}/pop-quiz-all-questions', [PopQuizMCQController::class, 'all'])->name('pop-quiz-all');
     // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
     // END OF Pop Quiz MCQ EXAM
 
     // START OF pop-quiz CQ EXAM
-    Route::resource('{exam}/pop-quiz-cq', PopQuizCQController::class);
+    Route::resource('{exam}/pop-quiz-cq', PopQuizCQController::class)->except(['index']);
     // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
     // END OF Pop Quiz CQ EXAM
+
+    // START OF topic end exam MCQ EXAM
+    Route::resource('{exam}/topic-end-exam-mcq', TopicEndExamMCQController::class)->except(['index']);
+    Route::get('{exam}/topic-end-exam-all-questions', [TopicEndExamMCQController::class, 'all'])->name('topic-end-exam-all');
+    // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
+    // END OF Pop Quiz MCQ EXAM
+
+    // START OF topic end exam CQ EXAM
+    Route::resource('{exam}/topic-end-exam-cq', PopQuizCQController::class)->except(['index']);
+    // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
+    // END OF Pop Quiz CQ EXAM
+
 
 
 

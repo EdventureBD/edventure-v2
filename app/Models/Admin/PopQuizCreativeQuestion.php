@@ -12,6 +12,8 @@ class PopQuizCreativeQuestion extends Model
 {
     use HasFactory;
 
+    protected $table = "pop_quiz_creative_questions";
+
     protected $guarded = [];
 
     public function getRouteKeyName()

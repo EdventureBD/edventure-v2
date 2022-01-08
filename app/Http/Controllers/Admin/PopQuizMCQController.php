@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\Storage;
 
  //models
 use App\Models\Admin\PopQuizMCQ;
+use App\Models\Admin\PopQuizCreativeQuestion;
 use App\Models\Admin\QuestionContentTag;
 use App\Models\Admin\Exam;
 use App\Models\Admin\ContentTag;
 
 class PopQuizMCQController extends Controller
 {
-    public function index(Exam $exam)
+    public function all(Exam $exam)
     {
         $pop_quiz_mcqs = PopQuizMCQ::join('exams', 'pop_quiz_mcqs.exam_id', 'exams.id')
         ->select('pop_quiz_mcqs.*', 'exams.title as examTitle')
         ->where('exam_id', $exam->id)
         ->orderby('id', 'DESC')->get();
 
-        return view('admin.pages.mcq_and_cq.index_mcq', compact('pop_quiz_mcqs', 'exam'));
+        $pop_quiz_cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
+        ->orderby('id', 'DESC')->get();
+
+        return view('admin.pages.mcq_and_cq.index', compact('pop_quiz_mcqs', 'pop_quiz_cqs', 'exam'));
     }
 
     public function store(Request $request, Exam $exam)
