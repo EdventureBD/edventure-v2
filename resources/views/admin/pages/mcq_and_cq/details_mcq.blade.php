@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'MCQ Details',
-'pageName'=>'MCQ Details',
-'secondPageName'=>'MCQ Details'
+'title'=> $type.' MCQ Details',
+'pageName'=> $type.' MCQ Details',
+'secondPageName'=> $type.' MCQ Details'
 ])
 @section('css1')
     <!-- summernote -->

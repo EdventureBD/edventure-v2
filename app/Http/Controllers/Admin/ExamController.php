@@ -71,15 +71,6 @@ class ExamController extends Controller
         } elseif (($exam->exam_type) == 'Aptitude Test') {
             return view('admin.pages.aptitude_test.create', compact('exam', 'contentTags'));
         }
-        
-        // elseif (($exam->exam_type) == 'Pop Quiz') {
-
-        //     // dd("HIT");
-
-        //     return view('admin.pages.pop_quiz.create_MCQ', compact('exam', 'contentTags'));
-        // }elseif (($exam->exam_type) == 'Topic End Exam') {
-        //     return view('admin.pages.topic_end_exam.create', compact('exam', 'contentTags'));
-        // }
     }
 
     public function addQuestion_CQ_only(Exam $exam)
@@ -94,23 +85,14 @@ class ExamController extends Controller
         }
 
         if (($exam->exam_type) == 'Pop Quiz') {
-            // dd($exam, "Pop Quiz CQ only");
-            return view('admin.pages.mcq_and_cq.create_cq', compact('exam', 'contentTags'));
+            $store_route = 'pop-quiz-cq.store';
+            $type = 'Pop Quiz';
         } elseif (($exam->exam_type) == 'Topic End Exam') {
-            dd($exam, "Topic End Exam CQ only");
-            return view('admin.pages.mcq_and_cq.create_cq', compact('exam', 'contentTags'));
+            $store_route = 'topic-end-exam-cq.store';
+            $type = 'Topic End Exam';
         }
 
-        dd("Missed !!");
-        
-        // elseif (($exam->exam_type) == 'Pop Quiz') {
-
-        //     // dd("HIT");
-
-        //     return view('admin.pages.pop_quiz.create_MCQ', compact('exam', 'contentTags'));
-        // }elseif (($exam->exam_type) == 'Topic End Exam') {
-        //     return view('admin.pages.topic_end_exam.create', compact('exam', 'contentTags'));
-        // }
+        return view('admin.pages.mcq_and_cq.create_cq', compact('exam', 'contentTags', 'store_route', 'type'));
     }
 
     public function addQuestion_MCQ_only(Exam $exam)
@@ -125,24 +107,14 @@ class ExamController extends Controller
         }
 
         if (($exam->exam_type) == 'Pop Quiz') {
-            // dd($exam->exam_type, "Pop Quiz MCQ only");
-            $route = 'pop-quiz-mcq.store';
-            return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags', 'route'));
+            $store_route = 'pop-quiz-mcq.store';
+            $type = 'Pop Quiz';
         } elseif (($exam->exam_type) == 'Topic End Exam') {
-            dd($exam->exam_type, "Topic End Exam MCQ only");
-            return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags'));
+            $store_route = 'topic-end-exam-mcq.store';
+            $type = 'Topic End Exam';
         }
 
-        dd("Missed !!");
-        
-        // elseif (($exam->exam_type) == 'Pop Quiz') {
-
-        //     // dd("HIT");
-
-        //     return view('admin.pages.pop_quiz.create_MCQ', compact('exam', 'contentTags'));
-        // }elseif (($exam->exam_type) == 'Topic End Exam') {
-        //     return view('admin.pages.topic_end_exam.create', compact('exam', 'contentTags'));
-        // }
+        return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags', 'store_route', 'type'));
     }
 
     public function excelAddQuestion(Exam $exam, Request $request)
@@ -174,42 +146,31 @@ class ExamController extends Controller
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.mcq.index', compact('exam', 'mcqs'));
             return redirect()->route('mcq.index', [$exam]);
-        } elseif ($exam->exam_type == 'CQ') {
+        }
+        elseif ($exam->exam_type == 'CQ') {
             // $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
             //     ->select('c_q_s.*', 'exams.title as examTitle')
             //     ->where('exam_id', $exam->id)
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.cq.index', compact('exam', 'cqs'));
             return redirect()->route('cq.index', [$exam]);
-        } elseif ($exam->exam_type == 'Assignment') {
+        }
+        elseif ($exam->exam_type == 'Assignment') {
             // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
             //     ->select('assignments.*', 'exams.title as examTitle')
             //     ->where('exam_id', $exam->id)
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
             return redirect()->route('assignment.index', [$exam]);
-        } elseif ($exam->exam_type == 'Aptitude Test') {
-            // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
-            //     ->select('assignments.*', 'exams.title as examTitle')
-            //     ->where('exam_id', $exam->id)
-            //     ->orderby('id', 'DESC')->get();
-            // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
+        }
+        elseif ($exam->exam_type == 'Aptitude Test') {
             return redirect()->route('aptitude-test-mcqs.index', [$exam]);
-        } elseif ($exam->exam_type == 'Pop Quiz') {
-            // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
-            //     ->select('assignments.*', 'exams.title as examTitle')
-            //     ->where('exam_id', $exam->id)
-            //     ->orderby('id', 'DESC')->get();
-            // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
+        }
+        elseif ($exam->exam_type == 'Pop Quiz') {
             return redirect()->route('pop-quiz-all', [$exam]);
-        } elseif ($exam->exam_type == 'Topic End Exam') {
-            // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
-            //     ->select('assignments.*', 'exams.title as examTitle')
-            //     ->where('exam_id', $exam->id)
-            //     ->orderby('id', 'DESC')->get();
-            // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
-            dd("Topic End Exam Boi in ExamController");
-            return redirect()->route('topic-end-exam.index', [$exam]);
+        }
+        elseif ($exam->exam_type == 'Topic End Exam') {
+            return redirect()->route('topic-end-exam-all', [$exam]);
         }
     }
 
@@ -250,16 +211,6 @@ class ExamController extends Controller
         //     ->select('exams.*', 'courses.title as courseName', 'course_topics.title as topicName')
         //     ->where('exams.exam_type', $examType)
         //     ->orderby('id', 'DESC')->get();
-
-        // if($examType == "Pop Quiz" || $examType == "Topic End Exam"){
-        //     $exams = Exam::where('exam_type', $examType)->orderby('id', 'DESC')->get();
-        //     return view('admin.pages.exam_cq_and_mcq.index', compact('exams'));
-        // }
-        // else{
-        //     // dd("MISS");
-        //     // $exams = Exam::where('exam_type', $examType)->orderby('id', 'DESC')->get();
-        //     // return view('admin.pages.exam.index', compact('exams'));
-        // }
 
         $exams = Exam::where('exam_type', $examType)->orderby('id', 'DESC')->get();
         return view('admin.pages.exam.index', compact('exams'));

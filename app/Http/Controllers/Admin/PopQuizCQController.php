@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 // support classes
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\Admin\ExamController;
 
 // models
 use App\Models\Admin\QuestionContentTag;
@@ -175,12 +174,14 @@ class PopQuizCQController extends Controller
         return redirect()->route('exam.show', $request->slug);
     }
 
-    public function show(Exam $exam, PopQuizCreativeQuestion $pop_quiz_cq)
+    public function show(Exam $exam, $pop_quiz_cq_slug)
     {
-        $cquestion1 = $pop_quiz_cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
-        $cquestion2 = $pop_quiz_cq->question()->where('marks', 2)->first(); // অনুধাবন
-        $cquestion3 = $pop_quiz_cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
-        $cquestion4 = $pop_quiz_cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
+        $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+
+        $cquestion1 = $cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
+        $cquestion2 = $cq->question()->where('marks', 2)->first(); // অনুধাবন
+        $cquestion3 = $cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
+        $cquestion4 = $cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
         $questionContentTags1 = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $cquestion1->id)
             ->get();
@@ -194,8 +195,10 @@ class PopQuizCQController extends Controller
             ->where('question_id', $cquestion4->id)
             ->get();
 
+        $type = "Pop Quiz";
+
         return view('admin.pages.mcq_and_cq.details_cq', compact(
-            'pop_quiz_cq',
+            'cq',
             'exam',
             'cquestion1',
             'cquestion2',
@@ -205,21 +208,23 @@ class PopQuizCQController extends Controller
             'questionContentTags2',
             'questionContentTags3',
             'questionContentTags4',
+            'type',
         ));
     }
 
-    public function edit(Exam $exam, PopQuizCreativeQuestion $pop_quiz_cq)
+    public function edit(Exam $exam, $pop_quiz_cq_slug)
     {
-        $cquestion1 = $pop_quiz_cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
-        $cquestion2 = $pop_quiz_cq->question()->where('marks', 2)->first(); // অনুধাবন
-        $cquestion3 = $pop_quiz_cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
-        $cquestion4 = $pop_quiz_cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
+        $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+
+        $cquestion1 = $cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
+        $cquestion2 = $cq->question()->where('marks', 2)->first(); // অনুধাবন
+        $cquestion3 = $cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
+        $cquestion4 = $cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
         $tagId1 = []; // জ্ঞানমূলক
         $tagId2 = []; // অনুধাবন
         $tagId3 = []; // প্রয়োগমূলক
         $tagId4 = []; // উচ্চতর দক্ষতা
 
-        // dd($cquestion1, $cquestion2, $cquestion3, $cquestion4);
         // জ্ঞানমূলক
         $questionContentTags1 = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $cquestion1->id)
@@ -238,7 +243,6 @@ class PopQuizCQController extends Controller
                 ->get();
         }
 
-        // dd($questionContentTags1, $contentTags1);
         // অনুধাবন
         $questionContentTags2 = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $cquestion2->id)
@@ -257,7 +261,6 @@ class PopQuizCQController extends Controller
                 ->get();
         }
 
-        // dd($questionContentTags2, $contentTags2);
         // প্রয়োগমূলক
         $questionContentTags3 = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $cquestion3->id)
@@ -276,7 +279,6 @@ class PopQuizCQController extends Controller
                 ->get();
         }
 
-        // dd($questionContentTags3, $contentTags3);
         // উচ্চতর দক্ষতা
         $questionContentTags4 = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $cquestion4->id)
@@ -296,9 +298,11 @@ class PopQuizCQController extends Controller
                 ->get();
         }
 
-        // dd($questionContentTags4, $contentTags4);
+        $type = "Pop Quiz";
+        $update_route = 'pop-quiz-cq.update';
+
         return view('admin.pages.mcq_and_cq.edit_cq', compact(
-            'pop_quiz_cq',
+            'cq',
             'exam',
             'contentTags1',
             'questionContentTags1',
@@ -312,12 +316,13 @@ class PopQuizCQController extends Controller
             'cquestion2',
             'cquestion3',
             'cquestion4',
+            'type',
+            'update_route',
         ));
     }
 
-    public function update(Request $request, Exam $exam, PopQuizCreativeQuestion $pop_quiz_cq)
+    public function update(Request $request, Exam $exam, $pop_quiz_cq_slug)
     {
-        // dd("Pop Quiz PopQuizCQ Controller update");
         $validateData = $request->validate([
             'creative_question' => 'required|min:4',
             'uddipokimage' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
@@ -337,25 +342,27 @@ class PopQuizCQController extends Controller
             'ucchotorcontentTagIds' => 'required'
         ]);
 
-        $pop_quiz_cq->creative_question = $request->creative_question;
-        $pop_quiz_cq->exam_id = $request->examId;
+        $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+
+        $cq->creative_question = $request->creative_question;
+        $cq->exam_id = $request->examId;
         if ($request->hasFile('uddipokimage')) {
-            Storage::delete('public/question/pop_quiz_cq' . $pop_quiz_cq->image);
-            $pop_quiz_cq->image = $request->uddipokimage->store('public/question/pop_quiz_cq');
+            Storage::delete('public/question/pop_quiz_cq' . $cq->image);
+            $cq->image = $request->uddipokimage->store('public/question/pop_quiz_cq');
         }
         if ($request->hasFile('answer')) {
-            Storage::delete('public/question/pop_quiz_cq/answer' . $pop_quiz_cq->standard_ans_pdf);
-            $pop_quiz_cq->standard_ans_pdf = $request->answer->store('public/question/pop_quiz_cq/answer');
+            Storage::delete('public/question/pop_quiz_cq/answer' . $cq->standard_ans_pdf);
+            $cq->standard_ans_pdf = $request->answer->store('public/question/pop_quiz_cq/answer');
         }
 
-        $saveCreativeQuestion = $pop_quiz_cq->save();
+        $cq->save();
 
         // জ্ঞানমূলক
-        $gyanmulok = PopQuizCQ::where('creative_question_id', $pop_quiz_cq->id)->where('marks', 1)->first();
+        $gyanmulok = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 1)->first();
         $gyanmulok->question = $request->gyanmulokquestion;
         $gyanmulok->slug = (string) Str::uuid();
         $gyanmulok->marks = $request->gyanmulokmarks;
-        $gyanmulok->creative_question_id = $pop_quiz_cq->id;
+        $gyanmulok->creative_question_id = $cq->id;
         $gyanmulok->number_of_attempt = 0;
         $gyanmulok->gain_marks = 0;
         $gyanmulok->success_rate = 0;
@@ -387,11 +394,11 @@ class PopQuizCQController extends Controller
         }
 
         // অনুধাবন
-        $onudhabon = PopQuizCQ::where('creative_question_id', $pop_quiz_cq->id)->where('marks', 2)->first();
+        $onudhabon = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 2)->first();
         $onudhabon->question = $request->onudhabonquestion;
         $onudhabon->slug = (string) Str::uuid();
         $onudhabon->marks = $request->onudhabonmarks;
-        $onudhabon->creative_question_id = $pop_quiz_cq->id;
+        $onudhabon->creative_question_id = $cq->id;
         $onudhabon->number_of_attempt = 0;
         $onudhabon->gain_marks = 0;
         $onudhabon->success_rate = 0;
@@ -423,11 +430,11 @@ class PopQuizCQController extends Controller
         }
 
         // প্রয়োগমূলক
-        $proyug = PopQuizCQ::where('creative_question_id', $pop_quiz_cq->id)->where('marks', 3)->first();
+        $proyug = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 3)->first();
         $proyug->question = $request->proyugquestion;
         $proyug->slug = (string) Str::uuid();
         $proyug->marks = $request->proyugmarks;
-        $proyug->creative_question_id = $pop_quiz_cq->id;
+        $proyug->creative_question_id = $cq->id;
         $proyug->number_of_attempt = 0;
         $proyug->gain_marks = 0;
         $proyug->success_rate = 0;
@@ -459,11 +466,11 @@ class PopQuizCQController extends Controller
         }
 
         // উচ্চতর দক্ষতা
-        $ucchotor = PopQuizCQ::where('creative_question_id', $pop_quiz_cq->id)->where('marks', 4)->first();
+        $ucchotor = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 4)->first();
         $ucchotor->question = $request->ucchotorquestion;
         $ucchotor->slug = (string) Str::uuid();
         $ucchotor->marks = $request->ucchotormarks;
-        $ucchotor->creative_question_id = $pop_quiz_cq->id;
+        $ucchotor->creative_question_id = $cq->id;
         $ucchotor->number_of_attempt = 0;
         $ucchotor->gain_marks = 0;
         $ucchotor->success_rate = 0;
@@ -497,9 +504,17 @@ class PopQuizCQController extends Controller
         return redirect()->route('exam.show', $request->slug);
     }
 
-    public function destroy(Exam $exam, PopQuizCreativeQuestion $pop_quiz_cq)
+    public function destroy(Exam $exam, $pop_quiz_cq_slug)
     {
-        $deleteCreativeQuestion = $pop_quiz_cq->delete();
+        $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+
+        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type)->where('question_id', $cq->id)->get();
+
+        foreach($question_content_tags as $question_content_tag){
+            $question_content_tag->delete();
+        }
+
+        $deleteCreativeQuestion = $cq->delete();
 
         if ($deleteCreativeQuestion) {
             return redirect()->route('exam.show', $exam)->with('status', 'Pop Quiz CQ deleted successfully!');
