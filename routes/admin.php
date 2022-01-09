@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\MCQController;
 use App\Http\Controllers\Admin\AptitudeTestMCQController;
 use App\Http\Controllers\Admin\PopQuizMCQController;
 use App\Http\Controllers\Admin\PopQuizCQController;
+use App\Http\Controllers\Admin\TopicEndExamMCQController;
+use App\Http\Controllers\Admin\TopicEndExamCQController;
 
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ExamController;
@@ -188,7 +190,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // END OF Pop Quiz MCQ EXAM
 
     // START OF topic end exam CQ EXAM
-    Route::resource('{exam}/topic-end-exam-cq', PopQuizCQController::class)->except(['index']);
+    Route::resource('{exam}/topic-end-exam-cq', TopicEndExamCQController::class)->except(['index']);
     // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
     // END OF Pop Quiz CQ EXAM
 
