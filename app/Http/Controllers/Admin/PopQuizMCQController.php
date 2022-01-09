@@ -18,15 +18,15 @@ class PopQuizMCQController extends Controller
 {
     public function all(Exam $exam)
     {
-        $pop_quiz_mcqs = PopQuizMCQ::join('exams', 'pop_quiz_mcqs.exam_id', 'exams.id')
+        $mcqs = PopQuizMCQ::join('exams', 'pop_quiz_mcqs.exam_id', 'exams.id')
         ->select('pop_quiz_mcqs.*', 'exams.title as examTitle')
         ->where('exam_id', $exam->id)
         ->orderby('id', 'DESC')->get();
 
-        $pop_quiz_cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
+        $cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
         ->orderby('id', 'DESC')->get();
 
-        return view('admin.pages.mcq_and_cq.index', compact('pop_quiz_mcqs', 'pop_quiz_cqs', 'exam'));
+        return view('admin.pages.mcq_and_cq.index', compact('mcqs', 'cqs', 'exam'));
     }
 
     public function store(Request $request, Exam $exam)
@@ -45,31 +45,31 @@ class PopQuizMCQController extends Controller
             'contentTagIds' => 'required',
         ]);
 
-        $pop_quiz_mcqs = new PopQuizMCQ();
-        $pop_quiz_mcqs->question = $request['question'];
-        $pop_quiz_mcqs->slug = (string) Str::uuid();
+        $mcqs = new PopQuizMCQ();
+        $mcqs->question = $request['question'];
+        $mcqs->slug = (string) Str::uuid();
         if ($request->hasFile('image')) {
-            $pop_quiz_mcqs->image = $request->image->store('public/question/pop_quiz_mcqs');
-            $pop_quiz_mcqs->image = Storage::url($pop_quiz_mcqs->image);
+            $mcqs->image = $request->image->store('public/question/pop_quiz_mcqs');
+            $mcqs->image = Storage::url($mcqs->image);
         }
-        $pop_quiz_mcqs->field1 = $request['field1'];
-        $pop_quiz_mcqs->field2 = $request['field2'];
-        $pop_quiz_mcqs->field3 = $request['field3'];
-        $pop_quiz_mcqs->field4 = $request['field4'];
-        $pop_quiz_mcqs->answer = $request['answer'];
-        $pop_quiz_mcqs->exam_id = $request->examId;
-        $pop_quiz_mcqs->explanation = $request['explanation'];
-        $pop_quiz_mcqs->number_of_attempt = 0;
-        $pop_quiz_mcqs->gain_marks = 0;
-        $pop_quiz_mcqs->success_rate = 0;
+        $mcqs->field1 = $request['field1'];
+        $mcqs->field2 = $request['field2'];
+        $mcqs->field3 = $request['field3'];
+        $mcqs->field4 = $request['field4'];
+        $mcqs->answer = $request['answer'];
+        $mcqs->exam_id = $request->examId;
+        $mcqs->explanation = $request['explanation'];
+        $mcqs->number_of_attempt = 0;
+        $mcqs->gain_marks = 0;
+        $mcqs->success_rate = 0;
 
-        $save = $pop_quiz_mcqs->save();
+        $save = $mcqs->save();
 
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
                 $question_content_tag->exam_type = $exam->exam_type;
-                $question_content_tag->question_id = $pop_quiz_mcqs->id;
+                $question_content_tag->question_id = $mcqs->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
             }
@@ -84,7 +84,9 @@ class PopQuizMCQController extends Controller
     public function show(Exam $exam, PopQuizMCQ $pop_quiz_mcq)
     {
         $exam = Exam::where('id', $pop_quiz_mcq->exam_id)->first();
-        return view('admin.pages.mcq_and_cq.details_mcq', compact('pop_quiz_mcq', 'exam'));
+        // For use with recyclable blade files
+        $mcq = $pop_quiz_mcq;
+        return view('admin.pages.mcq_and_cq.details_mcq', compact('mcq', 'exam'));
     }
 
     public function edit(Exam $exam, PopQuizMCQ $pop_quiz_mcq)

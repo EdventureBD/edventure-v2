@@ -31,9 +31,9 @@
                                             <div class="form-group">
                                                 <label for="question" class="col-form-label">Question <span
                                                         class="must-filled"></span></label>
-                                                {{-- <input type="text" class="form-control" value="{{ $pop_quiz_mcq->question }}"
+                                                {{-- <input type="text" class="form-control" value="{{ $mcq->question }}"
                                                     disabled> --}}
-                                                <p>{!! $pop_quiz_mcq->question !!}</p>
+                                                <p>{!! $mcq->question !!}</p>
                                                 @error('question')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -45,7 +45,7 @@
                                                 <div class="input-group">
                                                     <div class="___class_+?18___">
                                                         <img class="product-image-thumb"
-                                                            src='{{ $pop_quiz_mcq->image }}' alt="">
+                                                            src='{{ $mcq->image }}' alt="">
 
                                                     </div>
                                                 </div>
@@ -57,25 +57,25 @@
                                         <div class="col-md-5 card ml-4">
                                             <div class="form-group card-body">
                                                 <label for="field1" class="col-form-label">Option 1</label>
-                                                <p>{!! $pop_quiz_mcq->field1 !!}</p>
+                                                <p>{!! $mcq->field1 !!}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-5 card ml-4">
                                             <div class="form-group card-body">
                                                 <label for="field2" class="col-form-label">Option 2</label>
-                                                <p>{!! $pop_quiz_mcq->field2 !!}</p>
+                                                <p>{!! $mcq->field2 !!}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-5 card ml-4">
                                             <div class="form-group card-body">
                                                 <label for="field3" class="col-form-label">Option 3</label>
-                                                <p>{!! $pop_quiz_mcq->field3 !!}</p>
+                                                <p>{!! $mcq->field3 !!}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-5 card ml-4">
                                             <div class="form-group card-body">
                                                 <label for="field4" class="col-form-label">Option 4</span></label>
-                                                <p>{!! $pop_quiz_mcq->field4 !!}</p>
+                                                <p>{!! $mcq->field4 !!}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -85,10 +85,10 @@
                                                 <label class="col-form-label" for="examId">Answer <span
                                                         class="must-filled">*</span></label>
                                                 <select class="form-control" disabled>
-                                                    <option @if ($pop_quiz_mcq->answer == 1) selected @endif>Option 1</option>
-                                                    <option @if ($pop_quiz_mcq->answer == 2) selected @endif>Option 2</option>
-                                                    <option @if ($pop_quiz_mcq->answer == 3) selected @endif>Option 3</option>
-                                                    <option @if ($pop_quiz_mcq->answer == 4) selected @endif>Option 4</option>
+                                                    <option @if ($mcq->answer == 1) selected @endif>Option 1</option>
+                                                    <option @if ($mcq->answer == 2) selected @endif>Option 2</option>
+                                                    <option @if ($mcq->answer == 3) selected @endif>Option 3</option>
+                                                    <option @if ($mcq->answer == 4) selected @endif>Option 4</option>
                                                 </select>
                                                 @error('answer')
                                                     <p style="color: red;">{{ $message }}</p>
@@ -113,7 +113,7 @@
                                             <div class="form-group">
                                                 <label for="number_of_attempt" class="col-form-label">No of Attempt</label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $pop_quiz_mcq->number_of_attempt }}">
+                                                    value="{{ $mcq->number_of_attempt }}">
                                                 @error('number_of_attempt')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -123,7 +123,7 @@
                                             <div class="form-group">
                                                 <label for="gain_marks" class="col-form-label">Gained marks</label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $pop_quiz_mcq->gain_marks }}">
+                                                    value="{{ $mcq->gain_marks }}">
                                                 @error('gain_marks')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -133,7 +133,7 @@
                                             <div class="form-group">
                                                 <label for="gain_marks" class="col-form-label">Success rate</label>
                                                 <input type="text" class="form-control" disabled
-                                                    value="{{ $pop_quiz_mcq->success_rate }}">
+                                                    value="{{ $mcq->success_rate }}">
                                                 @error('success_rate')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
@@ -145,7 +145,7 @@
                                         <div class="col-md-12 card">
                                             <div class="form-group card-body">
                                                 <label for="field4" class="col-form-label">Explanation</span></label>
-                                                <p>{!! $pop_quiz_mcq->explanation !!}</p>
+                                                <p>{!! $mcq->explanation !!}</p>
                                             </div>
                                         </div>
                                     </div>

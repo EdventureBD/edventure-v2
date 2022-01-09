@@ -102,54 +102,54 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 @foreach ($pop_quiz_mcqs as $pop_quiz_mcq)
+                                 @foreach ($mcqs as $mcq)
                                        <tr>
                                           <td>{{ $loop->iteration }}</td>
-                                          <td>{!! $pop_quiz_mcq->question !!}</td>
+                                          <td>{!! $mcq->question !!}</td>
                                           <td>
-                                             <img class="product-image-thumb" src="{{ $pop_quiz_mcq->image }}"
+                                             <img class="product-image-thumb" src="{{ $mcq->image }}"
                                                    alt="">
                                           </td>
-                                          <td>{!! $pop_quiz_mcq->field1 !!}</td>
-                                          <td>{!! $pop_quiz_mcq->field2 !!}</td>
-                                          <td>{!! $pop_quiz_mcq->field3 !!}</td>
-                                          <td>{!! $pop_quiz_mcq->field4 !!}</td>
+                                          <td>{!! $mcq->field1 !!}</td>
+                                          <td>{!! $mcq->field2 !!}</td>
+                                          <td>{!! $mcq->field3 !!}</td>
+                                          <td>{!! $mcq->field4 !!}</td>
                                           <td>
-                                             @if ($pop_quiz_mcq->answer == 1)
-                                                   {!! $pop_quiz_mcq->field1 !!}
-                                             @elseif(($pop_quiz_mcq->answer) == 2)
-                                                   {!! $pop_quiz_mcq->field2 !!}
-                                             @elseif(($pop_quiz_mcq->answer) == 3)
-                                                   {!! $pop_quiz_mcq->field3 !!}
-                                             @elseif(($pop_quiz_mcq->answer) == 4)
-                                                   {!! $pop_quiz_mcq->field4 !!}
+                                             @if ($mcq->answer == 1)
+                                                   {!! $mcq->field1 !!}
+                                             @elseif(($mcq->answer) == 2)
+                                                   {!! $mcq->field2 !!}
+                                             @elseif(($mcq->answer) == 3)
+                                                   {!! $mcq->field3 !!}
+                                             @elseif(($mcq->answer) == 4)
+                                                   {!! $mcq->field4 !!}
                                              @endif
                                           </td>
                                           <td>
                                              <div class="btn-group">
                                                    <a class="mr-1"
-                                                      href="{{ route('pop-quiz-mcq.show', [$exam->slug, $pop_quiz_mcq->slug]) }}"
+                                                      href="{{ route('pop-quiz-mcq.show', [$exam->slug, $mcq->slug]) }}"
                                                       title="See Details">
                                                       <button type="button" class="btn btn-info"><i
                                                                class="fas fa-eye"></i></button>
                                                    </a>
                                                    <a class="mr-1"
-                                                      href="{{ route('pop-quiz-mcq.edit', [$exam->slug, $pop_quiz_mcq->slug]) }}"
-                                                      title="Edit {{ $pop_quiz_mcq->question }}">
+                                                      href="{{ route('pop-quiz-mcq.edit', [$exam->slug, $mcq->slug]) }}"
+                                                      title="Edit {{ $mcq->question }}">
                                                       <button class="btn btn-primary"><i
                                                                class="far fa-edit"></i></button>
                                                    </a>
-                                                   <a class="mr-1" href="#deleteMCQ{{ $pop_quiz_mcq->id }}"
-                                                      data-toggle="modal" title="Delete {{ $pop_quiz_mcq->question }}">
+                                                   <a class="mr-1" href="#deleteMCQ{{ $mcq->id }}"
+                                                      data-toggle="modal" title="Delete {{ $mcq->question }}">
                                                       <button class="btn btn-danger"><i
                                                                class="far fa-trash-alt"></i></button>
                                                    </a>
-                                                   <div class="modal fade" id="deleteMCQ{{ $pop_quiz_mcq->id }}">
+                                                   <div class="modal fade" id="deleteMCQ{{ $mcq->id }}">
                                                       <div class="modal-dialog">
                                                          <div class="modal-content bg-danger">
                                                                <div class="modal-header">
                                                                   <h4 class="modal-title">Delete MCQ
-                                                                     {!! $pop_quiz_mcq->question !!}</h4>
+                                                                     {!! $mcq->question !!}</h4>
                                                                   <button type="button" class="close"
                                                                      data-dismiss="modal" aria-label="Close">
                                                                      <span aria-hidden="true">&times;</span>
@@ -162,7 +162,7 @@
                                                                   <button type="button" class="btn btn-outline-light"
                                                                      data-dismiss="modal">Close</button>
                                                                   <form
-                                                                     action="{{ route('pop-quiz-mcq.destroy', [$exam->slug, $pop_quiz_mcq->slug]) }}"
+                                                                     action="{{ route('pop-quiz-mcq.destroy', [$exam->slug, $mcq->slug]) }}"
                                                                      method="POST">
                                                                      @csrf
                                                                      @method('delete')
@@ -331,38 +331,38 @@
                               </tr>
                            </thead>
                            <tbody>
-                              @foreach ($pop_quiz_cqs as $pop_quiz_cq)
+                              @foreach ($cqs as $cq)
                                     <tr>
                                        <td>{{ $loop->iteration }}</td>
                                        <td>
-                                          {!! $pop_quiz_cq->creative_question !!}
+                                          {!! $cq->creative_question !!}
                                        </td>
                                        <td>
-                                          <img class="product-image-thumb" src="{{ Storage::url($pop_quiz_cq->image) }}"
+                                          <img class="product-image-thumb" src="{{ Storage::url($cq->image) }}"
                                                 alt="">
                                        </td>
                                        <td>
                                           <div class="btn-group">
                                                 <a class="mr-1"
-                                                   href="{{ route('pop-quiz-cq.show', [$exam->slug, $pop_quiz_cq->slug]) }}"
+                                                   href="{{ route('pop-quiz-cq.show', [$exam->slug, $cq->slug]) }}"
                                                    title="See Details">
                                                    <button type="button" class="btn btn-info">
                                                       <i class="fas fa-eye"></i></button>
                                                 </a>
                                                 <a class="mr-1"
-                                                   href="{{ route('pop-quiz-cq.edit', [$exam->slug, $pop_quiz_cq->slug]) }}"
+                                                   href="{{ route('pop-quiz-cq.edit', [$exam->slug, $cq->slug]) }}"
                                                    title="Edit">
                                                    <button class="btn btn-info">
                                                       <i class="far fa-edit"></i>
                                                    </button>
                                                 </a>
-                                                <a class="mr-1" href="#deletecq{{ $pop_quiz_cq->id }}"
+                                                <a class="mr-1" href="#deletecq{{ $cq->id }}"
                                                    data-toggle="modal" title="Delete">
                                                    <button class="btn btn-danger">
                                                       <i class="far fa-trash-alt"></i>
                                                    </button>
                                                 </a>
-                                                <div class="modal fade" id="deletecq{{ $pop_quiz_cq->id }}"
+                                                <div class="modal fade" id="deletecq{{ $cq->id }}"
                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                    aria-hidden="true">
                                                    <div class="modal-dialog">
@@ -381,7 +381,7 @@
                                                                <button type="button" class="btn btn-outline-light"
                                                                   data-dismiss="modal">Close</button>
                                                                <form
-                                                                  action="{{ route('pop-quiz-cq.destroy', [$exam->slug, $pop_quiz_cq->slug]) }}"
+                                                                  action="{{ route('pop-quiz-cq.destroy', [$exam->slug, $cq->slug]) }}"
                                                                   method="POST">
                                                                   {{ csrf_field() }}
                                                                   @method('delete')

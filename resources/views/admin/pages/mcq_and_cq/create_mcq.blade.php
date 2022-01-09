@@ -48,8 +48,9 @@
                            </h3>
                         </div>
                         <!-- /.card-header -->
+                        {{-- 'pop-quiz-mcq.store' --}}
                         <div class="card-body">
-                           <form role="form" method="POST" action="{{ route('pop-quiz-mcq.store', $exam) }}"
+                           <form role="form" method="POST" action="{{ route($route, $exam) }}"
                               enctype="multipart/form-data">
                               {{ csrf_field() }}
                               <input name="examId" type="hidden" value="{{ $exam->id }}">

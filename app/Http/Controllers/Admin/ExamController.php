@@ -101,7 +101,7 @@ class ExamController extends Controller
             return view('admin.pages.mcq_and_cq.create_cq', compact('exam', 'contentTags'));
         }
 
-        dd("Missed LOL !!");
+        dd("Missed !!");
         
         // elseif (($exam->exam_type) == 'Pop Quiz') {
 
@@ -126,13 +126,14 @@ class ExamController extends Controller
 
         if (($exam->exam_type) == 'Pop Quiz') {
             // dd($exam->exam_type, "Pop Quiz MCQ only");
-            return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags'));
+            $route = 'pop-quiz-mcq.store';
+            return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags', 'route'));
         } elseif (($exam->exam_type) == 'Topic End Exam') {
             dd($exam->exam_type, "Topic End Exam MCQ only");
             return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags'));
         }
 
-        dd("Missed LOL !!");
+        dd("Missed !!");
         
         // elseif (($exam->exam_type) == 'Pop Quiz') {
 

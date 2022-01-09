@@ -32,13 +32,6 @@ class PopQuizCQController extends Controller
     //     return view('admin.pages.cq.index', compact('cqs', 'exam'));
     // }
 
-    public function create()
-    {
-        dd("Pop Quiz PopQuizCQ Controller Create");
-        // this function is written in exam controller named  addQuestion
-        ExamController::addQuestion_CQ_only(); //ignore the error. If you want to see the code just press the Alt key and left mouse button
-    }
-
     public function store(Request $request, Exam $exam)
     {
         $validateData = $request->validate([
