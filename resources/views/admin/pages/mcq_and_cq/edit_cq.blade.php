@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>' Pop Quiz CQ',
-'pageName'=>'Edit Pop Quiz CQ',
-'secondPageName'=>'Edit Pop Quiz CQ'
+'title'=> $type.' CQ',
+'pageName'=> 'Edit '.$type.' CQ',
+'secondPageName'=>'Edit '.$type.' CQ'
 ])
 @section('css1')
    <!-- Select2 -->
@@ -46,7 +46,7 @@
                      </div>
                      <!-- /.card-header -->
                      <div class="card-body">
-                           <form role="form" method="POST" action="{{ route('pop-quiz-cq.update', [$exam, $pop_quiz_cq]) }}"
+                           <form role="form" method="POST" action="{{ route($update_route, [$exam, $cq]) }}"
                               enctype="multipart/form-data">
                               {{ csrf_field() }}
                               @method('PUT')
@@ -61,7 +61,7 @@
                                        <textarea input="creative_question" id="creative_question" name="creative_question"
                                           placeholder="Enter question"
                                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                          required>{{ old('creative_question') ? old('creative_question') : $pop_quiz_cq->creative_question }}</textarea>
+                                          required>{{ old('creative_question') ? old('creative_question') : $cq->creative_question }}</textarea>
                                        @error('creative_question')
                                           <p style="color: red;">{{ $message }}</p>
                                        @enderror
@@ -87,8 +87,8 @@
                                              </div>
                                           </div>
                                           <div class="col-md-4">
-                                             @if ($pop_quiz_cq->image)
-                                                   <img class="product-image" src="{{ Storage::url($pop_quiz_cq->image) }}"
+                                             @if ($cq->image)
+                                                   <img class="product-image" src="{{ Storage::url($cq->image) }}"
                                                       id="previewImg" class="avatar" alt="...">
                                              @else
                                                    <img class="product-image" src="http://placehold.it/150x100"
@@ -96,7 +96,6 @@
                                              @endif
                                           </div>
                                        </div>
-
                                  </div>
                               </fieldset>
 
@@ -145,7 +144,6 @@
                                              @endif
                                           </div>
                                        </div>
-
                                  </div>
 
                                  <div class="row">
@@ -316,7 +314,6 @@
                                              @endif
                                           </div>
                                        </div>
-
                                  </div>
 
                                  <div class="row">
@@ -401,7 +398,6 @@
                                              @endif
                                           </div>
                                        </div>
-
                                  </div>
 
                                  <div class="row">
@@ -477,9 +473,6 @@
                                        </div>
                                  </div>
                               </fieldset>
-
-
-
 
                               <div class="card-footer">
                                  <button type="submit" class="btn btn-primary">Update</button>

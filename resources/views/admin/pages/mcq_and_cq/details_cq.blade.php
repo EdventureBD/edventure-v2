@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'Pop Quiz CQ Details',
-'pageName'=>'Pop Quiz CQ Details',
-'secondPageName'=>'Pop Quiz CQ Details'
+'title'=> $type.' CQ Details',
+'pageName'=> $type.' CQ Details',
+'secondPageName'=> $type.' CQ Details'
 ])
 @section('css1')
    <!-- summernote -->
@@ -31,20 +31,20 @@
                                           <div class="form-group">
                                              <label for="question" class="col-form-label">Question <span
                                                       class="must-filled"></span></label>
-                                             <p>{!! $pop_quiz_cq->creative_question !!}</p>
+                                             <p>{!! $cq->creative_question !!}</p>
                                              @error('question')
                                                    <p style="color: red;">{{ $message }}</p>
                                              @enderror
                                           </div>
                                        </div>
-                                       @if ($pop_quiz_cq->image)
+                                       @if ($cq->image)
                                           <div class="col-md-4">
                                              <div class="form-group">
                                                    <label for="" class="col-form-label">Image</label>
                                                    <div class="input-group">
                                                       <div class="___class_+?18___">
                                                          <img class="product-image-thumb"
-                                                               src='{{ Storage::url("$pop_quiz_cq->image") }}' alt="">
+                                                               src='{{ Storage::url("$cq->image") }}' alt="">
                                                       </div>
                                                    </div>
                                              </div>
@@ -218,7 +218,7 @@
 
                                  <div class="card bg-light mb-3 mt-3 shadow">
                                        <h3>Standard Answer PDF</h3>
-                                       <iframe src="{{ Storage::url($pop_quiz_cq->standard_ans_pdf) }}" frameborder="0"
+                                       <iframe src="{{ Storage::url($cq->standard_ans_pdf) }}" frameborder="0"
                                           width="100%" height="600px"></iframe>
                                  </div>
 

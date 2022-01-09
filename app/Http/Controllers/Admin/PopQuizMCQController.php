@@ -26,7 +26,27 @@ class PopQuizMCQController extends Controller
         $cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
         ->orderby('id', 'DESC')->get();
 
-        return view('admin.pages.mcq_and_cq.index', compact('mcqs', 'cqs', 'exam'));
+        $type = "Pop Quiz";
+        $mcq_show_route = "pop-quiz-mcq.show";
+        $mcq_edit_route = "pop-quiz-mcq.edit";
+        $mcq_destroy_route = "pop-quiz-mcq.destroy";
+
+        $cq_show_route = "pop-quiz-cq.show";
+        $cq_edit_route = "pop-quiz-cq.edit";
+        $cq_destroy_route = "pop-quiz-cq.destroy";
+
+        return view('admin.pages.mcq_and_cq.index', compact(
+            'mcqs',
+            'cqs',
+            'exam',
+            'type',
+            'mcq_show_route',
+            'mcq_edit_route',
+            'mcq_destroy_route',
+            'cq_show_route',
+            'cq_edit_route',
+            'cq_destroy_route',
+        ));
     }
 
     public function store(Request $request, Exam $exam)
@@ -45,31 +65,31 @@ class PopQuizMCQController extends Controller
             'contentTagIds' => 'required',
         ]);
 
-        $mcqs = new PopQuizMCQ();
-        $mcqs->question = $request['question'];
-        $mcqs->slug = (string) Str::uuid();
+        $mcq = new PopQuizMCQ();
+        $mcq->question = $request['question'];
+        $mcq->slug = (string) Str::uuid();
         if ($request->hasFile('image')) {
-            $mcqs->image = $request->image->store('public/question/pop_quiz_mcqs');
-            $mcqs->image = Storage::url($mcqs->image);
+            $mcq->image = $request->image->store('public/question/pop_quiz_mcqs');
+            $mcq->image = Storage::url($mcq->image);
         }
-        $mcqs->field1 = $request['field1'];
-        $mcqs->field2 = $request['field2'];
-        $mcqs->field3 = $request['field3'];
-        $mcqs->field4 = $request['field4'];
-        $mcqs->answer = $request['answer'];
-        $mcqs->exam_id = $request->examId;
-        $mcqs->explanation = $request['explanation'];
-        $mcqs->number_of_attempt = 0;
-        $mcqs->gain_marks = 0;
-        $mcqs->success_rate = 0;
+        $mcq->field1 = $request['field1'];
+        $mcq->field2 = $request['field2'];
+        $mcq->field3 = $request['field3'];
+        $mcq->field4 = $request['field4'];
+        $mcq->answer = $request['answer'];
+        $mcq->exam_id = $request->examId;
+        $mcq->explanation = $request['explanation'];
+        $mcq->number_of_attempt = 0;
+        $mcq->gain_marks = 0;
+        $mcq->success_rate = 0;
 
-        $save = $mcqs->save();
+        $save = $mcq->save();
 
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
                 $question_content_tag->exam_type = $exam->exam_type;
-                $question_content_tag->question_id = $mcqs->id;
+                $question_content_tag->question_id = $mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
             }
@@ -81,19 +101,20 @@ class PopQuizMCQController extends Controller
         }
     }
 
-    public function show(Exam $exam, PopQuizMCQ $pop_quiz_mcq)
+    public function show(Exam $exam, $pop_quiz_mcq_slug)
     {
-        $exam = Exam::where('id', $pop_quiz_mcq->exam_id)->first();
+        $mcq = PopQuizMCQ::where('slug', $pop_quiz_mcq_slug)->firstOrFail();
         // For use with recyclable blade files
-        $mcq = $pop_quiz_mcq;
-        return view('admin.pages.mcq_and_cq.details_mcq', compact('mcq', 'exam'));
+        $type = "Pop Quiz";
+        return view('admin.pages.mcq_and_cq.details_mcq', compact('mcq', 'exam', 'type'));
     }
 
-    public function edit(Exam $exam, PopQuizMCQ $pop_quiz_mcq)
+    public function edit(Exam $exam, $pop_quiz_mcq_slug)
     {
+        $mcq = PopQuizMCQ::where('slug', $pop_quiz_mcq_slug)->firstOrFail();
         $tagId = [];
         $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
-            ->where('question_id', $pop_quiz_mcq->id)
+            ->where('question_id', $mcq->id)
             ->get();
 
         foreach ($questionContentTags as $qct) {
@@ -111,10 +132,13 @@ class PopQuizMCQController extends Controller
                 ->get();
         }
 
-        return view('admin.pages.mcq_and_cq.edit_mcq', compact('pop_quiz_mcq', 'exam', 'contentTags', 'questionContentTags'));
+        $type = "Pop Quiz";
+        $update_route = 'pop-quiz-mcq.update';
+
+        return view('admin.pages.mcq_and_cq.edit_mcq', compact('mcq', 'exam', 'contentTags', 'questionContentTags', 'type', 'update_route'));
     }
 
-    public function update(Request $request, Exam $exam, PopQuizMCQ $pop_quiz_mcq)
+    public function update(Request $request, Exam $exam, $pop_quiz_mcq_slug)
     {
         $validaterequest = $request->validate([
             'question' => 'required|min:4',
@@ -130,27 +154,29 @@ class PopQuizMCQController extends Controller
             'contentTagIds' => 'required',
         ]);
 
+        $mcq = PopQuizMCQ::where('slug', $pop_quiz_mcq_slug)->firstOrFail();
+
         if ($request->hasFile('image')) {
-            if ($pop_quiz_mcq->image) {
-                Storage::delete($pop_quiz_mcq->image);
+            if ($mcq->image) {
+                Storage::delete($mcq->image);
             }
-            $pop_quiz_mcq->image = $request->image->store('public/question/mcq');
-            $pop_quiz_mcq->image = Storage::url($pop_quiz_mcq->image);
+            $mcq->image = $request->image->store('public/question/pop_quiz_mcqs');
+            $mcq->image = Storage::url($mcq->image);
         }
 
-        $pop_quiz_mcq->question = $request['question'];
-        $pop_quiz_mcq->field1 = $request['field1'];
-        $pop_quiz_mcq->field2 = $request['field2'];
-        $pop_quiz_mcq->field3 = $request['field3'];
-        $pop_quiz_mcq->field4 = $request['field4'];
-        $pop_quiz_mcq->answer = $request['answer'];
-        $pop_quiz_mcq->explanation = $request['explanation'];
-        $pop_quiz_mcq->exam_id = $request['examId'];        
+        $mcq->question = $request['question'];
+        $mcq->field1 = $request['field1'];
+        $mcq->field2 = $request['field2'];
+        $mcq->field3 = $request['field3'];
+        $mcq->field4 = $request['field4'];
+        $mcq->answer = $request['answer'];
+        $mcq->explanation = $request['explanation'];
+        $mcq->exam_id = $request['examId'];        
 
-        $save = $pop_quiz_mcq->save();
+        $save = $mcq->save();
 
         $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
-            ->where('question_id', $pop_quiz_mcq->id)
+            ->where('question_id', $mcq->id)
             ->get();
 
         foreach ($deleteContentTags as $deleteContentTag) {
@@ -161,7 +187,7 @@ class PopQuizMCQController extends Controller
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
                 $question_content_tag->exam_type = $exam->exam_type;
-                $question_content_tag->question_id = $pop_quiz_mcq->id;
+                $question_content_tag->question_id = $mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
             }
@@ -173,17 +199,18 @@ class PopQuizMCQController extends Controller
         }
     }
 
-    public function destroy(Exam $exam, PopQuizMCQ $pop_quiz_mcq)
+    public function destroy(Exam $exam, $pop_quiz_mcq_slug)
     {
-        $exam = Exam::where('id', $pop_quiz_mcq->exam_id)->first();
+        $mcq = PopQuizMCQ::where('slug', $pop_quiz_mcq_slug)->firstOrFail();
 
-        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type)->where('question_id', $pop_quiz_mcq->id)->get();
+        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type)->where('question_id', $mcq->id)->get();
 
         foreach($question_content_tags as $question_content_tag){
             $question_content_tag->delete();
         }
 
-        $delete = $pop_quiz_mcq->delete();
+        $delete = $mcq->delete();
+
         if ($delete) {
             return redirect()->route('exam.show', $exam)->with('status', 'Pop Quiz MCQ deleted successfully!');
         } else {

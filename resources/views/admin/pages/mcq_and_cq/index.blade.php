@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title' => 'Pop Quiz',
-'pageName'=>'Pop Quiz Questions',
-'secondPageName'=>'Pop Quiz Questions'
+'title' => $type.' Questions',
+'pageName'=> $type.' Questions',
+'secondPageName'=> $type.' Questions'
 ]) 
 
 @section('css1')
@@ -128,13 +128,13 @@
                                           <td>
                                              <div class="btn-group">
                                                    <a class="mr-1"
-                                                      href="{{ route('pop-quiz-mcq.show', [$exam->slug, $mcq->slug]) }}"
+                                                      href="{{ route($mcq_show_route, [$exam->slug, $mcq->slug]) }}"
                                                       title="See Details">
                                                       <button type="button" class="btn btn-info"><i
                                                                class="fas fa-eye"></i></button>
                                                    </a>
                                                    <a class="mr-1"
-                                                      href="{{ route('pop-quiz-mcq.edit', [$exam->slug, $mcq->slug]) }}"
+                                                      href="{{ route($mcq_edit_route, [$exam->slug, $mcq->slug]) }}"
                                                       title="Edit {{ $mcq->question }}">
                                                       <button class="btn btn-primary"><i
                                                                class="far fa-edit"></i></button>
@@ -162,7 +162,7 @@
                                                                   <button type="button" class="btn btn-outline-light"
                                                                      data-dismiss="modal">Close</button>
                                                                   <form
-                                                                     action="{{ route('pop-quiz-mcq.destroy', [$exam->slug, $mcq->slug]) }}"
+                                                                     action="{{ route($mcq_destroy_route, [$exam->slug, $mcq->slug]) }}"
                                                                      method="POST">
                                                                      @csrf
                                                                      @method('delete')
@@ -344,13 +344,13 @@
                                        <td>
                                           <div class="btn-group">
                                                 <a class="mr-1"
-                                                   href="{{ route('pop-quiz-cq.show', [$exam->slug, $cq->slug]) }}"
+                                                   href="{{ route($cq_show_route, [$exam->slug, $cq->slug]) }}"
                                                    title="See Details">
                                                    <button type="button" class="btn btn-info">
                                                       <i class="fas fa-eye"></i></button>
                                                 </a>
                                                 <a class="mr-1"
-                                                   href="{{ route('pop-quiz-cq.edit', [$exam->slug, $cq->slug]) }}"
+                                                   href="{{ route($cq_edit_route, [$exam->slug, $cq->slug]) }}"
                                                    title="Edit">
                                                    <button class="btn btn-info">
                                                       <i class="far fa-edit"></i>
@@ -381,7 +381,7 @@
                                                                <button type="button" class="btn btn-outline-light"
                                                                   data-dismiss="modal">Close</button>
                                                                <form
-                                                                  action="{{ route('pop-quiz-cq.destroy', [$exam->slug, $cq->slug]) }}"
+                                                                  action="{{ route($cq_destroy_route, [$exam->slug, $cq->slug]) }}"
                                                                   method="POST">
                                                                   {{ csrf_field() }}
                                                                   @method('delete')

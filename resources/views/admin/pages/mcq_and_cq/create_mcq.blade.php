@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'Pop Quiz MCQ',
-'pageName'=>'Create Pop Quiz MCQ',
-'secondPageName'=>'Create Pop Quiz MCQ'
+'title'=> $type.' MCQ',
+'pageName'=>'Create '.$type.' MCQ',
+'secondPageName'=>'Create '.$type.' MCQ'
 ])
 @section('css1')
    <!-- Select2 -->
@@ -46,11 +46,11 @@
                               @if (!empty($exam->topic) && !is_null($exam->topic))<b>Topic :</b> {{ $exam->topic->title }} <br> @endif
                               <b>Exam :</b> {{ $exam->title }}
                            </h3>
-                        </div>
+                        </div>                        
                         <!-- /.card-header -->
                         {{-- 'pop-quiz-mcq.store' --}}
                         <div class="card-body">
-                           <form role="form" method="POST" action="{{ route($route, $exam) }}"
+                           <form role="form" method="POST" action="{{ route($store_route, $exam) }}"
                               enctype="multipart/form-data">
                               {{ csrf_field() }}
                               <input name="examId" type="hidden" value="{{ $exam->id }}">
@@ -208,7 +208,7 @@
                               </div>
 
                               <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="btn btn-primary">Create {{$type}} MCQ</button>
                                     <a href="{{ URL::previous() }}"><button type="button"
                                           class="btn btn-danger">Back</button></a>
                               </div>

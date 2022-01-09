@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'Pop Quiz MCQ',
-'pageName'=>'Edit Pop Quiz MCQ',
-'secondPageName'=>'Edit Pop Quiz MCQ'
+'title'=> $type.' MCQ',
+'pageName'=> 'Edit '.$type.' MCQ',
+'secondPageName'=> 'Edit '.$type.' MCQ'
 ])
 
 @section('css1')
@@ -32,8 +32,8 @@
 @endsection
 
 @section('content')
-   {{-- @livewire('pop_quiz_mcq.edit', [
-      'pop_quiz_mcq' => $pop_quiz_mcq,
+   {{-- @livewire('mcq.edit', [
+      'mcq' => $mcq,
       'exam' => $exam,
       'contentTags' => $contentTags,
       'questionContentTag' => $questionContentTag
@@ -55,7 +55,7 @@
                      </div>
                      <!-- /.card-header -->
                      <div class="card-body">
-                           <form role="form" method="POST" action="{{ route('pop-quiz-mcq.update', [$exam, $pop_quiz_mcq]) }}"
+                           <form role="form" method="POST" action="{{ route($update_route, [$exam, $mcq]) }}"
                               enctype="multipart/form-data">
                               @method('PUT')
                               {{ csrf_field() }}
@@ -65,9 +65,9 @@
                                  <label for="question" class="col-form-label">Question <span
                                           class="must-filled">*</span></label>
                                  {{-- <input type="text" class="form-control" name="question"
-                                             value={{ $pop_quiz_mcq->question }} placeholder="Enter question"> --}}
+                                             value={{ $mcq->question }} placeholder="Enter question"> --}}
                                  <textarea input="question" id="question" name="question" placeholder="Enter question"
-                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('question') ? old('question') : $pop_quiz_mcq->question }}</textarea>
+                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('question') ? old('question') : $mcq->question }}</textarea>
                                  @error('question')
                                        <p style="color: red;">{{ $message }}</p>
                                  @enderror
@@ -92,8 +92,8 @@
                                           </div>
                                        </div>
                                        <div class="col-md-4">
-                                          @if ($pop_quiz_mcq->image)
-                                             <img class="product-image" src="{{ $pop_quiz_mcq->image}}"
+                                          @if ($mcq->image)
+                                             <img class="product-image" src="{{ $mcq->image}}"
                                                    id="previewImg" class="avatar" alt="...">
                                           @else
                                              <img class="product-image" src="http://placehold.it/150x100"
@@ -108,9 +108,9 @@
                                           <label for="field1" class="col-form-label">Option 1 <span
                                                    class="must-filled">*</span></label>
                                           {{-- <input type="text" class="form-control" name="field1"
-                                             value="{{ $pop_quiz_mcq->field1 }}" placeholder="Option 1"> --}}
+                                             value="{{ $mcq->field1 }}" placeholder="Option 1"> --}}
                                           <textarea input="field1" id="field1" name="field1" placeholder="Option 1"
-                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field1') ? old('field1') : $pop_quiz_mcq->field1 }}</textarea>
+                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field1') ? old('field1') : $mcq->field1 }}</textarea>
                                           @error('field1')
                                              <p style="color: red;">{{ $message }}</p>
                                           @enderror
@@ -121,9 +121,9 @@
                                           <label for="field2" class="col-form-label">Option 2 <span
                                                    class="must-filled">*</span></label>
                                           {{-- <input type="text" class="form-control" name="field2"
-                                             value="{{ $pop_quiz_mcq->field2 }}" placeholder="Option 2"> --}}
+                                             value="{{ $mcq->field2 }}" placeholder="Option 2"> --}}
                                           <textarea input="field2" id="field2" name="field2" placeholder="Option 2"
-                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field2') ? old('field2') : $pop_quiz_mcq->field2 }}</textarea>
+                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field2') ? old('field2') : $mcq->field2 }}</textarea>
                                           @error('field2')
                                              <p style="color: red;">{{ $message }}</p>
                                           @enderror
@@ -134,9 +134,9 @@
                                           <label for="field3" class="col-form-label">Option 3 <span
                                                    class="must-filled">*</span></label>
                                           {{-- <input type="text" class="form-control" name="field3"
-                                             value="{{ $pop_quiz_mcq->field3 }}" placeholder="Option 3"> --}}
+                                             value="{{ $mcq->field3 }}" placeholder="Option 3"> --}}
                                           <textarea input="field3" id="field3" name="field3" placeholder="Option 3"
-                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field3') ? old('field3') : $pop_quiz_mcq->field3 }}</textarea>
+                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field3') ? old('field3') : $mcq->field3 }}</textarea>
                                           @error('field3')
                                              <p style="color: red;">{{ $message }}</p>
                                           @enderror
@@ -147,9 +147,9 @@
                                           <label for="field4" class="col-form-label">Option 4 <span
                                                    class="must-filled">*</span></label>
                                           {{-- <input type="text" class="form-control" name="field4"
-                                             value="{{ $pop_quiz_mcq->field4 }}" placeholder="Option 4"> --}}
+                                             value="{{ $mcq->field4 }}" placeholder="Option 4"> --}}
                                           <textarea input="field4" id="field4" name="field4" placeholder="Option 4"
-                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field4') ? old('field4') : $pop_quiz_mcq->field4 }}</textarea>
+                                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('field4') ? old('field4') : $mcq->field4 }}</textarea>
                                           @error('field4')
                                              <p style="color: red;">{{ $message }}</p>
                                           @enderror
@@ -163,10 +163,10 @@
                                                    class="must-filled">*</span></label>
                                           <select class="form-control" name="answer">
                                              <option value="" selected>Select Answer</option>
-                                             <option value="1" {{ $pop_quiz_mcq->answer == 1 ? 'selected' : '' }}>Option 1</option>
-                                             <option value="2" {{ $pop_quiz_mcq->answer == 2 ? 'selected' : '' }}>Option 2</option>
-                                             <option value="3" {{ $pop_quiz_mcq->answer == 3 ? 'selected' : '' }}>Option 3</option>
-                                             <option value="4" {{ $pop_quiz_mcq->answer == 4 ? 'selected' : '' }}>Option 4</option>
+                                             <option value="1" {{ $mcq->answer == 1 ? 'selected' : '' }}>Option 1</option>
+                                             <option value="2" {{ $mcq->answer == 2 ? 'selected' : '' }}>Option 2</option>
+                                             <option value="3" {{ $mcq->answer == 3 ? 'selected' : '' }}>Option 3</option>
+                                             <option value="4" {{ $mcq->answer == 4 ? 'selected' : '' }}>Option 4</option>
                                           </select>
                                           @error('answer')
                                              <p style="color: red;">{{ $message }}</p>
@@ -214,7 +214,7 @@
                                  <label for="explanation" class="col-form-label">Explanation </label>
                                  <textarea input="explanation" id="explanation" name="explanation"
                                        placeholder="Enter explanation"
-                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('explanation') ? old('explanation') : $pop_quiz_mcq->explanation }}</textarea>
+                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('explanation') ? old('explanation') : $mcq->explanation }}</textarea>
                                  @error('explanation')
                                        <p style="color: red;">{{ $message }}</p>
                                  @enderror

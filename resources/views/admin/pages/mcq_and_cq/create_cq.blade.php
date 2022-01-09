@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'Pop Quiz CQ',
-'pageName'=>'Create Pop Quiz CQ',
-'secondPageName'=>'Create Pop Quiz CQ'
+'title'=> $type.' CQ',
+'pageName'=> $type.' Create CQ',
+'secondPageName'=> $type.' Create CQ'
 ])
 @section('css1')
    <!-- Select2 -->
@@ -44,11 +44,11 @@
                   <!-- general form elements disabled -->
                   <div class="card card-warning">
                      <div class="card-header">
-                           <h3 class="card-title">Create Pop Quiz CQ</h3>
+                           <h3 class="card-title">Create CQ</h3>
                      </div>
                      <!-- /.card-header -->
                      <div class="card-body">
-                           <form role="form" method="POST" action="{{ route('pop-quiz-cq.store', $exam) }}"
+                           <form role="form" method="POST" action="{{ route($store_route, $exam) }}"
                               enctype="multipart/form-data">
                               {{ csrf_field() }}
                               <input name="examId" type="hidden" value="{{ $exam->id }}">
@@ -135,7 +135,6 @@
                                                    id="previewImg" class="avatar" alt="...">
                                           </div>
                                        </div>
-
                                  </div>
 
                                  <div class="row">
@@ -282,7 +281,6 @@
                                                    id="previewImg" class="avatar" alt="...">
                                           </div>
                                        </div>
-
                                  </div>
 
                                  <div class="row">
@@ -357,7 +355,6 @@
                                                    id="previewImg" class="avatar" alt="...">
                                           </div>
                                        </div>
-
                                  </div>
 
                                  <div class="row">
