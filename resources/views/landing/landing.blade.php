@@ -3,7 +3,7 @@
     <section class="header-banner bg-art pt-7">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 py-5">
+                <div class="col-md-6 py-md-5">
                     <div class="pl-3">
                         @auth
                         <h4 class="text-purple  text-sm font-roboto">Hello, {{Auth::user()->name}} !</h4>
@@ -11,10 +11,16 @@
                         <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To give exam, Visit Your Dashboard.<h2>
                         <a href="{{route('profile')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
                         @else
-                        <h4 class="text-red  text-md font-roboto">HSC 2022</h4>
-                        <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
-                        নিজের মতো</h2>
-                        <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-5 my-4 py-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                        <div id="landing_greeting_and_register_button">
+                            <div>
+                                <h4 class="text-red  text-md font-roboto">HSC 2022</h4>
+                                <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
+                                নিজের মতো</h2>
+                            </div>
+                            <div>
+                                <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-md-5 my-md-4 py-md-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                            </div>
+                        </div>
                         @endauth
                         
                     </div>
