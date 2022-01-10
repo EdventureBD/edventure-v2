@@ -75,6 +75,7 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
+        // dd("Course Controller CoursePreview function");
         $batch = '';
         $enrolled = '';
         $lectures = [];
@@ -90,6 +91,7 @@ class CourseController extends Controller
                 array_push($course_topic_lectures[$course_lecture->topic_id], $course_lecture);
             }
         }
+
         if (Auth::check()) {
             $enrolled = BatchStudentEnrollment::where('course_id', $course->id)
                 ->where('student_id', auth()->user()->id)
@@ -98,19 +100,28 @@ class CourseController extends Controller
             if ($enrolled && $enrolled->status == 1) {
                 
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-               
+
                 return redirect()->route('batch-lecture', $batch->slug);
             } else {
                 if ($enrolled && $enrolled->status == 0 ) {
                     Session::flash('message', 'Please contact admin to access your course!');
                 }
-                return view('student.pages_new.course.preview_guest', compact(
-                    'course',
-                    'course_topics',
-                    'course_lectures',
-                    'course_topic_lectures',
-                    'enrolled'
-                ));
+
+                // return view('student.pages_new.course.preview_guest', compact(
+                //     'course',
+                //     'course_topics',
+                //     'course_lectures',
+                //     'course_topic_lectures',
+                //     'enrolled'
+                // ));
+
+                // return view('student.pages_new.course.preview_guest', compact(
+                //     'course',
+                //     'course_topics',
+                //     'course_lectures',
+                //     'course_topic_lectures',
+                //     'enrolled'
+                // ));
             }
         } else {
             return view('student.pages_new.course.preview_guest', compact(
@@ -122,8 +133,6 @@ class CourseController extends Controller
                 'batch'
             ));
         }
-     
-        
     }
 
     public function enroll(Course $course)
