@@ -11002,7 +11002,9 @@ a:hover {
 }
 
 .bg-gradient-purple {
-  background: linear-gradient(to bottom, #c89aee, #653092);
+  /* background: linear-gradient(to bottom, #c89aee, #653092); */
+  background: linear-gradient(180deg, #A77ACC 0%, #653092 61.98%);
+  box-shadow: 0px 72px 116px rgba(0, 0, 0, 0.137324), 0px 16.0821px 25.9101px rgba(0, 0, 0, 0.202676), 0px 4.78807px 7.71412px rgba(0, 0, 0, 0.34);
 }
 
 .bg-purple {
