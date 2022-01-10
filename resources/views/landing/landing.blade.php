@@ -1,5 +1,40 @@
 <x-landing-layout>
-    
+    {{-- Landing Section for General Students/HSC/SSC Students --}}
+    {{-- <section class="header-banner bg-art pt-7">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 py-md-5">
+                    <div class="pl-3">
+                        @auth
+                        <h4 class="text-purple  text-sm font-roboto">Hello, {{Auth::user()->name}} !</h4>
+                        <h4 class="text-red  text-sm font-roboto">You have Successfully logged into HSC 2022 Last Minute Preparation Bundle.</h4>
+                        <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To give exam, Visit Your Dashboard.<h2>
+                        <a href="{{route('profile')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
+                        @else
+                        <div id="landing_greeting_and_register_button">
+                            <div>
+                                <h4 class="text-red  text-md font-roboto">HSC 2022</h4>
+                                <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
+                                নিজের মতো</h2>
+                            </div>
+                            <div>
+                                <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-md-5 my-md-4 py-md-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                            </div>
+                        </div>
+                        @endauth
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="Top banner Image">
+                </div>
+            </div>
+        </div>
+    </section> --}} <!--header banner end-->
+    {{-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        ===========================Medical Campaign========================================
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --}}
+    {{-- Medical Campaign part for landing page starts Here! --}}
     <section class="header-banner bg-art pt-7">
         <div class="container">
             <div class="row">
@@ -30,7 +65,8 @@
                 </div>
             </div>
         </div>
-    </section> <!--header banner end-->
+    </section>
+    <!--Medical Campaign part for landing page ends Here!-->
 
     <div class="our-exams-section text-center py-5">
         <div class="container">
