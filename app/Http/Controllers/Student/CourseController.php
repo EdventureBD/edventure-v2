@@ -245,4 +245,8 @@ class CourseController extends Controller
         }
         return $months;
     }
+
+    public function roadmap(){
+        return view("student.pages_new.roadmap.roadmap_index");
+    }
 }

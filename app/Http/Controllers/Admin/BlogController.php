@@ -162,6 +162,7 @@ class BlogController extends Controller
                     ->select('title','slug','subtitle','banner','author_id' )
                     ->paginate(4)
                     ->fragment('courses');
+
         return view('student.pages_new.blogs.allblogs', compact('blogs'));
     }
 
