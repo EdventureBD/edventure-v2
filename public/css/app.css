@@ -12151,7 +12151,8 @@ form input {
     margin-bottom: 30%;
   }
 }
-@media screen and (max-width: 576px) {
+/* media querry for mobile view in normal size  */
+/* @media screen and (max-width: 576px) {
   .form-box {
     margin-left: 25%;
   }
@@ -12165,6 +12166,40 @@ form input {
   }
   #landing_greeting_and_register_button h2{
     font-size: 25px;
+  }
+  #landing_greeting_and_register_button a{
+    font-size: 12px;
+  }
+
+  .form-box h3 {
+    font-size: 30px;
+  }
+  .contact-box .text-box p{
+    font-size: 18px;
+  }
+  .contact-box .text-box h3, .contact-box .text-box span{
+    font-size: 25px;
+  }
+  #contact-us-banner-text{
+    font-size: 20px;
+  }
+} */
+/* media querry for medical campaign */
+@media screen and (max-width: 576px) {
+  .form-box {
+    margin-left: 25%;
+  }
+  .pt-7 {
+    padding-top: 80px !important;
+  }
+  #landing_greeting_and_register_button {
+    /* display: flex; */
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  #landing_greeting_and_register_button h2{
+    font-size: 25px;
+    word-wrap: break-word;
   }
   #landing_greeting_and_register_button a{
     font-size: 12px;

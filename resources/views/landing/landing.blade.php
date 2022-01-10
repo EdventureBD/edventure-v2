@@ -38,19 +38,18 @@
     <section class="header-banner bg-art pt-7">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 py-md-5">
+                <div class="col-md-5 col-sm-6 py-md-5">
                     <div class="pl-3">
                         @auth
-                        <h4 class="text-purple  text-sm font-roboto">Hello, {{Auth::user()->name}} !</h4>
-                        <h4 class="text-red  text-sm font-roboto">You have Successfully logged into HSC 2022 Last Minute Preparation Bundle.</h4>
-                        <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To give exam, Visit Your Dashboard.<h2>
-                        <a href="{{route('profile')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">My Dashboard <i class="fa fa-arrow-right icon"></i></a>
+                        <h4 class="text-purple  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4>
+                        <h4 class="text-red  text-sm font-roboto">Welcome to your dream medical campaign.</h4>
+                        <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To participate in the campaign, click on the button below or visit to the exam page.<h2>
+                        <a href="{{route('course')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">Jump to Campaign <i class="fa fa-arrow-right icon"></i></a>
                         @else
                         <div id="landing_greeting_and_register_button">
                             <div>
-                                <h4 class="text-red  text-md font-roboto">HSC 2022</h4>
-                                <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক<br/>
-                                নিজের মতো</h2>
+                                <h4 class="text-red  text-md font-roboto">Edventure Pre-Medical<br>Olympiad 2022</h4>
+                                <h2 class="text-lg fw-800 font-roboto text-purple">সাদা এপ্রনের<br>                                    স্বপ্ন পূরণে<br>তুমি কতটুকু প্রস্তুত?</h2>
                             </div>
                             <div>
                                 <a href="{{route('register')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-md-5 my-md-4 py-md-4">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
@@ -60,8 +59,13 @@
                         
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="Top banner Image">
+                <div class="col-md-7 col-sm-6">
+                    {{-- ++++++++++Edventure Top banner++++++++++ --}}
+                    
+                    {{-- <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="Top banner Image"> --}}
+
+                    {{-- Edventure Medical Campaign Banner --}}
+                    <img src="/img/medical_camp/medicampBanner.png" class="img-fluid" alt="Top banner Image">
                 </div>
             </div>
         </div>
@@ -71,7 +75,7 @@
     <div class="our-exams-section text-center py-5">
         <div class="container">
             <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
-            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">এবার Edventure এর HSC-2022 Last Minute Prep Bundle<br> এর সাথে হবে জোরদার প্রস্তুতি</p>
+            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">Edventure এর সাথে হবে জোরদার পরীক্ষার প্রস্তুতি। বেছে নাও তোমার পছন্দের টেস্ট প্রিপারেশন মডিউল</p>
             <div class=" @if($categories->count()>=7) course-category-js @endif course-category">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
@@ -108,23 +112,23 @@
 
     <div class="our-package-section text-center py-5">
         <div class="container">
-            <h3 class="text-purple text-md font-roboto">কী থাকছে HSC 2022 <br>Last Minute Prep Bundle এ</h3>
-            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- ৩টি পূর্ণাঙ্গ  মডেল টেস্ট
-- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়
-- ডিজিটাল রিপোর্টের মাধ্যমে দেশের সকল পরীক্ষার্থীদের মাঝে নিজের অবস্থান যাচাই করার সুযোগ
-- অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
+            <h3 class="text-purple text-md font-roboto">কি পাবে আমাদের প্ল্যাটফর্মে</h3>
+            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায় 
+                - ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয় 
+                - দেশসেরা অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন
+                </p>
             <div class="single-package bg-art py-5 px-3 mt-6">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="ml-4">
-                            <div class="package-icon text-left"><img src="/img/landing/exam_icon.png" class="img-fluid" alt="exam" /></div>
-                            <h4 class="text-xmd fw-800 text-left mt-3">অনলাইন মডেল টেস্ট</h4>
-                            <p class="text-xsm fw-400 text-gray text-left">মাস্টার ট্রেইনার দ্বারা প্রণীত প্রশ্নপত্রে, 
-পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, এবং গণিতের ৩টি পূর্ণাঙ্গ মডেল টেস্ট</p>
+                            <div class="package-icon text-left"><img src="/img/medical_camp/medicamp11.png" class="img-fluid" alt="roadmap icon" /></div>
+                            <h4 class="text-xmd fw-800 text-left mt-3">সিলেবাস ম্যাপিং</h4>
+                            <p class="text-xsm fw-400 text-gray text-left">পরীক্ষার প্রস্তুতিতে বসে সিলেবাসের মহাসমুদ্রে যাতে হারিয়ে না যাও- সেজন্য আমরা পুরো সিলেবাসকে ম্যাপ করে দিচ্ছি
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/exam.png" class=" img-fluid" alt="">
+                        <img src="/img/medical_camp/medicamp12.png" class=" img-fluid" alt="Roadmap Image">
                     </div>
                 </div>
             </div>
@@ -132,13 +136,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="ml-4">
-                        <div class="package-icon text-left"><img src="/img/landing/dashboard_icon.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-xmd fw-800  text-left mt-3">স্বয়ংক্রিয় ড্যাশবোর্ড</h4>
-                        <p class="text-xsm fw-400 text-gray text-left mt-3">এনালিটিক্স ইঞ্জিন প্রতিটি পরীক্ষার্থীর ড্যাশবোর্ডে তুলে ধরবে তার দুর্বলতা এবং সক্ষমতা, যার মাধ্যমে Preparation হবে সবচেয়ে জোরদার.</p>
+                        <div class="package-icon text-left"><img src="/img/medical_camp/medicamp21.png" class="img-fluid" alt="Dashboard Image" /></div>
+                        <h4 class="text-xmd fw-800  text-left mt-3">টপিকভিত্তিক উইকনেস ডিটেকশন</h4>
+                        <p class="text-xsm fw-400 text-gray text-left mt-3">বাংলাদেশের একমাত্র প্ল্যাটফর্ম হিসেবে Edventure এ পরীক্ষা দিয়েই জানতে পারবে ঠিক কোন চ্যাপ্টারের কোন টপিকে তুমি দুর্বল
+                        </p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/dashboard.jpg" class="img-fluid" alt="">
+                        <img src="/img/medical_camp/medicamp22.png" class="img-fluid" alt="Dashboard Photo">
                     </div>
                 </div>
             </div>
@@ -146,17 +151,18 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="ml-4">
-                        <div class="package-icon text-left"><img src="/img/landing/result_icon.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-xmd fw-800  text-left mt-3">ডিজিটাল রিপোর্ট</h4>
-                        <p class="text-xsm fw-400 text-gray text-left mt-3">পরীক্ষা দেয়া মাত্রই ডিজিটাল রিপোর্টের সাহায্যে জেনে নিতে পারবে বাকি পরীক্ষার্থীদের মধ্যে তুলনামূলক অবস্থান</p>
+                        <div class="package-icon text-left"><img src="/img/medical_camp/medicamp31.png" class="img-fluid" alt="Result" /></div>
+                        <h4 class="text-xmd fw-800  text-left mt-3">টিচারদের সাথে পারসোনাল সেশন</h4>
+                        <p class="text-xsm fw-400 text-gray text-left mt-3">দেশসেরা শিক্ষকদের সাথে পারসোনাল সেশন বুক করে তোমার সমস্যা শেয়ার করতে পারো, সমাধান দিবে তারাই!
+                        </p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/results.png" class="img-fluid" alt="">
+                        <img src="/img/medical_camp/medicamp32.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
-            <div class="single-package bg-art py-5 px-3 mt-6">
+            {{-- <div class="single-package bg-art py-5 px-3 mt-6">
                 <div class="row">
                     <div class="col-md-6">
                         <img src="/img/landing/solution.png" class=" img-fluid" alt="">
@@ -169,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div><!--our package section end-->
 <?php /*
