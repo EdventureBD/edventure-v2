@@ -61,7 +61,10 @@ Route::get('/course/course-preview/{course}', [CourseController::class, 'courseP
 Route::get('/course/{category?}/{intermediary_level?}', [CourseController::class, 'course'])->name('course');
 // Preview Course
 Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
-// Route::get('/course/course-preview/{course}/enroll/confirm', [CourseController::class, 'confirm'])->name('confirm');
+
+
+// Roadmap Page-> should be-> Route::get('/course/course-preview/{course}/roadmap', [CourseController::class, 'roadmap'])->name('roadmap')
+Route::get('/roadmap', [CourseController::class, 'roadmap'])->name('roadmap');
 
 
 require __DIR__ . '/auth.php';
