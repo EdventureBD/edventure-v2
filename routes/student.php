@@ -31,6 +31,13 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         Route::get('batch/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
         Route::get('batch/{batch}/{courseLecture}', [BatchController::class, 'lecture'])->name('topic_lecture');
 
+
+
+        // BATCH TEST
+        Route::get('batch/tests/{batch}/{exam_type}]', [BatchController::class, 'batchTest'])->name('batch-test');
+
+
+
         // EXAM
         // Route::get('batch/{batch}/{courseLecture}/{exam}', [ExamController::class, 'question'])->name('question');
         Route::get('batch/{batch}/exam/batch-exam/{exam}', [ExamController::class, 'question'])->name('question');
