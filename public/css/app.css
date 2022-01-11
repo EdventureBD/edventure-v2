@@ -545,6 +545,12 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+#roadmapParentContainer {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  /* column-gap: 10px; */
+}
+
 
 @media (min-width: 576px) {
   .container-sm, .container {
