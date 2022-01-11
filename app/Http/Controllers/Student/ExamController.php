@@ -24,27 +24,48 @@ class ExamController extends Controller
     public function question(Batch $batch, Exam $exam)
     {
         $totalNumber = 0;
+        // Getting all exam details
         $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
             ->where('exam_id', $exam->id)
             ->where('batch_id', $batch->id)
             ->get();
+
+        // Calculate total marks using all the exam details
         foreach ($detailsResult as $details) {
+
             if ($details->exam_type == Edvanture::CQ) {
                 $number = CQ::where('id', $details->question_id)->select('marks')->first();
                 $totalNumber = $totalNumber + $number->marks;
-            } else if ($details->exam_type == Edvanture::MCQ) {
+            }
+            else if ($details->exam_type == Edvanture::MCQ) {
                 $number = 1;
                 $totalNumber = $totalNumber + $number;
-            } else if ($details->exam_type == Edvanture::ASSIGNMENT) {
+            }
+            else if ($details->exam_type == Edvanture::ASSIGNMENT) {
                 $number = Assignment::where('id', $details->question_id)->select('marks')->first();
                 $totalNumber = $totalNumber + $number->marks;
             }
+            
+            // else if ($details->exam_type == Edvanture::APTITUDETEST) {
+            //     $number = Assignment::where('id', $details->question_id)->select('marks')->first();
+            //     $totalNumber = $totalNumber + $number->marks;
+            // }
+            // else if ($details->exam_type == Edvanture::ASSIGNMENT) {
+            //     $number = Assignment::where('id', $details->question_id)->select('marks')->first();
+            //     $totalNumber = $totalNumber + $number->marks;
+            // }
+            // else if ($details->exam_type == Edvanture::ASSIGNMENT) {
+            //     $number = Assignment::where('id', $details->question_id)->select('marks')->first();
+            //     $totalNumber = $totalNumber + $number->marks;
+            // }
         }
 
+        // Get max marks gained
         $max = ExamResult::where('exam_id', $exam->id)
             ->where('batch_id', $batch->id)
             ->max('gain_marks');
 
+        // Get min marks gained
         $min = ExamResult::where('exam_id', $exam->id)
             ->where('batch_id', $batch->id)
             ->min('gain_marks');
@@ -158,6 +179,10 @@ class ExamController extends Controller
                 return view('student.pages_new.batch.exam.assignment_result', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'exam_paper', 'max', 'min'));
             }
         }
+
+        // else if (){
+
+        // }
     }
 
     public function specialExamQuestion(Batch $batch, Exam $exam)

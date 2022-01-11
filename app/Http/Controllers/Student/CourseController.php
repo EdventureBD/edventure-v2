@@ -98,32 +98,27 @@ class CourseController extends Controller
                 ->first();
                 // dd($enrolled);
             if ($enrolled && $enrolled->status == 1) {
-                
+
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
 
                 return redirect()->route('batch-lecture', $batch->slug);
-            } else {
+            }
+            else
+            {
                 if ($enrolled && $enrolled->status == 0 ) {
                     Session::flash('message', 'Please contact admin to access your course!');
                 }
 
-                // return view('student.pages_new.course.preview_guest', compact(
-                //     'course',
-                //     'course_topics',
-                //     'course_lectures',
-                //     'course_topic_lectures',
-                //     'enrolled'
-                // ));
-
-                // return view('student.pages_new.course.preview_guest', compact(
-                //     'course',
-                //     'course_topics',
-                //     'course_lectures',
-                //     'course_topic_lectures',
-                //     'enrolled'
-                // ));
+                return view('student.pages_new.course.preview_guest', compact(
+                    'course',
+                    'course_topics',
+                    'course_lectures',
+                    'course_topic_lectures',
+                    'enrolled'
+                ));
             }
-        } else {
+        }
+        else {
             return view('student.pages_new.course.preview_guest', compact(
                 'course',
                 'course_topics',

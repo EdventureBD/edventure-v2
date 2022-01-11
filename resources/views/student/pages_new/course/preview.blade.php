@@ -99,7 +99,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
+                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }}"
                                     id="course-toc-{{ $batchTopic->id }}">
                                     {{-- @livewire('student.batch.lectures', ['batchTopic' => $batchTopic->id, 'batch' =>
                                     $batch], key($batchTopic->id)) --}}
@@ -131,7 +131,7 @@
                                             @endphp
                                             @if ($exam->exam->topic_id == $batchTopic->topic_id)
                                             <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
-                                                 <a class="flex text-dark" href="#">
+                                                <a class="flex text-dark" href="#">
                                                     {{ $exam->exam->title }}
                                                 </a>
                                                 <div>
