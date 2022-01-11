@@ -60,7 +60,7 @@
                     <a href="#">Copyright © 2021 Edventure Ltd . All rights reserved.</a>
                 </div>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 text-right text-left-footer">
                 <div class="single-footer-column">
                     <a href="tel:+8801746483678"  class="font-arial mr-4">+8801746483678</a>
                     <a href = "mailto: business@edventurebd.com" class="mr-4">business@edventurebd.com</a>

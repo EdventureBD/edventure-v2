@@ -42,9 +42,9 @@
                     <div class="pl-3">
                         @auth
                         <h4 class="text-purple  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4>
-                        <h4 class="text-red  text-sm font-roboto">Welcome to your dream medical campaign.</h4>
-                        <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To participate in the campaign, click on the button below or visit to the exam page.<h2>
-                        <a href="{{route('course')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">Jump to Campaign <i class="fa fa-arrow-right icon"></i></a>
+                        <h4 class="text-red  text-sm font-roboto">Welcome to the medical campaign.</h4>
+                        <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To participate in the Olympiad, click on the button below or visit to the exam page.<h2>
+                        <a href="{{route('course')}}" class="font-roboto border-none text-xxsm btn btn-register text-white bg-gradient-purple px-4">Jump to Olympiad <i class="fa fa-arrow-right icon"></i></a>
                         @else
                         <div id="landing_greeting_and_register_button">
                             <div>

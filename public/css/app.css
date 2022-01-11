@@ -12192,6 +12192,9 @@ form input {
   .pt-7 {
     padding-top: 80px !important;
   }
+  .text-left-footer {
+    text-align: left !important;
+  }
   #landing_greeting_and_register_button {
     /* display: flex; */
     justify-content: space-evenly;
