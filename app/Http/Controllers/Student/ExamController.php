@@ -721,7 +721,7 @@ class ExamController extends Controller
                     $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
                     // dd($cq_questions, $mcq_questions);
 
-                    return view('student.pages_new.batch.exam.batch_exam_topic_end_exam', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                    return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
                 }
 
                 $canAttempt = ExamResult::where('exam_id', $exam->id)
@@ -773,7 +773,7 @@ class ExamController extends Controller
                 // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
 
                 // ->inRandomOrder()
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->take(1)->firstOrFail();
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->latest()->take(1)->firstOrFail();
 
                 $canAttempt = CqExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
@@ -799,9 +799,8 @@ class ExamController extends Controller
                     $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
                     // $exam->question_limit
                     $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
-                    // dd($cq_questions, $mcq_questions);
 
-                    return view('student.pages_new.batch.exam.batch_exam_topic_end_exam', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                    return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
                 }
 
                 $canAttempt = ExamResult::where('exam_id', $exam->id)
