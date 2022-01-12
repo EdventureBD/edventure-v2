@@ -21,6 +21,13 @@ use smasif\ShurjopayLaravelPackage\ShurjopayService;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Medical olympiad 2022 route 
+
+Route::get('/medical-olympiad/medical-olympiad', function() {
+    return view('landing.medi-olympiad');
+})->name('medi-olympiad');
+
+// Medical olympiad 2022 route ends 
 
 Route::get('/', function () {
     $categories=CourseCategory::where('status',1)->select('title','id','slug')->orderBy('id', "ASC")->get();

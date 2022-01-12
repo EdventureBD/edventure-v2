@@ -15,7 +15,7 @@
             <div class="text-right">
                 <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
             </div>
-            <div class="result-sheet-table overflow-x-scroll">
+            <div class="result-sheet-table w-100 mx-auto overflow-x-scroll text-wrap">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
