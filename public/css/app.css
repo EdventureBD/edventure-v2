@@ -12378,7 +12378,7 @@ form input {
 #medi-olympiad p span{
   font-weight:600;
 }
-#medi-olympiad-banner {
+#medi-olympiad{
   background: url("/img/medical_camp/medicalOlympiadBanner1.jpeg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -12397,7 +12397,37 @@ form input {
   background: lightgray;
   padding: 0% 10% 5%;
   border: 1px solid lightblue;
-  border-radius: 10%;
+  border-radius: 25px 30px 25px 30px;
+}
+#medicamp-info-part{
+  flex-direction: column-reverse;
+  display: flex;
+  justify-content: right;
+}
+#medicamp-info-part img {
+  width: 25%;
+}
+@media screen and (max-width:576px) {
+/* #medi-olympiad {
+  background: url("/img/medical_camp/medicalOlympiadBannerMobile.jpg");
+}  */
+#medi-olympiad-banner{
+  margin: 20% auto;
+  margin-bottom: 0px;
+  border: 1px solid lightgray;
+  background-color: azure;
+}
+/* #medicamp-info-part{
+  flex-direction: column-reverse;
+  display: flex;
+  justify-content: right;
+} */
+.mobile_width {
+  width: 100%;
+}
+#medicamp-info-part img {
+  width: 60%;
+}
 }
 
 /* medical olympiad standalone page css ends  */
