@@ -18,6 +18,8 @@ use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CreativeQuestion;
 use App\Models\Admin\TopicEndExamMCQ;
 use App\Models\Admin\TopicEndExamCreativeQuestion;
+use App\Models\Admin\PopQuizMCQ;
+use App\Models\Admin\PopQuizCreativeQuestion;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
@@ -660,7 +662,6 @@ class ExamController extends Controller
 
 
 
-
         if ($exam_type == Edvanture::TOPICENDEXAM) {
 
             // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
@@ -718,6 +719,86 @@ class ExamController extends Controller
                     $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
                     // $exam->question_limit
                     $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                    // dd($cq_questions, $mcq_questions);
+
+                    return view('student.pages_new.batch.exam.batch_exam_topic_end_exam', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                }
+
+                $canAttempt = ExamResult::where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->where('student_id', auth()->user()->id)
+                    ->first();
+                    
+                if (!$canAttempt) {
+                    $show = false;
+                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                } else {
+                    $show = true;
+                    $exam_paper = (new CqExamPaper())->getCqExamPaper($exam->id, $batch->id, Auth::user()->id);
+                    // CqExamPaper::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', Auth::user()->id)->first();
+
+                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber', 'exam_paper'));
+                }
+        }
+
+
+        if ($exam_type == Edvanture::POPQUIZ) {
+
+            // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+            //Code for blocking student page refresh
+            // if (!empty($canAttempt) && $canAttempt->status == 0) {
+            //     $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+            //     // dd($questions->toArray());
+            //     $save = $this->processMCQ($questions->toArray(), [], $batch, $exam, 1, $canAttempt);
+            //     if ($save) {
+            //         $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
+            //             ->where('exam_id', $exam->id)
+            //             ->where('batch_id', $batch->id)
+            //             ->get();
+            //     }
+            // }
+            // $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+            //     ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+            //     ->where('question_content_tags.exam_type', "MCQ")
+            //     ->where('details_results.student_id', auth()->user()->id)
+            //     ->where('details_results.batch_id', $batch->id)
+            //     ->where('details_results.exam_id', $exam->id)
+            //     ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+            //     ->get();
+            // $weakAnalysis = $analysis;
+            //Giving access to student if they miss for first time or reload page
+            // if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
+
+
+                // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
+
+                // ->inRandomOrder()
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->take(1)->firstOrFail();
+
+                $canAttempt = CqExamPaper::where('exam_id', $exam->id)
+                ->where('batch_id', $batch->id)
+                ->where('student_id', auth()->user()->id)
+                ->where('exam_type', $exam->exam_type)
+                ->first();
+
+                $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+                    ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+                    ->where('question_content_tags.exam_type', "CQ")
+                    ->where('details_results.student_id', auth()->user()->id)
+                    ->where('details_results.batch_id', $batch->id)
+                    ->where('details_results.exam_id', $exam->id)
+                    ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+                    ->get();
+                $weakAnalysis = $analysis;
+
+                //Giving access to student if they miss for first time or reload page
+                if (!$canAttempt) {
+                    // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+
+                    // $exam->question_limit
+                    $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                    // $exam->question_limit
+                    $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
                     // dd($cq_questions, $mcq_questions);
 
                     return view('student.pages_new.batch.exam.batch_exam_topic_end_exam', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
