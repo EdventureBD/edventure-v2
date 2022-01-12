@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\Admin\CQ;
 use App\Models\Admin\MCQ;
+
+
+use App\Models\Admin\AptitudeTestMCQ;
+
+
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use Illuminate\Http\Request;
 use App\Models\Admin\Assignment;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CreativeQuestion;
+use App\Models\Admin\TopicEndExamMCQ;
+use App\Models\Admin\TopicEndExamCreativeQuestion;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
@@ -297,6 +305,27 @@ class ExamController extends Controller
                 return view('student.pages_new.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
             }
         }
+
+
+
+        if ($exam->exam_type == Edvanture::APTITUDETEST) {
+            // $result = ExamResult::where(['student_id' => auth()->user()->id, 'exam_id' => $exam->id, 'batch_id' => $batch->id])->first();
+            $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+            if ($result && $result->status == 1) {
+                return $this->sendResponse([]);
+            }
+            $questions = $request->q;
+            $answers = $request->a;
+            $save = $this->processAptitudeTestMCQ($questions, $answers, $batch, $exam, 1, $result);
+            if ($save) {
+                if ($request->ajax()) {
+                    return $this->sendResponse([]);
+                }
+                return view('student.pages_new.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
+            }
+        }
+
+
         if ($exam->exam_type == 'CQ') {
             // dd($request->all());
             // return $this->examPaper($request, $batch, $exam);
@@ -389,8 +418,6 @@ class ExamController extends Controller
         }
     }
 
-
-
     protected function formatMcqAnswers($answers)
     {
         $for_ans = [];
@@ -444,4 +471,276 @@ class ExamController extends Controller
         }
         return $save;
     }
+
+
+
+
+
+
+    private function processAptitudeTestMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
+    {
+        // $questions = $request->q;
+        $total = 0;
+        // $answers = $request->a;
+        $input = [];
+        $input['exam_id'] = $exam->id;
+        $input['batch_id'] = $batch->id;
+        $input['student_id'] = auth()->user()->id;
+        $input['status'] = $status;
+        $fAns = $this->formatMcqAnswers($answers);
+        foreach ($questions as $question) {
+            $qus_input = [];
+            $qus_input['number_of_attempt'] = $question['number_of_attempt'] + 1;
+            $qus_input['gain_marks'] = $question['gain_marks'];
+            if (!empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer']) {
+                $total = $total + 1;
+                $qus_input['gain_marks'] = $question['gain_marks'] + 1;
+            }
+            $qus_input['success_rate'] = ($qus_input['gain_marks'] * 100) / $qus_input['number_of_attempt'];
+            (new AptitudeTestMCQ())->saveData($qus_input, $question['id']); //updating question
+
+            //saving in the DetailsResuls
+            $input['exam_type'] = Edvanture::APTITUDETEST;
+            $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
+            $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
+            $input['question_id'] = $question['id'];
+            (new DetailsResult())->saveData($input);
+
+            //saving in the QuestionContentTagAnalysis
+            (new QuestionContentTagAnalysis())->saveQuesConTagAnalysis($input);
+        }
+        //saving in the ExamResults
+        $input['gain_marks'] = $total;
+        if ($result) {
+            $save = (new ExamResult())->saveData($input, $result->id);
+        } else {
+            $save = (new ExamResult())->saveData($input);
+        }
+        return $save;
+    }
+
+
+
+    public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_type){
+        // dd("Batch Controller batch Tests", $exam_type);
+
+        // $course = Course::where('id', $batch->course_id)->first();
+
+        // $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
+        //     ->where('batch_id', $batch->id)
+        //     ->where('course_id', $course->id)
+        //     ->first();
+        //     // dd($accessedDays);
+
+        // if ($accessedDays->status == 0) {
+        //     return redirect()->route('course-preview', $course->slug);
+        // }
+
+        // list($exams, $specialExams) = (new BatchExam())->getBatchExams($batch->id, $exam_type);
+
+        // dd($batch, $course, $accessedDays, $specialExams, $exams);
+
+        // $totalNumber = 0;
+        
+        // $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
+        //     ->where('exam_id', $exam->id)
+        //     ->where('batch_id', $batch->id)
+        //     ->get();
+        // foreach ($detailsResult as $details) {
+        //     if ($details->exam_type == Edvanture::CQ) {
+        //         $number = CQ::where('id', $details->question_id)->select('marks')->first();
+        //         $totalNumber = $totalNumber + $number->marks;
+        //     } else if ($details->exam_type == Edvanture::MCQ) {
+        //         $number = 1;
+        //         $totalNumber = $totalNumber + $number;
+        //     } else if ($details->exam_type == Edvanture::ASSIGNMENT) {
+        //         $number = Assignment::where('id', $details->question_id)->select('marks')->first();
+        //         $totalNumber = $totalNumber + $number->marks;
+        //     }
+        // }
+
+        // $max = ExamResult::where('exam_id', $exam->id)
+        //     ->where('batch_id', $batch->id)
+        //     ->max('gain_marks');
+
+        // $min = ExamResult::where('exam_id', $exam->id)
+        //     ->where('batch_id', $batch->id)
+        //     ->min('gain_marks');
+
+        // dd($totalNumber, $detailsResult, $max, $min);
+
+        // START OF MCQ
+
+        if ($exam_type == Edvanture::APTITUDETEST) {
+
+            // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+            //Code for blocking student page refresh
+            // if (!empty($canAttempt) && $canAttempt->status == 0) {
+            //     $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+            //     // dd($questions->toArray());
+            //     $save = $this->processMCQ($questions->toArray(), [], $batch, $exam, 1, $canAttempt);
+            //     if ($save) {
+            //         $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
+            //             ->where('exam_id', $exam->id)
+            //             ->where('batch_id', $batch->id)
+            //             ->get();
+            //     }
+            // }
+            // $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+            //     ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+            //     ->where('question_content_tags.exam_type', "MCQ")
+            //     ->where('details_results.student_id', auth()->user()->id)
+            //     ->where('details_results.batch_id', $batch->id)
+            //     ->where('details_results.exam_id', $exam->id)
+            //     ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+            //     ->get();
+            // $weakAnalysis = $analysis;
+            //Giving access to student if they miss for first time or reload page
+            // if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
+
+
+                // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
+
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->inRandomOrder()->take(1)->firstOrFail();
+
+                $totalNumber = 0;
+                $detailsResult = DetailsResult::where('student_id', auth()->user()->id)
+                    ->where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->with('question', 'atQuestion')
+                    ->get();
+                foreach ($detailsResult as $details) {
+                    if ($details->exam_type == Edvanture::CQ) {
+                        $number = CQ::where('id', $details->question_id)->select('marks')->first();
+                        $totalNumber = $totalNumber + $number->marks;
+                    } else if ($details->exam_type == Edvanture::MCQ) {
+                        $number = 1;
+                        $totalNumber = $totalNumber + $number;
+                    } else if ($details->exam_type == Edvanture::ASSIGNMENT) {
+                        $number = Assignment::where('id', $details->question_id)->select('marks')->first();
+                        $totalNumber = $totalNumber + $number->marks;
+                    }
+                }
+        
+                $max = ExamResult::where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->max('gain_marks');
+        
+                $min = ExamResult::where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->min('gain_marks');
+
+                $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+
+                $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+                ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+                ->where('question_content_tags.exam_type', "MCQ")
+                ->where('details_results.student_id', auth()->user()->id)
+                ->where('details_results.batch_id', $batch->id)
+                ->where('details_results.exam_id', $exam->id)
+                ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+                ->get();
+
+                $weakAnalysis = $analysis;
+            
+                //Giving access to student if they miss for first time or reload page
+                if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
+                    $questions = AptitudeTestMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+
+                    // Inserting in the exam result as first attempt
+                    (new ExamResult())->saveData(['exam_id' => $exam->id, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
+
+                    return view('student.pages_new.batch.exam.batch_exam_aptitude_test', compact('questions', 'exam', 'batch'));
+                }
+
+                // dd($detailsResult);
+
+            return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+        }
+
+
+
+
+        if ($exam_type == Edvanture::TOPICENDEXAM) {
+
+            // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+            //Code for blocking student page refresh
+            // if (!empty($canAttempt) && $canAttempt->status == 0) {
+            //     $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+            //     // dd($questions->toArray());
+            //     $save = $this->processMCQ($questions->toArray(), [], $batch, $exam, 1, $canAttempt);
+            //     if ($save) {
+            //         $detailsResult = DetailsResult::with('cqQuestion')->where('student_id', auth()->user()->id)
+            //             ->where('exam_id', $exam->id)
+            //             ->where('batch_id', $batch->id)
+            //             ->get();
+            //     }
+            // }
+            // $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+            //     ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+            //     ->where('question_content_tags.exam_type', "MCQ")
+            //     ->where('details_results.student_id', auth()->user()->id)
+            //     ->where('details_results.batch_id', $batch->id)
+            //     ->where('details_results.exam_id', $exam->id)
+            //     ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+            //     ->get();
+            // $weakAnalysis = $analysis;
+            //Giving access to student if they miss for first time or reload page
+            // if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
+
+
+                // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
+
+                // ->inRandomOrder()
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->take(1)->firstOrFail();
+
+                $canAttempt = CqExamPaper::where('exam_id', $exam->id)
+                ->where('batch_id', $batch->id)
+                ->where('student_id', auth()->user()->id)
+                ->where('exam_type', $exam->exam_type)
+                ->first();
+
+                $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+                    ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+                    ->where('question_content_tags.exam_type', "CQ")
+                    ->where('details_results.student_id', auth()->user()->id)
+                    ->where('details_results.batch_id', $batch->id)
+                    ->where('details_results.exam_id', $exam->id)
+                    ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+                    ->get();
+                $weakAnalysis = $analysis;
+
+                //Giving access to student if they miss for first time or reload page
+                if (!$canAttempt) {
+                    // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+
+                    // $exam->question_limit
+                    $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                    // $exam->question_limit
+                    $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                    // dd($cq_questions, $mcq_questions);
+
+                    return view('student.pages_new.batch.exam.batch_exam_topic_end_exam', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                }
+
+                $canAttempt = ExamResult::where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->where('student_id', auth()->user()->id)
+                    ->first();
+                    
+                if (!$canAttempt) {
+                    $show = false;
+                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                } else {
+                    $show = true;
+                    $exam_paper = (new CqExamPaper())->getCqExamPaper($exam->id, $batch->id, Auth::user()->id);
+                    // CqExamPaper::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', Auth::user()->id)->first();
+
+                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber', 'exam_paper'));
+                }
+        }
+
+        return view('student.pages_new.course.preview', compact('batch', 'course', 'accessedDays', 'specialExams', 'exams'));
+    }
+
 }
