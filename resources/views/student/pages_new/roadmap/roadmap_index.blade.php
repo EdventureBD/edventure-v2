@@ -63,7 +63,8 @@
                                           <a href=""> Lecture View </a>
                                        </li>
                                        <li>
-                                          <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Pop Quiz"]) }}"> Pop Quiz </a>
+                                          {{-- <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Pop Quiz"]) }}"> Pop Quiz </a> --}}
+                                          <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Topic End Exam"]) }}"> Pop Quiz </a>
                                        </li>
                                        <li>
                                           <a href=""> Lecture Content </a>
