@@ -12365,3 +12365,39 @@ form input {
 .description p {
   max-width: 100%;
 }
+/* medical olympiad standalone page css starts  */
+#medi-olympiad {
+  font-weight: bolder;
+  text-align: center;
+}
+#medi-olympiad p {
+ font-weight: 300;
+ text-align: justify;
+ line-height:1.6em;
+}
+#medi-olympiad p span{
+  font-weight:600;
+}
+#medi-olympiad-banner {
+  background: url("/img/medical_camp/medicalOlympiadBanner1.jpeg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#medi-olympiad-banner a{
+  padding: 7px 25px;
+  background: yellow;
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+.red-letter {
+  color: red;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#medicamp-info-part {
+  background: lightgray;
+  padding: 0% 10% 5%;
+  border: 1px solid lightblue;
+  border-radius: 10%;
+}
+
+/* medical olympiad standalone page css ends  */
