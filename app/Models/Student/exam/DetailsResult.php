@@ -2,6 +2,7 @@
 
 namespace App\Models\Student\exam;
 
+use App\Models\Admin\AptitudeTestMCQ;
 use App\Models\User;
 use App\Models\Admin\CQ;
 use App\Models\Admin\MCQ;
@@ -9,6 +10,7 @@ use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use App\Models\Admin\Assignment;
 use App\Models\AppModel;
+use App\Utils\Edvanture;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,6 +44,11 @@ class DetailsResult extends AppModel
     public function question()
     {
         return $this->belongsTo(MCQ::class);
+    }
+
+    public function atQuestion()
+    {
+        return $this->belongsTo(AptitudeTestMCQ::class, 'question_id', 'id');
     }
 
     public function cqQuestion()

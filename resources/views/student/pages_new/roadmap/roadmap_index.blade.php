@@ -57,19 +57,19 @@
                                     <h3 class="mt-3">Exams {{$batch->slug}}</h3>
                                     <ol>
                                        <li>
-                                          <a href="{{ route('batch-test', [$batch->slug, "Aptitude Test"]) }}"> Aptitude Test </a>
+                                          <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Aptitude Test"]) }}"> Aptitude Test </a>
                                        </li>
                                        <li>
                                           <a href=""> Lecture View </a>
                                        </li>
                                        <li>
-                                          <a href="{{ route('batch-test', [$batch->slug, "Pop Quiz"]) }}"> Pop Quiz </a>
+                                          <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Pop Quiz"]) }}"> Pop Quiz </a>
                                        </li>
                                        <li>
                                           <a href=""> Lecture Content </a>
                                        </li>
                                        <li>
-                                          <a href="{{ route('batch-test', [$batch->slug, "Topic End Exam"]) }}"> Topic End Exam </a>
+                                          <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Topic End Exam"]) }}"> Topic End Exam </a>
                                        </li>
                                     </ol>
                                     {{-- @foreach ($exams as $key=>$exam)

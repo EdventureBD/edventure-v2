@@ -1,68 +1,58 @@
 <x-landing-layout headerBg="white">
     <div class="page-section ">
-        @if ($exam->exam_type == 'MCQ')
-        @php 
-            $total_marks = 0;
-            $total_gain_marks = 0;
-            foreach($detailsResult as $result){
-                $total_marks += 1;
-                $total_gain_marks += $result->gain_marks;
-            }
-        @endphp
-        <div class="container">
-            <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-            <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
-            <div class="text-right">
-                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+        @if ($exam->exam_type == 'MCQ' || 'Aptitude Test')
+            @php 
+                $total_marks = 0;
+                $total_gain_marks = 0;
+                foreach($detailsResult as $result){
+                    $total_marks += 1;
+                    $total_gain_marks += $result->gain_marks;
+                }
+            @endphp
+            <div class="container">
+                <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
+                <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
+                <div class="text-right">
+                    <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+                </div>
+                <div class="result-sheet-table overflow-x-scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="bg-purple text-white">Sl</th>
+                                <th class="bg-purple text-white">Question</th>
+                                <th class="bg-purple text-white">Your Answer</th>
+                                <th class="bg-purple text-white">Correct Answer</th>
+                                <th class="bg-purple text-white">Explanation</th>
+                                <th class="bg-purple text-white">% got it right</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $n = 1; @endphp
+                            @foreach($detailsResult as $result)
+                            @php
+                                if ($result->exam_type == 'Aptitude Test') {
+                                    $result->question = $result->atQuestion;
+                                }
+                                
+                                $field = 'field'.$result->mcq_ans;
+                                $cfield = 'field'.$result->question->answer;
+                                $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
+                            @endphp
+                            <tr>
+                                <td class="{{$cellcolor}}">{{$n}}</td>
+                                <td class="{{$cellcolor}}">{!! $result->question->question !!}</td>
+                                <td class="{{$cellcolor}}">{!! $result->question->$field !!}</td>
+                                <td class="{{$cellcolor}}">{!! $result->question->$cfield !!}</td>
+                                <td class="{{$cellcolor}}">{!! $result->question->explanation !!}</td>
+                                <td class="{{$cellcolor}}">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td>
+                            </tr>
+                            @php $n++; @endphp
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="result-sheet-table w-100 mx-auto overflow-x-scroll text-wrap">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="bg-purple text-white">Sl</th>
-                            <th class="bg-purple text-white">Question</th>
-                            <th class="bg-purple text-white">Your Answer</th>
-                            <th class="bg-purple text-white">Correct Answer</th>
-                            <th class="bg-purple text-white">Explanation</th>
-                            <th class="bg-purple text-white">% got it right</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $n = 1; @endphp
-                        @foreach($detailsResult as $result)
-                        @php
-                            $field = 'field'.$result->mcq_ans;
-                            $cfield = 'field'.$result->question->answer;
-                            $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
-                        @endphp
-                        <tr>
-                            {{-- previous result sheet code --}}
-
-                           {{--  <td class="{{$cellcolor}}">{{$n}}</td>
-                            <td class="{{$cellcolor}}">{!! $result->question->question !!}</td>
-                            <td class="{{$cellcolor}}">{!! $result->question->$field !!}</td>
-                            <td class="{{$cellcolor}}">{!! $result->question->$cfield !!}</td>
-                            <td class="{{$cellcolor}}">{!! $result->question->explanation !!}</td>
-                            <td class="{{$cellcolor}}">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td> --}}
-                            {{-- serial number  --}}
-                            <td class="{{$cellcolor}}">{{$n}}</td>
-                            {{-- Question  --}}
-                            <td class="">{!! $result->question->question !!}</td>
-                            {{-- Your answer  --}}
-                            <td class="{{$cellcolor}}">{!! $result->question->$field !!}</td>
-                            {{-- Correct answer  --}}
-                            <td class="">{!! $result->question->$cfield !!}</td>
-                            {{-- Explaination --}}
-                            <td class="">{!! $result->question->explanation !!}</td>
-                            {{-- Percentage --}}
-                            <td class="{{$cellcolor}}">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td>
-                        </tr>
-                        @php $n++; @endphp
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
         @else
             @if (!$show)
             <div class="course-info bg-gradient-purple py-5">

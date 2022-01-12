@@ -2,11 +2,12 @@
 
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\QuestionContentTag;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\AppModel;
 
-class AptitudeTestMCQ extends Model
+class AptitudeTestMCQ extends AppModel
 {
     use HasFactory;
 
