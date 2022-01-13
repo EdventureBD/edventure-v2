@@ -4,11 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\Admin\CQ;
 use App\Models\Admin\MCQ;
-
-
 use App\Models\Admin\AptitudeTestMCQ;
-
-
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use Illuminate\Http\Request;
@@ -24,6 +20,8 @@ use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
 use App\Models\Student\exam\CqExamPaper;
+use App\Models\Student\exam\TopicEndExamCqExamPaper;
+use App\Models\Student\exam\PopQuizCqExamPaper;
 use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
 use App\Utils\Edvanture;
@@ -197,7 +195,6 @@ class ExamController extends Controller
 
     public function specialExamQuestion(Batch $batch, Exam $exam)
     {
-
         $totalNumber = 0;
         $detailsResult = DetailsResult::where('student_id', auth()->user()->id)
             ->where('exam_id', $exam->id)
@@ -308,8 +305,6 @@ class ExamController extends Controller
             }
         }
 
-
-
         if ($exam->exam_type == Edvanture::APTITUDETEST) {
             // $result = ExamResult::where(['student_id' => auth()->user()->id, 'exam_id' => $exam->id, 'batch_id' => $batch->id])->first();
             $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
@@ -327,8 +322,7 @@ class ExamController extends Controller
             }
         }
 
-
-        if ($exam->exam_type == 'CQ') {
+        if ($exam->exam_type == Edvanture::CQ) {
             // dd($request->all());
             // return $this->examPaper($request, $batch, $exam);
             $validateData = $request->validate([
@@ -377,6 +371,115 @@ class ExamController extends Controller
                 ));
             }
         }
+
+
+
+
+        if ($exam->exam_type == Edvanture::TOPICENDEXAM || $exam->exam_type == Edvanture::POPQUIZ) {
+
+            $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+            // dd($request->mcq_ques, $request->cq_ques);
+
+            if ($result == null || $result->status == 0) {
+                $validateData = $request->validate([
+                    'submitted_text' => 'nullable|string',
+                    'file' => 'nullable|mimes:pdf|max:10000',
+                    'mcq_ques' => 'required',
+                    'cq_ques' => 'required',
+                ]);
+
+                foreach($request->mcq_ques as $key => $mcq){
+                    // find corresponding mcq question by id
+                    if($exam->exam_type == Edvanture::TOPICENDEXAM){
+                        $mcq_question = TopicEndExamMCQ::find($key);
+                    }
+                    elseif($exam->exam_type == Edvanture::POPQUIZ){
+                        $mcq_question = PopQuizMCQ::find($key);
+                    }
+                    else{
+                        return back()->with('Warning', "Unauthorized Action !!");
+                    }
+                    
+                    $details_result = new DetailsResult();
+                    $details_result->exam_id = $exam->id;
+                    $details_result->exam_type = $exam->exam_type;
+                    $details_result->question_id = $mcq_question->id;
+                    $details_result->batch_id = $batch->id;
+                    $details_result->student_id = auth()->user()->id;
+                    $details_result->status = 0;
+
+                    if($mcq == $mcq_question->answer){
+                        $details_result->gain_marks = 1;
+                    }
+                    else{
+                        $details_result->gain_marks = 0;
+                    }
+
+                    $details_result->save();
+                }
+
+                $path = '';
+
+                if ($request->file('file')) {
+                    $name = time() . "_" . $request->file('file')->getClientOriginalName();
+                    if($exam->exam_type == Edvanture::TOPICENDEXAM){
+                        $path = $request->file('file')->storeAs('public/student/exam/answer/TopicEndExamCQ', $name);
+                    }
+                    elseif($exam->exam_type == Edvanture::POPQUIZ){
+                        $path = $request->file('file')->storeAs('public/student/exam/answer/PopQuizCQ', $name);
+                    }
+                }
+
+                for ($i = 1; $i <= sizeof($request->cq_ques); $i++) {
+                    if($exam->exam_type == Edvanture::TOPICENDEXAM){
+                        $exam_paper = new TopicEndExamCqExamPaper();
+                    }
+                    elseif($exam->exam_type == Edvanture::POPQUIZ){
+                        $exam_paper = new PopQuizCqExamPaper();
+                    }
+                    $exam_paper->creative_question_id = $request->cq_ques[$i];
+                    $exam_paper->exam_id = $exam->id;
+                    $exam_paper->exam_type = $exam->exam_type;
+                    $exam_paper->batch_id = $batch->id;
+                    $exam_paper->student_id = auth()->user()->id;
+                    $exam_paper->submitted_text = $request->submitted_text;
+                    $exam_paper->submitted_pdf = $path;
+                    $exam_paper->status = 1;
+                    $exam_paper->save();
+                }
+
+                $student_exam_attempt = new StudentExamAttempt();
+                $student_exam_attempt->student_id = auth()->user()->id;
+                $student_exam_attempt->exam_id = $exam->id;
+                $student_exam_attempt->is_completed = 1;
+                $student_exam_attempt->attended_at = now();
+                $student_exam_attempt->save();
+
+
+                // if ($save) {
+                //     // return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully submitted the CQ exam paper.");
+                //     $show = false;
+                //     // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+                //     return view('student.pages_new.batch.exam.canAttemp', compact(
+                //         // 'canAttempt',
+                //         'exam',
+                //         'batch',
+                //         'show',
+                //         // 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'
+                //     ));
+                // }
+
+                dd($exam->exam_type ,"Exam Submitted !!");
+            }
+            else{
+                dd($exam->exam_type, "Exam Already Attempted");
+            }
+
+            return view('student.pages_new.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
+        }
+
+        
+
         if ($exam->exam_type == 'Assignment') {
             return $this->examPaper($request, $batch, $exam);
         }
@@ -501,7 +604,7 @@ class ExamController extends Controller
             $qus_input['success_rate'] = ($qus_input['gain_marks'] * 100) / $qus_input['number_of_attempt'];
             (new AptitudeTestMCQ())->saveData($qus_input, $question['id']); //updating question
 
-            //saving in the DetailsResuls
+            //saving in the DetailsResuls Store for each iteration
             $input['exam_type'] = Edvanture::APTITUDETEST;
             $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
             $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;

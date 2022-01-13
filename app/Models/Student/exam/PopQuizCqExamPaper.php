@@ -2,16 +2,16 @@
 
 namespace App\Models\Student\exam;
 
-use App\Models\Admin\CreativeQuestion;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class CqExamPaper extends Model
+class PopQuizCqExamPaper extends Model
 {
     use HasFactory;
 
-    protected static $logName = "Cq Exam Paper";
+    protected $table = "pop_quiz_cq_exam_papers";
+
+    protected static $logName = "Pop Quiz Cq Exam Paper";
     
     public function getDescriptionForEvent(string $eventName): string
     {
@@ -33,13 +33,13 @@ class CqExamPaper extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function creativeQuestion()
+    public function popQuizCreativeQuestion()
     {
-        return $this->belongsTo(CreativeQuestion::class);
+        return $this->belongsTo(PopQuizCreativeQuestion::class);
     }
 
-    public function getCqExamPaper($exam_id, $batch_id, $student_id)
+    public function getTopicEndExamCqExamPaper($exam_id, $batch_id, $student_id)
     {
-        return CqExamPaper::where('exam_id', $exam_id)->where('batch_id', $batch_id)->where('student_id', $student_id)->first();
+        return PopQuizCqExamPaper::where('exam_id', $exam_id)->where('batch_id', $batch_id)->where('student_id', $student_id)->first();
     }
 }
