@@ -23,72 +23,99 @@
         <div class="container page__container">
             <div class="page-section">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
-                <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" id="cqFormSubmit" method="post"
-                    enctype="multipart/form-data">
+
+
+                
+
+
+
+                <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" id="cqFormSubmit" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
+                    @foreach($mcq_questions as $mcq)
+                        <div class="question mb-5" id="">
+                            <div class="bg-purple-light p-2 mb-3 bshadow bradius-15 d-flex"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
+                            {{-- <div class="row"> --}}
+                                @if($mcq->image)
+                                    <div class="col-md-6 d-block d-md-none">
+                                        <img class="img-fluid bradius-15 mb-2" src="{{ $mcq->image }}" alt="" />
+                                    </div>
+                                @endif
+                                    {{-- <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+                                    <label class="btn btn-secondary" for="option1">Checked</label>
 
+                                    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                                    <label class="btn btn-secondary" for="option2">Radio</label>
 
+                                    <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
+                                    <label class="btn btn-secondary" for="option4">Radio</label> --}}
 
+                                    {{-- <div class="bg-purple-light bg-light-gray bshadow bradius-15 p-2 mb-3 d-block">
+                                        <label class="btn btn-info w-100">
+                                            <input type="radio" name="options" id="option1" autocomplete="off"> Active
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                                        </label>
+                                    </div> --}}
 
-                @foreach($mcq_questions as $mcq)
-                    <div className="question mb-5" id="">
-                        <div class="bg-purple-light p-2 mb-3 bshadow bradius-15 d-flex"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
-                        {{-- <div class="row"> --}}
-                            @if($mcq->image)
-                                <div class="col-md-6 d-block d-md-none">
-                                    <img class="img-fluid bradius-15 mb-2" src="{{ $mcq->image }}" alt="" />
-                                </div>
-                            @endif
-                                {{-- <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-                                <label class="btn btn-secondary" for="option1">Checked</label>
-
-                                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                                <label class="btn btn-secondary" for="option2">Radio</label>
-
-                                <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
-                                <label class="btn btn-secondary" for="option4">Radio</label> --}}
-
-                                {{-- <div class="bg-purple-light bg-light-gray bshadow bradius-15 p-2 mb-3 d-block">
-                                    <label class="btn btn-info w-100">
-                                        <input type="radio" name="options" id="option1" autocomplete="off"> Active
-                                    </label>
-                                    <label class="btn btn-info">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-                                    </label>
-                                    <label class="btn btn-info">
-                                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-                                    </label>
-                                </div> --}}
-
-                                <div class="container my-4">
-                                    <div class="question ml-sm-5 pl-sm-5">
-                                        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-                                            <label class="options"> {!! $mcq->field1 !!}
-                                                <input type="radio" name="radio">
-                                                <span class="checkmark"></span>
+                                    {{-- <fieldset class="form-group">
+                                        <div class="row">
+                                        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                            <label class="form-check-label" for="gridRadios1">
+                                                First radio
                                             </label>
-                                            <label class="options"> {!! $mcq->field2 !!}
-                                                <input type="radio" name="radio">
-                                                <span class="checkmark"></span>
+                                            </div>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                            <label class="form-check-label" for="gridRadios2">
+                                                Second radio
                                             </label>
-                                            <label class="options"> {!! $mcq->field3 !!}
-                                                <input type="radio" name="radio">
-                                                <span class="checkmark"></span>
+                                            </div>
+                                            <div class="form-check disabled">
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                                            <label class="form-check-label" for="gridRadios3">
+                                                Third disabled radio
                                             </label>
-                                            <label class="options"> {!! $mcq->field4 !!}
-                                                <input type="radio" name="radio">
-                                                <span class="checkmark"></span>
-                                            </label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </fieldset> --}}
+
+                                    <div class="container my-4">
+                                        <div class="question ml-sm-5 pl-sm-5">
+                                            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3 form-group" id="options">
+                                                <label class="options"> {!! $mcq->field1 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="options"> {!! $mcq->field2 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="2">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="options"> {!! $mcq->field3 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="3">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="options"> {!! $mcq->field4 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="4">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {{-- <div class="col-md-6 d-none d-md-block">
-                                {question.image ? <img className="img-fluid bradius-15" src={question.image} alt="" /> : ""}
-                            </div> --}}
-                        {{-- </div> --}}
-                    </div>
-                @endforeach
+                                {{-- <div class="col-md-6 d-none d-md-block">
+                                    {question.image ? <img className="img-fluid bradius-15" src={question.image} alt="" /> : ""}
+                                </div> --}}
+                            {{-- </div> --}}
+                        </div>
+                    @endforeach
 
 
 
@@ -108,7 +135,7 @@
                                         class="avatar-img rounded img-fluid">
                                 </div>
                             @endif
-                            <input type="hidden" name="ques[{{ $loop->iteration }}]" value="{{ $question->id }}">
+                            <input type="hidden" name="cq_ques[{{ $loop->iteration }}]" value="{{ $question->id }}">
                         </div>
                         @foreach ($question->question as $key => $cq)
                             <div class="page-separator mt-3">
