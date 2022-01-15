@@ -60,6 +60,7 @@ class ExamResult extends AppModel
                 array_push($cq, $percentage);
                 $n_cq++;
             }
+
         }
         $labels = count($mcq_labels) > count($cq_labels) ? $mcq_labels : $cq_labels;
         return ['labels' => $labels, 'mcq' => $mcq, 'cq' => $cq];
