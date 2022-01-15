@@ -102,7 +102,7 @@
                     <!-- Timer -->
                     <div class="col-md-4 " style="padding: 60px;">
                         <div class="text-center text-md-right">
-                            <p class="d-inline-block" style="font-size:25px; color: #81007f !important;">Your Markes
+                            <p class="d-inline-block" style="font-size:25px; color: #81007f !important;">Your Marks
                                 <br> {{ $total }}
                             </p> <br>
                         </div>
