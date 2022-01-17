@@ -37,7 +37,7 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 @foreach($exam_results as $exam_result)
+                                 @foreach($mcq_exam_results as $exam_result)
                                        <tr>
                                           <td>{{ $loop->iteration }}</td>
                                           <td class="text-center">{{ $exam_result->student->name }}</td>
@@ -123,7 +123,7 @@
                                              </span>
                                           </td>
                                           <td class="text-center">
-                                             @foreach ($exam_results as $exam_result)
+                                             @foreach ($cq_exam_results as $exam_result)
                                                 @if ($exam_result->student_id == $student_exam_attempt->student_id)
                                                       {{ $exam_result->gain_marks }}
                                                 @endif
