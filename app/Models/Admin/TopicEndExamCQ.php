@@ -20,7 +20,7 @@ class TopicEndExamCQ extends Model
 
     protected $guarded = [];
 
-    public function TopicEndExamCreativeQuestion()
+    public function creativeQuestion()
     {
         return $this->belongsTo(TopicEndExamCreativeQuestion::class);
     }

@@ -391,6 +391,7 @@ class ExamController extends Controller
                     'cq_ques' => 'required',
                 ]);
 
+                // check and store MCQ answers
                 foreach($request->mcq_ques as $key => $mcq){
                     // find corresponding mcq question by id
                     if($exam->exam_type == Edvanture::TOPICENDEXAM){
@@ -410,6 +411,7 @@ class ExamController extends Controller
                     $details_result->batch_id = $batch->id;
                     $details_result->student_id = auth()->user()->id;
                     $details_result->status = 0;
+                    $details_result->mcq_ans = $mcq;
 
                     if($mcq == $mcq_question->answer){
                         $details_result->gain_marks = 1;
@@ -447,7 +449,7 @@ class ExamController extends Controller
                     $exam_paper->student_id = auth()->user()->id;
                     $exam_paper->submitted_text = $request->submitted_text;
                     $exam_paper->submitted_pdf = $path;
-                    $exam_paper->status = 1;
+                    $exam_paper->status = 0;
                     $exam_paper->save();
                 }
 
@@ -483,10 +485,10 @@ class ExamController extends Controller
                 dd($exam->exam_type ,"Exam Submitted !!");
             }
             elseif($result != null && $result->status == 0){
-                dd($exam->exam_type, "Exam Already Attempted");
+                dd($exam->exam_type, "Exam Already Attempted. Results Pending.");
             }
             elseif($result != null && $result->status == 1){
-                dd($exam->exam_type, "Here have some results");
+                dd($exam->exam_type, "Here have some results.");
             }
         }
 
@@ -890,7 +892,12 @@ class ExamController extends Controller
                 // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
 
                 // ->inRandomOrder()
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
+
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
+
+                if($exam == null){
+                    return redirect()->back()->withErrors(['This batch has no pop quizzes added to it!!']);
+                }
 
                 $canAttempt = PopQUizCqExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)

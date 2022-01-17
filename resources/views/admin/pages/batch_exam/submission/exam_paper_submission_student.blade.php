@@ -58,11 +58,11 @@
                                             <td class="text-center">
                                                 <a
                                                     href="{{ route('seeDetails', [
-    'batch' => $batch,
-    'student' => $student_exam_attempt->student,
-    'exam' => $student_exam_attempt->exam,
-    'exam_type' => $student_exam_attempt->exam->exam_type,
-]) }}">See
+                                                    'batch' => $batch,
+                                                    'student' => $student_exam_attempt->student,
+                                                    'exam' => $student_exam_attempt->exam,
+                                                    'exam_type' => $student_exam_attempt->exam->exam_type,
+                                                ]) }}">See
                                                     Details</a>
                                             </td>
                                         </tr>

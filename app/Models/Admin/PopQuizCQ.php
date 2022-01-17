@@ -21,7 +21,7 @@ class PopQuizCQ extends Model
 
     protected $guarded = [];
 
-    public function PopQuizCreativeQuestion()
+    public function creativeQuestion()
     {
         return $this->belongsTo(PopQuizCreativeQuestion::class);
     }

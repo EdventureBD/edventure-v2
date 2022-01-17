@@ -49,10 +49,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td title="View Exam Result">
                                                 <a href="{{ route('submission', [
-    'batch' => $batch_exam->batchSlug,
-    'exam' => $batch_exam->examSlug,
-    'exam_type' => $batch_exam->exam->exam_type,
-]) }}
+                                                            'batch' => $batch_exam->batchSlug,
+                                                            'exam' => $batch_exam->examSlug,
+                                                            'exam_type' => $batch_exam->exam->exam_type,
+                                                        ]) }}
                                                                             ">
                                                     {{ $batch_exam->batchTitle }}
                                                 </a>
@@ -62,7 +62,7 @@
                                                     {{ $batch_exam->examTitle }}
                                                 </a>
                                             </td>
-               
+
                                             <td >
                                                 @if ($batch_exam->exam->special)
                                                     <span class="badge bg-primary" > Special {{ $batch_exam->exam->exam_type }} </span>
@@ -70,12 +70,15 @@
                                                 <span
                                                 class="badge {{ $batch_exam->exam->exam_type == 'MCQ' ? 'bg-success' : '' }}
                                                                 {{ $batch_exam->exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
-                                                                {{ $batch_exam->exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}">
+                                                                {{ $batch_exam->exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}
+                                                                {{ $batch_exam->exam->exam_type == 'Aptitude Test' ? 'bg-dark' : '' }}
+                                                                {{ $batch_exam->exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
+                                                                {{ $batch_exam->exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}">
                                                 {{ $batch_exam->exam->exam_type }}
                                                 @endif
                                             </span>
                                             </td>
-                                  
+
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
                                                     id="single-col-{{ $batch_exam->id }}"

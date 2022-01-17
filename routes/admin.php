@@ -194,6 +194,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // START OF EXAM SUBMISSION
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission', [SubmissionController::class, 'submission'])->name('submission');
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetails', [SubmissionController::class, 'seeDetails'])->name('seeDetails');
+    Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetailsCqOnly', [SubmissionController::class, 'seeDetailsCqOnly'])->name('seeDetailsCqOnly');
+    Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetailsMcqOnly', [SubmissionController::class, 'seeDetailsMcqOnly'])->name('seeDetailsMcqOnly');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/give-marks', [SubmissionController::class, 'giveMarks'])->name('giveMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/{creative_question}/edit-marks', [SubmissionController::class, 'editMarks'])->name('editMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/{assignment}/edit-assignment-marks', [SubmissionController::class, 'editAssignmetnMarks'])->name('editAssignmetnMarks');
