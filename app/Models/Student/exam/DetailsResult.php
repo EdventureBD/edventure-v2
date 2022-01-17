@@ -13,6 +13,9 @@ use App\Models\AppModel;
 use App\Utils\Edvanture;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Admin\PopQuizCQ;
+use App\Models\Admin\TopicEndExamCQ;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailsResult extends AppModel
@@ -54,6 +57,16 @@ class DetailsResult extends AppModel
     public function cqQuestion()
     {
         return $this->belongsTo(CQ::class, 'question_id', 'id');
+    }
+
+    public function popQuizCqQuestion()
+    {
+        return $this->belongsTo(PopQuizCQ::class, 'question_id', 'id');
+    }
+
+    public function topicEndExamCqQuestion()
+    {
+        return $this->belongsTo(TopicEndExamCQ::class, 'question_id', 'id');
     }
 
     public function assignment()

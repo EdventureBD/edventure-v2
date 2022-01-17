@@ -11,10 +11,11 @@ class BatchExamController extends Controller
     public function index()
     {
         $batch_exams = BatchExam::join('batches', 'batch_exams.batch_id', 'batches.id')
+            ->with(['exam'])
             ->join('exams', 'batch_exams.exam_id', 'exams.id')
             ->select('batch_exams.*', 'batches.title as batchTitle', 'batches.slug as batchSlug', 'exams.title as examTitle', 'exams.slug as examSlug')
             ->get();
-        // dd($batch_exams);
+
         return view('admin.pages.batch_exam.index', compact('batch_exams'));
     }
 

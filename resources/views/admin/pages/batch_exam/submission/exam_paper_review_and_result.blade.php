@@ -59,6 +59,9 @@
                                             </td>
                                             <td class="text-justify">
                                                 @forelse($exam_results as $exam_result)
+                                                {{-- @php
+                                                    $exam_result->
+                                                @endphp --}}
                                                     @if ($exam_paper->creative_question_id == $exam_result->cqQuestion->creativeQuestion->id)
                                                         @if ($exam_result->marks == 1)
                                                             জ্ঞানমূলক : {{ $exam_result->gain_marks }} /
