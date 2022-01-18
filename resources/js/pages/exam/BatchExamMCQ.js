@@ -96,8 +96,13 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
         const url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
         const res = await axios.post(url, { a: state.answers, q: questions })
             .then(response => {
-                console.log(response.data);
-                window.location.reload();
+                // if(response && response.staus == 200) {
+                    
+                // } else {
+
+                // }
+                window.location.href = 'http://' + window.location.host + '/submission-status';
+                
             }).catch(error => {
                 console.log(error);
             });

@@ -1654,14 +1654,14 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #000000;
+  border-top: 1px solid #dee2e6;
 }
 .table thead th {
-  vertical-align: center;
-  border-bottom: 2px solid #000000;
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
 }
 .table tbody + tbody {
-  border-top: 2px solid #000000;
+  border-top: 2px solid #dee2e6;
 }
 
 .table-sm th,
@@ -1670,11 +1670,11 @@ pre code {
 }
 
 .table-bordered {
-  border: 1px solid #000000;
+  border: 1px solid #dee2e6;
 }
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #000000;
+  border: 1px solid #dee2e6;
 }
 .table-bordered thead th,
 .table-bordered thead td {
@@ -11002,9 +11002,7 @@ a:hover {
 }
 
 .bg-gradient-purple {
-  /* background: linear-gradient(to bottom, #c89aee, #653092); */
-  background: linear-gradient(180deg, #A77ACC 0%, #653092 61.98%);
-  box-shadow: 0px 72px 116px rgba(0, 0, 0, 0.137324), 0px 16.0821px 25.9101px rgba(0, 0, 0, 0.202676), 0px 4.78807px 7.71412px rgba(0, 0, 0, 0.34);
+  background: linear-gradient(to bottom, #c89aee, #653092);
 }
 
 .bg-purple {
@@ -11831,27 +11829,13 @@ svg.eye-icon {
   margin-bottom: 10%;
 }
 
-.form-box span{
-  font-size: 30px;
-}
-
-/* .Contact_us_action_button{
-  display: flex;
-  flex-direction: row;
-  row-gap: 15%;
-} */
-
 .form-box h3 {
-  /* font-family: "Oswald", sans-serif; */
+  font-family: "Oswald", sans-serif;
   text-align: center;
   color: white;
-  font-size: 30px;
+  font-size: 36px;
   padding-top: 15%;
-  padding-bottom: 5%;
-}
-.form-box input{
-  font-size: 18px;
-  color: whitesmoke;
+  padding-bottom: 10%;
 }
 
 .contact-box {
@@ -11859,23 +11843,21 @@ svg.eye-icon {
   height: auto;
   background-color: rgba(48, 48, 48, 0.9);
   border-radius: 98px;
-  margin-top: 30%;
+  margin-top: 40%;
   margin-left: 3%;
 }
 
 .btn-submit {
-  padding: 12px 24px;
+  padding: 11px 68px;
   background-color: #996FBC;
   color: white;
   border: 0;
   border-radius: 50px;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 5%;
+  margin-top: 10%;
   transition: all 0.4s;
   margin-bottom: 15%;
-  font-family: "Raleway";
-  line-height: 21px;
 }
 
 .btn-submit:hover {
@@ -11884,31 +11866,12 @@ svg.eye-icon {
 
 .icon-box {
   position: relative;
-  padding-top: 0;
+  padding-top: 10%;
   padding-bottom: 15%;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  /* column-gap: 10%; */
 }
-.icon-box img{
-  width: 30%;
-  border-radius: 15px;
-}
-.icon-box img:hover{
-  background: black;
-}
-.form-box h3{
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
-}
+
 .form-box h3 span {
   color: #996FBC;
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
 }
 
 .form-group {
@@ -11948,33 +11911,30 @@ form input {
 }
 
 .contact-box h3 {
-  font-size: 30px;
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
-  color: #996FBC;
+  font-size: 45px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  color: #653092;
 }
 
 .contact-box h3 span {
-  font-size: 30px;
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
+  font-size: 45px;
+  font-weight: 400;
   color: white;
 }
 
 .contact-box p {
   color: white;
-  font-size: 18px;
-  font-family: "Raleway","Zen Kurenaido", sans-serif;
+  font-size: 23px;
+  font-family: "Zen Kurenaido", sans-serif;
   font-weight: 400;
   margin-top: 25px;
 }
 
 .contact-box h4 {
-  font-family: "Raleway","Oswald", sans-serif;
+  font-family: "Oswald", sans-serif;
   color: #CECECE;
-  font-size: 25px;
+  font-size: 36px;
   font-weight: 400;
   margin-top: 25px;
 }
@@ -12026,65 +11986,42 @@ form input {
   height: auto;
 }
 
-.parlowlIconicLogo{
-  position: absolute;
-  top: 42%;
-  left: 44.5%;
-  z-index: 1;
-}
-
 .map {
-  /* margin-top: -20%; */
+  margin-top: -20%;
   position: relative;
 }
 
 .building {
   position: absolute;
-  top: 18%;
+  top: 20%;
   right: 0;
   z-index: 1;
 }
 
 @media screen and (min-width: 1700px) {
   .form-box h3 {
-    font-size: 35px;
-  }
-  .form-box span{
-    font-size: 35px;
-  }
-  .form-box {
-    width: 75%;
-    margin-right: auto;
-    margin-left: auto;
+    font-size: 50px;
   }
 
   .contact-box h3 {
-    font-size: 35px;
+    font-size: 50px;
   }
 
   .contact-box h3 span {
-    font-size: 35px;
+    font-size: 50px;
   }
 
   .btn-submit {
-    padding: 15px 24px;
+    padding: 15px 68px;
   }
 
   .contact p {
     font-size: 30px;
   }
-.contact-box {
-  width: 95%;
-  margin-left: auto;
-  margin-right: auto;
-}
+
   .contact-box h4 {
-    font-size: 30px;
+    font-size: 50px;
   }
-   
-  /* .btn-cancel{
-    margin-left: 15%;
-  } */
 }
 @media screen and (max-width: 1200px) {
   .contact p {
@@ -12099,7 +12036,6 @@ form input {
     margin-left: 50px;
     margin-right: 50px;
   }
-
 }
 @media screen and (max-width: 992px) {
   .contact p {
@@ -12151,74 +12087,13 @@ form input {
     margin-bottom: 30%;
   }
 }
-/* media querry for mobile view in normal size  */
-/* @media screen and (max-width: 576px) {
-  .form-box {
-    margin-left: 25%;
-  }
-  .pt-7 {
-    padding-top: 80px !important;
-  }
-  #landing_greeting_and_register_button {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  #landing_greeting_and_register_button h2{
-    font-size: 25px;
-  }
-  #landing_greeting_and_register_button a{
-    font-size: 12px;
-  }
-
-  .form-box h3 {
-    font-size: 30px;
-  }
-  .contact-box .text-box p{
-    font-size: 18px;
-  }
-  .contact-box .text-box h3, .contact-box .text-box span{
-    font-size: 25px;
-  }
-  #contact-us-banner-text{
-    font-size: 20px;
-  }
-} */
-/* media querry for medical campaign */
 @media screen and (max-width: 576px) {
   .form-box {
     margin-left: 25%;
   }
-  .pt-7 {
-    padding-top: 80px !important;
-  }
-  .text-left-footer {
-    text-align: left !important;
-  }
-  #landing_greeting_and_register_button {
-    /* display: flex; */
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  #landing_greeting_and_register_button h2{
-    font-size: 25px;
-    word-wrap: break-word;
-  }
-  #landing_greeting_and_register_button a{
-    font-size: 12px;
-  }
 
   .form-box h3 {
     font-size: 30px;
-  }
-  .contact-box .text-box p{
-    font-size: 18px;
-  }
-  .contact-box .text-box h3, .contact-box .text-box span{
-    font-size: 25px;
-  }
-  #contact-us-banner-text{
-    font-size: 20px;
   }
 }
 @media screen and (max-width: 575px) {
@@ -12264,8 +12139,8 @@ form input {
   }
 
   .btn-submit {
-    padding: 10px 24px;
-    /* margin-left: 10%; */
+    padding: 10px 50px;
+    margin-left: 10%;
   }
 
   .fa.fa-linkedin {
@@ -12284,7 +12159,6 @@ form input {
 
   .icon-box {
     padding-bottom: 15%;
-    width: 100%;
   }
 }
 .lecture-page .nav-tabs .nav-link {
@@ -12365,69 +12239,10 @@ form input {
 .description p {
   max-width: 100%;
 }
-/* medical olympiad standalone page css starts  */
-#medi-olympiad {
-  font-weight: bolder;
-  text-align: center;
-}
-#medi-olympiad p {
- font-weight: 300;
- text-align: justify;
- line-height:1.6em;
-}
-#medi-olympiad p span{
-  font-weight:600;
-}
-#medi-olympiad{
-  background: url("/img/medical_camp/medicalOlympiadBanner1.jpeg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-#medi-olympiad-banner a{
-  padding: 7px 25px;
-  background: yellow;
-  border: 1px solid gray;
-  border-radius: 15px;
-}
-.red-letter {
-  color: red;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-#medicamp-info-part {
-  background: lightgray;
-  padding: 0% 10% 5%;
-  border: 1px solid lightblue;
-  border-radius: 25px 30px 25px 30px;
-}
-#medicamp-info-part{
-  flex-direction: column-reverse;
-  display: flex;
-  justify-content: right;
-}
-#medicamp-info-part img {
-  width: 25%;
-}
-@media screen and (max-width:576px) {
-/* #medi-olympiad {
-  background: url("/img/medical_camp/medicalOlympiadBannerMobile.jpg");
-}  */
-#medi-olympiad-banner{
-  margin: 20% auto;
-  margin-bottom: 0px;
-  border: 1px solid lightgray;
-  background-color: azure;
-}
-/* #medicamp-info-part{
-  flex-direction: column-reverse;
-  display: flex;
-  justify-content: right;
-} */
-.mobile_width {
-  width: 100%;
-}
-#medicamp-info-part img {
-  width: 60%;
-}
-}
 
-/* medical olympiad standalone page css ends  */
+/* successfully submitted section's css  */
+#successfully_submitted_section h1 {
+  font-weight: bold;
+  color: #653092;
+  font-size: 35px;
+}
