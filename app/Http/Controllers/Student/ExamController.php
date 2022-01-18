@@ -392,6 +392,7 @@ class ExamController extends Controller
                 ]);
 
                 // check and store MCQ answers
+                $total = 0;
                 foreach($request->mcq_ques as $key => $mcq){
                     // find corresponding mcq question by id
                     if($exam->exam_type == Edvanture::TOPICENDEXAM){
@@ -400,9 +401,6 @@ class ExamController extends Controller
                     elseif($exam->exam_type == Edvanture::POPQUIZ){
                         $mcq_question = PopQuizMCQ::find($key);
                     }
-                    else{
-                        return back()->with('Warning', "Unauthorized Action !!");
-                    }
                     
                     $details_result = new DetailsResult();
                     $details_result->exam_id = $exam->id;
@@ -410,11 +408,12 @@ class ExamController extends Controller
                     $details_result->question_id = $mcq_question->id;
                     $details_result->batch_id = $batch->id;
                     $details_result->student_id = auth()->user()->id;
-                    $details_result->status = 0;
+                    $details_result->status = 1;
                     $details_result->mcq_ans = $mcq;
 
                     if($mcq == $mcq_question->answer){
                         $details_result->gain_marks = 1;
+                        $total++;
                     }
                     else{
                         $details_result->gain_marks = 0;
@@ -422,6 +421,22 @@ class ExamController extends Controller
 
                     $details_result->save();
                 }
+
+                // Store exam results for mcq
+                $exam_result = new ExamResult();
+                $exam_result->exam_id = $exam->id;
+                if($exam->exam_type == Edvanture::POPQUIZ){
+                    $exam_result->exam_type = "Pop Quiz MCQ";
+                }
+                else if($exam->exam_type == Edvanture::TOPICENDEXAM){
+                    $exam_result->exam_type = "Topic End Exam MCQ";
+                }
+                $exam_result->batch_id = $batch->id;
+                $exam_result->student_id = auth()->user()->id;
+                $exam_result->gain_marks = $total;
+                $exam_result->status = 1;
+                $exam_result->save();
+
 
                 $path = '';
 
@@ -449,7 +464,7 @@ class ExamController extends Controller
                     $exam_paper->student_id = auth()->user()->id;
                     $exam_paper->submitted_text = $request->submitted_text;
                     $exam_paper->submitted_pdf = $path;
-                    $exam_paper->status = 0;
+                    $exam_paper->status = 1;
                     $exam_paper->save();
                 }
 
@@ -474,12 +489,19 @@ class ExamController extends Controller
                 //     ));
                 // }
 
+                // Store exam results for cq
                 $exam_result = new ExamResult();
                 $exam_result->exam_id = $exam->id;
+                if($exam->exam_type == Edvanture::POPQUIZ){
+                    $exam_result->exam_type = "Pop Quiz CQ";
+                }
+                else if($exam->exam_type == Edvanture::TOPICENDEXAM){
+                    $exam_result->exam_type = "Topic End Exam CQ";
+                }
                 $exam_result->batch_id = $batch->id;
                 $exam_result->student_id = auth()->user()->id;
                 $exam_result->gain_marks = 0;
-                $exam_result->status = 0;
+                $exam_result->status = 1;
                 $exam_result->save();
 
                 dd($exam->exam_type ,"Exam Submitted !!");

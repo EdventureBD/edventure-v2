@@ -32,4 +32,14 @@ class Exam extends Model
     {
         return $this->belongsTo(CourseTopic::class);
     }
+
+    public function popQuizCreativeQuestion()
+    {
+        return $this->hasMany(PopQuizCreativeQuestion::class);
+    }
+
+    public function topicEndExamCreativeQuestion()
+    {
+        return $this->hasMany(TopicEndExamCreativeQuestion::class);
+    }
 }
