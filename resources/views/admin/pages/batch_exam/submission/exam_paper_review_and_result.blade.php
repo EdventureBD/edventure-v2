@@ -10,6 +10,9 @@
 @endsection
 
 @section('content')
+    {{-- @php
+        dd($exam_papers, $exam_results);
+    @endphp --}}
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">

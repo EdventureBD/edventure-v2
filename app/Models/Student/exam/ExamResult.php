@@ -16,7 +16,7 @@ class ExamResult extends AppModel
     use HasFactory;
     protected static $logName = "Exam Result";
 
-    protected $fillable = ['exam_id', 'batch_id', 'student_id', 'gain_marks', 'status'];
+    protected $fillable = ['exam_id', 'exam_type', 'batch_id', 'student_id', 'gain_marks', 'status'];
 
     public function getDescriptionForEvent(string $eventName): string
     {
