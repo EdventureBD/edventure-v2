@@ -183,8 +183,6 @@ class SubmissionController extends Controller
         return view('admin.pages.batch_exam.submission.details_exam_result', compact('details_result', 'batch', 'exam', 'exam_type', 'student'));
     }
 
-
-
     public function seeDetailsCqOnly(Batch $batch, Exam $exam, $exam_type, User $student){
 
         if($exam->exam_type == 'Pop Quiz'){
