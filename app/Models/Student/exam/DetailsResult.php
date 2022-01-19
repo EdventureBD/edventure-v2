@@ -13,6 +13,8 @@ use App\Models\AppModel;
 use App\Utils\Edvanture;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Admin\PopQuizMCQ;
+use App\Models\Admin\TopicEndExamMCQ;
 use App\Models\Admin\PopQuizCQ;
 use App\Models\Admin\TopicEndExamCQ;
 
@@ -52,6 +54,14 @@ class DetailsResult extends AppModel
     public function atQuestion()
     {
         return $this->belongsTo(AptitudeTestMCQ::class, 'question_id', 'id');
+    }
+
+    public function popQuizMCQ(){
+        return $this->belongsTo(PopQuizMCQ::class, 'question_id', 'id');
+    }
+
+    public function topicEndExamMCQ(){
+        return $this->belongsTo(TopicEndExamMCQ::class, 'question_id', 'id');
     }
 
     public function cqQuestion()
