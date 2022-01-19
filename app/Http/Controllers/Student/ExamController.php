@@ -379,9 +379,8 @@ class ExamController extends Controller
         if ($exam->exam_type == Edvanture::TOPICENDEXAM || $exam->exam_type == Edvanture::POPQUIZ) {
 
             $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+            // $result = ExamResult::where()->where()->where();
             // dd($request->mcq_ques, $request->cq_ques);
-
-            // dd($result);
 
             if ($result == null) {
                 $validateData = $request->validate([
@@ -502,6 +501,7 @@ class ExamController extends Controller
                 $exam_result->student_id = auth()->user()->id;
                 $exam_result->gain_marks = 0;
                 $exam_result->status = 1;
+                $exam_result->checked = 0;
                 $exam_result->save();
 
                 dd($exam->exam_type ,"Exam Submitted !!");
@@ -743,7 +743,7 @@ class ExamController extends Controller
                 // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
                 $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
 
-                $canAttempt = $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+                $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
                 
                 if(!$canAttempt){
                     // Inserting in the exam result as first attempt
@@ -783,8 +783,6 @@ class ExamController extends Controller
                     $min = ExamResult::where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
                         ->min('gain_marks');
-    
-                    
     
                     $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
                     ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
@@ -911,9 +909,61 @@ class ExamController extends Controller
             // if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
 
 
-                // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
-
                 // ->inRandomOrder()
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
+
+                $cq_exam_result = ExamResult::where('exam_id', $exam->id)
+                ->where('batch_id', $batch->id)
+                ->where('student_id', auth()->user()->id)
+                ->where('exam_type', 'Pop Quiz CQ')
+                ->first();
+                
+                if($cq_exam_result){
+                    if($cq_exam_result->checked == 0) {
+
+                        dd("Paper Checking Pending");
+                        return view('', compact(''));
+                    }
+                    elseif($cq_exam_result->checked == 1) {
+
+                        $mcq_exam_result = ExamResult::where('exam_id', $exam->id)
+                        ->where('batch_id', $batch->id)
+                        ->where('student_id', auth()->user()->id)
+                        ->where('exam_type', 'Pop Quiz MCQ')
+                        ->first();
+
+                        // contains only details of MCQ exams
+                        $mcq_details_results = DetailsResult::where('exam_id', $exam->id)
+                                            ->where('batch_id', $batch->id)
+                                            ->where('student_id', auth()->user()->id)
+                                            ->where('exam_type', 'Pop Quiz')
+                                            ->whereNotNull('mcq_ans')
+                                            ->with('popQuizMCQ')
+                                            ->get();
+
+                        $mcq_count = $mcq_details_results->count();
+                        $mcq_total_marks = 0;
+
+                        foreach($mcq_details_results as $details){
+                            $mcq_total_marks += $details->gain_marks;
+                        }
+
+                        // contains only details of CQ exams
+                        $cq_details_results = DetailsResult::where('exam_id', $exam->id)
+                        ->where('batch_id', $batch->id)
+                        ->where('student_id', auth()->user()->id)
+                        ->where('exam_type', 'Pop Quiz')
+                        ->whereNull('mcq_ans')
+                        ->with('popQuizCqQuestion')
+                        ->get();
+
+                        dd("Here Is The Checked Paper.", $mcq_details_results, $mcq_count, $mcq_total_marks, $cq_details_results);
+                        return view('', compact(''));
+                    }
+                }
+                else{
+                    // If no results exist, then go ahead attempt exam
+                }
 
                 $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
@@ -947,22 +997,6 @@ class ExamController extends Controller
                     $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
 
                     return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
-                }
-
-                $canAttempt = ExamResult::where('exam_id', $exam->id)
-                    ->where('batch_id', $batch->id)
-                    ->where('student_id', auth()->user()->id)
-                    ->first();
-                    
-                if (!$canAttempt) {
-                    $show = false;
-                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
-                } else {
-                    $show = true;
-                    $exam_paper = (new CqExamPaper())->getCqExamPaper($exam->id, $batch->id, Auth::user()->id);
-                    // CqExamPaper::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', Auth::user()->id)->first();
-
-                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber', 'exam_paper'));
                 }
         }
 

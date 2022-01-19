@@ -231,7 +231,6 @@ class SubmissionController extends Controller
 
 
 
-
     public function giveMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
     {
         if ($exam_type == 'CQ') {
@@ -343,19 +342,17 @@ class SubmissionController extends Controller
                     }
                 }
             }
-            $exam_result = new ExamResult();
-            $exam_result->exam_id = $exam->id;
-            if($exam_type == "Pop Quiz"){
-                $exam_result->exam_type = "Pop Quiz CQ";
-            }
-            else if($exam_type == "Topic End Exam"){
-                $exam_result->exam_type = "Topic End Exam CQ";
-            }
-            $exam_result->batch_id = $batch->id;
-            $exam_result->student_id = $student->id;
+
+            $exam_result = ExamResult::where('exam_id', $exam->id)
+            ->where('exam_type', "Pop Quiz CQ")
+            ->where('batch_id', $batch->id)
+            ->where('student_id', $student->id)
+            ->where('checked', 0)
+            ->firstOrFail();
+            $exam_result->checked = 1;
             $exam_result->gain_marks = $total;
-            $exam_result->status = 1;
             $save = $exam_result->save();
+
             if ($save) {
                 return redirect()->back();
             }

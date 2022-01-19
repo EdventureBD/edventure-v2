@@ -184,35 +184,34 @@
 
 
     <script type="text/javascript">
+    
         var timeleft = '<?php echo $exam->duration * 60; ?>';
         var downloadTimer = setInterval(function () {
-        timeleft--;
-        var hours = 0;
-        var minH = 0;
-        var min = 0;
-        var sec = timeleft > 0 ? timeleft : 0;
-        if (timeleft >=3600) {
-             hours = Math.floor(timeleft/3600);
-             minH = parseInt(timeleft % 3600) ;
-             min = Math.floor(minH / 60);
-             sec = parseInt(minH % 60);
-        } else if (timeleft >= 60) {
-            min = Math.floor(timeleft / 60);
-             sec = parseInt(timeleft % 60);
-        } 
-        if (timeleft > 0) {
-            document.getElementById('countdownMinuits').textContent = min;
-            document.getElementById('countdownSecound').textContent = sec;
-            document.getElementById('countdownHour').textContent = hours;
-        } 
-        
+            timeleft--;
+            var hours = 0;
+            var minH = 0;
+            var min = 0;
+            var sec = timeleft > 0 ? timeleft : 0;
+            if (timeleft >=3600) {
+                hours = Math.floor(timeleft/3600);
+                minH = parseInt(timeleft % 3600) ;
+                min = Math.floor(minH / 60);
+                sec = parseInt(minH % 60);
+            } else if (timeleft >= 60) {
+                min = Math.floor(timeleft / 60);
+                sec = parseInt(timeleft % 60);
+            } 
+            if (timeleft > 0) {
+                document.getElementById('countdownMinuits').textContent = min;
+                document.getElementById('countdownSecound').textContent = sec;
+                document.getElementById('countdownHour').textContent = hours;
+            } 
+            
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+            }
+        }, 1000);
 
-        if (timeleft <= 0) {
-            clearInterval(downloadTimer);
-        }
-
-    }, 1000);
-        
     </script>
     <script type="text/javascript">
         // var formSumit
