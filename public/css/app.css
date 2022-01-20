@@ -12239,3 +12239,20 @@ form input {
 .description p {
   max-width: 100%;
 }
+/* Exam Timer new css starts*/
+#parent-timer {
+  color: white;
+}
+#dropdownIcon {
+ margin: 0px auto;
+ display: flex;
+ justify-content: center;
+}
+#dropdownIcon a{
+  text-decoration: none;
+  color: white;
+  margin: 0px auto;
+  padding: 0px auto;
+}
+
+/* Exam Timer new css ends */

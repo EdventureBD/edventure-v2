@@ -1,16 +1,39 @@
 <x-landing-layout headerBg="white">
+    <link rel="stylesheet" href="/css/bootstrap5.min.css">
     <div class="course-info bg-gradient-purple py-5">
         <div class="container">
             <div class="row">
                 <div class="col-7">
                     <h3 class="text-white flex m-0">Course : {{ $batch->course->title }}</h3>
                 </div>
-                <div class="col-5 text-right">
-                    <p class="h2 text-white font-weight-light m-0 rounded timer">
-                        <span id="countdownHour"></span>: <span
-                        id="countdownMinuits"></span>:<span id="countdownSecound">
-
-                        </p>
+                <div class="col-5 text-right mx-0 px-0">
+                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-secondary">
+                        <div id="innerParent">
+                            <div id="timer" class="w-100 mx-0">
+                                <p class="h2 text-white font-weight-light m-0 rounded">
+                                    <span id="countdownHour"></span>: 
+                                    <span id="countdownMinuits"></span>:
+                                    <span id="countdownSecound"></span>
+                                </p>
+                            </div>
+                            <div id="dropdownIcon" >
+                                <a href="#">
+                                    <i class="c-point fas fa-angle-up"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="c-point fas fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center">
+                                <span class="border rounded">1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
                 <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span> : <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
