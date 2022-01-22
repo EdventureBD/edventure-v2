@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Admin\PopQuizCreativeQuestion;
 use App\Models\Admin\ContentTag;
+use App\Models\Student\exam\DetailsResult;
 
 class PopQuizCQ extends Model
 {
@@ -29,5 +30,10 @@ class PopQuizCQ extends Model
     public function contentTag()
     {
         return $this->hasMany(ContentTag::class);
+    }
+
+    public function detailsResult()
+    {
+        return $this->hasOne(DetailsResult::class, 'question_id');
     }
 }

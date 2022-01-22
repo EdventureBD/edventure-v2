@@ -663,6 +663,8 @@ class ExamController extends Controller
 
     // serve exam questions/to exam page with random questions per paper
     public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_type){
+
+        // $batch = Batch::where('id', $batch->id)->with('course')->firstOrFail();
         // dd("Batch Controller batch Tests", $exam_type);
 
         // $course = Course::where('id', $batch->course_id)->first();
@@ -910,8 +912,9 @@ class ExamController extends Controller
 
 
                 // ->inRandomOrder()
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with(['popQuizCreativeQuestions.question.detailsResult', 'popQuizCreativeQuestions.exam_papers'])->firstOrFail();
 
+                // if CQ exam result exists and is checked, then the user has attended exam and is checked. Then paper+marks+analytics is shown
                 $cq_exam_result = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
@@ -941,11 +944,13 @@ class ExamController extends Controller
                                             ->with('popQuizMCQ')
                                             ->get();
 
-                        $mcq_count = $mcq_details_results->count();
-                        $mcq_total_marks = 0;
+                        // Count total MCQ marks
+                        $mcq_total_marks = $mcq_details_results->count();
+                        $mcq_marks_scored = 0;
 
+                        // calculate total marks for MCQ part.
                         foreach($mcq_details_results as $details){
-                            $mcq_total_marks += $details->gain_marks;
+                            $mcq_marks_scored += $details->gain_marks;
                         }
 
                         // contains only details of CQ exams
@@ -957,8 +962,18 @@ class ExamController extends Controller
                         ->with('popQuizCqQuestion')
                         ->get();
 
-                        dd("Here Is The Checked Paper.", $mcq_details_results, $mcq_count, $mcq_total_marks, $cq_details_results);
-                        return view('', compact(''));
+                        $cq_total_marks = $exam->popQuizCreativeQuestions->count() * 10;
+                        $cq_marks_scored = 0;
+
+                        // count total marks scored by student for CQ part
+                        foreach($exam->popQuizCreativeQuestions as $creative_question){
+                            foreach($creative_question->question as $cq){
+                                $cq_marks_scored += $cq->detailsResult->gain_marks;
+                            }
+                        }
+
+                        // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch);
+                        return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_result', compact('exam', 'course_topic', 'batch', 'mcq_details_results', 'mcq_total_marks', 'mcq_marks_scored', 'cq_total_marks', 'cq_marks_scored'));
                     }
                 }
                 else{
