@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Admin\Exam;
 use App\Models\Admin\PopQuizCQ;
+use App\Models\Student\exam\DetailsResult;
+use App\Models\Student\exam\PopQuizCqExamPaper;
 
 class PopQuizCreativeQuestion extends Model
 {
@@ -29,5 +31,10 @@ class PopQuizCreativeQuestion extends Model
     public function question()
     {
         return $this->hasMany(PopQuizCQ::class, 'creative_question_id');
+    }
+
+    public function exam_papers()
+    {
+        return $this->hasOne(PopQuizCqExamPaper::class, 'creative_question_id');
     }
 }

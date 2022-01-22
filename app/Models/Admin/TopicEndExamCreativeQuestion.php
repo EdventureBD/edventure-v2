@@ -29,4 +29,9 @@ class TopicEndExamCreativeQuestion extends Model
     {
         return $this->hasMany(TopicEndExamCQ::class, 'creative_question_id');
     }
+
+    public function exam_papers()
+    {
+        return $this->hasOne(TopicEndExamCqExamPaper::class, 'creative_question_id');
+    }
 }
