@@ -546,9 +546,10 @@ pre code {
   margin-left: auto;
 }
 #roadmapParentContainer {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
+  display: flex;
   /* column-gap: 10px; */
+  background: url("/img/road_map/roadmapBackground.png");
+  color: whitesmoke;
 }
 
 
