@@ -22,20 +22,22 @@
                      <p class="hero__lead measure-hero-lead text-white-50">Exam : {{ $exam->title }}</p>
                </div>
             </div>
-            <div class="bg-light-gray">
+
+            {{-- <div class="bg-light-gray">
                <div class="container">
                      <div class="py-5 ">
                         <h1 class="display-5 text-sm text-dark max-w-38 mx-auto fw-600" style="text-align: center">Your submitted answer is being reviewed. Please wait</h1>
                      </div>
                </div>
-            </div>
+            </div> --}}
+
          </div>
 
 
 
          <div class="container">
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-            {{-- <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p> --}}
+            <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
             <div class="text-right">
                   <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
             </div>
@@ -47,9 +49,11 @@
                      $total_marks += $result->cqQuestion->marks;
                      $total_gain_marks += $result->gain_marks;
                }
-            @endphp --}}1
+            @endphp --}}
 
             <div class="result-sheet-table overflow-x-scroll">
+               <div class="">
+                  <p class="text-center text-sm">MCQ Marks : <b>{{$mcq_marks_scored." out of ".$mcq_total_marks}}</b></p>
                   <table class="table table-bordered">
                      <thead>
                         <tr>
@@ -88,14 +92,14 @@
                         @endforeach --}}
                      </tbody>
                   </table>
+               </div>
 
 
 
 
 
-
-
-
+               <div class="mt-5">
+                  <p class="text-center text-sm mt-3">CQ Marks : <b>{{$cq_marks_scored." out of ".$cq_total_marks}}</b></p>
                   <table class="table table-bordered">
                      <thead>
                         <tr>
@@ -225,6 +229,7 @@
 
                      </tbody>
                   </table>
+               </div>
             </div>
          </div>
 
