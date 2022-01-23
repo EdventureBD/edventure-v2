@@ -923,9 +923,8 @@ class ExamController extends Controller
                 
                 if($cq_exam_result){
                     if($cq_exam_result->checked == 0) {
-
-                        dd("Paper Checking Pending");
-                        return view('', compact(''));
+                        // dd("Paper Checking Pending");
+                        return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
                     }
                     elseif($cq_exam_result->checked == 1) {
 
@@ -972,46 +971,72 @@ class ExamController extends Controller
                             }
                         }
 
-                        // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch);
-                        return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_result', compact('exam', 'course_topic', 'batch', 'mcq_details_results', 'mcq_total_marks', 'mcq_marks_scored', 'cq_total_marks', 'cq_marks_scored'));
+                        // analysis for MCQs
+                        $analysis_mcqs = DetailsResult::join('pop_quiz_mcqs', 'details_results.question_id', '=', 'pop_quiz_mcqs.id')
+                        ->select('details_results.*', 'pop_quiz_mcqs.*')
+                        ->where('details_results.exam_id', $exam->id)
+                        ->where('details_results.exam_type', 'Pop Quiz')
+                        ->whereNotNull('details_results.mcq_ans')
+                        ->get();
+
+                        
+                        $mcqs = collect();
+                        foreach($analysis_mcqs as $analysis_mcq){
+                            if($mcqs->contains($analysis_mcq->question_id)){
+                                
+                            }
+                        }
+                        
+                        dd($analysis_mcqs);
+
+                        $total_mcqs = 0;
+                        $total_right_ans_for_mcqs = 0;
+                        foreach($analysis_mcqs as $analysis_mcq){
+                            $total_mcqs += 1;
+                            if($analysis_mcq->mcq_ans == $analysis_mcq->popQuizMCQ->answer)
+                                $total_right_ans_for_mcqs += 1;
+                        }
+
+                        dd($analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
+                        dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
+                        return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_result', compact('exam', 'course_topic', 'batch', 'mcq_details_results', 'mcq_total_marks', 'mcq_marks_scored', 'cq_total_marks', 'cq_marks_scored', 'total_mcqs', 'total_right_ans_for_mcqs'));
                     }
                 }
                 else{
                     // If no results exist, then go ahead attempt exam
-                }
+                    $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
+                    if($exam == null){
+                        return redirect()->back()->withErrors(['This batch has no pop quizzes added to it!!']);
+                    }
 
-                if($exam == null){
-                    return redirect()->back()->withErrors(['This batch has no pop quizzes added to it!!']);
-                }
+                    $canAttempt = PopQUizCqExamPaper::where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->where('student_id', auth()->user()->id)
+                    ->where('exam_type', $exam->exam_type)
+                    ->first();
 
-                $canAttempt = PopQUizCqExamPaper::where('exam_id', $exam->id)
-                ->where('batch_id', $batch->id)
-                ->where('student_id', auth()->user()->id)
-                ->where('exam_type', $exam->exam_type)
-                ->first();
+                    $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
+                        ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
+                        ->where('question_content_tags.exam_type', "CQ")
+                        ->where('details_results.student_id', auth()->user()->id)
+                        ->where('details_results.batch_id', $batch->id)
+                        ->where('details_results.exam_id', $exam->id)
+                        ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
+                        ->get();
 
-                $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
-                    ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
-                    ->where('question_content_tags.exam_type', "CQ")
-                    ->where('details_results.student_id', auth()->user()->id)
-                    ->where('details_results.batch_id', $batch->id)
-                    ->where('details_results.exam_id', $exam->id)
-                    ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
-                    ->get();
+                    $weakAnalysis = $analysis;
 
-                $weakAnalysis = $analysis;
+                    //Giving access to student if they miss for first time or reload page
+                    if (!$canAttempt) {
+                        // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+                        // $exam->question_limit
+                        $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                        // $exam->question_limit
+                        $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
 
-                //Giving access to student if they miss for first time or reload page
-                if (!$canAttempt) {
-                    // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
-                    // $exam->question_limit
-                    $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
-                    // $exam->question_limit
-                    $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
-
-                    return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                        return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                    }
                 }
         }
 
