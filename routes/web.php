@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\ContactUsController;
 use App\Models\User;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Course;
@@ -21,13 +22,13 @@ use smasif\ShurjopayLaravelPackage\ShurjopayService;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Medical olympiad 2022 route 
+// Medical olympiad 2022 route
 
 Route::get('/medical-olympiad/medical-olympiad', function() {
     return view('landing.medi-olympiad');
 })->name('medi-olympiad');
 
-// Medical olympiad 2022 route ends 
+// Medical olympiad 2022 route ends
 
 Route::get('/', function () {
     $categories=CourseCategory::where('status',1)->select('title','id','slug')->orderBy('id', "ASC")->get();
@@ -76,9 +77,9 @@ Route::get('/terms-condition', function(){
     return view('landing.termsandcondition');
 })->name('terms_condition');
 
-Route::get('/contact-us', function(){
-    return view('landing.contact_us');
-})->name('contact_us');
+Route::get('/contact-us', [ContactUsController::class,'index'])->name('contact_us');
+Route::post('/contact-us', [ContactUsController::class,'store'])->name('store.contact.us');
+
 
 
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
