@@ -97,6 +97,7 @@
                                     <th class="text-center">Batch</th>
                                     <th class="text-center">Exam</th>
                                     <th class="text-center">Exam Type</th>
+                                    <th class="text-center">Checked</th>
                                     <th class="text-center">Gain Marks</th>
                                     <th class="text-center">Action</th>
                                  </tr>
@@ -125,6 +126,17 @@
                                           <td class="text-center">
                                              @foreach ($cq_exam_results as $exam_result)
                                                 @if ($exam_result->student_id == $student_exam_attempt->student_id)
+                                                   @if($exam_result->checked)
+                                                      Yes
+                                                   @else
+                                                      No
+                                                   @endif
+                                                @endif
+                                             @endforeach
+                                          </td>
+                                          <td class="text-center">
+                                             @foreach ($cq_exam_results as $exam_result)
+                                                @if ($exam_result->student_id == $student_exam_attempt->student_id)
                                                       {{ $exam_result->gain_marks }}
                                                 @endif
                                              @endforeach
@@ -149,6 +161,7 @@
                                     <th class="text-center">Batch</th>
                                     <th class="text-center">Exam</th>
                                     <th class="text-center">Exam Type</th>
+                                    <th class="text-center">Checked</th>
                                     <th class="text-center">Gain Marks</th>
                                     <th class="text-center">Action</th>
                                  </tr>

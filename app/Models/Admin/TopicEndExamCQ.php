@@ -4,8 +4,10 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use App\Models\Admin\TopicEndExamCreativeQuestion;
 use App\Models\Admin\ContentTag;
+use App\Models\Student\exam\DetailsResult;
 
 class TopicEndExamCQ extends Model
 {

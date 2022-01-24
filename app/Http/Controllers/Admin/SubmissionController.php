@@ -38,9 +38,18 @@ class SubmissionController extends Controller
         elseif($exam->exam_type == 'Topic End Exam' || $exam->exam_type == 'Pop Quiz'){
             $student_exam_attempts = StudentExamAttempt::where('exam_id', $exam->id)->with(['student', 'exam'])->get();
 
-            $mcq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', "Pop Quiz MCQ")->with(['student', 'batch', 'exam'])->get();
+            if($exam->exam_type == 'Pop Quiz'){
+                $exam_result_mcq_type = 'Pop Quiz MCQ';
+                $exam_result_cq_type = 'Pop Quiz CQ';
+            }
+            elseif($exam->exam_type == 'Topic End Exam'){
+                $exam_result_mcq_type = 'Topic End Exam MCQ';
+                $exam_result_cq_type = 'Topic End Exam CQ';
+            }
 
-            $cq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', "Pop Quiz CQ")->with(['student', 'batch', 'exam'])->get();
+            $mcq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', $exam_result_mcq_type)->with(['student', 'batch', 'exam'])->get();
+
+            $cq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', $exam_result_cq_type)->with(['student', 'batch', 'exam'])->get();
 
             $exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->with(['student', 'batch', 'exam'])->get();
 
@@ -343,12 +352,20 @@ class SubmissionController extends Controller
                 }
             }
 
+            if($exam_type == "Pop Quiz"){
+                $cq_type = "Pop Quiz CQ";
+            }
+            else if($exam_type == "Topic End Exam"){
+                $cq_type = "Topic End Exam CQ";
+            }
+
             $exam_result = ExamResult::where('exam_id', $exam->id)
-            ->where('exam_type', "Pop Quiz CQ")
+            ->where('exam_type', $cq_type)
             ->where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('checked', 0)
             ->firstOrFail();
+            
             $exam_result->checked = 1;
             $exam_result->gain_marks = $total;
             $save = $exam_result->save();
