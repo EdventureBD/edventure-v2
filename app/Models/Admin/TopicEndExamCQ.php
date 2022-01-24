@@ -29,4 +29,9 @@ class TopicEndExamCQ extends Model
     {
         return $this->hasMany(ContentTag::class);
     }
+
+    public function detailsResult()
+    {
+        return $this->hasOne(DetailsResult::class, 'question_id');
+    }
 }
