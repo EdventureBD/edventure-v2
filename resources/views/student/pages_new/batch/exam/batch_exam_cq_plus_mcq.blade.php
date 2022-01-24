@@ -1,15 +1,14 @@
 <x-landing-layout headerBg="white">
-    <link rel="stylesheet" href="/css/bootstrap5.min.css">
-    <div class="course-info bg-gradient-purple py-5">
-        <div class="container">
+    <div class="course-info py-5">
+        <div class="container pt-5">
             <div class="row">
                 <div class="col-7">
-                    <h3 class="text-white flex m-0">Course : {{ $batch->course->title }}</h3>
+                    <h3 class="text-purple flex m-0">Course : {{ $batch->course->title }}</h3>
                 </div>
                 <div class="col-5 text-right mx-0 px-0">
-                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-secondary">
+                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
                         <div id="innerParent">
-                            <div id="timer" class="w-100 mx-0">
+                            <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
                                 <p class="h2 text-white font-weight-light m-0 rounded">
                                     <span id="countdownHour"></span>: 
                                     <span id="countdownMinuits"></span>:
@@ -25,10 +24,23 @@
                                 </a>
                             </div>
                             <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center">
-                                <span class="border rounded">1</span>
+                            <a href="#"  class="border rounded">
+                                <span>1</span>
+                            </a>
+                            <a href="#"  class="border rounded">
                                 <span>2</span>
+                            </a>
+                            <a href="#"  class="border rounded">
                                 <span>3</span>
+                            </a>
+                            <a href="#"  class="border rounded">
                                 <span>4</span>
+                            </a>
+                            <a href="#"  class="border rounded">
+                                <span>5</span>
+                            </a>
+                            
+    
                             </div>
                         </div>
                     </div>
@@ -37,9 +49,9 @@
                 </div>
                 <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span> : <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
-            <p class="hero__lead measure-hero-lead text-white-50">Batch : {{ $batch->title }}</p>
+            <p class="hero__lead measure-hero-lead text-purple fw-600">Batch : {{ $batch->title }}</p>
             {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}
-            <p class="hero__lead measure-hero-lead text-white-50">Exam : {{ $exam->title }}</p>
+            <p class="hero__lead measure-hero-lead text-purple fw-600">Exam : {{ $exam->title }}</p>
         </div>
     </div>
     <div class="bg-light-gray py-5">

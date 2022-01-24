@@ -12256,3 +12256,14 @@ form input {
 }
 
 /* Exam Timer new css ends */
+
+/* cq_mcq_php_blade part's css start */
+#questionMap span{
+  color: white;
+}
+#questionMap a{
+  text-decoration: none;
+}
+
+
+/* cq_mcq_php_blade part's css end  */
