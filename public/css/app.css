@@ -551,7 +551,13 @@ pre code {
   background: url("/img/road_map/roadmapBackground.png");
   color: whitesmoke;
 }
+@media screen and (max-width: 576px){
+  #roadmapParentContainer {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
 
+}
 
 @media (min-width: 576px) {
   .container-sm, .container {
