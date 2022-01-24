@@ -972,33 +972,73 @@ class ExamController extends Controller
                         }
 
                         // analysis for MCQs
-                        $analysis_mcqs = DetailsResult::join('pop_quiz_mcqs', 'details_results.question_id', '=', 'pop_quiz_mcqs.id')
+                        $all_analysis_mcqs = DetailsResult::join('pop_quiz_mcqs', 'details_results.question_id', '=', 'pop_quiz_mcqs.id')
                         ->select('details_results.*', 'pop_quiz_mcqs.*')
                         ->where('details_results.exam_id', $exam->id)
                         ->where('details_results.exam_type', 'Pop Quiz')
                         ->whereNotNull('details_results.mcq_ans')
                         ->get();
-
                         
-                        $mcqs = collect();
-                        foreach($analysis_mcqs as $analysis_mcq){
-                            if($mcqs->contains($analysis_mcq->question_id)){
-                                
+                        $mcq_attempts = collect();
+                        $mcq_corrects = collect();
+                        foreach($all_analysis_mcqs as $analysis_mcq){
+                            if($mcq_attempts->has($analysis_mcq->question_id)){
+                                $current_value = $mcq_attempts[$analysis_mcq->question_id];
+                                $current_value++;
+                                $mcq_attempts->pull($analysis_mcq->question_id);
+                                $mcq_attempts->put($analysis_mcq->question_id, $current_value);
+                            }
+                            else{
+                                $mcq_attempts->put($analysis_mcq->question_id, 1);
+                            }
+
+                            if($mcq_corrects->has($analysis_mcq->question_id)){
+                                if($analysis_mcq->mcq_ans == $analysis_mcq->answer){
+                                    $current_value = $mcq_corrects[$analysis_mcq->question_id];
+                                    $current_value++;
+                                    $mcq_corrects->pull($analysis_mcq->question_id);
+                                    $mcq_corrects->put($analysis_mcq->question_id, $current_value);
+                                }
+                            }
+                            else{
+                                if($analysis_mcq->mcq_ans == $analysis_mcq->answer){
+                                    $mcq_corrects->put($analysis_mcq->question_id, 1);
+                                }
+                                else{
+                                    $mcq_corrects->put($analysis_mcq->question_id, 0);
+                                }
                             }
                         }
-                        
-                        dd($analysis_mcqs);
+
+                        $mcq_percents = collect();
+                        foreach($mcq_attempts as $key1 => $mcq_attempt){
+                            foreach($mcq_corrects as $key2 => $mcq_correct){
+                                if( $key1 == $key2){
+                                    $mcq_percents->put($key1, round(($mcq_correct/$mcq_attempt), 2)*100);
+                                }
+                            }
+                        }
+
+                        foreach($mcq_details_results as $mcq_details_result){
+                            foreach($mcq_percents as $key => $mcq_percent){
+                                if($mcq_details_result->question_id == $key){
+                                    $mcq_details_result->success_percent = $mcq_percent;
+                                }
+                            }
+                        }
+
+                        // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);
 
                         $total_mcqs = 0;
                         $total_right_ans_for_mcqs = 0;
-                        foreach($analysis_mcqs as $analysis_mcq){
+                        foreach($all_analysis_mcqs as $analysis_mcq){
                             $total_mcqs += 1;
                             if($analysis_mcq->mcq_ans == $analysis_mcq->popQuizMCQ->answer)
                                 $total_right_ans_for_mcqs += 1;
                         }
 
-                        dd($analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
-                        dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
+                        // dd($all_analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
+                        // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
                         return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_result', compact('exam', 'course_topic', 'batch', 'mcq_details_results', 'mcq_total_marks', 'mcq_marks_scored', 'cq_total_marks', 'cq_marks_scored', 'total_mcqs', 'total_right_ans_for_mcqs'));
                     }
                 }
