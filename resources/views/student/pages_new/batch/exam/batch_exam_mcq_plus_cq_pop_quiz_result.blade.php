@@ -8,7 +8,6 @@
                   $total_gain_marks += $result->gain_marks;
             }
          @endphp --}}
-
          <div>
             <div class="course-info bg-gradient-purple py-5">
                <div class="container">
