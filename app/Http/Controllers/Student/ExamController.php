@@ -974,20 +974,12 @@ class ExamController extends Controller
                         }
 
                         $mcq_percents = collect();
-                        foreach($mcq_attempts as $key1 => $mcq_attempt){
-                            foreach($mcq_corrects as $key2 => $mcq_correct){
-                                if( $key1 == $key2){
-                                    $mcq_percents->put($key1, round(($mcq_correct/$mcq_attempt), 2)*100);
-                                }
-                            }
+                        foreach($mcq_attempts as $key => $mcq_attempt){
+                            $mcq_percents->put($key, round(($mcq_corrects[$key]/$mcq_attempt), 2)*100);
                         }
 
                         foreach($mcq_details_results as $mcq_details_result){
-                            foreach($mcq_percents as $key => $mcq_percent){
-                                if($mcq_details_result->question_id == $key){
-                                    $mcq_details_result->success_percent = $mcq_percent;
-                                }
-                            }
+                            $mcq_details_result->success_percent = $mcq_percents[$mcq_details_result->question_id];
                         }
 
                         // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);
@@ -1002,8 +994,6 @@ class ExamController extends Controller
 
                         // dd($all_analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
                         // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
-
-                        
                         return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_topic_end_exam_result',
                             compact(
                                 'exam',
@@ -1205,20 +1195,12 @@ class ExamController extends Controller
                         }
 
                         $mcq_percents = collect();
-                        foreach($mcq_attempts as $key1 => $mcq_attempt){
-                            foreach($mcq_corrects as $key2 => $mcq_correct){
-                                if( $key1 == $key2){
-                                    $mcq_percents->put($key1, round(($mcq_correct/$mcq_attempt), 2)*100);
-                                }
-                            }
+                        foreach($mcq_attempts as $key => $mcq_attempt){
+                            $mcq_percents->put($key, round(($mcq_corrects[$key]/$mcq_attempt), 2)*100);
                         }
 
                         foreach($mcq_details_results as $mcq_details_result){
-                            foreach($mcq_percents as $key => $mcq_percent){
-                                if($mcq_details_result->question_id == $key){
-                                    $mcq_details_result->success_percent = $mcq_percent;
-                                }
-                            }
+                            $mcq_details_result->success_percent = $mcq_percents[$mcq_details_result->question_id];
                         }
 
                         // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);

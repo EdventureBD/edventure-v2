@@ -78,12 +78,12 @@
                         @endphp --}}
                         @foreach ($mcq_details_results as $key => $mcq_details_result)
                            <tr>
-                              <td class="br-purple2">{{ $key }}</td>
-                              <td class="br-purple2">{!! $mcq_details_result->popQuizMCQ->question !!}</td>
-                              <td class="br-purple2">{{ $mcq_details_result->mcq_ans }}</td>
-                              <td class="br-purple2">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
-                              <td class="br-purple2">{{ $mcq_details_result->popQuizMCQ->explanation }}</td>
-                              <td class="br-purple2">{{ $mcq_details_result->success_percent }}%</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $key }}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->question !!}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->popQuizMCQ->explanation }}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
                               {{-- <td class="br-purple2">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td> --}}
                            </tr>
                         @endforeach
