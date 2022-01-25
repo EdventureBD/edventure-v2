@@ -170,7 +170,9 @@
                                  @endif
 
                                  <td class="bg-purple2 text-white">{!! $question->question !!}</td>
-                                 <td class="bg-purple2 text-white text-sm fw-600 bshadow">0%</td>
+                                 <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
+                                    {{ $question->avg_score }}
+                                 </td>
                                  
                                  @if ($key2 == 0)
                                     <td rowspan="4" class="bg-purple2 v-align-middle">
