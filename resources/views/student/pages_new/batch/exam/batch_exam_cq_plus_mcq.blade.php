@@ -1,15 +1,15 @@
 <x-landing-layout headerBg="white">
-    <div class="course-info py-5">
+    <div class="course-info py-5 bg-light-gray">
         <div class="container pt-5">
             <div class="row">
                 <div class="col-7">
-                    <h3 class="text-purple flex m-0">Course : {{ $batch->course->title }}</h3>
+                    <h3 class="text-gray d-flex m-0 fw-800">Course : {{ $batch->course->title }}</h3>
                 </div>
                 <div class="col-5 text-right mx-0 px-0">
                     <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
-                                <p class="h2 text-white fw-500 m-0 rounded" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+                                <p class="text-white fw-500 m-0 rounded" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px;">
                                     <span id="countdownHour"></span>:
                                     <span id="countdownMinuits"></span>:
                                     <span id="countdownSecound"></span>
@@ -47,12 +47,12 @@
                 </div>
                 <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span> : <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
-            <p class="hero__lead measure-hero-lead text-purple fw-600">Batch : {{ $batch->title }}</p>
+            <p class="hero__lead measure-hero-lead text-gray my-3 fw-800">Batch : {{ $batch->title }}</p>
             {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}
-            <p class="hero__lead measure-hero-lead text-purple fw-600">Exam : {{ $exam->title }}</p>
+            <p class="hero__lead measure-hero-lead text-gray my-3 fw-800">Exam : {{ $exam->title }}</p>
         </div>
     </div>
-    <div class="bg-light-gray py-5">
+    <div class="py-5 border rounded border-dashed">
         <div class="container page__container">
             <div class="page-section">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
@@ -199,7 +199,9 @@
                         <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label>
                         <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
                     </div>
-                    <p class="mx-auto h5">Or Upload a PDF answer file:</p>
+                    <div class="d-flex justify-center">
+                        <p class="mx-auto h5">Or Upload a PDF answer file:</p>
+                    </div>
                     <div class="form-group m-0">
                         <div class="custom-file">
                             <input type="file" id="file" name="file" class="custom-file-input">
@@ -209,7 +211,9 @@
                             <p style="color: red;font-weight: bold;">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 mx-auto mt-4">Submit</button>
+                    <div class="d-flex justify-content-center px-5">
+                        <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 my-4">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -339,18 +343,19 @@
     </style>
     {{-- ------------------------Frontend Script part--------------------------------------- --}}
     <script>
-        let openCollapseClicked = 0;
-        let closeCollapseClicked = 0;
          const closeCollapse = () => {
            questionMap.classList.add("d-none");
            openCollapseIcon.classList.add("d-none");
-           closeCollapseClicked = 1;
+           closeCollapseIcon.classList.remove("d-block");
+           closeCollapseIcon.classList.add("d-none");
+           openCollapseIcon.classList.add("d-block");
 
         };
          const openCollapse = () => {
            questionMap.classList.remove("d-none");
            closeCollapseIcon.classList.remove("d-none");
-           openCollapseClicked = 1;
+           openCollapseIcon.classList.remove("d-block");
+           openCollapseIcon.classList.add("d-none");
             
         };
         let closeCollapseIcon = document.getElementById("close_collapse_icon");
@@ -359,15 +364,6 @@
         closeCollapseIcon.addEventListener("click", closeCollapse);
         openCollapseIcon.addEventListener("click", openCollapse);
         
-        /* if(closeCollapseClicked ==1){
-           closeCollapseIcon.classList.add("d-none");
-           closeCollapseClicked = 0;
-        }
-        if(openCollapseClicked==1){
-            openCollapseIcon.classList.add("d-none");
-            openCollapseClicked = 0;
-        } */
-
        
 
     </script>
