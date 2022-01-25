@@ -9,38 +9,36 @@
                     <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
-                                <p class="h2 text-white font-weight-light m-0 rounded">
-                                    <span id="countdownHour"></span>: 
+                                <p class="h2 text-white fw-500 m-0 rounded" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+                                    <span id="countdownHour"></span>:
                                     <span id="countdownMinuits"></span>:
                                     <span id="countdownSecound"></span>
                                 </p>
                             </div>
                             <div id="dropdownIcon" >
-                                <a href="#">
+                                <a href="#" id="close_collapse_icon" class="d-none">
                                     <i class="c-point fas fa-angle-up"></i>
                                 </a>
-                                <a href="#">
+                                <a href="#" id="open_collapse_icon" class="d-block">
                                     <i class="c-point fas fa-angle-down"></i>
                                 </a>
                             </div>
-                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center">
-                            <a href="#"  class="border rounded">
-                                <span>1</span>
-                            </a>
-                            <a href="#"  class="border rounded">
+                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none">
+                                <a href="#"  class=" border rounded bg-secondary">
+                                    <span>1</span>
+                                </a>
+                                <a href="#"  class="border rounded bg-secondary">
                                 <span>2</span>
-                            </a>
-                            <a href="#"  class="border rounded">
-                                <span>3</span>
-                            </a>
-                            <a href="#"  class="border rounded">
-                                <span>4</span>
-                            </a>
-                            <a href="#"  class="border rounded">
-                                <span>5</span>
-                            </a>
-                            
-    
+                                </a>
+                                <a href="#"  class="border rounded bg-secondary">
+                                    <span>3</span>
+                                </a>
+                                <a href="#"  class="border rounded bg-secondary">
+                                    <span>4</span>
+                                </a>
+                                <a href="#"  class="border rounded bg-secondary">
+                                    <span>5</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -339,4 +337,39 @@
             }
         }
     </style>
+    {{-- ------------------------Frontend Script part--------------------------------------- --}}
+    <script>
+        let openCollapseClicked = 0;
+        let closeCollapseClicked = 0;
+         const closeCollapse = () => {
+           questionMap.classList.add("d-none");
+           openCollapseIcon.classList.add("d-none");
+           closeCollapseClicked = 1;
+
+        };
+         const openCollapse = () => {
+           questionMap.classList.remove("d-none");
+           closeCollapseIcon.classList.remove("d-none");
+           openCollapseClicked = 1;
+            
+        };
+        let closeCollapseIcon = document.getElementById("close_collapse_icon");
+        let openCollapseIcon = document.getElementById("open_collapse_icon");
+        let questionMap = document.getElementById("questionMap");
+        closeCollapseIcon.addEventListener("click", closeCollapse);
+        openCollapseIcon.addEventListener("click", openCollapse);
+        
+        /* if(closeCollapseClicked ==1){
+           closeCollapseIcon.classList.add("d-none");
+           closeCollapseClicked = 0;
+        }
+        if(openCollapseClicked==1){
+            openCollapseIcon.classList.add("d-none");
+            openCollapseClicked = 0;
+        } */
+
+       
+
+    </script>
+    {{-- -----------------------------Frontend Script part ends ----------------------------- --}}
 </x-landing-layout>
