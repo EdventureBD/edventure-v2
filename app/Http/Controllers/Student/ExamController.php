@@ -872,8 +872,12 @@ class ExamController extends Controller
 
                 // ->inRandomOrder()
                 $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
-                    'topicEndExamCreativeQuestions.question.detailsResult',
-                    'topicEndExamCreativeQuestions.exam_papers'
+                    'topicEndExamCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
+                        return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
+                    },
+                    'topicEndExamCreativeQuestions.exam_papers' => function($query) use ($batch) {
+                        return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
+                    }
                     ])
                     ->firstOrFail();
 
@@ -914,15 +918,6 @@ class ExamController extends Controller
                         foreach($mcq_details_results as $details){
                             $mcq_marks_scored += $details->gain_marks;
                         }
-
-                        // contains only details of CQ exams
-                        $cq_details_results = DetailsResult::where('exam_id', $exam->id)
-                        ->where('batch_id', $batch->id)
-                        ->where('student_id', auth()->user()->id)
-                        ->where('exam_type', 'Topic End Exam')
-                        ->whereNull('mcq_ans')
-                        ->with('topicEndExamCqQuestion')
-                        ->get();
 
                         $cq_total_marks = $exam->topicEndExamCreativeQuestions->count() * 10;
                         $cq_marks_scored = 0;
@@ -982,8 +977,6 @@ class ExamController extends Controller
                             $mcq_details_result->success_percent = $mcq_percents[$mcq_details_result->question_id];
                         }
 
-                        // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);
-
                         $total_mcqs = 0;
                         $total_right_ans_for_mcqs = 0;
                         foreach($all_analysis_mcqs as $analysis_mcq){
@@ -991,9 +984,36 @@ class ExamController extends Controller
                             if($analysis_mcq->mcq_ans == $analysis_mcq->topicEndExamMCQ->answer)
                                 $total_right_ans_for_mcqs += 1;
                         }
+                        // End of analysis for MCQs
+
+                        // analysis for CQs
+                        $all_analysis_cqs = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)
+                        ->with(['question.allDetailsResult'])
+                        ->get();
+
+                        foreach($all_analysis_cqs as $cq){
+                            foreach($cq->question as $cq_ques){
+                                $total_marks = 0;
+                                $scored_marks = 0;
+                                foreach($cq_ques->allDetailsResult as $result){
+                                    $total_marks += $cq_ques->marks;
+                                    $scored_marks += $result->gain_marks;
+                                }
+                                $cq_ques->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+
+                                foreach($exam->topicEndExamCreativeQuestions as $cq){
+                                    foreach($cq->question as $question){
+                                        if($cq_ques->id == $question->id){
+                                            $question->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // End of analysis for CQs
 
                         // dd($all_analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
-                        // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
+                        // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
                         return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_topic_end_exam_result',
                             compact(
                                 'exam',
@@ -1092,11 +1112,15 @@ class ExamController extends Controller
 
 
                 // ->inRandomOrder()
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)
-                    ->with([
-                        'popQuizCreativeQuestions.question.detailsResult',
-                        'popQuizCreativeQuestions.exam_papers'
-                    ])->firstOrFail();
+                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
+                    'popQUizCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
+                        return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
+                    },
+                    'popQuizCreativeQuestions.exam_papers' => function($query) use ($batch) {
+                        return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
+                    }
+                    ])
+                    ->firstOrFail();
 
                 // if CQ exam result exists and is checked, then the user has attended exam and is checked. Then paper+marks+analytics is shown
                 $cq_exam_result = ExamResult::where('exam_id', $exam->id)
@@ -1135,15 +1159,6 @@ class ExamController extends Controller
                         foreach($mcq_details_results as $details){
                             $mcq_marks_scored += $details->gain_marks;
                         }
-
-                        // contains only details of CQ exams
-                        $cq_details_results = DetailsResult::where('exam_id', $exam->id)
-                        ->where('batch_id', $batch->id)
-                        ->where('student_id', auth()->user()->id)
-                        ->where('exam_type', 'Pop Quiz')
-                        ->whereNull('mcq_ans')
-                        ->with('popQuizCqQuestion')
-                        ->get();
 
                         $cq_total_marks = $exam->popQuizCreativeQuestions->count() * 10;
                         $cq_marks_scored = 0;
@@ -1212,6 +1227,33 @@ class ExamController extends Controller
                             if($analysis_mcq->mcq_ans == $analysis_mcq->popQuizMCQ->answer)
                                 $total_right_ans_for_mcqs += 1;
                         }
+                        // End of analysis for MCQs
+
+                        // analysis for CQs
+                        $all_analysis_cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
+                        ->with(['question.allDetailsResult'])
+                        ->get();
+
+                        foreach($all_analysis_cqs as $cq){
+                            foreach($cq->question as $cq_ques){
+                                $total_marks = 0;
+                                $scored_marks = 0;
+                                foreach($cq_ques->allDetailsResult as $result){
+                                    $total_marks += $cq_ques->marks;
+                                    $scored_marks += $result->gain_marks;
+                                }
+                                $cq_ques->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+
+                                foreach($exam->popQuizCreativeQuestions as $cq){
+                                    foreach($cq->question as $question){
+                                        if($cq_ques->id == $question->id){
+                                            $question->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // End of analysis for CQs
 
                         // dd($all_analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
                         // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);

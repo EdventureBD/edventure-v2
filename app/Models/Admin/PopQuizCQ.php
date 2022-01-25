@@ -36,4 +36,9 @@ class PopQuizCQ extends Model
     {
         return $this->hasOne(DetailsResult::class, 'question_id');
     }
+
+    public function allDetailsResult()
+    {
+        return $this->hasMany(DetailsResult::class, 'question_id');
+    }
 }
