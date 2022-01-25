@@ -1,5 +1,5 @@
 <x-landing-layout headerBg="white">
-    <div class="course-info py-5 bg-light-gray">
+    <div class="course-info py-5 border" style="background: #D5BDEA; box-shadow: 5px 10px 18px #888888">
         <div class="container pt-5">
             <div class="row">
                 <div class="col-7">
@@ -9,7 +9,7 @@
                     <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
-                                <p class="text-white fw-500 m-0 rounded" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px;">
+                                <p class="text-white d-flex fw-500 m-0 rounded" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px;">
                                     <span id="countdownHour"></span>:
                                     <span id="countdownMinuits"></span>:
                                     <span id="countdownSecound"></span>
@@ -67,7 +67,10 @@
 
                     @foreach($mcq_questions as $mcq)
                         <div class="question mb-5" id="">
-                            <div class="bg-purple-light p-2 mb-3 bshadow bradius-15 d-flex"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light p-2 mb-3 rounded d-flex" style="border: 1px solid gray; box-shadow:
+                            inset 0 -3em 3em rgba(248, 245, 245, 0.384),
+                                  0 0  0 2px #C8A2C8,
+                                  0.3em 0.3em 1em rgba(247, 244, 244, 0.651);"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
                             {{-- <div class="row"> --}}
                                 @if($mcq->image)
                                     <div class="col-md-6 d-block d-md-none">
@@ -122,8 +125,8 @@
                                     </fieldset> --}}
 
                                     <div class="container my-4">
-                                        <div class="question ml-sm-5 pl-sm-5">
-                                            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3 form-group" id="options">
+                                        <div class="question d-flex justify-content-start">
+                                            <div class="pt-sm-0 pt-3 form-group" id="options">
                                                 <label class="options"> {!! $mcq->field1 !!}
                                                     <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1">
                                                     <span class="checkmark"></span>
@@ -157,7 +160,10 @@
 
                     @forelse($cq_questions as $key => $question)
                         <div class="page-separator pt-4">
-                            <div class="bg-purple-light bradius-10 p-3">
+                            <div class="bg-purple-light rounded p-3" style="border : 1px solid gray; box-shadow:
+                            inset 0 -3em 3em rgba(248, 245, 245, 0.384),
+                                  0 0  0 2px #C8A2C8,
+                                  0.3em 0.3em 1em rgba(247, 244, 244, 0.651);">
                                 <span class="badge badge-primary">
                                     Question {{ $key + 1 }}:
                                 </span> {!! $question->creative_question !!}
@@ -194,25 +200,29 @@
                             </div>
                         </div>
                     @endforelse
-                    <p class="h3 text-center pt-5 pb-3 text-dark fw-800">উত্তরঃ-</p>
-                    <div class="form-group">
-                        <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label>
-                        <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
-                    </div>
-                    <div class="d-flex justify-center">
-                        <p class="mx-auto h5">Or Upload a PDF answer file:</p>
-                    </div>
-                    <div class="form-group m-0">
-                        <div class="custom-file">
-                            <input type="file" id="file" name="file" class="custom-file-input">
-                            <label for="file" class="custom-file-label">Choose file</label>
+                    <div>
+                        <div class="d-flex flex-column justify-center">
+                            <p class="h3 text-center pt-5 pb-3 text-dark fw-800">উত্তরঃ-</p>
                         </div>
-                        @error('file')
-                            <p style="color: red;font-weight: bold;">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="d-flex justify-content-center px-5">
-                        <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 my-4">Submit</button>
+                        <div class="form-group">
+                            <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label>
+                            <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
+                        </div>
+                        <div class="d-flex justify-center">
+                            <p class="mx-auto h5">Or Upload a PDF answer file:</p>
+                        </div>
+                        <div class="form-group m-0">
+                            <div class="custom-file">
+                                <input type="file" id="file" name="file" class="custom-file-input">
+                                <label for="file" class="custom-file-label">Choose file</label>
+                            </div>
+                            @error('file')
+                                <p style="color: red;font-weight: bold;">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="d-flex justify-content-center px-5">
+                            <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 my-4">Submit</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -341,11 +351,11 @@
             }
         }
     </style>
-    {{-- ------------------------Frontend Script part--------------------------------------- --}}
+    {{-- ------------------------Frontend Script part for Timer collapse and expand #start--------------------------------------- --}}
     <script>
          const closeCollapse = () => {
            questionMap.classList.add("d-none");
-           openCollapseIcon.classList.add("d-none");
+        //    openCollapseIcon.classList.add("d-none");
            closeCollapseIcon.classList.remove("d-block");
            closeCollapseIcon.classList.add("d-none");
            openCollapseIcon.classList.add("d-block");
@@ -367,5 +377,5 @@
        
 
     </script>
-    {{-- -----------------------------Frontend Script part ends ----------------------------- --}}
+    {{-- -----------------------------Frontend Script part for Timer collapse and expand # ends ----------------------------- --}}
 </x-landing-layout>
