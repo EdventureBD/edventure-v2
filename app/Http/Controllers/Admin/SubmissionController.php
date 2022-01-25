@@ -225,9 +225,17 @@ class SubmissionController extends Controller
             ->select($database.'.*', 'details_results.*')
             ->get();
 
-        foreach($exam_results as $exam_result){
-            $exam_result->cqQuestion = $exam_result->popQuizCqQuestion;
-            unset($exam_result->popQuizCqQuestion);
+        if($exam->exam_type == 'Pop Quiz'){
+            foreach($exam_results as $exam_result){
+                $exam_result->cqQuestion = $exam_result->popQuizCqQuestion;
+                unset($exam_result->popQuizCqQuestion);
+            }
+        }
+        elseif($exam->exam_type == 'Topic End Exam'){
+            foreach($exam_results as $exam_result){
+                $exam_result->cqQuestion = $exam_result->topicEndExamCqQuestion;
+                unset($exam_result->topicEndExamCqQuestion);
+            }
         }
 
         // dd($exam_papers, $exam_results);
