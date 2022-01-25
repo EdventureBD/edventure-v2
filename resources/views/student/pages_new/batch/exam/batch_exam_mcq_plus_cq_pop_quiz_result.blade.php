@@ -175,10 +175,10 @@
                                  </td>
                                  
                                  @if ($key2 == 0)
-                                    <td rowspan="4" class="bg-purple2 v-align-middle">
+                                    <td rowspan="4" class="text-center bg-purple2 v-align-middle">
                                        <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Pdf</a>
                                     </td>
-                                    <td rowspan="4" class="bg-purple2 v-align-middle">
+                                    <td rowspan="4" class="text-center bg-purple2 v-align-middle">
                                        <a href="" class="btn text-xxsm text-white bg-purple px-4 py-2 " data-toggle="modal" data-target="#correctAnswerModal">View Pdf</a>
                                     </td>
 
