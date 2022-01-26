@@ -29,12 +29,15 @@
                      </div>
                </div>
             </div> --}}
-
          </div>
 
-
-
          <div class="container">
+            @if(session('exam_exists_message'))
+               <div class="alert alert-danger mt-3 text-center">
+                  <h1> {{ session('exam_exists_message') }} </h1>
+               </div>
+            @endif
+
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
             <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
             <div class="text-right">
