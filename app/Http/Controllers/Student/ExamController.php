@@ -1031,9 +1031,9 @@ class ExamController extends Controller
                     if (!$canAttempt) {
                         // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                         // $exam->question_limit
-                        $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                        $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->get();
                         // $exam->question_limit
-                        $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                        $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->get();
 
                         return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
                     }

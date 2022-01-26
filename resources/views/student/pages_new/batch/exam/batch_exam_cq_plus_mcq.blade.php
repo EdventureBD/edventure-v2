@@ -6,7 +6,7 @@
                     <h3 class="text-gray d-flex m-0 fw-800">Course : {{ $batch->course->title }}</h3>
                 </div>
                 <div class="col-5 text-right mx-0 px-0">
-                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
+                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple" style="top:30% !important;">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
                                 <p class="text-white d-flex fw-500 m-0 rounded" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px;">
@@ -65,56 +65,9 @@
                                         <img class="img-fluid bradius-15 mb-2" src="{{ $mcq->image }}" alt="" />
                                     </div>
                                 @endif
-                                    {{-- <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-                                    <label class="btn btn-secondary" for="option1">Checked</label>
-
-                                    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                                    <label class="btn btn-secondary" for="option2">Radio</label>
-
-                                    <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
-                                    <label class="btn btn-secondary" for="option4">Radio</label> --}}
-
-                                    {{-- <div class="bg-purple-light bg-light-gray bshadow bradius-15 p-2 mb-3 d-block">
-                                        <label class="btn btn-info w-100">
-                                            <input type="radio" name="options" id="option1" autocomplete="off"> Active
-                                        </label>
-                                        <label class="btn btn-info">
-                                            <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-                                        </label>
-                                        <label class="btn btn-info">
-                                            <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-                                        </label>
-                                    </div> --}}
-
-                                    {{-- <fieldset class="form-group">
-                                        <div class="row">
-                                        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                            <label class="form-check-label" for="gridRadios1">
-                                                First radio
-                                            </label>
-                                            </div>
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                            <label class="form-check-label" for="gridRadios2">
-                                                Second radio
-                                            </label>
-                                            </div>
-                                            <div class="form-check disabled">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                                            <label class="form-check-label" for="gridRadios3">
-                                                Third disabled radio
-                                            </label>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </fieldset> --}}
-
                                     <div class="container my-4">
                                         <div class="question d-flex justify-content-start">
-                                            <div class="pt-sm-0 pt-3 form-group" id="options_{{$mcq->id}}">
+                                            <div class="row row-cols-1 pt-sm-0 pt-3 form-group mx-0 px-0" id="options_{{$mcq->id}}">
                                                 <label class="options"> {!! $mcq->field1 !!}
                                                     <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1" id="mcqOp1">
                                                     <span class="checkmark"></span>
@@ -371,25 +324,25 @@
         
         let mcqQuestions = <?php echo json_encode($mcq_questions)?>;
         let questionCount = 0;
-        if(mcqQuestions.length > 0){
+        if (mcqQuestions.length > 0) {
             mcqQuestions.forEach(mcqQuestion => {
-            questionCount++;
-            let a = document.createElement("a");
-            a.className = ("border rounded bg-secondary");
-            let span = document.createElement("span");
-            span.innerText = questionCount;
-            a.setAttribute("id", `map_${mcqQuestion.id}`);
-            a.setAttribute("href", `#q_${mcqQuestion.id}`)
-            a.appendChild(span);
-            questionMap.append(a);
-            let optionFiledID = document.getElementById("options_" + mcqQuestion.id);
-            optionFiledID.addEventListener("click", ()=>{
-                let optionIdInMap = document.getElementById(`map_${mcqQuestion.id}`);
-                optionIdInMap.classList.remove("bg-secondary");
-                optionIdInMap.classList.add("bg-success");
-            })
-        });
-    }
+                questionCount++;
+                let a = document.createElement("a");
+                a.className = ("border rounded bg-secondary");
+                let span = document.createElement("span");
+                span.innerText = questionCount;
+                a.setAttribute("id", `map_${mcqQuestion.id}`);
+                a.setAttribute("href", `#q_${mcqQuestion.id}`)
+                a.appendChild(span);
+                questionMap.append(a);
+                let optionFiledID = document.getElementById("options_" + mcqQuestion.id);
+                optionFiledID.addEventListener("click", () => {
+                    let optionIdInMap = document.getElementById(`map_${mcqQuestion.id}`);
+                    optionIdInMap.classList.remove("bg-secondary");
+                    optionIdInMap.classList.add("bg-success");
+                });
+            });
+        }
         /* Question Mapping part ends */ 
 
         // if(document.getElementById("mcqOp1_").checked) {
