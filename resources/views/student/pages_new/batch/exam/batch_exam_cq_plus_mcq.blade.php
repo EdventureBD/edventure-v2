@@ -54,7 +54,7 @@
                     {{ csrf_field() }}
 
                     @foreach($mcq_questions as $mcq)
-                        <div class="question mb-5" id="">
+                        <div class="question mb-5" id="q_{{$mcq->id}}">
                             <div class="bg-purple-light p-2 mb-3 rounded d-flex" style="border: 1px solid gray; box-shadow:
                             inset 0 -3em 3em rgba(248, 245, 245, 0.384),
                                   0 0  0 2px #C8A2C8,
@@ -114,21 +114,21 @@
 
                                     <div class="container my-4">
                                         <div class="question d-flex justify-content-start">
-                                            <div class="pt-sm-0 pt-3 form-group" id="options">
+                                            <div class="pt-sm-0 pt-3 form-group" id="options_{{$mcq->id}}">
                                                 <label class="options"> {!! $mcq->field1 !!}
-                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1">
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1" id="mcqOp1">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="options"> {!! $mcq->field2 !!}
-                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="2">
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="2" id="mcqOp2">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="options"> {!! $mcq->field3 !!}
-                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="3">
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="3" id="mcqOp3">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="options"> {!! $mcq->field4 !!}
-                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="4">
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="4" id="mcqOp4">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -378,11 +378,25 @@
             a.className = ("border rounded bg-secondary");
             let span = document.createElement("span");
             span.innerText = questionCount;
+            a.setAttribute("id", `map_${mcqQuestion.id}`);
+            a.setAttribute("href", `#q_${mcqQuestion.id}`)
             a.appendChild(span);
             questionMap.append(a);
+            let optionFiledID = document.getElementById("options_" + mcqQuestion.id);
+            optionFiledID.addEventListener("click", ()=>{
+                let optionIdInMap = document.getElementById(`map_${mcqQuestion.id}`);
+                optionIdInMap.classList.remove("bg-secondary");
+                optionIdInMap.classList.add("bg-success");
+            })
         });
     }
         /* Question Mapping part ends */ 
+
+        // if(document.getElementById("mcqOp1_").checked) {
+        //     console.log("ckecked");
+        // }
+        // else console.log("unchecked");
+
 
     </script>
     {{-- -----------------------------Frontend Script part for Timer collapse and expand # ends ----------------------------- --}}
