@@ -24,21 +24,9 @@
                                 </a>
                             </div>
                             <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none">
-                                <a href="#"  class=" border rounded bg-secondary">
+                                {{-- <a href="#"  class=" border rounded bg-secondary">
                                     <span>1</span>
-                                </a>
-                                <a href="#"  class="border rounded bg-secondary">
-                                <span>2</span>
-                                </a>
-                                <a href="#"  class="border rounded bg-secondary">
-                                    <span>3</span>
-                                </a>
-                                <a href="#"  class="border rounded bg-secondary">
-                                    <span>4</span>
-                                </a>
-                                <a href="#"  class="border rounded bg-secondary">
-                                    <span>5</span>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     </div>
@@ -353,9 +341,15 @@
     </style>
     {{-- ------------------------Frontend Script part for Timer collapse and expand #start--------------------------------------- --}}
     <script>
-         const closeCollapse = () => {
+
+        let closeCollapseIcon = document.getElementById("close_collapse_icon");
+        let openCollapseIcon = document.getElementById("open_collapse_icon");
+        let questionMap = document.getElementById("questionMap");
+
+        /* timer's part starts  */
+        
+        const closeCollapse = () => {
            questionMap.classList.add("d-none");
-        //    openCollapseIcon.classList.add("d-none");
            closeCollapseIcon.classList.remove("d-block");
            closeCollapseIcon.classList.add("d-none");
            openCollapseIcon.classList.add("d-block");
@@ -368,13 +362,27 @@
            openCollapseIcon.classList.add("d-none");
             
         };
-        let closeCollapseIcon = document.getElementById("close_collapse_icon");
-        let openCollapseIcon = document.getElementById("open_collapse_icon");
-        let questionMap = document.getElementById("questionMap");
         closeCollapseIcon.addEventListener("click", closeCollapse);
         openCollapseIcon.addEventListener("click", openCollapse);
         
-       
+        /* timer's part ends  */
+
+        /* Question Mapping part starts */ 
+        
+        let mcqQuestions = <?php echo json_encode($mcq_questions)?>;
+        let questionCount = 0;
+        if(mcqQuestions.length > 0){
+            mcqQuestions.forEach(mcqQuestion => {
+            questionCount++;
+            let a = document.createElement("a");
+            a.className = ("border rounded bg-secondary");
+            let span = document.createElement("span");
+            span.innerText = questionCount;
+            a.appendChild(span);
+            questionMap.append(a);
+        });
+    }
+        /* Question Mapping part ends */ 
 
     </script>
     {{-- -----------------------------Frontend Script part for Timer collapse and expand # ends ----------------------------- --}}
