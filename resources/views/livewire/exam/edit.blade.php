@@ -107,6 +107,17 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="title" class="col-form-label">Order <span
+                                                    class="must-filled">*</span></label>
+                                            <input type="number" min="0" class="form-control" wire:model="order"
+                                                placeholder="Enter order in which this appears on an island(course_topic)">
+                                            @error('order')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="card-footer">

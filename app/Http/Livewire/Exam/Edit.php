@@ -26,6 +26,7 @@ class Edit extends Component
 
     public $course;
     public $topic;
+    public $order;
     // public $examType;
 
     public $show;
@@ -68,6 +69,13 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedOrder()
+    {
+        $this->validate([
+            'order' => 'required|numeric|integer|gt:-1'
+        ]);
+    }
+
     public function updatedExamType()
     {
         if (($this->examType) == 'Assignment') {
@@ -95,6 +103,7 @@ class Edit extends Component
         'examType' => 'required',
         'marks' => 'required',
         'duration' => 'required',
+        'order' => 'required|numeric|integer|gt:-1',
         'quesLimit' => 'required'
     ];
 
@@ -110,6 +119,7 @@ class Edit extends Component
         $exam->exam_type = $data['examType'];
         $exam->marks = $data['marks'];
         $exam->duration = $data['duration'];
+        $exam->order = $data['order'];
         $exam->question_limit = $data['quesLimit'];
 
         $save = $exam->save();
@@ -131,6 +141,7 @@ class Edit extends Component
         $this->examType = $this->exam->exam_type;
         $this->marks = $this->exam->marks;
         $this->duration = $this->exam->duration;
+        $this->order = $this->exam->order;
         $this->quesLimit = $this->exam->question_limit;
         $this->special = $this->exam->special;
 

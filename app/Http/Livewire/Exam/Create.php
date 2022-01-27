@@ -28,6 +28,7 @@ class Create extends Component
     public $courseId;
     public $topics;
     public $topicId;
+    public $order;
     // public $examTypes;
 
     public $showAssignment = true;
@@ -97,6 +98,13 @@ class Create extends Component
         ]);
     }
 
+    public function updatedOrder()
+    {
+        $this->validate([
+            'order' => 'required|numeric|integer|gt:-1'
+        ]);
+    }
+
     public function updatedExamType()
     {
         if (($this->examType) == 'Assignment') {
@@ -138,6 +146,7 @@ class Create extends Component
         'examType' => 'required',
         'marks' => 'required|numeric|integer|gt:0',
         'duration' => 'required|numeric|integer|gt:0',
+        'order' => 'required|numeric|integer|gt:-1',
         'quesLimit' => 'required|numeric|integer|gt:0',
         'special' => 'nullable|',
         'topicId' => 'nullable',
@@ -164,8 +173,8 @@ class Create extends Component
         $exam->special = $data['special'];
         $exam->marks = $data['marks'];
         $exam->duration = $data['duration'];
+        $exam->order = $data['order'];
         $exam->question_limit = $data['quesLimit'];
-        $exam->order = 0;
 
         $save = $exam->save();
 

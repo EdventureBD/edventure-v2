@@ -47,6 +47,7 @@
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
                                         <th class="text-center">Marks</th>
+                                        <th class="text-center">Order</th>
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -83,6 +84,7 @@
                                                 @endif
                                             </td>
                                             <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->marks }}</td>
+                                            <td class="text-center">{{ $exam->order }}</td>
                                             <td class="text-center">
 
                                                 @if ($exam->exam_type == "Pop Quiz")
@@ -184,7 +186,8 @@
                                         <th class="text-center">Course</th>
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
-                                        <th class="text-center">Marks</th>                                       
+                                        <th class="text-center">Marks</th>
+                                        <th class="text-center">Order</th>                                   
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
                                     </tr>

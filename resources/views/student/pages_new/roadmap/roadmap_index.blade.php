@@ -65,7 +65,7 @@
                                              @endforeach
                                           @endif
                                           <li class="font-weight-bold">
-                                             <a class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"> {{ $exam->exam_type }} </a>
+                                             <a class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"> {{ $exam->title }} </a>
                                           </li>
                                        @empty
                                           <h1> No Exams have been added to this Island(Course Topic) </h1>
