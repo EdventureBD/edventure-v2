@@ -135,18 +135,18 @@
                             </div>
                         </div>
                     @endforelse
-                    <div>
-                        <div class="d-flex flex-column justify-center">
+                    <div class="d-flex flex-column justify-evenly">
+                        <div>
                             <p class="h3 text-center pt-5 pb-3 text-dark fw-800">উত্তরঃ-</p>
                         </div>
-                        <div class="form-group">
-                            <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label>
-                            <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
+                        <div class="form-group"  style="padding-left: 0% !important">
+                            {{-- <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label> --}}
+                            <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3" placeholder="Write your CQ's answer here."></textarea>
                         </div>
                         <div class="d-flex justify-center">
                             <p class="mx-auto h5">Or Upload a PDF answer file:</p>
                         </div>
-                        <div class="form-group m-0">
+                        <div class="form-group m-0" style="padding-left: 0% !important">
                             <div class="custom-file">
                                 <input type="file" id="file" name="file" class="custom-file-input">
                                 <label for="file" class="custom-file-label">Choose file</label>
