@@ -523,7 +523,6 @@ class ExamController extends Controller
                 $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
 
                 Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
-                // $request->session()->flash();
 
                 return $this->batchTest($course_topic, $batch, $exam->exam_type);
 

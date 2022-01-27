@@ -179,7 +179,7 @@
                                  
                                  @if ($key2 == 0)
                                     <td rowspan="4" class="text-center bg-purple2 v-align-middle">
-                                       <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Pdf</a>
+                                       <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Answer</a>
                                     </td>
                                     <td rowspan="4" class="text-center bg-purple2 v-align-middle">
                                        <a href="" class="btn text-xxsm text-white bg-purple px-4 py-2 " data-toggle="modal" data-target="#correctAnswerModal">View Pdf</a>
@@ -197,7 +197,8 @@
                                           <div class="modal-body">
                                                 @if ($creative_question->exam_papers->submitted_text != null)
                                                    <textarea name="" id="" cols="30" rows="10">{!! $creative_question->exam_papers->submitted_text !!}</textarea>
-                                                @elseif ($creative_question->exam_papers->submitted_pdf != null)
+                                                @endif
+                                                @if ($creative_question->exam_papers->submitted_pdf != null)
                                                    <iframe src="{{ Storage::url($creative_question->exam_paper->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
                                                 @endif
                                           </div>
