@@ -59,6 +59,7 @@ class Index extends Component
             ->where('courses.id', $this->courseId)
             ->where('course_topics.id', $this->topicId)
             ->orderBy('course_lectures.created_at', 'DESC')
+            ->with('exam')
             ->get();
     }
 

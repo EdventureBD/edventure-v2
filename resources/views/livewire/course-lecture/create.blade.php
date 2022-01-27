@@ -100,6 +100,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="exam">Exam<span
+                                                    class="must-filled">*</span></label>
+                                            <select class="form-control" wire:model="examId">
+                                                <option value="" selected>Select Exam</option>
+                                                @foreach ($exams as $exam)
+                                                    <option wire:key="{{ $exam->slug.$exam->id }}" value="{{ $exam->id }}">{{ $exam->title }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div>
+                                                @error('examId')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group" wire:ignore>
                                     <label class="col-form-label" for="markdownText">Markdown Text</label>
