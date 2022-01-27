@@ -56,7 +56,21 @@
                                  <div class="modal-body">
                                     <h3 class="mt-3">Exams {{$batch->slug}}</h3>
                                     <ol>
-                                       <li>
+                                       @forelse ($batchTopic->courseTopic->exams as $exam)
+                                          @if (count($exam->course_lectures))
+                                             @foreach ($exam->course_lectures as $course_lecture)
+                                                <li class="font-weight-bold">
+                                                   <a href="#"> {{ $course_lecture->title }} </a>
+                                                </li>
+                                             @endforeach
+                                          @endif
+                                          <li class="font-weight-bold">
+                                             <a class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"> {{ $exam->exam_type }} </a>
+                                          </li>
+                                       @empty
+                                          <h1> No Exams have been added to this Island(Course Topic) </h1>
+                                       @endforelse
+                                       {{-- <li>
                                           <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Aptitude Test"]) }}"> Aptitude Test </a>
                                        </li>
                                        <li>
@@ -64,14 +78,13 @@
                                        </li>
                                        <li>
                                           <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Pop Quiz"]) }}"> Pop Quiz </a>
-                                          {{-- <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Topic End Exam"]) }}"> Pop Quiz </a> --}}
                                        </li>
                                        <li>
                                           <a href=""> Lecture Content </a>
                                        </li>
                                        <li>
                                           <a href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, "Topic End Exam"]) }}"> Topic End Exam </a>
-                                       </li>
+                                       </li> --}}
                                     </ol>
                                     {{-- @foreach ($exams as $key=>$exam)
                                        <p>{{ $loop->iteration }}. {{$key}}</p>

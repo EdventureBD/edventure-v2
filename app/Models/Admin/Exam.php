@@ -45,7 +45,7 @@ class Exam extends Model
         return $this->hasMany(TopicEndExamCreativeQuestion::class);
     }
 
-    public function course_lecture()
+    public function course_lectures()
     {
         return $this->hasMany(CourseLecture::class, 'exam_id');
     }

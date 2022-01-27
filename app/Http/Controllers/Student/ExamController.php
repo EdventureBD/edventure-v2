@@ -524,7 +524,7 @@ class ExamController extends Controller
 
                 Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
 
-                return $this->batchTest($course_topic, $batch, $exam->exam_type);
+                return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
 
                 // // dd($exam->exam_type, "Here have some results.");
 
@@ -817,8 +817,7 @@ class ExamController extends Controller
     }
 
     // serve exam questions/to exam page with random questions per paper
-    public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_type){
-
+    public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
         // $batch = Batch::where('id', $batch->id)->with('course')->firstOrFail();
         // dd("Batch Controller batch Tests", $exam_type);
 
@@ -898,7 +897,7 @@ class ExamController extends Controller
 
 
                 // $exam = Exam::where('')->inRandomOrder()->take(1)->first();
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
+                $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
 
                 $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
                 
@@ -1026,7 +1025,7 @@ class ExamController extends Controller
 
 
                 // ->inRandomOrder()
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
+                $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
                     'topicEndExamCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     },
@@ -1186,7 +1185,7 @@ class ExamController extends Controller
                 }
                 else{
                     // If no results exist, then go ahead attempt exam
-                    $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
+                    $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
                     if($exam == null){
                         return redirect()->back()->withErrors(['This batch has no topic end exam added to it!!']);
@@ -1267,7 +1266,7 @@ class ExamController extends Controller
 
 
                 // ->inRandomOrder()
-                $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
+                $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
                     'popQUizCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     },
@@ -1429,7 +1428,7 @@ class ExamController extends Controller
                 }
                 else{
                     // If no results exist, then go ahead attempt exam
-                    $exam = Exam::where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
+                    $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
                     if($exam == null){
                         return redirect()->back()->withErrors(['This batch has no pop quizzes added to it!!']);

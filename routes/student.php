@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
 
 
         // BATCH TEST
-        Route::get('batch/tests/{course_topic}/{batch}/{exam_type}]', [ExamController::class, 'batchTest'])->name('batch-test');
+        Route::get('batch/tests/{course_topic}/{batch}/{exam_id}/{exam_type}]', [ExamController::class, 'batchTest'])->name('batch-test');
 
 
 
