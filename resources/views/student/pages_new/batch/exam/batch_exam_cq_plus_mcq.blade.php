@@ -45,11 +45,6 @@
             <div class="page-section">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
 
-
-                
-
-
-
                 <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" id="cqFormSubmit" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
 

@@ -8,7 +8,6 @@
                   $total_gain_marks += $result->gain_marks;
             }
          @endphp --}}
-
          <div>
             <div class="course-info bg-gradient-purple py-5">
                <div class="container">
@@ -30,12 +29,15 @@
                      </div>
                </div>
             </div> --}}
-
          </div>
 
-
-
          <div class="container">
+            @if(session('exam_exists_message'))
+               <div class="alert alert-danger mt-3 text-center">
+                  <h1> {{ session('exam_exists_message') }} </h1>
+               </div>
+            @endif
+
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
             <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
             <div class="text-right">
@@ -79,12 +81,12 @@
                         @endphp --}}
                         @foreach ($mcq_details_results as $key => $mcq_details_result)
                            <tr>
-                              <td class="br-purple2">{{ $key }}</td>
-                              <td class="br-purple2">{!! $mcq_details_result->popQuizMCQ->question !!}</td>
-                              <td class="br-purple2">{{ $mcq_details_result->mcq_ans }}</td>
-                              <td class="br-purple2">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
-                              <td class="br-purple2">{{ $mcq_details_result->popQuizMCQ->explanation }}</td>
-                              <td class="br-purple2">Some percentage boi</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $key }}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->question !!}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->answer !!}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->topicEndExamMCQ->explanation }}</td>
+                              <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
                               {{-- <td class="br-purple2">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td> --}}
                            </tr>
                         @endforeach
@@ -154,7 +156,7 @@
 
                         {{-- <tr>
                            {!! $result->cqQuestion->creativeQuestion->creative_question !!}
-                           @foreach ($exam->popQuizCreativeQuestion as $creative_question)
+                           @foreach ($exam->topicEndExamCreativeQuestion as $creative_question)
                               {!! $result->cqQuestion->question !!}
                               <td rowspan="4" class="bg-purple2 text-white">{{ $creative_question->creative_question }}</td>
                               @foreach ($creative_question->question as $cq)
@@ -163,7 +165,7 @@
                            @endforeach
                         </tr> --}}
 
-                        @foreach ($exam->popQuizCreativeQuestions as $key => $creative_question)
+                        @foreach ($exam->topicEndExamCreativeQuestions as $key => $creative_question)
                            @foreach ($creative_question->question as $key2 => $question)
                               <tr>
                                  @if ($key2 == 0)
@@ -171,13 +173,15 @@
                                  @endif
 
                                  <td class="bg-purple2 text-white">{!! $question->question !!}</td>
-                                 <td class="bg-purple2 text-white text-sm fw-600 bshadow">0%</td>
+                                 <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
+                                    {{ $question->avg_score }}
+                                 </td>
                                  
                                  @if ($key2 == 0)
-                                    <td rowspan="4" class="bg-purple2 v-align-middle">
-                                       <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Pdf</a>
+                                    <td rowspan="4" class="text-center bg-purple2 v-align-middle">
+                                       <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Answer</a>
                                     </td>
-                                    <td rowspan="4" class="bg-purple2 v-align-middle">
+                                    <td rowspan="4" class="text-center bg-purple2 v-align-middle">
                                        <a href="" class="btn text-xxsm text-white bg-purple px-4 py-2 " data-toggle="modal" data-target="#correctAnswerModal">View Pdf</a>
                                     </td>
 
@@ -193,7 +197,8 @@
                                           <div class="modal-body">
                                                 @if ($creative_question->exam_papers->submitted_text != null)
                                                    <textarea name="" id="" cols="30" rows="10">{!! $creative_question->exam_papers->submitted_text !!}</textarea>
-                                                @elseif ($creative_question->exam_papers->submitted_pdf != null)
+                                                @endif
+                                                @if ($creative_question->exam_papers->submitted_pdf != null)
                                                    <iframe src="{{ Storage::url($creative_question->exam_paper->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
                                                 @endif
                                           </div>

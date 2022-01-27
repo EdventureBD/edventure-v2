@@ -70,7 +70,7 @@ class BatchController extends Controller
     {
         $course = Course::where('id', $batch->course_id)->first();
 
-        $batchTopics = BatchLecture::with('courseTopic', 'courseTopic.CourseLecture')
+        $batchTopics = BatchLecture::with('courseTopic.exams', 'courseTopic.CourseLecture')
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->get();
@@ -79,6 +79,8 @@ class BatchController extends Controller
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->first();
+
+        // $exams = Exam::where()->where()->where()->get();
 
         // dd($batch, $course, $batchTopics, $accessedDays);
 

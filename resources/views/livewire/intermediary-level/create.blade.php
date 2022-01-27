@@ -17,7 +17,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseTitle"> Course Title <span
+                                                <label class="col-form-label" for="courseTitle"> Intermediary Level Title <span
                                                         class="must-filled">*</span> </label>
                                                 <input type="text" wire:model="title"
                                                     class="form-control @error('title') is-invalid @enderror"

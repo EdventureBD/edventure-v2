@@ -20,7 +20,6 @@ class AccountDetailsController extends Controller
     public function index()
     {
         return view('student.pages_new.user.profile');
-         
     }
 
     public function profileData()
