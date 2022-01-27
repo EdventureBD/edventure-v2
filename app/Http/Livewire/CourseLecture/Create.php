@@ -10,6 +10,7 @@ use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Exam;
 use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
@@ -28,6 +29,9 @@ class Create extends Component
     public $url;
     public $markdownText;
     public $pdf;
+
+    public $exams;
+    public $examId;
 
     public function updatedTitle()
     {
@@ -67,6 +71,17 @@ class Create extends Component
         $this->validate([
             'topicId' => 'required',
         ]);
+
+        $this->exams = Exam::where('course_id', $this->courseId)->where('topic_id', $this->topicId)->where(function($query) {
+            return $query->where('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam');
+        })->get();
+    }
+
+    public function updatedExamId()
+    {
+        $this->validate([
+            'examId' => 'required',
+        ]);
     }
 
     public function updatedPdf()
@@ -81,6 +96,7 @@ class Create extends Component
         'url' => ['required', 'string', 'min:3'],
         'courseId' => 'required',
         'topicId' => 'required',
+        'examId' => 'required',
         'markdownText' => 'nullable',
         'pdf' => 'nullable|mimes:pdf|max:50000',
     ];
@@ -92,6 +108,7 @@ class Create extends Component
         $lecture->title = $data['title'];
         $lecture->course_id = $data['courseId'];
         $lecture->topic_id = $data['topicId'];
+        $lecture->exam_id = $data['examId'];
         $lecture->markdown_text = $data['markdownText'];
         $lecture->url = $data['url'];
         $lecture->slug = Str::slug($data['title']);
@@ -118,6 +135,7 @@ class Create extends Component
         $this->intermediaryLevels = collect();
         $this->courses = collect();
         $this->course_topics = collect();
+        $this->exams = collect();
     }
 
     public function render()

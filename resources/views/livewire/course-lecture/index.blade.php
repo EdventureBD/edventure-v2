@@ -67,6 +67,7 @@
                                                 <th>Title</th>
                                                 <th>Course</th>
                                                 <th>Topic</th>
+                                                <th>Exam</th>
                                                 <th>video</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -79,6 +80,7 @@
                                                     <td>{{ $lecture->title }}</td>
                                                     <td>{{ $lecture->courseName }}</td>
                                                     <td>{{ $lecture->topicName }}</td>
+                                                    <td>{{ $lecture->exam->title }}</td>
                                                     <td> 
                                                         <iframe width="224" height="126" src="https://www.youtube-nocookie.com/embed/{{$lecture->url }}"
                                                             title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
@@ -136,6 +138,7 @@
                                                 <th>Title</th>
                                                 <th>Course</th>
                                                 <th>Topic</th>
+                                                <th>Exam</th>
                                                 <th>video</th>
                                                 <th>Status</th>
                                                 <th>Action</th>

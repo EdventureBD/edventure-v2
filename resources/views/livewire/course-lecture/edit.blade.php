@@ -55,6 +55,21 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="exams">Exams</label>
+                                            <select class="form-control" wire:model="examId" disabled>
+                                                @foreach ($exams as $exam)
+                                                    <option value="{{ $exam->id }}">{{ $exam->title }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('examId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group" wire:ignore>
                                     <label class="col-form-label" for="markdownText">Markdown Text</label>
