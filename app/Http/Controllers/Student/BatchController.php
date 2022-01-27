@@ -70,7 +70,9 @@ class BatchController extends Controller
     {
         $course = Course::where('id', $batch->course_id)->first();
 
-        $batchTopics = BatchLecture::with('courseTopic.exams.course_lectures')
+        $batchTopics = BatchLecture::with(['courseTopic.exams' => function($query){
+            return $query->orderBy('exam_type')->orderBy('order');
+        }, 'courseTopic.exams.course_lectures'])
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->get();
