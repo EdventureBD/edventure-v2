@@ -40,20 +40,20 @@
 
                 {{-- START OF USER --}}
                 <li
-                    class="nav-item has-treeview {{ request()->is('admin/user') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/user/create') ? 'menu-open' : '' }} 
+                    class="nav-item has-treeview {{ request()->is('admin/user') ? 'menu-open' : '' }}
+                                                 {{ request()->is('admin/user/create') ? 'menu-open' : '' }}
                                                  {{ request()->is('admin/user/*/edit') ? 'menu-open' : '' }}
-                                                 {{ request()->is('admin/allAdmin') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/allTeacher') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/allStudent') ? 'menu-open' : '' }} 
+                                                 {{ request()->is('admin/allAdmin') ? 'menu-open' : '' }}
+                                                 {{ request()->is('admin/allTeacher') ? 'menu-open' : '' }}
+                                                 {{ request()->is('admin/allStudent') ? 'menu-open' : '' }}
                                                  ">
                     <a href="#"
                         class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}
-                        {{ request()->is('admin/user/create') ? 'active' : '' }} 
-                        {{ request()->is('admin/user/*/edit') ? 'active' : '' }} 
-                        {{ request()->is('admin/allAdmin') ? 'active' : '' }} 
-                        {{ request()->is('admin/allTeacher') ? 'active' : '' }} 
-                        {{ request()->is('admin/allStudent') ? 'active' : '' }} 
+                        {{ request()->is('admin/user/create') ? 'active' : '' }}
+                        {{ request()->is('admin/user/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/allAdmin') ? 'active' : '' }}
+                        {{ request()->is('admin/allTeacher') ? 'active' : '' }}
+                        {{ request()->is('admin/allStudent') ? 'active' : '' }}
                         ">
                         <i class="fas fa-user-friends"></i>
                         <p>&nbsp; User <i class="right fas fa-angle-left"></i></p>
@@ -111,14 +111,14 @@
 
                 {{-- START OF PAYMENTS --}}
                 <li
-                    class="nav-item has-treeview {{ request()->is('admin/payment') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/payment/create') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/payment/*/edit') ? 'menu-open' : '' }} 
+                    class="nav-item has-treeview {{ request()->is('admin/payment') ? 'menu-open' : '' }}
+                                                 {{ request()->is('admin/payment/create') ? 'menu-open' : '' }}
+                                                 {{ request()->is('admin/payment/*/edit') ? 'menu-open' : '' }}
                                                  ">
                     <a href="#"
-                        class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }} 
-                                        {{ request()->is('admin/payment/create') ? 'active' : '' }} 
-                                        {{ request()->is('admin/payment/*/edit') ? 'active' : '' }} 
+                        class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }}
+                                        {{ request()->is('admin/payment/create') ? 'active' : '' }}
+                                        {{ request()->is('admin/payment/*/edit') ? 'active' : '' }}
                                         ">
                         <i class="fas fa-boxes"></i>
                         <p>&nbsp; Payments<i class="right fas fa-angle-left"></i>
@@ -127,7 +127,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item {{ request()->is('admin/payment') ? 'menu-open' : '' }}">
                             <a href="{{ route('payment.index') }}"
-                                class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }} 
+                                class="nav-link {{ request()->is('admin/payment') ? 'active' : '' }}
                                                 {{ request()->is('admin/payment/*/edit') ? 'active' : '' }}">
                                 <i class="fas fa-file-invoice"></i>
                                 <p>&nbsp; Payment index</p>
@@ -146,20 +146,20 @@
 
                 {{-- START OF CONTENT TAGS --}}
                 <li
-                    class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/question-content-tag') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/question-content-tag/create') ? 'menu-open' : '' }} 
-                                                {{ request()->is('admin/question-content-tag/*/edit') ? 'menu-open' : '' }} 
+                    class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}
+                                                {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}
+                                                {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}
+                                                {{ request()->is('admin/question-content-tag') ? 'menu-open' : '' }}
+                                                {{ request()->is('admin/question-content-tag/create') ? 'menu-open' : '' }}
+                                                {{ request()->is('admin/question-content-tag/*/edit') ? 'menu-open' : '' }}
                                                 ">
                     <a href="#"
-                        class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} 
-                                                {{ request()->is('admin/content-tag/create') ? 'active' : '' }} 
-                                                {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }} 
-                                                {{ request()->is('admin/question-content-tag') ? 'active' : '' }} 
-                                                {{ request()->is('admin/question-content-tag/create') ? 'active' : '' }} 
-                                                {{ request()->is('admin/question-content-tag/*/edit') ? 'active' : '' }} 
+                        class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }}
+                                                {{ request()->is('admin/content-tag/create') ? 'active' : '' }}
+                                                {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}
+                                                {{ request()->is('admin/question-content-tag') ? 'active' : '' }}
+                                                {{ request()->is('admin/question-content-tag/create') ? 'active' : '' }}
+                                                {{ request()->is('admin/question-content-tag/*/edit') ? 'active' : '' }}
                                                 ">
                         <i class="fas fa-chart-bar"></i>
                         <p>&nbsp; Tags<i class="right fas fa-angle-left"></i></p>
@@ -186,20 +186,47 @@
                 @include('admin.includes.sidebar_content.exam')
                 {{-- END OF EXAM SIDEBAR --}}
 
+                {{-- START OF MODEL EXAM SIDEBAR --}}
+                <li class="nav-item has-treeview {{ request()->is('admin/exam-category') ? 'menu-open' : '' }}">
+                    <a href="{{ route('admin.settings') }}"
+                       class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
+                        <i class="fas fa-paste"></i>
+                        <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li>
+                            <a href="{{ route('exam.category.index') }}"
+                               class="nav-link {{ request()->is('admin/exam-category') ? 'active' : '' }} ">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Exam Category</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('showAllMCQ') }}"
+                               class="nav-link {{ request()->is('admin/all-mcq') ? 'active' : '' }} ">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Exam Topics</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                {{-- END OF MODEL EXAM SIDEBAR --}}
+
                 {{-- START OF EXAM SIDEBAR --}}
                 {{-- @include('admin.includes.sidebar_content.special-exam') --}}
                 {{-- END OF EXAM SIDEBAR --}}
 
                 {{-- START OF BLOG SIDEBAR --}}
                 <li
-                    class="nav-item has-treeview {{ request()->is('admin/blog') ? 'menu-open' : '' }} 
-                                                 {{ request()->is('admin/blog/create') ? 'menu-open' : '' }} 
+                    class="nav-item has-treeview {{ request()->is('admin/blog') ? 'menu-open' : '' }}
+                                                 {{ request()->is('admin/blog/create') ? 'menu-open' : '' }}
                                                  {{ request()->is('admin/blog/*/edit') ? 'menu-open' : '' }}
                                                  ">
                     <a href="#"
                         class="nav-link {{ request()->is('admin/blog') ? 'active' : '' }}
-                        {{ request()->is('admin/blog/create') ? 'active' : '' }} 
-                        {{ request()->is('admin/blog/*/edit') ? 'active' : '' }} 
+                        {{ request()->is('admin/blog/create') ? 'active' : '' }}
+                        {{ request()->is('admin/blog/*/edit') ? 'active' : '' }}
                         ">
                         <i class="fas fa-chart-bar"></i>
                         <p>&nbsp; Blog <i class="right fas fa-angle-left"></i></p>

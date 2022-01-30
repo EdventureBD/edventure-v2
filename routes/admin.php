@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExamCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ActivityController;
@@ -187,6 +188,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     // START OF IMAGE UPLOAD
     Route::resource('upload-image', ImageUploadController::class);
+
+    //Model Exam
+    Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
+    Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
 });
 
 require __DIR__ . '/auth.php';
