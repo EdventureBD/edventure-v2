@@ -16,31 +16,13 @@
                         </a>
                      </div>
                      <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50">
+                        <div class="mx-auto px-auto w-50 mt-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50 align-top">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="mx-5 px-5 row row-cols-1 justify-center">
-                     <div class="iland-photo my-0 py-0 align-baseline">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal">
-                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
-                        </a>
-                     </div>
-                     <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                        <div class="mx-auto px-auto w-50">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
@@ -52,13 +34,31 @@
                         </a>
                      </div>
                      <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50">
+                        <div class="mx-auto px-auto w-50 mt-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 mb-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 mt-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
@@ -85,31 +85,13 @@
                         </a>
                      </div>
                      <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50">
+                        <div class="mx-auto px-auto w-50 mt-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50 align-top">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="mx-5 px-5 row row-cols-1 justify-center">
-                     <div class="iland-photo">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal">
-                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
-                        </a>
-                     </div>
-                     <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                        <div class="mx-auto px-auto w-50">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
@@ -121,13 +103,31 @@
                         </a>
                      </div>
                      <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50">
+                        <div class="mx-auto px-auto w-50 mt-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 mb-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 mt-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
@@ -154,31 +154,13 @@
                         </a>
                      </div>
                      <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50">
+                        <div class="mx-auto px-auto w-50 mt-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50 align-top">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="mx-5 px-5 row row-cols-1 justify-center">
-                     <div class="iland-photo my-0 py-0 align-baseline">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal">
-                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
-                        </a>
-                     </div>
-                     <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                        <div class="mx-auto px-auto w-50">
-                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
-                        </div>
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
@@ -190,13 +172,31 @@
                         </a>
                      </div>
                      <div class="ratting_photos d-flex justify-center my-0 py-0">
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50">
+                        <div class="mx-auto px-auto w-50 mt-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="mx-auto px-auto w-50 align-top">
+                        <div class="mx-auto px-auto w-50 mb-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 mb-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 mt-auto">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 mb-auto">
                            <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
