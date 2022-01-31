@@ -192,6 +192,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     //Model Exam
     Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
     Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
+    Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
 });
 
 require __DIR__ . '/auth.php';
