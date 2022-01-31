@@ -1,126 +1,209 @@
 <x-landing-layout headerBg="white">
 <div class="page-section ">
-      <div class="mx-md-5">
-         <div class="">
+      <div>
+         <div>
             <div class=" text-center bradius-10 w-100 text-gray text-sm fw-700"> Roadmap </div>
          </div>
          {{-- d-flex justify-content-center all-blog py-3 card-group-row mb-lg-8pt --}}
-         <div class="d-flex justify-content-center all-blog py-3 card-group-row  mb-lg-8pt">
-            <div id="roadmapParentContainer">
-                  <div id="leftIlands" class="d-grid grid-cols-1">
-                     <div class="single-leftIland-container mb-5 pb-5">
-                        <div class="iland_image">
-                           <a href="#" data-toggle="modal" data-target="#exampleModal">
-                              <img src="/img/road_map/landl1.png" alt="" class=" img-fluid">
-                           </a>
+         
+            <div id="roadmapParentContainer" class="py-5 align-middle">
+               {{-- data-toggle="modal" data-target="#exampleModal" --}}
+               <div class="row row-cols-1 mx-5 px-5 singleIland w-75" id="left_iland">
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="iland_stars d-flex">
-
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
-                     {{-- second iland  --}}
-                     <div class="single-leftIland-container mb-5 pb-5">
-                        <div class="iland_image">
-                           <a href="#" data-toggle="modal" data-target="#exampleModal">
-                              <img src="/img/road_map/landl1.png" alt="" class=" img-fluid">
-                           </a>
-                        </div>
-                        <div class="iland_stars d-flex">
-
-                        </div>
-                     </div>
-                     {{-- second iland ends  --}}
-                     {{-- third iland  --}}
-                     <div class="single-leftIland-container mb-5 pb-5">
-                        <div class="iland_image">
-                           <a href="#" data-toggle="modal" data-target="#exampleModal">
-                              <img src="/img/road_map/landl1.png" alt="" class=" img-fluid">
-                           </a>
-                        </div>
-                        <div class="iland_stars d-flex">
-
-                        </div>
-                     </div>
-                     {{-- third iland ends --}}
                   </div>
-                  {{-- arrow part  --}}
-                  <div id="arrows" class="d-grid grid-cols-1">
-                     <div class="my-2">
-                        <div class="arrow_img">
-                           <img src="/img/road_map/arrowR2L.png" alt="" class=" img-fluid">
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
-                     {{-- second arrow part --}}
-                     <div class="my-2">
-                        <div class="arrow_img">
-                           <img src="/img/road_map/arrowL2R.png" alt="" class=" img-fluid">
-                        </div>
-                     </div>
-                     {{-- second arrow part ends  --}}
-                     {{-- third arrow part --}}
-                     <div class="my-2">
-                        <div class="arrow_img">
-                           <img src="/img/road_map/arrowR2L.png" alt="" class=" img-fluid">
-                        </div>
-                     </div>
-                     {{-- third arrow part ends --}}
-                     {{-- forth arrow part --}}
-                     <div class="my-2">
-                        <div class="arrow_img">
-                           <img src="/img/road_map/arrowL2R.png" alt="" class=" img-fluid">
-                        </div>
-                     </div>
-                     {{-- fourth arrow part ends --}}
-                     {{-- fifth arrow part --}}
-                     <div class="my-2">
-                        <div class="arrow_img">
-                           <img src="/img/road_map/arrowR2L.png" alt="" class=" img-fluid">
-                        </div>
-                     </div>
-                     {{-- fifth arrow part ends --}}
-
                   </div>
-                  {{-- arrow part ends  --}}
-                  {{-- right ilands  --}}
-                  <div id="rightIlands" class="d-grid grid-cols-1 gap-y-10 mt-5">
-                     <div class="single-right-iland my-3 py-5">
-                        <div class="iland_image">
-                           <a href="#" data-toggle="modal" data-target="#exampleModal">
-                              <img src="/img/road_map/landr1.png" alt="" class=" img-fluid">
-                           </a>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
-                        <div class="iland_stars d-flex">
-
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
                         </div>
                      </div>
-                     {{-- second right ilands  --}}
-                     <div class="single-right-iland my-3 py-5">
-                        <div class="iland_image">
-                           <a href="#" data-toggle="modal" data-target="#exampleModal">
-                              <img src="/img/road_map/landr1.png" alt="" class=" img-fluid">
-                           </a>
-                        </div>
-                        <div class="iland_stars d-flex">
-
-                        </div>
-                     </div>
-                     {{-- second right ilands ends --}}
-                     {{-- third right ilands  --}}
-                     <div class="single-right-iland my-3 py-5">
-                        <div class="iland_image">
-                           <a href="#" data-toggle="modal" data-target="#exampleModal">
-                              <img src="/img/road_map/landr1.png" alt="" class=" img-fluid">
-                           </a>
-                        </div>
-                        <div class="iland_stars d-flex">
-
-                        </div>
-                     </div>
-                     {{-- third right ilands ends --}}
                   </div>
-                  {{-- right ilands part ends  --}}
+               </div>
+               <div class="row row-cols-1 gap-5" id="left_arrow">
+                  <div class="row row-cols-1 arrow">
+                     <div class="arrow-photo d-flex align-middle w-50">
+                        <img src="/img/road_map/arrowR2L.svg" alt="" class="img-fluid">
+                     </div>
+                     <div class="arrow-photo d-flex align-middle">
+                        <img src="/img/road_map/arrowR2L.svg" alt="" class="img-fluid">
+                     </div>
+                     <div class="arrow-photo d-flex align-middle">
+                        <img src="/img/road_map/arrowR2L.svg" alt="" class="img-fluid">
+                     </div>
+                  </div>
+               </div>
+               <div class="row row-cols-1 mx-5 px-5 singleIland w-75" id="middle_iland">
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row row-cols-1 mx-auto px-auto gap-5 arrow" id="right_arrow">
+                  <div class="mx-auto px-auto row row-cols-1">
+                     <div class="arrow-photo d-flex align-middle">
+                        <img src="/img/road_map/arrowR2L.svg" alt="" class="img-fluid">
+                     </div>
+                     <div class="arrow-photo d-flex align-middle">
+                        <img src="/img/road_map/arrowR2L.svg" alt="" class="img-fluid">
+                     </div>
+                     <div class="arrow-photo d-flex align-middle">
+                        <img src="/img/road_map/arrowR2L.svg" alt="" class="img-fluid">
+                     </div>
+                  </div>
+               </div>
+               <div class="row row-cols-1 mx-5 px-5 singleIland w-75" id="right_iland">
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mx-5 px-5 row row-cols-1 justify-center">
+                     <div class="iland-photo my-0 py-0 align-baseline">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                           <img src="/img/road_map/landr3.png" alt="" class="img-fluid">
+                        </a>
+                     </div>
+                     <div class="ratting_photos d-flex justify-center my-0 py-0">
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="mx-auto px-auto w-50 align-top">
+                           <img src="/img/road_map/starEmpty.png" alt="" class="img-fluid">
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-         </div>
+         
          {{-- Modal part --}}
          <!-- Modal -->
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
