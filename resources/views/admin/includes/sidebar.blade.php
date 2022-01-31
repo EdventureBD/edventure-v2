@@ -187,9 +187,9 @@
                 {{-- END OF EXAM SIDEBAR --}}
 
                 {{-- START OF MODEL EXAM SIDEBAR --}}
-                <li class="nav-item has-treeview {{ request()->is('admin/exam-category') ? 'menu-open' : '' }}">
-                    <a href="{{ route('admin.settings') }}"
-                       class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ request()->is('admin/exam-category') || request()->is('admin/exam-topic') ? 'menu-open' : '' }}">
+                    <a href="#"
+                       class="nav-link {{ request()->is('admin/exam-category') || request()->is('admin/exam-topic') ? 'active' : '' }}">
                         <i class="fas fa-paste"></i>
                         <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -202,8 +202,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('showAllMCQ') }}"
-                               class="nav-link {{ request()->is('admin/all-mcq') ? 'active' : '' }} ">
+                            <a href="{{ route('exam.topic.index') }}"
+                               class="nav-link {{ request()->is('admin/exam-topic') ? 'active' : '' }} ">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Exam Topics</p>
                             </a>

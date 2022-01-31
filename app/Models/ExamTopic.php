@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExamCategory extends Model
+/**
+ * @property
+ */
+class ExamTopic extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function examTopics()
+    public function examCategory()
     {
-        return $this->hasMany(ExamTopic::class);
+        return $this->belongsTo(ExamCategory::class);
     }
 }

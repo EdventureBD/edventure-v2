@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExamCategoryController;
+use App\Http\Controllers\ExamTopicController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ActivityController;
@@ -189,10 +190,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // START OF IMAGE UPLOAD
     Route::resource('upload-image', ImageUploadController::class);
 
-    //Model Exam
+    /**************************************** Model Exam ****************************************/
+
+    //Exam Category
     Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
     Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
     Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
+
+    //Exam topic
+    Route::get('/exam-topic',[ExamTopicController::class,'index'])->name('exam.topic.index');
+    Route::get('/exam-topic/{id}',[ExamTopicController::class,'show'])->name('exam.topic.show');
+    Route::post('/exam-topic',[ExamTopicController::class,'store'])->name('exam.topic.store');
+    Route::put('/exam-topic/{id}',[ExamTopicController::class,'update'])->name('exam.topic.update');
+    Route::delete('/exam-topic/{id}',[ExamTopicController::class,'destroy'])->name('exam.topic.destroy');
+
 });
 
 require __DIR__ . '/auth.php';
