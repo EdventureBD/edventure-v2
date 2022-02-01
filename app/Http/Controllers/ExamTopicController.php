@@ -108,6 +108,12 @@ class ExamTopicController extends Controller
         return redirect()->back()->with(['status' => 'Topic Updated Successfully']);
     }
 
+    /**
+     * Check if the topic has its associative tags
+     * If topic has tags, it can not be deleted
+     * @param $topicId
+     * @return bool
+     */
     private function hasTags($topicId)
     {
         return ExamTopic::query()->where('id',$topicId)->has('examTags')->exists();
