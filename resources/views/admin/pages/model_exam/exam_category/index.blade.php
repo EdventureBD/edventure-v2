@@ -58,7 +58,7 @@
                     <div class="modal fade"
                          id="deleteCategory{{ $category->id }}">
                         <div class="modal-dialog">
-                            <div class="modal-content bg-danger">
+                            <div class="modal-content bg-light">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Delete
                                         {{ $category->name }}</h4>
@@ -71,7 +71,7 @@
                                     <p>Are you sure??</p>
                                 </div>
                                 <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-outline-light"
+                                    <button type="button" class="btn btn-outline-secondary"
                                             data-dismiss="modal">Close</button>
                                     <form
                                         action="{{ route('exam.category.destroy', $category->id) }}"
@@ -79,7 +79,7 @@
                                         @csrf
                                         @method('delete')
                                         <button type="submit"
-                                                class="btn btn-outline-light">Delete</button>
+                                                class="btn btn-outline-danger">Delete</button>
                                     </form>
                                 </div>
                             </div>

@@ -18,4 +18,9 @@ class ExamTopic extends Model
     {
         return $this->belongsTo(ExamCategory::class);
     }
+
+    public function examTags()
+    {
+        return $this->hasMany(ExamTag::class);
+    }
 }

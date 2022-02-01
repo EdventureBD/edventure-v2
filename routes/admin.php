@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExamCategoryController;
+use App\Http\Controllers\ExamTagsController;
 use App\Http\Controllers\ExamTopicController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
@@ -197,12 +198,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
     Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
 
-    //Exam topic
+    //Exam Topic
     Route::get('/exam-topic',[ExamTopicController::class,'index'])->name('exam.topic.index');
     Route::get('/exam-topic/{id}',[ExamTopicController::class,'show'])->name('exam.topic.show');
     Route::post('/exam-topic',[ExamTopicController::class,'store'])->name('exam.topic.store');
     Route::put('/exam-topic/{id}',[ExamTopicController::class,'update'])->name('exam.topic.update');
     Route::delete('/exam-topic/{id}',[ExamTopicController::class,'destroy'])->name('exam.topic.destroy');
+
+    //Exam Tags
+    Route::get('/exam-tags',[ExamTagsController::class,'index'])->name('exam.tags.index');
+    Route::get('/exam-tags/{id}',[ExamTagsController::class,'show'])->name('exam.tags.show');
+    Route::post('/exam-tags',[ExamTagsController::class,'store'])->name('exam.tags.store');
+    Route::put('/exam-tags/{id}',[ExamTagsController::class,'update'])->name('exam.tags.update');
+    Route::delete('/exam-tags/{id}',[ExamTagsController::class,'destroy'])->name('exam.tags.destroy');
 
 });
 

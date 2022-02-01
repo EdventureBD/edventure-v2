@@ -187,9 +187,13 @@
                 {{-- END OF EXAM SIDEBAR --}}
 
                 {{-- START OF MODEL EXAM SIDEBAR --}}
-                <li class="nav-item has-treeview {{ request()->is('admin/exam-category') || request()->is('admin/exam-topic') ? 'menu-open' : '' }}">
+                <li class="nav-item has-treeview {{ request()->is('admin/exam-category') ||
+                                                    request()->is('admin/exam-topic') ||
+                                                    request()->is('admin/exam-tags')? 'menu-open' : '' }}">
                     <a href="#"
-                       class="nav-link {{ request()->is('admin/exam-category') || request()->is('admin/exam-topic') ? 'active' : '' }}">
+                       class="nav-link {{ request()->is('admin/exam-category') ||
+                                          request()->is('admin/exam-topic') ||
+                                          request()->is('admin/exam-tags')? 'active' : '' }}">
                         <i class="fas fa-paste"></i>
                         <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -206,6 +210,13 @@
                                class="nav-link {{ request()->is('admin/exam-topic') ? 'active' : '' }} ">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Exam Topics</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('exam.tags.index') }}"
+                               class="nav-link {{ request()->is('admin/exam-tags') ? 'active' : '' }} ">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Exam Tags</p>
                             </a>
                         </li>
 

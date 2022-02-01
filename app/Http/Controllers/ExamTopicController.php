@@ -51,6 +51,10 @@ class ExamTopicController extends Controller
      */
     public function destroy($id)
     {
+        if($this->hasTags($id)) {
+            return redirect()->back()->with(['warning' => 'Can not delete Topic! This Topic has its associative tags']);
+        }
+
         ExamTopic::query()->find($id)->delete();
         return redirect()->back()->with(['status' => 'Topic Deleted Successfully']);
     }
@@ -70,12 +74,23 @@ class ExamTopicController extends Controller
                 ->exists();
     }
 
+    /**
+     * Get single exam topic
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         $topic = ExamTopic::query()->where('id', $id)->with('examCategory')->first();
         return response()->json($topic);
     }
 
+    /**
+     * Update specific exam topic
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $inputs =  $request->validate([
@@ -91,5 +106,10 @@ class ExamTopicController extends Controller
         ExamTopic::query()->where('id', $id)->update($inputs);
 
         return redirect()->back()->with(['status' => 'Topic Updated Successfully']);
+    }
+
+    private function hasTags($topicId)
+    {
+        return ExamTopic::query()->where('id',$topicId)->has('examTags')->exists();
     }
 }
