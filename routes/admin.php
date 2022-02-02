@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamTagsController;
 use App\Http\Controllers\ExamTopicController;
+use App\Http\Controllers\ModelExamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ActivityController;
@@ -211,6 +212,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/exam-tags',[ExamTagsController::class,'store'])->name('exam.tags.store');
     Route::put('/exam-tags/{id}',[ExamTagsController::class,'update'])->name('exam.tags.update');
     Route::delete('/exam-tags/{id}',[ExamTagsController::class,'destroy'])->name('exam.tags.destroy');
+
+    //Model Exam
+    Route::get('/model-exam',[ModelExamController::class,'index'])->name('model.exam.index');
+    Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
+    Route::post('/model-exam',[ModelExamController::class,'store'])->name('model.exam.store');
 
 });
 
