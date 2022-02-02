@@ -50,5 +50,20 @@
       }
    }
    // reverseStream design ends 
+   for(let i = 0; i  <5; i++){
+      for(let j = 0; j < 5; j++){
+         if(i===j){
+            let div = document.createElement("div");
+            div.innerText  = "h1";
+            landsParentDiv.appendChild(div);
+         }
+         else{
+            let div = document.createElement("div");
+            div.innerText  = "0";
+            div.classList.add("invisible");
+            landsParentDiv.appendChild(div);
+         }
+      }
+   }
 </script>
 </x-landing-layout>

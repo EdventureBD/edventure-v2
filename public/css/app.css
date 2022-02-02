@@ -560,6 +560,10 @@ pre code {
   #roadmap-backButton {
     width: 4rem;
   }
+  #ilandsParentContainer{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
 }
 
