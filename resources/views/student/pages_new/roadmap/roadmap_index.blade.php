@@ -22,13 +22,8 @@
          if(i===j){
             let div = document.createElement("div");
             div.innerText  = "h1";
-            if(j===4){
-               div.classList.add("invisible");
-               landsParentDiv.appendChild(div);
-            }
-            else{
-               landsParentDiv.appendChild(div);
-            }
+            div.classList.add("border","border-primary","p-5");
+            landsParentDiv.appendChild(div);
          }
          else{
             let div = document.createElement("div");
@@ -45,11 +40,12 @@
          if((i+j)===(5-1)){
             let div = document.createElement("div");
             div.innerText  = "h1";
-            if(i===4){
-               div.classList.add("invisible");
+            if((i===4) || (i===0)){
+               div.classList.add("invisible","border","border-primary","p-5");
                landsParentDiv.appendChild(div);
             }
             else{
+               div.classList.add("border","border-primary","p-5");
                landsParentDiv.appendChild(div);
             }
          }
@@ -62,11 +58,13 @@
       }
    }
    // reverseStream design ends 
+   // onstream again
    for(let i = 0; i  <5; i++){
       for(let j = 0; j < 5; j++){
          if(i===j){
             let div = document.createElement("div");
             div.innerText  = "h1";
+            div.classList.add("border","border-primary","p-5");
             landsParentDiv.appendChild(div);
          }
          else{
@@ -77,5 +75,6 @@
          }
       }
    }
+   // onstream again ends 
 </script>
 </x-landing-layout>
