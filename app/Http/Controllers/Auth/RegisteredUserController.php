@@ -54,7 +54,7 @@ class RegisteredUserController extends Controller
         } else if (!empty(request()->otp)) {
             if (Cache::get(request()->ip . '_otp') == request()->otp) {
                 $input = Cache::get(request()->ip . '_input');
-                 dd($input);
+
                 Auth::login($user = User::create([
                     'name' => $input['name'],
                     'email' => $input['email'],
@@ -64,6 +64,7 @@ class RegisteredUserController extends Controller
                     'user_type' => 3,
                     'image' => null,
                 ]));
+                dd($user);
                 Cache::forget(request()->ip . '_otp');
                 Cache::forget(request()->ip . '_input');
                 // event(new Registered($user));
