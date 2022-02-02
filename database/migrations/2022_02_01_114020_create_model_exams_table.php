@@ -21,7 +21,6 @@ class CreateModelExamsTable extends Migration
             $table->integer('question_limit');
             $table->integer('exam_type');
             $table->bigInteger('duration');
-            $table->bigInteger('exam_end_time')->nullable();
             $table->boolean('negative_marking')
                     ->default(0)
                     ->comment('0 => negative marking not allow , 1 => allow negative marking');
