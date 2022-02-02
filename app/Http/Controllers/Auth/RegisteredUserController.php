@@ -52,10 +52,9 @@ class RegisteredUserController extends Controller
             $input = $request->all();
             return $this->sendOtp($input);
         } else if (!empty(request()->otp)) {
-            dd([Cache::get(request()->ip . '_otp'), request()->otp]);
             if (Cache::get(request()->ip . '_otp') == request()->otp) {
                 $input = Cache::get(request()->ip . '_input');
-                // dd($ainput);
+                 dd($input);
                 Auth::login($user = User::create([
                     'name' => $input['name'],
                     'email' => $input['email'],
