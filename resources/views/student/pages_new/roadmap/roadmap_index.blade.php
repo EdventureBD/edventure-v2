@@ -16,17 +16,25 @@
 </div>
 <script>
    let landsParentDiv = document.getElementById("ilandsParentContainer");
-   let totalLands = 75;
+   let totalLands = 25;
    while(totalLands){
       // onStream design
       for(let i = 0; i  <5; i++){
          for(let j = 0; j < 5; j++){
             if(i===j){
-               let div = document.createElement("div");
-               div.innerText  = "h1";
-               div.classList.add("border","border-primary","p-5");
-               landsParentDiv.appendChild(div);
-               totalLands--;
+               if(j%2==0){
+                  let div = document.createElement("div");
+                  div.innerText  = "iland";
+                  div.classList.add("border","border-primary","p-5");
+                  landsParentDiv.appendChild(div);
+                  totalLands--;
+               }
+               else{
+                  let div = document.createElement("div");
+                  div.innerText  = "arrow";
+                  div.classList.add("border","border-primary","p-5");
+                  landsParentDiv.appendChild(div);
+               }
             }
             else{
                let div = document.createElement("div");
@@ -43,20 +51,29 @@
          }
       }
       // onStream design ends 
+      
       // reverseStream design starts
       for(let i = 0; i < 5; i++){
          for(let j = 0; j < 5; j++){
             if((i+j)===(5-1)){
                let div = document.createElement("div");
-               div.innerText  = "h1";
                if((i===4) || (i===0)){
                   div.classList.add("invisible","border","border-primary","p-5");
+                  div.innerText  = "0";
                   landsParentDiv.appendChild(div);
                }
                else{
-                  div.classList.add("border","border-primary","p-5");
-                  landsParentDiv.appendChild(div);
-                  totalLands--;
+                  if(i===j){
+                     div.classList.add("border","border-primary","p-5");
+                     div.innerText  = "lands";
+                     landsParentDiv.appendChild(div);
+                     totalLands--;
+                  }
+                  else{
+                     div.classList.add("border","border-primary","p-5");
+                     div.innerText  = "arrow";
+                     landsParentDiv.appendChild(div);
+                  }
                }
             }
             else{
@@ -74,24 +91,6 @@
          }
       }
       // reverseStream design ends 
-      // onstream again
-      /* for(let i = 0; i  <5; i++){
-         for(let j = 0; j < 5; j++){
-            if(i===j){
-               let div = document.createElement("div");
-               div.innerText  = "h1";
-               div.classList.add("border","border-primary","p-5");
-               landsParentDiv.appendChild(div);
-            }
-            else{
-               let div = document.createElement("div");
-               div.innerText  = "0";
-               div.classList.add("invisible");
-               landsParentDiv.appendChild(div);
-            }
-         }
-      } */
-      // onstream again ends 
    }
 </script>
 </x-landing-layout>
