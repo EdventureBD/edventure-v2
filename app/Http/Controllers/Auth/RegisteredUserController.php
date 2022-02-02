@@ -64,13 +64,12 @@ class RegisteredUserController extends Controller
                     'user_type' => 3,
                     'image' => null,
                 ]));
-                dd($user);
                 Cache::forget(request()->ip . '_otp');
                 Cache::forget(request()->ip . '_input');
                 // event(new Registered($user));
-
+                return redirect()->route('home');
                // return redirect(RouteServiceProvider::StudentHOME);
-               return redirect(Redirect::intended(RouteServiceProvider::StudentHOME)->getTargetUrl());
+//               return redirect(Redirect::intended(RouteServiceProvider::StudentHOME)->getTargetUrl());
             }
         }
 
