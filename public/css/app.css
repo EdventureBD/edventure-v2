@@ -546,15 +546,19 @@ pre code {
   margin-left: auto;
 }
 #roadmapParentContainer {
-  display: flex;
-  /* column-gap: 10px; */
   background: url("/img/road_map/roadmapBackground.png");
   color: whitesmoke;
+}
+#roadmap-backButton {
+  width: 25%;
 }
 @media screen and (max-width: 576px){
   #roadmapParentContainer {
     padding-left: 3%;
     padding-right: 3%;
+  }
+  #roadmap-backButton {
+    width: 4rem;
   }
 
 }
