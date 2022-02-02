@@ -100,7 +100,7 @@ class RegisteredUserController extends Controller
         $api_secret = config("edv.reve_secret_key");
         $caller_id = config("edv.reve_caller_id");
         $url = "https://smpp.ajuratech.com:7790/sendtext?apikey=" . $api_key . "&secretkey=" . $api_secret . "&callerID=" . $caller_id . "&toUser=" . $input['phone'] . "&messageContent=" . $message;
-        // dd($url);
+         dd($url);
         try {
             $result = $client->request('GET', $url);
             $result = $result->getBody()->getContents();
