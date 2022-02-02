@@ -22,7 +22,13 @@
          if(i===j){
             let div = document.createElement("div");
             div.innerText  = "h1";
-            landsParentDiv.appendChild(div);
+            if(j===4){
+               div.classList.add("invisible");
+               landsParentDiv.appendChild(div);
+            }
+            else{
+               landsParentDiv.appendChild(div);
+            }
          }
          else{
             let div = document.createElement("div");
@@ -39,7 +45,13 @@
          if((i+j)===(5-1)){
             let div = document.createElement("div");
             div.innerText  = "h1";
-            landsParentDiv.appendChild(div);
+            if(i===4){
+               div.classList.add("invisible");
+               landsParentDiv.appendChild(div);
+            }
+            else{
+               landsParentDiv.appendChild(div);
+            }
          }
          else{
             let div = document.createElement("div");
