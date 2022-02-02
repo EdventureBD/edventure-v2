@@ -52,6 +52,7 @@ class RegisteredUserController extends Controller
             $input = $request->all();
             return $this->sendOtp($input);
         } else if (!empty(request()->otp)) {
+            dd([Cache::get(request()->ip . '_otp'), request()->otp]);
             if (Cache::get(request()->ip . '_otp') == request()->otp) {
                 $input = Cache::get(request()->ip . '_input');
                 // dd($ainput);
@@ -103,7 +104,6 @@ class RegisteredUserController extends Controller
 
         $url = "https://smpp.ajuratech.com:7790/sendtext?apikey=" . $api_key . "&secretkey=" . $api_secret . "&callerID=" . $caller_id . "&toUser=" . $input['phone'] . "&messageContent=" . $message;
 
-         dd($url);
         try {
             $result = $client->request('GET', $url);
             $result = $result->getBody()->getContents();
