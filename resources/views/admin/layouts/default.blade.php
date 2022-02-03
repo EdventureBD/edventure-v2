@@ -27,6 +27,14 @@
             font-weight: 800;
             font-size: 110%;
         }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
         table.table-bordered.dataTable tbody th>div, table.table-bordered.dataTable tbody td>div {
     border-bottom-width: 0;
     max-width: 100% !important;

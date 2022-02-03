@@ -216,7 +216,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     //Model Exam
     Route::get('/model-exam',[ModelExamController::class,'index'])->name('model.exam.index');
     Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
+    Route::get('/model-exam/downloadPdf/{id}',[ModelExamController::class,'downloadSolutionPdf'])->name('model.exam.pdf');
     Route::post('/model-exam',[ModelExamController::class,'store'])->name('model.exam.store');
+    Route::delete('/model-exam/{id}',[ModelExamController::class,'destroy'])->name('model.exam.destroy');
 
 });
 

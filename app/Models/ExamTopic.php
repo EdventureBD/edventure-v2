@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property
+ * @property integer $id
+ * @property string $name
+ * @property integer $exam_category_id
  */
 class ExamTopic extends Model
 {
@@ -22,5 +24,10 @@ class ExamTopic extends Model
     public function examTags()
     {
         return $this->hasMany(ExamTag::class);
+    }
+
+    public function modelExam()
+    {
+        return $this->hasOne(ModelExam::class);
     }
 }

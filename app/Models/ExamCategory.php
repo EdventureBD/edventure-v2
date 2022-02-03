@@ -15,4 +15,9 @@ class ExamCategory extends Model
     {
         return $this->hasMany(ExamTopic::class);
     }
+
+    public function modelExam()
+    {
+        return $this->hasOne(ModelExam::class);
+    }
 }

@@ -24,15 +24,16 @@ class CreateModelExamsTable extends Migration
             $table->boolean('negative_marking')
                     ->default(0)
                     ->comment('0 => negative marking not allow , 1 => allow negative marking');
-            $table->float('negative_marking_value')->nullable();
+            $table->float('negative_marking_value')->nullable()->default(0);
             $table->boolean('visibility')
                     ->default(0)
+                    ->nullable()
                     ->comment('0 => exam is not publicly visible, 1 => exam is publicly visible ');
             $table->integer('per_question_marks')->nullable();
             $table->integer('total_exam_marks')->nullable();
             $table->longText('solution_pdf')->nullable();
             $table->longText('solution_video')->nullable();
-            $table->integer('exam_price')->default(0);
+            $table->integer('exam_price')->default(0)->nullable();
             $table->foreign('exam_topic_id')->references('id')->on('exam_topics')->onDelete('cascade');
             $table->foreign('exam_category_id')->references('id')->on('exam_categories')->onDelete('cascade');
             $table->timestamps();
