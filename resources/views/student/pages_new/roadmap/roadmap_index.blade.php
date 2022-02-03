@@ -45,7 +45,7 @@
 {{-- modal part ends  --}}
 <script>
    let landsParentDiv = document.getElementById("ilandsParentContainer");
-   let totalLands = 25;
+   let totalLands = 10;
    while(totalLands){
       // onStream design
       for(let i = 0; i  <5; i++){
@@ -63,7 +63,7 @@
                   div.appendChild(divIland);
                   // Iland down star's part 
                   let divstars = document.createElement("div");
-                  divstars.classList.add("row","row-cols-3","w-100");
+                  divstars.classList.add("row","row-cols-3","w-75","mx-auto");
                   divstars.innerHTML = `<img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                   <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                   <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
@@ -75,7 +75,7 @@
                else{
                   let div = document.createElement("div");
                   div.innerHTML  = `<img src="img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid">`;
-                  div.classList.add("px-5","w-100");
+                  div.classList.add("px-5","w-50");
                   landsParentDiv.appendChild(div);
                }
             }
@@ -101,8 +101,7 @@
             if((i+j)===(5-1)){
                let div = document.createElement("div");
                if((i===4) || (i===0)){
-                  div.classList.add("invisible","border","border-primary","px-5");
-                  div.innerText  = "0";
+                  div.classList.add("invisible");
                   landsParentDiv.appendChild(div);
                }
                else{
@@ -117,7 +116,7 @@
                      div.appendChild(divIland);
                      // Iland down star's part 
                      let divstars = document.createElement("div");
-                     divstars.classList.add("row","row-cols-3","w-100");
+                     divstars.classList.add("row","row-cols-3","w-75","mx-auto");
                      divstars.innerHTML = `<img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                      <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                      <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
@@ -128,7 +127,7 @@
                   }
                   else{
                      div.innerHTML  = `<img src="img/road_map/reverseStair.png" alt="Stair image" class="img-fluid">`;
-                     div.classList.add("px-5","w-100");
+                     div.classList.add("px-5","w-50");
                      landsParentDiv.appendChild(div);
                   }
                }
