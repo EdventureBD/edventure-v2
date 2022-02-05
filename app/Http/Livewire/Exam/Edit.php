@@ -17,7 +17,7 @@ class Edit extends Component
     public $title;
     public $courseId;
     public $topicId;
-    public $lectureId;
+    // public $lectureId;
     public $examType;
     public $marks;
     public $duration;
@@ -27,6 +27,7 @@ class Edit extends Component
     public $course;
     public $topic;
     public $order;
+    public $threshold_marks;
     // public $examType;
 
     public $show;
@@ -76,6 +77,13 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedThreshold_marks()
+    {
+        $this->validate([
+            'threshold_marks' => 'required|numeric|integer|gt:-1'
+        ]);
+    }
+
     public function updatedExamType()
     {
         if (($this->examType) == 'Assignment') {
@@ -104,6 +112,7 @@ class Edit extends Component
         'marks' => 'required',
         'duration' => 'required',
         'order' => 'required|numeric|integer|gt:-1',
+        'threshold_marks' => 'required',
         'quesLimit' => 'required'
     ];
 
@@ -120,6 +129,7 @@ class Edit extends Component
         $exam->marks = $data['marks'];
         $exam->duration = $data['duration'];
         $exam->order = $data['order'];
+        $exam->threshold_marks = $data['threshold_marks'];
         $exam->question_limit = $data['quesLimit'];
 
         $save = $exam->save();
@@ -142,6 +152,7 @@ class Edit extends Component
         $this->marks = $this->exam->marks;
         $this->duration = $this->exam->duration;
         $this->order = $this->exam->order;
+        $this->threshold_marks = $this->exam->threshold_marks;
         $this->quesLimit = $this->exam->question_limit;
         $this->special = $this->exam->special;
 

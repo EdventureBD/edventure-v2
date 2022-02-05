@@ -29,6 +29,7 @@ class Create extends Component
     public $topics;
     public $topicId;
     public $order;
+    public $threshold_marks;
     // public $examTypes;
 
     public $showAssignment = true;
@@ -105,6 +106,13 @@ class Create extends Component
         ]);
     }
 
+    public function updatedThreshold_marks()
+    {
+        $this->validate([
+            'threshold_marks' => 'required|numeric|integer|gt:-1'
+        ]);
+    }
+
     public function updatedExamType()
     {
         if (($this->examType) == 'Assignment') {
@@ -147,6 +155,7 @@ class Create extends Component
         'marks' => 'required|numeric|integer|gt:0',
         'duration' => 'required|numeric|integer|gt:0',
         'order' => 'required|numeric|integer|gt:-1',
+        'threshold_marks' => 'required|numeric|integer|gt:-1',
         'quesLimit' => 'required|numeric|integer|gt:0',
         'special' => 'nullable|',
         'topicId' => 'nullable',
@@ -158,6 +167,13 @@ class Create extends Component
 
     public function saveExam()
     {
+        $aptitude_test = Exam::where('exam_type', 'Aptitude Test')->where('course_id', $this->courseId)->where('topic_id', $this->topicId)->get();
+        
+        if($this->examType == 'Aptitude Test' && $aptitude_test){
+            $this->addError('aptitude_MCQ_exists', 'An aptitude test for this island(i.e course topic) already exists !!');
+            return;
+        }
+            
         if(!$this->special){
             $this->rules['topicId'] = 'required';
         }
@@ -174,6 +190,7 @@ class Create extends Component
         $exam->marks = $data['marks'];
         $exam->duration = $data['duration'];
         $exam->order = $data['order'];
+        $exam->threshold_marks = $data['threshold_marks'];
         $exam->question_limit = $data['quesLimit'];
 
         $save = $exam->save();

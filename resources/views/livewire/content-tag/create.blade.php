@@ -45,7 +45,7 @@
                                             <select class="form-control" wire:model="intermediaryLevelId">
                                                 <option value="" selected>Select intermediary level</option>
                                                 @foreach($intermediaryLevels as $intermediaryLevel)
-                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id.$intermediaryLevel->title }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('categoryId')
@@ -59,7 +59,7 @@
                                             <select class="form-control" wire:model="courseId">
                                                 <option value="" selected>Select Course</option>
                                                 @foreach($courses as $course)
-                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $course->id }}">{{ $course->title }}</option>
+                                                    <option wire:key="{{ $course->slug.$course->id.$course->title }}" value="{{ $course->id }}">{{ $course->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('courseId')
@@ -81,7 +81,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    {{-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseLecture">Lecture <span class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="lectureId">
@@ -94,7 +94,7 @@
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="card-footer">

@@ -49,7 +49,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseLecture">Lecture</label>
                                             <select class="form-control" wire:model="lectureId" disabled>
@@ -60,7 +60,7 @@
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="card-footer">

@@ -906,7 +906,7 @@ class ExamController extends Controller
                     $canAttempt = (new ExamResult())->saveData(['exam_id' => $exam->id, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
                 }
 
-                //Giving access to student if they miss for first time or reload page
+                // serve exam if the student hasn't completed and submitted an exam. Else, serve pending message/exam result.
                 if ( $canAttempt->status == 0 ) {
                     $questions = AptitudeTestMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
 
@@ -919,6 +919,7 @@ class ExamController extends Controller
                         ->where('batch_id', $batch->id)
                         ->with('atQuestion')
                         ->get();
+
                     foreach ($detailsResult as $details) {
                         if ($details->exam_type == Edvanture::CQ) {
                             $number = CQ::where('id', $details->question_id)->select('marks')->first();

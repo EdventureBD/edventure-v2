@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Admin\Course;
 use App\Models\Admin\ContentTag;
 use App\Models\Admin\CourseTopic;
-use App\Models\Admin\CourseLecture;
+// use App\Models\Admin\CourseLecture;
 
 class Edit extends Component
 {
@@ -16,11 +16,11 @@ class Edit extends Component
     public $title;
     public $courseId;
     public $topicId;
-    public $lectureId;
+    // public $lectureId;
 
     public $course;
     public $topic;
-    public $lecture;
+    // public $lecture;
 
     public function updatedTitle()
     {
@@ -33,7 +33,7 @@ class Edit extends Component
         'title' => 'required|string|max:325',
         'courseId' => 'required',
         'topicId' => 'required',
-        'lectureId' => 'required',
+        // 'lectureId' => 'required',
     ];
 
     public function updateContentTag()
@@ -43,7 +43,7 @@ class Edit extends Component
         $content_tag->title = $data['title'];
         $content_tag->course_id = $data['courseId'];
         $content_tag->topic_id = $data['topicId'];
-        $content_tag->lecture_id = $data['lectureId'];
+        // $content_tag->lecture_id = $data['lectureId'];
         $content_tag->status = 1;
 
         $save = $content_tag->save();
@@ -62,11 +62,11 @@ class Edit extends Component
         $this->title = $this->contentTag->title;
         $this->courseId = $this->contentTag->course_id;
         $this->topicId = $this->contentTag->topic_id;
-        $this->lectureId = $this->contentTag->lecture_id;
+        // $this->lectureId = $this->contentTag->lecture_id;
 
         $this->course = Course::where('id', $this->courseId)->first();
         $this->topic = CourseTopic::where('id', $this->topicId)->first();
-        $this->lecture = CourseLecture::where('id', $this->lectureId)->first();
+        // $this->lecture = CourseLecture::where('id', $this->lectureId)->first();
     }
 
     public function render()

@@ -80,22 +80,24 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->get();
 
-        $total_marks = 0;
-        $scored_marks = 0;
+        // calculate percentage marks scored
         foreach($batchTopics as $batchTopic){
             foreach($batchTopic->courseTopic->exams as $exam){
-                if($exam->exam_type == "Aptitude Test"){
-                    $total_marks = 0;
-                    $scored_marks = 0;
-                    $details_results = DetailsResult::where('exam_id', $exam->id)->get();
-                    foreach($details_results as $details_result){
-                        $total_marks += 1;
-                        $scored_marks = $scored_marks + $details_result->gain_marks;
-                    }
-                    $exam->percentage_scored = round((($scored_marks/$total_marks)*100), 2);                    
-                    // dd($exam, $total_marks, $scored_marks);
-                }else{
+                $total_marks = 0;
+                $scored_marks = 0;
+                $details_results = DetailsResult::where('exam_id', $exam->id)->get();
+                foreach($details_results as $details_result){
+                    $total_marks += 1;
+                    $scored_marks = $scored_marks + $details_result->gain_marks;
+                }
+                // to avoid division by zero if no exam result exists
+                if($scored_marks == 0){
+                    $exam->percentage_scored = 0;
+                    $exam->scored_marks = 0;
+                }
+                else{
                     $exam->percentage_scored = round((($scored_marks/$total_marks)*100), 2);
+                    $exam->scored_marks = 0;
                 }
             }
         }
@@ -105,7 +107,7 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd($batch, $course, $batchTopics, $accessedDays);
+        dd($batch, $course, $batchTopics, $accessedDays);
 
         return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
     }

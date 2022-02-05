@@ -9,7 +9,7 @@ use App\Models\Admin\IntermediaryLevel;
 use App\Models\Admin\Course;
 use App\Models\Admin\ContentTag;
 use App\Models\Admin\CourseTopic;
-use App\Models\Admin\CourseLecture;
+// use App\Models\Admin\CourseLecture;
 
 
 class Create extends Component
@@ -23,8 +23,8 @@ class Create extends Component
     public $courseId;
     public $topics;
     public $topicId;
-    public $lectures;
-    public $lectureId;
+    // public $lectures;
+    // public $lectureId;
 
     public function updatedTitle()
     {
@@ -58,21 +58,21 @@ class Create extends Component
             'topicId' => 'required'
         ]);
 
-        $this->lectures = CourseLecture::where('topic_id', $this->topicId)->get();
+        // $this->lectures = CourseLecture::where('topic_id', $this->topicId)->get();
     }
 
-    public function updatedLectureId()
-    {
-        $this->validate([
-            'lectureId' => 'required'
-        ]);
-    }
+    // public function updatedLectureId()
+    // {
+    //     $this->validate([
+    //         'lectureId' => 'required'
+    //     ]);
+    // }
 
     protected $rules = [
         'title' => 'required|string|max:200',
         'courseId' => 'required',
         'topicId' => 'required',
-        'lectureId' => 'required',
+        // 'lectureId' => 'required',
     ];
 
     public function saveBatchLecture()
@@ -83,7 +83,6 @@ class Create extends Component
         $content_tag->slug  =(string) Str::uuid();
         $content_tag->course_id = $data['courseId'];
         $content_tag->topic_id = $data['topicId'];
-        $content_tag->lecture_id = $data['lectureId'];
         $content_tag->status = 1;
 
         $save = $content_tag->save();
@@ -103,7 +102,7 @@ class Create extends Component
         $this->intermediaryLevels = collect();
         $this->courses = collect();
         $this->topics = collect();
-        $this->lectures = collect();
+        // $this->lectures = collect();
     }
 
     public function render()
