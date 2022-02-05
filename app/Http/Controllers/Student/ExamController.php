@@ -917,7 +917,7 @@ class ExamController extends Controller
                     $detailsResult = DetailsResult::where('student_id', auth()->user()->id)
                         ->where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
-                        ->with('question', 'atQuestion')
+                        ->with('atQuestion')
                         ->get();
                     foreach ($detailsResult as $details) {
                         if ($details->exam_type == Edvanture::CQ) {

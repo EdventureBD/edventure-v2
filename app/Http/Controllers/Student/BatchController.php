@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
+use App\Models\Admin\Exam;
 use App\Models\Admin\BatchExam;
 use App\Models\Admin\LiveClass;
 use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
+use App\Models\Student\exam\DetailsResult;
+use App\Models\Student\exam\ExamResult;
 use DateTime;
 
 class BatchController extends Controller
@@ -71,11 +74,31 @@ class BatchController extends Controller
         $course = Course::where('id', $batch->course_id)->first();
 
         $batchTopics = BatchLecture::with(['courseTopic.exams' => function($query){
-            return $query->orderBy('exam_type')->orderBy('order');
+            return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order');
         }, 'courseTopic.exams.course_lectures'])
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->get();
+
+        $total_marks = 0;
+        $scored_marks = 0;
+        foreach($batchTopics as $batchTopic){
+            foreach($batchTopic->courseTopic->exams as $exam){
+                if($exam->exam_type == "Aptitude Test"){
+                    $total_marks = 0;
+                    $scored_marks = 0;
+                    $details_results = DetailsResult::where('exam_id', $exam->id)->get();
+                    foreach($details_results as $details_result){
+                        $total_marks += 1;
+                        $scored_marks = $scored_marks + $details_result->gain_marks;
+                    }
+                    $exam->percentage_scored = round((($scored_marks/$total_marks)*100), 2);                    
+                    // dd($exam, $total_marks, $scored_marks);
+                }else{
+                    $exam->percentage_scored = round((($scored_marks/$total_marks)*100), 2);
+                }
+            }
+        }
 
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
             ->where('batch_id', $batch->id)
