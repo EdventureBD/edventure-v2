@@ -107,6 +107,19 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="title" class="col-form-label">Threshold Marks<span
+                                                    class="must-filled">*</span></label>
+                                            <input type="number" min="0" class="form-control" wire:model="threshold_marks"
+                                                placeholder="Enter Threshold Marks to pass to the next section">
+                                            @error('threshold_marks')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Order <span

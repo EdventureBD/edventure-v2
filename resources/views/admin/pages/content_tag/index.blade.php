@@ -95,7 +95,6 @@
                                         <th>Title</th>
                                         <th>Course</th>
                                         <th>Topic</th>
-                                        <th>Lecture</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -108,7 +107,6 @@
                                             <td>{{ $content_tag->title }}</td>
                                             <td>{{ $content_tag->courseName }}</td>
                                             <td>{{ $content_tag->topicName }}</td>
-                                            <td>{{ $content_tag->courseLectureName }}</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
                                                     id="single-col-{{ $content_tag->id }}"
@@ -175,7 +173,6 @@
                                         <th>Title</th>
                                         <th>Course</th>
                                         <th>Topic</th>
-                                        <th>Lecture</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>

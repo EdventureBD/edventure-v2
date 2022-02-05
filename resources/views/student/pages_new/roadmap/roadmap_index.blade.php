@@ -60,12 +60,12 @@
                                           @if (count($exam->course_lectures))
                                              @foreach ($exam->course_lectures as $course_lecture)
                                                 <li class="font-weight-bold">
-                                                   <a @if($exam->percentage_scored > 80) style="pointer-events: none; cursor: default; color: grey;" @endif href="#"> {{ $course_lecture->title }} </a>
+                                                   <a @if($exam->percentage_scored < 80) style="pointer-events: none; cursor: default; color: grey;" @endif href="#"> {{ $course_lecture->title }} </a>
                                                 </li>
                                              @endforeach
                                           @endif
                                           <li class="font-weight-bold">
-                                             <a @if($exam->exam_type != "Aptitude Test" && $exam->percentage_scored > 80) style="pointer-events: none; cursor: default; color: grey;   " @endif
+                                             <a @if($exam->exam_type != "Aptitude Test" && $exam->percentage_scored < 80) style="pointer-events: none; cursor: default; color: grey;" @endif
                                                 class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
                                                    {{ $exam->title }}
                                              </a>

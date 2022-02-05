@@ -10,6 +10,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Create Exam</h3>
                         </div>
+
                         <!-- /.card-header -->
                         <div class="card-body">
                             <form role="form" wire:submit.prevent="saveExam">
@@ -154,6 +155,19 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="title" class="col-form-label">Threshold Marks<span
+                                                    class="must-filled">*</span></label>
+                                            <input type="number" min="0" class="form-control" wire:model="threshold_marks"
+                                                placeholder="Enter Threshold Marks to pass to the next section">
+                                            @error('threshold_marks')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Order <span
@@ -166,6 +180,10 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @error('aptitude_MCQ_exists')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
