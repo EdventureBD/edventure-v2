@@ -58,34 +58,38 @@
                                  </button>
                                  </div>
                                  <div class="modal-body">
-                                    <h3 class="mt-3">Exams {{$batch->slug}}</h3>
+                                    <h3 class="mt-3">Exams {{$batch->slug}} {{auth()->user()->id}} </h3>
                                     <ol>
+                                       @php $disabled = false; @endphp
                                        @forelse ($batchTopic->courseTopic->exams as $exam)
                                           @if (count($exam->course_lectures))
                                              @foreach ($exam->course_lectures as $course_lecture)
                                                 <li class="font-weight-bold">
-                                                   <a href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}">
+                                                   <a @if ($disabled) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                                   href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}">
                                                       {{ $course_lecture->title }}
                                                    </a>
                                                    {{-- @if($exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
                                                 </li>
+                                                @php if (!$disabled && !$course_lecture->completed) $disabled = true; @endphp
                                              @endforeach
                                           @endif
                                           <li class="font-weight-bold">
                                              {{-- @if($exam->exam_type != "Aptitude Test" && $exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
                                              @if($exam->exam_type == "Aptitude Test")
-                                                <a 
+                                                <a
                                                    {{-- @if($aptitude_test_passed && $exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
                                                    class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
                                                       {{ $exam->title }}
                                                 </a>
                                              @else
-                                                <a 
-                                                   @if($aptitude_test_passed && $exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                                <a
+                                                   @if($disabled || !($exam->test_passed || $exam->lecture_count == 0 || $exam->lecture_count == $exam->completed_lecture_count)) style="pointer-events: none; cursor: default; color: grey;" @endif
                                                    class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
                                                       {{ $exam->title }}
                                                 </a>
                                              @endif
+                                             @php if (!$disabled && !$exam->test_passed) $disabled = true; @endphp
                                           </li>
                                           {{-- @php
                                              if($loop->iteration > 1){
