@@ -81,54 +81,50 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->get();
 
-        // calculate percentage marks scored
+        $topics = [];
         foreach($batchTopics as $batchTopic){
             foreach($batchTopic->courseTopic->exams as $exam){
-                // if($exam->exam_type == "Aptitude Test"){
-                //     // dd($exam);
-                //     $aptitude_test_total_marks = $exam->ques_limit;
-                //     $marks_scored = 
-                // }
                 $scored_marks = 0;
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->get();
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
 
-                if($exam->exam_type == "Aptitude Test"){
+                // if($exam->exam_type == "Aptitude Test"){
+                    // dump($scored_marks, $exam->question_limit);
                     if($scored_marks >= $exam->question_limit){
-                        $aptitude_test_passed = true;
+                        $exam->test_passed = true;
                     }
                     else{
-                        $aptitude_test_passed = false;
+                        $exam->test_passed = false;
                     }
-                }
+                // }
 
                 $lectures_in_this_exam = count($exam->course_lectures);
                 $completed_lecture_count = 0;
                 foreach($exam->course_lectures as $lecture){
                     $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $lecture->id)->count();
                     if($completed){
+                        $lecture->completed = true;
                         $completed_lecture_count++;
-                    }
+                    } else $lecture->completed = false;
+                    // dump($lecture);
                 }
                 $exam->lecture_count = $lectures_in_this_exam;
                 $exam->completed_lecture_count = $completed_lecture_count;
-                // if($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam"){
-                //     $exam_result = ExamResult::where()->first();
-                // }
                 $exam->scored_marks = $scored_marks;
             }
         }
+        // dd(1);
 
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->first();
 
-        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays, $aptitude_test_passed);
+        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays);
 
-        return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'aptitude_test_passed'));
+        return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
     }
 
     // public function batchTests(Batch $batch){
