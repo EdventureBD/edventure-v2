@@ -84,10 +84,24 @@ class BatchController extends Controller
         // calculate percentage marks scored
         foreach($batchTopics as $batchTopic){
             foreach($batchTopic->courseTopic->exams as $exam){
+                // if($exam->exam_type == "Aptitude Test"){
+                //     // dd($exam);
+                //     $aptitude_test_total_marks = $exam->ques_limit;
+                //     $marks_scored = 
+                // }
                 $scored_marks = 0;
-                $details_results = DetailsResult::where('exam_id', $exam->id)->get();
+                $details_results = DetailsResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->get();
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
+                }
+
+                if($exam->exam_type == "Aptitude Test"){
+                    if($scored_marks >= $exam->question_limit){
+                        $aptitude_test_passed = true;
+                    }
+                    else{
+                        $aptitude_test_passed = false;
+                    }
                 }
 
                 $lectures_in_this_exam = count($exam->course_lectures);
@@ -112,9 +126,9 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays);
+        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays, $aptitude_test_passed);
 
-        return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
+        return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'aptitude_test_passed'));
     }
 
     // public function batchTests(Batch $batch){
