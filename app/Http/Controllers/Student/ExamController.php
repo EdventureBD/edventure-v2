@@ -1286,7 +1286,6 @@ class ExamController extends Controller
                 
                 if($cq_exam_result){
                     if($cq_exam_result->checked == 0) {
-                        // dd("Paper Checking Pending");
                         return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
                     }
                     elseif($cq_exam_result->checked == 1) {

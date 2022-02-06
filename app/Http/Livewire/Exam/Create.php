@@ -167,17 +167,18 @@ class Create extends Component
 
     public function saveExam()
     {
-        $aptitude_test = Exam::where('exam_type', 'Aptitude Test')->where('course_id', $this->courseId)->where('topic_id', $this->topicId)->get();
-        
-        if($this->examType == 'Aptitude Test' && $aptitude_test){
-            $this->addError('aptitude_MCQ_exists', 'An aptitude test for this island(i.e course topic) already exists !!');
-            return;
-        }
-            
         if(!$this->special){
             $this->rules['topicId'] = 'required';
         }
         $data = $this->validate();
+
+        $aptitude_test = Exam::where('exam_type', 'Aptitude Test')->where('course_id', $this->courseId)->where('topic_id', $this->topicId)->count();
+        
+        // if test type is aptitude test and an aptitude test already exists
+        if($this->examType == 'Aptitude Test' && $aptitude_test){
+            $this->addError('aptitude_MCQ_exists', 'An aptitude test for this island(i.e course topic) already exists !!');
+            return;
+        }
 
         $exam = new Exam;
         $exam->title = $data['title'];
