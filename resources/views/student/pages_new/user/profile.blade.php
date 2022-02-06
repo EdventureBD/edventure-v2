@@ -50,8 +50,18 @@
             margin-bottom: 5px;
         }
         .category-name {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 0;
+        }
+        .category-name h5{
             margin-left: auto;
             margin-right: auto;
+        }
+        .progress {
+            background: #FA9632;
+            margin-bottom: 0;
+            height: 15px;
         }
         .category-link-icon {
             display: flex;
@@ -62,6 +72,20 @@
 
             background: #FA9632;
             border-radius: 0px 11.041px 11.041px 0px;
+        }
+        .subjects {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 65.96px;
+            background: #6902C5;
+            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
+            border-radius: 12.4444px;
+            margin: 5px auto;
+            padding-left: 15px;
+            padding-right: 15px;
+
         }
         @media screen and (max-width:570px){
             #profile-dash-img{
@@ -134,7 +158,7 @@
                         <div>
                             <h6 class="fw-500">Select Test Category</h6>
                         </div>
-                        <div>
+                        <div id="category-selection-icon">
                             <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
                             <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
                         </div>
@@ -142,9 +166,13 @@
                     {{-- category part --}}
                     <div class="mx-auto category-progress text-white">
                         <div class="category-name">
-                           <h5 class="fw-600">
-                            Medical Admission
-                           </h5>
+                           <div class="d-flex">
+                            <h5 class="fw-600 pl-4">
+                                Medical Admission
+                               </h5>
+                           </div>
+                           <div class="progress">
+                           </div>
                         </div>
                         <div class="category-link-icon">
                             <span class="iconify-inline" data-icon="ei:external-link" data-width="36" data-height="36" data-rotate="90deg" data-flip="horizontal"></span>
@@ -152,9 +180,29 @@
                     </div>
                     {{-- category part ends  --}}
                 </div>
+                {{-- subject selection part --}}
                 <div class="" id="subject-selection">
-
+                    <div class="mx-auto mt-3 d-flex justify-content-between border py-2">
+                        <div>
+                            <h6 class="fw-500">Choose Subject</h6>
+                        </div>
+                        <div id="subject-selection-icon">
+                            <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
+                            <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
+                        </div>
+                    </div>
+                    <div class="mx-auto subjects text-white">
+                           <div class="d-flex">
+                                <h5 class="fw-600">Chemistry</h5>
+                           </div>
+                        <div>
+                            <h5 class="fw-600">
+                                45%
+                            </h5>
+                        </div>
+                    </div>
                 </div>
+                {{-- subject selection part ends --}}
             </div>
             <div id="info-middle-option">
 
