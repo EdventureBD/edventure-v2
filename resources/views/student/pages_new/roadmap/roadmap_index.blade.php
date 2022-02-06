@@ -36,6 +36,10 @@
             <div class="row">
                <div class="col-lg-12">
                   <div class="row">
+                     {{-- @php
+                        $prev_scored_marks = 0;
+                        $prev_threshold_marks = 0;
+                     @endphp --}}
                      @forelse ($batchTopics as $batchTopic)
                         <div class="card col-4 mx-2" data-toggle="modal" data-target="#courseTopicModal-{{ $batchTopic->id }}">
                            <img class="card-img-top" src="https://picsum.photos/seed/{{ rand(1,100) }}/200/200" alt="Card image cap">
@@ -60,16 +64,27 @@
                                           @if (count($exam->course_lectures))
                                              @foreach ($exam->course_lectures as $course_lecture)
                                                 <li class="font-weight-bold">
-                                                   <a @if($exam->percentage_scored < 80) style="pointer-events: none; cursor: default; color: grey;" @endif href="#"> {{ $course_lecture->title }} </a>
+                                                   <a href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}">
+                                                      {{ $course_lecture->title }}
+                                                   </a>
+                                                   {{-- @if($exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
                                                 </li>
                                              @endforeach
                                           @endif
                                           <li class="font-weight-bold">
-                                             <a @if($exam->exam_type != "Aptitude Test" && $exam->percentage_scored < 80) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                             {{-- @if($exam->exam_type != "Aptitude Test" && $exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
+                                             <a 
+                                                @if($exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif
                                                 class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
                                                    {{ $exam->title }}
                                              </a>
                                           </li>
+                                          {{-- @php
+                                             if($loop->iteration > 1){
+                                                $prev_scored_marks = $exam->scored_marks;
+                                                $prev_threshold_marks = $exam->threshold_marks;
+                                             }
+                                          @endphp --}}
                                        @empty
                                           <h1> No Exams have been added to this Island(Course Topic) </h1>
                                        @endforelse

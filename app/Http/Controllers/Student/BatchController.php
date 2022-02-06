@@ -11,6 +11,7 @@ use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
+use App\Models\Admin\CompletedLectures;
 use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\ExamResult;
 use DateTime;
@@ -83,22 +84,26 @@ class BatchController extends Controller
         // calculate percentage marks scored
         foreach($batchTopics as $batchTopic){
             foreach($batchTopic->courseTopic->exams as $exam){
-                $total_marks = 0;
                 $scored_marks = 0;
                 $details_results = DetailsResult::where('exam_id', $exam->id)->get();
                 foreach($details_results as $details_result){
-                    $total_marks += 1;
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
-                // to avoid division by zero if no exam result exists
-                if($scored_marks == 0){
-                    $exam->percentage_scored = 0;
-                    $exam->scored_marks = 0;
+
+                $lectures_in_this_exam = count($exam->course_lectures);
+                $completed_lecture_count = 0;
+                foreach($exam->course_lectures as $lecture){
+                    $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $lecture->id)->count();
+                    if($completed){
+                        $completed_lecture_count++;
+                    }
                 }
-                else{
-                    $exam->percentage_scored = round((($scored_marks/$total_marks)*100), 2);
-                    $exam->scored_marks = 0;
-                }
+                $exam->lecture_count = $lectures_in_this_exam;
+                $exam->completed_lecture_count = $completed_lecture_count;
+                // if($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam"){
+                //     $exam_result = ExamResult::where()->first();
+                // }
+                $exam->scored_marks = $scored_marks;
             }
         }
 
@@ -107,7 +112,7 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        dd($batch, $course, $batchTopics, $accessedDays);
+        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays);
 
         return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
     }
@@ -142,6 +147,16 @@ class BatchController extends Controller
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {
+
+        $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture->id)->count();
+
+        if(!$completed){
+            $completed = new CompletedLectures();
+            $completed->student_id = auth()->user()->id;
+            $completed->lecture_id = $courseLecture->id;
+            $completed->save();
+        }
+
         //setting next lecture & prev lecture
         $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'desc')->first();
         $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
