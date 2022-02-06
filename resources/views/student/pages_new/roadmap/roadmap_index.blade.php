@@ -73,11 +73,19 @@
                                           @endif
                                           <li class="font-weight-bold">
                                              {{-- @if($exam->exam_type != "Aptitude Test" && $exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
-                                             <a 
-                                                @if($exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                                class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
-                                                   {{ $exam->title }}
-                                             </a>
+                                             @if($exam->exam_type == "Aptitude Test")
+                                                <a 
+                                                   {{-- @if($aptitude_test_passed && $exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
+                                                   class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
+                                                      {{ $exam->title }}
+                                                </a>
+                                             @else
+                                                <a 
+                                                   @if($aptitude_test_passed && $exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                                   class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
+                                                      {{ $exam->title }}
+                                                </a>
+                                             @endif
                                           </li>
                                           {{-- @php
                                              if($loop->iteration > 1){
