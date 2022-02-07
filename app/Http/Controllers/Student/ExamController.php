@@ -1463,7 +1463,6 @@ class ExamController extends Controller
                         // $exam->question_limit
                         $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();
                         
-                        
                         if($mcq_questions->count() < $exam->question_limit || $cq_questions->count() < $exam->question_limit_2){
                             return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                         }
