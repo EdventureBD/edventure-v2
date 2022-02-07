@@ -115,13 +115,13 @@
                        <div>
                             <h5 class="fw-600">MCQ</h5>
                        </div>
-                       <div class="row text-black">
-                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton D Costa</p>
-                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton D Generio la</p>
-                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
-                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
-                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
-                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                       <div class=" text-black">
+                           <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton D Costa</p>
+                           <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton D Generio la</p>
+                           <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                           <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                           <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                           <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
                        </div>
                        <div>
                            <a href="#" style="text-decoration: none; color: black; font-weight:600;">
@@ -134,13 +134,13 @@
                         <div>
                             <h5 class="fw-600">CQ</h5>
                        </div>
-                       <div class="row text-black">
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                       <div class=" text-black">
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
                     </div>
                     <div>
                         <a href="#" style="text-decoration: none; color: black; font-weight:600;">
@@ -162,7 +162,7 @@
                         <h5 class="fw-600">MCQ</h5>
                      </div>
                      <div class="text-black">
-                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunkddjk jkddhdjk ffffkjd</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
                         <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
                         <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
                         <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
@@ -178,13 +178,13 @@
                      <div class="strength-weakness-cq-mcq" id="">
                          <h5 class="fw-600">CQ</h5>
                      </div>
-                     <div class="row text-black">
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
-                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                     <div class="text-black">
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
                     </div>
                     <div>
                         <a href="#" style="text-decoration: none; color: black; font-weight:600;">
