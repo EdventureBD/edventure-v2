@@ -49,11 +49,10 @@
                 <td>{{ $category->name }}</td>
                 <td>{{ date('F j, Y, g:i a', strtotime($category->created_at)) }}</td>
                 <td>
-                    <a class="mr-1"
+                    <a class="mr-1 btn btn-outline-danger btn-sm"
                        href="#deleteCategory{{ $category->id }}"
                        data-toggle="modal" title="Delete {{ $category->name }}">
-                        <button class="btn btn-danger"><i
-                                class="far fa-trash-alt"></i></button>
+                        <i class="far fa-trash-alt"></i>
                     </a>
                     <div class="modal fade"
                          id="deleteCategory{{ $category->id }}">

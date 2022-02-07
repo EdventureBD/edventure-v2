@@ -19,7 +19,7 @@ class ExamTagsController extends Controller
      */
     public function index()
     {
-        $exam_topics = ExamTopic::query()->get();
+        $exam_topics = ExamTopic::query()->with('examCategory')->get();
         $exam_tags = ExamTag::query()->with('examTopic')->paginate(5);
         return view('admin.pages.model_exam.exam_tag.index', compact('exam_topics','exam_tags'));
     }

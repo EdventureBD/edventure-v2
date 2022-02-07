@@ -16,7 +16,7 @@
                     <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}">
                     <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
-                @endauth     
+                @endauth
             @endif
 
             <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
@@ -24,6 +24,11 @@
                                          {{ request()->is('batch/*') ? 'active' : '' }}"
             >
             <a class="nav-link text-purple-half" href="{{route('course')}}">EXAMS</a>
+            </li>
+
+            <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
+                <a class="nav-link text-purple-half"
+                   href="{{route('model.exam')}}">MODEL EXAMS</a>
             </li>
 
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">
@@ -59,10 +64,10 @@
                                 <a class="dropdown-item" href="{{route('profile')}}">My Dashboard</a>
                                 @endif
                                 <a class="dropdown-item" href="#">All courses</a>
-                                
+
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); 
+                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                                                                             this.closest('form').submit();">
                                         Log out
                                     </a>

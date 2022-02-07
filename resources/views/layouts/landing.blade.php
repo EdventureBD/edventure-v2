@@ -20,21 +20,21 @@
     <link rel="icon" type="image/png" href="{{ asset('img/landing/fav.png') }}">
         <!-- Font Awesome Icons -->
         <link type="text/css" href="{{ asset('student/public/css/fontawesome.css') }}" rel="stylesheet">
-        
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
         @include('partials.facebook_pixel')
     </head>
     <body>
-                
+
         <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=842032013135226&autoLogAppEvents=1" 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=842032013135226&autoLogAppEvents=1"
         nonce="2W2mmhKE"></script>
 
 
         <script>
-            if (location.protocol !== 'https:' && location.hostname !== '127.0.0.1') {  
+            if (location.protocol !== 'https:' && location.hostname !== '127.0.0.1') {
                 location.replace(`https:${location.href.substring(location.protocol.length)}`);
             }
         </script>

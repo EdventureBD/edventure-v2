@@ -5,6 +5,28 @@
             $('#negative_marking_value').attr('disabled', true);
         })
 
+
+        function visibilityUpdate(examId) {
+            url = window.location.origin +'/admin/model-exam/visibility/'+examId;
+            $.ajax({
+                url: url,
+                type:"GET",
+                success:function(response){
+                    if(response == 'visible') {
+                        alert('Exam is now Visible')
+                    } else {
+                        alert('Exam is now Invisible')
+                    }
+
+                },
+            });
+        }
+
+        $("#question_limit").on('change keyup', function() {
+            $("#per_question_marks").val(1)
+            $("#total_exam_marks").val($("#per_question_marks").val() * $("#question_limit").val())
+        });
+
         $("#checkBoxValue").on('change', function() {
             if ($(this).is(':checked')) {
                 $(this).attr('value', '1');

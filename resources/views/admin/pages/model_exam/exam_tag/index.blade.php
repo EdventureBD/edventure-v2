@@ -29,7 +29,7 @@
                             style="width: 100%; margin-top: -8px !important;">
                         @foreach ($exam_topics as $topic)
                             <option value=""></option>
-                            <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+                            <option value="{{ $topic->id }}">{{ $topic->name.' ('.$topic->examCategory->name.')' }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -59,6 +59,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tags</th>
                 <th scope="col">Topic</th>
+                <th scope="col">Category</th>
                 <th scope="col">Created at</th>
                 <th scope="col">Action</th>
             </tr>
@@ -70,22 +71,21 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $tag->name }}</td>
                 <td>{{ $tag->examTopic->name }}</td>
+                <td>{{ $tag->examTopic->examCategory->name }}</td>
                 <td>{{ date('F j, Y, g:i a', strtotime($tag->created_at)) }}</td>
                 <td>
-                    <a class="mr-1"
+                    <a class="mr-1 btn btn-outline-primary btn-sm"
                        onclick="fetchData({{ $tag->id }});"
                        href="#editTag{{ $tag->id }}"
                        data-toggle="modal"
                        title="Edit {{ $tag->name }}">
-                        <button class="btn btn-primary"><i
-                                class="far fa-edit"></i></button>
+                        <i class="far fa-edit"></i>
                     </a>
-                    <a class="mr-1"
+                    <a class="mr-1 btn btn-outline-danger btn-sm"
                        href="#deleteTag{{ $tag->id }}"
                        data-toggle="modal"
                        title="Delete {{ $tag->name }}">
-                        <button class="btn btn-danger"><i
-                                class="far fa-trash-alt"></i></button>
+                        <i class="far fa-trash-alt"></i>
                     </a>
                     <div class="modal fade"
                          id="deleteTag{{ $tag->id }}">
@@ -147,7 +147,7 @@
                                                             style="width: 100%;">
                                                         @foreach ($exam_topics as $topic)
                                                             <option value=""></option>
-                                                            <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+                                                            <option value="{{ $topic->id }}">{{ $topic->name.' ('.$topic->examCategory->name.')' }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

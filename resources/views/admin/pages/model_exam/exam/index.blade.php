@@ -90,7 +90,9 @@
                 <td>{{ \App\Enum\ExamType::Exam[$exam->exam_type] }}</td>
                 <td>{{ $exam->duration }}</td>
                 <td>{{ $exam->negative_marking_value }}</td>
-                <td>{{ $exam->visibility }}</td>
+                <td>
+                    <input onclick="visibilityUpdate({{$exam->id}})" {{ $exam->visibility == 1 ? 'checked' : '' }} type="checkbox">
+                </td>
                 <td>{{ $exam->per_question_marks }}</td>
                 <td>{{ $exam->total_exam_marks }}</td>
                 <td>
@@ -118,7 +120,7 @@
                 <td>{{ $exam->exam_price ?? 0 }}</td>
                 <td class="text-sm">{{ date('F jS, Y', strtotime($exam->created_at)) }}</td>
                 <td>
-                    <a class="btn btn-outline-primary btn-sm" href="">
+                    <a class="btn btn-outline-primary btn-sm" href="{{route('model.exam.question.index',$exam->id)}}">
                         <i class="far fa-copy"></i>
                     </a>
                 </td>

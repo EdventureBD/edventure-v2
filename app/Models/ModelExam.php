@@ -27,6 +27,12 @@ class ModelExam extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $appends = array('question_count');
+
+    public function getQuestionCountAttribute()
+    {
+        return $this->mcqQuestions()->count();
+    }
 
     public function category()
     {
@@ -36,5 +42,10 @@ class ModelExam extends Model
     public function topic()
     {
         return $this->belongsTo(ExamTopic::class,'exam_topic_id','id');
+    }
+
+    public function mcqQuestions()
+    {
+        return $this->hasMany(McqQuestion::class,'model_exam_id','id');
     }
 }

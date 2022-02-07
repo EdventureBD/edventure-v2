@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\ModelExamController;
 use App\Models\User;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Course;
@@ -80,7 +81,9 @@ Route::get('/terms-condition', function(){
 Route::get('/contact-us', [ContactUsController::class,'index'])->name('contact_us');
 Route::post('/contact-us', [ContactUsController::class,'store'])->name('store.contact.us');
 
-
+Route::get('/model-exam', [ModelExamController::class,'getModelExams'])->name('model.exam')->middleware('auth');
+Route::get('/model-exam/{id}', [ModelExamController::class,'getMcqExamPaper'])->name('model.exam.paper.mcq')->middleware('auth');
+Route::post('/model-exam/submit/{id}', [ModelExamController::class,'submitMcq'])->name('model.exam.mcq.submit')->middleware('auth');
 
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
 Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');

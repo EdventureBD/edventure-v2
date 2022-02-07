@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamTagsController;
 use App\Http\Controllers\ExamTopicController;
+use App\Http\Controllers\McqQuestionController;
 use App\Http\Controllers\ModelExamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
@@ -215,10 +216,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     //Model Exam
     Route::get('/model-exam',[ModelExamController::class,'index'])->name('model.exam.index');
+    Route::get('/model-exam/visibility/{id}',[ModelExamController::class,'updateExamVisibility'])->name('model.exam.visibility');
     Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
     Route::get('/model-exam/downloadPdf/{id}',[ModelExamController::class,'downloadSolutionPdf'])->name('model.exam.pdf');
     Route::post('/model-exam',[ModelExamController::class,'store'])->name('model.exam.store');
     Route::delete('/model-exam/{id}',[ModelExamController::class,'destroy'])->name('model.exam.destroy');
+
+    //Model Exam Question
+    Route::get('/model-exam/question/{id}',[McqQuestionController::class,'index'])->name('model.exam.question.index');
+    Route::post('/model-exam/question/{id}',[McqQuestionController::class,'store'])->name('model.exam.question.store');
+    Route::delete('/model-exam/question/{slug}',[McqQuestionController::class,'destroy'])->name('model.exam.question.destroy');
+
 
 });
 

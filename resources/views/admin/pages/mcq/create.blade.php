@@ -10,8 +10,7 @@
     <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
 
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
+
 
 
     <script>
@@ -231,8 +230,6 @@
     <!-- Bootstrap4 Duallistbox -->
     <script src="{{ asset('admin/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
 
-    <!-- Summernote -->
-    <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script>
         $(function() {
             // Summernote

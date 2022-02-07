@@ -72,20 +72,18 @@
                 <td>{{ $topic->examCategory->name }}</td>
                 <td>{{ date('F j, Y, g:i a', strtotime($topic->created_at)) }}</td>
                 <td>
-                    <a class="mr-1"
+                    <a class="mr-1 btn btn-outline-primary btn-sm"
                        onclick="fetchData({{ $topic->id }});"
                        href="#editCategory{{ $topic->id }}"
                        data-toggle="modal"
                        title="Edit {{ $topic->name }}">
-                        <button class="btn btn-primary"><i
-                                class="far fa-edit"></i></button>
+                        <i class="far fa-edit"></i>
                     </a>
-                    <a class="mr-1"
+                    <a class="mr-1 btn btn-outline-danger btn-sm"
                        href="#deleteCategory{{ $topic->id }}"
                        data-toggle="modal"
                        title="Delete {{ $topic->name }}">
-                        <button class="btn btn-danger"><i
-                                class="far fa-trash-alt"></i></button>
+                        <i class="far fa-trash-alt"></i>
                     </a>
                     <div class="modal fade"
                          id="deleteCategory{{ $topic->id }}">

@@ -8,7 +8,7 @@ interface ExamType {
     const BQ = 3;
 
     const Exam = [
-        '1' => 'MCS',
+        '1' => 'MCQ',
         '2' => 'CS',
         '3' => 'BQ'
     ];

@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateModelExam;
+use App\Http\Requests\CreateModelExamRequest;
 use App\Models\ExamCategory;
 use App\Models\ExamTopic;
+use App\Models\McqMarkingDetail;
+use App\Models\McqQuestion;
+use App\Models\McqTotalResult;
 use App\Models\ModelExam;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class ModelExamController extends Controller
 {
+    /**
+     * Load index page to view and create new model exam
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $exam_categories = ExamCategory::get();
@@ -20,7 +31,12 @@ class ModelExamController extends Controller
         return view('admin.pages.model_exam.exam.index', compact('exam_categories','exams'));
     }
 
-    public function store(CreateModelExam $request)
+    /**
+     * Store New model exam data
+     * @param CreateModelExamRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(CreateModelExamRequest $request)
     {
         $inputs = $request->validated();
         if($request->hasFile('solution_pdf')) {
@@ -37,6 +53,11 @@ class ModelExamController extends Controller
 
     }
 
+    /**
+     * Delete Specific model exam
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         ModelExam::query()->find($id)->delete();
@@ -44,6 +65,11 @@ class ModelExamController extends Controller
         return redirect()->back()->with('status','Exam Deleted Successfully');
     }
 
+    /**
+     * Get topic list by category id
+     * @param $categoryId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getTopicsByCategory($categoryId)
     {
         $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->get();
@@ -51,11 +77,155 @@ class ModelExamController extends Controller
         return response()->json($topics);
     }
 
+    /**
+     * Update model exam visibility status by ajax request
+     * @param $examId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateExamVisibility($examId)
+    {
+        $exam  = ModelExam::query()->find($examId);
+
+        if($exam->visibility == 1) {
+           $exam->visibility = 0;
+           $exam->save();
+           $flag = 'hide';
+        } else {
+            $exam->visibility = 1;
+            $exam->save();
+            $flag = 'visible';
+        }
+
+        return response()->json($flag);
+    }
+
+    /**
+     * Download solution pdf of specific exam uploaded by admin
+     * @param $examId
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function downloadSolutionPdf($examId)
     {
         $model_exam = ModelExam::query()->find($examId);
 
         $file = public_path().'/storage/solutionPdf/'.$model_exam->solution_pdf;
         return Response()->download($file);
+    }
+
+    /**
+     * Load model exam landing page to show available exams to student
+     * Same path is used to load exam categories, exam topics.
+     * Same path is used to load exams according to selected category and topic.
+     * @return Application|Factory|View
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function getModelExams()
+    {
+        $exam_categories = ExamCategory::query()->get();
+        $exam_topics = [];
+        $exams = [];
+
+        if(!request()->has('c') && !request()->has('t')) {
+            Cache::forget('exam_topics');
+            Cache::forget('exam_category');
+            Cache::forget('exam_topic');
+        }
+        if(request()->has('c')) {
+            $exam_topics = ExamTopic::query()
+                                    ->whereHas('modelExam', function ($q) {
+                                        $q->has('mcqQuestions')
+                                            ->where('visibility',1);
+                                    })
+                                    ->where('exam_category_id', request()->get('c'))->get();
+            Cache::put('exam_topics',$exam_topics);
+            Cache::put('exam_category', request()->get('c'));
+        }
+
+        if(request()->has('t')) {
+            $exams = ModelExam::query()
+                                ->where('exam_topic_id', request()->get('t'))
+                                ->where('exam_category_id', Cache::get('exam_category'))
+                                ->where('visibility',1)
+                                ->has('mcqQuestions')
+                                ->get();
+            $exam_topics = Cache::get('exam_topics');
+            Cache::put('exam_topic', request()->get('t'));
+        }
+
+        return view('student.pages_new.model-exam.index',compact('exam_categories','exam_topics','exams'));
+    }
+
+
+    public function getMcqExamPaper($examId)
+    {
+        $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->first();
+
+        if(auth() && $result = $this->examAttended($examId, auth()->user()->id)) {
+            $details = [];
+            $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
+                                            ->where('model_exam_id', $examId)
+                                            ->where('student_id',auth()->user()->id)
+                                            ->get();
+
+            return view('student.pages_new.model-exam.mcq-result',compact('result','exam_answer'));
+        }
+        return view('student.pages_new.model-exam.exam-paper', compact('exam'));
+    }
+
+    public function submitMcq(Request $request, $examId)
+    {
+
+        $inputs = $request->validate([
+            'mcq' => 'required'
+        ]);
+        $student_id = auth()->user()->id;
+
+        if ($this->examAttended($examId, $student_id)) {
+            return redirect()->back()->withErrors('You have already attempted on this exam!!');
+        }
+
+        $mcq = $inputs['mcq'];
+
+        $detail_result = [];
+        $total_marks = 0;
+        $exam = ModelExam::query()->find($examId);
+
+        foreach ($mcq as $key => $value) {
+            array_push($detail_result,[
+                'model_exam_id' => (int) $examId,
+                'mcq_question_id' => $key,
+                'student_id' => $student_id,
+                'mcq_ans' => (int) $value,
+                'gain_marks' =>  McqQuestion::query()->find($key)->answer == $value ? 1 : 0,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        foreach ($detail_result as $key => $value) {
+            $total_marks +=  $value['gain_marks'];
+        }
+
+        $total_result = [
+            'model_exam_id' => (int) $examId,
+            'student_id' => $student_id,
+            'exam_end_time' => 0,
+            'total_marks' => $total_marks,
+            'duration' => $exam->duration * 60
+        ];
+
+        McqMarkingDetail::query()->insert($detail_result);
+        McqTotalResult::query()->create($total_result);
+
+        return view('student.pages_new.batch.exam.examSubmissionGreeting');
+    }
+
+    private function examAttended($examId, $studentId)
+    {
+        return McqTotalResult::query()
+                            ->where('model_exam_id',$examId)
+                            ->where('student_id',$studentId)
+                            ->first();
     }
 }
