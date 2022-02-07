@@ -98,7 +98,6 @@ class BatchController extends Controller
                         }
                     }
                     elseif($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam"){
-                        $scored_marks = $exam->question_limit + ($exam->question_limit_2 * 10);
                         if($scored_marks >= $exam->threshold_marks){
                             $exam->test_passed = true;
                         }
