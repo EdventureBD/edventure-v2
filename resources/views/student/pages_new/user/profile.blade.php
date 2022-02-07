@@ -53,7 +53,7 @@
                     </p>
                 </div>
                 <div class="" id="category-selection">
-                    <div class="mx-auto mt-3 d-flex justify-content-between border py-2">
+                    <div class="mx-auto mt-3 d-flex justify-content-between border py-2" type="button" data-toggle="collapse" data-target="#categories" aria-expanded="false" aria-controls="collapseExample">
                         <div>
                             <h6 class="fw-500" id="category-selection-text">Select Test Category</h6>
                         </div>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     {{-- category part --}}
-                    <div class="mx-auto category-progress text-white">
+                    <div class="mx-auto category-progress collapse text-white" id="categories">
                         <div class="category-name">
                            <div class="d-flex">
                             <h5 class="fw-600 pl-4">
@@ -81,7 +81,7 @@
                 </div>
                 {{-- subject selection part --}}
                 <div class="" id="subject-selection">
-                    <div class="mx-auto mt-3 d-flex justify-content-between border py-2">
+                    <div class="mx-auto mt-3 d-flex justify-content-between border py-2" type="button" data-toggle="collapse" data-target="#subjectschoicing" aria-expanded="false" aria-controls="collapseExample">
                         <div>
                             <h6 class="fw-500" id="subject-selection-text">Choose Subject</h6>
                         </div>
@@ -90,7 +90,7 @@
                             <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
                         </div>
                     </div>
-                    <div class="mx-auto subjects text-white">
+                    <div class="mx-auto subjects collapse text-white" id="subjectschoicing">
                            <div class="d-flex">
                                 <h5 class="fw-600">Chemistry</h5>
                            </div>
