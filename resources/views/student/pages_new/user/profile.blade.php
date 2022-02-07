@@ -210,25 +210,19 @@
     {{-- frontend script part --}}
     <script>
          const courseButtonAction = () => {
-            let categorySelectionText = document.getElementById("category-selection-text");
             categorySelectionText.innerText = "Select Course";
-
-            let subjectSelectionText = document.getElementById("subject-selection-text");
             subjectSelectionText.innerText = "Choose Subject";
-
             courseOption.setAttribute("style", "background: #FA9632 ; color: white;");
             modelTestOption.setAttribute("style", "background: white ; color: black;");
         }
          const modelTestButtonAction = () => {
-            let categorySelectionText = document.getElementById("category-selection-text");
             categorySelectionText.innerText = "Select Test Category";
-
-            let subjectSelectionText = document.getElementById("subject-selection-text");
             subjectSelectionText.innerText = "Choose Subject";
-
             modelTestOption.setAttribute("style", "background: #FA9632 ; color: white;");
             courseOption.setAttribute("style", "background: white ; color: black;");
         }
+        let categorySelectionText = document.getElementById("category-selection-text");
+        let subjectSelectionText = document.getElementById("subject-selection-text");
         let courseOption = document.getElementById("course-option");
         courseOption.addEventListener("click",courseButtonAction);
 
