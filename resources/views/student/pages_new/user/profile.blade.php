@@ -43,7 +43,6 @@
                 </div>
             </div>
         </div>
-        {{-- row-cols-md-3 row-cols-sm-1  --}}
         <div id="info-detail" class="row mx-auto my-5">
             <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">
                 <div class="d-flex flex-column justify-content-center mx-auto border px-5 my-3" id="journey-cart">
@@ -195,6 +194,14 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            <div>
+                <span class="iconify mr-5" data-icon="fa-solid:angle-left"></span>
+            </div>
+           <div>
+                <span class="iconify ml-5" data-icon="fa-solid:angle-right"></span>
+           </div>
+        </div>
     </div>
     {{-- icon's script part linked --}}
     <script src="/js/new-dashboard/iconify-icons.js"></script>
@@ -202,7 +209,33 @@
 
     {{-- frontend script part --}}
     <script>
-        
+         const courseButtonAction = () => {
+            let categorySelectionText = document.getElementById("category-selection-text");
+            categorySelectionText.innerText = "Select Course";
+
+            let subjectSelectionText = document.getElementById("subject-selection-text");
+            subjectSelectionText.innerText = "Choose Subject";
+
+            courseOption.setAttribute("style", "background: #FA9632 ; color: white;");
+            modelTestOption.setAttribute("style", "background: white ; color: black;");
+        }
+         const modelTestButtonAction = () => {
+            let categorySelectionText = document.getElementById("category-selection-text");
+            categorySelectionText.innerText = "Select Test Category";
+
+            let subjectSelectionText = document.getElementById("subject-selection-text");
+            subjectSelectionText.innerText = "Choose Subject";
+
+            modelTestOption.setAttribute("style", "background: #FA9632 ; color: white;");
+            courseOption.setAttribute("style", "background: white ; color: black;");
+        }
+        let courseOption = document.getElementById("course-option");
+        courseOption.addEventListener("click",courseButtonAction);
+
+        let modelTestOption = document.getElementById("model-test-option");
+        modelTestOption.addEventListener("click",modelTestButtonAction);
+
+       
     </script>
     {{-- frontend script part ends --}}
 </x-landing-layout>
