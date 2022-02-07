@@ -81,7 +81,7 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->get();
 
-        $topics = [];
+        // $topics = [];
         foreach($batchTopics as $batchTopic){
             foreach($batchTopic->courseTopic->exams as $exam){
                 $scored_marks = 0;
@@ -107,15 +107,15 @@ class BatchController extends Controller
                     if($completed){
                         $lecture->completed = true;
                         $completed_lecture_count++;
-                    } else $lecture->completed = false;
-                    // dump($lecture);
+                    }
+                    else
+                        $lecture->completed = false;
                 }
                 $exam->lecture_count = $lectures_in_this_exam;
                 $exam->completed_lecture_count = $completed_lecture_count;
                 $exam->scored_marks = $scored_marks;
             }
         }
-        // dd(1);
 
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
             ->where('batch_id', $batch->id)

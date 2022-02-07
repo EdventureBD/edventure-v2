@@ -58,7 +58,7 @@
                                  </button>
                                  </div>
                                  <div class="modal-body">
-                                    <h3 class="mt-3">Exams {{$batch->slug}} {{auth()->user()->id}} </h3>
+                                    <h3 class="mt-3">Exams {{$batch->title}} {{auth()->user()->id}} </h3>
                                     <ol>
                                        @php $disabled = false; @endphp
                                        @forelse ($batchTopic->courseTopic->exams as $exam)
