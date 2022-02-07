@@ -26,7 +26,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mt-5 ml-4 {{ $showSpecialExam ? '' : 'd-none' }}">
+                                    {{-- <div class="col-md-4 mt-5 ml-4 {{ $showSpecialExam ? '' : 'd-none' }}">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" type="checkbox" id="customCheckbox1"
                                                 wire:model="special" value="1">
@@ -34,7 +34,7 @@
                                                 Special Exam
                                             </label>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-{{ $showAssignment ? '3' : '4' }}">
@@ -119,15 +119,30 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="title" class="col-form-label">Question Limit <span
+                                            <label for="title" class="col-form-label"> @if($showQuestionLimit2) MCQ Question Limit @else Question Limit @endif <span
                                                     class="must-filled">*</span></label>
-                                            <input type="number" min="1" class="form-control" wire:model="quesLimit"
+                                            <input type="number" @if($showQuestionLimit2) min="0" @else min="1" @endif class="form-control" wire:model="quesLimit"
                                                 placeholder="Enter question limit" @if (!$showQuestionLimit) disabled @endif>
                                             @error('quesLimit')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    @if($showQuestionLimit2)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="title" class="col-form-label"> CQ Question Limit <span
+                                                        class="must-filled">*</span></label>
+                                                <input type="number" @if($showQuestionLimit2) min="0" @else min="1" @endif class="form-control" wire:model="quesLimit_2"
+                                                    placeholder="Enter question limit">
+                                                @error('quesLimit_2')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Marks <span

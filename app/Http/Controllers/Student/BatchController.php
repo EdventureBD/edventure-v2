@@ -89,16 +89,12 @@ class BatchController extends Controller
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
-
-                // if($exam->exam_type == "Aptitude Test"){
-                    // dump($scored_marks, $exam->question_limit);
                     if($scored_marks >= $exam->question_limit){
                         $exam->test_passed = true;
                     }
                     else{
                         $exam->test_passed = false;
                     }
-                // }
 
                 $lectures_in_this_exam = count($exam->course_lectures);
                 $completed_lecture_count = 0;
