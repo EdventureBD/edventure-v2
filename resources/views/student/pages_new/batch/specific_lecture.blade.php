@@ -5,11 +5,21 @@
                 <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-angle-double-left"></i> Back to course</a>
                 <div class="d-flex justify-content-between">
                     <div>
-                @if(!empty($prev_lecture_link))<a href="{{$prev_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif
+                        @if(!empty($prev_lecture_link))<a href="{{$prev_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif
                     </div>
-                <div>
-                @if(!empty($next_lecture_link))<a href="{{$next_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20">Next Lecture <i class="fas fa-angle-right"></i></a>@endif
+                    <div>
+                        @if(!empty($next_lecture_link))<a href="{{$next_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20">Next Lecture<i class="fas fa-angle-right"></i></a>@endif
+                    </div>
                 </div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="m-4">
+                            <label class="container"> Please click this checkbox after finishing the lecture to proceed to the next parts
+                                <input type="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row justify-content-center my-3">
                     <div class="col-lg-12">
@@ -140,4 +150,73 @@
     }, 1000);
 
 </script>
+
+<style>
+    .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+    background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+    display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+</style>
 </x-landing-layout>
