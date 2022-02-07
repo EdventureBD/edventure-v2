@@ -1,158 +1,8 @@
 <x-landing-layout headerBg="white">
-    <style>
-        #profile-dash-img{
-            width: 165px;
-            display:flex;
-            justify-content: center;
-            box-shadow: 0.821333px 0.821333px 4.10667px 1.64267px rgba(0, 0, 0, 0.1);
-            border-radius: 82.1333px;
-        }
-        #course-option{
-            box-shadow: 1.69017px 1.69017px 8.45083px 3.38033px rgba(0, 0, 0, 0.1);
-            border-radius: 8.45083px 0px 0px 8.45083px;
-        }
-        #model-test-option {
-            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
-            border-radius: 0px 12.4444px 12.4444px 0px;
-        }
-        .horizontal-line{
-            width: 100%;
-        }
-        #course-option:hover {
-            background: #FA9632;
-            color: white;
-        }
-        #model-test-option:hover {
-            background: #FA9632;
-            color: white;
-        }
-        #journey-cart {
-            color: #6802C1;
-            width: 100%;
-            height: 134px;
-            background: #FFFFFF;
-            box-shadow: 1.91673px 1.91673px 9.58365px 3.83346px rgba(0, 0, 0, 0.1);
-            border-radius: 9.58365px;
-        }
-        .category-selection{
-            overflow-y: scroll;
-        }
-        .category-progress {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            height: 65.96px;
-            background: #6902C5;
-            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
-            border-radius: 12.4444px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        .category-name {
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 0;
-        }
-        .category-name h5{
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .progress {
-            background: #FA9632;
-            margin-bottom: 0;
-            height: 15px;
-        }
-        .category-link-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 20%;
-            height: 65.96px;
+    {{-- custom css linked --}}
+    <link rel="stylesheet" href="/css/new-dashboard.css">
+    {{-- custom css linked --}}
 
-            background: #FA9632;
-            border-radius: 0px 11.041px 11.041px 0px;
-        }
-        .subjects {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            height: 65.96px;
-            background: #6902C5;
-            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
-            border-radius: 12.4444px;
-            margin: 5px auto;
-            padding-left: 15px;
-            padding-right: 15px;
-
-        }
-        #info-middle-option {
-            width: 100%;
-            height: 449.24px;
-            background: #FFFFFF;
-            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
-            border-radius: 12.4444px;
-        }
-        #info-right-option {
-            width: 100%;
-            height: 449.24px;
-            background: #FFFFFF;
-            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
-            border-radius: 12.4444px;
-        }
-        #strength-title {
-            background: #67B032;
-            border: 1.96px solid #67B032;
-        }
-        #weakness-title {
-            background: #C50902;
-            border: 1.96px solid #C50902;
-        }
-        .strength-weakness-title-common {
-            display: flex;
-            justify-content: space-between;
-            box-sizing: border-box;
-            border-radius: 9.8px 9.8px 0px 0px;
-            font-family: Inter;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 34.8444px;
-            line-height: 42px;
-            letter-spacing: 0.03em;
-            color: #FFFFFF;
-            width: 100%;
-            height: 68.44px;
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-        .strength-weakness-cq-mcq-data {
-            width: 100%;
-            height: 31.11px;
-            background: rgba(0, 0, 0, 0.13);
-            border-radius: 12.4444px;
-            font-weight: 600;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        @media screen and (max-width:570px){
-            #profile-dash-img{
-                width: 78.5px;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 15px;
-            }
-            #info-part{
-                margin-left: 0px;
-            }
-        }
-        @media screen and (min-width: 992px) {
-            #info-part {
-                margin-left: 55px;
-            }
-        }
-    </style>
     <div id="parent-div" class="mt-5 pt-5 p-5">
         <div id="info-part" class="d-md-flex justify-content-between align-items-middle">
             <div class="d-md-flex justify-content-start mr-auto">
@@ -206,7 +56,7 @@
                 <div class="" id="category-selection">
                     <div class="mx-auto mt-3 d-flex justify-content-between border py-2">
                         <div>
-                            <h6 class="fw-500">Select Test Category</h6>
+                            <h6 class="fw-500" id="category-selection-text">Select Test Category</h6>
                         </div>
                         <div id="category-selection-icon">
                             <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
@@ -234,7 +84,7 @@
                 <div class="" id="subject-selection">
                     <div class="mx-auto mt-3 d-flex justify-content-between border py-2">
                         <div>
-                            <h6 class="fw-500">Choose Subject</h6>
+                            <h6 class="fw-500" id="subject-selection-text">Choose Subject</h6>
                         </div>
                         <div id="subject-selection-icon">
                             <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
@@ -266,13 +116,13 @@
                        <div>
                             <h5 class="fw-600">MCQ</h5>
                        </div>
-                       <div class="row">
-                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
-                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
-                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
-                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
-                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
-                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                       <div class="row text-black">
+                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton D Costa</p>
+                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton D Generio la</p>
+                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
+                           <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Newton</p>
                        </div>
                        <div>
                            <a href="#" style="text-decoration: none; color: black; font-weight:600;">
@@ -285,13 +135,13 @@
                         <div>
                             <h5 class="fw-600">CQ</h5>
                        </div>
-                       <div class="row">
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                       <div class="row text-black">
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p>
                     </div>
                     <div>
                         <a href="#" style="text-decoration: none; color: black; font-weight:600;">
@@ -312,29 +162,47 @@
                     <div class="strength-weakness-cq-mcq" id="">
                         <h5 class="fw-600">MCQ</h5>
                      </div>
-                     <div class="row">
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
+                     <div class="text-black">
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunkddjk jkddhdjk ffffkjd</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
+                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p>
+                    </div>
+                    <div>
+                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                            See More
+                        </a>
                     </div>
                      <div class="w-100 h-0 border border-gray my-3 py-0 px-5" id="horizontal-line"></div>
                      <div class="strength-weakness-cq-mcq" id="">
                          <h5 class="fw-600">CQ</h5>
                      </div>
-                     <div class="row">
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
-                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
+                     <div class="row text-black">
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                        <p class="col-3 mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p>
+                    </div>
+                    <div>
+                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                            See More
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {{-- icon's script part linked --}}
     <script src="/js/new-dashboard/iconify-icons.js"></script>
+    {{-- icon's script part linked --}}
+
+    {{-- frontend script part --}}
+    <script>
+        
+    </script>
+    {{-- frontend script part ends --}}
 </x-landing-layout>
