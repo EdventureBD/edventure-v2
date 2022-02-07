@@ -48,6 +48,7 @@
                         $prev_scored_marks = 0;
                         $prev_threshold_marks = 0;
                      @endphp --}}
+                     @php $disabled = false; @endphp
                      @forelse ($batchTopics as $batchTopic)
                         <div class="card col-4 mx-2" data-toggle="modal" data-target="#courseTopicModal-{{ $batchTopic->id }}">
                            <img class="card-img-top" src="https://picsum.photos/seed/{{ rand(1,100) }}/200/200" alt="Card image cap">
@@ -68,7 +69,6 @@
                                  <div class="modal-body">
                                     <h3 class="mt-3">Exams {{$batch->title}} {{auth()->user()->id}} </h3>
                                     <ol>
-                                       @php $disabled = false; @endphp
                                        @forelse ($batchTopic->courseTopic->exams as $exam)
                                           @if (count($exam->course_lectures))
                                              @foreach ($exam->course_lectures as $course_lecture)
@@ -87,7 +87,7 @@
                                              @if($exam->exam_type == "Aptitude Test")
                                                 <a
                                                    {{-- @if($aptitude_test_passed && $exam->lecture_count != $exam->completed_lecture_count) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
-                                                   class="font-weight-bold" href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
+                                                   class="font-weight-bold" @if ($disabled) style="pointer-events: none; cursor: default; color: grey;" @endif href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}">
                                                       {{ $exam->title }}
                                                 </a>
                                              @else
