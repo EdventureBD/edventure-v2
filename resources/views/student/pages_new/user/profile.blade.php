@@ -59,7 +59,7 @@
                         </div>
                         <div id="category-selection-icon">
                             <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
-                            <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
+                            {{-- <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span> --}}
                         </div>
                     </div>
                     {{-- category part --}}
@@ -87,7 +87,7 @@
                         </div>
                         <div id="subject-selection-icon">
                             <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
-                            <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
+                            {{-- <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span> --}}
                         </div>
                     </div>
                     <div class="mx-auto subjects collapse text-white" id="subjectschoicing">
