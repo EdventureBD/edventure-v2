@@ -15,8 +15,8 @@
             box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
             border-radius: 0px 12.4444px 12.4444px 0px;
         }
-        #horizontal-line{
-            width: 496.55px;
+        .horizontal-line{
+            width: 100%;
         }
         #course-option:hover {
             background: #FA9632;
@@ -101,6 +101,31 @@
             box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
             border-radius: 12.4444px;
         }
+        #strength-title {
+            background: #67B032;
+            border: 1.96px solid #67B032;
+        }
+        #weakness-title {
+            background: #C50902;
+            border: 1.96px solid #C50902;
+        }
+        .strength-weakness-title-common {
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            border-radius: 9.8px 9.8px 0px 0px;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 34.8444px;
+            line-height: 42px;
+            letter-spacing: 0.03em;
+            color: #FFFFFF;
+            width: 100%;
+            height: 68.44px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
         @media screen and (max-width:570px){
             #profile-dash-img{
                 width: 78.5px;
@@ -128,7 +153,7 @@
                     <div class="d-flex">
                         <h3 class="fw-600">Zahidullah</h3><span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
                     </div>
-                    <div class="w-100 h-0 border border-gray m-0 p-0" id="horizontal-line"></div>
+                    <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line"></div>
                     <div class="d-flex justify-content-between">
                         <div class="d-flex flex-column fw-800 mr-3">
                             <div>
@@ -160,7 +185,7 @@
         </div>
         {{-- row-cols-md-3 row-cols-sm-1  --}}
         <div id="info-detail" class="row mx-auto my-5">
-            <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5">
+            <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">
                 <div class="d-flex flex-column justify-content-center mx-auto border px-5 my-3" id="journey-cart">
                     <h5 class="fw-800 mx-auto">Amazing!</h5>
                     <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
@@ -219,13 +244,41 @@
                 </div>
                 {{-- subject selection part ends --}}
             </div>
-            <div id="info-middle-option" class=" my-3 col-md-3">
-                hello
+            <div id="info-middle-option" class=" my-3 col-md-3 px-0">
+                <div id="strength-title" class="strength-weakness-title-common">
+                    <h2>Strength</h2>
+                    <div>
+                        <a href="#"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>
+                    </div>
+                </div>
+                <div class="p-3" id="strength-body">
+                    <div class="strength-weakness-cq-mcq" id="">
+                        hellow
+                    </div>
+                    <div class="w-100 h-0 border border-gray my-0 py-0 px-5" id="horizontal-line"></div>
+                    <div class="strength-weakness-cq-mcq" id="">
+                        hi
+                    </div>
+                </div>
             </div>
-            <div id="info-right-option" class="my-3 col-md-3 mx-md-5">
-                hi
+            <div id="info-right-option" class="my-3 col-md-3 mx-md-5 px-0">
+                <div id="weakness-title" class="strength-weakness-title-common">
+                    <h2>Weakness</h2>
+                    <div>
+                        <a href="#"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>
+                    </div>
+                </div>
+                <div class="p-3" id="weakness-body">
+                    <div class="strength-weakness-cq-mcq" id="">
+
+                    </div>
+                    <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line" id=""></div>
+                    <div class="strength-weakness-cq-mcq" id="">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <script src="/js/new-dashboard/iconify-icons.js"></script>
 </x-landing-layout>
