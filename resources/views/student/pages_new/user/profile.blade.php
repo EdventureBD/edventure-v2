@@ -87,6 +87,20 @@
             padding-right: 15px;
 
         }
+        #info-middle-option {
+            width: 100%;
+            height: 449.24px;
+            background: #FFFFFF;
+            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
+            border-radius: 12.4444px;
+        }
+        #info-right-option {
+            width: 100%;
+            height: 449.24px;
+            background: #FFFFFF;
+            box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
+            border-radius: 12.4444px;
+        }
         @media screen and (max-width:570px){
             #profile-dash-img{
                 width: 78.5px;
@@ -144,12 +158,13 @@
                 </div>
             </div>
         </div>
-        <div id="info-detail" class="d-flex justify-content-between mx-auto my-5">
-            <div id="info-left-option" class="d-flex flex-column justify-content-center">
+        {{-- row-cols-md-3 row-cols-sm-1  --}}
+        <div id="info-detail" class="row mx-auto my-5">
+            <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5">
                 <div class="d-flex flex-column justify-content-center mx-auto border px-5 my-3" id="journey-cart">
                     <h5 class="fw-800 mx-auto">Amazing!</h5>
                     <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
-                    <p class="fw-500" id="day-count">
+                    <p class="fw-500 mx-auto" id="day-count">
                         You are on a 16 Day streak
                     </p>
                 </div>
@@ -204,11 +219,11 @@
                 </div>
                 {{-- subject selection part ends --}}
             </div>
-            <div id="info-middle-option">
-
+            <div id="info-middle-option" class=" my-3 col-md-3">
+                hello
             </div>
-            <div id="info-right-option">
-
+            <div id="info-right-option" class="my-3 col-md-3 mx-md-5">
+                hi
             </div>
         </div>
     </div>
