@@ -126,6 +126,16 @@
             padding-left: 8px;
             padding-right: 8px;
         }
+        .strength-weakness-cq-mcq-data {
+            width: 100%;
+            height: 31.11px;
+            background: rgba(0, 0, 0, 0.13);
+            border-radius: 12.4444px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         @media screen and (max-width:570px){
             #profile-dash-img{
                 width: 78.5px;
@@ -151,7 +161,7 @@
                 </div>
                 <div class="d-flex flex-column justify-content-center align-top ml-3">
                     <div class="d-flex">
-                        <h3 class="fw-600">Zahidullah</h3><span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
+                        <h3 class="fw-600">Zarin</h3><span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
                     </div>
                     <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line"></div>
                     <div class="d-flex justify-content-between">
@@ -253,11 +263,41 @@
                 </div>
                 <div class="p-3" id="strength-body">
                     <div class="strength-weakness-cq-mcq" id="">
-                        hellow
+                       <div>
+                            <h5 class="fw-600">MCQ</h5>
+                       </div>
+                       <div class="row">
+                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                           <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Newton</p>
+                       </div>
+                       <div>
+                           <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                               See More
+                           </a>
+                       </div>
                     </div>
-                    <div class="w-100 h-0 border border-gray my-0 py-0 px-5" id="horizontal-line"></div>
+                    <div class="w-100 h-0 border border-gray my-3 py-0 px-5" id="horizontal-line"></div>
                     <div class="strength-weakness-cq-mcq" id="">
-                        hi
+                        <div>
+                            <h5 class="fw-600">CQ</h5>
+                       </div>
+                       <div class="row">
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Maxwell</p>
+                    </div>
+                    <div>
+                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                            See More
+                        </a>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -270,11 +310,27 @@
                 </div>
                 <div class="p-3" id="weakness-body">
                     <div class="strength-weakness-cq-mcq" id="">
-
+                        <h5 class="fw-600">MCQ</h5>
+                     </div>
+                     <div class="row">
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Plunk</p>
                     </div>
-                    <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line" id=""></div>
-                    <div class="strength-weakness-cq-mcq" id="">
-
+                     <div class="w-100 h-0 border border-gray my-3 py-0 px-5" id="horizontal-line"></div>
+                     <div class="strength-weakness-cq-mcq" id="">
+                         <h5 class="fw-600">CQ</h5>
+                     </div>
+                     <div class="row">
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
+                        <p class="col-3 mx-2 strength-weakness-cq-mcq-data ">Pythagoras</p>
                     </div>
                 </div>
             </div>
