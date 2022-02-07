@@ -15,7 +15,7 @@ class McqQuestionController extends Controller
     public function index($examId)
     {
         $exam = ModelExam::query()->where('id',$examId)->first();
-        $exam_questions = McqQuestion::query()
+        $exam_questions = McqQuestion::query()->with('examTag')
                         ->where('model_exam_id',$examId)
                         ->orderByDesc('created_at')
                         ->paginate(5);

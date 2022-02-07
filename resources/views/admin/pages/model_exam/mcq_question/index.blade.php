@@ -42,6 +42,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Question</th>
+                <th scope="col">Tag</th>
                 <th scope="col">Option 1</th>
                 <th scope="col">Option 2</th>
                 <th scope="col">Option 3</th>
@@ -58,6 +59,9 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{!! $q->question !!}</td>
+                <td class="badge badge-pill badge-info" style="margin-top: 25px;padding:5px">
+                    {{$q->examTag->name}}
+                </td>
                 <td>{!! $q->field_1 !!}</td>
                 <td>{!! $q->field_2 !!}</td>
                 <td>{!! $q->field_3 !!}</td>

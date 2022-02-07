@@ -12,8 +12,8 @@ class McqQuestion extends Model
 
     protected $guarded = ['id'];
 
-    public function setSlugAttribute($value) {
-
+    public function setSlugAttribute($value)
+    {
         if (static::whereSlug($slug = Str::slug($value))->exists()) {
 
             $slug = $this->incrementSlug($slug);
@@ -22,8 +22,8 @@ class McqQuestion extends Model
         $this->attributes['slug'] = $slug;
     }
 
-    public function incrementSlug($slug) {
-
+    public function incrementSlug($slug)
+    {
         $original = $slug;
 
         $count = 2;
@@ -34,6 +34,10 @@ class McqQuestion extends Model
         }
 
         return $slug;
+    }
 
+    public function examTag()
+    {
+        return $this->belongsTo(ExamTag::class);
     }
 }
