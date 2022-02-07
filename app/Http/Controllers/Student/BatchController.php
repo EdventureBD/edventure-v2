@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
+use Illuminate\Http\Request;
+
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
 use App\Models\Admin\Exam;
@@ -154,15 +156,6 @@ class BatchController extends Controller
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {
 
-        $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture->id)->count();
-
-        if(!$completed){
-            $completed = new CompletedLectures();
-            $completed->student_id = auth()->user()->id;
-            $completed->lecture_id = $courseLecture->id;
-            $completed->save();
-        }
-
         //setting next lecture & prev lecture
         $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'desc')->first();
         $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
@@ -186,5 +179,23 @@ class BatchController extends Controller
             $timeleft = $timeleft_seconds;
         }
         return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_lecture_link', 'next_lecture_link'));
-    }    
+    }
+
+    public function lecture_visit_confirmed_ajax(Request $request, CourseLecture $courseLecture){
+
+        if($request->ajax()){
+
+            $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture->id)->first();
+
+            if($completed){
+                $completed->delete();
+            }
+            else{
+                $completed = new CompletedLectures();
+                $completed->student_id = auth()->user()->id;
+                $completed->lecture_id = $courseLecture->id;
+                $completed->save();
+            }
+        }
+    }
 }
