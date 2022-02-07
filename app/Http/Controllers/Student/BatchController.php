@@ -89,11 +89,22 @@ class BatchController extends Controller
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
-                    if($scored_marks >= $exam->question_limit){
-                        $exam->test_passed = true;
+                    if($exam->exam_type == "Aptitude Test"){
+                        if($scored_marks >= $exam->question_limit){
+                            $exam->test_passed = true;
+                        }
+                        else{
+                            $exam->test_passed = false;
+                        }
                     }
-                    else{
-                        $exam->test_passed = false;
+                    elseif($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam"){
+                        $scored_marks = $exam->question_limit + ($exam->question_limit_2 * 10);
+                        if($scored_marks >= $exam->threshold_marks){
+                            $exam->test_passed = true;
+                        }
+                        else{
+                            $exam->test_passed = false;
+                        }
                     }
 
                 $lectures_in_this_exam = count($exam->course_lectures);
