@@ -1189,7 +1189,7 @@ class ExamController extends Controller
                     $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
                     if($exam == null){
-                        return redirect()->back()->withErrors(['This batch has no topic end exam added to it!!']);
+                        return redirect()->back()->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
                     }
 
                     $canAttempt = TopicEndExamCqExamPaper::where('exam_id', $exam->id)
@@ -1213,9 +1213,13 @@ class ExamController extends Controller
                     if (!$canAttempt) {
                         // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                         // $exam->question_limit
-                        $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                        $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                         // $exam->question_limit
-                        $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                        $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();
+
+                        if($mcq_questions->count() < $exam->question_limit || $cq_questions->count() < $exam->question_limit_2){
+                            return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
+                        }
 
                         return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
                     }
@@ -1431,7 +1435,7 @@ class ExamController extends Controller
                     $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
                     if($exam == null){
-                        return redirect()->back()->withErrors(['This batch has no pop quizzes added to it!!']);
+                        return redirect()->back()->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
                     }
 
                     $canAttempt = PopQuizCqExamPaper::where('exam_id', $exam->id)
@@ -1455,10 +1459,15 @@ class ExamController extends Controller
                     if (!$canAttempt) {
                         // $questions = CQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                         // $exam->question_limit
-                        $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
+                        $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                         // $exam->question_limit
-                        $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take(2)->get();
-
+                        $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();
+                        
+                        
+                        if($mcq_questions->count() < $exam->question_limit || $cq_questions->count() < $exam->question_limit_2){
+                            return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
+                        }
+                        
                         return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
                     }
                 }

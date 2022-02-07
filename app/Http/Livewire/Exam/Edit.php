@@ -22,6 +22,7 @@ class Edit extends Component
     public $marks;
     public $duration;
     public $quesLimit;
+    public $quesLimit_2;
     public $special;
 
     public $course;
@@ -34,6 +35,8 @@ class Edit extends Component
 
 
     public $showQuestionLimit;
+
+    public $showQuestionLimit2 = false;
 
     public function updatedTitle()
     {
@@ -86,14 +89,37 @@ class Edit extends Component
 
     public function updatedExamType()
     {
+        // if (($this->examType) == 'Assignment') {
+        //     $this->quesLimit = 0;
+        //     $this->showQuestionLimit = false;
+        // } else {
+        //     $this->showQuestionLimit = true;
+        //     $this->validate([
+        //         'examType' => 'required'
+        //     ]);
+        // }
+
         if (($this->examType) == 'Assignment') {
             $this->quesLimit = 0;
             $this->showQuestionLimit = false;
-        } else {
+            $this->showQuestionLimit2 = false;
+            // $this->showSpecialExam = false;
+            $this->marks=10;
+            $this->duration=1440;
+        } elseif( ($this->examType) == 'MCQ' || ($this->examType) == 'Aptitude Test') {
+            $this->quesLimit = '';
             $this->showQuestionLimit = true;
+            $this->showQuestionLimit2 = false;
+            // $this->showSpecialExam = true;
+            $this->marks=null;
             $this->validate([
                 'examType' => 'required'
             ]);
+            $this->duration=null;
+        } elseif ( ($this->examType) == 'Pop Quiz' || ($this->examType) == 'Topic End Exam' ){
+            $this->showQuestionLimit2 = true;
+        } elseif( ($this->examType) == 'CQ' ){
+            $this->showQuestionLimit2 = false;
         }
     }
 
@@ -105,20 +131,63 @@ class Edit extends Component
     }
 
     protected $rules = [
-        'title' => 'required|string|max:325',
+        // 'title' => 'required|string|max:325|unique:exams,title,'.$this->exam->id,
         'courseId' => 'required',
         'topicId' => 'nullable',
         'examType' => 'required',
-        'marks' => 'required',
-        'duration' => 'required',
+        'marks' => 'required|numeric|integer|gt:0',
+        'duration' => 'required|numeric|integer|gt:0',
         'order' => 'required|numeric|integer|gt:-1',
-        'threshold_marks' => 'required',
-        'quesLimit' => 'required'
+        'threshold_marks' => 'required|numeric|integer|gte:0',
+        'special' => 'nullable',
+        'topicId' => 'nullable',
+    ];
+
+    protected $messages = [
+        'title.unique' => 'The exam name already exists. Choose a different name',
+        'quesLimit.required' => 'Question limit is required',
+        'quesLimit.numeric' => 'Question limit has to be a number',
+        'quesLimit.integer' => 'Question limit has to be a integer',
+        'quesLimit.gte' => 'Question limit has to be greater than 0'
     ];
 
     public function saveExam()
     {
+        if(!$this->special){
+            $this->rules['topicId'] = 'required';
+        }
+
+        $this->rules['title'] = 'required|string|max:325|unique:exams,title,'.$this->exam->id;
+
+        if($this->showQuestionLimit2){
+            $this->rules['quesLimit'] = 'required|numeric|integer|gte:0';
+            $this->rules['quesLimit_2'] = 'required|numeric|integer|gte:0';
+
+            $this->messages['quesLimit.required'] = 'MCQ Question limit is required';
+            $this->messages['quesLimit.numeric'] = 'MCQ Question limit has to be a number';
+            $this->messages['quesLimit.integer'] = 'MCQ Question limit has to be a integer';
+            $this->messages['quesLimit.gte'] = 'MCQ Question limit has to be greater than 0';
+
+            $this->messages['quesLimit_2.required'] = 'CQ Question limit is required';
+            $this->messages['quesLimit_2.numeric'] = 'CQ Question limit has to be a number';
+            $this->messages['quesLimit_2.integer'] = 'CQ Question limit has to be a integer';
+            $this->messages['quesLimit_2.gte'] = 'CQ Question limit has to be greater than 0';
+        }
+        else{
+            $this->rules['quesLimit'] = 'required|numeric|integer|gte:0';
+
+            $this->messages['quesLimit.required'] = 'Question limit is required';
+        }
+
         $data = $this->validate();
+
+        if($this->quesLimit < 1 && $this->quesLimit_2 < 1){
+            $this->addError('quesLimit', 'Both MCQ and CQ question limits cannot be empty');
+            $this->addError('quesLimit_2', 'Both MCQ and CQ question limits cannot be empty');
+
+            return;
+        }
+
         $exam = Exam::find($this->exam->id);
         $exam->title = $data['title'];
         // $exam->slug = Str::slug($data['title']);
@@ -131,6 +200,9 @@ class Edit extends Component
         $exam->order = $data['order'];
         $exam->threshold_marks = $data['threshold_marks'];
         $exam->question_limit = $data['quesLimit'];
+        if($this->showQuestionLimit2){
+            $exam->question_limit_2 = $data['quesLimit_2'];
+        }
 
         $save = $exam->save();
 
@@ -154,6 +226,7 @@ class Edit extends Component
         $this->order = $this->exam->order;
         $this->threshold_marks = $this->exam->threshold_marks;
         $this->quesLimit = $this->exam->question_limit;
+        $this->quesLimit_2 = $this->exam->question_limit_2;
         $this->special = $this->exam->special;
 
         if ($this->special) {
