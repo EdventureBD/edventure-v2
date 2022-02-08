@@ -48,4 +48,9 @@ class ModelExam extends Model
     {
         return $this->hasMany(McqQuestion::class,'model_exam_id','id');
     }
+
+    public function mcqTotalResult()
+    {
+        return $this->hasMany(McqTotalResult::class,'model_exam_id','id');
+    }
 }

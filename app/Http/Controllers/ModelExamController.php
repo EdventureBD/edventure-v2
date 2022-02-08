@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateModelExamRequest;
 use App\Http\Requests\UpdateModelExamRequest;
+use App\Jobs\OnMcqSubmit;
 use App\Models\ExamCategory;
 use App\Models\ExamTopic;
 use App\Models\McqMarkingDetail;
@@ -170,7 +171,7 @@ class ModelExamController extends Controller
         }
 
         if(request()->has('t')) {
-            $exams = ModelExam::query()
+            $exams = ModelExam::query()->with('mcqTotalResult')
                                 ->where('exam_topic_id', request()->get('t'))
                                 ->where('exam_category_id', Cache::get('exam_category'))
                                 ->where('visibility',1)
@@ -179,7 +180,6 @@ class ModelExamController extends Controller
             $exam_topics = Cache::get('exam_topics');
             Cache::put('exam_topic', request()->get('t'));
         }
-
         return view('student.pages_new.model-exam.index',compact('exam_categories','exam_topics','exams'));
     }
 
@@ -189,13 +189,12 @@ class ModelExamController extends Controller
         $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->first();
 
         if(auth() && $result = $this->examAttended($examId, auth()->user()->id)) {
-            $details = [];
+
             $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
                                             ->where('model_exam_id', $examId)
                                             ->where('student_id',auth()->user()->id)
                                             ->get();
-
-            return view('student.pages_new.model-exam.mcq-result',compact('result','exam_answer'));
+            return view('student.pages_new.model-exam.mcq-result',compact('result','exam_answer','exam'));
         }
         return view('student.pages_new.model-exam.exam-paper', compact('exam'));
     }
@@ -204,7 +203,8 @@ class ModelExamController extends Controller
     {
 
         $inputs = $request->validate([
-            'mcq' => 'required'
+            'mcq' => 'required',
+            'exam_end_time' => 'required'
         ]);
         $student_id = auth()->user()->id;
 
@@ -214,36 +214,9 @@ class ModelExamController extends Controller
 
         $mcq = $inputs['mcq'];
 
-        $detail_result = [];
-        $total_marks = 0;
         $exam = ModelExam::query()->find($examId);
 
-        foreach ($mcq as $key => $value) {
-            array_push($detail_result,[
-                'model_exam_id' => (int) $examId,
-                'mcq_question_id' => $key,
-                'student_id' => $student_id,
-                'mcq_ans' => (int) $value,
-                'gain_marks' =>  McqQuestion::query()->find($key)->answer == $value ? 1 : 0,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-        }
-
-        foreach ($detail_result as $key => $value) {
-            $total_marks +=  $value['gain_marks'];
-        }
-
-        $total_result = [
-            'model_exam_id' => (int) $examId,
-            'student_id' => $student_id,
-            'exam_end_time' => 0,
-            'total_marks' => $total_marks,
-            'duration' => $exam->duration * 60
-        ];
-
-        McqMarkingDetail::query()->insert($detail_result);
-        McqTotalResult::query()->create($total_result);
+        OnMcqSubmit::dispatch($mcq,$exam,$inputs['exam_end_time'],$student_id);
 
         return view('student.pages_new.batch.exam.examSubmissionGreeting');
     }

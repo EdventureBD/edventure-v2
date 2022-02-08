@@ -2,6 +2,7 @@
     <div class="container my-5">
         <div class="my-5 py-5 d-flex justify-content-center">
             <div>
+                <h4>Exam Result: <b>{{(int)$result->total_marks}}</b> Out of <b>{{$exam->total_exam_marks}}</b></h4>
                 <table class="table table-responsive table-striped table-bordered">
                     <thead>
                         <tr>

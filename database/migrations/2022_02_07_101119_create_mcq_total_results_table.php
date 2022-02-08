@@ -17,8 +17,8 @@ class CreateMcqTotalResultsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('model_exam_id');
             $table->unsignedBigInteger('student_id');
-            $table->integer('exam_end_time')->comment('End time till be store in seconds');
-            $table->integer('duration')->comment('End time till be store in seconds');
+            $table->integer('exam_end_time')->comment('Exam end remaining time will be store in seconds');
+            $table->integer('duration')->comment('Exam duration will be store in seconds');
             $table->float('total_marks');
             $table->foreign('model_exam_id')->references('id')->on('model_exams')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
