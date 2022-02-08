@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMcqQuestionRequest;
+use App\Http\Requests\UpdateMcqQuestionRequest;
 use App\Models\ExamTag;
+use App\Models\ExamTopic;
 use App\Models\McqQuestion;
 use App\Models\ModelExam;
 use Illuminate\Http\Request;
@@ -37,6 +39,21 @@ class McqQuestionController extends Controller
         McqQuestion::query()->create($inputs);
 
         return redirect()->back()->with(['status' => 'Question Added Successfully']);
+    }
+
+    public function edit($slug)
+    {
+        $mcqQuestion = McqQuestion::query()->where('slug',$slug)->with('examTag')->first();
+        return view('admin.pages.model_exam.mcq_question.edit', compact('mcqQuestion'));
+    }
+
+    public function update(UpdateMcqQuestionRequest $request, $id)
+    {
+        $inputs =  $request->validated();
+
+        McqQuestion::query()->where('id', $id)->update($inputs);
+
+        return redirect()->back()->with(['status' => 'Question Updated Successfully']);
     }
 
     public function destroy($slug)

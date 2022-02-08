@@ -23,27 +23,28 @@
             height: 50px;
             margin: 0 auto;
         }
+
         .zoom:hover {
             width: 250px;
             height: 100px;
             transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
 
-        .iframe{
-            overflow:hidden;
-            height:100%;
-            width:100%;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
+        .iframe {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             transition: transform .2s; /* Animation */
             margin: 0 auto;
         }
 
         .iframe:hover {
-            height:120%;
-            width:80%;
+            height: 120%;
+            width: 80%;
             transform: scale(1.2);
         }
     </style>
@@ -91,7 +92,8 @@
                 <td>{{ $exam->duration }}</td>
                 <td>{{ $exam->negative_marking_value }}</td>
                 <td>
-                    <input onclick="visibilityUpdate({{$exam->id}})" {{ $exam->visibility == 1 ? 'checked' : '' }} type="checkbox">
+                    <input onclick="visibilityUpdate({{$exam->id}})"
+                           {{ $exam->visibility == 1 ? 'checked' : '' }} type="checkbox">
                 </td>
                 <td>{{ $exam->per_question_marks }}</td>
                 <td>{{ $exam->total_exam_marks }}</td>
@@ -125,7 +127,13 @@
                     </a>
                 </td>
                 <td>
-                    @include('admin.pages.model_exam.exam.delete')
+                    <div class="d-flex justify-content-center">
+                        <a class="mr-1 btn btn-outline-primary btn-sm"
+                           href="{{ route('model.exam.edit', $exam->id) }}">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        @include('admin.pages.model_exam.exam.delete')
+                    </div>
                 </td>
             </tr>
         @empty
@@ -133,7 +141,7 @@
                 <p>No Exam Found</p>
             </div>
             <div class="d-flex justify-content-center">
-                <img src="{{asset('admin/notFound.svg')}}" width="193" height="130" />
+                <img src="{{asset('admin/notFound.svg')}}" width="193" height="130"/>
             </div>
         @endforelse
         </tbody>

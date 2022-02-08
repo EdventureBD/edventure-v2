@@ -220,10 +220,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
     Route::get('/model-exam/downloadPdf/{id}',[ModelExamController::class,'downloadSolutionPdf'])->name('model.exam.pdf');
     Route::post('/model-exam',[ModelExamController::class,'store'])->name('model.exam.store');
+    Route::put('/model-exam/{id}',[ModelExamController::class,'update'])->name('model.exam.update');
+    Route::get('/model-exam/{id}',[ModelExamController::class,'edit'])->name('model.exam.edit');
     Route::delete('/model-exam/{id}',[ModelExamController::class,'destroy'])->name('model.exam.destroy');
 
     //Model Exam Question
     Route::get('/model-exam/question/{id}',[McqQuestionController::class,'index'])->name('model.exam.question.index');
+    Route::get('/model-exam/question/edit/{slug}',[McqQuestionController::class,'edit'])->name('model.exam.question.edit');
+    Route::put('/model-exam/question/{id}',[McqQuestionController::class,'update'])->name('model.exam.question.update');
     Route::post('/model-exam/question/{id}',[McqQuestionController::class,'store'])->name('model.exam.question.store');
     Route::delete('/model-exam/question/{slug}',[McqQuestionController::class,'destroy'])->name('model.exam.question.destroy');
 

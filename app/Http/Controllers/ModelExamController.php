@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateModelExamRequest;
+use App\Http\Requests\UpdateModelExamRequest;
 use App\Models\ExamCategory;
 use App\Models\ExamTopic;
 use App\Models\McqMarkingDetail;
@@ -40,7 +41,7 @@ class ModelExamController extends Controller
     {
         $inputs = $request->validated();
         if($request->hasFile('solution_pdf')) {
-            $filename = $request->exam_category_id.'_'.str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
+            $filename = str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
             $path = $request->file('solution_pdf')->storeAs(
                 'solutionPdf', $filename, 'public'
             );
@@ -51,6 +52,32 @@ class ModelExamController extends Controller
 
         return redirect()->back()->with('status','Exam Created Successfully');
 
+    }
+
+    public function edit($examId)
+    {
+        $exam = ModelExam::query()->where('id',$examId)->with('topic')->with('category')->first();
+        $exam_topics = ExamTopic::query()->where('exam_category_id', $exam->exam_category_id)->get();
+        return view('admin.pages.model_exam.exam.edit', compact('exam','exam_topics'));
+    }
+
+
+    public function update(UpdateModelExamRequest $request, $examId)
+    {
+        $inputs = $request->validated();
+
+        if($request->hasFile('solution_pdf')) {
+
+            $filename = str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
+            $path = $request->file('solution_pdf')->storeAs(
+                'solutionPdf', $filename, 'public'
+            );
+            $inputs['solution_pdf'] = $filename;
+        }
+
+        ModelExam::query()->where('id',$examId)->update($inputs);
+
+        return redirect()->back()->with('status','Exam Updated Successfully');
     }
 
     /**
