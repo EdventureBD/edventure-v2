@@ -29,11 +29,12 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::group(['middleware' => 'canAccess'], function () {
         // BATCH
         Route::get('batch/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
-        Route::get('batch/{batch}/{courseLecture}', [BatchController::class, 'lecture'])->name('topic_lecture');
-        Route::get('batch/{courseLecture}', [BatchController::class, 'lecture_visit_confirmed_ajax'])->name('lecture_visit_confirmed_ajax');
+        Route::get('batch/{batch}/{courseLecture}', [BatchController::class, 'lecture'])->name('topic_lecture')->middleware('proceed_guard');
+        Route::get('batch/{batch}/ajax/get/{courseLecture}', [BatchController::class, 'get_lecture_visit_status_ajax'])->name('get_lecture_visit_status_ajax');
+        Route::get('batch/{batch}/ajax/confirm/{courseLecture}', [BatchController::class, 'lecture_visit_confirmed_ajax'])->name('lecture_visit_confirmed_ajax');
 
         // BATCH TEST(For serving tests if a person hasn't attended it already)
-        Route::get('batch/tests/{course_topic}/{batch}/{exam_id}/{exam_type}]', [ExamController::class, 'batchTest'])->name('batch-test');
+        Route::get('batch/tests/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'batchTest'])->name('batch-test')->middleware('proceed_guard');
         
         // EXAM
         // Route::get('batch/{batch}/{courseLecture}/{exam}', [ExamController::class, 'question'])->name('question');

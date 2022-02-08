@@ -382,23 +382,26 @@ class ExamController extends Controller
             // dd($request->mcq_ques, $request->cq_ques);
 
             if ($exam->exam_type == Edvanture::TOPICENDEXAM){
-                $exam_type = "Topic End Exam CQ";
+                $exam_type_cq = "Topic End Exam CQ";
+                $exam_type_mcq = "Topic End Exam MCQ";
             }
             elseif($exam->exam_type == Edvanture::POPQUIZ){
-                $exam_type = "Pop Quiz CQ";
+                $exam_type_cq = "Pop Quiz CQ";
+                $exam_type_mcq = "Pop Quiz MCQ";
             }
 
-            $result = ExamResult::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', $exam_type)->first();
+            $cq_result = ExamResult::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', $exam_type_cq)->first();
+            $mcq_result = ExamResult::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', $exam_type_mcq)->first();
 
-            if (!$result) {
-                $validateData = $request->validate([
-                    'submitted_text' => 'nullable|string',
-                    'file' => 'nullable|mimes:pdf|max:10000',
-                    'mcq_ques' => 'required',
-                    'cq_ques' => 'required',
-                ]);
+            $validateData = $request->validate([
+                'submitted_text' => 'nullable|string',
+                'file' => 'nullable|mimes:pdf|max:10000',
+                'mcq_ques' => 'nullable',
+                'cq_ques' => 'nullable',
+            ]);
 
-                // check and store MCQ answers
+            // dd($request);
+            if(!$mcq_result && count($request->mcq_ques)){
                 $total = 0;
                 foreach($request->mcq_ques as $key => $mcq){
                     // find corresponding mcq question by id
@@ -443,10 +446,10 @@ class ExamController extends Controller
                 $exam_result->gain_marks = $total;
                 $exam_result->status = 1;
                 $exam_result->save();
+            }
 
-
+            if(!$cq_result && count($request->cq_ques)){
                 $path = '';
-
                 if ($request->file('file')) {
                     $name = time() . "_" . $request->file('file')->getClientOriginalName();
                     if($exam->exam_type == Edvanture::TOPICENDEXAM){
@@ -482,20 +485,6 @@ class ExamController extends Controller
                 $student_exam_attempt->attended_at = now();
                 $student_exam_attempt->save();
 
-
-                // if ($save) {
-                //     // return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully submitted the CQ exam paper.");
-                //     $show = false;
-                //     // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
-                //     return view('student.pages_new.batch.exam.canAttemp', compact(
-                //         // 'canAttempt',
-                //         'exam',
-                //         'batch',
-                //         'show',
-                //         // 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'
-                //     ));
-                // }
-
                 // Store exam results for cq
                 $exam_result = new ExamResult();
                 $exam_result->exam_id = $exam->id;
@@ -514,17 +503,29 @@ class ExamController extends Controller
 
                 return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
             }
-            elseif($result && $result->checked == 0){
+
+            elseif($cq_result && $cq_result->checked == 0){
 
                 return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
+
             }
-            elseif($result && $result->checked == 1){
+
+            elseif($cq_result && $cq_result->checked == 1){
 
                 $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
 
                 Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
 
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
+            }
+            
+            elseif(!$cq_result) {
+                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
+
+                Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
+
+                return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
+            }
 
                 // // dd($exam->exam_type, "Here have some results.");
 
@@ -664,12 +665,8 @@ class ExamController extends Controller
                 //         'total_mcqs',
                 //         'total_right_ans_for_mcqs'
                 //     ));
-
-
-            }
+            // }
         }
-
-
 
         if ($exam->exam_type == 'Assignment') {
             return $this->examPaper($request, $batch, $exam);
@@ -957,7 +954,6 @@ class ExamController extends Controller
         }
 
         if ($exam_type == Edvanture::TOPICENDEXAM) {
-
             // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
             //Code for blocking student page refresh
             // if (!empty($canAttempt) && $canAttempt->status == 0) {
@@ -1049,7 +1045,6 @@ class ExamController extends Controller
                         return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
                     }
                     elseif($cq_exam_result->checked == 1) {
-
                         $mcq_exam_result = ExamResult::where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
                         ->where('student_id', auth()->user()->id)
@@ -1166,8 +1161,6 @@ class ExamController extends Controller
                             }
                         }
                         // End of analysis for CQs
-
-                        // dd($all_analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
                         // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
                         return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_topic_end_exam_result',
                             compact(

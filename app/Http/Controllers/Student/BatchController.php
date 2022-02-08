@@ -87,11 +87,13 @@ class BatchController extends Controller
         foreach($batchTopics as $batchTopic){
             foreach($batchTopic->courseTopic->exams as $exam){
                 $scored_marks = 0;
-                $details_results = DetailsResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->get();
+                $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
+                // dd($details_results);
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
-                    if($scored_marks >= $exam->question_limit){
+                
+                    if($scored_marks >= $exam->threshold_marks){
                         $exam->test_passed = true;
                     }
                     else{
@@ -155,7 +157,6 @@ class BatchController extends Controller
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {
-
         //setting next lecture & prev lecture
         $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'desc')->first();
         $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
@@ -181,21 +182,33 @@ class BatchController extends Controller
         return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_lecture_link', 'next_lecture_link'));
     }
 
-    public function lecture_visit_confirmed_ajax(Request $request, CourseLecture $courseLecture){
+    public function lecture_visit_confirmed_ajax($batch, $courseLecture){
 
-        if($request->ajax()){
+        $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture)->first();
 
-            $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture->id)->first();
-
-            if($completed){
-                $completed->delete();
-            }
-            else{
-                $completed = new CompletedLectures();
-                $completed->student_id = auth()->user()->id;
-                $completed->lecture_id = $courseLecture->id;
-                $completed->save();
-            }
+        if($completed){
+            $completed->delete();
         }
+        else{
+            $completed = new CompletedLectures();
+            $completed->student_id = auth()->user()->id;
+            $completed->lecture_id = $courseLecture;
+            $completed->save();
+        }
+
+        return true;
+    }
+
+    public function get_lecture_visit_status_ajax($batch, $courseLecture){
+        $completed_lecture = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture)->first();
+        if($completed_lecture){
+            return true;
+        }
+        else{
+            return false;
+        }
+        // $course_lecture = CourseLecture::where('id', $courseLecture)->first();
+        // return [$batch, $courseLecture, auth()->user()->id];
+        // return $completed_lecture;
     }
 }
