@@ -545,28 +545,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-#roadmapParentContainer {
-  background: url("/img/road_map/roadmapBackground.png");
-  color: whitesmoke;
-}
-#roadmap-backButton-div {
-  left: 10px;
-}
-@media screen and (max-width: 576px){
-  #roadmapParentContainer {
-    padding-left: 3%;
-    padding-right: 3%;
-  }
-  #roadmap-backButton-img {
-    width: 4rem;
-  }
-  #ilandsParentContainer{
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-}
-
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
