@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Admin\Batch;
 use Closure;
 use App\Models\Admin\Course;
 use Illuminate\Http\Request;
@@ -19,6 +20,8 @@ class canAccess
     public function handle(Request $request, Closure $next)
     {
         $batch = $request->route('batch');
+        if(is_string($batch)) $batch = Batch::findOrFail($batch);
+
         $course = Course::where('id', $batch->course_id)->first();
         $batch_student_enrollment = BatchStudentEnrollment::where('batch_id', $batch->id)
             ->where('student_id', auth()->user()->id)
