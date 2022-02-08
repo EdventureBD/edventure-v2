@@ -9,7 +9,7 @@
      </a>
    </div>
    <div class="d-flex justify-content-center w-100">
-      <div class="row row-cols-5 mx-5 px-5 w-100 mt-0 pt-0" id="ilandsParentContainer">
+      <div class="row row-cols-md-5 row-cols-sm-1 mx-5 px-md-5 px-sm-2 w-100 mt-0 pt-0" id="ilandsParentContainer">
          
       </div>
    </div>
