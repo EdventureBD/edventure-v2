@@ -218,6 +218,7 @@
 
                                     <div class="card bg-light mb-3 mt-3 shadow">
                                         <h3>Standard Answer PDF</h3>
+                                        {{ Storage::url($cq->standard_ans_pdf) }}
                                         <iframe src="{{ Storage::url($cq->standard_ans_pdf) }}" frameborder="0"
                                             width="100%" height="600px"></iframe>
                                     </div>

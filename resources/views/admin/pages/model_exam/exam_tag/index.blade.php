@@ -16,53 +16,27 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('exam.tags.store')}}" method="POST">
-        @csrf
-        <div class="row">
-            <div class="col-md-6">
-                <div class="select2-purple d-flex align-middle py-0 pb-5">
-                    <select required
-                            class="select2 form-control"
-                            name="exam_topic_id"
-                            data-placeholder="Select a Topic"
-                            data-dropdown-css-class="select2-purple"
-                            style="width: 100%; margin-top: -8px !important;">
-                        @foreach ($exam_topics as $topic)
-                            <option value=""></option>
-                            <option value="{{ $topic->id }}">{{ $topic->name.' ('.$topic->examCategory->name.')' }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <input
-                        required
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        placeholder="Tags name"
-                        aria-label="Tags name"
-                        aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit">Create</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </form>
-    <table class="table">
+    <style>
+        .table td.fit,
+        .table th.fit {
+            white-space: nowrap;
+            width: 1%;
+        }
+    </style>
+    @include('admin.pages.model_exam.exam_tag.create')
+
+    <table class="table table-responsive table-striped">
 
         @if(count($exam_tags) > 0)
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tags</th>
-                <th scope="col">Topic</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Action</th>
+                <th class="fit" scope="col">#</th>
+                <th class="fit" scope="col">Tags</th>
+                <th class="fit" scope="col">Topic</th>
+                <th class="fit" scope="col">Category</th>
+                <th class="fit" scope="col">Created at</th>
+                <th class="fit" scope="col">Action</th>
             </tr>
             </thead>
         @endif
@@ -74,109 +48,10 @@
                 <td>{{ $tag->examTopic->name }}</td>
                 <td>{{ $tag->examTopic->examCategory->name }}</td>
                 <td>{{ date('F j, Y, g:i a', strtotime($tag->created_at)) }}</td>
-                <td>
-                    <a class="mr-1 btn btn-outline-primary btn-sm"
-                       onclick="fetchData({{ $tag->id }});"
-                       href="#editTag{{ $tag->id }}"
-                       data-toggle="modal"
-                       title="Edit {{ $tag->name }}">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <a class="mr-1 btn btn-outline-danger btn-sm"
-                       href="#deleteTag{{ $tag->id }}"
-                       data-toggle="modal"
-                       title="Delete {{ $tag->name }}">
-                        <i class="far fa-trash-alt"></i>
-                    </a>
-                    <div class="modal fade"
-                         id="deleteTag{{ $tag->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-light">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Delete
-                                        {{ $tag->name }}</h4>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure??</p>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    <form
-                                        action="{{ route('exam.tags.destroy', $tag->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit"
-                                                class="btn btn-outline-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <div class="modal fade"
-                         id="editTag{{ $tag->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit
-                                        {{ $tag->name }}</h4>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{route('exam.tags.update',$tag->id)}}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="select2-purple">
-                                                    <select required
-                                                            id="topic{{$tag->id}}"
-                                                            class="select2 form-control"
-                                                            name="exam_topic_id"
-                                                            data-placeholder="Select a Topic"
-                                                            data-dropdown-css-class="select2-purple"
-                                                            style="width: 100%;">
-                                                        @foreach ($exam_topics as $topic)
-                                                            <option value=""></option>
-                                                            <option value="{{ $topic->id }}">{{ $topic->name.' ('.$topic->examCategory->name.')' }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-group mb-3">
-                                                    <input
-                                                        required
-                                                        type="text"
-                                                        id="tag_name{{$tag->id}}"
-                                                        class="form-control"
-                                                        name="name"
-                                                        placeholder="Topic name"
-                                                        aria-label="Topic name"
-                                                        aria-describedby="basic-addon2">
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-outline-primary" type="submit">Update</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
+                <td style="display: inline-flex">
+                    @include('admin.pages.model_exam.exam_tag.edit')
+                    @include('admin.pages.model_exam.exam_tag.delete')
+                    @include('admin.pages.model_exam.exam_tag.view')
                 </td>
             </tr>
         @empty

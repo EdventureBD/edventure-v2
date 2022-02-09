@@ -17,6 +17,8 @@ class CreateExamTagsTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('exam_topic_id');
+            $table->string('solution_pdf')->nullable();
+            $table->string('solution_video')->nullable();
             $table->timestamps();
             $table->foreign('exam_topic_id')->references('id')->on('exam_topics')->onDelete('cascade');
             $table->unique(["name", "exam_topic_id"],'unique_name_topic');

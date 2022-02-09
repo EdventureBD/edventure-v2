@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExamTag;
 use App\Models\ExamTopic;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -33,12 +34,22 @@ class ExamTagsController extends Controller
     {
         $inputs =  $request->validate([
             'name' => 'required',
-            'exam_topic_id' => 'required'
+            'exam_topic_id' => 'required',
+            'solution_video' => 'nullable|string',
+            'solution_pdf' => 'nullable|mimes:pdf|max:10000'
         ]);
 
         if($this->checkDuplicateTagName($inputs['exam_topic_id'],$inputs['name'])) {
 
             return redirect()->back()->with(['failed' => 'This tags is already added to this topic']);
+        }
+
+        if($request->hasFile('solution_pdf')) {
+            $filename = $request->exam_topic_id.'_'.str_replace(' ', '_', $request->name).'_'.Carbon::today()->toDateString().'.pdf';
+            $path = $request->file('solution_pdf')->storeAs(
+                'tagsSolutionPdf', $filename, 'public'
+            );
+            $inputs['solution_pdf'] = $filename;
         }
 
         ExamTag::create($inputs);
@@ -55,12 +66,17 @@ class ExamTagsController extends Controller
     {
         $inputs =  $request->validate([
             'name' => 'required',
-            'exam_topic_id' => 'required'
+            'exam_topic_id' => 'required',
+            'solution_video' => 'nullable|string',
+            'solution_pdf' => 'nullable|mimes:pdf|max:10000'
         ]);
 
-        if($this->checkDuplicateTagName($inputs['exam_topic_id'],$inputs['name'])) {
-
-            return redirect()->back()->with(['failed' => 'This tags is already added to a topic']);
+        if($request->hasFile('solution_pdf')) {
+            $filename = $request->exam_topic_id.'_'.str_replace(' ', '_', $request->name).'_'.Carbon::today()->toDateString().'.pdf';
+            $path = $request->file('solution_pdf')->storeAs(
+                'tagsSolutionPdf', $filename, 'public'
+            );
+            $inputs['solution_pdf'] = $filename;
         }
 
         ExamTag::query()->where('id', $id)->update($inputs);
