@@ -40,7 +40,9 @@
         </script>
         <div class="font-sans text-gray-900 antialiased" id="app">
             <div class="landing-page">
-                @include('landing.header', ['headerBg'=>$headerBg])
+                @if(!request()->is("roadmap"))
+                    @include('landing.header', ['headerBg'=>$headerBg])
+                @endif
                 {{ $slot }}
                 {{-- @yield('content') --}}
                 @include('landing.footer')
