@@ -46,7 +46,7 @@
                                         <th class="text-center">Course</th>
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
-                                        <th class="text-center">Marks</th>
+                                        <th class="text-center">Threshold Marks</th>
                                         <th class="text-center">Order</th>
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
@@ -67,6 +67,7 @@
                                                     {{ $exam->topic->title }}
                                                 @endif
                                             </td>
+
                                             <td class="text-center">
                                                 @if ($exam->special)
                                                     <span class="badge bg-primary" > Special {{ $exam->exam_type }} </span>
@@ -83,7 +84,8 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->marks }}</td>
+                                            
+                                            <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->threshold_marks }}</td>
                                             <td class="text-center">{{ $exam->order }}</td>
                                             <td class="text-center">
 
@@ -186,7 +188,7 @@
                                         <th class="text-center">Course</th>
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
-                                        <th class="text-center">Marks</th>
+                                        <th class="text-center">Threshold Marks</th>
                                         <th class="text-center">Order</th>                                   
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
