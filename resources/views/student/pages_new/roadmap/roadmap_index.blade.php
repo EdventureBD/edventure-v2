@@ -11,6 +11,9 @@
             <img src="/img/road_map/back.png" alt="" class="img-fluid w-25" id="roadmap-backButton-img">
          </a>
       </div>
+      <div class="my-5 py-4">
+
+      </div>
       <div class="d-flex justify-content-center w-100">
          <div class="row row-cols-md-5 row-cols-sm-1 mx-5 px-lg-5 px-sm-2 w-100 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
             
