@@ -1,5 +1,7 @@
 let landsParentDiv = document.getElementById("ilandsParentContainer");
-let totalLands = 10;
+let ilandImages = ["img/road_map/landl1.png","img/road_map/landr4.png","img/road_map/Frame 46.png","img/road_map/landl5.png","img/road_map/landl6.png","img/road_map/landl2.png","img/road_map/landl2.png","img/road_map/landl6.png"];
+let totalLands = ilandImages.length;
+let ilandImageIndex = 0;
    while(totalLands){
       // onStream design
       for(let i = 0; i  <5; i++){
@@ -10,7 +12,7 @@ let totalLands = 10;
                   div.classList.add("px-lg-5","px-sm-0");
                   // Iland image part 
                   let divIland = document.createElement("div");
-                  divIland.innerHTML = `<img src="img/road_map/landl1.png" alt="Iland image" class="img-fluid">`;
+                  divIland.innerHTML = `<img src="${ilandImages[ilandImageIndex]}" alt="Iland image" class="img-fluid">`;
                   // modal part 
                   divIland.setAttribute("data-toggle","modal");
                   divIland.setAttribute("data-target", "#exampleModal");
@@ -24,6 +26,7 @@ let totalLands = 10;
                   `;
                   div.appendChild(divstars);
                   landsParentDiv.appendChild(div);
+                  ilandImageIndex++;
                   totalLands--;
                }
                else{
@@ -71,7 +74,7 @@ let totalLands = 10;
                      div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
-                     divIland.innerHTML = `<img src="img/road_map/landr4.png" alt="Iland image" class="img-fluid">`;
+                     divIland.innerHTML = `<img src="${ilandImages[ilandImageIndex]}" alt="Iland image" class="img-fluid">`;
                      // modal part 
                      divIland.setAttribute("data-toggle","modal");
                      divIland.setAttribute("data-target", "#exampleModal");
@@ -85,6 +88,7 @@ let totalLands = 10;
                      `;
                      div.appendChild(divstars);
                      landsParentDiv.appendChild(div);
+                     ilandImageIndex++;
                      totalLands--;
                   }
                   else{
