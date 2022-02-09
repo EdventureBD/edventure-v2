@@ -1304,7 +1304,7 @@ class ExamController extends Controller
                 ->where('exam_type', 'Pop Quiz MCQ')
                 ->first();
 
-                dd($exam, $cq_exam_result, $mcq_exam_result);
+                // dd($exam, $cq_exam_result, $mcq_exam_result);
 
                 if($mcq_exam_result){
                     // contains only details of MCQ exams
