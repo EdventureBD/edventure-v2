@@ -376,7 +376,6 @@ class ExamController extends Controller
         }
         
         if ($exam->exam_type == Edvanture::TOPICENDEXAM || $exam->exam_type == Edvanture::POPQUIZ) {
-
             // $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
             // $result = ExamResult::where()->where()->where();
             // dd($request->mcq_ques, $request->cq_ques);
@@ -504,38 +503,14 @@ class ExamController extends Controller
             }
 
             if($cq_result && $cq_result->checked == 0){
-
                 return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
-
             }
+
             else{
                 $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
-
                 Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
-
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
-
-
-
-            // elseif($cq_result && $cq_result->checked == 1){
-
-            //     $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
-
-            //     Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
-
-            //     return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
-            // }
-
-            // elseif(!$cq_result) {
-            //     $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
-
-            //     Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
-
-            //     return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
-            // }
-
-
 
                 // // dd($exam->exam_type, "Here have some results.");
 
@@ -874,9 +849,7 @@ class ExamController extends Controller
         // dd($totalNumber, $detailsResult, $max, $min);
 
         // START OF MCQ
-
         if ($exam_type == Edvanture::APTITUDETEST) {
-
             // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
             //Code for blocking student page refresh
             // if (!empty($canAttempt) && $canAttempt->status == 0) {
@@ -1031,6 +1004,7 @@ class ExamController extends Controller
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 // ->inRandomOrder()
+
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
                     'topicEndExamCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
@@ -1121,6 +1095,8 @@ class ExamController extends Controller
                     foreach($mcq_details_results as $mcq_details_result){
                         $mcq_details_result->success_percent = $mcq_percents[$mcq_details_result->question_id];
                     }
+
+                    // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);
 
                     $total_mcqs = 0;
                     $total_right_ans_for_mcqs = 0;
@@ -1214,7 +1190,6 @@ class ExamController extends Controller
                     ));
                 }
 
-                ////////////////////////////////////////
                 if(!$mcq_exam_result && !$cq_exam_result){
                     // If no results exist, then go ahead attempt exam
                     $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
@@ -1312,42 +1287,116 @@ class ExamController extends Controller
                     ])
                     ->firstOrFail();
 
+                dd($exam);
+
                 // if CQ exam result exists and is checked, then the user has attended exam and is checked. Then paper+marks+analytics is shown
                 $cq_exam_result = ExamResult::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
                 ->where('exam_type', 'Pop Quiz CQ')
                 ->first();
+
+                $mcq_exam_result = ExamResult::where('exam_id', $exam->id)
+                ->where('batch_id', $batch->id)
+                ->where('student_id', auth()->user()->id)
+                ->where('exam_type', 'Pop Quiz MCQ')
+                ->first();
+
+                if($mcq_exam_result){
+                    // contains only details of MCQ exams
+                    $mcq_details_results = DetailsResult::where('exam_id', $exam->id)
+                    ->where('batch_id', $batch->id)
+                    ->where('student_id', auth()->user()->id)
+                    ->where('exam_type', 'Pop Quiz')
+                    ->whereNotNull('mcq_ans')
+                    ->with('popQuizMCQ')
+                    ->get();
+
+                    // Count total MCQ marks
+                    $mcq_total_marks = $mcq_details_results->count();
+                    $mcq_marks_scored = 0;
+
+                    // calculate total marks for MCQ part.
+                    foreach($mcq_details_results as $details){
+                        $mcq_marks_scored += $details->gain_marks;
+                    }
+
+                    // analysis for MCQs
+                    $all_analysis_mcqs = DetailsResult::join('pop_quiz_mcqs', 'details_results.question_id', '=', 'pop_quiz_mcqs.id')
+                    ->select('details_results.*', 'pop_quiz_mcqs.*')
+                    ->where('details_results.exam_id', $exam->id)
+                    ->where('details_results.exam_type', 'Pop Quiz')
+                    ->whereNotNull('details_results.mcq_ans')
+                    ->get();
+                    
+                    $mcq_attempts = collect();
+                    $mcq_corrects = collect();
+                    foreach($all_analysis_mcqs as $analysis_mcq){
+                        if($mcq_attempts->has($analysis_mcq->question_id)){
+                            $current_value = $mcq_attempts[$analysis_mcq->question_id];
+                            $current_value++;
+                            $mcq_attempts->pull($analysis_mcq->question_id);
+                            $mcq_attempts->put($analysis_mcq->question_id, $current_value);
+                        }
+                        else{
+                            $mcq_attempts->put($analysis_mcq->question_id, 1);
+                        }
+
+                        if($mcq_corrects->has($analysis_mcq->question_id)){
+                            if($analysis_mcq->mcq_ans == $analysis_mcq->answer){
+                                $current_value = $mcq_corrects[$analysis_mcq->question_id];
+                                $current_value++;
+                                $mcq_corrects->pull($analysis_mcq->question_id);
+                                $mcq_corrects->put($analysis_mcq->question_id, $current_value);
+                            }
+                        }
+                        else{
+                            if($analysis_mcq->mcq_ans == $analysis_mcq->answer){
+                                $mcq_corrects->put($analysis_mcq->question_id, 1);
+                            }
+                            else{
+                                $mcq_corrects->put($analysis_mcq->question_id, 0);
+                            }
+                        }
+                    }
+
+                    $mcq_percents = collect();
+                    foreach($mcq_attempts as $key => $mcq_attempt){
+                        $mcq_percents->put($key, round(($mcq_corrects[$key]/$mcq_attempt), 2)*100);
+                    }
+
+                    foreach($mcq_details_results as $mcq_details_result){
+                        $mcq_details_result->success_percent = $mcq_percents[$mcq_details_result->question_id];
+                    }
+
+                    // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);
+
+                    $total_mcqs = 0;
+                    $total_right_ans_for_mcqs = 0;
+                    foreach($all_analysis_mcqs as $analysis_mcq){
+                        $total_mcqs += 1;
+                        if($analysis_mcq->mcq_ans == $analysis_mcq->popQuizMCQ->answer)
+                            $total_right_ans_for_mcqs += 1;
+                    }
+                    // End of analysis for MCQs
+                    $mcqs_exist = true;
+                }
+                else{
+                    // dd("No MCQ");
+                    $mcqs_exist = false;
+                    $mcq_details_results = 0;
+                    $mcq_total_marks = 0;
+                    $mcq_marks_scored = 0;
+                    $total_mcqs = 0;
+                    $total_right_ans_for_mcqs = 0;
+                }
                 
                 if($cq_exam_result){
                     if($cq_exam_result->checked == 0) {
+                        // dd("Paper Checking Pending");
                         return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
                     }
                     elseif($cq_exam_result->checked == 1) {
-
-                        $mcq_exam_result = ExamResult::where('exam_id', $exam->id)
-                        ->where('batch_id', $batch->id)
-                        ->where('student_id', auth()->user()->id)
-                        ->where('exam_type', 'Pop Quiz MCQ')
-                        ->first();
-
-                        // contains only details of MCQ exams
-                        $mcq_details_results = DetailsResult::where('exam_id', $exam->id)
-                                            ->where('batch_id', $batch->id)
-                                            ->where('student_id', auth()->user()->id)
-                                            ->where('exam_type', 'Pop Quiz')
-                                            ->whereNotNull('mcq_ans')
-                                            ->with('popQuizMCQ')
-                                            ->get();
-
-                        // Count total MCQ marks
-                        $mcq_total_marks = $mcq_details_results->count();
-                        $mcq_marks_scored = 0;
-
-                        // calculate total marks for MCQ part.
-                        foreach($mcq_details_results as $details){
-                            $mcq_marks_scored += $details->gain_marks;
-                        }
 
                         $cq_total_marks = $exam->popQuizCreativeQuestions->count() * 10;
                         $cq_marks_scored = 0;
@@ -1358,65 +1407,6 @@ class ExamController extends Controller
                                 $cq_marks_scored += $cq->detailsResult->gain_marks;
                             }
                         }
-
-                        // analysis for MCQs
-                        $all_analysis_mcqs = DetailsResult::join('pop_quiz_mcqs', 'details_results.question_id', '=', 'pop_quiz_mcqs.id')
-                        ->select('details_results.*', 'pop_quiz_mcqs.*')
-                        ->where('details_results.exam_id', $exam->id)
-                        ->where('details_results.exam_type', 'Pop Quiz')
-                        ->whereNotNull('details_results.mcq_ans')
-                        ->get();
-                        
-                        $mcq_attempts = collect();
-                        $mcq_corrects = collect();
-                        foreach($all_analysis_mcqs as $analysis_mcq){
-                            if($mcq_attempts->has($analysis_mcq->question_id)){
-                                $current_value = $mcq_attempts[$analysis_mcq->question_id];
-                                $current_value++;
-                                $mcq_attempts->pull($analysis_mcq->question_id);
-                                $mcq_attempts->put($analysis_mcq->question_id, $current_value);
-                            }
-                            else{
-                                $mcq_attempts->put($analysis_mcq->question_id, 1);
-                            }
-
-                            if($mcq_corrects->has($analysis_mcq->question_id)){
-                                if($analysis_mcq->mcq_ans == $analysis_mcq->answer){
-                                    $current_value = $mcq_corrects[$analysis_mcq->question_id];
-                                    $current_value++;
-                                    $mcq_corrects->pull($analysis_mcq->question_id);
-                                    $mcq_corrects->put($analysis_mcq->question_id, $current_value);
-                                }
-                            }
-                            else{
-                                if($analysis_mcq->mcq_ans == $analysis_mcq->answer){
-                                    $mcq_corrects->put($analysis_mcq->question_id, 1);
-                                }
-                                else{
-                                    $mcq_corrects->put($analysis_mcq->question_id, 0);
-                                }
-                            }
-                        }
-
-                        $mcq_percents = collect();
-                        foreach($mcq_attempts as $key => $mcq_attempt){
-                            $mcq_percents->put($key, round(($mcq_corrects[$key]/$mcq_attempt), 2)*100);
-                        }
-
-                        foreach($mcq_details_results as $mcq_details_result){
-                            $mcq_details_result->success_percent = $mcq_percents[$mcq_details_result->question_id];
-                        }
-
-                        // dd($mcq_details_results, $all_analysis_mcqs, $mcq_attempts, $mcq_corrects, $mcq_percents);
-
-                        $total_mcqs = 0;
-                        $total_right_ans_for_mcqs = 0;
-                        foreach($all_analysis_mcqs as $analysis_mcq){
-                            $total_mcqs += 1;
-                            if($analysis_mcq->mcq_ans == $analysis_mcq->popQuizMCQ->answer)
-                                $total_right_ans_for_mcqs += 1;
-                        }
-                        // End of analysis for MCQs
 
                         // analysis for CQs
                         $all_analysis_cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
@@ -1443,25 +1433,36 @@ class ExamController extends Controller
                             }
                         }
                         // End of analysis for CQs
-
-                        // dd($all_analysis_mcqs, $total_mcqs, $total_right_ans_for_mcqs);
-                        // dd($exam, "Here Is The Checked Paper.", $mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cq_details_results, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
-                        return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_pop_quiz_result',
-                            compact(
-                                'exam',
-                                'course_topic',
-                                'batch',
-                                'mcq_details_results',
-                                'mcq_total_marks',
-                                'mcq_marks_scored',
-                                'cq_total_marks',
-                                'cq_marks_scored',
-                                'total_mcqs',
-                                'total_right_ans_for_mcqs'
-                            ));
+                        $cqs_exist = true;
                     }
                 }
                 else{
+                    $cqs_exist = false;
+                    $cq_total_marks = 0;
+                    $cq_marks_scored = 0;
+                    // dd("No CQ");
+                }
+
+                if($mcq_exam_result || ($cq_exam_result && $cq_exam_result->checked == 1)){
+                    return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_topic_end_exam_result',
+                    compact(
+                        'exam',
+                        'course_topic',
+                        'batch',
+                        'mcqs_exist',
+                        'mcq_details_results',
+                        'mcq_total_marks',
+                        'mcq_marks_scored',
+                        'total_mcqs',
+                        'total_right_ans_for_mcqs',
+                        'cqs_exist',
+                        'cq_total_marks',
+                        'cq_marks_scored',
+                    ));
+                }
+
+                /////////////////////
+                if(!$mcq_exam_result && !$cq_exam_result){
                     // If no results exist, then go ahead attempt exam
                     $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
