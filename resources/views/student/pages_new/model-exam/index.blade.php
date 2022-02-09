@@ -2,6 +2,8 @@
 <x-landing-layout headerBg="white">
     <div class="page-section">
         <div class="container">
+            @include('partials.alert')
+
             @if(count($exam_categories) > 0)
                 <div class="py-4">
                     <div class="text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Exams Category</div>
@@ -53,20 +55,45 @@
 
             @if(count($exams) > 0 )
                 <div class="row justify-content-center py-3 card-group-row mb-lg-8pt">
-                    @php($label = 'Take Exam')
+
                     @foreach ($exams as $exam)
-                        @foreach($exam->mcqTotalResult as $value)
-                            @if($value->student_id == auth()->user()->id)
-                                @php($label = 'View Result')
-                                @break
+                        @php($label = 'Take Exam')
+                        @php($href = route('model.exam.paper.mcq', $exam->id))
+
+                        @if(count($exam->paymentOfExams) > 0 && auth()->check())
+                            @foreach($exam->paymentOfExams as $value)
+                                @if($value->user_id == auth()->user()->id)
+                                    @php($label = 'Take Exam')
+                                    @php($href = route('model.exam.paper.mcq', $exam->id))
+                                    @break
+                                @else
+                                    @php($label = 'Pay')
+                                    @php($href = route('single.payment.initialize', $exam->id))
+                                    @break
+                                @endif
+                            @endforeach
+                        @else
+                            @if(!is_null($exam->exam_price) && $exam->exam_price != 0)
+                                @php($label = 'Pay')
+                                @php($href = route('single.payment.initialize', $exam->id))
                             @endif
-                        @endforeach
+                        @endif
+
+                        @if(count($exam->mcqTotalResult) > 0 && auth()->check())
+                            @foreach($exam->mcqTotalResult as $value)
+                                @if($value->student_id == auth()->user()->id)
+                                    @php($label = 'View Result')
+                                    @php($href = route('model.exam.paper.mcq', $exam->id))
+                                    @break
+                                @endif
+                            @endforeach
+                        @endif
                         <div class="col-md-3 mb-4">
                             <div class="single-exam text-center mx-auto p-4 mb-md-0">
                                 <h5 class="text-center text-sm mt-2">{{ $exam->title }} </h5>
-                                <p class=" text-center text-md mt-2 fw-600 text-price">{{number_format($exam->exam_price)}}৳</p>
+                                <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
-                                    <a href="{{ route('model.exam.paper.mcq', $exam->id) }}"  class="btn btn-outline text-purple mt-2">
+                                    <a href="{{$href }}"  class="btn btn-outline text-purple mt-2">
                                             {{$label}}
                                     </a>
                                 </div>
@@ -74,6 +101,9 @@
                         </div>
                     @endforeach
             </div>
+                <div class="py-5 py-md-1 text-center d-flex justify-content-center">
+                    <p class="text-center">{{ $exams->withQueryString()->links('vendor.pagination.custom') }}</p>
+                </div>
         @endif
     </div>
     </div>

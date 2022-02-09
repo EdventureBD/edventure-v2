@@ -89,6 +89,7 @@ class ModelExamController extends Controller
     public function destroy($id)
     {
         ModelExam::query()->find($id)->delete();
+        McqQuestion::query()->where('model_exam_id', $id)->delete();
 
         return redirect()->back()->with('status','Exam Deleted Successfully');
     }
@@ -171,15 +172,16 @@ class ModelExamController extends Controller
         }
 
         if(request()->has('t')) {
-            $exams = ModelExam::query()->with('mcqTotalResult')
+            $exams = ModelExam::query()->with('mcqTotalResult')->with('paymentOfExams')
                                 ->where('exam_topic_id', request()->get('t'))
                                 ->where('exam_category_id', Cache::get('exam_category'))
                                 ->where('visibility',1)
                                 ->has('mcqQuestions')
-                                ->get();
+                                ->paginate(1);
             $exam_topics = Cache::get('exam_topics');
             Cache::put('exam_topic', request()->get('t'));
         }
+
         return view('student.pages_new.model-exam.index',compact('exam_categories','exam_topics','exams'));
     }
 

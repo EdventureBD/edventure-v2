@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ModelExamController;
+use App\Http\Controllers\SinglePaymentController;
 use App\Models\User;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseCategory;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
@@ -62,6 +64,18 @@ Route::get('/course/course-preview/{course}/enroll', [CourseController::class, '
 
 require __DIR__ . '/auth.php';
 
+
+Route::get('/test', function(){
+    $shurjopay_service = new ShurjopayService();
+    $trx_id = $shurjopay_service->generateTxId();
+    $success_url = route('ok');
+    $shurjopay_service->sendPayment(1, $success_url, []);
+});
+
+//Route::get('/ok', function(Request $request){
+//    return $request->all();
+//})->name('ok');
+
 Route::get('/about-us', function(){
     return view('landing.about_us');
 })->name('about_us');
@@ -81,9 +95,14 @@ Route::get('/terms-condition', function(){
 Route::get('/contact-us', [ContactUsController::class,'index'])->name('contact_us');
 Route::post('/contact-us', [ContactUsController::class,'store'])->name('store.contact.us');
 
+//Model Exam landing page
 Route::get('/model-exam', [ModelExamController::class,'getModelExams'])->name('model.exam');
 Route::get('/model-exam/{id}', [ModelExamController::class,'getMcqExamPaper'])->name('model.exam.paper.mcq')->middleware('auth');
 Route::post('/model-exam/submit/{id}', [ModelExamController::class,'submitMcq'])->name('model.exam.mcq.submit')->middleware('auth');
+
+//single payment api
+Route::get('/single-payment/{examId}', [SinglePaymentController::class,'initialize'])->name('single.payment.initialize')->middleware('auth');
+Route::get('/single-payment-success/{examId}', [SinglePaymentController::class,'paymentSuccess'])->name('single.payment.success')->middleware('auth');
 
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
 Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');

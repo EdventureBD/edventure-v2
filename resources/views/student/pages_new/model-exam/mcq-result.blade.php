@@ -2,11 +2,11 @@
     <div class="container my-5">
         <div class="my-5 py-5 d-flex justify-content-center">
             <div>
-                <h4>Exam Result: <b>{{(int)$result->total_marks}}</b> Out of <b>{{$exam->total_exam_marks}}</b></h4>
+                <h4>Exam Result: <b>{{(int)$result->total_marks}}</b> Out of <b>{{count($exam_answer)}}</b></h4>
                 <table class="table table-responsive table-striped table-bordered">
-                    <thead>
+                    <thead class="bg-purple text-white text-center">
                         <tr>
-                            <td>No</td>
+                            <td>SL</td>
                             <td>Question</td>
                             <td>Answer</td>
                             <td>Your Answer</td>
@@ -16,7 +16,7 @@
                     <tbody>
                     @foreach($exam_answer as $key => $answer)
                         <tr>
-                            <td style="background: {{$answer->mcqQuestion->answer == $answer->mcq_ans ? 'lime' : 'red'}}">
+                            <td class="text-white text-center {{$answer->mcqQuestion->answer == $answer->mcq_ans ? 'bg-green' : 'bg-red'}}">
                                 {{$loop->iteration}}
                             </td>
                             <td>{!! $answer->mcqQuestion->question !!}</td>

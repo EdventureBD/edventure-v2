@@ -21,7 +21,7 @@ class ContactUsController extends Controller
         ]);
 
         ContactUs::query()->create($inputs);
-        return redirect()->back()->with('status', 'Your Information Successfully Submitted');
+        return redirect()->back()->with('success', 'Your Information Successfully Submitted');
 
     }
 }
