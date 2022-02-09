@@ -100,7 +100,7 @@
 
 
                @if($cqs_exist)
-                  <div class="mt-5">
+                  <div class="@if($mcqs_exist) mt-5 @endif">
                      <p class="text-center text-sm mt-3">CQ Marks : <b>{{$cq_marks_scored." out of ".$cq_total_marks}}</b></p>
                      <table class="table table-bordered">
                         <thead>
@@ -167,67 +167,69 @@
 
                            @foreach ($exam->topicEndExamCreativeQuestions as $key => $creative_question)
                               @foreach ($creative_question->question as $key2 => $question)
-                                 <tr>
-                                    @if ($key2 == 0)
-                                       <td rowspan="4" class="bg-purple2 text-white">{!! $creative_question->creative_question !!}</td>
-                                    @endif
+                                 @if ($creative_question->exam_papers)
+                                    <tr>
+                                       @if ($key2 == 0)
+                                          <td rowspan="4" class="bg-purple2 text-white">{!! $creative_question->creative_question !!}</td>
+                                       @endif
 
-                                    <td class="bg-purple2 text-white">{!! $question->question !!}</td>
-                                    <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
-                                       {{ $question->avg_score }}
-                                    </td>
-                                    
-                                    @if ($key2 == 0)
-                                       <td rowspan="4" class="text-center bg-purple2 v-align-middle">
-                                          <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Answer</a>
+                                       <td class="bg-purple2 text-white">{!! $question->question !!}</td>
+                                       <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
+                                          {{ $question->avg_score }}
                                        </td>
-                                       <td rowspan="4" class="text-center bg-purple2 v-align-middle">
-                                          <a href="" class="btn text-xxsm text-white bg-purple px-4 py-2 " data-toggle="modal" data-target="#correctAnswerModal">View Pdf</a>
-                                       </td>
+                                       
+                                       @if ($key2 == 0)
+                                          <td rowspan="4" class="text-center bg-purple2 v-align-middle">
+                                             <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Answer</a>
+                                          </td>
+                                          <td rowspan="4" class="text-center bg-purple2 v-align-middle">
+                                             <a href="" class="btn text-xxsm text-white bg-purple px-4 py-2 " data-toggle="modal" data-target="#correctAnswerModal">View Pdf</a>
+                                          </td>
 
-                                       <div class="modal fade" id="yourAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog modal-lg" role="document">
-                                             <div class="modal-content">
-                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Your Answer</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                   <span aria-hidden="true">&times;</span>
-                                                </button>
-                                             </div>
-                                             <div class="modal-body">
-                                                   @if ($creative_question->exam_papers->submitted_text != null)
-                                                      <textarea name="" id="" cols="30" rows="10">{!! $creative_question->exam_papers->submitted_text !!}</textarea>
-                                                   @endif
-                                                   @if ($creative_question->exam_papers->submitted_pdf != null)
-                                                      <iframe src="{{ Storage::url($creative_question->exam_paper->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
-                                                   @endif
-                                             </div>
+                                          <div class="modal fade" id="yourAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalLabel">Your Answer</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                      @if ($creative_question->exam_papers->submitted_text != null)
+                                                         <textarea name="" id="" cols="30" rows="10">{!! $creative_question->exam_papers->submitted_text !!}</textarea>
+                                                      @endif
+                                                      @if ($creative_question->exam_papers->submitted_pdf != null)
+                                                         <iframe src="{{ Storage::url($creative_question->exam_paper->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
+                                                      @endif
+                                                </div>
+                                                </div>
                                              </div>
                                           </div>
-                                       </div>
-                     
-                                       <div class="modal fade" id="correctAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog modal-lg" role="document">
-                                             <div class="modal-content">
-                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Correct Answer</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                   <span aria-hidden="true">&times;</span>
-                                                </button>
-                                             </div>
-                                             <div class="modal-body">
-                                                   @if ( $creative_question->standard_ans_pdf != null)
-                                                      <iframe src="{{ Storage::url($creative_question->standard_ans_pdf) }}" frameborder="0"
-                                                         width="100%" height="600px"></iframe>
-                                                   @endif
-                                             </div>
+                        
+                                          <div class="modal fade" id="correctAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalLabel">Correct Answer</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                      @if ( $creative_question->standard_ans_pdf != null)
+                                                         <iframe src="{{ Storage::url($creative_question->standard_ans_pdf) }}" frameborder="0"
+                                                            width="100%" height="600px"></iframe>
+                                                      @endif
+                                                </div>
+                                                </div>
                                              </div>
                                           </div>
-                                       </div>
 
 
-                                    @endif
-                                 </tr>
+                                       @endif
+                                    </tr>
+                                 @endif
                               @endforeach
                            @endforeach
 
