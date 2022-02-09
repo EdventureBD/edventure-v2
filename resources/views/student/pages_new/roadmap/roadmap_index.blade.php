@@ -3,7 +3,7 @@
    <link rel="stylesheet" href="/css/roadmap.css">
    {{-- css linked part ends  --}}
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
-      <div class="d-flex justify-content-around sticky-top" style="background: linear-gradient(to right,#410169,#280042)">
+      <div class="d-flex justify-content-around sticky-top" style="background: linear-gradient(90deg,#410169 0%,#280042 27%)">
          <div class="my-auto">
             <a href="{{route("home")}}" class="w-25"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid w-25"></a>
          </div>

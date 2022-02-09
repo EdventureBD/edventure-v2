@@ -11,4 +11,10 @@
       margin-left: 15px;
       width: 50%;
     }
+    #onStreamStair {
+      content: url("/img/road_map/stairDownwordsL2R.png");
+    }
+    #reverseStreamStair {
+      content: url("/img/road_map/stairDownwordsR2L.png");
+    }
   }

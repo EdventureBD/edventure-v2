@@ -28,7 +28,7 @@ let totalLands = 10;
                }
                else{
                   let div = document.createElement("div");
-                  div.innerHTML  = `<img src="img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid">`;
+                  div.innerHTML  = `<img src="img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid" id="onStreamStair">`;
                   div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                   landsParentDiv.appendChild(div);
                }
@@ -80,7 +80,7 @@ let totalLands = 10;
                      totalLands--;
                   }
                   else{
-                     div.innerHTML  = `<img src="img/road_map/reverseStair.png" alt="Stair image" class="img-fluid">`;
+                     div.innerHTML  = `<img src="img/road_map/reverseStair.png" alt="Stair image" class="img-fluid" id="reverseStreamStair">`;
                      div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                      landsParentDiv.appendChild(div);
                   }
