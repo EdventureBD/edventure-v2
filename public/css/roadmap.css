@@ -3,8 +3,12 @@
     color: whitesmoke;
   }
   @media screen and (max-width: 576px){
-    #ilandGrandParentContainer {
-      padding-left: 3%;
-      padding-right: 3%;
+    #roadmap-subject-topic-name {
+      font-size: 25px;
+    }
+    #ilandsParentContainer {
+      margin-right: 15px;
+      margin-left: 15px;
+      width: 50%;
     }
   }

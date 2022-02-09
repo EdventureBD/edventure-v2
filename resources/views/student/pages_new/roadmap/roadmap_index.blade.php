@@ -8,11 +8,11 @@
             <a href="{{route("home")}}" class="w-25"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid w-25"></a>
          </div>
          <div class="my-auto d-flex justify-content-center pr-4">
-            <h1 class="fw-800">Physics</h1>
+            <h1 class="fw-800" id="roadmap-subject-topic-name">Physics</h1>
          </div>
       </div>
       <div class="d-flex justify-content-center container" id="ilandGrandParentContainer">
-         <div class="row row-cols-md-5 row-cols-sm-1 px-sm-2 mx-sm-5 mx-md-0 w-100 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
+         <div class="row row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
             
          </div>
       </div>
