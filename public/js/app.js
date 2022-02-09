@@ -2242,7 +2242,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var BatchExamMCQ = function BatchExamMCQ(_ref) {
+var BatchExamAptitudeTest = function BatchExamAptitudeTest(_ref) {
   var questions = _ref.questions,
       batch = _ref.batch,
       exam = _ref.exam;
@@ -2492,14 +2492,14 @@ var BatchExamMCQ = function BatchExamMCQ(_ref) {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BatchExamMCQ);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BatchExamAptitudeTest);
 
-if (document.getElementById('BatchExamMCQ')) {
-  var el = document.getElementById('BatchExamMCQ');
+if (document.getElementById('BatchExamAptitudeTest')) {
+  var el = document.getElementById('BatchExamAptitudeTest');
   var questions = el.getAttribute('data-questions') ? JSON.parse(el.getAttribute('data-questions')) : [];
   var exam = el.getAttribute('data-exam') ? JSON.parse(el.getAttribute('data-exam')) : [];
   var batch = el.getAttribute('data-batch') ? JSON.parse(el.getAttribute('data-batch')) : [];
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(BatchExamMCQ, {
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(BatchExamAptitudeTest, {
     questions: questions,
     exam: exam,
     batch: batch
