@@ -750,11 +750,6 @@ class ExamController extends Controller
         return $save;
     }
 
-
-
-
-
-
     private function processAptitudeTestMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
     {
         // $questions = $request->q;
@@ -1125,13 +1120,20 @@ class ExamController extends Controller
                     }
                     elseif($cq_exam_result->checked == 1) {
 
-                        $cq_total_marks = $exam->topicEndExamCreativeQuestions->count() * 10;
+                        $cq_total_marks = 0;
+                        foreach($exam->popQuizCreativeQuestions as $creative_question){
+                            if($creative_question->exam_papers){
+                                $cq_total_marks += 10;
+                            }
+                        }
+                        
                         $cq_marks_scored = 0;
-
                         // count total marks scored by student for CQ part
                         foreach($exam->topicEndExamCreativeQuestions as $creative_question){
                             foreach($creative_question->question as $cq){
-                                $cq_marks_scored += $cq->detailsResult->gain_marks;
+                                if($cq->detailsResult){
+                                    $cq_marks_scored += $cq->detailsResult->gain_marks;
+                                }
                             }
                         }
 
@@ -1249,7 +1251,6 @@ class ExamController extends Controller
         }
 
         if ($exam_type == Edvanture::POPQUIZ) {
-
             // $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
             //Code for blocking student page refresh
             // if (!empty($canAttempt) && $canAttempt->status == 0) {
@@ -1281,13 +1282,14 @@ class ExamController extends Controller
                     'popQUizCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     },
+                    // 'popQuizCreativeQuestions' => function($query) {
+                    //     return $query->has('exam_papers');
+                    // },
                     'popQuizCreativeQuestions.exam_papers' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     }
                     ])
                     ->firstOrFail();
-
-                dd($exam);
 
                 // if CQ exam result exists and is checked, then the user has attended exam and is checked. Then paper+marks+analytics is shown
                 $cq_exam_result = ExamResult::where('exam_id', $exam->id)
@@ -1301,6 +1303,8 @@ class ExamController extends Controller
                 ->where('student_id', auth()->user()->id)
                 ->where('exam_type', 'Pop Quiz MCQ')
                 ->first();
+
+                dd($exam, $cq_exam_result, $mcq_exam_result);
 
                 if($mcq_exam_result){
                     // contains only details of MCQ exams
@@ -1398,13 +1402,20 @@ class ExamController extends Controller
                     }
                     elseif($cq_exam_result->checked == 1) {
 
-                        $cq_total_marks = $exam->popQuizCreativeQuestions->count() * 10;
-                        $cq_marks_scored = 0;
+                        $cq_total_marks = 0;
+                        foreach($exam->popQuizCreativeQuestions as $creative_question){
+                            if($creative_question->exam_papers){
+                                $cq_total_marks += 10;
+                            }
+                        }
 
+                        $cq_marks_scored = 0;
                         // count total marks scored by student for CQ part
                         foreach($exam->popQuizCreativeQuestions as $creative_question){
                             foreach($creative_question->question as $cq){
-                                $cq_marks_scored += $cq->detailsResult->gain_marks;
+                                if($cq->detailsResult){
+                                    $cq_marks_scored += $cq->detailsResult->gain_marks;
+                                }
                             }
                         }
 
@@ -1413,20 +1424,23 @@ class ExamController extends Controller
                         ->with(['question.allDetailsResult'])
                         ->get();
 
+                        // dd($all_analysis_cqs);
+
                         foreach($all_analysis_cqs as $cq){
                             foreach($cq->question as $cq_ques){
+                                // dd($cq_ques);
                                 $total_marks = 0;
                                 $scored_marks = 0;
                                 foreach($cq_ques->allDetailsResult as $result){
                                     $total_marks += $cq_ques->marks;
                                     $scored_marks += $result->gain_marks;
                                 }
-                                $cq_ques->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+                                $cq_ques->avg_score = $total_marks > 0 ? round( (($scored_marks/$total_marks)*$cq_ques->marks), 2) : 0;
 
                                 foreach($exam->popQuizCreativeQuestions as $cq){
                                     foreach($cq->question as $question){
                                         if($cq_ques->id == $question->id){
-                                            $question->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+                                            $question->avg_score = $total_marks > 0 ? round( (($scored_marks/$total_marks)*$cq_ques->marks), 2) : 0;
                                         }
                                     }
                                 }
@@ -1443,8 +1457,10 @@ class ExamController extends Controller
                     // dd("No CQ");
                 }
 
+                // dd($exam, "Here Is The Checked Paper.", $mcqs_exist ,$mcq_details_results, $mcq_total_marks, $mcq_marks_scored, $cqs_exist, $cq_total_marks, $cq_marks_scored, $course_topic, $batch, $total_mcqs, $total_right_ans_for_mcqs);
+
                 if($mcq_exam_result || ($cq_exam_result && $cq_exam_result->checked == 1)){
-                    return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_topic_end_exam_result',
+                    return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_pop_quiz_result',
                     compact(
                         'exam',
                         'course_topic',
