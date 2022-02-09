@@ -5,7 +5,7 @@ import Timer from '../../components/Timer';
 import Axios from 'axios';
 import { useBeforeunload } from 'react-beforeunload';
 
-const BatchExamMCQ = ({ questions, batch, exam }) => {
+const BatchExamAptitudeTest = ({ questions, batch, exam }) => {
    const [showSummary, setShowSummary] = useState(true);
    const [state, setState] = useReducer(
    (state, newState) => ({ ...state, ...newState }),
@@ -162,12 +162,12 @@ const BatchExamMCQ = ({ questions, batch, exam }) => {
    </div>)
 }
 
-export default BatchExamMCQ;
+export default BatchExamAptitudeTest;
 
-if (document.getElementById('BatchExamMCQ')) {
-   const el = document.getElementById('BatchExamMCQ');
+if (document.getElementById('BatchExamAptitudeTest')) {
+   const el = document.getElementById('BatchExamAptitudeTest');
    const questions = el.getAttribute('data-questions') ? JSON.parse(el.getAttribute('data-questions')) : [];
    const exam = el.getAttribute('data-exam') ? JSON.parse(el.getAttribute('data-exam')) : [];
    const batch = el.getAttribute('data-batch') ? JSON.parse(el.getAttribute('data-batch')) : [];
-   ReactDOM.render(<BatchExamMCQ questions={questions} exam={exam} batch={batch} />, el);
+   ReactDOM.render(<BatchExamAptitudeTest questions={questions} exam={exam} batch={batch} />, el);
 }
