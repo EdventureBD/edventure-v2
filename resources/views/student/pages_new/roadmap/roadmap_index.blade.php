@@ -2,20 +2,17 @@
    {{-- css linked --}}
    <link rel="stylesheet" href="/css/roadmap.css">
    {{-- css linked part ends  --}}
-   <div class="my-5 p-5 d-flex flex-column" id="roadmapParentContainer">
-      <div class="mx-auto">
-         <h3 class="fw-700">Physics</h3>
+   <div class="my-5 d-flex flex-column position-relative" id="roadmapParentContainer">
+      <div class="d-flex justify-content-evenly sticky-top mt-3 bg-purple">
+         <div class="my-auto">
+            <a href="#" class="w-25"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid w-25"></a>
+         </div>
+         <div class="my-auto mx-auto pr-5">
+            <h3 class="fw-800">Physics</h3>
+         </div>
       </div>
-      <div class="d-flex w-25 position-relative">
-         <a href="#" class="position-fixed" id="roadmap-backButton-div">
-            <img src="/img/road_map/back.png" alt="" class="img-fluid w-25" id="roadmap-backButton-img">
-         </a>
-      </div>
-      <div class="my-5 py-4">
-
-      </div>
-      <div class="d-flex justify-content-center w-100">
-         <div class="row row-cols-md-5 row-cols-sm-1 mx-5 px-lg-5 px-sm-2 w-100 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
+      <div class="d-flex justify-content-center w-100 container" id="ilandGrandParentContainer">
+         <div class="row row-cols-md-5 row-cols-sm-1 px-sm-2 mx-sm-5 mx-md-0 w-100 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
             
          </div>
       </div>
