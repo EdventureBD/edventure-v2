@@ -1,25 +1,44 @@
 <x-landing-layout headerBg="white">
-    <div class="course-info bg-gradient-purple py-5">
-        <div class="container">
+    <div class="course-info py-5 border-secondary" id="popUpExamPageBanner">
+        <div class="container pt-5">
             <div class="row">
                 <div class="col-7">
-                    <h3 class="text-white flex m-0">Course : {{ $batch->course->title }}</h3>
+                    <h3 class="text-gray d-flex m-0 fw-800">Course : {{ $batch->course->title }}</h3>
                 </div>
-                <div class="col-5 text-right">
-                    <p class="h2 text-white font-weight-light m-0 rounded timer">
-                        <span id="countdownHour"></span>: <span
-                        id="countdownMinuits"></span>:<span id="countdownSecound">
-
-                        </p>
+                <div class="col-5 text-right mx-0 px-0">
+                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
+                        <div id="innerParent">
+                            <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
+                                <p class="text-white d-flex fw-500 m-0 rounded">
+                                    <span id="countdownHour"></span>:
+                                    <span id="countdownMinuits"></span>:
+                                    <span id="countdownSecound"></span>
+                                </p>
+                            </div>
+                            <div id="dropdownIcon" >
+                                <a href="#" id="close_collapse_icon" class="d-none">
+                                    <i class="c-point fas fa-angle-up"></i>
+                                </a>
+                                <a href="#" id="open_collapse_icon" class="d-block">
+                                    <i class="c-point fas fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none">
+                                {{-- <a href="#"  class=" border rounded bg-secondary">
+                                    <span>1</span>
+                                </a> --}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span> : <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
-            <p class="hero__lead measure-hero-lead text-white-50">Batch : {{ $batch->title }}</p>
+            <p class="hero__lead measure-hero-lead text-gray my-3 fw-800">Batch : {{ $batch->title }}</p>
             {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}
-            <p class="hero__lead measure-hero-lead text-white-50">Exam : {{ $exam->title }}</p>
+            <p class="hero__lead measure-hero-lead text-gray my-3 fw-800">Exam : {{ $exam->title }}</p>
         </div>
     </div>
-    <div class="bg-light-gray py-5">
+    <div class="py-5 border rounded border-dashed">
         <div class="container page__container">
             <div class="page-section">
                 {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
@@ -29,95 +48,44 @@
 
                     @if($mcq_questions->count() > 0)
                         @foreach($mcq_questions as $mcq)
-                            <div class="question mb-5" id="">
-                                <div class="bg-purple-light p-2 mb-3 bshadow bradius-15 d-flex"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
-                                {{-- <div class="row"> --}}
+                            <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
+                                <div class="bg-purple-light p-3 d-flex rounded popUpExamMcqTitle"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
                                     @if($mcq->image)
                                         <div class="col-md-6 d-block d-md-none">
                                             <img class="img-fluid bradius-15 mb-2" src="{{ $mcq->image }}" alt="" />
                                         </div>
                                     @endif
-                                        {{-- <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-                                        <label class="btn btn-secondary" for="option1">Checked</label>
 
-                                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                                        <label class="btn btn-secondary" for="option2">Radio</label>
-
-                                        <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
-                                        <label class="btn btn-secondary" for="option4">Radio</label> --}}
-
-                                        {{-- <div class="bg-purple-light bg-light-gray bshadow bradius-15 p-2 mb-3 d-block">
-                                            <label class="btn btn-info w-100">
-                                                <input type="radio" name="options" id="option1" autocomplete="off"> Active
-                                            </label>
-                                            <label class="btn btn-info">
-                                                <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-                                            </label>
-                                            <label class="btn btn-info">
-                                                <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-                                            </label>
-                                        </div> --}}
-
-                                        {{-- <fieldset class="form-group">
-                                            <div class="row">
-                                            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                            <div class="col-sm-10">
-                                                <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    First radio
+                                    <div class="container my-4">
+                                        <div class="question d-flex justify-content-start">
+                                            <div class="row row-cols-1 pt-sm-0 pt-3 form-group mx-0 px-0 popUpMcqOptions" id="options_{{$mcq->id}}">
+                                                <label class="options"> {!! $mcq->field1 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1" id="mcqOp1">
+                                                    <span class="checkmark"></span>
                                                 </label>
-                                                </div>
-                                                <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Second radio
+                                                <label class="options"> {!! $mcq->field2 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="2" id="mcqOp2">
+                                                    <span class="checkmark"></span>
                                                 </label>
-                                                </div>
-                                                <div class="form-check disabled">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                                                <label class="form-check-label" for="gridRadios3">
-                                                    Third disabled radio
+                                                <label class="options"> {!! $mcq->field3 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="3" id="mcqOp3">
+                                                    <span class="checkmark"></span>
                                                 </label>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </fieldset> --}}
-
-                                        <div class="container my-4">
-                                            <div class="question ml-sm-5 pl-sm-5">
-                                                <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3 form-group" id="options">
-                                                    <label class="options"> {!! $mcq->field1 !!}
-                                                        <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="1">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="options"> {!! $mcq->field2 !!}
-                                                        <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="2">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="options"> {!! $mcq->field3 !!}
-                                                        <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="3">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="options"> {!! $mcq->field4 !!}
-                                                        <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="4">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                        <input type="radio" name="mcq_ques[{{ $mcq->id }}]" checked value="0" style="display: none">
-                                                </div>
+                                                <label class="options"> {!! $mcq->field4 !!}
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" value="4" id="mcqOp4">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                    <input type="radio" name="mcq_ques[{{ $mcq->id }}]" checked value="0" style="display: none">
                                             </div>
                                         </div>
-                                    {{-- <div class="col-md-6 d-none d-md-block">
-                                        {question.image ? <img className="img-fluid bradius-15" src={question.image} alt="" /> : ""}
-                                    </div> --}}
-                                {{-- </div> --}}
+                                    </div>
                             </div>
                         @endforeach
                     @endif
 
                     @forelse($cq_questions as $key => $question)
                         <div class="page-separator pt-4">
-                            <div class="bg-purple-light bradius-10 p-3">
+                            <div class="bg-purple-light rounded p-3 popUpExamCqTitle">
                                 <span class="badge badge-primary">
                                     Question {{ $key + 1 }}:
                                 </span> {!! $question->creative_question !!}
@@ -138,7 +106,7 @@
                                     </span> <div class="d-inline-block"> {!!$cq->question !!}</div>
                                 </div>
                                 @if ($cq->image)
-                                    <div class=" bg-purple-light p-3 bradius-15 bshadow mt-3">
+                                    <div class="bg-purple-light p-3 bradius-15 bshadow mt-3">
                                         <img src="{{ Storage::url($cq->image) }}" alt="Avatar"
                                             class="avatar-img rounded img-fluid">
                                     </div>
@@ -157,12 +125,14 @@
 
                     @if($cq_questions->count() > 0)
                         <p class="h3 text-center pt-5 pb-3 text-dark fw-800">উত্তরঃ-</p>
-                        <div class="form-group">
-                            <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label>
-                            <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3"></textarea>
+                        <div class="form-group" style="padding-left: 0% !important">
+                            {{-- <label for="submitted_text" class="text-center w-100 fw-600">Write your answer here </label> --}}
+                            <textarea class="form-control" name="submitted_text" id="submitted_text" rows="3" placeholder="Write your CQ's answer here."></textarea>
                         </div>
-                        <p class="mx-auto h5">Or Upload a PDF answer file:</p>
-                        <div class="form-group m-0">
+                        <div class="d-flex justify-center">
+                            <p class="mx-auto h5">Or Upload a PDF answer file:</p>
+                        </div>
+                        <div class="form-group m-0" style="padding-left: 0% !important">
                             <div class="custom-file">
                                 <input type="file" id="file" name="file" class="custom-file-input">
                                 <label for="file" class="custom-file-label">Choose file</label>
@@ -173,7 +143,9 @@
                         </div>
                     @endif
                     
-                    <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 mx-auto mt-4">Submit</button>
+                    <div class="d-flex justify-content-center px-5">
+                        <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 my-4">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -208,14 +180,13 @@
                 clearInterval(downloadTimer);
             }
         }, 1000);
-
     </script>
+
     <script type="text/javascript">
         // var formSumit
         window.onbeforeunload = function() {
             // return "Dude, are you sure you want to leave? Think of the kittens!";
-        }
-        
+        }    
     </script>
 
     <style>
@@ -301,4 +272,59 @@
             }
         }
     </style>
+
+    {{-- ------------------------Frontend Script part for Timer collapse and expand #start--------------------------------------- --}}
+    <script>
+        let closeCollapseIcon = document.getElementById("close_collapse_icon");
+        let openCollapseIcon = document.getElementById("open_collapse_icon");
+        let questionMap = document.getElementById("questionMap");
+        /* timer's part starts  */
+        
+        const closeCollapse = () => {
+            questionMap.classList.add("d-none");
+            closeCollapseIcon.classList.remove("d-block");
+            closeCollapseIcon.classList.add("d-none");
+            openCollapseIcon.classList.add("d-block");
+        };
+            const openCollapse = () => {
+            questionMap.classList.remove("d-none");
+            closeCollapseIcon.classList.remove("d-none");
+            openCollapseIcon.classList.remove("d-block");
+            openCollapseIcon.classList.add("d-none");
+            
+        };
+        closeCollapseIcon.addEventListener("click", closeCollapse);
+        openCollapseIcon.addEventListener("click", openCollapse);
+        
+        /* timer's part ends  */
+        /* Question Mapping part starts */ 
+        
+        let mcqQuestions = <?php echo json_encode($mcq_questions)?>;
+        let questionCount = 0;
+        if (mcqQuestions.length > 0) {
+            mcqQuestions.forEach(mcqQuestion => {
+                questionCount++;
+                let a = document.createElement("a");
+                a.className = ("border rounded bg-secondary");
+                let span = document.createElement("span");
+                span.innerText = questionCount;
+                a.setAttribute("id", `map_${mcqQuestion.id}`);
+                a.setAttribute("href", `#q_${mcqQuestion.id}`)
+                a.appendChild(span);
+                questionMap.append(a);
+                let optionFiledID = document.getElementById("options_" + mcqQuestion.id);
+                optionFiledID.addEventListener("click", () => {
+                    let optionIdInMap = document.getElementById(`map_${mcqQuestion.id}`);
+                    optionIdInMap.classList.remove("bg-secondary");
+                    optionIdInMap.classList.add("bg-success");
+                });
+            });
+        }
+        /* Question Mapping part ends */ 
+        // if(document.getElementById("mcqOp1_").checked) {
+        //     console.log("ckecked");
+        // }
+        // else console.log("unchecked");
+    </script>
+    {{-- ------------------------Frontend Script part for Timer collapse and expand #ends--------------------------------------- --}}
 </x-landing-layout>
