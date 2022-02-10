@@ -313,7 +313,7 @@ class SubmissionController extends Controller
                 $gain_marks = $request->m[$value];
                 $details_result = new DetailsResult();
                 $details_result->exam_id = $exam->id;
-                $details_result->exam_type = $exam_type;
+                $details_result->exam_type = $exam_type.' CQ';
                 $details_result->question_id = $request->q[$i];
                 $details_result->batch_id = $batch->id;
                 $details_result->student_id = $student->id;
@@ -345,10 +345,10 @@ class SubmissionController extends Controller
                         $questionContentTagAnalysis->student_id = $student->id;
 
                         if($exam_type == "Pop Quiz"){
-                            $questionContentTagAnalysis->exam_type = 'Pop Quiz';
+                            $questionContentTagAnalysis->exam_type = 'Pop Quiz CQ';
                         }
                         else if($exam_type == "Topic End Exam"){
-                            $questionContentTagAnalysis->exam_type = 'Topic End Exam';
+                            $questionContentTagAnalysis->exam_type = 'Topic End Exam CQ';
                         }
                         
                         $questionContentTagAnalysis->question_id = $request->q[$i];

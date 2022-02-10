@@ -88,7 +88,7 @@ class PopQuizMCQController extends Controller
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = $exam->exam_type;
+                $question_content_tag->exam_type = $exam->exam_type.' MCQ';
                 $question_content_tag->question_id = $mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
@@ -113,7 +113,7 @@ class PopQuizMCQController extends Controller
     {
         $mcq = PopQuizMCQ::where('slug', $pop_quiz_mcq_slug)->firstOrFail();
         $tagId = [];
-        $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' MCQ')
             ->where('question_id', $mcq->id)
             ->get();
 
@@ -175,7 +175,7 @@ class PopQuizMCQController extends Controller
 
         $save = $mcq->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' MCQ')
             ->where('question_id', $mcq->id)
             ->get();
 
@@ -186,7 +186,7 @@ class PopQuizMCQController extends Controller
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = $exam->exam_type;
+                $question_content_tag->exam_type = $exam->exam_type.' MCQ';
                 $question_content_tag->question_id = $mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
@@ -203,7 +203,7 @@ class PopQuizMCQController extends Controller
     {
         $mcq = PopQuizMCQ::where('slug', $pop_quiz_mcq_slug)->firstOrFail();
 
-        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type)->where('question_id', $mcq->id)->get();
+        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' MCQ')->where('question_id', $mcq->id)->get();
 
         foreach($question_content_tags as $question_content_tag){
             $question_content_tag->delete();

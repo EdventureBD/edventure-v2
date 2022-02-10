@@ -198,8 +198,8 @@
                                                 @if ($creative_question->exam_papers->submitted_text != null)
                                                    <textarea name="" id="" cols="30" rows="10">{!! $creative_question->exam_papers->submitted_text !!}</textarea>
                                                 @endif
-                                                @if ($creative_question->exam_papers->submitted_pdf != null)
-                                                   <iframe src="{{ Storage::url($creative_question->exam_paper->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
+                                                @if ($creative_question->exam_papers->submitted_pdf != null && Storage::disk('local')->exists($creative_question->exam_papers->submitted_pdf))
+                                                   <iframe src="{{ Storage::url($creative_question->exam_papers->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
                                                 @endif
                                              </div>
                                              </div>
@@ -216,7 +216,7 @@
                                                 </button>
                                              </div>
                                              <div class="modal-body">
-                                                   @if ( $creative_question->standard_ans_pdf != null)
+                                                   @if ($creative_question->standard_ans_pdf != null && Storage::disk('local')->exists($creative_question->standard_ans_pdf))
                                                       <iframe src="{{ Storage::url($creative_question->standard_ans_pdf) }}" frameborder="0"
                                                          width="100%" height="600px"></iframe>
                                                    @endif
@@ -240,7 +240,6 @@
             </div>
          </div>
 
-      
 </div>
 </x-landing-layout>
 
