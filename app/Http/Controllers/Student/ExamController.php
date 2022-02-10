@@ -773,7 +773,7 @@ class ExamController extends Controller
             (new AptitudeTestMCQ())->saveData($qus_input, $question['id']); //updating question
 
             //saving in the DetailsResuls Store for each iteration
-            $input['exam_type'] = Edvanture::APTITUDETEST;
+            $input['exam_type'] = Edvanture::APTITUDETEST.' MCQ';
             $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
             $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
             $input['question_id'] = $question['id'];

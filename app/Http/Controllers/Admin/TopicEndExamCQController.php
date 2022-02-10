@@ -72,7 +72,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->gyanmulokcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->gyanmulokcontentTagIds); $i++) {
                     $question_content_tag1 = new QuestionContentTag();
-                    $question_content_tag1->exam_type = $exam->exam_type;
+                    $question_content_tag1->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag1->question_id = $gyanmulok->id;
                     $question_content_tag1->content_tag_id = $request->gyanmulokcontentTagIds[$i];
                     $question_content_tag1->save();
@@ -98,7 +98,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->onudhaboncontentTagIds)) {
                 for ($j = 0; $j < sizeOf($request->onudhaboncontentTagIds); $j++) {
                     $question_content_tag2 = new QuestionContentTag();
-                    $question_content_tag2->exam_type = $exam->exam_type;
+                    $question_content_tag2->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag2->question_id = $onudhabon->id;
                     $question_content_tag2->content_tag_id = $request->onudhaboncontentTagIds[$j];
                     $question_content_tag2->save();
@@ -124,7 +124,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->proyugcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->proyugcontentTagIds); $i++) {
                     $question_content_tag3 = new QuestionContentTag();
-                    $question_content_tag3->exam_type = $exam->exam_type;
+                    $question_content_tag3->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag3->question_id = $proyug->id;
                     $question_content_tag3->content_tag_id = $request->proyugcontentTagIds[$i];
                     $question_content_tag3->save();
@@ -150,7 +150,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->ucchotorcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
                     $question_content_tag4 = new QuestionContentTag();
-                    $question_content_tag4->exam_type = $exam->exam_type;
+                    $question_content_tag4->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag4->question_id = $ucchotor->id;
                     $question_content_tag4->content_tag_id = $request->ucchotorcontentTagIds[$i];
                     $question_content_tag4->save();
@@ -170,16 +170,16 @@ class TopicEndExamCQController extends Controller
         $cquestion2 = $cq->question()->where('marks', 2)->first(); // অনুধাবন
         $cquestion3 = $cq->question()->where('marks', 3)->first(); // প্রয়োগমূলক
         $cquestion4 = $cq->question()->where('marks', 4)->first(); // উচ্চতর দক্ষতা
-        $questionContentTags1 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags1 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion1->id)
             ->get();
-        $questionContentTags2 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags2 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion2->id)
             ->get();
-        $questionContentTags3 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags3 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion3->id)
             ->get();
-        $questionContentTags4 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags4 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion4->id)
             ->get();
 
@@ -214,7 +214,7 @@ class TopicEndExamCQController extends Controller
         $tagId4 = []; // উচ্চতর দক্ষতা
 
         // জ্ঞানমূলক
-        $questionContentTags1 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags1 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion1->id)
             ->get();
         foreach ($questionContentTags1 as $qct) {
@@ -232,7 +232,7 @@ class TopicEndExamCQController extends Controller
         }
 
         // অনুধাবন
-        $questionContentTags2 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags2 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion2->id)
             ->get();
         foreach ($questionContentTags2 as $qct) {
@@ -250,7 +250,7 @@ class TopicEndExamCQController extends Controller
         }
 
         // প্রয়োগমূলক
-        $questionContentTags3 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags3 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion3->id)
             ->get();
         foreach ($questionContentTags3 as $qct) {
@@ -268,7 +268,7 @@ class TopicEndExamCQController extends Controller
         }
 
         // উচ্চতর দক্ষতা
-        $questionContentTags4 = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $questionContentTags4 = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $cquestion4->id)
             ->get();
         foreach ($questionContentTags4 as $qct) {
@@ -361,7 +361,7 @@ class TopicEndExamCQController extends Controller
 
         $savegyanmulok = $gyanmulok->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $gyanmulok->id)
             ->get();
 
@@ -373,7 +373,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->gyanmulokcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->gyanmulokcontentTagIds); $i++) {
                     $question_content_tag1 = new QuestionContentTag();
-                    $question_content_tag1->exam_type = $exam->exam_type;
+                    $question_content_tag1->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag1->question_id = $gyanmulok->id;
                     $question_content_tag1->content_tag_id = $request->gyanmulokcontentTagIds[$i];
                     $question_content_tag1->save();
@@ -397,7 +397,7 @@ class TopicEndExamCQController extends Controller
 
         $saveonudhabon = $onudhabon->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $onudhabon->id)
             ->get();
 
@@ -409,7 +409,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->onudhaboncontentTagIds)) {
                 for ($j = 0; $j < sizeOf($request->onudhaboncontentTagIds); $j++) {
                     $question_content_tag2 = new QuestionContentTag();
-                    $question_content_tag2->exam_type = $exam->exam_type;
+                    $question_content_tag2->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag2->question_id = $onudhabon->id;
                     $question_content_tag2->content_tag_id = $request->onudhaboncontentTagIds[$j];
                     $question_content_tag2->save();
@@ -433,7 +433,7 @@ class TopicEndExamCQController extends Controller
 
         $saveproyug = $proyug->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $proyug->id)
             ->get();
 
@@ -445,7 +445,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->proyugcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->proyugcontentTagIds); $i++) {
                     $question_content_tag3 = new QuestionContentTag();
-                    $question_content_tag3->exam_type = $exam->exam_type;
+                    $question_content_tag3->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag3->question_id = $proyug->id;
                     $question_content_tag3->content_tag_id = $request->proyugcontentTagIds[$i];
                     $question_content_tag3->save();
@@ -481,7 +481,7 @@ class TopicEndExamCQController extends Controller
             if (!empty($request->ucchotorcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
                     $question_content_tag4 = new QuestionContentTag();
-                    $question_content_tag4->exam_type = $exam->exam_type;
+                    $question_content_tag4->exam_type = $exam->exam_type.' CQ';
                     $question_content_tag4->question_id = $ucchotor->id;
                     $question_content_tag4->content_tag_id = $request->ucchotorcontentTagIds[$i];
                     $question_content_tag4->save();
@@ -496,7 +496,7 @@ class TopicEndExamCQController extends Controller
     {
         $cq = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
 
-        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type)->where('question_id', $cq->id)->get();
+        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
 
         foreach($question_content_tags as $question_content_tag){
             $question_content_tag->delete();
