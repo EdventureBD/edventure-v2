@@ -17,7 +17,7 @@ class ExamCategoryController extends Controller
      */
     public function index()
     {
-        $exam_categories = ExamCategory::query()->paginate(5);
+        $exam_categories = ExamCategory::query()->orderByDesc('created_at')->paginate(5);
         return view('admin.pages.model_exam.exam_category.index', compact('exam_categories'));
     }
 

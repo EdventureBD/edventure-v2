@@ -28,7 +28,10 @@ class ModelExamController extends Controller
     public function index()
     {
         $exam_categories = ExamCategory::get();
-        $exams = ModelExam::query()->with('category')->with('topic')->paginate(5);
+        $exams = ModelExam::query()->with('category')
+                            ->with('topic')
+                            ->orderByDesc('created_at')
+                            ->paginate(5);
 
         return view('admin.pages.model_exam.exam.index', compact('exam_categories','exams'));
     }
@@ -167,30 +170,38 @@ class ModelExamController extends Controller
                                             ->where('visibility',1);
                                     })
                                     ->where('exam_category_id', request()->get('c'))->get();
-            Cache::put('exam_topics',$exam_topics);
-            Cache::put('exam_category', request()->get('c'));
+            Cache::forever('exam_topics',$exam_topics);
+            Cache::forever('exam_category', request()->get('c'));
         }
 
-        if(request()->has('t')) {
+        if(request()->has('t') || Cache::has('exam_category')) {
             $exams = ModelExam::query()->with('mcqTotalResult')->with('paymentOfExams')
                                 ->where('exam_topic_id', request()->get('t'))
                                 ->where('exam_category_id', Cache::get('exam_category'))
                                 ->where('visibility',1)
                                 ->has('mcqQuestions')
-                                ->paginate(1);
+                                ->orderByDesc('created_at')
+                                ->paginate(5);
             $exam_topics = Cache::get('exam_topics');
-            Cache::put('exam_topic', request()->get('t'));
+            Cache::forever('exam_topic', request()->get('t'));
         }
 
         return view('student.pages_new.model-exam.index',compact('exam_categories','exam_topics','exams'));
     }
 
 
+    /**
+     * Initially load for presenting exam paper to the student
+     * If a student already attempted the exam, load the exam result by same route
+     * @param $examId
+     * @return Application|Factory|View
+     */
     public function getMcqExamPaper($examId)
     {
         $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->first();
 
-        if(auth() && $result = $this->examAttended($examId, auth()->user()->id)) {
+        //If already attempted the exam, load exam results
+        if(auth()->check() && $result = $this->examAttended($examId, auth()->user()->id)) {
 
             $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
                                             ->where('model_exam_id', $examId)
@@ -201,6 +212,12 @@ class ModelExamController extends Controller
         return view('student.pages_new.model-exam.exam-paper', compact('exam'));
     }
 
+    /**
+     * Submit student exam paper for mcq
+     * @param Request $request
+     * @param $examId
+     * @return Application|Factory|View|\Illuminate\Http\RedirectResponse
+     */
     public function submitMcq(Request $request, $examId)
     {
 
