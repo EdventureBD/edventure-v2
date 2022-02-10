@@ -3,15 +3,15 @@
    <link rel="stylesheet" href="/css/roadmap.css">
    {{-- css linked part ends  --}}
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
-      <div class="d-flex sticky-top" id="roadmap-nav">
-         <div class="my-auto">
+      <div class="d-flex fixed-top" id="roadmap-nav">
+         <div class="my-auto pl-3">
             <a href="{{route("home")}}" class=""> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
-         <div class="my-auto pr-4 mx-auto">
+         <div class="my-auto pr-5 mx-auto">
             <h1 class="fw-800" id="roadmap-subject-topic-name">Physics</h1>
          </div>
       </div>
-      <div class="d-flex justify-content-center container" id="ilandGrandParentContainer">
+      <div class="d-flex justify-content-center container mt-5 pt-4" id="ilandGrandParentContainer">
          <div class="row row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
             
          </div>
