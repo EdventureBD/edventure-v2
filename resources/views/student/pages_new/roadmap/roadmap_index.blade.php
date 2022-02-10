@@ -23,8 +23,8 @@
    <!-- Modal -->
    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
-         <div class="modal-content border-0" style="border-radius: 60px">
-            <div class="modal-header border" style="border-radius: 60px 60px 0px 0px">
+         <div class="modal-content border-0">
+            <div class="modal-header border">
                <h5 class="modal-title mx-5 fw-800 text-black" id="exampleModalLabel">Road Map</h5>
                </button>
             </div>
