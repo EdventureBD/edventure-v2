@@ -114,7 +114,7 @@
     </script>
     <script type="text/javascript">
         window.onbeforeunload = function() {
-            // return "Dude, are you sure you want to leave? Think of the kittens!";
+            return "Are you sure you want to leave?";
         }
     </script>
 
