@@ -26,6 +26,7 @@ ul li{
   align-items: center;
   max-height: 45px;
   
+  
 }
 @media screen and (max-width: 576px){
   #roadmap-subject-topic-name {

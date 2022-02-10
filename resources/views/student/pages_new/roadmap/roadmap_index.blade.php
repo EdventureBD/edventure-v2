@@ -28,31 +28,31 @@
                <h5 class="modal-title mx-5 fw-800 text-black" id="exampleModalLabel">Road Map</h5>
                </button>
             </div> 
-            <div clas s="modal-body"> 
+            <div class="modal-body"> 
                 <ul> 
                     <li>
                        <div class="w-25">
                            <img src="/img/road_map/rightSign.png" alt="" class=" px-4 pt-md-2 img-fluid" id="model-test">
                        </div>
-                       <a href="">Model Test</a>
+                       <a href="" class="fw-800">Model Test</a>
                      </li>
                      <li>
                         <div class="w-25">
                            <img src="/img/road_map/rightSign.png" alt="" class="px-4 pt-md-2 img-fluid" id="aptitute-test">
                        </div>
-                        <a href="">Aptitute Test</a>
+                        <a href="" class="fw-800">Aptitute Test</a>
                      </li>
                      <li>
                         <div class="w-25">
                            <img src="/img/road_map/wrongSign.png" alt="" class="px-4 pt-md-2 img-fluid" id="mcq-test">
                        </div>
-                        <a href="">MCQ Test</a>
+                        <a href="" class="fw-800">MCQ Test</a>
                      </li>
                      <li>
                         <div class="w-25">
                            <img src="/img/road_map/rightSign.png" alt="" class="px-4 pt-md-2 img-fluid" id="cq-test">
                        </div>
-                        <a href="">CQ Test</a>
+                        <a href="" class="fw-800">CQ Test</a>
                      </li>
                </ul>
             </div>
