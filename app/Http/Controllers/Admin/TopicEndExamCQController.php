@@ -469,7 +469,7 @@ class TopicEndExamCQController extends Controller
 
         $saveucchotor = $ucchotor->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
             ->where('question_id', $ucchotor->id)
             ->get();
 
