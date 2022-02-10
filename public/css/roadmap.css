@@ -7,7 +7,7 @@
   opacity: 80%;
   max-height: 80px;
 }
-#roadmap-back-btn {
+#roadmap-back-btn,#roadmap-modal-close-btn {
   max-height: 70px;
 }
   @media screen and (max-width: 576px){

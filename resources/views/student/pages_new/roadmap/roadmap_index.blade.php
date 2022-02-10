@@ -5,7 +5,7 @@
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
       <div class="d-flex fixed-top" id="roadmap-nav">
          <div class="my-auto pl-3">
-            <a href="{{route("home")}}" class=""> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
+            <a href="{{route("home")}}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
          <div class="my-auto pr-5 mx-auto">
             <h1 class="fw-800" id="roadmap-subject-topic-name">Physics</h1>
@@ -23,26 +23,23 @@
    <!-- Modal -->
    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header bg-warning">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+         <div class="modal-content border-0" style="border-radius: 60px">
+            <div class="modal-header border" style="border-radius: 60px 60px 0px 0px">
+               <h5 class="modal-title mx-5 fw-800 text-black" id="exampleModalLabel">Road Map</h5>
+               </button>
+            </div>
+            <div class="modal-body">
+               <ul>
+                  <li><a href="">Model Test</a></li>
+                  <li><a href="">Aptitute Test</a></li>
+                  <li><a href="">MCQ Test</a></li>
+                  <li><a href="">CQ Test</a></li>
+               </ul>
+            </div>
+            <div class="modal-footer mx-auto">
+               <a class="close" data-dismiss="modal" aria-label="Close"> <img src="/img/road_map/back.png" alt="modal closing button" class="img-fluid" id="roadmap-modal-close-btn"></a>
+            </div>
          </div>
-         <div class="modal-body">
-            <ul>
-               <li><a href="">Model Test</a></li>
-               <li><a href="">Aptitute Test</a></li>
-               <li><a href="">MCQ Test</a></li>
-               <li><a href="">CQ Test</a></li>
-            </ul>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-         </div>
-      </div>
       </div>
    </div>
    {{-- modal part ends  --}}
