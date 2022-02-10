@@ -19,9 +19,7 @@
                         </h4>
                         <span>Coming Soon..</span>
                     </div>
-
                 </div>
-
             @endif
 
             <div class="text-center @if($exam_categories->count()>=7) course-category-js @endif ">
@@ -31,9 +29,6 @@
                             mx-1 bradius-15 bshadow-medium px-4">{{$category->name}}</a>
                 @endforeach
             </div>
-{{--            <div class="py-5 py-md-1 text-center d-flex justify-content-center">--}}
-{{--                <p class="text-center">{{ $exam_category->links('vendor.pagination.custom') }}</p>--}}
-{{--            </div>--}}
             @if(count($exam_topics) > 0 )
                 <div class="py-4">
                     <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700">Topics</div>
