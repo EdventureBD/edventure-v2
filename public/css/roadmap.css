@@ -19,19 +19,27 @@
 .modal-header {
   border-radius: 30px 30px 0px 0px;
 }
-  @media screen and (max-width: 576px){
-    #roadmap-subject-topic-name {
-      font-size: 25px;
-    }
-    #ilandsParentContainer {
-      margin-right: 15px;
-      margin-left: 15px;
-      width: 50%;
-    }
-    .onStreamStair {
-      content: url("/img/road_map/stairDownwordsL2R.png");
-    }
-    .reverseStreamStair {
-      content: url("/img/road_map/stairDownwordsR2L.png");
-    }
+ul li{
+  display: flex;
+  justify-content: start;
+  list-style: none;
+  align-items: center;
+  max-height: 45px;
+  
+}
+@media screen and (max-width: 576px){
+  #roadmap-subject-topic-name {
+    font-size: 25px;
   }
+  #ilandsParentContainer {
+    margin-right: 15px;
+    margin-left: 15px;
+    width: 50%;
+  }
+  .onStreamStair {
+    content: url("/img/road_map/stairDownwordsL2R.png");
+  }
+  .reverseStreamStair {
+    content: url("/img/road_map/stairDownwordsR2L.png");
+  }
+}
