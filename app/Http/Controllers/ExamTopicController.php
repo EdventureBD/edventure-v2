@@ -18,7 +18,18 @@ class ExamTopicController extends Controller
      */
     public function index()
     {
-        $exam_topics = ExamTopic::query()->with('examCategory')->orderByDesc('created_at')->paginate(5);
+        $exam_topics = ExamTopic::query()->with('examCategory');
+
+        if(request()->input('query.category')) {
+            $exam_topics = $exam_topics->where('exam_category_id',request()->input('query.category'));
+        }
+
+        if(request()->input('query.topic')) {
+            $topic = request()->input('query.topic');
+            $exam_topics = $exam_topics->where('name', 'LIKE', '%'.$topic.'%');
+        }
+
+        $exam_topics = $exam_topics->orderByDesc('created_at')->paginate(5);
         $exam_categories = ExamCategory::query()->get();
         return view('admin.pages.model_exam.exam_topic.index', compact('exam_topics','exam_categories'));
     }

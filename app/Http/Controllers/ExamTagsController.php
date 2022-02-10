@@ -21,7 +21,18 @@ class ExamTagsController extends Controller
     public function index()
     {
         $exam_topics = ExamTopic::query()->with('examCategory')->get();
-        $exam_tags = ExamTag::query()->with('examTopic')->orderByDesc('created_at')->paginate(5);
+        $exam_tags = ExamTag::query()->with('examTopic');
+
+        if(request()->input('query.topic')) {
+            $exam_tags = $exam_tags->where('exam_topic_id',request()->input('query.topic'));
+        }
+
+        if(request()->input('query.tag')) {
+            $tag = request()->input('query.tag');
+            $exam_tags = $exam_tags->where('name', 'LIKE', '%'.$tag.'%');
+        }
+
+        $exam_tags = $exam_tags->orderByDesc('created_at')->paginate(5);
         return view('admin.pages.model_exam.exam_tag.index', compact('exam_topics','exam_tags'));
     }
 

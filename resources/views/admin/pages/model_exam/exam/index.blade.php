@@ -47,36 +47,38 @@
             width: 80%;
             transform: scale(1.2);
         }
+         .table td.fit,
+         .table th.fit {
+             white-space: nowrap;
+             width: 1%;
+         }
     </style>
-    <a
-        href="#createExam"
-        data-toggle="modal"
-        title="Create Model Exam">
-        <button class="btn btn-outline-primary"><i class="far fa-plus-square"></i> New Exam</button>
-    </a>
+
+    @include('admin.pages.model_exam.exam.filter')
+    @include('admin.pages.model_exam.exam.create')
 
     <table class="table table-responsive table-striped">
 
         @if(count($exams) > 0)
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Topic</th>
-                <th scope="col">Category</th>
-                <th scope="col">Question Limit</th>
-                <th scope="col">Exam type</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Negative Marking Value</th>
-                <th scope="col">Visibility</th>
-                <th scope="col">Per Question Marks</th>
-                <th scope="col">Total Exam Marks</th>
-                <th scope="col">Solution Pdf</th>
-                <th scope="col">Solution Video</th>
-                <th scope="col">Price</th>
-                <th scope="col">Created</th>
-                <th scope="col">Questions</th>
-                <th scope="col">Action</th>
+                <th class="fit" scope="col">#</th>
+                <th class="fit" scope="col">Title</th>
+                <th class="fit" scope="col">Topic</th>
+                <th class="fit" scope="col">Category</th>
+                <th class="fit" scope="col">Question Limit</th>
+                <th class="fit" scope="col">Exam type</th>
+                <th class="fit" scope="col">Duration</th>
+                <th class="fit" scope="col">Negative Marking Value</th>
+                <th class="fit" scope="col">Visibility</th>
+                <th class="fit" scope="col">Per Question Marks</th>
+                <th class="fit" scope="col">Total Exam Marks</th>
+                <th class="fit" scope="col">Solution Pdf</th>
+                <th class="fit" scope="col">Solution Video</th>
+                <th class="fit" scope="col">Price</th>
+                <th class="fit" scope="col">Created</th>
+                <th class="fit" scope="col">Questions</th>
+                <th class="fit" scope="col">Action</th>
             </tr>
             </thead>
         @endif
@@ -148,12 +150,9 @@
     </table>
     @if ($exams->hasPages())
         <div class="pagination-wrapper">
-            {{ $exams->links() }}
+            {{ $exams->withQueryString()->links() }}
         </div>
     @endif
-
-    @include('admin.pages.model_exam.exam.create')
-
 @endsection
 
 @include('admin.pages.model_exam.exam.utils')

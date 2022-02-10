@@ -29,9 +29,21 @@ class ModelExamController extends Controller
     {
         $exam_categories = ExamCategory::get();
         $exams = ModelExam::query()->with('category')
-                            ->with('topic')
-                            ->orderByDesc('created_at')
-                            ->paginate(5);
+                            ->with('topic');
+
+        if(request()->input('query.category')) {
+            $exams = $exams->where('exam_category_id',request()->input('query.category'));
+        }
+
+        if(request()->input('query.topic')) {
+            $exams = $exams->where('exam_topic_id',request()->input('query.topic'));
+        }
+
+        if(request()->input('query.exam')) {
+            $exams = $exams->where('id',request()->input('query.exam'));
+        }
+
+        $exams = $exams->orderByDesc('created_at')->paginate(5);
 
         return view('admin.pages.model_exam.exam.index', compact('exam_categories','exams'));
     }
@@ -105,6 +117,15 @@ class ModelExamController extends Controller
     public function getTopicsByCategory($categoryId)
     {
         $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->get();
+
+        return response()->json($topics);
+    }
+
+    public function getExamByCategoryAndTopic($categoryId, $topicId)
+    {
+        $topics = ModelExam::query()->select('id','title')
+                        ->where('exam_category_id',$categoryId)
+                        ->where('exam_topic_id',$topicId)->get();
 
         return response()->json($topics);
     }

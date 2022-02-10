@@ -1,6 +1,15 @@
+<div style="justify-content: right;display: grid; text-align: end">
+    <a
+        href="#createExam"
+        data-toggle="modal"
+        title="Create Model Exam">
+        <button class="btn btn-outline-primary"><i class="far fa-plus-square"></i> New Exam</button>
+    </a>
+</div>
+
 <div class="modal fade"
      id="createExam">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content bg-light">
             <form action="{{route('model.exam.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf

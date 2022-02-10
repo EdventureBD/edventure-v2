@@ -1,47 +1,35 @@
 <div style="justify-content: right;display: grid; text-align: end">
-    <a href="#createTag"
+    <a href="#createTopic"
        data-toggle="modal"
        title="Create Model Exam">
-        <button class="btn btn-outline-primary"><i class="far fa-plus-square"></i> New Tag</button>
+        <button class="btn btn-outline-primary"><i class="far fa-plus-square"></i> New Topic</button>
     </a>
 </div>
 
+
+
 <div class="modal fade"
-     id="createTag">
-    <div class="modal-dialog modal-lg">
+     id="createTopic">
+    <div class="modal-dialog">
         <div class="modal-content bg-light">
-            <form action="{{route('exam.tags.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
+            <form action="{{route('exam.topic.store')}}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Create New Topic</h4>
+                </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <input class="form-control" name="solution_pdf" accept="application/pdf" type="file">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">https://youtube.com/watch?v=</span>
-                                </div>
-                                <input type="text"
-                                       class="form-control"
-                                       name="solution_video"
-                                       id="solution_video"
-                                       placeholder="Solution Video Url" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="select2-purple d-flex align-middle py-0 pb-5">
                                 <select required
                                         class="select2 form-control"
-                                        name="exam_topic_id"
-                                        data-placeholder="Select a Topic"
+                                        name="exam_category_id"
+                                        data-placeholder="Select a Category"
                                         data-dropdown-css-class="select2-purple"
                                         style="width: 100%; margin-top: -8px !important;">
-                                    @foreach ($exam_topics as $topic)
+                                    @foreach ($exam_categories as $category)
                                         <option value=""></option>
-                                        <option value="{{ $topic->id }}">{{ $topic->name.' ('.$topic->examCategory->name.')' }}</option>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -53,14 +41,13 @@
                                     type="text"
                                     class="form-control"
                                     name="name"
-                                    placeholder="Tags name"
-                                    aria-label="Tags name"
+                                    placeholder="Topic name"
+                                    aria-label="Topic name"
                                     aria-describedby="basic-addon2">
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="modal-footer justify-content-between">
                     <button type="button"
                             class="btn btn-outline-secondary"
@@ -70,7 +57,6 @@
                             class="btn btn-outline-success">Create
                     </button>
                 </div>
-
             </form>
         </div>
     </div>

@@ -4,6 +4,7 @@
             $('.select2').select2()
             $('#negative_marking_value').attr('disabled', true);
         })
+        let query_category_id = null;
 
 
         function visibilityUpdate(examId) {
@@ -70,6 +71,60 @@
                     $('#exam_topics').select2({
                         data: topicsObj
                     });
+
+                },
+                error: function (e) {
+                    console.log(e)
+                }
+            });
+        });
+
+        $('#query_category_selected').on("select2:selecting", function (e) {
+            console.log(e)
+            query_category_id = e.params.args.data.id
+            let url = window.location.origin + '/admin/model-exam/topics/' + query_category_id;
+            $('#query_topic_selected').empty();
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (response) {
+                    let topicsObj = [
+                        id = '',
+                        text = ''
+                    ];
+                    for (const [key, value] of Object.entries(response)) {
+                        topicsObj.push({"id": value.id, "text": value.name})
+                    }
+                    $('#query_topic_selected').select2({
+                        data: topicsObj
+                    });
+
+                },
+                error: function (e) {
+                    console.log(e)
+                }
+            });
+        });
+
+        $('.selected_topic').on("select2:selecting", function (e) {
+            let query_topic_id = e.params.args.data.id
+            let url = window.location.origin + '/admin/model-exam/list/' + query_category_id + '/' + query_topic_id;
+            $('#query_exam_selected').empty();
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (response) {
+                    let examsObj = [
+                        id = '',
+                        text = ''
+                    ];
+                    for (const [key, value] of Object.entries(response)) {
+                        examsObj.push({"id": value.id, "text": value.title})
+                    }
+                    $('#query_exam_selected').select2({
+                        data: examsObj
+                    });
+
                 },
                 error: function (e) {
                     console.log(e)

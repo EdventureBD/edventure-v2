@@ -7,6 +7,13 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <style>
+        .table td.fit,
+        .table th.fit {
+            white-space: nowrap;
+            width: 1%;
+        }
+    </style>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -16,51 +23,20 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('exam.topic.store')}}" method="POST">
-        @csrf
-        <div class="row">
-            <div class="col-md-6">
-                <div class="select2-purple d-flex align-middle py-0 pb-5">
-                    <select required
-                            class="select2 form-control"
-                            name="exam_category_id"
-                            data-placeholder="Select a Category"
-                            data-dropdown-css-class="select2-purple"
-                            style="width: 100%; margin-top: -8px !important;">
-                        @foreach ($exam_categories as $category)
-                            <option value=""></option>
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <input
-                        required
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        placeholder="Topic name"
-                        aria-label="Topic name"
-                        aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit">Create</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <table class="table">
+
+    @include('admin.pages.model_exam.exam_topic.filter')
+    @include('admin.pages.model_exam.exam_topic.create')
+
+    <table class="table table-striped table-responsive">
 
         @if(count($exam_topics) > 0)
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Topic</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Action</th>
+                <th class="fit" scope="col">#</th>
+                <th class="fit" scope="col">Topic</th>
+                <th class="fit" scope="col">Category</th>
+                <th class="fit" scope="col">Created at</th>
+                <th class="fit" scope="col">Action</th>
             </tr>
             </thead>
         @endif
@@ -71,109 +47,9 @@
                 <td>{{ $topic->name }}</td>
                 <td>{{ $topic->examCategory->name }}</td>
                 <td>{{ date('F j, Y, g:i a', strtotime($topic->created_at)) }}</td>
-                <td>
-                    <a class="mr-1 btn btn-outline-primary btn-sm"
-                       onclick="fetchData({{ $topic->id }});"
-                       href="#editCategory{{ $topic->id }}"
-                       data-toggle="modal"
-                       title="Edit {{ $topic->name }}">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <a class="mr-1 btn btn-outline-danger btn-sm"
-                       href="#deleteCategory{{ $topic->id }}"
-                       data-toggle="modal"
-                       title="Delete {{ $topic->name }}">
-                        <i class="far fa-trash-alt"></i>
-                    </a>
-                    <div class="modal fade"
-                         id="deleteCategory{{ $topic->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-light">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Delete
-                                        {{ $topic->name }}</h4>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure??</p>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    <form
-                                        action="{{ route('exam.topic.destroy', $topic->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit"
-                                                class="btn btn-outline-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <div class="modal fade"
-                         id="editCategory{{ $topic->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit
-                                        {{ $topic->name }}</h4>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{route('exam.topic.update',$topic->id)}}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="select2-purple">
-                                                <select required
-                                                        id="category{{$topic->id}}"
-                                                        class="select2 form-control"
-                                                        name="exam_category_id"
-                                                        data-placeholder="Select a Category"
-                                                        data-dropdown-css-class="select2-purple"
-                                                        style="width: 100%;">
-                                                    @foreach ($exam_categories as $category)
-                                                        <option value=""></option>
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-group mb-3">
-                                                <input
-                                                    required
-                                                    type="text"
-                                                    id="topic_name{{$topic->id}}"
-                                                    class="form-control"
-                                                    name="name"
-                                                    placeholder="Topic name"
-                                                    aria-label="Topic name"
-                                                    aria-describedby="basic-addon2">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-primary" type="submit">Update</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
+                <td style="display: flex">
+                    @include('admin.pages.model_exam.exam_topic.edit')
+                    @include('admin.pages.model_exam.exam_topic.delete')
                 </td>
             </tr>
         @empty
@@ -190,7 +66,7 @@
     </table>
     @if ($exam_topics->hasPages())
         <div class="pagination-wrapper">
-            {{ $exam_topics->links() }}
+            {{ $exam_topics->withQueryString()->links() }}
         </div>
     @endif
 @endsection

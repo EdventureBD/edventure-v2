@@ -35,7 +35,7 @@
     </div>
     @include('admin.pages.model_exam.mcq_question.create')
 
-    <table class="table table-responsive">
+    <table class="table table-responsive table-striped">
 
         @if(count($exam_questions) > 0)
             <thead>
@@ -59,7 +59,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{!! $q->question !!}</td>
-                <td class="badge badge-pill badge-info" style="margin-top: 25px;padding:5px">
+                <td class="badge badge-pill badge-info" style="margin-top: auto;padding:5px">
                     {{$q->examTag->name}}
                 </td>
                 <td>{!! $q->field_1 !!}</td>

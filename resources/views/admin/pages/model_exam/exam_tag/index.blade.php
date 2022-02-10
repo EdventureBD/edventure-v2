@@ -24,6 +24,7 @@
             width: 1%;
         }
     </style>
+    @include('admin.pages.model_exam.exam_tag.filter')
     @include('admin.pages.model_exam.exam_tag.create')
 
     <table class="table table-responsive table-striped">

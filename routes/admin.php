@@ -218,6 +218,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/model-exam',[ModelExamController::class,'index'])->name('model.exam.index');
     Route::get('/model-exam/visibility/{id}',[ModelExamController::class,'updateExamVisibility'])->name('model.exam.visibility');
     Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
+    Route::get('/model-exam/list/{categoryId}/{topicId}',[ModelExamController::class,'getExamByCategoryAndTopic'])->name('model.exam.list');
     Route::get('/model-exam/downloadPdf/{id}',[ModelExamController::class,'downloadSolutionPdf'])->name('model.exam.pdf');
     Route::post('/model-exam',[ModelExamController::class,'store'])->name('model.exam.store');
     Route::put('/model-exam/{id}',[ModelExamController::class,'update'])->name('model.exam.update');
