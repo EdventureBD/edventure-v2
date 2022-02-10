@@ -2,6 +2,13 @@
     background: url("/img/road_map/roadmapBackground.png");
     color: whitesmoke;
   }
+#roadmap-nav {
+  background: linear-gradient(90deg,#410169 0%,#280042 27%);
+  max-height: 80px;
+}
+#roadmap-back-btn {
+  max-height: 70px;
+}
   @media screen and (max-width: 576px){
     #roadmap-subject-topic-name {
       font-size: 25px;
