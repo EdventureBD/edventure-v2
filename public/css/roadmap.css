@@ -13,6 +13,9 @@
 #roadmap-modal-close-btn {
   transform: rotate(90deg);
 }
+#exampleModalLabel {
+  color: #6902C5;
+}
 .modal-content {
   border: 8px solid #cbaddd;
   border-radius: 30px;

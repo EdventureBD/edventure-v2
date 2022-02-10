@@ -25,7 +25,7 @@
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-header border">
-               <h5 class="modal-title mx-auto fw-800 text-black" id="exampleModalLabel">Road Map</h5>
+               <h5 class="modal-title mx-auto fw-800" id="exampleModalLabel">Road Map</h5>
                </button>
             </div> 
             <div class="modal-body"> 
