@@ -14,7 +14,9 @@
   transform: rotate(90deg);
 }
 .modal-content {
+  border: 8px solid #cbaddd;
   border-radius: 30px;
+  background: rgb(254 228 240);
 }
 .modal-header {
   border-radius: 30px 30px 0px 0px;
@@ -25,8 +27,9 @@ ul li{
   list-style: none;
   align-items: center;
   max-height: 45px;
-  
-  
+}
+ul li a{
+  width: 50%;
 }
 @media screen and (max-width: 576px){
   #roadmap-subject-topic-name {
@@ -37,6 +40,10 @@ ul li{
     margin-left: 15px;
     width: 50%;
   }
+ ul li {
+   max-height: 55px;
+ }
+  
   .onStreamStair {
     content: url("/img/road_map/stairDownwordsL2R.png");
   }

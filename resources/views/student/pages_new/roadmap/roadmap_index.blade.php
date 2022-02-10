@@ -23,36 +23,36 @@
    <!-- Modal -->
    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
-         <div class="modal-content border-0">
+         <div class="modal-content">
             <div class="modal-header border">
-               <h5 class="modal-title mx-5 fw-800 text-black" id="exampleModalLabel">Road Map</h5>
+               <h5 class="modal-title mx-auto fw-800 text-black" id="exampleModalLabel">Road Map</h5>
                </button>
             </div> 
             <div class="modal-body"> 
                 <ul> 
                     <li>
                        <div class="w-25">
-                           <img src="/img/road_map/rightSign.png" alt="" class=" px-4 pt-md-2 img-fluid" id="model-test">
+                           <img src="/img/road_map/rightSign.png" alt="" class=" px-md-4 px-sm-3 pt-md-2 img-fluid" id="model-test">
                        </div>
-                       <a href="" class="fw-800">Model Test</a>
+                       <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">Model Test</a>
                      </li>
                      <li>
                         <div class="w-25">
-                           <img src="/img/road_map/rightSign.png" alt="" class="px-4 pt-md-2 img-fluid" id="aptitute-test">
+                           <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
                        </div>
-                        <a href="" class="fw-800">Aptitute Test</a>
+                        <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">Aptitute Test</a>
                      </li>
                      <li>
                         <div class="w-25">
-                           <img src="/img/road_map/wrongSign.png" alt="" class="px-4 pt-md-2 img-fluid" id="mcq-test">
+                           <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="mcq-test">
                        </div>
-                        <a href="" class="fw-800">MCQ Test</a>
+                        <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">MCQ Test</a>
                      </li>
                      <li>
                         <div class="w-25">
-                           <img src="/img/road_map/rightSign.png" alt="" class="px-4 pt-md-2 img-fluid" id="cq-test">
+                           <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="cq-test">
                        </div>
-                        <a href="" class="fw-800">CQ Test</a>
+                        <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">CQ Test</a>
                      </li>
                </ul>
             </div>
