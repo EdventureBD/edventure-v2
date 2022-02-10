@@ -5,9 +5,9 @@
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
       <div class="d-flex sticky-top" id="roadmap-nav">
          <div class="my-auto">
-            <a href="{{route("home")}}" class="w-100"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid w-100" id="roadmap-back-btn"></a>
+            <a href="{{route("home")}}" class=""> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
-         <div class="my-auto d-flex justify-content-center pr-4 mx-auto">
+         <div class="my-auto pr-4 mx-auto">
             <h1 class="fw-800" id="roadmap-subject-topic-name">Physics</h1>
          </div>
       </div>

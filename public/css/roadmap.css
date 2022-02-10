@@ -4,6 +4,7 @@
   }
 #roadmap-nav {
   background: linear-gradient(90deg,#410169 0%,#280042 27%);
+  opacity: 80%;
   max-height: 80px;
 }
 #roadmap-back-btn {
