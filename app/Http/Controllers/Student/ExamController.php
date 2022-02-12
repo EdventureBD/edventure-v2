@@ -16,6 +16,7 @@ use App\Models\Admin\TopicEndExamMCQ;
 use App\Models\Admin\TopicEndExamCreativeQuestion;
 use App\Models\Admin\PopQuizMCQ;
 use App\Models\Admin\PopQuizCreativeQuestion;
+use App\Models\Admin\QuestionContentTag;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
@@ -378,7 +379,7 @@ class ExamController extends Controller
         if ($exam->exam_type == Edvanture::TOPICENDEXAM || $exam->exam_type == Edvanture::POPQUIZ) {
             // $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
             // $result = ExamResult::where()->where()->where();
-            // dd($request->mcq_ques, $request->cq_ques);
+            // dd($request, $batch, $exam);
 
             if ($exam->exam_type == Edvanture::TOPICENDEXAM){
                 $exam_type_cq = "Topic End Exam CQ";
@@ -408,6 +409,23 @@ class ExamController extends Controller
                     }
                     elseif($exam->exam_type == Edvanture::POPQUIZ){
                         $mcq_question = PopQuizMCQ::find($key);
+
+                        $question_content_tag = QuestionContentTag::where('exam_type', $exam_type_mcq)->where('question_id', $key)->first();
+
+                        $content_tag_analysis = new QuestionContentTagAnalysis();
+                        $content_tag_analysis->content_tag_id = $question_content_tag->content_tag_id;
+                        $content_tag_analysis->student_id = auth()->user()->id;
+                        $content_tag_analysis->exam_type = $exam_type_mcq;
+                        $content_tag_analysis->question_id = $question_content_tag->question_id;
+                        $content_tag_analysis->number_of_attempt = 1;
+                        if($mcq == $mcq_question->answer){
+                            $content_tag_analysis->gain_marks = 1;
+                        }
+                        else{
+                            $content_tag_analysis->gain_marks = 0;
+                        }
+                        $content_tag_analysis->status = 1;
+                        $content_tag_analysis->save();
                     }
                     
                     $details_result = new DetailsResult();
@@ -1479,6 +1497,7 @@ class ExamController extends Controller
                     ));
                 }
 
+                // dd($mcq_exam_result, $cq_exam_result);
                 /////////////////////
                 if(!$mcq_exam_result && !$cq_exam_result){
                     // If no results exist, then go ahead attempt exam
