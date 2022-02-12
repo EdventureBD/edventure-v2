@@ -342,27 +342,27 @@ class PopQuizCQController extends Controller
             'ucchotorcontentTagIds' => 'required'
         ]);
 
-        $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+        $creative_question = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
 
-        $cq->creative_question = $request->creative_question;
-        $cq->exam_id = $request->examId;
+        $creative_question->creative_question = $request->creative_question;
+        $creative_question->exam_id = $request->examId;
         if ($request->hasFile('uddipokimage')) {
-            Storage::delete('public/question/pop_quiz_cq' . $cq->image);
-            $cq->image = $request->uddipokimage->store('public/question/pop_quiz_cq');
+            Storage::delete('public/question/pop_quiz_cq' . $creative_question->image);
+            $creative_question->image = $request->uddipokimage->store('public/question/pop_quiz_cq');
         }
         if ($request->hasFile('answer')) {
-            Storage::delete('public/question/pop_quiz_cq/answer' . $cq->standard_ans_pdf);
-            $cq->standard_ans_pdf = $request->answer->store('public/question/pop_quiz_cq/answer');
+            Storage::delete('public/question/pop_quiz_cq/answer' . $creative_question->standard_ans_pdf);
+            $creative_question->standard_ans_pdf = $request->answer->store('public/question/pop_quiz_cq/answer');
         }
 
-        $cq->save();
+        $creative_question->save();
 
         // জ্ঞানমূলক
-        $gyanmulok = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 1)->first();
+        $gyanmulok = PopQuizCQ::where('creative_question_id', $creative_question->id)->where('marks', 1)->first();
         $gyanmulok->question = $request->gyanmulokquestion;
         $gyanmulok->slug = (string) Str::uuid();
         $gyanmulok->marks = $request->gyanmulokmarks;
-        $gyanmulok->creative_question_id = $cq->id;
+        $gyanmulok->creative_question_id = $creative_question->id;
         $gyanmulok->number_of_attempt = 0;
         $gyanmulok->gain_marks = 0;
         $gyanmulok->success_rate = 0;
@@ -394,11 +394,11 @@ class PopQuizCQController extends Controller
         }
 
         // অনুধাবন
-        $onudhabon = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 2)->first();
+        $onudhabon = PopQuizCQ::where('creative_question_id', $creative_question->id)->where('marks', 2)->first();
         $onudhabon->question = $request->onudhabonquestion;
         $onudhabon->slug = (string) Str::uuid();
         $onudhabon->marks = $request->onudhabonmarks;
-        $onudhabon->creative_question_id = $cq->id;
+        $onudhabon->creative_question_id = $creative_question->id;
         $onudhabon->number_of_attempt = 0;
         $onudhabon->gain_marks = 0;
         $onudhabon->success_rate = 0;
@@ -430,11 +430,11 @@ class PopQuizCQController extends Controller
         }
 
         // প্রয়োগমূলক
-        $proyug = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 3)->first();
+        $proyug = PopQuizCQ::where('creative_question_id', $creative_question->id)->where('marks', 3)->first();
         $proyug->question = $request->proyugquestion;
         $proyug->slug = (string) Str::uuid();
         $proyug->marks = $request->proyugmarks;
-        $proyug->creative_question_id = $cq->id;
+        $proyug->creative_question_id = $creative_question->id;
         $proyug->number_of_attempt = 0;
         $proyug->gain_marks = 0;
         $proyug->success_rate = 0;
@@ -466,11 +466,11 @@ class PopQuizCQController extends Controller
         }
 
         // উচ্চতর দক্ষতা
-        $ucchotor = PopQuizCQ::where('creative_question_id', $cq->id)->where('marks', 4)->first();
+        $ucchotor = PopQuizCQ::where('creative_question_id', $creative_question->id)->where('marks', 4)->first();
         $ucchotor->question = $request->ucchotorquestion;
         $ucchotor->slug = (string) Str::uuid();
         $ucchotor->marks = $request->ucchotormarks;
-        $ucchotor->creative_question_id = $cq->id;
+        $ucchotor->creative_question_id = $creative_question->id;
         $ucchotor->number_of_attempt = 0;
         $ucchotor->gain_marks = 0;
         $ucchotor->success_rate = 0;
@@ -506,20 +506,42 @@ class PopQuizCQController extends Controller
 
     public function destroy(Exam $exam, $pop_quiz_cq_slug)
     {
-        $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+        // $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
 
-        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
+        // $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
 
-        foreach($question_content_tags as $question_content_tag){
-            $question_content_tag->delete();
+        // foreach($question_content_tags as $question_content_tag){
+        //     $question_content_tag->delete();
+        // }
+
+        // $deleteCreativeQuestion = $cq->delete();
+
+        // if ($deleteCreativeQuestion) {
+        //     return redirect()->route('exam.show', $exam)->with('status', 'Pop Quiz CQ deleted successfully!');
+        // } else {
+        //     return redirect()->route('exam.show', $exam)->with('failed', 'Pop Quiz CQ deletion failed!');
+        // }
+        
+        $creative_question = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
+
+        $cqs = PopQuizCQ::where('creative_question_id', $creative_question->id)->get();
+
+        foreach($cqs as $cq){
+            $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
+            
+            foreach($question_content_tags as $question_content_tag){
+                $question_content_tag->delete();
+            }
+
+            $cq->delete();
         }
 
-        $deleteCreativeQuestion = $cq->delete();
+        $deleteCreativeQuestion = $creative_question->delete();
 
         if ($deleteCreativeQuestion) {
-            return redirect()->route('exam.show', $exam)->with('status', 'Pop Quiz CQ deleted successfully!');
+            return redirect()->route('exam.show', $exam)->with('status', 'Topic End Exam CQ deleted successfully!');
         } else {
-            return redirect()->route('exam.show', $exam)->with('failed', 'Pop Quiz CQ deletion failed!');
+            return redirect()->route('exam.show', $exam)->with('failed', 'Topic End Exam CQ deletion failed!');
         }
     }
 }
