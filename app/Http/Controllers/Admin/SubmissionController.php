@@ -245,7 +245,7 @@ class SubmissionController extends Controller
 
 
 
-    
+
     public function giveMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
     {
         if ($exam_type == 'CQ') {
@@ -335,7 +335,9 @@ class SubmissionController extends Controller
                 $cq->success_rate = $successRate;
                 $cq->save();
 
+                // dump($request->q);
                 $questionContentTags = QuestionContentTag::where('question_id', $request->q[$i])->get();
+                // dump($questionContentTags);
                 if ($questionContentTags->count() > 0) {
                     foreach ($questionContentTags as $questionContentTag) {
                         $questionContentTagAnalysis = new QuestionContentTagAnalysis();
@@ -353,10 +355,13 @@ class SubmissionController extends Controller
                         $questionContentTagAnalysis->number_of_attempt = 1;
                         $questionContentTagAnalysis->gain_marks = $gain_marks;
                         $questionContentTagAnalysis->status = 1;
+                        // dump($questionContentTagAnalysis);
                         $questionContentTagAnalysis->save();
                     }
                 }
             }
+
+            // dd(1);
 
             if($exam_type == "Pop Quiz"){
                 $cq_type = "Pop Quiz CQ";
