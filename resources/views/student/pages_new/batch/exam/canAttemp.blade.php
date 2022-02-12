@@ -28,24 +28,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $n = 1; @endphp
+                            @php $n = 1;@endphp
                             @foreach($detailsResult as $result)
                             @php
-                                if ($result->exam_type == 'Aptitude Test') {
-                                    $result->question = $result->atQuestion;
-                                }
-                                
                                 $field = 'field'.$result->mcq_ans;
-                                $cfield = 'field'.$result->question->answer;
-                                $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
+                                $cfield = 'field'.$result->atQuestion->answer;
+                                $cellcolor = $result->mcq_ans == $result->atQuestion->answer ? 'bg-green' : 'bg-red';
                             @endphp
                             <tr>
                                 <td class="{{$cellcolor}}">{{$n}}</td>
-                                <td class="{{$cellcolor}}">{!! $result->question->question !!}</td>
-                                <td class="{{$cellcolor}}">{!! $result->question->$field !!}</td>
-                                <td class="{{$cellcolor}}">{!! $result->question->$cfield !!}</td>
-                                <td class="{{$cellcolor}}">{!! $result->question->explanation !!}</td>
-                                <td class="{{$cellcolor}}">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td>
+                                <td class="{{$cellcolor}}">{!! $result->atQuestion->question !!}</td>
+                                <td class="{{$cellcolor}}">{!! $result->atQuestion->$field !!}</td>
+                                <td class="{{$cellcolor}}">{!! $result->atQuestion->$cfield !!}</td>
+                                <td class="{{$cellcolor}}">{!! $result->atQuestion->explanation !!}</td>
+                                <td class="{{$cellcolor}}">{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
                             </tr>
                             @php $n++; @endphp
                             @endforeach
@@ -106,8 +102,8 @@
                                 if ($n == 1) $creative = $result->cqQuestion->creativeQuestion->creative_question;
                                 $avg = 0;
                                 
-                                if (!empty($result->question) && $result->question->gain_marks > 0) {
-                                    $avg = number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2);
+                                if (!empty($result->atQuestion) && $result->atQuestion->gain_marks > 0) {
+                                    $avg = number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2);
                                 }
                                 
                             @endphp
