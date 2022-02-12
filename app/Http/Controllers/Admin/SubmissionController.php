@@ -245,9 +245,7 @@ class SubmissionController extends Controller
 
 
 
-
-
-
+    
     public function giveMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
     {
         if ($exam_type == 'CQ') {

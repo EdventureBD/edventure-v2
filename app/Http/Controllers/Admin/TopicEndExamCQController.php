@@ -51,7 +51,6 @@ class TopicEndExamCQController extends Controller
         if ($request->hasFile('answer')) {
             $creative_question->standard_ans_pdf = $request->answer->store('public/question/topic_end_exam_cq/answer');
         }
-
         $creative_question->save();
 
         // জ্ঞানমূলক
@@ -66,8 +65,8 @@ class TopicEndExamCQController extends Controller
         if ($request->hasFile('gyanmulokimage')) {
             $gyanmulok->image = $request->gyanmulokimage->store('public/question/topic_end_exam_cq');
         }
-
         $savegyanmulok = $gyanmulok->save();
+
         if ($savegyanmulok) {
             if (!empty($request->gyanmulokcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->gyanmulokcontentTagIds); $i++) {
@@ -92,8 +91,8 @@ class TopicEndExamCQController extends Controller
         if ($request->hasFile('onudhabonimage')) {
             $onudhabon->image = $request->onudhabonimage->store('public/question/topic_end_exam_cq');
         }
-
         $saveonudhabon = $onudhabon->save();
+
         if ($saveonudhabon) {
             if (!empty($request->onudhaboncontentTagIds)) {
                 for ($j = 0; $j < sizeOf($request->onudhaboncontentTagIds); $j++) {
@@ -118,8 +117,8 @@ class TopicEndExamCQController extends Controller
         if ($request->hasFile('proyugimage')) {
             $proyug->image = $request->proyugimage->store('public/question/topic_end_exam_cq');
         }
-
         $saveproyug = $proyug->save();
+
         if ($saveproyug) {
             if (!empty($request->proyugcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->proyugcontentTagIds); $i++) {
@@ -144,8 +143,8 @@ class TopicEndExamCQController extends Controller
         if ($request->hasFile('ucchotorimage')) {
             $ucchotor->image = $request->ucchotorimage->store('public/question/topic_end_exam_cq');
         }
-
         $saveucchotor = $ucchotor->save();
+
         if ($saveucchotor) {
             if (!empty($request->ucchotorcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
@@ -330,27 +329,26 @@ class TopicEndExamCQController extends Controller
             'ucchotorcontentTagIds' => 'required'
         ]);
 
-        $cq = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
+        $creative_question = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
 
-        $cq->creative_question = $request->creative_question;
-        $cq->exam_id = $request->examId;
+        $creative_question->creative_question = $request->creative_question;
+        $creative_question->exam_id = $request->examId;
         if ($request->hasFile('uddipokimage')) {
-            Storage::delete('public/question/topic_end_exam_cq' . $cq->image);
-            $cq->image = $request->uddipokimage->store('public/question/topic_end_exam_cq');
+            Storage::delete('public/question/topic_end_exam_cq' . $creative_question->image);
+            $creative_question->image = $request->uddipokimage->store('public/question/topic_end_exam_cq');
         }
         if ($request->hasFile('answer')) {
-            Storage::delete('public/question/topic_end_exam_cq/answer' . $cq->standard_ans_pdf);
-            $cq->standard_ans_pdf = $request->answer->store('public/question/topic_end_exam_cq/answer');
+            Storage::delete('public/question/topic_end_exam_cq/answer' . $creative_question->standard_ans_pdf);
+            $creative_question->standard_ans_pdf = $request->answer->store('public/question/topic_end_exam_cq/answer');
         }
-
-        $cq->save();
+        $creative_question->save();
 
         // জ্ঞানমূলক
-        $gyanmulok = TopicEndExamCQ::where('creative_question_id', $cq->id)->where('marks', 1)->first();
+        $gyanmulok = TopicEndExamCQ::where('creative_question_id', $creative_question->id)->where('marks', 1)->first();
         $gyanmulok->question = $request->gyanmulokquestion;
         $gyanmulok->slug = (string) Str::uuid();
         $gyanmulok->marks = $request->gyanmulokmarks;
-        $gyanmulok->creative_question_id = $cq->id;
+        $gyanmulok->creative_question_id = $creative_question->id;
         $gyanmulok->number_of_attempt = 0;
         $gyanmulok->gain_marks = 0;
         $gyanmulok->success_rate = 0;
@@ -358,7 +356,6 @@ class TopicEndExamCQController extends Controller
             Storage::delete('public/question/topic_end_exam_cq' . $gyanmulok->image);
             $gyanmulok->image = $request->gyanmulokimage->store('public/question/topic_end_exam_cq');
         }
-
         $savegyanmulok = $gyanmulok->save();
 
         $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
@@ -382,11 +379,11 @@ class TopicEndExamCQController extends Controller
         }
 
         // অনুধাবন
-        $onudhabon = TopicEndExamCQ::where('creative_question_id', $cq->id)->where('marks', 2)->first();
+        $onudhabon = TopicEndExamCQ::where('creative_question_id', $creative_question->id)->where('marks', 2)->first();
         $onudhabon->question = $request->onudhabonquestion;
         $onudhabon->slug = (string) Str::uuid();
         $onudhabon->marks = $request->onudhabonmarks;
-        $onudhabon->creative_question_id = $cq->id;
+        $onudhabon->creative_question_id = $creative_question->id;
         $onudhabon->number_of_attempt = 0;
         $onudhabon->gain_marks = 0;
         $onudhabon->success_rate = 0;
@@ -394,7 +391,6 @@ class TopicEndExamCQController extends Controller
             Storage::delete('public/question/topic_end_exam_cq' . $onudhabon->image);
             $onudhabon->image = $request->onudhabonimage->store('public/question/topic_end_exam_cq');
         }
-
         $saveonudhabon = $onudhabon->save();
 
         $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
@@ -418,11 +414,11 @@ class TopicEndExamCQController extends Controller
         }
 
         // প্রয়োগমূলক
-        $proyug = TopicEndExamCQ::where('creative_question_id', $cq->id)->where('marks', 3)->first();
+        $proyug = TopicEndExamCQ::where('creative_question_id', $creative_question->id)->where('marks', 3)->first();
         $proyug->question = $request->proyugquestion;
         $proyug->slug = (string) Str::uuid();
         $proyug->marks = $request->proyugmarks;
-        $proyug->creative_question_id = $cq->id;
+        $proyug->creative_question_id = $creative_question->id;
         $proyug->number_of_attempt = 0;
         $proyug->gain_marks = 0;
         $proyug->success_rate = 0;
@@ -430,7 +426,6 @@ class TopicEndExamCQController extends Controller
             Storage::delete('public/question/topic_end_exam_cq' . $proyug->image);
             $proyug->image = $request->proyugimage->store('public/question/topic_end_exam_cq');
         }
-
         $saveproyug = $proyug->save();
 
         $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
@@ -454,11 +449,11 @@ class TopicEndExamCQController extends Controller
         }
 
         // উচ্চতর দক্ষতা
-        $ucchotor = TopicEndExamCQ::where('creative_question_id', $cq->id)->where('marks', 4)->first();
+        $ucchotor = TopicEndExamCQ::where('creative_question_id', $creative_question->id)->where('marks', 4)->first();
         $ucchotor->question = $request->ucchotorquestion;
         $ucchotor->slug = (string) Str::uuid();
         $ucchotor->marks = $request->ucchotormarks;
-        $ucchotor->creative_question_id = $cq->id;
+        $ucchotor->creative_question_id = $creative_question->id;
         $ucchotor->number_of_attempt = 0;
         $ucchotor->gain_marks = 0;
         $ucchotor->success_rate = 0;
@@ -466,16 +461,7 @@ class TopicEndExamCQController extends Controller
             Storage::delete('public/question/topic_end_exam_cq' . $ucchotor->image);
             $ucchotor->image = $request->ucchotorimage->store('public/question/topic_end_exam_cq');
         }
-
         $saveucchotor = $ucchotor->save();
-
-        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
-            ->where('question_id', $ucchotor->id)
-            ->get();
-
-        foreach ($deleteContentTags as $deleteContentTag) {
-            $delete = $deleteContentTag->delete();
-        }
 
         if ($saveucchotor) {
             if (!empty($request->ucchotorcontentTagIds)) {
@@ -494,15 +480,18 @@ class TopicEndExamCQController extends Controller
 
     public function destroy(Exam $exam, $topic_end_exam_slug)
     {
-        $cq = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
+        $creative_question = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
 
-        $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
+        $cqs = TopicEndExamCQ::where('creative_question_id', $creative_question->id)->get();
 
-        foreach($question_content_tags as $question_content_tag){
-            $question_content_tag->delete();
+        foreach($cqs as $cq){
+            $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
+            foreach($question_content_tags as $question_content_tag){
+                $question_content_tag->delete();
+            }
         }
 
-        $deleteCreativeQuestion = $cq->delete();
+        $deleteCreativeQuestion = $creative_question->delete();
 
         if ($deleteCreativeQuestion) {
             return redirect()->route('exam.show', $exam)->with('status', 'Topic End Exam CQ deleted successfully!');
