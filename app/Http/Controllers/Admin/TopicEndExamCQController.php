@@ -463,6 +463,14 @@ class TopicEndExamCQController extends Controller
         }
         $saveucchotor = $ucchotor->save();
 
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type.' CQ')
+        ->where('question_id', $ucchotor->id)
+        ->get();
+
+        foreach ($deleteContentTags as $deleteContentTag) {
+            $delete = $deleteContentTag->delete();
+        }
+
         if ($saveucchotor) {
             if (!empty($request->ucchotorcontentTagIds)) {
                 for ($i = 0; $i < sizeOf($request->ucchotorcontentTagIds); $i++) {
@@ -486,9 +494,12 @@ class TopicEndExamCQController extends Controller
 
         foreach($cqs as $cq){
             $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
+
             foreach($question_content_tags as $question_content_tag){
                 $question_content_tag->delete();
             }
+
+            $cq->delete();
         }
 
         $deleteCreativeQuestion = $creative_question->delete();
