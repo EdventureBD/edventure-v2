@@ -311,7 +311,7 @@ class SubmissionController extends Controller
                 $gain_marks = $request->m[$value];
                 $details_result = new DetailsResult();
                 $details_result->exam_id = $exam->id;
-                $details_result->exam_type = $exam_type.' CQ';
+                $details_result->exam_type = $exam_type;
                 $details_result->question_id = $request->q[$i];
                 $details_result->batch_id = $batch->id;
                 $details_result->student_id = $student->id;
@@ -335,9 +335,7 @@ class SubmissionController extends Controller
                 $cq->success_rate = $successRate;
                 $cq->save();
 
-                // dump($request->q);
                 $questionContentTags = QuestionContentTag::where('question_id', $request->q[$i])->get();
-                // dump($questionContentTags);
                 if ($questionContentTags->count() > 0) {
                     foreach ($questionContentTags as $questionContentTag) {
                         $questionContentTagAnalysis = new QuestionContentTagAnalysis();
@@ -355,13 +353,10 @@ class SubmissionController extends Controller
                         $questionContentTagAnalysis->number_of_attempt = 1;
                         $questionContentTagAnalysis->gain_marks = $gain_marks;
                         $questionContentTagAnalysis->status = 1;
-                        // dump($questionContentTagAnalysis);
                         $questionContentTagAnalysis->save();
                     }
                 }
             }
-
-            // dd(1);
 
             if($exam_type == "Pop Quiz"){
                 $cq_type = "Pop Quiz CQ";

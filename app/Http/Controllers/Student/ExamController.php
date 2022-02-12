@@ -190,10 +190,6 @@ class ExamController extends Controller
                 return view('student.pages_new.batch.exam.assignment_result', compact('canAttempt', 'exam', 'batch', 'show', 'detailsResult', 'exam_paper', 'max', 'min'));
             }
         }
-
-        // else if (){
-
-        // }
     }
 
     public function specialExamQuestion(Batch $batch, Exam $exam)
