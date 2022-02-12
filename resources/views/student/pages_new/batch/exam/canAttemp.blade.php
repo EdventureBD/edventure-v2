@@ -12,9 +12,16 @@
             <div class="container">
                 <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
                 <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
-                <div class="text-right">
-                    <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+
+                <div class="d-flex justify-content-end">
+                    <div class="text-right">
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
+                    </div>
+                    <div class="text-right ml-2">
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+                    </div>
                 </div>
+
                 <div class="result-sheet-table overflow-x-scroll">
                     <table class="table table-bordered">
                         <thead>

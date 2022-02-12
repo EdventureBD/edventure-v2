@@ -807,6 +807,65 @@ class ExamController extends Controller
         return $save;
     }
 
+    public function reattemptBatchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
+        // dd($course_topic, $batch, $exam_id, $exam_type);
+
+        if($exam_type == Edvanture::APTITUDETEST){
+            $details_results = DetailsResult::where('exam_id', $exam_id)
+                ->where('exam_type', 'Aptitude Test')
+                ->where('batch_id', $batch->id)
+                ->where('student_id', auth()->user()->id)
+                ->with('atQuestion')
+                ->get();
+
+            foreach($details_results as $details_result){
+                $question_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)
+                ->where('exam_type', 'Aptitude Test')
+                ->where('question_id', $details_result->atQuestion->id)
+                ->get();
+
+                foreach($question_content_tag_analysis as $tags){
+                    $tags->delete();
+                }
+
+                $details_result->delete();
+            }
+
+            $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', 'Aptitude Test')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
+            $exam_result->delete();
+
+            return $this->batchTest($course_topic, $batch, $exam_id, $exam_type);
+        }
+        elseif($exam_type == Edvanture::POPQUIZ || $exam_type == Edvanture::TOPICENDEXAM){
+            dd("HIT !");
+
+            $details_results = DetailsResult::where('exam_id', $exam_id)
+            ->where('exam_type', 'Aptitude Test')
+            ->where('batch_id', $batch->id)
+            ->where('student_id', auth()->user()->id)
+            ->with('atQuestion')
+            ->get();
+
+            foreach($details_results as $details_result){
+                $question_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)
+                ->where('exam_type', 'Aptitude Test')
+                ->where('question_id', $details_result->atQuestion->id)
+                ->get();
+
+                foreach($question_content_tag_analysis as $tags){
+                    $tags->delete();
+                }
+
+                $details_result->delete();
+            }
+
+            $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', 'Aptitude Test')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
+            $exam_result->delete();
+
+            return $this->batchTest($course_topic, $batch, $exam_id, $exam_type);
+        }
+    }
+
     // serve exam questions/to exam page with random questions per paper
     public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
         // $batch = Batch::where('id', $batch->id)->with('course')->firstOrFail();
@@ -941,9 +1000,9 @@ class ExamController extends Controller
     
                     $weakAnalysis = $analysis;
 
-                    // dd($detailsResult);
+                    // dd($course_topic, $batch, $exam);
                 
-                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min'));
+                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'course_topic', 'batch', 'exam'));
                 }
         }
 

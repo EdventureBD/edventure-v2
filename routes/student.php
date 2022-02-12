@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
 
         // BATCH TEST(For serving tests if a person hasn't attended it already)
         Route::get('batch/tests/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'batchTest'])->name('batch-test')->middleware('proceed_guard');
+        Route::get('batch/tests/reattempt/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'reattemptBatchTest'])->name('reattempt-batch-test')->middleware('proceed_guard');
         
         // EXAM
         // Route::get('batch/{batch}/{courseLecture}/{exam}', [ExamController::class, 'question'])->name('question');
