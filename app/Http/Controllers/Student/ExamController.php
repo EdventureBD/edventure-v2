@@ -837,19 +837,40 @@ class ExamController extends Controller
             return $this->batchTest($course_topic, $batch, $exam_id, $exam_type);
         }
         elseif($exam_type == Edvanture::POPQUIZ || $exam_type == Edvanture::TOPICENDEXAM){
-            dd("HIT !");
 
-            $details_results = DetailsResult::where('exam_id', $exam_id)
-            ->where('exam_type', 'Aptitude Test')
+            if($exam_type == Edvanture::POPQUIZ){
+                $cq_exam_papers = PopQuizCqExamPaper::where('exam_id', $exam_id)->where('exam_type', $exam_type)->where('student_id', auth()->user()->id)->get();
+            }
+            elseif($exam_type == Edvanture::TOPICENDEXAM){
+                $cq_exam_papers = TopicEndExamCqExamPaper::where('exam_id', $exam_id)->where('exam_type', $exam_type)->where('student_id', auth()->user()->id)->get();
+            }
+
+            foreach($cq_exam_papers as $cq_exam_paper){
+                $cq_exam_paper->delete();
+            }
+
+            // dd("HIT !", $cq_exam_paper, $exam_type);
+
+            $mcq_details_results = DetailsResult::where('exam_id', $exam_id)
+            ->where('exam_type', $exam_type)
             ->where('batch_id', $batch->id)
             ->where('student_id', auth()->user()->id)
-            ->with('atQuestion')
+            ->whereNotNull('mcq_ans')
             ->get();
 
-            foreach($details_results as $details_result){
+            $cq_details_results = DetailsResult::where('exam_id', $exam_id)
+            ->where('exam_type', $exam_type)
+            ->where('batch_id', $batch->id)
+            ->where('student_id', auth()->user()->id)
+            ->whereNull('mcq_ans')
+            ->get();
+
+            // dd($mcq_details_results, $cq_details_results);
+
+            foreach($mcq_details_results as $details_result){
                 $question_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)
-                ->where('exam_type', 'Aptitude Test')
-                ->where('question_id', $details_result->atQuestion->id)
+                ->where('exam_type', $exam_type.' MCQ')
+                ->where('question_id', $details_result->question_id)
                 ->get();
 
                 foreach($question_content_tag_analysis as $tags){
@@ -859,8 +880,26 @@ class ExamController extends Controller
                 $details_result->delete();
             }
 
-            $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', 'Aptitude Test')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
+            foreach($cq_details_results as $details_result){
+                $question_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)
+                ->where('exam_type', $exam_type.' CQ')
+                ->where('question_id', $details_result->question_id)
+                ->get();
+
+                foreach($question_content_tag_analysis as $tags){
+                    $tags->delete();
+                }
+
+                $details_result->delete();
+            }
+
+            $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', $exam_type.' MCQ')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
             $exam_result->delete();
+            $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', $exam_type.' CQ')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
+            $exam_result->delete();
+
+            $student_exam_attempt = StudentExamAttempt::where('exam_id', $exam_id)->where('student_id', auth()->user()->id)->first();
+            $student_exam_attempt->delete();
 
             return $this->batchTest($course_topic, $batch, $exam_id, $exam_type);
         }
@@ -961,25 +1000,26 @@ class ExamController extends Controller
                     return view('student.pages_new.batch.exam.batch_exam_aptitude_test', compact('questions', 'exam', 'batch'));
                 }
                 else{
-                    $totalNumber = 0;
-                    $detailsResult = DetailsResult::where('student_id', auth()->user()->id)
+                    $total_marks = 0;
+                    $detailsResults = DetailsResult::where('student_id', auth()->user()->id)
                         ->where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
                         ->with('atQuestion')
                         ->get();
 
-                    foreach ($detailsResult as $details) {
-                        if ($details->exam_type == Edvanture::CQ) {
-                            $number = CQ::where('id', $details->question_id)->select('marks')->first();
-                            $totalNumber = $totalNumber + $number->marks;
-                        } else if ($details->exam_type == Edvanture::MCQ) {
-                            $number = 1;
-                            $totalNumber = $totalNumber + $number;
-                        } else if ($details->exam_type == Edvanture::ASSIGNMENT) {
-                            $number = Assignment::where('id', $details->question_id)->select('marks')->first();
-                            $totalNumber = $totalNumber + $number->marks;
-                        }
-                    }
+                    // foreach ($detailsResults as $detailsResult) {
+                    //     $total_marks += $detailsResult->gain_marks;
+                    //     if ($details->exam_type == Edvanture::CQ) {
+                    //         $number = CQ::where('id', $details->question_id)->select('marks')->first();
+                    //         $totalNumber = $totalNumber + $number->marks;
+                    //     } else if ($details->exam_type == Edvanture::MCQ) {
+                    //         $number = 1;
+                    //         $totalNumber = $totalNumber + $number;
+                    //     } else if ($details->exam_type == Edvanture::ASSIGNMENT) {
+                    //         $number = Assignment::where('id', $details->question_id)->select('marks')->first();
+                    //         $totalNumber = $totalNumber + $number->marks;
+                    //     }
+                    // }
             
                     $max = ExamResult::where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
@@ -1001,8 +1041,9 @@ class ExamController extends Controller
                     $weakAnalysis = $analysis;
 
                     // dd($course_topic, $batch, $exam);
+                    // dd($detailsResults, $exam->threshold_marks);
                 
-                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'course_topic', 'batch', 'exam'));
+                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResults', 'analysis', 'weakAnalysis', 'max', 'min', 'course_topic', 'batch', 'exam'));
                 }
         }
 
@@ -1201,16 +1242,8 @@ class ExamController extends Controller
                                 $cq_total_marks += 10;
                             }
                         }
-                        
-                        $cq_marks_scored = 0;
-                        // count total marks scored by student for CQ part
-                        foreach($exam->topicEndExamCreativeQuestions as $creative_question){
-                            foreach($creative_question->question as $cq){
-                                if($cq->detailsResult){
-                                    $cq_marks_scored += $cq->detailsResult->gain_marks;
-                                }
-                            }
-                        }
+
+                        $cq_marks_scored = $cq_exam_result->gain_marks;
 
                         // analysis for CQs
                         $all_analysis_cqs = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)
@@ -1219,18 +1252,20 @@ class ExamController extends Controller
 
                         foreach($all_analysis_cqs as $cq){
                             foreach($cq->question as $cq_ques){
+                                // dd($cq_ques);
                                 $total_marks = 0;
                                 $scored_marks = 0;
                                 foreach($cq_ques->allDetailsResult as $result){
                                     $total_marks += $cq_ques->marks;
                                     $scored_marks += $result->gain_marks;
                                 }
-                                $cq_ques->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+
+                                $cq_ques->avg_score = $total_marks > 0 ? round( (($scored_marks/$total_marks)*$cq_ques->marks), 2) : 0;
 
                                 foreach($exam->topicEndExamCreativeQuestions as $cq){
                                     foreach($cq->question as $question){
                                         if($cq_ques->id == $question->id){
-                                            $question->avg_score = round( (($scored_marks/$total_marks)*$cq_ques->marks), 2);
+                                            $question->avg_score = $total_marks > 0 ? round( (($scored_marks/$total_marks)*$cq_ques->marks), 2) : 0;
                                         }
                                     }
                                 }
@@ -1357,9 +1392,9 @@ class ExamController extends Controller
                     'popQUizCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     },
-                    // 'popQuizCreativeQuestions' => function($query) {
-                    //     return $query->has('exam_papers');
-                    // },
+                    'popQuizCreativeQuestions.question' => function($query) {
+                        return $query->has('detailsResult');
+                    },
                     'popQuizCreativeQuestions.exam_papers' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     }
@@ -1484,15 +1519,7 @@ class ExamController extends Controller
                             }
                         }
 
-                        $cq_marks_scored = 0;
-                        // count total marks scored by student for CQ part
-                        foreach($exam->popQuizCreativeQuestions as $creative_question){
-                            foreach($creative_question->question as $cq){
-                                if($cq->detailsResult){
-                                    $cq_marks_scored += $cq->detailsResult->gain_marks;
-                                }
-                            }
-                        }
+                        $cq_marks_scored = $cq_exam_result->gain_marks;
 
                         // analysis for CQs
                         $all_analysis_cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
