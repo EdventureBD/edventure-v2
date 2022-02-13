@@ -88,7 +88,7 @@
                                 <h5 class="text-center text-sm mt-2">{{ $exam->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
-                                    <a href="{{$href }}"  class="btn btn-outline text-purple mt-2">
+                                    <a id="{{!auth()->check() ? 'logInAlert' : ''}}" href="{{!auth()->check() ? 'javascript:void(0);' : $href}}" class="btn btn-outline text-purple mt-2">
                                             {{$label}}
                                     </a>
                                 </div>
@@ -102,4 +102,27 @@
         @endif
     </div>
     </div>
+
+    {{--    /************************* Sweet Alert ******************************/--}}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {{--    /*******************************************************/--}}
+
+    <script>
+        document.getElementById('logInAlert').onclick = function(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Please login to continue',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        }
+    </script>
 </x-landing-layout>
