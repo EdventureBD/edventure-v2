@@ -13,6 +13,12 @@
 #roadmap-modal-close-btn {
   transform: rotate(90deg);
 }
+.modal-items {
+  background: linear-gradient(180deg, #AB7BD4 0%, #420F6C 100%)
+}
+.modal-items:hover {
+  background: linear-gradient(180deg, #472F5C 0%, #090110 100%);
+}
 #exampleModalLabel {
   color: #6902C5;
 }

@@ -34,25 +34,25 @@
                        <div class="w-25">
                            <img src="/img/road_map/rightSign.png" alt="" class=" px-md-4 px-sm-3 pt-md-2 img-fluid" id="model-test">
                        </div>
-                       <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">Model Test</a>
+                       <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded">Model Test</a>
                      </li>
                      <li>
                         <div class="w-25">
                            <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
                        </div>
-                        <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">Aptitute Test</a>
+                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded">Aptitute Test</a>
                      </li>
                      <li>
                         <div class="w-25">
                            <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="mcq-test">
                        </div>
-                        <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">MCQ Test</a>
+                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded">MCQ Test</a>
                      </li>
                      <li>
                         <div class="w-25">
                            <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="cq-test">
                        </div>
-                        <a href="" class="fw-800 bg-info text-white d-flex justify-content-center rounded">CQ Test</a>
+                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded" id="cq">CQ Test</a>
                      </li>
                </ul>
             </div>
