@@ -88,7 +88,10 @@
                                 <h5 class="text-center text-sm mt-2">{{ $exam->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
-                                    <a id="{{!auth()->check() ? 'logInAlert' : ''}}" href="{{!auth()->check() ? 'javascript:void(0);' : $href}}" class="btn btn-outline text-purple mt-2">
+                                    <a
+                                       id="{{!auth()->check() ? 'logInAlert' : ''}}"
+                                       href="{{!auth()->check() ? 'javascript:void(0);' : $href}}"
+                                       class="{{auth()->check() && auth()->user()->is_admin == 1 ? 'disabled' : ''}} btn btn-outline text-purple mt-2">
                                             {{$label}}
                                     </a>
                                 </div>
