@@ -109,7 +109,7 @@ class ExamController extends Controller
             if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
                 $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                 //Inserting in the exam result as first attempt
-                (new ExamResult())->saveData(['exam_id' => $exam->id, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
+                (new ExamResult())->saveData(['exam_id' => $exam->id, 'exam_type' => $exam_type, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
                 return view('student.pages_new.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
             }
 
@@ -951,7 +951,7 @@ class ExamController extends Controller
                 
                 if(!$canAttempt){
                     // Inserting in the exam result as first attempt
-                    $canAttempt = (new ExamResult())->saveData(['exam_id' => $exam->id, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
+                    $canAttempt = (new ExamResult())->saveData(['exam_id' => $exam->id, 'exam_type' => $exam_type, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
                 }
 
                 // serve exam if the student hasn't completed and submitted an exam. Else, serve pending message/exam result.
