@@ -1,4 +1,3 @@
-{{-- filtering data  --}}
 <form action="">
     <div class="row">
         <div class="col-sm-4 mt-4">
