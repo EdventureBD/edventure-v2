@@ -2,24 +2,103 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+
+// models
+use App\Models\User;
 use App\Models\Admin\Batch;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
-use App\Models\Student\exam\ExamResult;
-use App\Models\Student\exam\QuestionContentTagAnalysis;
 use App\Models\Student\StudentDetails;
-use Illuminate\Support\Facades\Auth;
+
+use App\Models\Student\exam\DetailsResult;
+use App\Models\Student\exam\ExamResult;
+use App\Models\Admin\ContentTag;
+use App\Models\Admin\QuestionContentTag;
+use App\Models\Student\exam\QuestionContentTagAnalysis;
+
+use App\Models\Admin\PopQuizCQ;
+use App\Models\Admin\TopicEndExamCQ;
 
 class AccountDetailsController extends Controller
 {
     public function index()
     {
-        return view('student.pages_new.user.profile');
+        $user = auth()->user();
+
+        $mcq_content_tags = ContentTag::has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
+            return $query->where('student_id', auth()->user()->id)->where(function($query){
+                $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz MCQ')->orWhere('exam_type', 'Topic End Exam MCQ');
+            });
+        }])->get();
+
+        foreach($mcq_content_tags as $mcq_content_tag){
+            $mcq_tag_total_marks = 0;
+            $mcq_tag_scored_marks = 0;
+            foreach($mcq_content_tag->questionContentTagAnalysis as $analysis){
+                $mcq_tag_total_marks += 1;
+                $mcq_tag_scored_marks += $analysis->gain_marks;
+            }
+            $mcq_content_tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $mcq_content_tag->tag_total_marks = $mcq_tag_total_marks;
+            $mcq_content_tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+        }
+
+        $cq_content_tags = ContentTag::has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
+            return $query->where('student_id', auth()->user()->id)->where(function($query){
+                $query->Where('exam_type', 'Pop Quiz CQ')->orWhere('exam_type', 'Topic End Exam CQ');
+            });
+        }])->get();
+
+        foreach($cq_content_tags as $cq_content_tag){
+            $cq_tag_total_marks = 0;
+            $cq_tag_scored_marks = 0;
+            foreach($cq_content_tag->questionContentTagAnalysis as $analysis){
+                // dd($analysis);
+                if($analysis->exam_type == 'Pop Quiz CQ'){
+                    $cq_question = PopQuizCQ::where('id', $analysis->question_id)->first();
+                    $cq_tag_total_marks = $cq_tag_total_marks + $cq_question->marks;
+
+                    // $details_result = DetailsResult::where('student_id', auth()->user()->id)
+                    // ->where('question_id', $analysis->question_id)
+                    // ->where('exam_type', 'Pop Quiz')
+                    // ->whereNull('mcq_ans')
+                    // ->first();
+                    // $cq_tag_scored_marks += $details_result->gain_marks;
+                    
+                    $cq_tag_scored_marks += $analysis->gain_marks;
+
+                    // dd($cq_question, $cq_tag_total_marks, $cq_tag_scored_marks);
+                }
+                elseif($analysis->exam_type == 'Topic End Exam CQ'){
+                    $cq_question = TopicEndExamCQ::where('id', $analysis->question_id)->first();
+                    $cq_tag_total_marks += $cq_question->marks;
+                    $cq_tag_scored_marks += $analysis->gain_marks;
+                }
+            }
+            $cq_content_tag->tag_scored_marks = $cq_tag_scored_marks;
+            $cq_content_tag->tag_total_marks = $cq_tag_total_marks;
+            $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
+        }
+        
+        // $mcq_details_results = DetailsResult::where('student_id', auth()->user()->id )->where( 'mcq_ans', null)->get();
+
+        // $mcq_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->get();
+
+        // $question_content_tags = ContentTag::has('questionContentTags')->get();
+
+        // dump($question_content_tags);
+        // dump($mcq_content_tag_analysis);
+        // dump($mcq_details_results);
+        // dump($mcq_content_tags);
+        // dump($cq_content_tags);
+        // dd("Finished");
+
+        return view('student.pages_new.user.profile', compact('user', 'mcq_content_tags', 'cq_content_tags'));
     }
 
     public function profileData()
