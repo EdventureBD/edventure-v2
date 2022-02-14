@@ -54,10 +54,30 @@
              white-space: nowrap;
              width: 1%;
          }
+         .select2-purple .select2-container--default span span{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
+         div .select2 .selection .select2-selection{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
     </style>
 
-    @include('admin.pages.model_exam.exam.filter')
-    @include('admin.pages.model_exam.exam.create')
+    
+    
+
+    <div class="row">
+        <div class="col-md-9">
+            @include('admin.pages.model_exam.exam.filter')
+         
+        </div>
+        <div class="col-md-3">
+            @include('admin.pages.model_exam.exam.create')
+        </div>
+     </div>
 
     <table class="table table-responsive table-striped">
 

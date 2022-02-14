@@ -1,4 +1,4 @@
-<div style="justify-content: right;display: grid; text-align: end">
+<div style="justify-content: right;display: flex; text-align: end" class="mt-4">
     <a
         href="#createExam"
         data-toggle="modal"

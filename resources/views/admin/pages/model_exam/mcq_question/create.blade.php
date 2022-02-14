@@ -1,5 +1,4 @@
-<div class="modal fade"
-     id="createQuestion">
+<div class="modal fade" id="createQuestion">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-light">
             <form action="" id="question_form" method="POST" enctype="multipart/form-data">
