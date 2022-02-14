@@ -15,15 +15,15 @@
                 @csrf
                 <div class="modal-header">
                     <h4 class="modal-title">Create Model Exam</h4>
-                    <div class="d-flex">
+                    <div class="d-flex align-items-middle">
                         <p>Visible</p>
-                        <input id="checkBoxValue" value="false" name="visibility" type="checkbox">
+                        <input class="mt-2 ml-2" id="checkBoxValue" value="false" name="visibility" type="checkbox">
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <div class="select2-purple d-flex align-middle py-0 pb-5">
+                            <div class="select2-purple d-flex align-middle py-1">
                                 <select required
                                         id="exam_category_selected"
                                         class="select2 form-control"
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <div class="select2-purple d-flex align-middle py-0 pb-5">
+                            <div class="select2-purple d-flex align-middle py-1">
                                 <select required
                                         class="select2 form-control"
                                         id="exam_topics"
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row py-1">
                         <div class="form-group col-md-6">
                             <input required name="title" type="text" class="form-control" id="title" placeholder="Exam Title">
                         </div>
