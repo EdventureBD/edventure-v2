@@ -13,6 +13,11 @@
             white-space: nowrap;
             width: 1%;
         }
+        .select2-purple .select2-container--default span span{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
     </style>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -24,8 +29,15 @@
         </div>
     @endif
 
-    @include('admin.pages.model_exam.exam_topic.filter')
-    @include('admin.pages.model_exam.exam_topic.create')
+    <div class="row">
+       <div class="col-md-9">
+        @include('admin.pages.model_exam.exam_topic.filter')
+        
+       </div>
+       <div class="col-md-3">
+        @include('admin.pages.model_exam.exam_topic.create')
+       </div>
+    </div>
 
     <table class="table table-striped table-responsive">
 

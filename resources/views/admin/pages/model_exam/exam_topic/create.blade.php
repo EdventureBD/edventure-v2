@@ -1,4 +1,4 @@
-<div style="justify-content: right;display: grid; text-align: end">
+<div style="justify-content: right;display: flex; text-align: end" class="mt-4">
     <a href="#createTopic"
        data-toggle="modal"
        title="Create Model Exam">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button"
-                            class="btn btn-outline-secondary"
+                            class="btn btn-outline-danger"
                             data-dismiss="modal">Close
                     </button>
                     <button type="submit"
