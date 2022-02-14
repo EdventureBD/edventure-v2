@@ -1,4 +1,6 @@
 @section('js2')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         $(function () {
             $('.select2').select2()
@@ -14,9 +16,19 @@
                 type:"GET",
                 success:function(response){
                     if(response == 'visible') {
-                        alert('Exam is now Visible')
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Visible...',
+                            text: 'Exam is now Visible!'
+                        })
+                        // alert('Exam is now Visible')
                     } else {
-                        alert('Exam is now Invisible')
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Invisible...',
+                            text: 'Exam is now Invisible!'
+                        })
+                        // alert('Exam is now Invisible')
                     }
 
                 },
