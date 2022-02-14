@@ -18,10 +18,10 @@
                      <div class="d-flex justify-content-between">
                         <div class="d-flex flex-column fw-800 mr-3">
                               <div>
-                                 Courses 
+                                 Courses
                               </div>
                               <div class="mx-auto">
-                                 5
+                                 {{ $batch_student_enrollment->count() }}
                               </div>
                         </div>
                         <div class="d-flex flex-column fw-800 ml-3 justify-content-center">
@@ -213,7 +213,7 @@
          </div>
       </div>
       {{-- icon's script part linked --}}
-      <script src="/js/new-dashboard/iconify-icons.js"></script>
+      <script src="{{ asset('/js/new-dashboard/iconify-icons.js') }}"></script>
       {{-- icon's script part linked --}}
 
       {{-- frontend script part --}}
@@ -224,12 +224,14 @@
             courseOption.setAttribute("style", "background: #FA9632 ; color: white;");
             modelTestOption.setAttribute("style", "background: white ; color: black;");
          }
+
          const modelTestButtonAction = () => {
             categorySelectionText.innerText = "Select Test Category";
             subjectSelectionText.innerText = "Choose Subject";
             modelTestOption.setAttribute("style", "background: #FA9632 ; color: white;");
             courseOption.setAttribute("style", "background: white ; color: black;");
          }
+
          let categorySelectionText = document.getElementById("category-selection-text");
          let subjectSelectionText = document.getElementById("subject-selection-text");
          let courseOption = document.getElementById("course-option");
@@ -237,8 +239,39 @@
 
          let modelTestOption = document.getElementById("model-test-option");
          modelTestOption.addEventListener("click",modelTestButtonAction);
-
-         
       </script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+      <script>
+         $(document).on('click', '#course-option', function(){
+            console.log("HIT");
+            // var issue_id = $( this ).val();
+            // var html = '<option value="0"> None </option>';
+
+            // $('.append_blogs').html('');
+
+            // $.ajax({
+            //    url: '{{ route("ajax-get-courses") }}',
+            //    type: 'GET',
+            //    data: { issue_id: issue_id },
+            //    success: function(response)
+            //    {
+            //          console.log(response);
+            //          var blogs = response;
+            //          if (blogs.length > 0) 
+            //          {
+            //             jQuery.each(blogs, function(index, blog)
+            //             {
+            //                html += '<option value="' + blog.id + '">' + blog.title + '</option>';
+            //             });
+
+            //             $('.append_blogs').append(html);
+            //          }
+            //    }
+            // });
+         });
+      </script>
+
       {{-- frontend script part ends --}}
    </x-landing-layout>

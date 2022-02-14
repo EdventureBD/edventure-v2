@@ -29,6 +29,7 @@ class AccountDetailsController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $batch_student_enrollment = BatchStudentEnrollment::where('student_id', auth()->user()->id)->with('course')->get();
 
         $mcq_content_tags = ContentTag::has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
             return $query->where('student_id', auth()->user()->id)->where(function($query){
@@ -98,7 +99,7 @@ class AccountDetailsController extends Controller
         // dump($cq_content_tags);
         // dd("Finished");
 
-        return view('student.pages_new.user.profile', compact('user', 'mcq_content_tags', 'cq_content_tags'));
+        return view('student.pages_new.user.profile', compact('user', 'mcq_content_tags', 'cq_content_tags', 'batch_student_enrollment'));
     }
 
     public function profileData()
