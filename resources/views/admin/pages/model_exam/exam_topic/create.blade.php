@@ -6,8 +6,6 @@
     </a>
 </div>
 
-
-
 <div class="modal fade"
      id="createTopic">
     <div class="modal-dialog">

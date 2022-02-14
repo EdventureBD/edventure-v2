@@ -23,9 +23,24 @@
             white-space: nowrap;
             width: 1%;
         }
+        .select2-purple .select2-container--default span span{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
     </style>
-    @include('admin.pages.model_exam.exam_tag.filter')
-    @include('admin.pages.model_exam.exam_tag.create')
+    
+    
+
+    <div class="row">
+        <div class="col-md-9">
+            @include('admin.pages.model_exam.exam_tag.filter')
+         
+        </div>
+        <div class="col-md-3">
+            @include('admin.pages.model_exam.exam_tag.create')
+        </div>
+     </div>
 
     <table class="table table-responsive table-striped">
 
