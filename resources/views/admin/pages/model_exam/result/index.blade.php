@@ -41,6 +41,8 @@
                 <th class="fit" scope="col">Exam Type</th>
                 <th class="fit" scope="col">Total Marks</th>
                 <th class="fit" scope="col">Gain Marks</th>
+                <th class="fit" scope="col">Exam duration</th>
+                <th class="fit" scope="col">Time taken</th>
                 <th class="fit" scope="col">Payment Status</th>
                 <th class="fit" scope="col">Action</th>
             </tr>
@@ -58,6 +60,8 @@
                 <td>{{ \App\Enum\ExamType::Exam[$result->modelExam->exam_type]  }}</td>
                 <td>{{ $result->modelExam->mcqQuestionsCount() }}</td>
                 <td>{{ $result->total_marks }}</td>
+                <td>{{ gmdate("H:i:s", $result->duration) }}</td>
+                <td>{{ gmdate("H:i:s", ($result->duration - $result->exam_end_time)) }}</td>
                 <td style="width: 30%; border-radius: 25px; padding: 5px" class="badge badge-info">
                     {{ !is_null($result->modelExam->exam_price) && $result->modelExam->exam_price != 0 ? 'PAID' : 'FREE' }}
                 </td>
