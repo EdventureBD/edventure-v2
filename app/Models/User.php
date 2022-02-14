@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Student\StudentDetails;
 use Illuminate\Notifications\Notifiable;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;

@@ -190,11 +190,13 @@
                 <li class="nav-item has-treeview {{ request()->is('admin/exam-category') ||
                                                     request()->is('admin/exam-topic') ||
                                                     request()->is('admin/exam-tags') ||
-                                                    request()->is('admin/model-exam') ? 'menu-open' : '' }}">
+                                                    request()->is('admin/model-exam') ||
+                                                    request()->is('admin/model-exam/result/list') ? 'menu-open' : '' }}">
                     <a href="#"
                        class="nav-link {{ request()->is('admin/exam-category') ||
                                           request()->is('admin/exam-topic') ||
                                           request()->is('admin/exam-tags') ||
+                                          request()->is('admin/model-exam/result/list') ||
                                           request()->is('admin/model-exam') ? 'active' : '' }}">
                         <i class="fas fa-paste"></i>
                         <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
@@ -226,6 +228,14 @@
                                class="nav-link {{ request()->is('admin/model-exam') ? 'active' : '' }} ">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Exams</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('model.exam.result') }}"
+                               class="nav-link {{ request()->is('admin/model-exam/result/list') ? 'active' : '' }} ">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Results</p>
                             </a>
                         </li>
 
