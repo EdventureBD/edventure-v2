@@ -25,6 +25,16 @@
             white-space: nowrap;
             width: 1%;
         }
+        .select2-purple .select2-container--default span span{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
+        div .select2 .selection .select2-selection{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
     </style>
     @include('admin.pages.model_exam.result.filter')
     <table class="table table-responsive table-striped">
@@ -58,7 +68,7 @@
                 <td>{{ \App\Enum\ExamType::Exam[$result->modelExam->exam_type]  }}</td>
                 <td>{{ $result->modelExam->mcqQuestionsCount() }}</td>
                 <td>{{ $result->total_marks }}</td>
-                <td style="width: 30%; border-radius: 25px; padding: 5px" class="badge badge-info">
+                <td style="width: 30%; border-radius: 25px; padding: 5px; margin: 8% 15%" class="badge badge-info">
                     {{ !is_null($result->modelExam->exam_price) && $result->modelExam->exam_price != 0 ? 'PAID' : 'FREE' }}
                 </td>
                 <td>
