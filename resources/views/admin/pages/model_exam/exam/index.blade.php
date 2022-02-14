@@ -78,6 +78,7 @@
                 <th class="fit" scope="col">Solution Pdf</th>
                 <th class="fit" scope="col">Solution Video</th>
                 <th class="fit" scope="col">Price</th>
+                <th class="fit" scope="col">Total Participation</th>
                 <th class="fit" scope="col">Created</th>
                 <th class="fit" scope="col">Questions</th>
                 <th class="fit" scope="col">Action</th>
@@ -124,6 +125,7 @@
                     @endif
                 </td>
                 <td>{{ $exam->exam_price ?? 0 }}</td>
+                <td>{{ count($exam->mcqTotalResult) }}</td>
                 <td class="text-sm">{{ date('F jS, Y', strtotime($exam->created_at)) }}</td>
                 <td>
                     <a class="btn btn-outline-primary btn-sm" href="{{route('model.exam.question.index',$exam->id)}}">

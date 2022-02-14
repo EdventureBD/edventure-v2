@@ -27,12 +27,14 @@ class ModelExam extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $appends = array('question_count');
+//    protected $appends = [
+//        'question_count'
+//    ];
 
-    public function getQuestionCountAttribute()
-    {
-        return $this->mcqQuestions()->count();
-    }
+//    public function getQuestionCountAttribute()
+//    {
+//        return $this->mcqQuestions()->count();
+//    }
 
     public function category()
     {
@@ -57,5 +59,10 @@ class ModelExam extends Model
     public function paymentOfExams()
     {
         return $this->hasMany(PaymentOfExams::class,'model_exam_id','id');
+    }
+
+    public function mcqQuestionsCount()
+    {
+        return $this->mcqQuestions()->count();
     }
 }

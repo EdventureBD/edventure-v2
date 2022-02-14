@@ -15,6 +15,8 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +31,7 @@ class ModelExamController extends Controller
     {
         $exam_categories = ExamCategory::get();
         $exams = ModelExam::query()->with('category')
-                            ->with('topic');
+                            ->with('topic')->with('mcqTotalResult');
 
         if(request()->input('query.category')) {
             $exams = $exams->where('exam_category_id',request()->input('query.category'));
@@ -70,14 +72,25 @@ class ModelExamController extends Controller
 
     }
 
+    /**
+     * Load edit page for model exam update
+     * @param $examId
+     * @return Application|Factory|View
+     */
     public function edit($examId)
     {
-        $exam = ModelExam::query()->where('id',$examId)->with('topic')->with('category')->first();
+        $exam = ModelExam::query()->where('id',$examId)->with('topic')->with('category')->firstOrFail();
         $exam_topics = ExamTopic::query()->where('exam_category_id', $exam->exam_category_id)->get();
         return view('admin.pages.model_exam.exam.edit', compact('exam','exam_topics'));
     }
 
 
+    /**
+     * Update specific model exam
+     * @param UpdateModelExamRequest $request
+     * @param $examId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateModelExamRequest $request, $examId)
     {
         $inputs = $request->validated();
@@ -121,6 +134,12 @@ class ModelExamController extends Controller
         return response()->json($topics);
     }
 
+    /**
+     * Get exams list by specific category and topic
+     * @param $categoryId
+     * @param $topicId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getExamByCategoryAndTopic($categoryId, $topicId)
     {
         $topics = ModelExam::query()->select('id','title')
@@ -219,14 +238,19 @@ class ModelExamController extends Controller
      */
     public function getMcqExamPaper($examId)
     {
-        $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->first();
+        $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->firstOrFail();
 
         //If already attempted the exam, load exam results
-        if(auth()->check() && $result = $this->examAttended($examId, auth()->user()->id)) {
+        if(auth()->user()->is_admin) {
+            $student_id = request()->input('student_id');
+        } else {
+            $student_id = auth()->user()->id;
+        }
+        if(auth()->check() && $result = $this->examAttended($examId, $student_id)) {
 
             $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
                                             ->where('model_exam_id', $examId)
-                                            ->where('student_id',auth()->user()->id)
+                                            ->where('student_id',$student_id)
                                             ->get();
             return view('student.pages_new.model-exam.mcq-result',compact('result','exam_answer','exam'));
         }
@@ -261,6 +285,49 @@ class ModelExamController extends Controller
         return view('student.pages_new.batch.exam.examSubmissionGreeting');
     }
 
+    public function modelExamResult()
+    {
+
+        $results =  McqTotalResult::query()->with(['modelExam' => function($q) {
+            $q->with('topic')->with('category');
+        }])->with('student');
+
+        //filterable data for result search
+        $filters['student'] = McqTotalResult::query()->with('student:id,name,email')->get()->unique('student_id');
+        $filters['exam'] = McqTotalResult::query()->with('modelExam:id,title')->get()->unique('model_exam_id');
+
+        if(request()->input('query.student')) {
+            $student_id = request()->input('query.student');
+            $results = $results->whereHas('student', function ($q) use ($student_id) {
+                $q->where('id', $student_id);
+            });
+        }
+
+        if(request()->input('query.email')) {
+            $student_id = request()->input('q_countuery.email');
+            $results = $results->whereHas('student', function ($q) use ($student_id) {
+                $q->where('id', $student_id);
+            });
+        }
+
+        if(request()->input('query.exam')) {
+            $exam_id = request()->input('query.exam');
+            $results = $results->whereHas('modelExam', function ($q) use ($exam_id) {
+                $q->where('id', $exam_id);
+            });
+        }
+
+        $results = $results->paginate(5);
+
+        return view('admin.pages.model_exam.result.index', compact('results','filters'));
+    }
+
+    /**
+     * Check whether specific student already attended specific exam
+     * @param $examId
+     * @param $studentId
+     * @return Builder|Model|object|null
+     */
     private function examAttended($examId, $studentId)
     {
         return McqTotalResult::query()
