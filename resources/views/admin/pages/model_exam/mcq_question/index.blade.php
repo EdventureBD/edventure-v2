@@ -18,15 +18,15 @@
     <a href="{{route('model.exam.index')}}" title="Back to exams"> <i class="far fa-hand-point-left"></i> </a>
     <div style="justify-content: right;display: grid; text-align: end">
         <a
-            href="#{{$exam->question_count === $exam->question_limit ? '' : 'createQuestion'}}"
+            href="#{{$exam->mcqQuestionsCount() === $exam->question_limit ? '' : 'createQuestion'}}"
             data-toggle="modal"
             title="Create Model Exam">
-            <button class="{{$exam->question_count === $exam->question_limit ? 'disabled' : ''}} btn btn-outline-primary">
+            <button class="{{$exam->mcqQuestionsCount() === $exam->question_limit ? 'disabled' : ''}} btn btn-outline-primary">
                 <i class="far fa-plus-square"></i>
                 Add Question
             </button>
         </a>
-        @if($exam->question_count === $exam->question_limit)
+        @if($exam->mcqQuestionsCount() === $exam->question_limit)
             <small class="text-bold">You have added maximum number of question</small>
         @else
             <small>Maximum Question Limit: {{$exam->question_limit}}</small>

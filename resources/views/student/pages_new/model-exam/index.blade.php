@@ -64,7 +64,7 @@
                                 @else
                                     @php($label = 'Pay')
                                     @php($href = route('single.payment.initialize', $exam->id))
-                                    @break
+                                    @continue
                                 @endif
                             @endforeach
                         @else
