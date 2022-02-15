@@ -52,7 +52,7 @@
          .table td.fit,
          .table th.fit {
              white-space: nowrap;
-             width: 1%;
+             max-width: 2%;
          }
          .select2-purple .select2-container--default span span{
             padding-top: auto;
@@ -112,7 +112,7 @@
                 <td>{{ $exam->title }}</td>
                 <td>{{ $exam->topic->name }}</td>
                 <td>{{ $exam->category->name }}</td>
-                <td>{{ $exam->question_limit }}</td>
+                <td class="d-flex justify-content-center">{{ $exam->question_limit }}</td>
                 <td>{{ \App\Enum\ExamType::Exam[$exam->exam_type] }}</td>
                 <td>{{ $exam->duration }}</td>
                 <td>{{ $exam->negative_marking_value }}</td>

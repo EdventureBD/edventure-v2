@@ -24,7 +24,7 @@
                 <button type="submit" class="btn btn-outline-primary">Find</button>
             </div>
             <div>
-                <a href="{{route('exam.tags.index')}}" class="btn btn-outline-danger">Clear</a>
+                <a href="{{route('exam.tags.index')}}" class="btn btn-outline-secondary">Clear</a>
             </div>
         </div>
 
