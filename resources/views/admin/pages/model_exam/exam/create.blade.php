@@ -156,11 +156,14 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <input
-                                class="form-control"
-                                type="file"
-                                name="solution_pdf"
-                                id="solution_pdf">
+                            <div class="custom-file">
+                                <input type="file"
+                                       name="solution_pdf"
+                                       class="custom-file-input"
+                                       accept="application/pdf"
+                                       id="solution_pdf">
+                                <label class="custom-file-label" for="solution_pdf">Solution pdf</label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">

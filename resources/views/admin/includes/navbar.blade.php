@@ -121,6 +121,10 @@
                         {{ __('Logout') }}
                     </a>
                 </form>
+
+                <a href="{{route('admin.update.password')}}" class="dropdown-item"><i class="fa fa-key" style="color: greenyellow"></i>
+                    Change Password
+                </a>
             </div>
         </li>
         {{-- <li class="nav-item">

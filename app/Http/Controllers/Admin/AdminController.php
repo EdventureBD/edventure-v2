@@ -11,4 +11,9 @@ class AdminController extends Controller
     {
         return view('admin.pages.admin');
     }
+
+    public function updatePassword()
+    {
+        return view('admin.pages.update-password');
+    }
 }
