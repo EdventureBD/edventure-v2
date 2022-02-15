@@ -250,11 +250,11 @@ class CourseController extends Controller
         return $months;
     }
 
-    public function roadmap(){
-        return view("student.pages_new.roadmap.roadmap_index");
-    }
+    // public function roadmap(){
+    //     return view("student.pages_new.roadmap.roadmap_index");
+    // }
 
-    public function new_roadmap(){
-        return view("student.pages_new.roadmap.new_roadmap_index");
-    }
+    // public function new_roadmap(){
+    //     return view("student.pages_new.roadmap.new_roadmap_index");
+    // }
 }
