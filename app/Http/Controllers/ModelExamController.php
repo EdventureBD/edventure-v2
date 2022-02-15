@@ -242,7 +242,9 @@ class ModelExamController extends Controller
 
 
         //If already attempted the exam, load exam results
-        $student_id = request()->input('student_id') ?? auth()->user()->id;
+        $student_id = auth()->user()->is_admin && request()->input('student_id') ?
+                                                    request()->input('student_id') :
+                                                    auth()->user()->id;
         if(auth()->check() && $result = $this->examAttended($examId, $student_id)) {
 
             $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
