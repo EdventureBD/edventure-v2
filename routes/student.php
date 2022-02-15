@@ -12,6 +12,9 @@ use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/profile/ajax_get_courses', [AccountDetailsController::class, 'ajax_get_courses'])->name('ajax-get-courses');
+    Route::get('/profile/ajax_get_strengths_and_weaknesses', [AccountDetailsController::class, 'ajax_get_strengths_and_weaknesses'])->name('ajax-get-strengths-and-weaknesses');
+
     Route::get('/profile-data', [AccountDetailsController::class, 'profileData'])->name('profile-data');
     Route::get('/batch-results', [AccountDetailsController::class, 'batchResults'])->name('batch-results'); //getting batch results
     Route::get('/tag-analysis-report/{course}', [AccountDetailsController::class, 'tagAnalysisReport'])->name('tag-analysis-report');
