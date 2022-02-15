@@ -85,10 +85,6 @@
         }
         /* Question Mapping part ends */
 
-        // if(document.getElementById("mcqOp1_").checked) {
-        //     console.log("ckecked");
-        // }
-        // else console.log("unchecked");
 
 
     // {{-- -----------------------------Frontend Script part for Timer collapse and expand # ends ----------------------------- --}}
