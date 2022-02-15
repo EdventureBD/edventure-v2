@@ -66,7 +66,7 @@
                     {{ !is_null($result->modelExam->exam_price) && $result->modelExam->exam_price != 0 ? 'PAID' : 'FREE' }}
                 </td>
                 <td>
-                    <a href="{{route('model.exam.paper.mcq',['id'=>$result->modelExam->id, 'student_id'=> $result->student->id])}}" class="btn btn-outline-primary btn-sm">
+                    <a target="_blank" href="{{route('model.exam.paper.mcq',['id'=>$result->modelExam->id, 'student_id'=> $result->student->id])}}" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-info-circle"></i>
                     </a>
                 </td>
