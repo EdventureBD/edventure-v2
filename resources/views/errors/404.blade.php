@@ -4,4 +4,4 @@
 {{--@section('code', '404')--}}
 {{--@section('message', __('Not Found'))--}}
 
-@extends('student.pages_new.error')
+@extends('errors.edventure-404')
