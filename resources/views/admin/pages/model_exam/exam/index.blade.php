@@ -52,12 +52,32 @@
          .table td.fit,
          .table th.fit {
              white-space: nowrap;
-             width: 1%;
+             max-width: 2%;
          }
+         .select2-purple .select2-container--default span span{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
+         div .select2 .selection .select2-selection{
+            padding-top: auto;
+            padding-bottom: auto;
+            height: 2.35rem;
+        }
     </style>
 
-    @include('admin.pages.model_exam.exam.filter')
-    @include('admin.pages.model_exam.exam.create')
+    
+    
+
+    <div class="row">
+        <div class="col-md-9">
+            @include('admin.pages.model_exam.exam.filter')
+         
+        </div>
+        <div class="col-md-3">
+            @include('admin.pages.model_exam.exam.create')
+        </div>
+     </div>
 
     <table class="table table-responsive table-striped">
 
@@ -92,7 +112,7 @@
                 <td>{{ $exam->title }}</td>
                 <td>{{ $exam->topic->name }}</td>
                 <td>{{ $exam->category->name }}</td>
-                <td>{{ $exam->question_limit }}</td>
+                <td class="d-flex justify-content-center">{{ $exam->question_limit }}</td>
                 <td>{{ \App\Enum\ExamType::Exam[$exam->exam_type] }}</td>
                 <td>{{ $exam->duration }}</td>
                 <td>{{ $exam->negative_marking_value }}</td>
