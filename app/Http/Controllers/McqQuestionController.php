@@ -16,7 +16,7 @@ class McqQuestionController extends Controller
 {
     public function index($examId)
     {
-        $exam = ModelExam::query()->where('id',$examId)->first();
+        $exam = ModelExam::query()->where('id',$examId)->firstOrFail();
         $exam_questions = McqQuestion::query()->with('examTag')
                         ->where('model_exam_id',$examId)
                         ->orderByDesc('created_at')
@@ -43,7 +43,7 @@ class McqQuestionController extends Controller
 
     public function edit($slug)
     {
-        $mcqQuestion = McqQuestion::query()->where('slug',$slug)->with('examTag')->first();
+        $mcqQuestion = McqQuestion::query()->where('slug',$slug)->with('examTag')->firstOrFail();
         return view('admin.pages.model_exam.mcq_question.edit', compact('mcqQuestion'));
     }
 
@@ -58,7 +58,7 @@ class McqQuestionController extends Controller
 
     public function destroy($slug)
     {
-        McqQuestion::query()->where('slug', $slug)->first()->delete();
+        McqQuestion::query()->where('slug', $slug)->firstOrFail()->delete();
 
         return redirect()->back()->with(['status' => 'Question Deleted Successfully']);
     }
