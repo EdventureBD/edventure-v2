@@ -59,7 +59,10 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <input class="form-control" name="solution_pdf" accept="application/pdf" type="file">
+                            <div class="custom-file">
+                                <input name="solution_pdf" accept="application/pdf" type="file" class="custom-file-input" id="customFileLangHTML">
+                                <label class="custom-file-label" for="customFileLangHTML">Solution pdf</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">

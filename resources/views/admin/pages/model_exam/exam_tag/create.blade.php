@@ -43,7 +43,10 @@
                     </div>
                     <div class="d-flex flex-column">
                         <div class="my-2">
-                            <input class="form-control my-auto p-0" name="solution_pdf" accept="application/pdf" type="file">
+                            <div class="custom-file">
+                                <input name="solution_pdf" accept="application/pdf" type="file" class="custom-file-input" id="customFileLangHTML">
+                                <label class="custom-file-label" for="customFileLangHTML">Solution pdf</label>
+                            </div>
                         </div>
                         <div class="my-2">
                             <div class="input-group">
