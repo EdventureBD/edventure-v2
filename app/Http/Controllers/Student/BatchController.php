@@ -124,7 +124,9 @@ class BatchController extends Controller
 
         // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays);
 
-        return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
+        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
+
+        // return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
     }
 
     // public function batchTests(Batch $batch){
