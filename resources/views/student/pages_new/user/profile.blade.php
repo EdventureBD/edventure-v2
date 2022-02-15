@@ -116,7 +116,7 @@
                         <div>
                               <h5 class="fw-600">MCQ</h5>
                         </div>
-                        <div class=" text-black">
+                        <div class=" text-black" id="mcq_strength">
                            @foreach ($mcq_content_tags as $mcq_content_tag)
                               @if($mcq_content_tag->percentage_scored != 'no data')
                                  @if($mcq_content_tag->percentage_scored > 80)
@@ -136,7 +136,7 @@
                         <div>
                               <h5 class="fw-600">CQ</h5>
                         </div>
-                        <div class=" text-black">
+                        <div class=" text-black" id="cq_strength">
                            @foreach ($cq_content_tags as $cq_content_tag)
                               @if($cq_content_tag->percentage_scored != 'no data')
                                  @if($cq_content_tag->percentage_scored > 80)
@@ -145,7 +145,7 @@
                               @endif
                            @endforeach
                         {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p> --}}
-                     </div>
+                        </div>
                      <div>
                         <a href="#" style="text-decoration: none; color: black; font-weight:600;">
                               See More
@@ -165,7 +165,7 @@
                      <div class="strength-weakness-cq-mcq" id="">
                         <h5 class="fw-600">MCQ</h5>
                      </div>
-                     <div class="text-black">
+                     <div class="text-black" id="mcq_weakness">
                         @foreach ($mcq_content_tags as $mcq_content_tag)
                            @if($mcq_content_tag->percentage_scored !== 'no data')
                               @if($mcq_content_tag->percentage_scored < 20)
@@ -184,7 +184,7 @@
                      <div class="strength-weakness-cq-mcq" id="">
                            <h5 class="fw-600">CQ</h5>
                      </div>
-                     <div class="text-black">
+                     <div class="text-black" id="cq_weakness">
                         @foreach ($cq_content_tags as $cq_content_tag)
                            @if($cq_content_tag->percentage_scored !== 'no data')
                            
@@ -245,33 +245,106 @@
 
       <script>
          $(document).on('click', '#course-option', function(){
-            console.log("HIT");
+            // console.log("HIT");
             // var issue_id = $( this ).val();
-            // var html = '<option value="0"> None </option>';
+            // var course_id = $( this ).data('id');
+            $('#category-selection').html('');
+            var html = ' <div class="mx-auto mt-3 d-flex justify-content-between border py-2" type="button" data-toggle="collapse" data-target="#categories" aria-expanded="false" aria-controls="collapseExample"> <div> <h6 class="fw-500" id="category-selection-text">Select Course</h6> </div> <div id="category-selection-icon"> <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span> </div> </div> ';
 
-            // $('.append_blogs').html('');
+            $.ajax({
+               url: '{{ route("ajax-get-courses") }}',
+               type: 'GET',
+               data: {},
+               success: function(response)
+               {
+                  // console.log(response);
+                  var enrolled_courses = response;
 
-            // $.ajax({
-            //    url: '{{ route("ajax-get-courses") }}',
-            //    type: 'GET',
-            //    data: { issue_id: issue_id },
-            //    success: function(response)
-            //    {
-            //          console.log(response);
-            //          var blogs = response;
-            //          if (blogs.length > 0) 
-            //          {
-            //             jQuery.each(blogs, function(index, blog)
-            //             {
-            //                html += '<option value="' + blog.id + '">' + blog.title + '</option>';
-            //             });
+                  if (enrolled_courses.length > 0)
+                  {
+                     jQuery.each(enrolled_courses, function(index, enrolled_course)
+                     {
+                        // html += '<option value="' + enrolled_courses.id + '">' + enrolled_courses.title + '</option>';
+                        html += '<div class="mx-auto category-progress collapse text-white" id="categories" data-id="' + enrolled_course.id + '" > <div class="category-name"> <div class="d-flex"> <h5 class="fw-600 pl-4">'  + enrolled_course.title +  '</h5> </div> <div class="progress"> </div> </div> <div class="category-link-icon"> <span class="iconify-inline" data-icon="ei:external-link" data-width="36" data-height="36" data-rotate="90deg" data-flip="horizontal"></span> </div> </div> ';
+                     });
 
-            //             $('.append_blogs').append(html);
-            //          }
-            //    }
-            // });
+                     $('#category-selection').append(html);
+                  }
+
+               }
+            });
          });
       </script>
+
+   <script>
+      $(document).on('click', '#categories', function(){
+         var course_id = $( this ).data('id');
+         $('#mcq_strength').html('');
+         $('#cq_strength').html('');
+         $('#mcq_weakness').html('');
+         $('#cq_weakness').html('');
+         
+         // console.log("SELECT HIT");
+         // console.log( course_id );
+
+         $.ajax({
+            url: '{{ route("ajax-get-strengths-and-weaknesses") }}',
+            type: 'GET',
+            data: { course_id: course_id },
+            success: function(response)
+            {
+               // console.log(response);
+
+               var mcq_tags = response.mcq_content_tags;
+               var cq_tags = response.cq_content_tags;
+
+               // console.log(mcq_tags);
+               // console.log(cq_tags);
+
+               if (mcq_tags.length > 0){
+
+                  mcq_strength_tags_html = '';
+                  mcq_weakness_tags_html = '';
+                  jQuery.each(mcq_tags, function(index, mcq_tag)
+                  {
+                     if(mcq_tag.percentage_scored != "no data"){
+                        if(mcq_tag.percentage_scored > 80){
+                           mcq_strength_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p>';
+                        }
+                        else if(mcq_tag.percentage_scored < 20){
+                           mcq_weakness_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p>';
+                        }
+                     }
+                  });
+
+                  $('#mcq_strength').append(mcq_strength_tags_html);
+                  $('#mcq_weakness').append(mcq_weakness_tags_html);
+               }
+
+               if (cq_tags.length > 0){
+                  
+                  cq_strength_tags_html = '';
+                  cq_weakness_tags_html = '';
+                  jQuery.each(cq_tags, function(index, cq_tag)
+                  {
+                     if(cq_tag.percentage_scored != "no data"){
+                        if(cq_tag.percentage_scored > 80){
+                           cq_strength_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p>';
+                        }
+                        else if(cq_tag.percentage_scored < 20){
+                           cq_weakness_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p>';
+                        }
+                     }
+                  });
+
+                  $('#cq_strength').append(cq_strength_tags_html);
+                  $('#cq_weakness').append(cq_weakness_tags_html);
+               }
+
+            }
+         });
+      });
+   </script>
 
       {{-- frontend script part ends --}}
    </x-landing-layout>

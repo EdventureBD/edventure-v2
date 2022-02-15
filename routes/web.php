@@ -65,6 +65,7 @@ Route::get('/course/course-preview/{course}/enroll', [CourseController::class, '
 
 // Roadmap Page-> should be-> Route::get('/course/course-preview/{course}/roadmap', [CourseController::class, 'roadmap'])->name('roadmap')
 Route::get('/roadmap', [CourseController::class, 'roadmap'])->name('roadmap');
+Route::get('/new_roadmap', [CourseController::class, 'new_roadmap'])->name('new_roadmap');
 
 
 require __DIR__ . '/auth.php';
