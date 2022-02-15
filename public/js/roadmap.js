@@ -1,5 +1,5 @@
 let landsParentDiv = document.getElementById("ilandsParentContainer");
-let ilandImages = ["img/road_map/landl1.png","img/road_map/landr4.png","img/road_map/Frame 46.png","img/road_map/landl5.png","img/road_map/landl6.png","img/road_map/landl2.png","img/road_map/landl2.png","img/road_map/landl6.png"];
+let ilandImages = ["/img/road_map/landl1.png", "/img/road_map/landr4.png", "/img/road_map/Frame 46.png", "/img/road_map/landl5.png", "/img/road_map/landl6.png", "/img/road_map/landl2.png", "/img/road_map/landl2.png", "/img/road_map/landl6.png"];
 let totalLands = ilandImages.length;
 let ilandImageIndex = 0;
    while(totalLands){
@@ -20,9 +20,9 @@ let ilandImageIndex = 0;
                   // Iland down star's part 
                   let divstars = document.createElement("div");
                   divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
-                  divstars.innerHTML = `<img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                  <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                  <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                  divstars.innerHTML = `<img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                  <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                  <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                   `;
                   div.appendChild(divstars);
                   landsParentDiv.appendChild(div);
@@ -32,13 +32,13 @@ let ilandImageIndex = 0;
                else{
                   if(j % 3 !== 0) {
                      let div = document.createElement("div");
-                     div.innerHTML  = `<img src="img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair">`;
+                     div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair">`;
                      div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                      landsParentDiv.appendChild(div);
                   }
                   else{
                      let div = document.createElement("div");
-                     div.innerHTML  = `<img src="img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair">`;
+                     div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair">`;
                      div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                      landsParentDiv.appendChild(div);
                   }
@@ -82,9 +82,9 @@ let ilandImageIndex = 0;
                      // Iland down star's part 
                      let divstars = document.createElement("div");
                      divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
-                     divstars.innerHTML = `<img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                     <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                     <img src="img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                     divstars.innerHTML = `<img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                     <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                     <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                      `;
                      div.appendChild(divstars);
                      landsParentDiv.appendChild(div);
@@ -93,12 +93,12 @@ let ilandImageIndex = 0;
                   }
                   else{
                      if(j % 3 !== 0){
-                        div.innerHTML  = `<img src="img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" >`;
+                        div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" >`;
                         div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                         landsParentDiv.appendChild(div);
                      }
                      else{
-                        div.innerHTML  = `<img src="img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" >`;
+                        div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" >`;
                         div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                         landsParentDiv.appendChild(div);
                      }

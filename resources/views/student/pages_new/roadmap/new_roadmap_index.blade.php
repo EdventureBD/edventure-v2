@@ -64,7 +64,7 @@
    </div>
    {{-- modal part ends  --}}
    {{-- script part --}}
-   <script src="/js/roadmap.js">
+   <script src="{{ asset('/js/roadmap.js') }}">
    </script>
    {{-- script part ends  --}}
 </x-landing-layout>
