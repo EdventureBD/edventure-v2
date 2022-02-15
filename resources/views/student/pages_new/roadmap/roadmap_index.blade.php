@@ -50,12 +50,16 @@
                      @endphp --}}
                      @php $disabled = false; @endphp
                      @forelse ($batchTopics as $batchTopic)
+
+
                         <div class="card col-4 mx-2" data-toggle="modal" data-target="#courseTopicModal-{{ $batchTopic->id }}">
                            <img class="card-img-top" src="https://picsum.photos/seed/{{ rand(1,100) }}/200/200" alt="Card image cap">
                            <div class="card-body">
                               <p class="card-text"> {{ $batchTopic->courseTopic->title }} </p>
                            </div>
                         </div>
+
+
 
                         <div class="modal fade" id="courseTopicModal-{{ $batchTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
                            <div class="modal-dialog" role="document">
@@ -67,9 +71,13 @@
                                  </button>
                                  </div>
                                  <div class="modal-body">
-                                    <h3 class="mt-3">Exams {{$batch->title}} {{auth()->user()->id}} </h3>
+                                    <h3 class="mt-3"> Exams {{$batch->title}} </h3>
                                     <ol>
+
+
                                        @forelse ($batchTopic->courseTopic->exams as $exam)
+
+                                       
                                           @if (count($exam->course_lectures))
                                              @foreach ($exam->course_lectures as $course_lecture)
                                                 <li class="font-weight-bold">
@@ -82,6 +90,8 @@
                                                 @php if (!$disabled && !$course_lecture->completed) $disabled = true; @endphp
                                              @endforeach
                                           @endif
+
+
                                           <li class="font-weight-bold">
                                              {{-- @if($exam->exam_type != "Aptitude Test" && $exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}
                                              @if($exam->exam_type == "Aptitude Test")
