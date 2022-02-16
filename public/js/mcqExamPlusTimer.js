@@ -82,41 +82,33 @@
                     optionIdInMap.classList.add("bg-success");
                 });
 
-                /* mcq option selection and color changing part  */
-
-                    let op1 = document.getElementById(`mcq_${mcqQuestion.id}_op1`);
-                    let op2 = document.getElementById(`mcq_${mcqQuestion.id}_op2`);
-                    let op3 = document.getElementById(`mcq_${mcqQuestion.id}_op3`);
-                    let op4 = document.getElementById(`mcq_${mcqQuestion.id}_op4`);
-                    op1.addEventListener("click", () => {
-                        op1.setAttribute("style","background: #FCBF82");
-                        op2.removeAttribute("style");
-                        op3.removeAttribute("style");
-                        op4.removeAttribute("style");
-                    });
-                    op2.addEventListener("click", () => {
-                        op2.setAttribute("style","background: #FCBF82");
-                        op1.removeAttribute("style");
-                        op3.removeAttribute("style");
-                        op4.removeAttribute("style");
-                    });
-                    op3.addEventListener("click", () => {
-                        op3.setAttribute("style","background: #FCBF82");
-                        op1.removeAttribute("style");
-                        op2.removeAttribute("style");
-                        op4.removeAttribute("style");
-                    });
-                    op4.addEventListener("click", () => {
-                        op4.setAttribute("style","background: #FCBF82");
-                        op1.removeAttribute("style");
-                        op3.removeAttribute("style");
-                        op2.removeAttribute("style");
-                    });
+                /* mcq option selection and on click color changing part  */
+                    optionSelected("op1","op2","op3","op4",mcqQuestion.id);
+                    optionSelected("op2","op1","op3","op4",mcqQuestion.id);
+                    optionSelected("op3","op2","op1","op4",mcqQuestion.id);
+                    optionSelected("op4","op2","op3","op1",mcqQuestion.id);
+                    
 
                 /* mcq option selection and color changing part ends */
 
                 
             });
+        }
+        /* mcq option selection and on click color changing part's function starts */
+        function optionSelected(activeOp,inactiveOp1,inactiveOp2,inactiveOp3,mcqId) {
+            let selected = document.getElementById(`mcq_${mcqId}_${activeOp}`);
+            let option2 = document.getElementById(`mcq_${mcqId}_${inactiveOp1}`);
+            let option3 = document.getElementById(`mcq_${mcqId}_${inactiveOp2}`);
+            let option4 = document.getElementById(`mcq_${mcqId}_${inactiveOp3}`);
+            selected.addEventListener("click", () => {
+                selected.setAttribute("style","background: #FCBF82");
+                option2.removeAttribute("style");
+                option3.removeAttribute("style");
+                option4.removeAttribute("style");
+            });
+        /* mcq option selection and on click color changing part's function ends */
+
+            
         }
         /* Question Mapping part ends */
 
