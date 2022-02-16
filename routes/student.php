@@ -33,6 +33,11 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         // BATCH
         Route::get('batch/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
         Route::get('batch/{batch}/{courseLecture}', [BatchController::class, 'lecture'])->name('topic_lecture')->middleware('proceed_guard');
+
+        // Route::get('batch/ajax/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
+
+
+
         Route::get('batch/{batch}/ajax/get/{courseLecture}', [BatchController::class, 'get_lecture_visit_status_ajax'])->name('get_lecture_visit_status_ajax');
         Route::get('batch/{batch}/ajax/confirm/{courseLecture}', [BatchController::class, 'lecture_visit_confirmed_ajax'])->name('lecture_visit_confirmed_ajax');
 

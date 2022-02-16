@@ -23,11 +23,10 @@
    <!-- Modal -->
    @php $disabled = false; @endphp
    @forelse ($batchTopics as $batchTopic)
-      <div class="modal fade" id="courseTopicModal-{{ $batchTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
+      <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header border">
-                  <h3 class="mt-3"> Batch - {{$batch->title}} </h3>
                   <h5 class="modal-title mx-auto fw-800" id="exampleModalLabel"> Exams for {{ $batchTopic->courseTopic->title }}</h5>
                   </button>
                </div> 
@@ -117,7 +116,162 @@
    
    {{-- modal part ends  --}}
    {{-- script part --}}
-   <script src="{{ asset('/js/roadmap.js') }}">
+   <script>
+      let allLands = JSON.parse(atob('{{ base64_encode(json_encode($batchTopics)) }}'));
+      console.log(allLands);
+
+      let landCounter = 0;
+      console.log(landCounter);
+
+      let totalLands = '{{ $batchTopics->count() }}';
+      console.log("Land Count", totalLands);
+
+      // console.log(allLands[0].course_topic.id);
+
+      let landsParentDiv = document.getElementById("ilandsParentContainer");
+      let ilandImages = [  "{{ asset('/img/road_map/landl1.png') }}",
+                           "{{ asset('/img/road_map/landr4.png') }}",
+                           "{{ asset('/img/road_map/Frame 46.png') }}", 
+                           "{{ asset('/img/road_map/landl5.png') }}",
+                           "{{ asset('/img/road_map/landl6.png') }}",
+                           "{{ asset('/img/road_map/landl2.png') }}",
+                        ];
+      // let totalLands = ilandImages.length;
+      // console.log("Land Count", totalLands);
+      // let ilandImageIndex = 0;
+
+         while(totalLands){
+            // onStream design
+            for(let i = 0; i  <5; i++){
+               for(let j = 0; j < 5; j++){
+                  if(i===j){
+                     if(j%2==0){
+                        let div = document.createElement("div");
+                        div.classList.add("px-lg-5","px-sm-0");
+                        // Iland image part 
+                        let divIland = document.createElement("div");
+                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                        // modal part 
+                        divIland.setAttribute("data-toggle","modal");
+                        divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
+                        div.appendChild(divIland);
+                        // Iland down star's part 
+                        let divstars = document.createElement("div");
+                        divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
+                        divstars.innerHTML = `<img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                        <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                        <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                        `;
+                        div.appendChild(divstars);
+                        landsParentDiv.appendChild(div);
+                        // console.log("henlo", ilandImageIndex);
+                        if(landCounter == ilandImages.length){
+                           landCounter = 0;
+                        }
+                        else{
+                           landCounter++;
+                        }
+                        totalLands--;
+                     }
+                     else{
+                        if(j % 3 !== 0) {
+                           let div = document.createElement("div");
+                           div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair">`;
+                           div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
+                           landsParentDiv.appendChild(div);
+                        }
+                        else{
+                           let div = document.createElement("div");
+                           div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair">`;
+                           div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
+                           landsParentDiv.appendChild(div);
+                        }
+                     }
+                  }
+                  else{
+                     let div = document.createElement("div");
+                     div.innerText  = "0";
+                     div.classList.add("invisible");
+                     landsParentDiv.appendChild(div);
+                  }
+                  if(!totalLands){
+                     break;
+                  }
+               }
+               if(!totalLands){
+                  break;
+               }
+            }
+            // onStream design ends 
+            
+            // reverseStream design starts
+            for(let i = 0; i < 5; i++){
+               for(let j = 0; j < 5; j++){
+                  if((i+j)===(5-1)){
+                     let div = document.createElement("div");
+                     if((i===4) || (i===0)){
+                        div.classList.add("invisible");
+                        landsParentDiv.appendChild(div);
+                     }
+                     else{
+                        if(i===j){
+                           div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
+                           // Iland image part 
+                           let divIland = document.createElement("div");
+                           divIland.innerHTML = `<img src="${ilandImages[ilandImageIndex]}" alt="Iland image" class="img-fluid">`;
+                           // modal part 
+                           divIland.setAttribute("data-toggle","modal");
+                           divIland.setAttribute("data-target", "#exampleModal");
+                           div.appendChild(divIland);
+                           // Iland down star's part 
+                           let divstars = document.createElement("div");
+                           divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
+                           divstars.innerHTML = `<img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                           <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                           <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                           `;
+                           div.appendChild(divstars);
+                           landsParentDiv.appendChild(div);
+                           // ilandImageIndex++;
+                           // console.log("henlo", ilandImageIndex);
+                           if(landCounter == ilandImages.length){
+                              landCounter = 0;
+                           }
+                           else{
+                              landCounter++;
+                           }
+                           totalLands--;
+                        }
+                        else{
+                           if(j % 3 !== 0){
+                              div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" >`;
+                              div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
+                              landsParentDiv.appendChild(div);
+                           }
+                           else{
+                              div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" >`;
+                              div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
+                              landsParentDiv.appendChild(div);
+                           }
+                        }
+                     }
+                  }
+                  else{
+                     let div = document.createElement("div");
+                     div.innerText  = "0";
+                     div.classList.add("invisible");
+                     landsParentDiv.appendChild(div);
+                  }
+                  if(!totalLands){
+                     break;
+                  }
+               }
+               if(!totalLands){
+                  break;
+               }
+            }
+            // reverseStream design ends 
+         }
    </script>
    {{-- script part ends  --}}
 </x-landing-layout>
