@@ -5,7 +5,19 @@
 ])
 
 @section('content')
-    <form autocomplete="off">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form style="margin-left: 10%" action="" method="POST" autocomplete="off">
+        @csrf
+        @method('PUT')
         <div class="form-group row">
             <div class="col-sm-8">
                 <div class="input-group mb-2 mr-sm-2">
@@ -25,9 +37,9 @@
             <div class="col-sm-8">
                 <div class="input-group mb-2 mr-sm-2">
                     <input type="password"
-                           name="new_password"
+                           name="password"
                            class="form-control"
-                           id="new_password"
+                           id="password"
                            placeholder="New Password">
                     <div class="input-group-append">
                         <div class="input-group-text"><i id="new_icon" class="fas fa-eye-slash"></i></div>
@@ -40,13 +52,21 @@
             <div class="col-sm-8">
                 <div class="input-group mb-2 mr-sm-2">
                     <input type="password"
-                           name="confirm_password"
+                           name="password_confirmation"
                            class="form-control"
-                           id="confirm_password"
+                           id="password_confirmation"
                            placeholder="Confirm Password">
                     <div class="input-group-append">
                         <div class="input-group-text"><i id="confirm_icon" class="fas fa-eye-slash"></i></div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-8">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-outline-success submitBtn">Update</button>
                 </div>
             </div>
         </div>
@@ -55,16 +75,29 @@
 
 @section('js2')
     <script>
+        $(function () {
+            $(".submitBtn").prop("disabled", true);
+        })
+
+
+        $('#current_password,#password,#password_confirmation').on('change keyup', function() {
+            if($('#current_password').val() === '' || $('#password').val() === '' || $('#password_confirmation').val() === '') {
+                $(".submitBtn").prop("disabled", true);
+            } else {
+                $(".submitBtn").prop("disabled", false);
+            }
+        })
+
         $('#current_icon').on('click', function() {
             toggle('current_password','current_icon')
         })
 
         $('#new_icon').on('click', function() {
-            toggle('new_password','new_icon')
+            toggle('password','new_icon')
         })
 
         $('#confirm_icon').on('click', function() {
-            toggle('confirm_password','confirm_icon')
+            toggle('password_confirmation','confirm_icon')
         })
 
 
