@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="py-5 border rounded border-dashed">
+    <div class="py-5">
         <div class="container page__container">
             <div class="page-section">
                 <form action="{{route('model.exam.mcq.submit',$exam->id)}}" id="cqFormSubmit" method="POST">
@@ -50,19 +50,19 @@
                                 <div class="question d-flex justify-content-start">
                                     <div class="row row-cols-1 pt-sm-0 pt-3 form-group mx-0 px-0 popUpMcqOptions" id="options_{{$mcq->id}}">
                                         <input type="hidden" name="mcq[{{ $mcq->id }}]" value="0">
-                                        <label class="options"> {!! $mcq->field_1 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op1"> {!! $mcq->field_1 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="1" id="mcqOp1">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="options"> {!! $mcq->field_2 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op2"> {!! $mcq->field_2 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="2" id="mcqOp2">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="options"> {!! $mcq->field_3 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op3"> {!! $mcq->field_3 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="3" id="mcqOp3">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="options"> {!! $mcq->field_4 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op4"> {!! $mcq->field_4 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="4" id="mcqOp4">
                                             <span class="checkmark"></span>
                                         </label>
@@ -82,8 +82,7 @@
 
     {{-- new vendor's code part starts --}}
     <script type="text/javascript">
-        window.onbeforeunload = function() {
-        }
+        
         var timeleft = {{$exam->duration * 60}};
         
 
@@ -91,7 +90,7 @@
         let mcqQuestions = <?php echo json_encode($exam->mcqQuestions)?>;
         //frontend design part's js ends
     </script>
-    // new vendor's code part ends
+     {{-- new vendor's code part ends --}}
 
     <script src="/js/mcqExamPlusTimer.js"></script>
 </x-landing-layout>
