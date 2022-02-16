@@ -3,10 +3,10 @@
     <div class="course-info py-5 border-secondary" id="popUpExamPageBanner">
         <div class="container pt-5">
             <div class="row">
-                <div class="col-7">
-                    <h3 class="text-gray d-flex m-0 fw-800">Exam : {{ $exam->title }}</h3>
+                <div class="col-12">
+                    <h3 class="text-gray d-flex justify-content-center m-0 fw-800">Exam : {{ $exam->title }}</h3>
                 </div>
-                <div class="col-5 text-right mx-0 px-0">
+                <div class="col-12 mx-0 px-0">
                     <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
@@ -44,7 +44,7 @@
                     <input type="hidden" id="exam_end_time" name="exam_end_time">
                     @foreach($exam->mcqQuestions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light p-3 d-flex popUpExamMcqTitle"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light p-2 d-flex align-items-middle popUpExamMcqTitle"><b class="pl-3 my-auto">{{ $loop->iteration }}</b> <span class="w-100 px-2 d-flex align-items-middle pt-auto">{!! $mcq->question !!} </span></div>
 
                             <div class="container my-4">
                                 <div class="question d-flex justify-content-start">
