@@ -50,19 +50,19 @@
                                 <div class="question d-flex justify-content-start">
                                     <div class="row row-cols-1 pt-sm-0 pt-3 form-group mx-0 px-0 popUpMcqOptions" id="options_{{$mcq->id}}">
                                         <input type="hidden" name="mcq[{{ $mcq->id }}]" value="0">
-                                        <label class="options" id="mcq_{{$mcq->id}}_Op1"> {!! $mcq->field_1 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op1"> {!! $mcq->field_1 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="1" id="mcqOp1">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="options" id="mcq_{{$mcq->id}}_Op2"> {!! $mcq->field_2 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op2"> {!! $mcq->field_2 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="2" id="mcqOp2">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="options" id="mcq_{{$mcq->id}}_Op3"> {!! $mcq->field_3 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op3"> {!! $mcq->field_3 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="3" id="mcqOp3">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="options" id="mcq_{{$mcq->id}}_Op4"> {!! $mcq->field_4 !!}
+                                        <label class="options" id="mcq_{{$mcq->id}}_op4"> {!! $mcq->field_4 !!}
                                             <input type="radio" name="mcq[{{ $mcq->id }}]" value="4" id="mcqOp4">
                                             <span class="checkmark"></span>
                                         </label>

@@ -81,10 +81,44 @@
                     optionIdInMap.classList.remove("bg-secondary");
                     optionIdInMap.classList.add("bg-success");
                 });
+
+                /* mcq option selection and color changing part  */
+
+                    let op1 = document.getElementById(`mcq_${mcqQuestion.id}_op1`);
+                    let op2 = document.getElementById(`mcq_${mcqQuestion.id}_op2`);
+                    let op3 = document.getElementById(`mcq_${mcqQuestion.id}_op3`);
+                    let op4 = document.getElementById(`mcq_${mcqQuestion.id}_op4`);
+                    op1.addEventListener("click", () => {
+                        op1.setAttribute("style","background: #FCBF82");
+                        op2.removeAttribute("style");
+                        op3.removeAttribute("style");
+                        op4.removeAttribute("style");
+                    });
+                    op2.addEventListener("click", () => {
+                        op2.setAttribute("style","background: #FCBF82");
+                        op1.removeAttribute("style");
+                        op3.removeAttribute("style");
+                        op4.removeAttribute("style");
+                    });
+                    op3.addEventListener("click", () => {
+                        op3.setAttribute("style","background: #FCBF82");
+                        op1.removeAttribute("style");
+                        op2.removeAttribute("style");
+                        op4.removeAttribute("style");
+                    });
+                    op4.addEventListener("click", () => {
+                        op4.setAttribute("style","background: #FCBF82");
+                        op1.removeAttribute("style");
+                        op3.removeAttribute("style");
+                        op2.removeAttribute("style");
+                    });
+
+                /* mcq option selection and color changing part ends */
+
+                
             });
         }
         /* Question Mapping part ends */
-
 
 
     // {{-- -----------------------------Frontend Script part for Timer collapse and expand # ends ----------------------------- --}}
