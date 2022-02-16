@@ -16,4 +16,12 @@ class AdminController extends Controller
     {
         return view('admin.pages.update-password');
     }
+
+    public function submitUpdatePassword(Request $request)
+    {
+        $inputs = $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+    }
 }
