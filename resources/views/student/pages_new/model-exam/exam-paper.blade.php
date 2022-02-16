@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="py-5 border rounded border-dashed">
+    <div class="py-5">
         <div class="container page__container">
             <div class="page-section">
                 <form action="{{route('model.exam.mcq.submit',$exam->id)}}" id="cqFormSubmit" method="POST">
@@ -82,8 +82,7 @@
 
     {{-- new vendor's code part starts --}}
     <script type="text/javascript">
-        window.onbeforeunload = function() {
-        }
+        
         var timeleft = {{$exam->duration * 60}};
         
 
@@ -91,7 +90,7 @@
         let mcqQuestions = <?php echo json_encode($exam->mcqQuestions)?>;
         //frontend design part's js ends
     </script>
-    // new vendor's code part ends
+     {{-- new vendor's code part ends --}}
 
     <script src="/js/mcqExamPlusTimer.js"></script>
 </x-landing-layout>
