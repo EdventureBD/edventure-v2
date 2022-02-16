@@ -129,6 +129,10 @@ class BatchController extends Controller
         // return view('student.pages_new.roadmap.roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
     }
 
+    public function ajax_get_course_topics(){
+        return 1;
+    }
+
     // public function batchTests(Batch $batch){
     //     // $sExams = [];
     //     // $course = Course::where('id', $batch->course_id)->first();
