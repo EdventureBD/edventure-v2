@@ -44,7 +44,7 @@
                     <input type="hidden" id="exam_end_time" name="exam_end_time">
                     @foreach($exam->mcqQuestions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light p-3 d-flex rounded popUpExamMcqTitle"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light p-3 d-flex popUpExamMcqTitle"><b class="pr-2">{{ $loop->iteration }}</b> <span>{!! $mcq->question !!} </span></div>
 
                             <div class="container my-4">
                                 <div class="question d-flex justify-content-start">
@@ -80,189 +80,18 @@
         </div>
     </div>
 
-
-    <script type="text/javascript">
-        var timeleft = {{$exam->duration * 60}};
-        var downloadTimer = setInterval(function () {
-            timeleft--;
-            var hours = 0;
-            var minH = 0;
-            var min = 0;
-            var sec = timeleft > 0 ? timeleft : 0;
-            if (timeleft >=3600) {
-                hours = Math.floor(timeleft/3600);
-                minH = parseInt(timeleft % 3600) ;
-                min = Math.floor(minH / 60);
-                sec = parseInt(minH % 60);
-            } else if (timeleft >= 60) {
-                min = Math.floor(timeleft / 60);
-                sec = parseInt(timeleft % 60);
-            }
-            if (timeleft > 0) {
-                document.getElementById('countdownMinuits').textContent = min;
-                document.getElementById('countdownSecound').textContent = sec;
-                document.getElementById('countdownHour').textContent = hours;
-            }
-            $('#exam_end_time').val(timeleft)
-
-            if (timeleft <= 0) {
-                clearInterval(downloadTimer);
-                $('#cqFormSubmit').submit()
-            }
-        }, 1000);
-
-    </script>
+    {{-- new vendor's code part starts --}}
     <script type="text/javascript">
         window.onbeforeunload = function() {
-            // if(!$('#cqFormSubmit').submit()) {
-            //     return "Are you sure you want to leave?";
-            // }
-
         }
-    </script>
+        var timeleft = {{$exam->duration * 60}};
+        
 
-    <style>
-        .question {
-            width: 75%
-        }
-
-        .options {
-            position: relative;
-            padding-left: 40px
-        }
-
-        #options label {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 14px;
-            cursor: pointer
-        }
-
-        .options input {
-            opacity: 0
-        }
-
-        .checkmark {
-            position: absolute;
-            top: -1px;
-            left: 0;
-            height: 25px;
-            width: 25px;
-            background-color: #D5BDEA;
-            border: 1px solid #ddd;
-            border-radius: 50%;'
-        }
-
-        .options input:checked~.checkmark:after {
-            display: block
-        }
-
-        .options .checkmark:after {
-            content: "";
-            width: 10px;
-            height: 10px;
-            display: block;
-            background: white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: 300ms ease-in-out 0s
-        }
-
-        .options input[type="radio"]:checked~.checkmark {
-            background: rgb(123, 69, 126);
-            transition: 300ms ease-in-out 0s
-            /* #D5BDEA */
-        }
-
-        .options input[type="radio"]:checked~.checkmark:after {
-            transform: translate(-50%, -50%) scale(1)
-        }
-
-        .btn-primary {
-            background-color: #D5BDEA;
-            color: #ddd;
-            border: 1px solid #ddd
-        }
-
-        .btn-primary:hover {
-            background-color: #D5BDEA;
-            border: 1px solid #D5BDEA;
-        }
-
-        .btn-success {
-            padding: 5px 25px;
-            background-color: #D5BDEA;
-        }
-
-        @media(max-width:576px) {
-            .question {
-                width: 100%;
-                word-spacing: 2px
-            }
-        }
-    </style>
-    {{-- ------------------------Frontend Script part for Timer collapse and expand #start--------------------------------------- --}}
-    <script type="text/javascript">
-
-        let closeCollapseIcon = document.getElementById("close_collapse_icon");
-        let openCollapseIcon = document.getElementById("open_collapse_icon");
-        let questionMap = document.getElementById("questionMap");
-
-        /* timer's part starts  */
-
-        const closeCollapse = () => {
-            questionMap.classList.add("d-none");
-            closeCollapseIcon.classList.remove("d-block");
-            closeCollapseIcon.classList.add("d-none");
-            openCollapseIcon.classList.add("d-block");
-
-        };
-        const openCollapse = () => {
-            questionMap.classList.remove("d-none");
-            closeCollapseIcon.classList.remove("d-none");
-            openCollapseIcon.classList.remove("d-block");
-            openCollapseIcon.classList.add("d-none");
-
-        };
-        closeCollapseIcon.addEventListener("click", closeCollapse);
-        openCollapseIcon.addEventListener("click", openCollapse);
-
-        /* timer's part ends  */
-
-        /* Question Mapping part starts */
+        // forontend design part's js starts
         let mcqQuestions = <?php echo json_encode($exam->mcqQuestions)?>;
-
-        let questionCount = 0;
-        if (mcqQuestions.length > 0) {
-            mcqQuestions.forEach(mcqQuestion => {
-                questionCount++;
-                let a = document.createElement("a");
-                a.className = ("border rounded bg-secondary");
-                let span = document.createElement("span");
-                span.innerText = questionCount;
-                a.setAttribute("id", `map_${mcqQuestion.id}`);
-                a.setAttribute("href", `#q_${mcqQuestion.id}`)
-                a.appendChild(span);
-                questionMap.append(a);
-                let optionFiledID = document.getElementById("options_" + mcqQuestion.id);
-                optionFiledID.addEventListener("click", () => {
-                    let optionIdInMap = document.getElementById(`map_${mcqQuestion.id}`);
-                    optionIdInMap.classList.remove("bg-secondary");
-                    optionIdInMap.classList.add("bg-success");
-                });
-            });
-        }
-        /* Question Mapping part ends */
-
-        // if(document.getElementById("mcqOp1_").checked) {
-        //     console.log("ckecked");
-        // }
-        // else console.log("unchecked");
-
-
+        //frontend design part's js ends
     </script>
-    {{-- -----------------------------Frontend Script part for Timer collapse and expand # ends ----------------------------- --}}
+    // new vendor's code part ends
+
+    <script src="/js/mcqExamPlusTimer.js"></script>
 </x-landing-layout>
