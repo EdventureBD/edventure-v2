@@ -50,6 +50,9 @@
     font-weight: 500;
     color: #3A3939;
 }
+.popUpExamMcqTitle p {
+    margin-top: revert;
+}
 .popUpExamCqTitle{
     border : 1px solid gray;
     box-shadow: inset 0 -3em 3em rgba(248, 245, 245, 0.384),
@@ -95,7 +98,10 @@
 .options input {
     opacity: 0
 }
-
+label p {
+    margin-top: revert;
+    margin-bottom: initial;
+}
 .checkmark {
     position: absolute;
     top: -1px;
