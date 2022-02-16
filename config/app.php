@@ -166,6 +166,8 @@ return [
          * Package Service Providers...
          */
 
+        Sarfraznawaz2005\Loading\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
