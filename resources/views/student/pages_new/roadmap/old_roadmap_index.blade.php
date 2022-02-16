@@ -59,8 +59,6 @@
                            </div>
                         </div>
 
-
-
                         <div class="modal fade" id="courseTopicModal-{{ $batchTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
                            <div class="modal-dialog" role="document">
                               <div class="modal-content">
@@ -74,10 +72,7 @@
                                     <h3 class="mt-3"> Exams {{$batch->title}} </h3>
                                     <ol>
 
-
                                        @forelse ($batchTopic->courseTopic->exams as $exam)
-
-                                       
                                           @if (count($exam->course_lectures))
                                              @foreach ($exam->course_lectures as $course_lecture)
                                                 <li class="font-weight-bold">
@@ -90,7 +85,6 @@
                                                 @php if (!$disabled && !$course_lecture->completed) $disabled = true; @endphp
                                              @endforeach
                                           @endif
-
 
                                           <li class="font-weight-bold">
                                              {{-- @if($exam->exam_type != "Aptitude Test" && $exam->scored_marks < $exam->threshold_marks) style="pointer-events: none; cursor: default; color: grey;" @endif --}}

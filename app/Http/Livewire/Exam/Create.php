@@ -183,6 +183,8 @@ class Create extends Component
             $this->rules['topicId'] = 'required';
         }
 
+        // $this->rules['title'] = 'required|string|max:325|unique:exams,title,'.$this->exam->id;
+
         if($this->showQuestionLimit2){
             $this->rules['quesLimit'] = 'required|numeric|integer|gte:0';
             $this->rules['quesLimit_2'] = 'required|numeric|integer|gte:0';

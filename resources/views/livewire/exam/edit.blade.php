@@ -26,7 +26,37 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="batch">Course Category</label>
+                                            <select class="form-control" wire:model="categoryId" disabled>
+                                                <option value="" selected>Select Category</option>
+                                                {{-- @foreach ($categories as $category) --}}
+                                                    {{-- <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}</option> --}}
+                                                    <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
+                                                {{-- @endforeach --}}
+                                            </select>
+                                            @error('categoryId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="batch">Intermediary Level</label>
+                                            <select class="form-control" wire:model="intermediaryLevelId" disabled>
+                                                <option value="" selected>Select intermediary level</option>
+                                                {{-- @foreach ($intermediaryLevels as $intermediaryLevel) --}}
+                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                                {{-- @endforeach --}}
+                                            </select>
+                                            @error('intermedairyLevelId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-{{ $show ? '4' : '6' }}">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Course <span
@@ -69,17 +99,34 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="title" class="col-form-label">Question Limit <span
+                                            <label for="title" class="col-form-label"> @if($showQuestionLimit2) MCQ Question Limit @else Question Limit @endif <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="quesLimit"
-                                                placeholder="Enter question limit" @if (!$showQuestionLimit) disabled
+                                            {{-- <input type="text" class="form-control" wire:model="quesLimit"
+                                                placeholder="Enter question limit" @if (!$showQuestionLimit) disabled @endif> --}}
 
-                                            @endif>
+                                            <input type="number" @if($showQuestionLimit2) min="0" @else min="1" @endif class="form-control" wire:model="quesLimit"
+                                                placeholder="Enter question limit" @if (!$showQuestionLimit) disabled @endif>
+
                                             @error('quesLimit')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    @if($showQuestionLimit2)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="title" class="col-form-label"> CQ Question Limit <span
+                                                        class="must-filled">*</span></label>
+                                                <input type="number" @if($showQuestionLimit2) min="0" @else min="1" @endif class="form-control" wire:model="quesLimit_2"
+                                                    placeholder="Enter question limit">
+                                                @error('quesLimit_2')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Marks <span

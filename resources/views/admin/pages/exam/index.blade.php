@@ -47,6 +47,8 @@
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
                                         <th class="text-center">Threshold Marks</th>
+                                        <th class="text-center">MCQ Limit</th>
+                                        <th class="text-center">CQ Limit</th>
                                         <th class="text-center">Order</th>
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
@@ -86,6 +88,9 @@
                                             </td>
                                             
                                             <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->threshold_marks }}</td>
+                                            <td class="text-center">{{ $exam->question_limit }}</td>
+                                            <td class="text-center"> @if($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam") {{ $exam->question_limit_2 }} @else N/A @endif</td>
+
                                             <td class="text-center">{{ $exam->order }}</td>
                                             <td class="text-center">
 
@@ -189,6 +194,8 @@
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
                                         <th class="text-center">Threshold Marks</th>
+                                        <th class="text-center">MCQ Limit</th>
+                                        <th class="text-center">CQ Limit</th>
                                         <th class="text-center">Order</th>                                   
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>

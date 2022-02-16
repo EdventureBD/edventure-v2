@@ -6,17 +6,17 @@ use Livewire\Component;
 use App\Models\Admin\Exam;
 use Illuminate\Support\Str;
 use App\Models\Admin\Course;
-use App\Models\Admin\ExamType;
+// use App\Models\Admin\ExamType;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
+// use App\Models\Admin\CourseCategory;
 
 class Edit extends Component
 {
     public $exam;
 
     public $title;
-    public $courseId;
-    public $topicId;
     // public $lectureId;
     public $examType;
     public $marks;
@@ -25,16 +25,20 @@ class Edit extends Component
     public $quesLimit_2;
     public $special;
 
+    public $category;
+    public $categoryId;
+    public $intermediaryLevel;
+    public $intermediaryLevelId;
     public $course;
+    public $courseId;
     public $topic;
+    public $topicId;
     public $order;
     public $threshold_marks;
     // public $examType;
-
     public $show;
 
-
-    public $showQuestionLimit;
+    public $showQuestionLimit = true;
 
     public $showQuestionLimit2 = false;
 
@@ -125,6 +129,13 @@ class Edit extends Component
 
     public function updatedQuesLimit()
     {
+        if (!empty ($this->examType) && ( ($this->examType) == 'MCQ' || ($this->examType) == 'Aptitude Test' )) {
+            $this->marks = $this->quesLimit;
+            $this->duration = $this->quesLimit;
+        } else if (!empty ($this->examType) && ($this->examType) == 'CQ') {
+            $this->marks = $this->quesLimit*10;
+            $this->duration = $this->quesLimit*30;
+        }
         $this->validate([
             'quesLimit' => 'required'
         ]);
@@ -226,6 +237,9 @@ class Edit extends Component
         $this->order = $this->exam->order;
         $this->threshold_marks = $this->exam->threshold_marks;
         $this->quesLimit = $this->exam->question_limit;
+        if($this->examType == "Pop Quiz" || $this->examType == "Topic End Exam"){
+            $this->showQuestionLimit2 = true;
+        }
         $this->quesLimit_2 = $this->exam->question_limit_2;
         $this->special = $this->exam->special;
 
@@ -237,6 +251,14 @@ class Edit extends Component
 
         // $this->examType = ExamType::where('id', $this->examType)->first();
         $this->course = Course::where('id', $this->courseId)->first();
+
+        $this->intermediaryLevel = IntermediaryLevel::where('id', $this->course->intermediary_level_id)->first();
+        $this->intermediaryLevelId = $this->intermediaryLevel->id;
+
+        $this->category = CourseCategory::where('id', $this->intermediaryLevel->course_category_id)->first();
+        $this->categoryId = $this->category->id;
+        
+        // dd($this->course, $this->intermediaryLevel, $this->intermediaryLevelId, $this->categoryId);
 
         if (!($this->special)) {
             $this->topic = CourseTopic::where('id', $this->topicId)->first();

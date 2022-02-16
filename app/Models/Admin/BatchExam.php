@@ -152,4 +152,5 @@ class BatchExam extends Model
     //     // dd($exams);
     //     return [$exams, $specialExams];
     // }
+    }
 }
