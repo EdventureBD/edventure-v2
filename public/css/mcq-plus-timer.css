@@ -69,7 +69,7 @@
 }
 .popUpMcqOptions .options:hover {
     width: 100%;
-    background: #FCBF82;;
+    background: #FCBF82;
 }
 
 /* cq_mcq_php_blade part's css end  */
@@ -105,6 +105,7 @@
     background-color: #D5BDEA;
     border: 1px solid #ddd;
     border-radius: 50%;
+    display: none;
 }
 
 .options input:checked~.checkmark:after {
