@@ -25,8 +25,6 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
     Route::get('/course/course-preview/{course}/enroll/{payments}', [CourseController::class, 'invoice'])->name('invoice');
 
-    // Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
-
     // BATCH
     Route::get('batch', [BatchController::class, 'batch'])->name('batch');
     Route::group(['middleware' => 'canAccess'], function () {

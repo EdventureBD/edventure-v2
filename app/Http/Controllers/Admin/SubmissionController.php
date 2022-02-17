@@ -14,10 +14,12 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Assignment;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\CreativeQuestion;
+use App\Models\Admin\PopQuizCreativeQuestion;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\QuestionContentTag;
 use App\Models\Admin\StudentExamAttempt;
+use App\Models\Admin\TopicEndExamCreativeQuestion;
 use App\Models\Student\exam\CqExamPaper;
 
 use App\Models\Student\exam\PopQuizCqExamPaper;
@@ -414,25 +416,42 @@ class SubmissionController extends Controller
         }
     }
 
-    public function editMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student, CreativeQuestion $creativeQuestion)
+    public function editMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student, $creative_question_slug)
     {
-        // dd($request, $batch, $exam, $exam_type, $student, $creativeQuestion);
+        if($exam_type == "CQ"){
+            $creativeQuestion = CreativeQuestion::where('slug', $creative_question_slug)->firstOrFail();
+        }
+        elseif($exam_type == "Pop Quiz"){
+            $creativeQuestion = PopQuizCreativeQuestion::where('slug', $creative_question_slug)->firstOrFail();
+        }
+        elseif($exam_type == "Topic End Exam"){
+            $creativeQuestion = TopicEndExamCreativeQuestion::where('slug', $creative_question_slug)->firstOrFail();
+        }
+
         // START OF FINDING SPECIFIC QUESTION VALUE
         $detailsResult1 = DetailsResult::where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('question_id', $request->gyanMulokQuestionID)
+            ->where('exam_type', $exam_type)
+            ->whereNull('mcq_ans')
             ->where('exam_id', $exam->id)->first();
         $detailsResult2 = DetailsResult::where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('question_id', $request->onudhabonQuestionID)
+            ->where('exam_type', $exam_type)
+            ->whereNull('mcq_ans')
             ->where('exam_id', $exam->id)->first();
         $detailsResult3 = DetailsResult::where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('question_id', $request->proyugMulokQuestionID)
+            ->where('exam_type', $exam_type)
+            ->whereNull('mcq_ans')
             ->where('exam_id', $exam->id)->first();
         $detailsResult4 = DetailsResult::where('batch_id', $batch->id)
             ->where('student_id', $student->id)
             ->where('question_id', $request->ucchotorQuestionID)
+            ->where('exam_type', $exam_type)
+            ->whereNull('mcq_ans')
             ->where('exam_id', $exam->id)
             ->first();
         // END OF FINDING SPECIFIC QUESTION VALUE
@@ -450,58 +469,69 @@ class SubmissionController extends Controller
         $detailsResult3->gain_marks = $request->proyugMulok;
         $detailsResult4->gain_marks = $request->ucchotor;
 
-        $save1 = $detailsResult1->save();
-        $save2 = $detailsResult2->save();
-        $save3 = $detailsResult3->save();
-        $save4 = $detailsResult4->save();
+        $detailsResult1->save();
+        $detailsResult2->save();
+        $detailsResult3->save();
+        $detailsResult4->save();
         // END OF STORING EDITED MARKS TO DETAILS RESULT TABLE 
 
-        // START OF STORING EDITED MARKS TO EXAM RESULT TABLE 
-        $totals = DetailsResult::where([
-            ['exam_id', $exam->id],
-            ['batch_id', $batch->id],
-            ['student_id', $student->id]
-        ])->get();
-        $totalGainMarks = 0;
-        foreach ($totals as $total) {
-            $totalGainMarks += $total->gain_marks;
+        // START OF STORING EDITED MARKS TO EXAM RESULT TABLE
+        if($exam_type == "Pop Quiz" || $exam_type == "Topic End Exam"){
+            $exam_type = $exam_type.' CQ';
         }
-        $gainMarks = ExamResult::where(
+
+        $exam_result = ExamResult::where(
             [
                 ['exam_id', $exam->id],
                 ['batch_id', $batch->id],
-                ['student_id', $student->id]
+                ['student_id', $student->id],
+                ['exam_type', $exam_type]
             ]
         )->first();
-        $gainMarks->gain_marks = $totalGainMarks;
-        $gainMarks->save();
-        // END OF STORING EDITED MARKS TO EXAM RESULT TABLE 
 
-        // START OF STORING EDITED MARKS TO CQ TABLE
-        $cq1 = CQ::find($request->gyanMulokQuestionID);
-        $cq2 = CQ::find($request->onudhabonQuestionID);
-        $cq3 = CQ::find($request->proyugMulokQuestionID);
-        $cq4 = CQ::find($request->ucchotorQuestionID);
+        $sum_of_previous_marks = $previousMarks1 + $previousMarks2 + $previousMarks3 + $previousMarks4;
+        $sum_of_new_marks = $detailsResult1->gain_marks + $detailsResult2->gain_marks + $detailsResult3->gain_marks + $detailsResult4->gain_marks;
+        $exam_result->gain_marks = $exam_result->gain_marks - $sum_of_previous_marks + $sum_of_new_marks;
+        $exam_result->save();
+        // END OF STORING EDITED MARKS TO EXAM RESULT TABLE
 
+        // START OF STORING EDITED MARKS TO RESPECIVE CQ TABLE
+        if($exam_type == "CQ"){
+            $cq1 = CQ::find($request->gyanMulokQuestionID);
+            $cq2 = CQ::find($request->onudhabonQuestionID);
+            $cq3 = CQ::find($request->proyugMulokQuestionID);
+            $cq4 = CQ::find($request->ucchotorQuestionID);
+        }
+        elseif($exam_type == "Pop Quiz CQ"){
+            $cq1 = PopQuizCQ::find($request->gyanMulokQuestionID);
+            $cq2 = PopQuizCQ::find($request->onudhabonQuestionID);
+            $cq3 = PopQuizCQ::find($request->proyugMulokQuestionID);
+            $cq4 = PopQuizCQ::find($request->ucchotorQuestionID);
+        }
+        elseif($exam_type == "Topic End Exam CQ"){
+            $cq1 = TopicEndExamCQ::find($request->gyanMulokQuestionID);
+            $cq2 = TopicEndExamCQ::find($request->onudhabonQuestionID);
+            $cq3 = TopicEndExamCQ::find($request->proyugMulokQuestionID);
+            $cq4 = TopicEndExamCQ::find($request->ucchotorQuestionID);
+        }
+
+        // calculating total marks scored by all students for each CQ
         $newMarks1 = ($cq1->gain_marks - $previousMarks1) + $request->gyanMulok;
         $newMarks2 = ($cq2->gain_marks - $previousMarks2) + $request->onudhabon;
         $newMarks3 = ($cq3->gain_marks - $previousMarks3) + $request->proyugMulok;
         $newMarks4 = ($cq4->gain_marks - $previousMarks4) + $request->ucchotor;
 
+        // calculating attempts per mark for each CQ
         $totalCQMarks1 = $cq1->number_of_attempt * $cq1->marks;
         $totalCQMarks2 = $cq2->number_of_attempt * $cq2->marks;
         $totalCQMarks3 = $cq3->number_of_attempt * $cq3->marks;
         $totalCQMarks4 = $cq4->number_of_attempt * $cq4->marks;
 
-        $successRate1 = ($newMarks1 * 100) / $totalCQMarks1;
-        $successRate2 = ($newMarks2 * 100) / $totalCQMarks2;
-        $successRate3 = ($newMarks3 * 100) / $totalCQMarks3;
-        $successRate4 = ($newMarks4 * 100) / $totalCQMarks4;
-
-        $cq1->success_rate = $successRate1;
-        $cq2->success_rate = $successRate2;
-        $cq3->success_rate = $successRate3;
-        $cq4->success_rate = $successRate4;
+        // calculating and updating success rate for each CQ
+        $cq1->success_rate = ($newMarks1 * 100) / $totalCQMarks1;
+        $cq2->success_rate = ($newMarks2 * 100) / $totalCQMarks2;
+        $cq3->success_rate = ($newMarks3 * 100) / $totalCQMarks3;
+        $cq4->success_rate = ($newMarks4 * 100) / $totalCQMarks4;
 
         $cq1->gain_marks = $newMarks1;
         $cq2->gain_marks = $newMarks2;
@@ -512,11 +542,9 @@ class SubmissionController extends Controller
         $cq2->save();
         $cq3->save();
         $cq4->save();
-        // END OF STORING EDITED MARKS TO CQ TABLE
+        // END OF STORING EDITED MARKS TO RESPECTIVE CQ TABLE
 
-        if ($save1 && $save2 && $save3 && $save4) {
-            return redirect()->back();
-        }
+        return redirect()->back();
     }
 
     public function checkedPaperOfCQ(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
