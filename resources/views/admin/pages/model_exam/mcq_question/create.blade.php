@@ -1,3 +1,9 @@
+<style>
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        margin-top: -8px !important;
+    }
+</style>
+
 <div class="modal fade" id="createQuestion">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-light">
@@ -18,7 +24,7 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <div class="select2-purple">
+                            <div class="select2-purple d-flex align-middle py-0 pb-md-5">
                                 <select required
                                         class="select2 form-control"
                                         name="exam_tag_id"

@@ -1,3 +1,9 @@
+<style>
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        margin-top: -8px !important;
+    }
+</style>
+
 @extends('admin.layouts.default', [
 'title'=> 'Model Exam',
 'pageName'=> 'Edit Exam',
@@ -5,7 +11,7 @@
 ])
 
 @section('content')
-    <a href="{{route('model.exam.index')}}" title="Back to exams"> <i class="far fa-hand-point-left"></i> </a>
+    <a href="{{route('model.exam.index')}}" title="Back to exams"> <span class="iconify text-info m-3 text-xl" data-icon="akar-icons:arrow-back-thick-fill"></span> </a>
     <form action="{{route('model.exam.update',$exam->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -237,4 +243,5 @@
         });
     </script>
     <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="/js/new-dashboard/iconify-icons.js"></script>
 @endsection
