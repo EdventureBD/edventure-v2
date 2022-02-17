@@ -11469,6 +11469,7 @@ a:hover {
   font-size: 25px;
   font-weight: 600;
 }
+
 .single-exam:hover {
   box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
 }
@@ -12081,7 +12082,7 @@ form input {
   .contact-box h4 {
     font-size: 30px;
   }
-   
+
   /* .btn-cancel{
     margin-left: 15%;
   } */

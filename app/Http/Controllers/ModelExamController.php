@@ -221,7 +221,7 @@ class ModelExamController extends Controller
                                 ->where('visibility',1)
                                 ->has('mcqQuestions')
                                 ->orderByDesc('created_at')
-                                ->paginate(5);
+                                ->paginate(4);
             $exam_topics = Cache::get('exam_topics');
             Cache::forever('exam_topic', request()->get('t'));
         }
