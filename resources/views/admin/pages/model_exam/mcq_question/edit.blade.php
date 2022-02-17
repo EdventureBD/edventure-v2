@@ -5,7 +5,7 @@
 ])
 
 @section('content')
-    <a href="{{route('model.exam.question.index',$mcqQuestion->model_exam_id)}}" title="Back to Question"> <i class="far fa-hand-point-left"></i> </a>
+    <a href="{{route('model.exam.question.index',$mcqQuestion->model_exam_id)}}" title="Back to Question"> <span class="iconify text-info m-3 text-xl" data-icon="akar-icons:arrow-back-thick-fill"></span> </a>
     <form action="{{route('model.exam.question.update',$mcqQuestion->id)}}" id="question_form" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -99,3 +99,5 @@
 @endsection
 
 @include('admin.pages.model_exam.mcq_question.utils')
+
+<script src="/js/new-dashboard/iconify-icons.js"></script>
