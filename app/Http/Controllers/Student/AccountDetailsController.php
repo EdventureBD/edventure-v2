@@ -69,7 +69,7 @@ class AccountDetailsController extends Controller
                     // ->whereNull('mcq_ans')
                     // ->first();
                     // $cq_tag_scored_marks += $details_result->gain_marks;
-                    
+
                     $cq_tag_scored_marks += $analysis->gain_marks;
 
                     // dd($cq_question, $cq_tag_total_marks, $cq_tag_scored_marks);
@@ -84,7 +84,7 @@ class AccountDetailsController extends Controller
             $cq_content_tag->tag_total_marks = $cq_tag_total_marks;
             $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
         }
-        
+
         // $mcq_details_results = DetailsResult::where('student_id', auth()->user()->id )->where( 'mcq_ans', null)->get();
 
         // $mcq_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->get();
@@ -98,7 +98,7 @@ class AccountDetailsController extends Controller
         // dump($cq_content_tags);
         // dd("Finished");
 
-        return view('student.pages_new.user.profile', compact('user', 'mcq_content_tags', 'cq_content_tags', 'batch_student_enrollment'));
+        return view('student.pages_new.user.course', compact('user', 'mcq_content_tags', 'cq_content_tags', 'batch_student_enrollment'));
     }
 
     public function ajax_get_courses(){
@@ -162,7 +162,7 @@ class AccountDetailsController extends Controller
             $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
         }
 
-        return  [  
+        return  [
                     'mcq_content_tags' => $mcq_content_tags,
                     'cq_content_tags' => $cq_content_tags
                 ];
@@ -214,7 +214,7 @@ class AccountDetailsController extends Controller
 
     /**
      * Tag analysis report
-     * 
+     *
      */
 
     public function tagAnalysisReport(Course $course)
