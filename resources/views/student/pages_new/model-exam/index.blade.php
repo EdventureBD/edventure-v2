@@ -1,5 +1,44 @@
 
 <x-landing-layout headerBg="white">
+    <style>
+        .card{
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+            padding: 14px 80px 18px 36px;
+            cursor: pointer;
+        }
+
+        .card:hover{
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        }
+
+        .card h3{
+            font-weight: 600;
+        }
+
+        .card img{
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            max-height: 120px;
+        }
+
+        .card-1{
+            background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
+            background-repeat: no-repeat;
+            background-position: right;
+            background-size: 80px;
+        }
+
+        @media(max-width: 990px){
+            .card{
+                margin: 20px;
+            }
+        }
+    </style>
     <div class="page-section">
         <div class="container">
             @include('partials.alert')
@@ -83,9 +122,9 @@
                                 @endif
                             @endforeach
                         @endif
-                        <div class="col-md-3 mb-4">
-                            <div class="single-exam text-center mx-auto p-4 mb-md-0">
-                                <h5 class="text-center text-sm mt-2">{{ $exam->title }} </h5>
+                        <div class="col-md-3 mb-4" style="max-width: fit-content;padding-right: 0 !important;">
+                            <div style="background-position: center center !important;background: url('https://thumbs.dreamstime.com/b/abstract-grey-dna-molecular-structure-animated-background-motion-graphic-design-medical-video-clip-ultra-hd-k-x-78780655.jpg')" class="single-exam text-center mx-auto p-4 mb-md-0">
+                                <h5 style="max-height: 100px" class="text-center mt-2">{{ $exam->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
                                     <a
@@ -97,6 +136,12 @@
                                 </div>
                             </div>
                         </div>
+{{--                        <div class="col-md-4">--}}
+{{--                            <div class="card card-1">--}}
+{{--                                <h3>{{ $exam->title }}</h3>--}}
+{{--                                <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     @endforeach
             </div>
                 <div class="py-5 py-md-1 text-center d-flex justify-content-center">
