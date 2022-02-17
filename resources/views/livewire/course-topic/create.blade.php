@@ -30,7 +30,7 @@
                                                 <select class="form-control" wire:model="categoryId" id="courseCategory">
                                                     <option value="" selected>Select course category</option>
                                                     @foreach($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                        <option wire:key="{{ lang($loop->index.$category->slug.$category->id) }}" value="{{ $category->id }}">{{ $category->title }}</option>
                                                     @endforeach
                                                 </select>
                                                 <div>
@@ -43,11 +43,11 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="intermediaryLevel"> Intermediate Levels <span class="must-filled">*</span></label>
+                                                <label class="col-form-label" for="intermediaryLevel"> Intermediary Levels <span class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="intermediaryLevelId" id="intermediaryLevel">
                                                     <option value="" selected>Select Intermediary Level</option>
                                                         @foreach($intermediaryLevels as $intermediaryLevel)
-                                                            <option wire:key="lang{{$intermediaryLevel}}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                                            <option wire:key="{{ lang($loop->index.$intermediaryLevel->slug.$intermediaryLevel->id) }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
                                                         @endforeach
                                                 </select>
                                                 <div>
@@ -104,6 +104,21 @@
                                         </div>
                                     </div>
                                 @endif --}}
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="islandImage">Island Image</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" wire:model="islandImage">
+                                            <label class="custom-file-label" for="customFile">Choose Image</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        @error('islandImage')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>

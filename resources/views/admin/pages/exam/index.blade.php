@@ -61,8 +61,8 @@
                                             <td title="View Questions">
                                                 <a href="{{ route('exam.show', $exam->slug) }}">
                                                     @if($exam->special)<b>{{ $exam->title }}</b> @else{{ $exam->title }} @endif
+                                                </a>
                                             </td>
-                                            </a>
                                             <td class="text-center"><a target="blank" href="/admin/course/{{ $exam->course->slug }}">{{ $exam->course->title }}</a></td>
                                             <td class="text-center">
                                                 @if (!empty($exam->topic_id))
