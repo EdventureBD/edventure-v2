@@ -44,7 +44,7 @@
                     <input type="hidden" id="exam_end_time" name="exam_end_time">
                     @foreach($exam->mcqQuestions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light p-2 d-flex align-items-middle popUpExamMcqTitle"><b class="pl-3 my-auto">{{ $loop->iteration }}</b> <span class="w-100 px-2 d-flex align-items-middle pt-auto">{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light p-2 d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2">Q.{{ $loop->iteration }}</b> <span class="mr-2 px-2">{!! $mcq->question !!} </span></div>
 
                             <div class="container my-4">
                                 <div class="question d-flex justify-content-start">
