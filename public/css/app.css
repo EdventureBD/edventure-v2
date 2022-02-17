@@ -11461,6 +11461,7 @@ a:hover {
   border-radius: 30px;
   background-size: cover;
   max-width: 250px;
+  transition: transform .5s;
 }
 .single-exam h5 {
   min-height: 7rem;
@@ -11470,6 +11471,7 @@ a:hover {
 
 .single-exam:hover {
   box-shadow: 0 0px 25px rgba(101, 48, 146, 0.5);
+  transform: scale(1.05);
 }
 .single-exam.about {
   max-width: 100%;
