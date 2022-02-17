@@ -1,31 +1,32 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamTagsController;
 use App\Http\Controllers\ExamTopicController;
 use App\Http\Controllers\McqQuestionController;
 use App\Http\Controllers\ModelExamController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\Admin\CQController;
 use App\Http\Controllers\Admin\CSVController;
+
+use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\MCQController;
+use App\Http\Controllers\Admin\CQController;
 use App\Http\Controllers\Admin\AptitudeTestMCQController;
 use App\Http\Controllers\Admin\PopQuizMCQController;
 use App\Http\Controllers\Admin\PopQuizCQController;
 use App\Http\Controllers\Admin\TopicEndExamMCQController;
 use App\Http\Controllers\Admin\TopicEndExamCQController;
 
+use App\Http\Controllers\Admin\IslandController;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\CourseController;
-
 use App\Http\Controllers\Admin\IntermediaryLevelController;
-
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\BatchExamController;
@@ -190,6 +191,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('/blog', BlogController::class);
     Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus']);
     // END OF BLOG
+
+
+
+    // START OF ISLAND IMAGES
+    Route::resource('/island_images', IslandController::class)->except('show');
+    // END OF ISLAND IMAGES
+
+
 
     // START OF EXAM SUBMISSION
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission', [SubmissionController::class, 'submission'])->name('submission');
