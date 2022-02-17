@@ -46,7 +46,10 @@
                                         <th class="text-center">Course</th>
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
-                                        <th class="text-center">Marks</th>
+                                        <th class="text-center">Threshold Marks</th>
+                                        <th class="text-center">MCQ Limit</th>
+                                        <th class="text-center">CQ Limit</th>
+                                        <th class="text-center">Order</th>
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -57,7 +60,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td title="View Questions">
                                                 <a href="{{ route('exam.show', $exam->slug) }}">
-                                                     @if($exam->special)<b>{{ $exam->title }}</b> @else{{ $exam->title }} @endif
+                                                    @if($exam->special)<b>{{ $exam->title }}</b> @else{{ $exam->title }} @endif
                                             </td>
                                             </a>
                                             <td class="text-center"><a target="blank" href="/admin/course/{{ $exam->course->slug }}">{{ $exam->course->title }}</a></td>
@@ -66,6 +69,7 @@
                                                     {{ $exam->topic->title }}
                                                 @endif
                                             </td>
+
                                             <td class="text-center">
                                                 @if ($exam->special)
                                                     <span class="badge bg-primary" > Special {{ $exam->exam_type }} </span>
@@ -73,18 +77,64 @@
                                                     <span                                                   
                                                         class="badge {{ $exam->exam_type == 'MCQ' ? 'bg-success' : '' }}
                                                                     {{ $exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
-                                                                    {{ $exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}">
+                                                                    {{ $exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}
+                                                                    {{ $exam->exam_type == 'Aptitude Test' ? 'bg-dark' : '' }}
+                                                                    {{ $exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
+                                                                    {{ $exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}">
                                                         
                                                         {{ $exam->exam_type }}
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->marks }}</td>
+                                            
+                                            <td title="Duration: {{ $exam->duration }} Q-Limit: {{ $exam->question_limit }} " class="text-center">{{ $exam->threshold_marks }}</td>
+                                            <td class="text-center">{{ $exam->question_limit }}</td>
+                                            <td class="text-center"> @if($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam") {{ $exam->question_limit_2 }} @else N/A @endif</td>
+
+                                            <td class="text-center">{{ $exam->order }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('addQuestion', $exam->slug) }}">
-                                                    <button class="btn btn-info"><i
-                                                            class="fas fa-plus-square"></i></button>
-                                                </a>
+
+                                                @if ($exam->exam_type == "Pop Quiz")
+                                                    <a href="{{ route('addQuestion_CQ_only', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>CQ</button>
+                                                    </a>
+
+                                                    <a href="{{ route('addQuestion_MCQ_only', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>MCQ</button>
+                                                    </a>
+                                                @elseif($exam->exam_type == "Topic End Exam")
+                                                    <a href="{{ route('addQuestion_CQ_only', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>CQ</button> 
+                                                    </a>
+
+                                                    <a href="{{ route('addQuestion_MCQ_only', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>MCQ</button>
+                                                    </a>
+                                                @elseif($exam->exam_type == "MCQ")
+                                                    <a href="{{ route('addQuestion', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>MCQ</button>
+                                                    </a>
+                                                @elseif($exam->exam_type == "CQ")
+                                                    <a href="{{ route('addQuestion', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>CQ</button>
+                                                    </a>
+                                                @elseif($exam->exam_type == "Assignment")
+                                                    <a href="{{ route('addQuestion', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>Assignment Paper</button>
+                                                    </a>
+                                                @elseif($exam->exam_type == "Aptitude Test")
+                                                    <a href="{{ route('addQuestion', $exam->slug) }}">
+                                                        <button class="btn btn-info"><i
+                                                                class="fas fa-plus-square pr-1"></i>MCQ</button>
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>
                                                 <div class="btn-group">
@@ -143,7 +193,10 @@
                                         <th class="text-center">Course</th>
                                         <th class="text-center">Topic</th>
                                         <th class="text-center">Exam Type</th>
-                                        <th class="text-center">Marks</th>                                       
+                                        <th class="text-center">Threshold Marks</th>
+                                        <th class="text-center">MCQ Limit</th>
+                                        <th class="text-center">CQ Limit</th>
+                                        <th class="text-center">Order</th>                                   
                                         <th class="text-center">Add Question</th>
                                         <th class="text-center">Action</th>
                                     </tr>

@@ -7,44 +7,52 @@ use Illuminate\Support\Str;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseCategory;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\Admin\IntermediaryLevel;
 
 class Create extends Component
 {
     public $categories;
     public $categoryId;
+    public $intermediaryLevels;
+    public $intermediaryLevelId;
     public $courses;
     public $title;
-    public $course_id;
+    public $courseId;
 
-    public $show = true;
-
-    public function updated()
-    {
-        $this->validate([
-            'title' => 'required|string|max:325|unique:course_topics,title',
-        ]);
-    }
+    public $show = false;
 
     protected $rules = [
         'title' => 'required|string|max:200|unique:course_topics,title',
-        'course_id' => ['required'],
-        'categories' => ['required']
+        'categoryId' => ['required'],
+        'intermediaryLevelId' => ['required'],
+        'courseId' => ['required']
     ];
+
+    public function updatedCategoryId()
+    {
+        $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
+    }
+
+    public function updatedIntermediaryLevelId()
+    {
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
 
     public function saveCourseTopic()
     {
         $data = $this->validate();
+
         $course_topic = new CourseTopic;
         $course_topic->title = $data['title'];
         $course_topic->slug = (string) Str::uuid();
-        $course_topic->course_id = $data['course_id'];
+        $course_topic->intermediary_level_id = $data['intermediaryLevelId'];
+        $course_topic->course_id = $data['courseId'];
         $course_topic->order = 0;
         $course_topic->status = 1;
         $url = url()->previous();
         $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
 
-        $slug = Course::where('id', $this->course_id)
+        $slug = Course::where('id', $this->courseId)
             ->select('courses.slug')
             ->first();
 
@@ -65,21 +73,13 @@ class Create extends Component
 
     public function mount()
     {
-        if (!($this->courses)) {
-            $this->categories = CourseCategory::all();
-            $this->show = false;
-        } else {
-            $this->categories = CourseCategory::where('id', $this->courses->course_category_id)->first();
-            $this->categoryId = $this->categories->id;
-            $this->course_id = $this->courses->id;
-        }
+        $this->categories = CourseCategory::all();
+        $this->intermediaryLevels = collect();
+        $this->courses = collect();
     }
 
     public function render()
     {
-        if (!empty($this->categories)) {
-            $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        }
         return view('livewire.course-topic.create');
     }
 }

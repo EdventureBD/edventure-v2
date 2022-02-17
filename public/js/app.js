@@ -1900,6 +1900,8 @@ __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/s
 __webpack_require__(/*! ./custom */ "./resources/js/custom.js"); //react pages
 
 
+__webpack_require__(/*! ./pages/exam/BatchExamAptitudeTest */ "./resources/js/pages/exam/BatchExamAptitudeTest.js");
+
 __webpack_require__(/*! ./pages/exam/BatchExamMCQ */ "./resources/js/pages/exam/BatchExamMCQ.js");
 
 __webpack_require__(/*! ./pages/user/Dashboard */ "./resources/js/pages/user/Dashboard.js");
@@ -2183,6 +2185,326 @@ var CourseCard = function CourseCard(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CourseCard);
+
+/***/ }),
+
+/***/ "./resources/js/pages/exam/BatchExamAptitudeTest.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/pages/exam/BatchExamAptitudeTest.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var html_react_parser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! html-react-parser */ "./node_modules/html-react-parser/index.mjs");
+/* harmony import */ var _components_Timer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Timer */ "./resources/js/components/Timer.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_beforeunload__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-beforeunload */ "./node_modules/react-beforeunload/lib/index.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+var BatchExamAptitudeTest = function BatchExamAptitudeTest(_ref) {
+  var questions = _ref.questions,
+      batch = _ref.batch,
+      exam = _ref.exam;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      showSummary = _useState2[0],
+      setShowSummary = _useState2[1];
+
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useReducer)(function (state, newState) {
+    return _objectSpread(_objectSpread({}, state), newState);
+  }, {
+    answers: [],
+    error: false,
+    timeOut: false,
+    submit: false
+  }),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      state = _useReducer2[0],
+      setState = _useReducer2[1];
+
+  (0,react_beforeunload__WEBPACK_IMPORTED_MODULE_6__.useBeforeunload)(function (event) {
+    console.log(event);
+
+    if (!state.timeOut) {
+      event.preventDefault();
+      console.log("in prevent not");
+    }
+
+    console.log("in prevent");
+  });
+  var questionRows = '';
+  var fields = [1, 2, 3, 4];
+  var sl = 1;
+
+  var selectAnswer = function selectAnswer(q, a) {
+    var answers = state.answers.filter(function (answer) {
+      return answer !== q + '_' + 1 && answer !== q + '_' + 2 && answer !== q + '_' + 3 && answer !== q + '_' + 4;
+    });
+    answers.push(q + '_' + a);
+    setState({
+      answers: answers,
+      error: false
+    });
+  }; // useEffect(()=>{
+  //     if (!state.timeOut) {
+  //         window.addEventListener('beforeunload', (event) => {
+  //             event.preventDefault();
+  //             // processSubmit();
+  //             console.log('adding on unload');
+  //             event.returnValue = "";
+  //         }, true);
+  //         return () => {
+  //             console.log("removing on unload");
+  //             window.removeEventListener('beforeunload', handleUnload);
+  //         }
+  //     }
+  // });
+
+
+  var handleUnload = function handleUnload() {// processSubmit();
+  }; //   return <div>Try closing the window.</div>;
+  // useEffect(()=>{
+  //     // if (!state.timeOut) {
+  //         // window.location.reload(false);
+  //         window.onbeforeunload = (event) => {
+  //             const e = event || window.event;
+  //             // Cancel the event
+  //             e.preventDefault();
+  //             if (e) {
+  //                 // return;
+  //                 console.log('before submit');
+  //                e.returnValue = 'herefds'; // Legacy method for cross browser support
+  //             } else {
+  //                 console.log('after submit');
+  //                 return ' dsfew'; // Legacy method for cross browser support
+  //             }
+  //         };
+  //     // }
+  //     window.addEventListener('beforeunload', () =>{
+  //         // this.setState({appended:true});
+  //         console.log('how to face log');
+  //     });
+  //  }, [])
+
+
+  var submitExam = function submitExam(e) {
+    e.preventDefault(); // if (state.answers.length < questions.length) {
+    //     setState({ error: true })
+    // } else {
+
+    processSubmit(); // }
+  };
+
+  var processSubmit = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var url, res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setState({
+                timeOut: true,
+                submit: true
+              });
+              url = "/batch/" + batch.slug + "/" + exam.slug + "/result";
+              _context.next = 4;
+              return axios.post(url, {
+                a: state.answers,
+                q: questions
+              }).then(function (response) {
+                console.log(response.data);
+                window.location.reload();
+              })["catch"](function (error) {
+                console.log(error);
+              });
+
+            case 4:
+              res = _context.sent;
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function processSubmit() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  questionRows = questions.map(function (question, index) {
+    sl = index + 1;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      className: "question mb-5",
+      id: "qus_" + question.id,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "bg-purple-light p-2 mb-3 bshadow bradius-15",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("b", {
+          children: "Q " + sl + ".  "
+        }), question.question ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question.question) : ""]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "col-md-6 d-block d-md-none",
+          children: question.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+            className: "img-fluid  bradius-15 mb-2",
+            src: question.image,
+            alt: ""
+          }) : ""
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "col-md-6",
+          children: fields.map(function (fieldNo) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "".concat(state.answers.includes(question.id + '_' + fieldNo) ? "bg-purple-light" : "bg-light-gray", " bshadow bradius-15 p-2 mb-3"),
+              onClick: function onClick() {
+                return selectAnswer(question.id, fieldNo);
+              },
+              children: [fieldNo + '. ', " ", question['field' + fieldNo] ? (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(question['field' + fieldNo]) : '']
+            });
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "col-md-6 d-none d-md-block",
+          children: question.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+            className: "img-fluid bradius-15",
+            src: question.image,
+            alt: ""
+          }) : ""
+        })]
+      })]
+    });
+  });
+  var questionSummary = [];
+  questions.map(function (qus, qindex) {
+    var sanswer = state.answers.find(function (answer) {
+      return answer == qus.id + '_' + 1 || answer == qus.id + '_' + 2 || answer == qus.id + '_' + 3 || answer == qus.id + '_' + 4;
+    }); // console.log(sanswer);
+
+    questionSummary.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+      href: "#qus_" + qus.id,
+      className: "single-qus-summary ".concat(sanswer ? "bg-green" : "bg-red", " bradius-15 c-point"),
+      children: qindex + 1
+    }));
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    className: "batch-exam",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      className: "container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "alert alert-danger bg-red my-4 text-center",
+        children: "If you refresh this page or try to go to another page/window, your previous answers will be lost."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "row py-5",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          className: "col-md-10",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h2", {
+            className: "text-purple text-xmd fw-800",
+            children: ["Batch: ", batch.title]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h2", {
+            className: "text-purple",
+            children: ["Exam: ", exam.title]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          className: "col-md-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "".concat(!showSummary && "hide-summary", " timer text-white text-center"),
+            onClick: function onClick() {
+              return setShowSummary(!showSummary);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Timer__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              timeOutAction: processSubmit,
+              initialMinute: exam.duration ? exam.duration : 30,
+              initialSeconds: 0
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "text-xsm text-center text-white icon",
+              children: showSummary ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                className: "c-point fas fa-angle-up"
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                className: "c-point fas fa-angle-down"
+              })
+            })]
+          }), showSummary && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "".concat(questions.length > 40 && "more-than-50", " question-summary ").concat(showSummary ? "show-sum" : "hide-sum"),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "overflow-hidden",
+              children: questionSummary
+            })
+          })]
+        })]
+      }), questionRows, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
+        action: "/batch/" + batch.slug + "/" + exam.slug + "/result",
+        method: "post",
+        id: "exam-form",
+        onSubmit: submitExam,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+          className: state.error ? "text-red" : "text-red d-none",
+          children: "Please answer all the questions!"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+          className: "btn text-xxsm fw-800 text-white bg-purple px-4 py-2 mt-3",
+          onSubmit: submitExam,
+          children: "Submit"
+        })]
+      })]
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BatchExamAptitudeTest);
+
+if (document.getElementById('BatchExamAptitudeTest')) {
+  var el = document.getElementById('BatchExamAptitudeTest');
+  var questions = el.getAttribute('data-questions') ? JSON.parse(el.getAttribute('data-questions')) : [];
+  var exam = el.getAttribute('data-exam') ? JSON.parse(el.getAttribute('data-exam')) : [];
+  var batch = el.getAttribute('data-batch') ? JSON.parse(el.getAttribute('data-batch')) : [];
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(BatchExamAptitudeTest, {
+    questions: questions,
+    exam: exam,
+    batch: batch
+  }), el);
+}
 
 /***/ }),
 

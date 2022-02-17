@@ -398,8 +398,10 @@
                                                             <div class="modal-body">
                                                                 {{-- Are you sure want to add more access days to
                                                                 {{ $student->student->name }} --}}
+
                                                                 @livewire('payment.create', ['batch'=> $batch->id, 'student'
                                                                 => $student->student->id],, key($student->student->id))
+
                                                             </div>
                                                             {{-- <div class="modal-footer">
                                                                 <a href="" type="button" class="btn btn-primary">Yes</a>

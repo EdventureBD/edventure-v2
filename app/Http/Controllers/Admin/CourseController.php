@@ -4,26 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Course;
-use App\Models\Admin\CourseCategory;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseTopic;
+use App\Models\Admin\IntermediaryLevel;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::join('course_categories', 'courses.course_category_id', '=', 'course_categories.id')
-            ->select('courses.*', 'course_categories.title as name')
-            ->orderByRaw('courses.created_at DESC')
-            ->get();
+        $courses = Course::join('intermediary_levels', 'courses.intermediary_level_id', '=', 'intermediary_levels.id')
+        ->select('courses.*', 'intermediary_levels.title as name')
+        ->orderByRaw('courses.created_at DESC')
+        ->get();
+
         return view('admin.pages.course.index', compact('courses'));
     }
 
     public function create()
     {
-        $categories = CourseCategory::all();
-        return view('admin.pages.course.create', compact('categories'));
+        $intermediary_levels = IntermediaryLevel::where('status', 1)->get();
+        return view('admin.pages.course.create', compact('intermediary_levels'));
     }
 
     public function show(Course $course)

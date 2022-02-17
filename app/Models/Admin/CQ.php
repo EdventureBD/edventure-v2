@@ -2,11 +2,11 @@
 
 namespace App\Models\Admin;
 
-use App\Models\Admin\ContentTag;
-use App\Models\Admin\CreativeQuestion;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Admin\ContentTag;
+use App\Models\Admin\CreativeQuestion;
 
 class CQ extends Model
 {

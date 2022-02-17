@@ -14,10 +14,11 @@ class Edit extends Component
     public $title;
     public $student_limit;
     public $batch_running_days;
-    public $teacher_id;
-    public $course_id;
+
     public $teachers;
+    public $teacher_id;
     public $courses;
+    public $course_id;
 
     public function updatedTitle()
     {
@@ -29,14 +30,14 @@ class Edit extends Component
     public function updatedStudent_limit()
     {
         $this->validate([
-            'student_limit' => ['required', 'numeric'],
+            'student_limit' => ['required', 'numeric', 'gt:-1'],
         ]);
     }
 
     public function updatedBatch_running_days()
     {
         $this->validate([
-            'batch_running_days' => ['required', 'numeric'],
+            'batch_running_days' => ['required', 'numeric', 'gt:-1'],
         ]);
     }
 
@@ -56,8 +57,8 @@ class Edit extends Component
 
     protected $rules = [
         'title' => ['required', 'string', 'max:325'],
-        'student_limit' => ['required', 'numeric'],
-        'batch_running_days' => ['required', 'numeric'],
+        'student_limit' => ['required', 'numeric', 'gt:-1'],
+        'batch_running_days' => ['required', 'numeric', 'gt:-1'],
         'teacher_id' => ['required'],
         'course_id' => ['required'],
     ];
@@ -78,7 +79,7 @@ class Edit extends Component
             session()->flash('status', 'Batch successfully updated!');
             return redirect()->route('batch.index');
         } else {
-            session()->flash('failed', 'Batch added failed!');
+            session()->flash('failed', 'Batch update failed!');
             return redirect()->route('batch.edit', $this->batch->slug);
         }
     }

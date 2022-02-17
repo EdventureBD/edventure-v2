@@ -56,10 +56,16 @@ Route::get('/error', function () {
 
 Route::view('/dashboard', 'dashboard')->middleware(['auth'])->name('dashboard');
 
-Route::get('/course/{category?}', [CourseController::class, 'course'])->name('course');
 Route::get('/course/course-preview/{course}', [CourseController::class, 'coursePreview'])->name('course-preview');
+// Courses Page
+Route::get('/course/{category?}/{intermediary_level?}', [CourseController::class, 'course'])->name('course');
+// Preview Course
 Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
-// Route::get('/course/course-preview/{course}/enroll/confirm', [CourseController::class, 'confirm'])->name('confirm');
+
+
+// Roadmap Page-> should be-> Route::get('/course/course-preview/{course}/roadmap', [CourseController::class, 'roadmap'])->name('roadmap')
+// Route::get('/roadmap', [CourseController::class, 'roadmap'])->name('roadmap');
+// Route::get('/new_roadmap', [CourseController::class, 'new_roadmap'])->name('new_roadmap');
 
 
 require __DIR__ . '/auth.php';

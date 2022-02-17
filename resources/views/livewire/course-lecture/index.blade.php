@@ -13,38 +13,46 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="courseName">Category</label>
-                                        <select class="form-control" wire:model="categoryId">
+                                        <label class="col-form-label" for="courseCategory">Category</label>
+                                        <select class="form-control" id="courseCategory" wire:model="categoryId">
                                             <option value="" selected>Select course category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->title }}
-                                                </option>
+                                                <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="courseName">Course</label>
-                                        <select class="form-control" wire:model="courseId">
+                                        <label class="col-form-label" for="intermediaryLevel">Intermediary Level</label>
+                                        <select class="form-control" id="intermediaryLevel" wire:model="intermediaryLevelId">
+                                            <option value="" selected>Select intermediary level</option>
+                                            @foreach($intermediaryLevels as $intermediaryLevel)
+                                                <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="course">Course</label>
+                                        <select class="form-control" id="course" wire:model="courseId">
                                             <option value="" selected>Select Course</option>
                                             @foreach($courses as $course)
-                                                <option value="{{ $course->id }}">{{ $course->title }}
-                                                </option>
+                                                <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="courseName">Topics</label>
-                                        <select class="form-control" wire:model="topicId">
+                                        <label class="col-form-label" for="topic">Topics</label>
+                                        <select class="form-control" id="topic" wire:model="topicId">
                                             <option value="" selected>Select Topic</option>
                                             @foreach($topics as $topic)
-                                                <option value="{{ $topic->id }}">{{ $topic->title }}
-                                                </option>
+                                                <option wire:key="{{ $topic->slug.$topic->id }}" value="{{ $topic->id }}">{{ $topic->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -59,6 +67,7 @@
                                                 <th>Title</th>
                                                 <th>Course</th>
                                                 <th>Topic</th>
+                                                <th>Exam</th>
                                                 <th>video</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -71,6 +80,7 @@
                                                     <td>{{ $lecture->title }}</td>
                                                     <td>{{ $lecture->courseName }}</td>
                                                     <td>{{ $lecture->topicName }}</td>
+                                                    <td>{{ $lecture->exam->title }}</td>
                                                     <td> 
                                                         <iframe width="224" height="126" src="https://www.youtube-nocookie.com/embed/{{$lecture->url }}"
                                                             title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
@@ -128,6 +138,7 @@
                                                 <th>Title</th>
                                                 <th>Course</th>
                                                 <th>Topic</th>
+                                                <th>Exam</th>
                                                 <th>video</th>
                                                 <th>Status</th>
                                                 <th>Action</th>

@@ -13,26 +13,38 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="courseName">Category</label>
-                                        <select class="form-control" wire:model="categoryId">
+                                        <label class="col-form-label" for="courseCategory">Category</label>
+                                        <select class="form-control" wire:model="categoryId" id="courseCategory">
                                             <option value="" selected>Select course category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->title }}
+                                                <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>                                
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="intermediateLevel">Intermediary Levels</label>
+                                        <select class="form-control" wire:model="intermediaryLevelId" id="intermediateLevel">
+                                            <option value="" selected>Select Intermediary Level</option>
+                                                @foreach($intermediaryLevels as $intermediaryLevel)
+                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
+
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="col-form-label" for="courseName">Course</label>
                                         <select class="form-control" wire:model="courseId">
                                             <option value="" selected>Select Course</option>
                                             @foreach($courses as $course)
-                                                <option value="{{ $course->id }}">{{ $course->title }}
-                                                </option>
+                                                <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>

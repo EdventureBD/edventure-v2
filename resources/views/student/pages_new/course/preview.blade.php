@@ -42,14 +42,15 @@
                                         <span class="text-gray text-sm fw-700">Mock Test</span>
                                         <span class="d-inline-block float-right text-gray text-sm">
                                             <span class="arrow-up text-gray"><i class="fas fa-angle-up"></i></span>
-                                        <span class="arrow-down text-gray"><i class="fas fa-angle-down"></i></span></span>
+                                            <span class="arrow-down text-gray"><i class="fas fa-angle-down"></i></span>
+                                        </span>
                                     </a>
                                 </div>
                                 <div class="accordion__menu collapse show" id="specialExams1">
                                     
                                     @forelse ($specialExams as $specialExam)
                                         @php
-                                           $sp_view_result = "View Result";
+                                            $sp_view_result = "View Result";
                                             // if ($specialExam->canAttemp ) {
                                             //     $sp_view_result = "Start Exam";
                                             // }
@@ -98,7 +99,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }} "
+                                <div class="accordion__menu collapse {{ $loop->iteration == 1 ? 'show' : '' }}"
                                     id="course-toc-{{ $batchTopic->id }}">
                                     {{-- @livewire('student.batch.lectures', ['batchTopic' => $batchTopic->id, 'batch' =>
                                     $batch], key($batchTopic->id)) --}}
@@ -130,7 +131,7 @@
                                             @endphp
                                             @if ($exam->exam->topic_id == $batchTopic->topic_id)
                                             <div class="accordion__menu-link d-flex justify-content-between align-items-center bg-light-gray mt-3 py-2 px-3 bradius-15 bshadow text-dark fw-600">
-                                                 <a class="flex text-dark" href="#">
+                                                <a class="flex text-dark" href="#">
                                                     {{ $exam->exam->title }}
                                                 </a>
                                                 <div>

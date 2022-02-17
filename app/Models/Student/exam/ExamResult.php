@@ -16,7 +16,7 @@ class ExamResult extends AppModel
     use HasFactory;
     protected static $logName = "Exam Result";
 
-    protected $fillable = ['exam_id', 'batch_id', 'student_id', 'gain_marks', 'status'];
+    protected $fillable = ['exam_id', 'exam_type', 'batch_id', 'student_id', 'gain_marks', 'status'];
 
     public function getDescriptionForEvent(string $eventName): string
     {
@@ -60,6 +60,7 @@ class ExamResult extends AppModel
                 array_push($cq, $percentage);
                 $n_cq++;
             }
+
         }
         $labels = count($mcq_labels) > count($cq_labels) ? $mcq_labels : $cq_labels;
         return ['labels' => $labels, 'mcq' => $mcq, 'cq' => $cq];

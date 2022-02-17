@@ -14,38 +14,58 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
 use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 class CourseController extends Controller
 {
-    public function course($category_slug=null)
+    public function course($category_slug=null, $intermediary_level_slug = null)
     {
-        if(isset($category_slug)&&!empty($category_slug)){
-            $caretory=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
-        }else{
-            $caretory=CourseCategory::where('status',1)->first();
-        }
-        $courses = Course::where('status', 1)
-                        ->where('course_category_id',$caretory->id)
-                        ->select('title','slug','icon','banner','course_category_id','price')
-                        ->paginate(8)
-                        ->fragment('courses');
-
-        $selected_category_slug=$caretory->slug;
         $categories=CourseCategory::where('status',1)
-                                ->orderBy('id', "ASC")
-                                ->select('title','slug')
-                                ->get();
-               
-        return view('student.pages_new.course.course', compact('courses','categories','selected_category_slug'));
+        ->orderBy('id', "ASC")
+        ->select('title','slug')
+        ->get();
+
+        if(isset($category_slug)&&!empty($category_slug)){
+            $category=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
+        }else{
+            $category=CourseCategory::where('status',1)->first();
+        }
+
+        $selected_category_slug=$category->slug;
+
+        $intermediary_levels = IntermediaryLevel::where('status', 1)
+        ->where('course_category_id',$category->id)
+        ->select('title', 'slug', 'course_category_id')
+        ->paginate(8)
+        ->fragment('intermediary_levels');
+
+        if(isset($intermediary_level_slug)&&!empty($intermediary_level_slug)){
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('slug', $intermediary_level_slug)->first();
+        }
+        else{
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('course_category_id', $category->id)->first();
+        }
+
+        if($selected_intermediary_level){
+            $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)->where('status', 1)->paginate(8)->fragment('intermediary_levels');
+        }
+        else{
+            $courses = [];
+        }
+
+        // dump($category->id, $selected_category_slug, $intermediary_level_slug, $selected_intermediary_level, $courses);
+        // dd( $categories, $selected_category_slug, $intermediary_levels, $selected_intermediary_level, $courses);
+
+        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses'));
     }
 
     public function courseByCategory($category_slug){
-        $caretory=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
+        $category=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
         $courses=Course::where('status', 1)
-                ->where('course_category_id',$caretory->id)
+                ->where('course_category_id',$category->id)
                 ->orderBy('order')
                 ->take(8)
                 ->select('title','slug','icon','banner','course_category_id','price')
@@ -55,6 +75,7 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
+        // dd("Course Controller CoursePreview function");
         $batch = '';
         $enrolled = '';
         $lectures = [];
@@ -70,20 +91,24 @@ class CourseController extends Controller
                 array_push($course_topic_lectures[$course_lecture->topic_id], $course_lecture);
             }
         }
+
         if (Auth::check()) {
             $enrolled = BatchStudentEnrollment::where('course_id', $course->id)
                 ->where('student_id', auth()->user()->id)
                 ->first();
                 // dd($enrolled);
             if ($enrolled && $enrolled->status == 1) {
-                
+
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-               
+
                 return redirect()->route('batch-lecture', $batch->slug);
-            } else {
+            }
+            else
+            {
                 if ($enrolled && $enrolled->status == 0 ) {
                     Session::flash('message', 'Please contact admin to access your course!');
                 }
+
                 return view('student.pages_new.course.preview_guest', compact(
                     'course',
                     'course_topics',
@@ -92,7 +117,8 @@ class CourseController extends Controller
                     'enrolled'
                 ));
             }
-        } else {
+        }
+        else {
             return view('student.pages_new.course.preview_guest', compact(
                 'course',
                 'course_topics',
@@ -102,8 +128,6 @@ class CourseController extends Controller
                 'batch'
             ));
         }
-     
-        
     }
 
     public function enroll(Course $course)
@@ -225,4 +249,12 @@ class CourseController extends Controller
         }
         return $months;
     }
+
+    // public function roadmap(){
+    //     return view("student.pages_new.roadmap.roadmap_index");
+    // }
+
+    // public function new_roadmap(){
+    //     return view("student.pages_new.roadmap.new_roadmap_index");
+    // }
 }

@@ -5,8 +5,8 @@ namespace App\Http\Livewire\Course;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Admin\Course;
+use App\Models\Admin\IntermediaryLevel;
 use Livewire\WithFileUploads;
-use App\Models\Admin\CourseCategory;
 use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
@@ -19,7 +19,7 @@ class Edit extends Component
     public $title;
     public $description;
     public $price;
-    public $categoryId;
+    public $intermediaryLevelId;
     public $duration;
     public $url;
     public $image;
@@ -44,7 +44,6 @@ class Edit extends Component
     public function updatedBanner()
     {
         $this->tempBanner = $this->banner;
-       
     }
 
     public function updatedDuration()
@@ -61,10 +60,10 @@ class Edit extends Component
         ]);
     }
 
-    public function updatedCategoryId()
+    public function updatedIntermediaryLevelId()
     {
         $this->validate([
-            'categoryId' => 'required'
+            'intermediaryLevelId' => 'required'
         ]);
     }
 
@@ -86,8 +85,8 @@ class Edit extends Component
         'title' => ['required', 'string', 'max:100'],
         'description' => 'required|string|max:500',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric',
-        'categoryId' => 'required',
+        'price' => 'required|integer|numeric|gt:-1',
+        'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
     ];
 
@@ -110,7 +109,7 @@ class Edit extends Component
         $course->banner = $this->banner;
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
-        $course->course_category_id = $data['categoryId'];
+        $course->intermediary_level_id = $data['intermediaryLevelId'];
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];
@@ -131,14 +130,14 @@ class Edit extends Component
         $this->title = $this->course->title;
         $this->description = $this->course->description;
         $this->price = $this->course->price;
-        $this->categoryId = $this->course->course_category_id;
+        $this->intermediaryLevelId = $this->course->intermediary_level_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
         $this->image = $this->course->icon;
         $this->banner = $this->course->banner;
         $this->deleteImage = $this->course->logo;
         $this->deleteBanner = $this->course->banner;
-        $this->categories = CourseCategory::all();
+        $this->intermediary_levels = IntermediaryLevel::all();
     }
 
     public function render()

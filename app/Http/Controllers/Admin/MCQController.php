@@ -31,7 +31,6 @@ class MCQController extends Controller
 
     public function store(Request $request, Exam $exam)
     {
-
         $validaterequest = $request->validate([
             'question' => 'required|min:4|unique:m_c_q_s',
             'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
@@ -71,7 +70,7 @@ class MCQController extends Controller
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = 'MCQ';
+                $question_content_tag->exam_type = $exam->exam_type;
                 $question_content_tag->question_id = $question_id->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();
@@ -95,7 +94,7 @@ class MCQController extends Controller
     {
         $tagId = [];
         // $exam = Exam::where('id', $mcq->exam_id)->first();
-        $questionContentTags = QuestionContentTag::where('exam_type', "MCQ")
+        $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $mcq->id)
             ->get();
         foreach ($questionContentTags as $qct) {
@@ -151,7 +150,7 @@ class MCQController extends Controller
 
         $save = $mcq->save();
 
-        $deleteContentTags = QuestionContentTag::where('exam_type', "MCQ")
+        $deleteContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $mcq->id)
             ->get();
         foreach ($deleteContentTags as $deleteContentTag) {
@@ -161,7 +160,7 @@ class MCQController extends Controller
         if ($save) {
             for ($i = 0; $i < sizeOf($request->contentTagIds); $i++) {
                 $question_content_tag = new QuestionContentTag();
-                $question_content_tag->exam_type = 'MCQ';
+                $question_content_tag->exam_type = $exam->exam_type;
                 $question_content_tag->question_id = $mcq->id;
                 $question_content_tag->content_tag_id = $request->contentTagIds[$i];
                 $question_content_tag->save();

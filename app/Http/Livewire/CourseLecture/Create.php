@@ -9,23 +9,29 @@ use Livewire\WithFileUploads;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Exam;
 use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
     use WithFileUploads;
 
-    public $course_topics;
+    public $categories;
+    public $categoryId;
+    public $intermediaryLevels;
+    public $intermediaryLevelId;
     public $courses;
-    public $title;
     public $courseId;
+    public $course_topics;
     public $topicId;
+    public $title;
     public $url;
     public $markdownText;
     public $pdf;
 
-    public $categories;
-    public $categoryId;
+    public $exams;
+    public $examId;
 
     public function updatedTitle()
     {
@@ -41,17 +47,40 @@ class Create extends Component
         ]);
     }
 
+    public function updatedCategoryId()
+    {
+        $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
+    }
+
+    public function updatedIntermediaryLevelId()
+    {
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
+
     public function updatedCourseId()
     {
         $this->validate([
             'courseId' => 'required',
         ]);
+
+        $this->course_topics = CourseTopic::where('course_id', $this->courseId)->get();
     }
 
     public function updatedTopicId()
     {
         $this->validate([
             'topicId' => 'required',
+        ]);
+
+        $this->exams = Exam::where('course_id', $this->courseId)->where('topic_id', $this->topicId)->where(function($query) {
+            return $query->where('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam');
+        })->get();
+    }
+
+    public function updatedExamId()
+    {
+        $this->validate([
+            'examId' => 'required',
         ]);
     }
 
@@ -67,6 +96,7 @@ class Create extends Component
         'url' => ['required', 'string', 'min:3'],
         'courseId' => 'required',
         'topicId' => 'required',
+        'examId' => 'required',
         'markdownText' => 'nullable',
         'pdf' => 'nullable|mimes:pdf|max:50000',
     ];
@@ -78,6 +108,7 @@ class Create extends Component
         $lecture->title = $data['title'];
         $lecture->course_id = $data['courseId'];
         $lecture->topic_id = $data['topicId'];
+        $lecture->exam_id = $data['examId'];
         $lecture->markdown_text = $data['markdownText'];
         $lecture->url = $data['url'];
         $lecture->slug = Str::slug($data['title']);
@@ -101,16 +132,14 @@ class Create extends Component
     public function mount()
     {
         $this->categories = CourseCategory::all();
+        $this->intermediaryLevels = collect();
+        $this->courses = collect();
+        $this->course_topics = collect();
+        $this->exams = collect();
     }
 
     public function render()
     {
-        if (!empty($this->categories)) {
-            $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        }
-        if (!empty($this->courses)) {
-            $this->course_topics = CourseTopic::where('course_id', $this->courseId)->get();
-        }
         return view('livewire.course-lecture.create');
     }
 }

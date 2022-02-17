@@ -92,15 +92,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseprice"> Course Price <span
                                                     class="must-filled">*</span> </label>
-                                            <input type="number" wire:model="price"
+                                            <input type="number" min="0" wire:model="price"
                                                 class="form-control @error('price') is-invalid @enderror"
                                                 id="courseCategoryprice" placeholder="Enter your course price">
                                             <small id="passwordHelpBlock" class="form-text text-secondary">
@@ -113,17 +111,16 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Category <span
+                                            <label class="col-form-label" for="courseName">Intermediary Level <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="categoryId">
-                                                <option value="" selected>Select Category</option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}
-                                                    </option>
+                                            <select class="form-control" wire:model="intermediaryLevelId">
+                                                <option value="" selected>Select Intermediary Level</option>
+                                                @foreach ($intermediary_levels as $intermediary)
+                                                    <option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @error('categoryId')
+                                        @error('intermediaryLevelId')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -131,7 +128,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseDuration">Course Duration <span
                                                     class="must-filled">*</span></label>
-                                            <input type="number" wire:model="duration"
+                                            <input type="number" min="1" max="36" wire:model="duration"
                                                 class="form-control @error('duration') is-invalid @enderror"
                                                 id="courseDuration" placeholder="Enter your course duration (month)">
                                             <small id="passwordHelpBlock" class="form-text text-secondary">

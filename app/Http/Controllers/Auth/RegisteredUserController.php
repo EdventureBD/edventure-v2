@@ -54,7 +54,6 @@ class RegisteredUserController extends Controller
         } else if (!empty(request()->otp)) {
             if (Cache::get(request()->ip . '_otp') == request()->otp) {
                 $input = Cache::get(request()->ip . '_input');
-
                 Auth::login($user = User::create([
                     'name' => $input['name'],
                     'email' => $input['email'],
@@ -92,7 +91,6 @@ class RegisteredUserController extends Controller
     public function sendOtp($input)
     {
         $otp = mt_rand(100000, 999999);
-
         Cache::put(request()->ip . '_otp', $otp, 120);
         Cache::put(request()->ip . '_input', $input, 120);
         $message = "Your Edventure register otp is " . $otp;

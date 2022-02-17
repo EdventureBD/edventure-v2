@@ -4,6 +4,8 @@ namespace App\Models\Admin;
 
 use App\Models\Admin\LiveClass;
 use App\Models\Admin\BatchLecture;
+use App\Models\Admin\Exam;
+
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,11 +33,16 @@ class CourseTopic extends Model
 
     public function batchLecture()
     {
-        $this->hasMany(BatchLecture::class);
+        return $this->hasMany(BatchLecture::class);
     }
 
     public function liveClass()
     {
-        $this->hasMany(LiveClass::class);
+        return $this->hasMany(LiveClass::class);
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'topic_id', 'id');
     }
 }

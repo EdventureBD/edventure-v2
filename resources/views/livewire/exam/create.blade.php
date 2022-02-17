@@ -10,6 +10,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Create Exam</h3>
                         </div>
+
                         <!-- /.card-header -->
                         <div class="card-body">
                             <form role="form" wire:submit.prevent="saveExam">
@@ -25,7 +26,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mt-5 ml-4 {{ $showSpecialExam ? '' : 'd-none' }}">
+                                    {{-- <div class="col-md-4 mt-5 ml-4 {{ $showSpecialExam ? '' : 'd-none' }}">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" type="checkbox" id="customCheckbox1"
                                                 wire:model="special" value="1">
@@ -33,21 +34,33 @@
                                                 Special Exam
                                             </label>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-{{ $showAssignment ? '3' : '4' }}">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="batch">Course Category <span
-                                                    class="must-filled">*</span></label>
+                                            <label class="col-form-label" for="batch">Course Category</label>
                                             <select class="form-control" wire:model="categoryId">
                                                 <option value="" selected>Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->title }}
-                                                    </option>
+                                                    <option wire:key="{{ $category->slug.$category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('categoryId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-{{ $showAssignment ? '3' : '4' }}">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="batch">Intermediary Level</label>
+                                            <select class="form-control" wire:model="intermediaryLevelId">
+                                                <option value="" selected>Select intermediary level</option>
+                                                @foreach ($intermediaryLevels as $intermediaryLevel)
+                                                    <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>  
+                                                @endforeach
+                                            </select>
+                                            @error('intermedairyLevelId')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -59,7 +72,7 @@
                                             <select class="form-control" wire:model="courseId">
                                                 <option value="" selected>Select Course</option>
                                                 @foreach ($courses as $course)
-                                                    <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                                    <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}">{{ $course->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('courseId')
@@ -74,7 +87,7 @@
                                             <select class="form-control" wire:model="topicId">
                                                 <option value="" selected>Select Topic</option>
                                                 @foreach ($topics as $topic)
-                                                    <option value="{{ $topic->id }}">{{ $topic->title }}</option>
+                                                    <option wire:key="{{ $topic->slug.$topic->id }}" value="{{ $topic->id }}">{{ $topic->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('topicId')
@@ -93,8 +106,11 @@
                                                     Assignment</option>
                                                 <option value="CQ">CQ</option>
                                                 <option value="MCQ">MCQ</option>
+                                                <option value="Aptitude Test">Aptitude Test</option>
+                                                <option value="Pop Quiz">Pop Quiz</option>
+                                                <option value="Topic End Exam">Topic End Exam</option>
                                             </select>
-                                            @error('examTypeId')
+                                            @error('examType')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -103,20 +119,35 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="title" class="col-form-label">Question Limit <span
+                                            <label for="title" class="col-form-label"> @if($showQuestionLimit2) MCQ Question Limit @else Question Limit @endif <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="quesLimit"
+                                            <input type="number" @if($showQuestionLimit2) min="0" @else min="1" @endif class="form-control" wire:model="quesLimit"
                                                 placeholder="Enter question limit" @if (!$showQuestionLimit) disabled @endif>
                                             @error('quesLimit')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    @if($showQuestionLimit2)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="title" class="col-form-label"> CQ Question Limit <span
+                                                        class="must-filled">*</span></label>
+                                                <input type="number" @if($showQuestionLimit2) min="0" @else min="1" @endif class="form-control" wire:model="quesLimit_2"
+                                                    placeholder="Enter question limit">
+                                                @error('quesLimit_2')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Marks <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="marks"
+                                            <input type="number" min="1" class="form-control" wire:model="marks"
                                                 placeholder="Enter marks">
                                             @error('marks')
                                                 <p style="color: red;">{{ $message }}</p>
@@ -127,7 +158,7 @@
                                         <div class="form-group">
                                             <label for="title" class="col-form-label">Duration <span
                                                     class="must-filled">*</span></label>
-                                            <input type="text" class="form-control" wire:model="duration"
+                                            <input type="number" min="1" class="form-control" wire:model="duration"
                                                 placeholder="Enter exam duration">
                                             <small id="passwordHelpBlock" class="form-text text-muted">
                                                 <span class="must-filled">N.B:</span>
@@ -139,7 +170,35 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="title" class="col-form-label">Threshold Marks<span
+                                                    class="must-filled">*</span></label>
+                                            <input type="number" min="0" class="form-control" wire:model="threshold_marks"
+                                                placeholder="Enter Threshold Marks to pass to the next section">
+                                            @error('threshold_marks')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="title" class="col-form-label">Order <span
+                                                    class="must-filled">*</span></label>
+                                            <input type="number" min="0" class="form-control" wire:model="order"
+                                                placeholder="Enter order in which this appears on an island(course_topic)">
+                                            @error('order')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
+
+                                @error('aptitude_MCQ_exists')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>

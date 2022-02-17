@@ -12,6 +12,9 @@ use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/profile/ajax_get_courses', [AccountDetailsController::class, 'ajax_get_courses'])->name('ajax-get-courses');
+    Route::get('/profile/ajax_get_strengths_and_weaknesses', [AccountDetailsController::class, 'ajax_get_strengths_and_weaknesses'])->name('ajax-get-strengths-and-weaknesses');
+
     Route::get('/profile-data', [AccountDetailsController::class, 'profileData'])->name('profile-data');
     Route::get('/batch-results', [AccountDetailsController::class, 'batchResults'])->name('batch-results'); //getting batch results
     Route::get('/tag-analysis-report/{course}', [AccountDetailsController::class, 'tagAnalysisReport'])->name('tag-analysis-report');
@@ -27,8 +30,17 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::group(['middleware' => 'canAccess'], function () {
         // BATCH
         Route::get('batch/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
-        Route::get('batch/{batch}/{courseLecture}', [BatchController::class, 'lecture'])->name('topic_lecture');
+        Route::get('batch/{batch}/{courseLecture}', [BatchController::class, 'lecture'])->name('topic_lecture')->middleware('proceed_guard');
 
+        // Route::get('batch/ajax/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
+
+        Route::get('batch/{batch}/ajax/get/{courseLecture}', [BatchController::class, 'get_lecture_visit_status_ajax'])->name('get_lecture_visit_status_ajax');
+        Route::get('batch/{batch}/ajax/confirm/{courseLecture}', [BatchController::class, 'lecture_visit_confirmed_ajax'])->name('lecture_visit_confirmed_ajax');
+
+        // BATCH TEST(For serving tests if a person hasn't attended it already)
+        Route::get('batch/tests/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'batchTest'])->name('batch-test')->middleware('proceed_guard');
+        Route::get('batch/tests/reattempt/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'reattemptBatchTest'])->name('reattempt-batch-test')->middleware('proceed_guard');
+        
         // EXAM
         // Route::get('batch/{batch}/{courseLecture}/{exam}', [ExamController::class, 'question'])->name('question');
         Route::get('batch/{batch}/exam/batch-exam/{exam}', [ExamController::class, 'question'])->name('question');
@@ -55,7 +67,6 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::post('/process-payment/{course}', [CourseController::class, 'processPayment'])->name('payment.process');
     //Payment success
     Route::get('/payment-success/{course}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-
 });
 
 require __DIR__ . '/auth.php';

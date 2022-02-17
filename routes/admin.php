@@ -11,12 +11,21 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\CQController;
 use App\Http\Controllers\Admin\CSVController;
 use App\Http\Controllers\Admin\MCQController;
+use App\Http\Controllers\Admin\AptitudeTestMCQController;
+use App\Http\Controllers\Admin\PopQuizMCQController;
+use App\Http\Controllers\Admin\PopQuizCQController;
+use App\Http\Controllers\Admin\TopicEndExamMCQController;
+use App\Http\Controllers\Admin\TopicEndExamCQController;
+
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\CourseController;
+
+use App\Http\Controllers\Admin\IntermediaryLevelController;
+
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\BatchExamController;
@@ -53,6 +62,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('/course', CourseController::class, ['except' => ['store', 'update']]);
     Route::get('/changeCourseStatus', [CourseController::class, 'changeCourseStatus']);
     Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
+    // END OF COURSE
+
+    // START OF COURSE
+    Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
+    Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus']);
     // END OF COURSE
 
     // START OF COURSE CATEGORY
@@ -109,10 +123,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // START OF EXAM
     Route::resource('/exam', ExamController::class, ['except' => ['store', 'update']]);
     Route::get('/exam/{exam}/add-question', [ExamController::class, 'addQuestion'])->name('addQuestion');
+    // Add MCQ and CQ for POP QUIZ and TOPIC END EXAM
+    Route::get('/exam/{exam}/add-question-CQ-only', [ExamController::class, 'addQuestion_CQ_only'])->name('addQuestion_CQ_only');
+    Route::get('/exam/{exam}/add-question-MCQ-only', [ExamController::class, 'addQuestion_MCQ_only'])->name('addQuestion_MCQ_only');
     Route::post('/exam/{exam}/excel-add-question', [ExamController::class, 'excelAddQuestion'])->name('excelAddQuestion');
     Route::get('/all-mcq', [ExamController::class, 'allMCQ'])->name('showAllMCQ');
     Route::get('/all-cq', [ExamController::class, 'allCQ'])->name('showAllCQ');
     Route::get('/all-assignment', [ExamController::class, 'allAssignment'])->name('showAllAssignment');
+    Route::get('/all-aptitude-test', [ExamController::class, 'allAT'])->name('showAllAT');
+    Route::get('/all-pop-quiz', [ExamController::class, 'allPQ'])->name('showAllPQ');
+    Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
     // END OF EXAM
 
     // START OF EXAM
@@ -140,6 +160,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // Route::resource('/exam/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
     // END OF ASSIGNMENT
 
+    // START OF APTITUDE TEST MCQ EXAM
+    Route::resource('{exam}/aptitude-test-mcqs', AptitudeTestMCQController::class);
+    // END OF Aptitude Test MCQ EXAM
+
+    // START OF POP QUIZ MCQ EXAM
+    Route::resource('{exam}/pop-quiz-mcq', PopQuizMCQController::class)->except(['index']);
+    Route::get('{exam}/pop-quiz-all-questions', [PopQuizMCQController::class, 'all'])->name('pop-quiz-all');
+    // END OF POP QUIZ MCQ EXAM
+
+    // START OF POP QUIZ CQ EXAM
+    Route::resource('{exam}/pop-quiz-cq', PopQuizCQController::class)->except(['index']);
+    // END OF POP QUIZ CQ EXAM
+
+    // START OF TOPIC END EXAM MCQ EXAM
+    Route::resource('{exam}/topic-end-exam-mcq', TopicEndExamMCQController::class)->except(['index']);
+    Route::get('{exam}/topic-end-exam-all-questions', [TopicEndExamMCQController::class, 'all'])->name('topic-end-exam-all');
+    // END OF TOPIC END EXAM MCQ EXAM
+
+    // START OF TOPIC END EXAM CQ EXAM
+    Route::resource('{exam}/topic-end-exam-cq', TopicEndExamCQController::class)->except(['index']);
+    // END OF TOPIC END EXAM CQ EXAM
+
     // START OF ASSIGNMENT
     Route::resource('/request', RequestController::class, ['except' => ['store', 'update']]);
     // END OF ASSIGNMENT
@@ -152,6 +194,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     // START OF EXAM SUBMISSION
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission', [SubmissionController::class, 'submission'])->name('submission');
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetails', [SubmissionController::class, 'seeDetails'])->name('seeDetails');
+    Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetailsCqOnly', [SubmissionController::class, 'seeDetailsCqOnly'])->name('seeDetailsCqOnly');
+    Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/seeDetailsMcqOnly', [SubmissionController::class, 'seeDetailsMcqOnly'])->name('seeDetailsMcqOnly');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/give-marks', [SubmissionController::class, 'giveMarks'])->name('giveMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/{creative_question}/edit-marks', [SubmissionController::class, 'editMarks'])->name('editMarks');
     Route::post('/batch-exam/{batch}/{exam}/{exam_type}/submission/{student}/{assignment}/edit-assignment-marks', [SubmissionController::class, 'editAssignmetnMarks'])->name('editAssignmetnMarks');

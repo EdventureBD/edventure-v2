@@ -1,4 +1,3 @@
-
 <x-landing-layout metatag="{{$meta_tag}}" metadesc="{{$meta_description}}" >
 
     <section class="page-section header-banner pt-7">

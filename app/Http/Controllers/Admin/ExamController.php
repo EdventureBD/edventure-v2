@@ -68,7 +68,53 @@ class ExamController extends Controller
             return view('admin.pages.cq.create', compact('exam', 'contentTags'));
         } elseif (($exam->exam_type) == 'Assignment') {
             return view('admin.pages.assignment.create', compact('exam'));
+        } elseif (($exam->exam_type) == 'Aptitude Test') {
+            return view('admin.pages.aptitude_test.create', compact('exam', 'contentTags'));
         }
+    }
+
+    public function addQuestion_CQ_only(Exam $exam)
+    {
+        if ($exam->special) {
+            $contentTags = ContentTag::where('course_id', $exam->course_id)
+                ->get();
+        } else {
+            $contentTags = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->get();
+        }
+
+        if (($exam->exam_type) == 'Pop Quiz') {
+            $store_route = 'pop-quiz-cq.store';
+            $type = 'Pop Quiz';
+        } elseif (($exam->exam_type) == 'Topic End Exam') {
+            $store_route = 'topic-end-exam-cq.store';
+            $type = 'Topic End Exam';
+        }
+
+        return view('admin.pages.mcq_and_cq.create_cq', compact('exam', 'contentTags', 'store_route', 'type'));
+    }
+
+    public function addQuestion_MCQ_only(Exam $exam)
+    {
+        if ($exam->special) {
+            $contentTags = ContentTag::where('course_id', $exam->course_id)
+                ->get();
+        } else {
+            $contentTags = ContentTag::where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->get();
+        }
+
+        if (($exam->exam_type) == 'Pop Quiz') {
+            $store_route = 'pop-quiz-mcq.store';
+            $type = 'Pop Quiz';
+        } elseif (($exam->exam_type) == 'Topic End Exam') {
+            $store_route = 'topic-end-exam-mcq.store';
+            $type = 'Topic End Exam';
+        }
+
+        return view('admin.pages.mcq_and_cq.create_mcq', compact('exam', 'contentTags', 'store_route', 'type'));
     }
 
     public function excelAddQuestion(Exam $exam, Request $request)
@@ -100,20 +146,31 @@ class ExamController extends Controller
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.mcq.index', compact('exam', 'mcqs'));
             return redirect()->route('mcq.index', [$exam]);
-        } elseif ($exam->exam_type == 'CQ') {
+        }
+        elseif ($exam->exam_type == 'CQ') {
             // $cqs = CQ::join('exams', 'c_q_s.exam_id', 'exams.id')
             //     ->select('c_q_s.*', 'exams.title as examTitle')
             //     ->where('exam_id', $exam->id)
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.cq.index', compact('exam', 'cqs'));
             return redirect()->route('cq.index', [$exam]);
-        } elseif ($exam->exam_type == 'Assignment') {
+        }
+        elseif ($exam->exam_type == 'Assignment') {
             // $assignments = Assignment::join('exams', 'assignments.exam_id', 'exams.id')
             //     ->select('assignments.*', 'exams.title as examTitle')
             //     ->where('exam_id', $exam->id)
             //     ->orderby('id', 'DESC')->get();
             // return view('admin.pages.assignment.index', compact('exam', 'assignments'));
             return redirect()->route('assignment.index', [$exam]);
+        }
+        elseif ($exam->exam_type == 'Aptitude Test') {
+            return redirect()->route('aptitude-test-mcqs.index', [$exam]);
+        }
+        elseif ($exam->exam_type == 'Pop Quiz') {
+            return redirect()->route('pop-quiz-all', [$exam]);
+        }
+        elseif ($exam->exam_type == 'Topic End Exam') {
+            return redirect()->route('topic-end-exam-all', [$exam]);
         }
     }
 
@@ -130,6 +187,21 @@ class ExamController extends Controller
     public function allAssignment()
     {
         return $this->singleExamType("Assignment");
+    }
+
+    public function allAT()
+    {
+        return $this->singleExamType("Aptitude Test");
+    }
+
+    public function allPQ()
+    {
+        return $this->singleExamType("Pop Quiz");
+    }
+
+    public function allTEE()
+    {
+        return $this->singleExamType("Topic End Exam");
     }
 
     private function singleExamType($examType)
