@@ -1120,6 +1120,9 @@ class ExamController extends Controller
                     'topicEndExamCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     },
+                    'topicEndExamCreativeQuestions.question' => function($query) {
+                        return $query->has('detailsResult');
+                    },
                     'topicEndExamCreativeQuestions.exam_papers' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
                     }
@@ -1237,7 +1240,7 @@ class ExamController extends Controller
                     elseif($cq_exam_result->checked == 1) {
 
                         $cq_total_marks = 0;
-                        foreach($exam->popQuizCreativeQuestions as $creative_question){
+                        foreach($exam->topicEndExamCreativeQuestions as $creative_question){
                             if($creative_question->exam_papers){
                                 $cq_total_marks += 10;
                             }
