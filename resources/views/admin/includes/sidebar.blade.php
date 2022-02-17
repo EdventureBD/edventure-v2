@@ -280,6 +280,43 @@
                 </li>
                 {{-- END OF BLOG SIDEBAR --}}
 
+
+
+                {{-- START OF ISLAND IMAGES SIDEBAR --}}
+                <li
+                class="nav-item has-treeview {{ request()->is('admin/island_images') ? 'menu-open' : '' }}
+                                             {{ request()->is('admin/island_image/create') ? 'menu-open' : '' }}
+                                             {{ request()->is('admin/island_image/*/edit') ? 'menu-open' : '' }}
+                                            ">
+                <a href="#"
+                    class="nav-link {{ request()->is('admin/island_images') ? 'active' : '' }}
+                    {{ request()->is('admin/island_image/create') ? 'active' : '' }}
+                    {{ request()->is('admin/island_image/*/edit') ? 'active' : '' }}
+                    ">
+                    <i class="fas fa-chart-bar"></i>
+                    <p>&nbsp; Island Images <i class="right fas fa-angle-left"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('island_images.index') }}"
+                            class="nav-link {{ request()->is('admin/island_images') ? 'active' : '' }} ">
+                            <i class="fas fa-align-center"></i>
+                            <p>&nbsp; Index</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('island_images.create') }}"
+                            class="nav-link {{ request()->is('admin/island_images/create') ? 'active' : '' }} ">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>&nbsp; Create</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {{-- END OF ISLAND IMAGES SIDEBAR --}}
+
+
+
                 {{-- START OF SHORTCUT CREATE --}}
                 @include('admin.includes.sidebar_content.shortcut')
                 {{-- END OF SHORTCUT CREATE --}}
