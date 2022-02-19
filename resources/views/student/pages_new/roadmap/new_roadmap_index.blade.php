@@ -87,6 +87,17 @@
                         <h3 class="flex text-center pr-5">No exams found. Please contact administrators.</h3>
                      @endforelse
 
+                  </ul>
+               </div>
+               <div class="modal-footer mx-auto">
+                  <a class="close" data-dismiss="modal" aria-label="Close"> <img src="/img/road_map/back.png" alt="modal closing button" class="img-fluid" id="roadmap-modal-close-btn"></a>
+               </div>
+            </div>
+         </div>
+      </div>
+   @empty
+   @endforelse
+
    
    {{-- modal part ends  --}}
    {{-- script part --}}
@@ -94,14 +105,10 @@
    {{-- <script src="{{ asset('/js/roadmap.js') }}"></script> --}}
    <script>
       let allLands = JSON.parse(atob('{{ base64_encode(json_encode($batchTopics)) }}'));
-      console.log(allLands);
 
       let landCounter = 0;
-      // console.log(landCounter);
 
       let totalLands = '{{ $batchTopics->count() }}';
-      console.log("Land Count", totalLands);
-      // console.log(allLands[0].course_topic.id);
 
       let landsParentDiv = document.getElementById("ilandsParentContainer");
 
