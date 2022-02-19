@@ -24,9 +24,6 @@
                                 </a>
                             </div>
                             <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none">
-                                {{-- <a href="#"  class=" border rounded bg-secondary">
-                                    <span>1</span>
-                                </a> --}}
                             </div>
                         </div>
                     </div>
@@ -34,14 +31,12 @@
                 <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span> : <span id="countdownMinuits-xs"></span> : <span id="countdownSecound-xs"></span></p>
             </div>
             <p class="hero__lead measure-hero-lead text-gray my-3 fw-800">Batch : {{ $batch->title }}</p>
-            {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}
             <p class="hero__lead measure-hero-lead text-gray my-3 fw-800">Exam : {{ $exam->title }}</p>
         </div>
     </div>
     <div class="py-5 border rounded border-dashed">
         <div class="container page__container">
             <div class="page-section">
-                {{-- action="{{ route('submit', ['batch' => $batch, 'courseLecture' => $courseLecture, 'exam' => $exam]) }}" --}}
 
                 <form action="{{ route('submit', ['batch' => $batch, 'exam' => $exam]) }}" id="cqFormSubmit" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}

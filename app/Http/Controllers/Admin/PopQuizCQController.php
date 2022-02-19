@@ -18,19 +18,6 @@ use App\Models\Admin\PopQuizCQ;
 
 class PopQuizCQController extends Controller
 {
-    // public function index(Exam $exam)
-    // {
-    //     dd("Pop Quiz PopQuizCQ Controller Index");
-    //     // $cqs = PopQuizCQ::join('exams', 'c_q_s.exam_id', 'exams.id')
-    //     //     ->select('c_q_s.*', 'exams.title as examTitle')
-    //     //     ->where('exam_id', $exam->id)
-    //     //     ->orderby('id', 'DESC')->get();
-    //     $cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
-    //         ->orderby('id', 'DESC')->get();
-    //     // dd($cqs);
-    //     return view('admin.pages.cq.index', compact('cqs', 'exam'));
-    // }
-
     public function store(Request $request, Exam $exam)
     {
         $validateData = $request->validate([
@@ -506,22 +493,6 @@ class PopQuizCQController extends Controller
 
     public function destroy(Exam $exam, $pop_quiz_cq_slug)
     {
-        // $cq = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
-
-        // $question_content_tags = QuestionContentTag::where("exam_type", $exam->exam_type.' CQ')->where('question_id', $cq->id)->get();
-
-        // foreach($question_content_tags as $question_content_tag){
-        //     $question_content_tag->delete();
-        // }
-
-        // $deleteCreativeQuestion = $cq->delete();
-
-        // if ($deleteCreativeQuestion) {
-        //     return redirect()->route('exam.show', $exam)->with('status', 'Pop Quiz CQ deleted successfully!');
-        // } else {
-        //     return redirect()->route('exam.show', $exam)->with('failed', 'Pop Quiz CQ deletion failed!');
-        // }
-        
         $creative_question = PopQuizCreativeQuestion::where('slug', $pop_quiz_cq_slug)->firstOrFail();
 
         $cqs = PopQuizCQ::where('creative_question_id', $creative_question->id)->get();

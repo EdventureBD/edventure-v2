@@ -1,13 +1,5 @@
 <x-landing-layout headerBg="white">
 <div class="page-section ">
-      {{--  @php 
-            $total_marks = 0;
-            $total_gain_marks = 0;
-            foreach($detailsResult as $result){
-                  $total_marks += 1;
-                  $total_gain_marks += $result->gain_marks;
-            }
-         @endphp --}}
          <div>
             <div class="course-info bg-gradient-purple py-5">
                <div class="container">
@@ -17,18 +9,9 @@
                         </div>
                      </div>
                      <p class="hero__lead measure-hero-lead text-white-50">Batch : {{ $batch->title }}</p>
-                     {{-- <p class="hero__lead measure-hero-lead text-white-50">Topic : {{ $courseLecture->title }}</p> --}}
                      <p class="hero__lead measure-hero-lead text-white-50">Exam : {{ $exam->title }}</p>
                </div>
             </div>
-
-            {{-- <div class="bg-light-gray">
-               <div class="container">
-                     <div class="py-5 ">
-                        <h1 class="display-5 text-sm text-dark max-w-38 mx-auto fw-600" style="text-align: center">Your submitted answer is being reviewed. Please wait</h1>
-                     </div>
-               </div>
-            </div> --}}
          </div>
 
          <div class="container">
@@ -52,15 +35,6 @@
                </div>
             </div>
 
-            {{-- @php
-               $total_marks = 0;
-               $total_gain_marks = 0;
-               foreach($detailsResult as $result){
-                     $total_marks += $result->cqQuestion->marks;
-                     $total_gain_marks += $result->gain_marks;
-               }
-            @endphp --}}
-
             <div class="result-sheet-table overflow-x-scroll">
                @if($mcqs_exist)
                   <div class="">
@@ -77,17 +51,6 @@
                            </tr>
                         </thead>
                         <tbody>
-                           {{-- @php $n = 1; @endphp
-                           @foreach($detailsResult as $result)
-                           @php
-                                 if ($result->exam_type == 'Aptitude Test') {
-                                    $result->question = $result->atQuestion;
-                                 }
-                                 
-                                 $field = 'field'.$result->mcq_ans;
-                                 $cfield = 'field'.$result->question->answer;
-                                 $cellcolor = $result->mcq_ans == $result->question->answer ? 'bg-green' : 'bg-red';
-                           @endphp --}}
                            @foreach ($mcq_details_results as $key => $mcq_details_result)
                               <tr>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $key }}</td>
@@ -96,11 +59,8 @@
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->popQuizMCQ->explanation }}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
-                                 {{-- <td class="br-purple2">{{number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2)}}%</td> --}}
                               </tr>
                            @endforeach
-                           {{-- @php $n++; @endphp
-                           @endforeach --}}
                         </tbody>
                      </table>
                   </div>
@@ -120,57 +80,6 @@
                         </tr>
                      </thead>
                      <tbody>
-                        {{-- @php $n = 1; @endphp
-                        @foreach($detailsResult as $result)
-                        @php
-                              
-                              $cellcolor = "bg-purple2";
-                              if ($n == 1) $creative = $result->cqQuestion->creativeQuestion->creative_question;
-                              $avg = 0;
-                              
-                              if (!empty($result->question) && $result->question->gain_marks > 0) {
-                                 $avg = number_format(($result->question->gain_marks * 100 )/ $result->question->number_of_attempt, 2);
-                              }
-                              
-                        @endphp --}}
-                        {{-- <tr> --}}
-                              {{-- @if ($n==1 || $creative != $result->cqQuestion->creativeQuestion->creative_question)
-                              <td rowSpan="4" class="{{$cellcolor}} text-white">{!! $result->cqQuestion->creativeQuestion->creative_question !!}</td>
-                              @php $cretive = $result->cqQuestion->creativeQuestion->creative_question; @endphp
-                              @endif
-                              <td class="{{$cellcolor}} text-white">{!! $result->cqQuestion->question !!}</td>
-                              <td class="{{$cellcolor}} text-white text-sm fw-600 bshadow">{{$avg}}%</td>
-                              @if ($n==1)
-                              <td rowSpan="4" class="{{$cellcolor}} v-align-middle">
-                                 <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Pdf</a>
-                              </td>
-                              <td rowSpan="4" class="{{$cellcolor}} v-align-middle">
-                                 <a href="" class="btn text-xxsm text-white bg-purple px-4 py-2 " data-toggle="modal" data-target="#correctAnswerModal">View Pdf</a>
-                              </td>
-                              @endif --}}
-                        {{-- </tr> --}}
-                        {{-- @php 
-                              $n++; 
-                              if ($n == 5) {
-                                 $n = 1;
-                              }
-                        @endphp --}}
-                        {{-- @endforeach --}}
-
-
-
-                        {{-- <td rowspan="4" class="bg-purple2 text-white">{{ $exam->title }}</td> --}}
-
-                        {{-- <tr>
-                           {!! $result->cqQuestion->creativeQuestion->creative_question !!}
-                           @foreach ($exam->popQuizCreativeQuestion as $creative_question)
-                              {!! $result->cqQuestion->question !!}
-                              <td rowspan="4" class="bg-purple2 text-white">{{ $creative_question->creative_question }}</td>
-                              @foreach ($creative_question->question as $cq)
-                                 <td class="bg-purple2 text-white">{{ $cq->question }}</td>
-                              @endforeach
-                           @endforeach
-                        </tr> --}}
 
                         @foreach ($exam->popQuizCreativeQuestions as $key => $creative_question)
                            @foreach ($creative_question->question as $key2 => $question)

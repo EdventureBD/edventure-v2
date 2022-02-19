@@ -11,8 +11,6 @@ class CourseTopicController extends Controller
 {
     public function index()
     {
-        // $categories = CourseCategory::where('status', 1)->get();    
-        // , compact('categories')
         return view('admin.pages.course_topic.index');
     }
 

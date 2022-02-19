@@ -56,9 +56,6 @@ class CourseController extends Controller
             $courses = [];
         }
 
-        // dump($category->id, $selected_category_slug, $intermediary_level_slug, $selected_intermediary_level, $courses);
-        // dd( $categories, $selected_category_slug, $intermediary_levels, $selected_intermediary_level, $courses);
-
         return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses'));
     }
 
@@ -75,7 +72,6 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
-        // dd("Course Controller CoursePreview function");
         $batch = '';
         $enrolled = '';
         $lectures = [];
@@ -180,7 +176,7 @@ class CourseController extends Controller
             );
             return redirect()->route('batch-lecture', $courseFirstBatch->slug);
         } else {
-           
+
             
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
@@ -200,7 +196,7 @@ class CourseController extends Controller
             // $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
             // dd($studentDetails);
             $student = auth()->user();
-           
+
             return view('student.pages_new.course.confirm_enroll', compact('course', 'student', 'batch', 'enroll_months'));
         }
     }
@@ -214,7 +210,7 @@ class CourseController extends Controller
             $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
         } else {
             $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
-           
+
             $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
         }
         
@@ -249,12 +245,4 @@ class CourseController extends Controller
         }
         return $months;
     }
-
-    // public function roadmap(){
-    //     return view("student.pages_new.roadmap.roadmap_index");
-    // }
-
-    // public function new_roadmap(){
-    //     return view("student.pages_new.roadmap.new_roadmap_index");
-    // }
 }

@@ -57,22 +57,11 @@ class AccountDetailsController extends Controller
         foreach($cq_content_tags as $cq_content_tag){
             $cq_tag_total_marks = 0;
             $cq_tag_scored_marks = 0;
-            foreach($cq_content_tag->questionContentTagAnalysis as $analysis){
-                // dd($analysis);
                 if($analysis->exam_type == 'Pop Quiz CQ'){
                     $cq_question = PopQuizCQ::where('id', $analysis->question_id)->first();
                     $cq_tag_total_marks = $cq_tag_total_marks + $cq_question->marks;
 
-                    // $details_result = DetailsResult::where('student_id', auth()->user()->id)
-                    // ->where('question_id', $analysis->question_id)
-                    // ->where('exam_type', 'Pop Quiz')
-                    // ->whereNull('mcq_ans')
-                    // ->first();
-                    // $cq_tag_scored_marks += $details_result->gain_marks;
-
                     $cq_tag_scored_marks += $analysis->gain_marks;
-
-                    // dd($cq_question, $cq_tag_total_marks, $cq_tag_scored_marks);
                 }
                 elseif($analysis->exam_type == 'Topic End Exam CQ'){
                     $cq_question = TopicEndExamCQ::where('id', $analysis->question_id)->first();
@@ -84,19 +73,6 @@ class AccountDetailsController extends Controller
             $cq_content_tag->tag_total_marks = $cq_tag_total_marks;
             $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
         }
-
-        // $mcq_details_results = DetailsResult::where('student_id', auth()->user()->id )->where( 'mcq_ans', null)->get();
-
-        // $mcq_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->get();
-
-        // $question_content_tags = ContentTag::has('questionContentTags')->get();
-
-        // dump($question_content_tags);
-        // dump($mcq_content_tag_analysis);
-        // dump($mcq_details_results);
-        // dump($mcq_content_tags);
-        // dump($cq_content_tags);
-        // dd("Finished");
 
         return view('student.pages_new.user.course', compact('user', 'mcq_content_tags', 'cq_content_tags', 'batch_student_enrollment'));
     }

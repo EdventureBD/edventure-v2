@@ -11,9 +11,6 @@
 
 @section('content')
    <!-- Main content -->
-   {{-- @php
-      dd($student_exam_attempts, $exam_results);
-   @endphp --}}
    <section class="content">
       <div class="container-fluid">
          <div class="row">
@@ -46,10 +43,6 @@
                                           <td class="text-center">
                                              <span
                                                    class="badge 
-                                                               {{-- {{ $exam_result->exam->exam_type == 'MCQ' ? 'bg-primary': '' }}
-                                                               {{ $exam_result->exam->exam_type == 'CQ' ? 'bg-warning': '' }}
-                                                               {{ $exam_result->exam->exam_type == 'Assignment' ? 'bg-danger': '' }}
-                                                               {{ $exam_result->exam->exam_type == 'Aptitude Test' ? 'bg-dark' : '' }} --}}
                                                                {{ $exam_result->exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
                                                                {{ $exam_result->exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}
                                                                ">
@@ -112,10 +105,6 @@
                                           <td class="text-center">
                                              <span
                                              class="badge 
-                                                         {{-- {{ $student_exam_attempt->exam->exam_type == 'MCQ' ? 'bg-primary': '' }}
-                                                         {{ $student_exam_attempt->exam->exam_type == 'CQ' ? 'bg-warning': '' }}
-                                                         {{ $student_exam_attempt->exam->exam_type == 'Assignment' ? 'bg-danger': '' }}
-                                                         {{ $student_exam_attempt->exam->exam_type == 'Aptitude Test' ? 'bg-dark' : '' }} --}}
                                                          {{ $student_exam_attempt->exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
                                                          {{ $student_exam_attempt->exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}
                                                          ">
