@@ -22,7 +22,7 @@
                                     Courses
                                  </div>
                                  <div class="mx-auto">
-                                    {{ $batch_student_enrollment->count() }}
+                                    {{ $enrolled_course_count }}
                                  </div>
                            </div>
                            <div class="d-flex flex-column fw-800 ml-3 justify-content-center">
@@ -30,7 +30,7 @@
                                     Completed
                                  </div>
                                  <div class="mx-auto">
-                                    3
+                                    {{ $completed_course_count }}
                                  </div>
                            </div>
                         </div>
