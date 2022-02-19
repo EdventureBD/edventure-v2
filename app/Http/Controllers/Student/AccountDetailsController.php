@@ -57,6 +57,7 @@ class AccountDetailsController extends Controller
         foreach($cq_content_tags as $cq_content_tag){
             $cq_tag_total_marks = 0;
             $cq_tag_scored_marks = 0;
+            foreach($cq_content_tag->questionContentTagAnalysis as $analysis){
                 if($analysis->exam_type == 'Pop Quiz CQ'){
                     $cq_question = PopQuizCQ::where('id', $analysis->question_id)->first();
                     $cq_tag_total_marks = $cq_tag_total_marks + $cq_question->marks;
