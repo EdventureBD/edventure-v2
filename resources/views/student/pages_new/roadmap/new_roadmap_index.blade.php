@@ -135,7 +135,7 @@
       console.log(allLands);
 
       let landCounter = 0;
-      console.log(landCounter);
+      // console.log(landCounter);
 
       let totalLands = '{{ $batchTopics->count() }}';
       console.log("Land Count", totalLands);
@@ -143,13 +143,16 @@
       // console.log(allLands[0].course_topic.id);
 
       let landsParentDiv = document.getElementById("ilandsParentContainer");
-      let ilandImages = [  "{{ asset('/img/road_map/landl1.png') }}",
-                           "{{ asset('/img/road_map/landr4.png') }}",
-                           "{{ asset('/img/road_map/Frame 46.png') }}", 
-                           "{{ asset('/img/road_map/landl5.png') }}",
-                           "{{ asset('/img/road_map/landl6.png') }}",
-                           "{{ asset('/img/road_map/landl2.png') }}",
-                        ];
+      // let ilandImages = [  "{{ asset('/img/road_map/landl1.png') }}",
+      //                      "{{ asset('/img/road_map/landr4.png') }}",
+      //                      "{{ asset('/img/road_map/Frame 46.png') }}", 
+      //                      "{{ asset('/img/road_map/landl5.png') }}",
+      //                      "{{ asset('/img/road_map/landl6.png') }}",
+      //                      "{{ asset('/img/road_map/landl2.png') }}",
+      //                   ];
+
+      let ilandImages = JSON.parse(atob('{{ base64_encode(json_encode($island_images)) }}'));
+      // console.log(ilandImages);
 
       // let totalLands = ilandImages.length;
       // console.log("Land Count", totalLands);
@@ -233,10 +236,10 @@
                         div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
                         // Iland image part 
                         let divIland = document.createElement("div");
-                        divIland.innerHTML = `<img src="${ilandImages[ilandImageIndex]}" alt="Iland image" class="img-fluid">`;
+                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
                         // modal part 
                         divIland.setAttribute("data-toggle","modal");
-                        divIland.setAttribute("data-target", "#exampleModal");
+                        divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                         div.appendChild(divIland);
                         // Iland down star's part 
                         let divstars = document.createElement("div");

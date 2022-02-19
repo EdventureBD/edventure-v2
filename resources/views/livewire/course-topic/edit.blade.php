@@ -111,9 +111,13 @@
                                        </div>
                                  </div>
                                  <div>
-                                       @error('islandImage')
-                                          <p style="color: red;">{{ $message }}</p>
-                                       @enderror
+                                    @if ($islandImage)
+                                       Preview:
+                                       <img src="{{ $islandImage->temporaryUrl() }}">
+                                    @endif
+                                    @error('islandImage')
+                                       <p style="color: red;">{{ $message }}</p>
+                                    @enderror
                                  </div>
                               </div>
 

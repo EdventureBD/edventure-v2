@@ -83,8 +83,9 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->get();
 
-        // $topics = [];
+        $island_images = [];
         foreach($batchTopics as $batchTopic){
+            $island_images[] = $batchTopic->courseTopic->island_image;
             foreach($batchTopic->courseTopic->exams as $exam){
                 $scored_marks = 0;
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
@@ -122,9 +123,9 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays);
+        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays, $island_images);
 
-        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
+        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
 
         // return view('student.pages_new.roadmap.old_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
     }
