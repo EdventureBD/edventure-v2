@@ -4267,7 +4267,7 @@ input[type=button].btn-block {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
   color: rgba(0, 0, 0, 0.7);
@@ -11420,7 +11420,7 @@ a:hover {
   font-weight: 800;
 }
 .navbar .nav-item.active .nav-link, .navbar .nav-item:hover .nav-link {
-  color: #663193;
+  color: #FA9632;
   font-weight: 800;
 }
 .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
@@ -11429,7 +11429,7 @@ a:hover {
   width: 5px;
   height: 5px;
   left: calc(50% - 2px);
-  background: #663193;
+  background: #FA9632;
   border-radius: 50%;
   bottom: 0px;
 }
@@ -11945,6 +11945,12 @@ svg.eye-icon {
 /* #medi-olympiad {
   background: url("/img/medical_camp/medicalOlympiadBannerMobile.jpg");
 }  */
+/* navbar part's css  */
+.navbar-light .navbar-nav .nav-link{
+  color: #727272;
+}
+/* navbar part's css  */
+
 #medi-olympiad-banner{
   margin: 20% auto;
   margin-bottom: 0px;
