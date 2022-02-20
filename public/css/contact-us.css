@@ -383,6 +383,10 @@
     #contact-us-banner-text{
       font-size: 20px;
     }
+    .btn-submit {
+      font-weight: 600;
+      font-size: 1rem;
+    }
   }
   @media screen and (max-width: 575px) {
     .shape-a {
