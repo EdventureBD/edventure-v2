@@ -1,12 +1,12 @@
-<nav class="navbar top-nav-fixed navbar-expand-lg navbar-light {{$headerBg == 'white' ? "position-relative bg-light " : "position-absolute"}} w-100">
-    <a class="navbar-brand" href="{{route('home')}}"><img src="/img/landing/newEdventureLogoNav.png" width="220" alt="EdventureLogo"></a>
+<nav class="navbar top-nav-fixed navbar-expand-lg navbar-light w-100" style="background: #6400C8">
+    <a class="navbar-brand" href="{{route('home')}}"><img src="/img/landing/edventureFinalLogo.png" width="220" alt="EdventureLogo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse  navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
             <li class="nav-item has-dot  {{Route::current()->getName() == 'home' ? 'active' : ''}}">
-            <a class="nav-link text-purple-half" href="{{route('home')}}">HOME</a>
+            <a class="nav-link text-white" href="{{route('home')}}">HOME</a>
             </li>
             <li class="nav-item has-dot">
             </li>
@@ -14,7 +14,7 @@
             @if (Route::has('login'))
                 @auth
                     <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}">
-                    <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
+                    <a class="nav-link text-white "  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
                 @endauth
             @endif
@@ -23,24 +23,24 @@
                                          {{ request()->is('course/course-preview/*') ? 'active' : '' }}
                                          {{ request()->is('batch/*') ? 'active' : '' }}"
             >
-            <a class="nav-link text-purple-half" href="{{route('course')}}">EXAMS</a>
+            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>
             </li>
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
-                <a class="nav-link text-purple-half"
-                   href="{{route('model.exam')}}">MODEL EXAMS</a>
+                <a class="nav-link text-white"
+                   href="{{route('model.exam')}}">EXAMS</a>
             </li>
 
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">
-                <a class="nav-link text-purple-half " href="{{route('about_us')}}">ABOUT US</a>
+                <a class="nav-link text-white " href="{{route('about_us')}}">ABOUT US</a>
             </li>
             <li class="nav-item has-dot {{Route::current()->getName() == 'read-blog' ? 'active' : ''}}
                                         {{Route::current()->getName() == 'all-blogs' ? 'active' : ''}}
                 ">
-                <a class="nav-link text-purple-half " href="{{route('all-blogs')}}">BLOGS</a>
+                <a class="nav-link text-white " href="{{route('all-blogs')}}">BLOGS</a>
             </li>
             <li class="nav-item has-dot">
-            <a class="nav-link text-purple-half" href="{{route('contact_us')}}">CONTACT US</a>
+            <a class="nav-link text-white" href="{{route('contact_us')}}">CONTACT US</a>
             </li>
             {{-- <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">HELP</a>
