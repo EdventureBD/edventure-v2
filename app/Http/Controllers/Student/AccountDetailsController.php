@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\ExamTag;
+use App\Models\McqMarkingDetail;
+use App\Models\McqTotalResult;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -97,7 +100,6 @@ class AccountDetailsController extends Controller
         // dump($mcq_content_tags);
         // dump($cq_content_tags);
         // dd("Finished");
-
         return view('student.pages_new.user.course', compact('user', 'mcq_content_tags', 'cq_content_tags', 'batch_student_enrollment'));
     }
 
@@ -273,5 +275,31 @@ class AccountDetailsController extends Controller
         } else {
             abort(401);
         }
+    }
+
+    public function getModelTestInfo()
+    {
+        $user = auth()->user();
+
+        $mcq_tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($user) {
+                            $q->where('student_id',$user->id);
+                        })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
+                            $q->where('student_id',$user->id);
+                        }])->get();
+
+
+        foreach($mcq_tags as $tag){
+            $mcq_tag_total_marks = 0;
+            $mcq_tag_scored_marks = 0;
+            foreach($tag->modelMcqTagAnalysis as $analysis){
+                $mcq_tag_total_marks += 1;
+                $mcq_tag_scored_marks += $analysis->gain_marks;
+            }
+            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_total_marks = $mcq_tag_total_marks;
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+        }
+
+        return view('student.pages_new.user.model-test',compact('user','mcq_tags'));
     }
 }

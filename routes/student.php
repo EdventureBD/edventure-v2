@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ModelMcqTagAnalysisController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\PdfController;
 use App\Http\Controllers\Student\ExamController;
@@ -12,6 +13,13 @@ use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
+
+    Route::group([], function(){
+        Route::get('/profile/model-test', [AccountDetailsController::class, 'getModelTestInfo'])->name('profile.modelTest');
+        Route::get('/profile/model-test/tag-details', [ModelMcqTagAnalysisController::class, 'index'])->name('tag.analysis,index');
+    });
+
+
     Route::get('/profile/ajax_get_courses', [AccountDetailsController::class, 'ajax_get_courses'])->name('ajax-get-courses');
     Route::get('/profile/ajax_get_strengths_and_weaknesses', [AccountDetailsController::class, 'ajax_get_strengths_and_weaknesses'])->name('ajax-get-strengths-and-weaknesses');
 
@@ -40,7 +48,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         // BATCH TEST(For serving tests if a person hasn't attended it already)
         Route::get('batch/tests/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'batchTest'])->name('batch-test')->middleware('proceed_guard');
         Route::get('batch/tests/reattempt/{course_topic}/{batch}/{exam_id}/{exam_type}', [ExamController::class, 'reattemptBatchTest'])->name('reattempt-batch-test')->middleware('proceed_guard');
-        
+
         // EXAM
         // Route::get('batch/{batch}/{courseLecture}/{exam}', [ExamController::class, 'question'])->name('question');
         Route::get('batch/{batch}/exam/batch-exam/{exam}', [ExamController::class, 'question'])->name('question');

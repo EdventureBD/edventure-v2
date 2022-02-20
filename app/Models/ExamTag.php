@@ -15,4 +15,9 @@ class ExamTag extends Model
     {
         return $this->belongsTo(ExamTopic::class);
     }
+
+    public function modelMcqTagAnalysis()
+    {
+        return $this->hasMany(ModelMcqTagAnalysis::class);
+    }
 }
