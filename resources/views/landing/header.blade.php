@@ -53,7 +53,7 @@
                             <a href="#" class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
                                 data-caret="false">
                                 <span class="avatar avatar-sm mr-8pt2">
-                                    <span class="avatar-title rounded-circle bg-purple text-white" style="padding: 8px 10px"><i class="fas fa-user"></i></span>
+                                    <span class="avatar-title rounded-circle text-white" style="padding: 8px 10px; background:#FA9632"><i class="fas fa-user"></i></span>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
