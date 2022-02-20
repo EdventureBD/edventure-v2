@@ -4282,7 +4282,7 @@ input[type=button].btn-block {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 .navbar-light .navbar-toggler-icon {
   background-image: url("/img/landing/nav_mobile_toggler.png");
@@ -11135,6 +11135,12 @@ a:hover {
   background-color: #663193;
   color: #ffffff;
 }
+.btn-orange-customed {
+  font-size: 14px;
+  font-weight: 800;
+  background-color: #FA9632;
+  color: white;
+}
 .btn-purple:hover {
   color: #ffffff;
   box-shadow: 0 0 5px #663193;
@@ -11415,7 +11421,7 @@ a:hover {
 }
 .navbar .nav-item.active, .navbar .nav-item:hover {
   position: relative;
-  color: #663193;
+  color: white;
   font-weight: 800;
 }
 .navbar .nav-item.active .nav-link, .navbar .nav-item:hover .nav-link {
