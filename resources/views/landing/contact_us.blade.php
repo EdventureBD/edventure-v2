@@ -98,10 +98,10 @@
 
     <!--map-->
     <div class="map-container container">
-        <div class="map">
+        <div class="map mt-auto">
             <img src="img/contact/map.webp" alt="map" width="100%" class="img-fluid">
             <a href="https://goo.gl/maps/zWsBhtSGmc3SMmBB9" title="Click me to find us on map" target="_blank">
-                <img src="img/contact/mapLogo.png" alt="Parl Owl Iconic Logo" width="8%"
+                <img src="img/contact/mapLogo.png" alt="Parl Owl Iconic Logo" width="5%"
                      class="img-fluid parlowlIconicLogo">
             </a>
         </div>
