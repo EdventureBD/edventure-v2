@@ -19,7 +19,6 @@
    </div>
 
    {{-- Modal part --}}
-   {{-- data-toggle="modal" data-target="#exampleModal" --}}
    <!-- Modal -->
    @php $disabled = false; @endphp
    @forelse ($batchTopics as $batchTopic)
@@ -88,32 +87,6 @@
                         <h3 class="flex text-center pr-5">No exams found. Please contact administrators.</h3>
                      @endforelse
 
-                     {{-- <li>
-                        <div class="w-25">
-                              <img src="/img/road_map/rightSign.png" alt="" class=" px-md-4 px-sm-3 pt-md-2 img-fluid" id="model-test">
-                        </div>
-                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded">Model Test</a>
-                     </li>
-
-                     <li>
-                        <div class="w-25">
-                           <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                        </div>
-                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded">Aptitute Test</a>
-                     </li>
-                     <li>
-                        <div class="w-25">
-                           <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="mcq-test">
-                        </div>
-                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded">MCQ Test</a>
-                     </li>
-                     <li>
-                        <div class="w-25">
-                           <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="cq-test">
-                        </div>
-                        <a href="" class="fw-800 modal-items text-white d-flex justify-content-center rounded" id="cq">CQ Test</a>
-                     </li> --}}
-                     
                   </ul>
                </div>
                <div class="modal-footer mx-auto">
@@ -124,36 +97,22 @@
       </div>
    @empty
    @endforelse
+
    
    {{-- modal part ends  --}}
    {{-- script part --}}
 
    {{-- <script src="{{ asset('/js/roadmap.js') }}"></script> --}}
-
    <script>
       let allLands = JSON.parse(atob('{{ base64_encode(json_encode($batchTopics)) }}'));
-      console.log(allLands);
 
       let landCounter = 0;
-      console.log(landCounter);
 
       let totalLands = '{{ $batchTopics->count() }}';
-      console.log("Land Count", totalLands);
-
-      // console.log(allLands[0].course_topic.id);
 
       let landsParentDiv = document.getElementById("ilandsParentContainer");
-      let ilandImages = [  "{{ asset('/img/road_map/landl1.png') }}",
-                           "{{ asset('/img/road_map/landr4.png') }}",
-                           "{{ asset('/img/road_map/Frame 46.png') }}", 
-                           "{{ asset('/img/road_map/landl5.png') }}",
-                           "{{ asset('/img/road_map/landl6.png') }}",
-                           "{{ asset('/img/road_map/landl2.png') }}",
-                        ];
 
-      // let totalLands = ilandImages.length;
-      // console.log("Land Count", totalLands);
-      // let ilandImageIndex = 0;
+      let ilandImages = JSON.parse(atob('{{ base64_encode(json_encode($island_images)) }}'));
 
       while(totalLands){
          // onStream design
@@ -179,7 +138,6 @@
                      `;
                      div.appendChild(divstars);
                      landsParentDiv.appendChild(div);
-                     // console.log("henlo", ilandImageIndex);
                      if(landCounter == ilandImages.length){
                         landCounter = 0;
                      }
@@ -233,10 +191,10 @@
                         div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
                         // Iland image part 
                         let divIland = document.createElement("div");
-                        divIland.innerHTML = `<img src="${ilandImages[ilandImageIndex]}" alt="Iland image" class="img-fluid">`;
+                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
                         // modal part 
                         divIland.setAttribute("data-toggle","modal");
-                        divIland.setAttribute("data-target", "#exampleModal");
+                        divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                         div.appendChild(divIland);
                         // Iland down star's part 
                         let divstars = document.createElement("div");
@@ -247,8 +205,6 @@
                         `;
                         div.appendChild(divstars);
                         landsParentDiv.appendChild(div);
-                        // ilandImageIndex++;
-                        // console.log("henlo", ilandImageIndex);
                         if(landCounter == ilandImages.length){
                            landCounter = 0;
                         }

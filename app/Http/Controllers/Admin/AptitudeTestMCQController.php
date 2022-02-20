@@ -87,7 +87,6 @@ class AptitudeTestMCQController extends Controller
     public function edit(Exam $exam, AptitudeTestMCQ $aptitude_test_mcq)
     {
         $tagId = [];
-        // $exam = Exam::where('id', $aptitude_test_mcq->exam_id)->first();
         $questionContentTags = QuestionContentTag::where('exam_type', $exam->exam_type)
             ->where('question_id', $aptitude_test_mcq->id)
             ->get();
@@ -124,9 +123,6 @@ class AptitudeTestMCQController extends Controller
             'contentTagIds' => 'required',
         ]);
 
-        // dump($aptitude_test_mcq);
-        // $aptitude_test_mcq = AptitudeTestMCQ::find($aptitude_test_mcq->id);
-
         if ($request->hasFile('image')) {
             if ($aptitude_test_mcq->image) {
                 Storage::delete($aptitude_test_mcq->image);
@@ -142,9 +138,7 @@ class AptitudeTestMCQController extends Controller
         $aptitude_test_mcq->field4 = $request['field4'];
         $aptitude_test_mcq->answer = $request['answer'];
         $aptitude_test_mcq->explanation = $request['explanation'];
-        $aptitude_test_mcq->exam_id = $request['examId'];        
-
-        // dd($aptitude_test_mcq);
+        $aptitude_test_mcq->exam_id = $request['examId'];
 
         $save = $aptitude_test_mcq->save();
 

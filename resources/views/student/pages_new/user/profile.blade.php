@@ -16,26 +16,26 @@
                      </div>
                      <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line"></div>
                      @if(request()->is('profile'))
-                          <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-column fw-800 mr-3">
-                                  <div>
-                                     Courses
-                                  </div>
-                                  <div class="mx-auto">
-                                     {{ $batch_student_enrollment->count() }}
-                                  </div>
-                            </div>
-                            <div class="d-flex flex-column fw-800 ml-3 justify-content-center">
-                                  <div>
-                                     Completed
-                                  </div>
-                                  <div class="mx-auto">
-                                     3
-                                  </div>
-                            </div>
-                         </div>
-                      @endif
-                  </div>
+                        <div class="d-flex justify-content-between">
+                           <div class="d-flex flex-column fw-800 mr-3">
+                                 <div>
+                                    Courses
+                                 </div>
+                                 <div class="mx-auto">
+                                    {{ $enrolled_course_count }}
+                                 </div>
+                           </div>
+                           <div class="d-flex flex-column fw-800 ml-3 justify-content-center">
+                                 <div>
+                                    Completed
+                                 </div>
+                                 <div class="mx-auto">
+                                    {{ $completed_course_count }}
+                                 </div>
+                           </div>
+                        </div>
+                     @endif
+               </div>
             </div>
             <div class="d-flex max-h-10 justify-content-center my-5">
                   <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black;'}}" class="px-4 py-2 border my-auto fw-600" id="course-option">
