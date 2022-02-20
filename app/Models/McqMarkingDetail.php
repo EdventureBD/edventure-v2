@@ -15,4 +15,9 @@ class McqMarkingDetail extends Model
     {
         return $this->belongsTo(McqQuestion::class);
     }
+
+    public function modelExam()
+    {
+        return $this->belongsTo(ModelExam::class);
+    }
 }

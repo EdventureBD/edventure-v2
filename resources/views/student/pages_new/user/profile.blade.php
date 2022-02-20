@@ -38,12 +38,20 @@
                </div>
             </div>
             <div class="d-flex max-h-10 justify-content-center my-5">
-                  <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black;'}}" class="px-4 py-2 border my-auto fw-600" id="course-option">
-                     Course
-                  </div>
-                  <div class="px-4 py-2 border my-auto fw-600" id="model-test-option">
-                     Model Test
-                  </div>
+                <a href="{{route('profile')}}" class="text-decoration-none">
+                    <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black;'}}"
+                         class="px-4 py-2 border my-auto fw-600" id="course-option">
+                        Course
+                    </div>
+                </a>
+                <a href="{{route('profile.modelTest')}}" class="text-decoration-none">
+                    <div style="{{request()->is('profile/model-test') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black;'}}"
+                         class="px-4 py-2 border my-auto fw-600" id="model-test-option">
+                        Model Test
+                    </div>
+                </a>
+
+
             </div>
          </div>
             @yield('content')

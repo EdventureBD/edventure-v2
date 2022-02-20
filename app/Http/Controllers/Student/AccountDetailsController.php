@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\ExamTag;
+use App\Models\McqMarkingDetail;
+use App\Models\McqTotalResult;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +70,7 @@ class AccountDetailsController extends Controller
         }
         // End counting how many courses the user completed
 
-        // Start Count percentage scored for each MCQ content tag 
+        // Start Count percentage scored for each MCQ content tag
         $mcq_content_tags = ContentTag::has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
             return $query->where('student_id', auth()->user()->id)->where(function($query){
                 $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz MCQ')->orWhere('exam_type', 'Topic End Exam MCQ');
@@ -85,9 +88,9 @@ class AccountDetailsController extends Controller
             $mcq_content_tag->tag_total_marks = $mcq_tag_total_marks;
             $mcq_content_tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
         }
-        // End Count percentage scored for each MCQ content tag 
+        // End Count percentage scored for each MCQ content tag
 
-        // Count percentage scored for each CQ content tag 
+        // Count percentage scored for each CQ content tag
         $cq_content_tags = ContentTag::has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
             return $query->where('student_id', auth()->user()->id)->where(function($query){
                 $query->Where('exam_type', 'Pop Quiz CQ')->orWhere('exam_type', 'Topic End Exam CQ');
@@ -116,7 +119,21 @@ class AccountDetailsController extends Controller
         }
         // End Count percentage scored for each CQ content tag
 
+
+        // $mcq_details_results = DetailsResult::where('student_id', auth()->user()->id )->where( 'mcq_ans', null)->get();
+
+        // $mcq_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->get();
+
+        // $question_content_tags = ContentTag::has('questionContentTags')->get();
+
+        // dump($question_content_tags);
+        // dump($mcq_content_tag_analysis);
+        // dump($mcq_details_results);
+        // dump($mcq_content_tags);
+        // dump($cq_content_tags);
+        // dd("Finished");
         return view('student.pages_new.user.course', compact('user', 'mcq_content_tags', 'cq_content_tags', 'enrolled_course_count', 'completed_course_count'));
+
     }
 
     public function ajax_get_courses(){
@@ -291,5 +308,31 @@ class AccountDetailsController extends Controller
         } else {
             abort(401);
         }
+    }
+
+    public function getModelTestInfo()
+    {
+        $user = auth()->user();
+
+        $mcq_tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($user) {
+                            $q->where('student_id',$user->id);
+                        })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
+                            $q->where('student_id',$user->id);
+                        }])->get();
+
+
+        foreach($mcq_tags as $tag){
+            $mcq_tag_total_marks = 0;
+            $mcq_tag_scored_marks = 0;
+            foreach($tag->modelMcqTagAnalysis as $analysis){
+                $mcq_tag_total_marks += 1;
+                $mcq_tag_scored_marks += $analysis->gain_marks;
+            }
+            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_total_marks = $mcq_tag_total_marks;
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+        }
+
+        return view('student.pages_new.user.model-test',compact('user','mcq_tags'));
     }
 }
