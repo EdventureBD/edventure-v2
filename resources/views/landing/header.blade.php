@@ -78,7 +78,7 @@
                 @else
         <div class="my-2 my-lg-0">
             <a class="nav-item active my-2 my-sm-0 pr-3" href="{{route('register')}}">SIGN UP</a>
-            <a class="btn btn-purple my-2 my-sm-0" href="{{route('login')}}">LOG IN</a>
+            <a class="btn my-2 my-sm-0 btn-orange-customed" href="{{route('login')}}">LOG IN</a>
         </div>
         @endauth
         @endif
