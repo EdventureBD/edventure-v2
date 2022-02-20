@@ -38,7 +38,7 @@
                 location.replace(`https:${location.href.substring(location.protocol.length)}`);
             }
         </script>
-        
+
         <div class="font-sans text-gray-900 antialiased" id="app">
             <div class="landing-page">
                 @if(!request()->is("batch/*"))
@@ -50,7 +50,9 @@
             </div>
         </div>
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        @if(!request()->is('profile/model-test') || request()->is('model-test/topic/*'))
+            <script src="{{ asset('js/app.js') }}"></script>
+        @endif
         @include('partials.custom_sctipt')
         @include('partials.after_body_analytics')
     </body>

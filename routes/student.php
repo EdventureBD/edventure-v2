@@ -16,7 +16,10 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
 
     Route::group([], function(){
         Route::get('/profile/model-test', [AccountDetailsController::class, 'getModelTestInfo'])->name('profile.modelTest');
+        Route::get('/model-test/topic/{id}', [AccountDetailsController::class, 'getTopic'])->name('model.test.topic');
         Route::get('/profile/model-test/tag-details', [ModelMcqTagAnalysisController::class, 'index'])->name('tag.analysis,index');
+        Route::get('/model-test/tag-details/{id}', [ModelMcqTagAnalysisController::class, 'getAjaxTagAnalysis'])->name('tag.analysis.ajax');
+        Route::get('/profile/model-test/tag-solutions/{tagId}', [ModelMcqTagAnalysisController::class, 'solutions'])->name('tag.solution');
     });
 
 

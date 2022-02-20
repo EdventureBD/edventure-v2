@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\ExamCategory;
 use App\Models\ExamTag;
+use App\Models\ExamTopic;
 use App\Models\McqMarkingDetail;
 use App\Models\McqTotalResult;
 use Illuminate\Support\Facades\Auth;
@@ -332,7 +334,19 @@ class AccountDetailsController extends Controller
             $tag->tag_total_marks = $mcq_tag_total_marks;
             $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
         }
+        $categories = ExamCategory::query()->whereHas('modelExam', function ($me) use ($user) {
+            $me->wherehas('mcqTotalResult', function ($mtr) use ($user) {
+                $mtr->where('student_id', $user->id);
+            });
+        })->get();
 
-        return view('student.pages_new.user.model-test',compact('user','mcq_tags'));
+        return view('student.pages_new.user.model-test',compact('user','mcq_tags','categories'));
+    }
+
+    public function getTopic($categoryId)
+    {
+        $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->get();
+
+        return response()->json($topics);
     }
 }
