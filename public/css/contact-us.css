@@ -387,6 +387,16 @@
       font-weight: 600;
       font-size: 1rem;
     }
+    .shape-a .form-box h3, .shape-a .form-box h3 span{
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    #shape-b-contact-box .contact-box .text-box h3, #shape-b-contact-box .contact-box .text-box h3 span{
+      font-weight: 600;
+    } 
+    #shape-b-contact-box .contact-box .text-box p {
+      font-size: 1rem;
+    }
   }
   @media screen and (max-width: 575px) {
     .shape-a {
