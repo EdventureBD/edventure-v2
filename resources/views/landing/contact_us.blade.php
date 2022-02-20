@@ -35,11 +35,11 @@
                         <br>
 
                         <div id="Contact_us_action_button" class="w-80 row">
-                            <button type="submit" class="btn-submit col-4 mx-3"
+                            <button type="submit" class="btn-submit col-4 mx-3 d-flex justify-content-center"
                                     style="border: 1px solid black">Submit
                             </button>
 
-                            <button type="reset" class="btn-submit btn-cancel col-4 mx-3"
+                            <button type="reset" class="btn-submit btn-cancel col-4 mx-3  d-flex justify-content-center"
                                     style="border: 1px solid black">Cancel
                             </button>
                         </div>
