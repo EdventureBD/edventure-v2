@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
-use App\Models\Admin\Exam;
-use App\Models\Admin\BatchExam;
 use App\Models\Admin\LiveClass;
 use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
@@ -15,7 +13,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CompletedLectures;
 use App\Models\Student\exam\DetailsResult;
-use App\Models\Student\exam\ExamResult;
 use DateTime;
 
 class BatchController extends Controller
@@ -30,48 +27,6 @@ class BatchController extends Controller
         return view('student.pages.batch.index', compact('batches'));
     }
 
-    // public function batchLecture(Batch $batch)
-    // {
-    //     $sExams = [];
-    //     $course = Course::where('id', $batch->course_id)->first();
-    //     // $batchTopics = BatchLecture::with('course_topics', 'batch_lectures.topic_id', 'course_topics.id')
-    //     //     ->where('batch_id', $batch->id)
-    //     //     ->where('course_id', $course->id)
-    //     //     ->get();
-    //     $batchTopics = BatchLecture::with('courseTopic', 'courseTopic.CourseLecture')
-    //         ->where('batch_id', $batch->id)
-    //         ->where('course_id', $course->id)
-    //         ->get();
-    //     // dd($batchTopics);
-    //     $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
-    //         ->where('batch_id', $batch->id)
-    //         ->where('course_id', $course->id)
-    //         ->first();
-    //         // dd($accessedDays);
-    //     if ($accessedDays->status == 0) {
-    //         return redirect()->route('course-preview', $course->slug);
-    //     }
-
-    //     list($exams, $specialExams) = (new BatchExam())->getBatchExams($batch->id);
-
-    //     // dd($batch, $course, $batchTopics, $accessedDays, $specialExams, $exams);
-
-    //     // $courseLectures = CourseLecture::where('topic_id', $batchTopics)->get();
-    //     // dd($specialExams);
-    //     // foreach ($specialExams as $specialExam) {
-    //     //     if ($specialExam->exam->special) {
-    //     //         array_push($sExams, $specialExam->exam->id);
-    //     //     }
-    //     // }
-
-    //     // $specialExams = BatchExam::with('cqExamPaper', 'examResult')->where('batch_id', $batch->id)
-    //     //     ->whereIn('exam_id', $sExams)
-    //     //     ->where('status', '1')
-    //     //     ->get();
-
-    //     return view('student.pages_new.course.preview', compact('batch', 'course', 'batchTopics', 'accessedDays', 'specialExams', 'exams'));
-    // }
-
     public function batchLecture(Batch $batch)
     {
         $course = Course::where('id', $batch->course_id)->first();
@@ -83,8 +38,9 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->get();
 
-        // $topics = [];
+        $island_images = [];
         foreach($batchTopics as $batchTopic){
+            $island_images[] = $batchTopic->courseTopic->island_image;
             foreach($batchTopic->courseTopic->exams as $exam){
                 $scored_marks = 0;
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
@@ -122,44 +78,8 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd(auth()->user()->id, $batch, $course, $batchTopics, $accessedDays);
-
-        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
-
-        // return view('student.pages_new.roadmap.old_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays'));
+        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
     }
-
-    // public function ajax_get_course_topics(){
-    //     return 1;
-    // }
-
-    // public function batchTests(Batch $batch){
-    //     // $sExams = [];
-    //     // $course = Course::where('id', $batch->course_id)->first();
-    //     // // $batchTopics = BatchLecture::with('course_topics', 'batch_lectures.topic_id', 'course_topics.id')
-    //     // //     ->where('batch_id', $batch->id)
-    //     // //     ->where('course_id', $course->id)
-    //     // //     ->get();
-    //     // $batchTopics = BatchLecture::with('courseTopic', 'courseTopic.CourseLecture')
-    //     //     ->where('batch_id', $batch->id)
-    //     //     ->where('course_id', $course->id)
-    //     //     ->get();
-    //     // // dd($batchTopics);
-    //     // $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
-    //     //     ->where('batch_id', $batch->id)
-    //     //     ->where('course_id', $course->id)
-    //     //     ->first();
-    //     //     // dd($accessedDays);
-    //     // if ($accessedDays->status == 0) {
-    //     //     return redirect()->route('course-preview', $course->slug);
-    //     // }
-
-    //     list($exams, $specialExams) = (new BatchExam())->getBatchExams($batch->id);
-
-    //     dd($batch, $exams, $specialExams);
-
-    //     return view('student.pages_new.roadmap.roadmap_tests', compact('batch' ,'specialExams', 'exams'));
-    // }
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {

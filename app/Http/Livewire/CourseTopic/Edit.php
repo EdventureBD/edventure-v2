@@ -3,44 +3,81 @@
 namespace App\Http\Livewire\CourseTopic;
 
 use Livewire\Component;
-use App\Models\Admin\Course;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
+
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 
 class Edit extends Component
 {
-    public $course_topic;
-    public $courses;
+    use WithFileUploads;
 
-    public $title;
+    public $all_course_categories;
+    public $courseCategory;
+    public $courseCategoryId;
+    public $all_intermediary_levels;
+    public $intermediaryLevel;
+    public $intermediaryLevelId;
+    public $all_courses;
+    public $course;
     public $courseId;
+    public $course_topic;
+    public $title;
+    public $islandImage;
 
-    public function updatedTitle()
-    {
+    public $show = false;
+
+    protected $rules = [
+        'courseCategoryId' => ['required'],
+        'intermediaryLevelId' => ['required'],
+        'courseId' => ['required'],
+        'islandImage' => ['file', 'image', 'max:5000'],
+    ];
+
+    public function updatedTitle(){
         $this->validate([
-            'title' => ['required', 'string', 'max:325'],
+            'title' => ['required', 'string', 'max:200', 'unique:course_topics,title,'.$this->course_topic->id],
         ]);
     }
 
-    public function updatedCategoryId()
+    public function updatedCourseCategoryId()
     {
-        if (!empty($this->categories)) {
-            $this->courses = Course::where('course_category_id', $this->categoryId)->get();
-        }
+        $this->all_intermediary_levels = IntermediaryLevel::where('course_category_id', $this->courseCategoryId)->get();
+        $this->all_courses = collect();
     }
 
-    protected $rules = [
-        'title' => ['required', 'string', 'max:325'],
-        'courseId' => ['required']
-    ];
+    public function updatedIntermediaryLevelId()
+    {
+        $this->all_courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
+
+    public function updatedIslandImage()
+    {
+        $this->validate([
+            'islandImage' => ['required', 'file', 'image', 'max:5000'],
+        ]);
+    }
 
     public function updateCourseTopic()
     {
+        $this->rules['title'] = ['required', 'string', 'max:200', 'unique:course_topics,title,'.$this->course_topic->id];
         $data = $this->validate();
-        $topic = CourseTopic::find($this->course_topic->id);
-        $topic->title = $data['title'];
-        $topic->course_id = $data['courseId'];
-        $save = $topic->save();
+        $course_topic = CourseTopic::find($this->course_topic->id);
+        $course_topic->title = $data['title'];
+        if (!empty($this->islandImage)) {
+            unlink(public_path($course_topic->island_image));
+            $course_topic->island_image = Storage::url($this->islandImage->store('public/roadmap/island_images'));
+        }
+        $course_topic->course_id = $data['courseId'];
+        $course_topic->intermediary_level_id = $data['intermediaryLevelId'];
+        $course_topic->slug = (string) Str::uuid();
+        $course_topic->order = 0;
+        $course_topic->status = 1;
+        $save = $course_topic->save();
 
         if ($save) {
             session()->flash('status', 'Course successfully updated!');
@@ -54,9 +91,17 @@ class Edit extends Component
     public function mount()
     {
         $this->title = $this->course_topic->title;
-        $this->courseId = $this->course_topic->course_id;
+        $this->all_course_categories = CourseCategory::all();
 
-        $this->courses = Course::all();
+        $this->courseId = $this->course_topic->course_id;
+        $this->course = Course::where('id', $this->courseId)->firstOrFail();
+        $this->intermediaryLevelId = $this->course_topic->intermediary_level_id;
+        $this->intermediaryLevel = IntermediaryLevel::where('id', $this->intermediaryLevelId)->firstOrFail();
+        $this->courseCategoryId = $this->intermediaryLevel->course_category_id;
+        $this->courseCategory = CourseCategory::where('id', $this->courseCategoryId)->firstOrFail();
+        $this->all_intermediary_levels = IntermediaryLevel::where('course_category_id', $this->courseCategoryId)->get();
+        $this->all_courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+
     }
 
     public function render()

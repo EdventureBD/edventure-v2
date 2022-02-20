@@ -20,7 +20,6 @@ use App\Http\Controllers\Admin\PopQuizCQController;
 use App\Http\Controllers\Admin\TopicEndExamMCQController;
 use App\Http\Controllers\Admin\TopicEndExamCQController;
 
-use App\Http\Controllers\Admin\IslandController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
@@ -191,14 +190,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::resource('/blog', BlogController::class);
     Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus']);
     // END OF BLOG
-
-
-
-    // START OF ISLAND IMAGES
-    Route::resource('/island_images', IslandController::class)->except('show');
-    // END OF ISLAND IMAGES
-
-
 
     // START OF EXAM SUBMISSION
     Route::get('/batch-exam/{batch}/{exam}/{exam_type}/submission', [SubmissionController::class, 'submission'])->name('submission');
