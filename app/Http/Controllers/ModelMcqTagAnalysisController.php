@@ -12,6 +12,18 @@ class ModelMcqTagAnalysisController extends Controller
         $user = auth()->user();
         $tag_type = request()->input('type');
 
+        $tags = $this->getAnalysis($user,$tag_type);
+
+        return view('student.pages_new.user.exam-tag-analysis',compact('user','tags','tag_type'));
+    }
+
+    public function solutions($tagId)
+    {
+        $tag = ExamTag::query()->findOrFail($tagId);
+        return view('student.pages_new.user.exam-tag-solution',compact('tag'));
+    }
+
+    protected function getAnalysis($user, $tag_type = null){
         $tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($user) {
             $q->where('student_id',$user->id);
         })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
@@ -30,7 +42,39 @@ class ModelMcqTagAnalysisController extends Controller
             $tag->tag_total_marks = $mcq_tag_total_marks;
             $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
         }
+        if($tag_type == 'weakness') {
+            $tags = $tags->sortBy('percentage_scored');
+        } else {
+            $tags = $tags->sortByDesc('percentage_scored');
+        }
 
-        return view('student.pages_new.user.exam-weakness-tag-analysis',compact('user','tags','tag_type'));
+        return $tags;
+    }
+
+    public function getAjaxTagAnalysis($topicId)
+    {
+        $user = auth()->user();
+
+        $tags = $tags =  ExamTag::query()->where('exam_topic_id', $topicId)->whereHas('modelMcqTagAnalysis', function ($q) use ($user) {
+            $q->where('student_id',$user->id);
+        })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
+            $q->where('student_id',$user->id);
+        }])->get();
+
+
+        foreach($tags as $tag){
+            $mcq_tag_total_marks = 0;
+            $mcq_tag_scored_marks = 0;
+            foreach($tag->modelMcqTagAnalysis as $analysis){
+                $mcq_tag_total_marks += 1;
+                $mcq_tag_scored_marks += $analysis->gain_marks;
+            }
+            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_total_marks = $mcq_tag_total_marks;
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            unset($tag->modelMcqTagAnalysis);
+        }
+
+        return response()->json($tags);
     }
 }
