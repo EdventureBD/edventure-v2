@@ -1,4 +1,17 @@
 <x-landing-layout headerBg="white">
+    <style>
+        .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+            color: #FA9632 !important;
+            
+        }
+        .nav-link:hover {
+            color: #6400c8
+        }
+        .nav-link {
+            color: #6400c8;
+            font-weight: bold;
+        }
+    </style>
     <div class="mt-5 pt-5 p-5">
         <div class="container">
             <nav>
