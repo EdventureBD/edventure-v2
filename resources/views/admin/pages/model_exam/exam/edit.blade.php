@@ -151,7 +151,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <div class="custom-file">
                     <input type="file"
                            name="solution_pdf"
@@ -160,6 +160,21 @@
                            id="solution_pdf">
                     <label class="custom-file-label" for="solution_pdf">Solution pdf</label>
                 </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <div class="custom-file">
+                    <input type="file"
+                           name="image"
+                           class="custom-file-input"
+                           accept="image/*"
+                           id="image">
+                    <label class="custom-file-label" for="image">Image</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <img height="100" width="300" src="{{Storage::url('examImage/'.$exam->image)}}" alt="">
             </div>
         </div>
 
