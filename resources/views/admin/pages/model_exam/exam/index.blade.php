@@ -66,13 +66,13 @@
         }
     </style>
 
-    
-    
+
+
 
     <div class="row">
         <div class="col-md-9">
             @include('admin.pages.model_exam.exam.filter')
-         
+
         </div>
         <div class="col-md-3">
             @include('admin.pages.model_exam.exam.create')
@@ -99,6 +99,7 @@
                 <th class="fit" scope="col">Solution Video</th>
                 <th class="fit" scope="col">Price</th>
                 <th class="fit" scope="col">Total Participation</th>
+                <th class="fit" scope="col">Image</th>
                 <th class="fit" scope="col">Created</th>
                 <th class="fit" scope="col">Questions</th>
                 <th class="fit" scope="col">Action</th>
@@ -146,6 +147,13 @@
                 </td>
                 <td>{{ $exam->exam_price ?? 0 }}</td>
                 <td>{{ count($exam->mcqTotalResult) }}</td>
+                <td>
+                    @if($exam->image)
+                        <img height="100" width="100" src="{{Storage::url('examImage/'.$exam->image)}}" alt="">
+                    @else
+                        <span class="badge badge-primary">No Image</span>
+                    @endif
+                </td>
                 <td class="text-sm">{{ date('F jS, Y', strtotime($exam->created_at)) }}</td>
                 <td>
                     <a class="btn btn-outline-primary btn-sm" href="{{route('model.exam.question.index',$exam->id)}}">

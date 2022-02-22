@@ -155,7 +155,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <div class="custom-file">
                                 <input type="file"
                                        name="solution_pdf"
@@ -165,7 +165,31 @@
                                 <label class="custom-file-label" for="solution_pdf">Solution pdf</label>
                             </div>
                         </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="custom-file">
+                                <input type="file"
+                                       accept="image/*"
+                                       name="image"
+                                       class="custom-file-input"
+                                       id="image">
+                                <label class="custom-file-label" for="image">Image</label>
+                            </div>
+                        </div>
                     </div>
+
+{{--                    <div class="form-row">--}}
+{{--                        <div class="form-group col-md-12">--}}
+{{--                            <div class="custom-file">--}}
+{{--                                <input type="file"--}}
+{{--                                       name="image"--}}
+{{--                                       class="custom-file-input"--}}
+{{--                                       id="image">--}}
+{{--                                <label class="custom-file-label" for="image">Image</label>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <div class="input-group">

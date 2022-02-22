@@ -34,6 +34,7 @@ class UpdateModelExamRequest extends FormRequest
             'per_question_marks' => 'nullable|Numeric',
             'total_exam_marks' => 'nullable|Numeric',
             'solution_pdf' => 'nullable|mimes:pdf|max:10000',
+            'image' => 'nullable|mimes:jpg.jpeg,png|max:1000',
             'solution_video' => 'nullable|string',
             'exam_price' => 'nullable|Numeric',
         ];

@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class ModelExamController extends Controller
 {
@@ -58,12 +59,21 @@ class ModelExamController extends Controller
     public function store(CreateModelExamRequest $request)
     {
         $inputs = $request->validated();
+
         if($request->hasFile('solution_pdf')) {
-            $filename = str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
+            $filename = rand().'_'.str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
             $path = $request->file('solution_pdf')->storeAs(
                 'solutionPdf', $filename, 'public'
             );
             $inputs['solution_pdf'] = $filename;
+        }
+
+        if($request->hasFile('image')) {
+            $filename = rand().'_'.str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.jpg';
+            $path = $request->file('image')->storeAs(
+                'examImage', $filename, 'public'
+            );
+            $inputs['image'] = $filename;
         }
 
         ModelExam::query()->create($inputs);
@@ -94,14 +104,32 @@ class ModelExamController extends Controller
     public function update(UpdateModelExamRequest $request, $examId)
     {
         $inputs = $request->validated();
+        $exam = ModelExam::query()->find($examId);
 
         if($request->hasFile('solution_pdf')) {
 
-            $filename = str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
+            if($exam->solution_pdf) {
+                @unlink(public_path('storage/solutionPdf/'.$exam->solution_pdf));
+            }
+
+            $filename = rand().'_'.str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.pdf';
             $path = $request->file('solution_pdf')->storeAs(
                 'solutionPdf', $filename, 'public'
             );
             $inputs['solution_pdf'] = $filename;
+        }
+
+        if($request->hasFile('image')) {
+
+            if($exam->image) {
+                @unlink(public_path('storage/examImage/'.$exam->image));
+            }
+
+            $filename = rand().'_'.str_replace(' ', '_', $request->title).'_'.Carbon::today()->toDateString().'.jpg';
+            $path = $request->file('image')->storeAs(
+                'examImage', $filename, 'public'
+            );
+            $inputs['image'] = $filename;
         }
 
         ModelExam::query()->where('id',$examId)->update($inputs);
