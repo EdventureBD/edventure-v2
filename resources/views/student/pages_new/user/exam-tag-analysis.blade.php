@@ -4,10 +4,18 @@
         .table th.fit {
             white-space: nowrap;
             max-width: 2%;
+            border: 1px solid rgba(0, 0, 0, 0.185);
+            text-align: center;
+            font-weight: bold;
+        }
+        tbody td {
+            border: 1px solid rgba(0, 0, 0, 0.185);
+            text-align: center
         }
     </style>
-    <div class="mt-5 pt-5 p-5">
-            <div class="container">
+    <div class=" pt-5">
+        <div class="mt-5 pt-5 p-5">
+            <div class="container mb-md-5 pb-md-5">
                 @if($tag_type == 'weakness')
                     <h2>Weakness Analysis</h2>
                 @else
@@ -44,6 +52,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
     </div>
 
 </x-landing-layout>
