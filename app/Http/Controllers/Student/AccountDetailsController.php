@@ -315,32 +315,14 @@ class AccountDetailsController extends Controller
     public function getModelTestInfo()
     {
         $user = auth()->user();
-
-        $mcq_tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($user) {
-                            $q->where('student_id',$user->id);
-                        })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
-                            $q->where('student_id',$user->id);
-                        }])->get();
-
-
-        foreach($mcq_tags as $tag){
-            $mcq_tag_total_marks = 0;
-            $mcq_tag_scored_marks = 0;
-            foreach($tag->modelMcqTagAnalysis as $analysis){
-                $mcq_tag_total_marks += 1;
-                $mcq_tag_scored_marks += $analysis->gain_marks;
-            }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks;
-            $tag->tag_total_marks = $mcq_tag_total_marks;
-            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
-        }
+        $exam_attended_count = McqTotalResult::query()->where('student_id', $user->id)->count();
         $categories = ExamCategory::query()->whereHas('modelExam', function ($me) use ($user) {
             $me->wherehas('mcqTotalResult', function ($mtr) use ($user) {
                 $mtr->where('student_id', $user->id);
             });
         })->get();
 
-        return view('student.pages_new.user.model-test',compact('user','mcq_tags','categories'));
+        return view('student.pages_new.user.model-test',compact('user','categories','exam_attended_count'));
     }
 
     public function getTopic($categoryId)

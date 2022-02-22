@@ -13,7 +13,8 @@
 
             @if (Route::has('login'))
                 @auth
-                    <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}">
+                    <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}
+                                                {{ request()->is('profile/model-test') ? 'active' : '' }}">
                     <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
                 @endauth
@@ -51,7 +52,7 @@
                     <div class="nav navbar-nav flex-nowrap d-flex mr-16pt">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
-                                data-caret="false">
+                                data-caret="false" aria-expanded="false">
                                 <span class="avatar avatar-sm mr-8pt2">
                                     <span class="avatar-title rounded-circle text-white" style="padding: 8px 10px; background:#FA9632"><i class="fas fa-user"></i></span>
                                 </span>

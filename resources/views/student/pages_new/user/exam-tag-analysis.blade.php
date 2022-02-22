@@ -35,7 +35,7 @@
                         @foreach($tags as $tag)
                             @if($tag->percentage_scored >= 90)
                                 <tr>
-                                    <td>{{$tag->name}}</td>
+                                    <td><a href="{{route('tag.solution', $tag->id)}}">{{$tag->name}}</a></td>
                                     <td>{{$tag->percentage_scored}} %</td>
                                 </tr>
                             @endif

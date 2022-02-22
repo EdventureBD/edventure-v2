@@ -6,6 +6,7 @@ use App\Models\ModelExam;
 use App\Models\PaymentOfExams;
 use App\Models\SinglePayment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
@@ -14,6 +15,7 @@ class SinglePaymentController extends Controller
     public function initialize(Request $request, $examId)
     {
         $exam = ModelExam::query()->find($examId);
+
         $shurjopay_service = new ShurjopayService();
         $trx_id = $shurjopay_service->generateTxId();
         $success_url = route('single.payment.success', $examId);
@@ -22,7 +24,6 @@ class SinglePaymentController extends Controller
 
     public function paymentSuccess(Request $request, $examId)
     {
-
         if (request()->status != "Success") {
             return redirect()->route('model.exam')->with(['failed' =>"Payment failed, please try again!"]);
         }

@@ -59,7 +59,7 @@ class ModelMcqTagAnalysisController extends Controller
             $q->where('student_id',$user->id);
         })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
             $q->where('student_id',$user->id);
-        }])->get();
+        }])->take(15)->get();
 
 
         foreach($tags as $tag){

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
@@ -266,6 +267,8 @@ class ModelExamController extends Controller
      */
     public function getMcqExamPaper($examId)
     {
+        $examId = Crypt::decrypt($examId);
+
         $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->firstOrFail();
 
 
