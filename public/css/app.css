@@ -11374,6 +11374,14 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+   /* navbar part's css  */
+   .navbar-light .navbar-nav .nav-link {
+    color: #727272;
+  }
+  .navbar .nav-item.active, .navbar .nav-item:hover {
+    color: #727272 !important;
+  }
+  /* navbar part's css  */
   .course-category-js .slick-next {
     margin-top: 50px;
     margin-right: 220px;
@@ -11952,6 +11960,9 @@ svg.eye-icon {
 }  */
 /* navbar part's css  */
 .navbar-light .navbar-nav .nav-link{
+  color: #727272;
+}
+.navbar .nav-item.active, .navbar .nav-item:hover {
   color: #727272;
 }
 /* navbar part's css  */
