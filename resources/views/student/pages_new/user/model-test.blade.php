@@ -1,9 +1,25 @@
 @extends('student.pages_new.user.profile')
 
+
+@section('mini-header')
+    <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column fw-800 mr-3">
+            <div>
+                Exams Attended
+            </div>
+            <div class="mx-auto">
+                {{$exam_attended_count}}
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
     <style>
-        .select2-purple {
-            background: purple;
+        /*.select2-purple {*/
+        /*    background: purple;*/
+        /*}*/
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #6400C8 !important;
         }
     </style>
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
@@ -19,11 +35,11 @@
             </div>
             {{-- subject selection part --}}
             <div>
-                <select required
+                <select
                         class="select2 form-control"
                         name="category"
                         id="category_selecting"
-                        data-placeholder="Select a Category"
+                        data-placeholder="Choose Category"
                         data-dropdown-css-class="select2-purple"
                         style="width: 100%; margin-top: -8px !important;">
                     @foreach ($categories as $category)
@@ -41,12 +57,12 @@
                 </div>
             </div>
 
-            <div>
-                <select required
+            <div class="mt-3">
+                <select
                         class="select2 form-control"
                         name="topic"
                         id="topic_selecting"
-                        data-placeholder="Select a Topic"
+                        data-placeholder="Choose Topic"
                         data-dropdown-css-class="select2-purple"
                         style="width: 100%; margin-top: -8px !important;">
                 </select>
@@ -80,7 +96,7 @@
                         Strength will be shown here
                     </div>
                     <div>
-                        <a href="{{route('tag.analysis,index',['type' => 'strength'])}}" style="text-decoration: none; color: black; font-weight:600;">
+                        <a target="_blank" id="strengthDetailsText" href="{{route('tag.analysis,index',['type' => 'strength'])}}" style="text-decoration: none; color: black; font-weight:600;">
                             See More
                         </a>
                     </div>
@@ -102,92 +118,106 @@
 {{--                    <p id="" class="weakTag mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">--}}
 {{--                        --}}{{--                                <a href="{{route('tag.solution',$tag->id)}}" class="text-decoration-none">{{$tag->name}}</a>--}}
 {{--                    </p>--}}
-                    <div id="weaknessMessage">
-                        Weakness will be shown here
-                    </div>
+                </div>
+                <div id="weaknessMessage">
+                    Weakness will be shown here
                 </div>
                 <div>
-                    <a href="{{route('tag.analysis,index',['type' => 'weakness'])}}" style="text-decoration: none; color: black; font-weight:600;">
+                    <a target="_blank" id="weaknessDetailsText" href="{{route('tag.analysis,index',['type' => 'weakness'])}}" style="text-decoration: none; color: black; font-weight:600;">
                         See More
                     </a>
                 </div>
             </div>
         </div>
     </div>
-{{--    <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>--}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
 
-    <script>
+    @section('js')
+        <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+        {{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>--}}
+        <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
+        <script>
 
-        $('.select2').select2()
+            $('.select2').select2()
+            $('#weaknessDetailsText').css('display','none')
+            $('#strengthDetailsText').css('display','none')
 
-        $('#category_selecting').on("select2:selecting", function (e) {
-            $('#SelectedCategory').removeClass('d-none')
-            $('#categoryName').html(e.params.args.data.text)
+            $('#category_selecting').on("select2:selecting", function (e) {
+                $('#SelectedCategory').removeClass('d-none')
+                $('#categoryName').html(e.params.args.data.text)
+                $('#SelectedTopic').addClass('d-none')
 
-            query_category_id = e.params.args.data.id
-            let url = window.location.origin + '/model-test/topic/' + query_category_id;
-            $('#topic_selecting').empty();
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function (response) {
-                    let topicsObj = [
-                        id = '',
-                        text = ''
-                    ];
-                    for (const [key, value] of Object.entries(response)) {
-                        topicsObj.push({"id": value.id, "text": value.name})
+                query_category_id = e.params.args.data.id
+                let url = window.location.origin + '/model-test/topic/' + query_category_id;
+                $('#topic_selecting').empty();
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function (response) {
+                        let topicsObj = [
+                            id = '',
+                            text = ''
+                        ];
+                        for (const [key, value] of Object.entries(response)) {
+                            topicsObj.push({"id": value.id, "text": value.name})
+                        }
+                        $('#topic_selecting').select2({
+                            data: topicsObj
+                        });
+                    },
+                    error: function (e) {
+                        console.log(e)
                     }
-                    $('#topic_selecting').select2({
-                        data: topicsObj
-                    });
-                },
-                error: function (e) {
-                    console.log(e)
-                }
+                });
             });
-        });
-        $('#topic_selecting').on("select2:selecting", function (e) {
-            $('#SelectedTopic').removeClass('d-none')
-            $('#topicName').html(e.params.args.data.text)
+            $('#topic_selecting').on("select2:selecting", function (e) {
+                $('#SelectedTopic').removeClass('d-none')
+                $('#topicName').html(e.params.args.data.text)
+                $('#mcq_strength').html('')
+                $('#mcq_weakness').html('')
+                $('#weaknessDetailsText').css('display','none')
+                $('#strengthDetailsText').css('display','none')
+                $('#weaknessMessage').html('Weakness will be shown here')
+                $('#strengthMessage').html('Strength will be shown here')
+                // $('#strengthMessage').css('display','block')
 
-            let url = window.location.origin + '/model-test/tag-details/' + e.params.args.data.id;
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function (response) {
-                    if(response.length > 0) {
-                        response.forEach((item, index)=>{
-                            url = window.location.origin+'/profile/model-test/tag-solutions/'+item.id
-                            console.log(url)
-                            if(item.percentage_scored <= 60) {
-                                $('#weaknessMessage').html('')
-                                $('#mcq_weakness').append('' +
-                                    '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
-                                    '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
-                                    '</p>')
-                            } else if(item.percentage_scored >= 90) {
-                                $('#strengthMessage').html('')
-                                $('#mcq_strength').append('' +
-                                    '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
-                                    '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
-                                    '</p>')
-                            }
 
-                        })
-                    } else {
+                let url = window.location.origin + '/model-test/tag-details/' + e.params.args.data.id;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function (response) {
+                        if(response.length > 0) {
+                            response.forEach((item, index)=>{
+                                url = window.location.origin+'/profile/model-test/tag-solutions/'+item.id
+                                if(item.percentage_scored <= 60) {
+                                    $('#weaknessMessage').html('')
+                                    $('#weaknessDetailsText').css('display','block')
+                                    $('#mcq_weakness').append('' +
+                                        '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
+                                        '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
+                                        '</p>')
+                                } else if(item.percentage_scored >= 90) {
+                                    $('#strengthMessage').html('')
+                                    $('#strengthDetailsText').css('display','block')
+                                    $('#mcq_strength').append('' +
+                                        '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
+                                        '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
+                                        '</p>')
+                                }
 
+                            })
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e)
                     }
-                },
-                error: function (e) {
-                    console.log(e)
-                }
+                });
             });
-        });
-    </script>
+        </script>
+        <script src="{{ asset('/js/new-dashboard/iconify-icons.js') }}"></script>
+    @endsection
 
-    <script src="{{ asset('/js/new-dashboard/iconify-icons.js') }}"></script>
+
+
 @endsection
 

@@ -1,5 +1,26 @@
 @extends('student.pages_new.user.profile')
 
+
+@section('mini-header')
+    <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column fw-800 mr-3">
+            <div>
+                Courses
+            </div>
+            <div class="mx-auto">
+                {{ $enrolled_course_count }}
+            </div>
+        </div>
+        <div class="d-flex flex-column fw-800 ml-3 justify-content-center">
+            <div>
+                Completed
+            </div>
+            <div class="mx-auto">
+                {{ $completed_course_count }}
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div id="info-detail" class="row mx-auto my-5">
         <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">

@@ -50,9 +50,9 @@
             </div>
         </div>
         <!-- Scripts -->
-        @if(!request()->is('profile/model-test') || request()->is('model-test/topic/*'))
-            <script src="{{ asset('js/app.js') }}"></script>
-        @endif
+
+        <script src="{{ asset('js/app.js') }}"></script>
+        @yield('js')
         @include('partials.custom_sctipt')
         @include('partials.after_body_analytics')
     </body>

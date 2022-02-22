@@ -15,26 +15,7 @@
                         <h3 class="fw-600">{{ $user->name }}</h3><span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
                      </div>
                      <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line"></div>
-                     @if(request()->is('profile'))
-                        <div class="d-flex justify-content-between">
-                           <div class="d-flex flex-column fw-800 mr-3">
-                                 <div>
-                                    Courses
-                                 </div>
-                                 <div class="mx-auto">
-                                    {{ $enrolled_course_count }}
-                                 </div>
-                           </div>
-                           <div class="d-flex flex-column fw-800 ml-3 justify-content-center">
-                                 <div>
-                                    Completed
-                                 </div>
-                                 <div class="mx-auto">
-                                    {{ $completed_course_count }}
-                                 </div>
-                           </div>
-                        </div>
-                     @endif
+                      @yield('mini-header')
                </div>
             </div>
             <div class="d-flex max-h-10 justify-content-center my-5">
