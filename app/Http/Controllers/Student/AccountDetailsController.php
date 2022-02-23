@@ -7,6 +7,7 @@ use App\Models\ExamTag;
 use App\Models\ExamTopic;
 use App\Models\McqMarkingDetail;
 use App\Models\McqTotalResult;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -330,5 +331,29 @@ class AccountDetailsController extends Controller
         $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->get();
 
         return response()->json($topics);
+    }
+
+    public function getExamResult()
+    {
+        $exam_results = McqTotalResult::query()->with('modelExam:id,title')->where('student_id',auth()->user()->id)->paginate(10);
+
+        return view('student.pages_new.user.exam-result', compact('exam_results'));
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $user = auth()->user();
+        $input =  $request->validate([
+            'image' => 'required|mimes:jpg,jpeg,png|max:1000'
+        ]);
+        if($user->image) {
+            @unlink(public_path('storage/studentImage/'.$user->image));
+        }
+        $filename = rand().'.jpg';
+        $path = $request->file('image')->storeAs(
+            'studentImage', $filename, 'public'
+        );
+        $user->image  = $filename;
+        return $user->save();
     }
 }

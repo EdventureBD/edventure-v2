@@ -64,7 +64,10 @@
                                 @else
                                 <a class="dropdown-item" href="{{route('profile')}}">My Dashboard</a>
                                 @endif
-                                <a class="dropdown-item" href="#">All courses</a>
+                                @if(Auth::user()->is_admin== 0 && request()->is('profile/model-test'))
+                                    <a class="dropdown-item" href="{{route('student.model.test.result')}}">Exams</a>
+                                @endif
+{{--                                <a class="dropdown-item" href="#">All courses</a>--}}
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
