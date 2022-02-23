@@ -96,13 +96,13 @@
             </div>
             <div class="d-flex max-h-10 justify-content-center mt-md-5 pt-5">
                 <a href="{{route('profile')}}" class="text-decoration-none">
-                    <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
+                    <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                          class="px-4 py-2 border my-auto fw-600" id="course-option">
                         Course
                     </div>
                 </a>
                 <a href="{{route('profile.modelTest')}}" class="text-decoration-none">
-                    <div style="{{request()->is('profile/model-test') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
+                    <div style="{{request()->is('profile/model-test') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                          class="px-4 py-2 border my-auto fw-600" id="model-test-option">
                         Model Test
                     </div>
