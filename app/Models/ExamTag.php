@@ -20,4 +20,9 @@ class ExamTag extends Model
     {
         return $this->hasMany(ModelMcqTagAnalysis::class);
     }
+
+    public function usedInNumberOfQuestions()
+    {
+        return $this->modelMcqTagAnalysis()->distinct('mcq_question_id')->count();
+    }
 }
