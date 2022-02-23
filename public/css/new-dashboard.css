@@ -86,18 +86,20 @@
 
 }
 #info-middle-option {
-   width: 100%;
-   height: 449.24px;
+   max-width: 100%;
+   max-height: 449.24px;
    background: #FFFFFF;
    box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
    border-radius: 12.4444px;
+   overflow-y: hidden;
 }
 #info-right-option {
-   width: 100%;
-   height: 449.24px;
+   max-width: 100%;
+   max-height: 449.24px;
    background: #FFFFFF;
    box-shadow: 2.48889px 2.48889px 12.4444px 4.97778px rgba(0, 0, 0, 0.1);
    border-radius: 12.4444px;
+   overflow-y: hidden;
 }
 #strength-title {
    background: #67B032;
@@ -123,6 +125,68 @@
    height: 68.44px;
    padding-left: 8px;
    padding-right: 8px;
+}
+.avatar-upload {
+   position: relative;
+   max-width: 205px;
+   margin: 50px auto;
+}
+.avatar-upload .avatar-edit {
+   position: absolute;
+   right: 12px;
+   z-index: 1;
+   top: 10px;
+}
+.avatar-upload .avatar-edit input {
+   display: none
+}
+#imageLabel {
+   display: inline-block;
+   width: 34px;
+   height: 34px;
+   margin-bottom: 0;
+   border-radius: 100%;
+   background: #FFFFFF;
+   border: 1px solid transparent;
+   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+   cursor: pointer;
+   font-weight: normal;
+   transition: all .2s ease-in-out;
+}
+#imageLabel:hover {
+   background: #f1f1f1;
+   border-color: #d6d6d6;
+}
+#imageLabel:after {
+   content: "\f303";
+   font-family: 'Font Awesome 5 Free';
+   color: #757575;
+   position: absolute;
+   top: 8px;
+   left: 0;
+   right: 0;
+   text-align: center;
+   margin: auto;
+   font-weight: 900;
+}
+.avatar-preview {
+   width: 197px;
+   height: 192px;
+   position: relative;
+   border-radius: 100%;
+   border: 6px solid #F8F8F8;
+   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+#imagePreview {
+   width: 188px;
+   height: 178px;
+   border-radius: 100%;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+   background-color: #6400C8 !important;
 }
 @media screen and (max-width:570px){
    #profile-dash-img{
