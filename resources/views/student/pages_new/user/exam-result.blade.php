@@ -4,11 +4,18 @@
         .table th.fit {
             white-space: nowrap;
             max-width: 2%;
+            border: 1px solid rgba(0, 0, 0, 0.185);
+            text-align: center;
+            font-weight: bold;
+        }
+        tbody td {
+            border: 1px solid rgba(0, 0, 0, 0.185);
+            text-align: center
         }
     </style>
     <div class="mt-5 pt-5 p-5">
-            <div class="container">
-
+            <div class="container py-md-5 my-md-5">
+                <h3>Result Details:</h3>
                 <table class="table table-striped table-responsive align-content-center">
                     <thead>
                     <tr>

@@ -14,14 +14,6 @@
     </div>
 @endsection
 @section('content')
-    <style>
-        /*.select2-purple {*/
-        /*    background: purple;*/
-        /*}*/
-        .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #6400C8 !important;
-        }
-    </style>
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <div id="info-detail" class="row mx-auto my-5">
@@ -77,7 +69,7 @@
             </div>
             {{-- subject selection part ends --}}
         </div>
-        <div style="height: auto" id="info-middle-option" class=" my-3 col-md-3 px-0">
+        <div id="info-middle-option" class=" my-3 col-md-3 px-0">
             <div id="strength-title" class="strength-weakness-title-common">
                 <h2>Strength</h2>
 {{--                <div>--}}
