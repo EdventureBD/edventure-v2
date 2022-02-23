@@ -68,10 +68,10 @@
        </style>
       {{-- custom css linked --}}
 
-      <div id="parent-div" class="mt-5 pt-5 p-5">
-         <div id="info-part" class="d-md-flex justify-content-between align-items-middle">
+      <div id="parent-div" class="mt-md-5 pt-5 p-5">
+         <div id="info-part" class="d-md-flex justify-content-around align-items-middle">
 
-            <div class="d-md-flex justify-content-start mr-auto">
+            <div class="d-md-flex justify-content-start">
                   <div class="d-md-flex">
                           <div class="avatar-upload">
                               <div class="avatar-edit">
@@ -85,24 +85,24 @@
                                   </div>
                               </div>
                           </div>
-                  </div>
-                  <div class="d-flex flex-column justify-content-center align-top ml-3">
+                    </div>
+                  <div class="d-flex flex-column justify-content-center align-items-top ml-3">
                      <div class="d-flex">
                         <h3 class="fw-600">{{ $user->name }}</h3><span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
                      </div>
                      <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line"></div>
                       @yield('mini-header')
-               </div>
+                    </div>
             </div>
-            <div class="d-flex max-h-10 justify-content-center my-5">
+            <div class="d-flex max-h-10 justify-content-center mt-md-5 pt-5">
                 <a href="{{route('profile')}}" class="text-decoration-none">
-                    <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black;'}}"
+                    <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                          class="px-4 py-2 border my-auto fw-600" id="course-option">
                         Course
                     </div>
                 </a>
                 <a href="{{route('profile.modelTest')}}" class="text-decoration-none">
-                    <div style="{{request()->is('profile/model-test') ? 'background: #FA9632 ; color: white;' : 'background: white ; color: black;'}}"
+                    <div style="{{request()->is('profile/model-test') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                          class="px-4 py-2 border my-auto fw-600" id="model-test-option">
                         Model Test
                     </div>
@@ -111,7 +111,9 @@
 
             </div>
          </div>
-            @yield('content')
+           <div class="pl-md-5 ml-md-5">
+                @yield('content');
+           </div>
       </div>
    </x-landing-layout>
    {{--    /************************* Sweet Alert ******************************/--}}
@@ -164,7 +166,7 @@
                    },
                    error: function (jqXHR, textStatus, errorThrown) {
                        Swal.fire({
-                           icon: 'error',
+                           icon: 'warning',
                            title: JSON.parse(jqXHR.responseText).errors.image[0],
                            showClass: {
                                popup: 'animate__animated animate__fadeInDown'
