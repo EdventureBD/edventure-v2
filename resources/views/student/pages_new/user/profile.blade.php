@@ -20,7 +20,7 @@
            .avatar-upload .avatar-edit input {
                display: none
            }
-           .avatar-upload .avatar-edit label {
+           #imageLabel {
                display: inline-block;
                width: 34px;
                height: 34px;
@@ -33,11 +33,11 @@
                font-weight: normal;
                transition: all .2s ease-in-out;
            }
-           .avatar-upload .avatar-edit label:hover {
+           #imageLabel:hover {
                background: #f1f1f1;
                border-color: #d6d6d6;
            }
-           .avatar-upload .avatar-edit label:after {
+           #imageLabel:after {
                content: "\f303";
                font-family: 'Font Awesome 5 Free';
                color: #757575;
@@ -76,7 +76,7 @@
                           <div class="avatar-upload">
                               <div class="avatar-edit">
                                   <input type='file' id="image" name="image" accept=".png, .jpg, .jpeg" />
-                                  <label for="image"></label>
+                                  <label id="imageLabel" for="image"></label>
                               </div>
                               <div class="avatar-preview">
                                   <div id="imagePreview" style="background-image: url({{auth()->user()->image ?
@@ -118,6 +118,19 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    {{--    /*******************************************************/--}}
    <script type="text/javascript">
+       if ( $(window).width() < 576 ) {
+           $('#imageLabel').show();
+       } else {
+           $('#imageLabel').hide();
+       }
+
+
+       $('.avatar-upload').mouseover(function () {
+           $('#imageLabel').show();
+       });
+       $('.avatar-upload').mouseout(function () {
+           $('#imageLabel').hide();
+       });
        $('#image').change(function(){
 
            let reader = new FileReader();
