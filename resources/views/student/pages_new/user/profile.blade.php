@@ -91,7 +91,8 @@
                         if(res) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Photo Uploaded Successfully',
+                                title: 'Nice',
+                                text: 'Your Photo Uploaded Successfully',
                                 showClass: {
                                     popup: 'animate__animated animate__fadeInDown'
                                 },
@@ -106,7 +107,8 @@
                    error: function (jqXHR, textStatus, errorThrown) {
                        Swal.fire({
                            icon: 'warning',
-                           title: JSON.parse(jqXHR.responseText).errors.image[0],
+                           title: 'Oops..',
+                           text: JSON.parse(jqXHR.responseText).errors.image[0],
                            showClass: {
                                popup: 'animate__animated animate__fadeInDown'
                            },

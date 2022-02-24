@@ -344,8 +344,9 @@ class AccountDetailsController extends Controller
     {
         $user = auth()->user();
         $input =  $request->validate([
-            'image' => 'required|mimes:jpg,jpeg,png|max:1000'
-        ]);
+            'image' => 'required|mimes:jpg,jpeg,png|max:500'
+        ],
+        [ 'image.max' => 'The :attribute should not be more than 500 Kilobyte.']);
         if($user->image) {
             @unlink(public_path('storage/studentImage/'.$user->image));
         }
