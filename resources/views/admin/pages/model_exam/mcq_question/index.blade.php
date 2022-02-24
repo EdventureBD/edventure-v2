@@ -41,7 +41,7 @@
 
     </div>
     @include('admin.pages.model_exam.mcq_question.create')
-
+    <b>Exam:</b> {{$exam->title}}
     <table class="table table-responsive table-striped">
 
         @if(count($exam_questions) > 0)

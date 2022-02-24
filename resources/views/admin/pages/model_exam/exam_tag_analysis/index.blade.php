@@ -71,8 +71,8 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$tag->name}}</td>
-                <td>{{$tag->usedInNumberOfQuestions()}}</td>
-                <td>{{$tag->accuracy}}</td>
+                <td>{{$tag->usedInNumberOfQuestions($selectedExam->id)}}</td>
+                <td>{{$tag->accuracy}} %</td>
             </tr>
         @empty
             <div class="d-flex justify-content-center">

@@ -93,9 +93,7 @@ class ModelMcqTagAnalysisController extends Controller
              $selectedExam = ModelExam::query()->find($examId);
 
             foreach($tags as $tag){
-                foreach($tag->modelMcqTagAnalysis as $analysis){
-                    $individual = $this->individual($tag->modelMcqTagAnalysis);
-                }
+                $individual = $this->individual($tag->modelMcqTagAnalysis);
                 $tag->accuracy = $individual['accuracy'];
                 unset($tag->modelMcqTagAnalysis);
 

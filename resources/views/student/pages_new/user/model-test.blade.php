@@ -1,6 +1,14 @@
 @extends('student.pages_new.user.profile')
 
 
+<style>
+    .select2-purple .select2-container--default span span{
+        height: 2.35rem;
+    }
+    div .select2 .selection .select2-selection{
+        height: 2.35rem;
+    }
+</style>
 @section('mini-header')
     <div class="d-flex justify-content-between">
         <div class="d-flex flex-column fw-800 mr-3">
