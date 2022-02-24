@@ -122,11 +122,12 @@
                                 @endif
                             @endforeach
                         @endif
-                        <div class="col-md-3 mb-4" style="max-width: fit-content;padding-right: 0 !important;">
+                        <div class="col-md-3 mb-4" style="max-width: 100%;padding-right: 0 !important;">
                             <div style="background-position: center center !important;
                                         background: url({{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}})"
                                  class="single-exam text-center mx-auto p-4 mb-md-0">
-                                <h5 style="max-height: 100px" class="text-center mt-2">{{ $exam->title }} </h5>
+                                <h5 style="max-height: 100px; white-space: nowrap; width: 100%; overflow: hidden;
+                                text-overflow: ellipsis;" class="text-center mt-2">{{ $exam->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
                                     <a
