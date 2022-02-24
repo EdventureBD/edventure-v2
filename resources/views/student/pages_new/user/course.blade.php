@@ -31,56 +31,32 @@
                     You are on a 16 Day streak
                 </p>
             </div>
-            <div class="" id="category-selection">
-{{--                <div class="mx-auto mt-3 d-flex justify-content-between border py-2" type="button" data-toggle="collapse" data-target="#categories" aria-expanded="false" aria-controls="collapseExample">--}}
-{{--                    <div>--}}
-{{--                        <h6 class="fw-500" id="category-selection-text">Select Test Category</h6>--}}
-{{--                    </div>--}}
-{{--                    <div id="category-selection-icon">--}}
-{{--                        <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>--}}
-{{--                        --}}{{-- <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span> --}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                {{-- category part --}}
-{{--                <div class="mx-auto category-progress collapse text-white" id="categories">--}}
-{{--                    <div class="category-name">--}}
-{{--                        <div class="d-flex">--}}
-{{--                            <h5 class="fw-600 pl-4">--}}
-{{--                                Medical Admission--}}
-{{--                            </h5>--}}
-{{--                        </div>--}}
-{{--                        <div class="progress">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="category-link-icon">--}}
-{{--                        <span class="iconify-inline" data-icon="ei:external-link" data-width="36" data-height="36" data-rotate="90deg" data-flip="horizontal"></span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                {{-- category part ends  --}}
-            </div>
-            {{-- subject selection part --}}
-            <div class="" id="subject-selection">
-                <div class="mx-auto mt-3 d-flex justify-content-between border py-2" type="button" data-toggle="collapse" data-target="#subjectschoicing" aria-expanded="false" aria-controls="collapseExample">
-                    <div>
-                        <h6 class="fw-500" id="subject-selection-text">Choose Subject</h6>
-                    </div>
-                    <div id="subject-selection-icon">
-                        <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span>
-                        {{-- <span class="iconify-inline d-none" data-icon="ic:baseline-greater-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span> --}}
-                    </div>
-                </div>
-                <div class="mx-auto subjects collapse text-white" id="subjectschoicing">
-                    <div class="d-flex">
-                        <h5 class="fw-600">Chemistry</h5>
-                    </div>
-                    <div>
-                        <h5 class="fw-600">
-                            45%
-                        </h5>
+
+            <div>
+                <select
+                        class="select2 form-control"
+                        name="course"
+                        id="course_selecting"
+                        data-placeholder="Choose Course"
+                        data-dropdown-css-class="select2-purple"
+                        style="width: 100%; margin-top: -8px !important;">
+
+                    <option value="" disabled selected>Choose Course Topic</option>
+
+                    @foreach ($enrolled_courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->title }}</option>
+                    @endforeach
+                </select>
+
+                <div id="SelectedCourse" class="d-none mx-auto category-progress text-white">
+                    <div class="course-name">
+                        <div class="d-flex">
+                            <h5 id="courseName" class="fw-600 pl-4"></h5>
+                        </div>
                     </div>
                 </div>
             </div>
-            {{-- subject selection part ends --}}
+
         </div>
         <div id="info-middle-option" class=" my-3 col-md-3 px-0">
             <div id="strength-title" class="strength-weakness-title-common">
@@ -222,7 +198,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script>
+{{-- <script>
     fetchCourseOption()
     $(document).on('click', '#course-option', function(){
         fetchCourseOption()
@@ -251,15 +227,23 @@
 
                     $('#category-selection').append(html);
                 }
-
             }
         });
     }
-</script>
+</script> --}}
 
 <script>
-    $(document).on('click', '#categories', function(){
-        var course_id = $( this ).data('id');
+    $(document).on('change', '#course_selecting', function(){
+        var course_id = $( this ).val();
+        var course_name = $( this ).find('option:selected').text();
+        
+        console.log(course_id);
+
+        $('#SelectedCourse').removeClass('d-none');
+        $('#courseName').text(course_name);
+
+
+
         $('#mcq_strength').html('');
         $('#cq_strength').html('');
         $('#mcq_weakness').html('');

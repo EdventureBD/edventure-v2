@@ -14,7 +14,7 @@
                 <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
 
                 <div class="d-flex justify-content-end">
-                    @if( $total_gain_marks < $exam->threshold_marks )
+                    @if( $exam->exam_type !== "Aptitude Test" && $total_gain_marks < $exam->threshold_marks )
                         <div class="text-right">
                             <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
                         </div>

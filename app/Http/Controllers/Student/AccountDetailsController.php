@@ -35,6 +35,15 @@ class AccountDetailsController extends Controller
     public function index(){
         $user = auth()->user();
 
+        $enrolled_courses = collect();
+
+        $student_enrollments = BatchStudentEnrollment::where( 'student_id', auth()->user()->id )->get();
+
+        foreach($student_enrollments as $student_enrollment){
+            $course = Course::where('id', $student_enrollment->course_id)->first();
+            $enrolled_courses->push($course);
+        }
+
         // Get the of courses via. batch_student_enrollments and all topic end exams associated to those courses
         $batch_student_enrollment = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
         ->where('batch_student_enrollments.student_id', auth()->user()->id)
@@ -122,20 +131,7 @@ class AccountDetailsController extends Controller
         }
         // End Count percentage scored for each CQ content tag
 
-
-        // $mcq_details_results = DetailsResult::where('student_id', auth()->user()->id )->where( 'mcq_ans', null)->get();
-
-        // $mcq_content_tag_analysis = QuestionContentTagAnalysis::where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->get();
-
-        // $question_content_tags = ContentTag::has('questionContentTags')->get();
-
-        // dump($question_content_tags);
-        // dump($mcq_content_tag_analysis);
-        // dump($mcq_details_results);
-        // dump($mcq_content_tags);
-        // dump($cq_content_tags);
-        // dd("Finished");
-        return view('student.pages_new.user.course', compact('user', 'mcq_content_tags', 'cq_content_tags', 'enrolled_course_count', 'completed_course_count'));
+        return view('student.pages_new.user.course', compact('user', 'mcq_content_tags', 'cq_content_tags', 'enrolled_course_count', 'completed_course_count', 'enrolled_courses'));
 
     }
 
