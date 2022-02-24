@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ModelMcqTagAnalysisController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamCategoryController;
@@ -278,6 +279,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::put('/model-exam/question/{id}',[McqQuestionController::class,'update'])->name('model.exam.question.update');
     Route::post('/model-exam/question/{id}',[McqQuestionController::class,'store'])->name('model.exam.question.store');
     Route::delete('/model-exam/question/{slug}',[McqQuestionController::class,'destroy'])->name('model.exam.question.destroy');
+
+    //Model Exam Tag analysis
+    Route::get('/model-exam/tag/analysis',[ModelMcqTagAnalysisController::class,'tagAnalysisForAdmin'])->name('model.exam.tag.analysis');
 
 
 

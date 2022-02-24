@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExamTag;
+use App\Models\ModelExam;
 use Illuminate\Http\Request;
 
 class ModelMcqTagAnalysisController extends Controller
@@ -76,5 +77,68 @@ class ModelMcqTagAnalysisController extends Controller
         }
 
         return response()->json($tags);
+    }
+
+    public function tagAnalysisForAdmin()
+    {
+        $exams =  ModelExam::query()->has('mcqTotalResult')->get();
+        $tags = [];
+        $selectedExam = null;
+        $studentCount = null;
+        if(request()->input('query.exam')) {
+             $examId = request()->input('query.exam');
+             $tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($examId) {
+                $q->where('model_exam_id',$examId);
+            })->with('modelMcqTagAnalysis')->get();
+             $selectedExam = ModelExam::query()->find($examId);
+
+            foreach($tags as $tag){
+                $individual = $this->individual($tag->modelMcqTagAnalysis);
+                $tag->accuracy = $individual['accuracy'];
+                unset($tag->modelMcqTagAnalysis);
+
+                $studentCount = $individual['student_count'];
+            }
+        }
+        return view('admin.pages.model_exam.exam_tag_analysis.index', compact('exams','tags','selectedExam','studentCount'));
+    }
+
+    protected function individual($analysis)
+    {
+        $singleStudent = [];
+        $studentIds = [];
+        $totalPercentage = 0;
+        foreach ($analysis as $key => $value) {
+            if(!in_array($value->student_id,$studentIds)) {
+                array_push($studentIds,$value->student_id);
+            }
+        }
+        $student_count = count($studentIds);
+
+        foreach($studentIds as $student){
+            $scored_marks = 0;
+            $tags = 0;
+            foreach ($analysis as $value) {
+                if($student == $value->student_id) {
+                    $tags += 1;
+                    $scored_marks += $value->gain_marks;
+                }
+            }
+            array_push($singleStudent,[
+                'id' => $student,
+                'marks' => $scored_marks,
+                'tags' => $tags,
+                'percentage' => $tags > 0 ? round((($scored_marks/$tags)*100), 2) : 0
+            ]);
+        }
+
+        foreach ($singleStudent as $data) {
+            $totalPercentage += $data['percentage'];
+        }
+
+        return [
+            'accuracy' => (int) $totalPercentage/$student_count,
+            'student_count' => $student_count
+        ];
     }
 }
