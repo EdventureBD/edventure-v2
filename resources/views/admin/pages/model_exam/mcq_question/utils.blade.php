@@ -5,27 +5,158 @@
 
             $('#question').summernote({
                 placeholder: 'Enter Question',
-                height: 100,
+                height: 200,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    },
+                    onImageUpload: function (files) {
+
+                        if (!files.length) return;
+                        var file = files[0];
+                        // create FileReader
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            var img = $("<img>").attr({src: reader.result, width: "300px"});
+                            $('#question').summernote("insertNode", img[0]);
+                        }
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+
+                    }
+                },
             });
 
             $('#field_1').summernote({
                 placeholder: 'Option 1',
+                height: 100,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    },
+                    onImageUpload: function (files) {
+
+                        if (!files.length) return;
+                        var file = files[0];
+                        // create FileReader
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            var img = $("<img>").attr({src: reader.result, width: "300px"});
+                            $('#field_1').summernote("insertNode", img[0]);
+                        }
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+
+                    }
+                }
             });
 
             $('#field_2').summernote({
                 placeholder: 'Option 2',
+                height: 100,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    },
+                    onImageUpload: function (files) {
+
+                        if (!files.length) return;
+                        var file = files[0];
+                        // create FileReader
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            var img = $("<img>").attr({src: reader.result, width: "300px"});
+                            $('#field_2').summernote("insertNode", img[0]);
+                        }
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+
+                    }
+                }
             });
 
             $('#field_3').summernote({
                 placeholder: 'Option 3',
+                height: 100,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    },
+                    onImageUpload: function (files) {
+
+                        if (!files.length) return;
+                        var file = files[0];
+                        // create FileReader
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            var img = $("<img>").attr({src: reader.result, width: "300px"});
+                            $('#field_3').summernote("insertNode", img[0]);
+                        }
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+
+                    }
+                }
             });
 
             $('#field_4').summernote({
                 placeholder: 'Option 4',
+                height: 100,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    },
+                    onImageUpload: function (files) {
+
+                        if (!files.length) return;
+                        var file = files[0];
+                        // create FileReader
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            var img = $("<img>").attr({src: reader.result, width: "300px"});
+                            $('#field_4').summernote("insertNode", img[0]);
+                        }
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+
+                    }
+                }
             });
 
             $('#explanation').summernote({
                 placeholder: 'Explanation',
+                height: 100,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    },
+                    onImageUpload: function (files) {
+
+                        if (!files.length) return;
+                        var file = files[0];
+                        // create FileReader
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            var img = $("<img>").attr({src: reader.result, width: "300px"});
+                            $('#explanation').summernote("insertNode", img[0]);
+                        }
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+
+                    }
+                }
             });
         })
 

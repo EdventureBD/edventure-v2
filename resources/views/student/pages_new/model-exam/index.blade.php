@@ -92,13 +92,13 @@
 
                     @foreach ($exams as $exam)
                         @php($label = 'Take Exam')
-                        @php($href = route('model.exam.paper.mcq', $exam->id))
+                        @php($href = route('model.exam.paper.mcq', \Illuminate\Support\Facades\Crypt::encrypt($exam->id)))
 
                         @if(count($exam->paymentOfExams) > 0 && auth()->check())
                             @foreach($exam->paymentOfExams as $value)
                                 @if($value->user_id == auth()->user()->id)
                                     @php($label = 'Take Exam')
-                                    @php($href = route('model.exam.paper.mcq', $exam->id))
+                                    @php($href = route('model.exam.paper.mcq', \Illuminate\Support\Facades\Crypt::encrypt($exam->id)))
                                     @break
                                 @else
                                     @php($label = 'Pay')
@@ -117,20 +117,21 @@
                             @foreach($exam->mcqTotalResult as $value)
                                 @if($value->student_id == auth()->user()->id)
                                     @php($label = 'View Result')
-                                    @php($href = route('model.exam.paper.mcq', $exam->id))
+                                    @php($href = route('model.exam.paper.mcq', \Illuminate\Support\Facades\Crypt::encrypt($exam->id)))
                                     @break
                                 @endif
                             @endforeach
                         @endif
                         <div class="col-md-3 mb-4" style="max-width: fit-content;padding-right: 0 !important;">
-                            <div style="background-position: center center !important;background: url('https://thumbs.dreamstime.com/b/abstract-grey-dna-molecular-structure-animated-background-motion-graphic-design-medical-video-clip-ultra-hd-k-x-78780655.jpg')" class="single-exam text-center mx-auto p-4 mb-md-0">
+                            <div style="background-position: center center !important;
+                                        background: url({{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}})"
+                                 class="single-exam text-center mx-auto p-4 mb-md-0">
                                 <h5 style="max-height: 100px" class="text-center mt-2">{{ $exam->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
                                     <a
-                                       id="{{!auth()->check() ? 'logInAlert' : ''}}"
                                        href="{{!auth()->check() ? 'javascript:void(0);' : $href}}"
-                                       class="{{auth()->check() && auth()->user()->is_admin == 1 ? 'disabled' : ''}} btn btn-outline text-purple mt-2">
+                                       class="{{auth()->check() && auth()->user()->is_admin == 1 ? 'disabled' : ''}}{{!auth()->check() ? 'logInAlert' : ''}} btn btn-outline text-purple mt-2">
                                             {{$label}}
                                     </a>
                                 </div>
@@ -160,17 +161,23 @@
     {{--    /*******************************************************/--}}
 
     <script>
-        document.getElementById('logInAlert').onclick = function(){
-            Swal.fire({
-                icon: 'error',
-                title: 'Please login to continue',
-                showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                }
-            })
+        var loginAlert = document.getElementsByClassName('logInAlert');
+
+        for(var i = 0; i < loginAlert.length; i++) {
+            (function(index) {
+                loginAlert[index].addEventListener("click", function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Please login to continue',
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                })
+            })(i);
         }
     </script>
 </x-landing-layout>

@@ -1,5 +1,5 @@
-<nav class="navbar top-nav-fixed navbar-expand-lg navbar-light {{$headerBg == 'white' ? "position-relative bg-light " : "position-absolute"}} w-100">
-    <a class="navbar-brand" href="{{route('home')}}"><img src="/img/landing/newEdventureLogoNav.png" width="220" alt="EdventureLogo"></a>
+<nav class="navbar top-nav-fixed navbar-expand-lg navbar-light w-100" style="background: #6400C8">
+    <a class="navbar-brand" href="{{route('home')}}"><img src="/img/landing/edventureFinalLogo.png" width="220" alt="EdventureLogo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,7 +13,8 @@
 
             @if (Route::has('login'))
                 @auth
-                    <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}">
+                    <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}
+                                                {{ request()->is('profile/model-test') ? 'active' : '' }}">
                     <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
                 @endauth
@@ -23,12 +24,12 @@
                                          {{ request()->is('course/course-preview/*') ? 'active' : '' }}
                                          {{ request()->is('batch/*') ? 'active' : '' }}"
             >
-            <a class="nav-link text-purple-half" href="{{route('course')}}">EXAMS</a>
+            <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>
             </li>
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
                 <a class="nav-link text-purple-half"
-                   href="{{route('model.exam')}}">MODEL EXAMS</a>
+                   href="{{route('model.exam')}}">EXAMS</a>
             </li>
 
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">
@@ -51,9 +52,9 @@
                     <div class="nav navbar-nav flex-nowrap d-flex mr-16pt">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
-                                data-caret="false">
+                                data-caret="false" aria-expanded="false">
                                 <span class="avatar avatar-sm mr-8pt2">
-                                    <span class="avatar-title rounded-circle bg-purple text-white" style="padding: 8px 10px"><i class="fas fa-user"></i></span>
+                                    <span class="avatar-title rounded-circle text-white" style="padding: 8px 10px; background:#FA9632"><i class="fas fa-user"></i></span>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -63,7 +64,10 @@
                                 @else
                                 <a class="dropdown-item" href="{{route('profile')}}">My Dashboard</a>
                                 @endif
-                                <a class="dropdown-item" href="#">All courses</a>
+                                @if(Auth::user()->is_admin== 0 && request()->is('profile/model-test'))
+                                    <a class="dropdown-item" href="{{route('student.model.test.result')}}">Exams</a>
+                                @endif
+{{--                                <a class="dropdown-item" href="#">All courses</a>--}}
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -78,7 +82,7 @@
                 @else
         <div class="my-2 my-lg-0">
             <a class="nav-item active my-2 my-sm-0 pr-3" href="{{route('register')}}">SIGN UP</a>
-            <a class="btn btn-purple my-2 my-sm-0" href="{{route('login')}}">LOG IN</a>
+            <a class="btn my-2 my-sm-0 btn-orange-customed" href="{{route('login')}}">LOG IN</a>
         </div>
         @endauth
         @endif

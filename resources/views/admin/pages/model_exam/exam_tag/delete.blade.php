@@ -1,7 +1,7 @@
 <a class="mr-1 btn btn-outline-danger btn-sm"
    href="#deleteTag{{ $tag->id }}"
    data-toggle="modal"
-   title="Delete {{ $tag->name }}">
+   title="Delete?">
     <i class="far fa-trash-alt"></i>
 </a>
 <div class="modal fade"

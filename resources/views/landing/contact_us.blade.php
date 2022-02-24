@@ -1,4 +1,5 @@
 <x-landing-layout>
+    <link rel="stylesheet" href="/css/contact-us.css">
     @include('partials.alert')
     <section class="header-banner pt-7 container">
         <div class="container-fluid">
@@ -11,7 +12,8 @@
                 </p>
             </div>
         </div>
-    </section> <!--header banner end-->
+    </section> 
+    <!--header banner end-->
 
     <!--Contact form -->
     <div class="container-fluid container">
@@ -33,11 +35,11 @@
                         <br>
 
                         <div id="Contact_us_action_button" class="w-80 row">
-                            <button type="submit" class="btn-submit col-4 mx-3"
+                            <button type="submit" class="btn-submit col-4 mx-3 d-flex justify-content-center"
                                     style="border: 1px solid black">Submit
                             </button>
 
-                            <button type="reset" class="btn-submit btn-cancel col-4 mx-3"
+                            <button type="reset" class="btn-submit btn-cancel col-4 mx-3  d-flex justify-content-center"
                                     style="border: 1px solid black">Cancel
                             </button>
                         </div>
@@ -68,21 +70,21 @@
                         <div class="icon-box">
 
                             <a href="https://www.facebook.com/edventurebd" style="width: auto"
-                               target="_blank">{{-- <i class="fa fa-twitter" aria-hidden="true"></i> --}}
+                               target="_blank">
                                 <img src="/images/follow_us/FacebookWhite.png"
-                                     alt="Facebook Logo" {{-- class="fa fa-twitter" --}}>
+                                     alt="Facebook Logo">
                             </a>
 
                             <a href="https://www.instagram.com/edventurebd/"
-                               target="_blank">{{-- <i class="fa fa-linkedin" aria-hidden="true"></i> --}}
+                               target="_blank">
                                 <img src="/images/follow_us/InstagramWhite.png" alt="Instagram Logo">
                             </a>
 
                             <a href="https://www.linkedin.com/company/edventurebd/"
-                               target="_blank">{{-- <i class="fa fa-linkedin" aria-hidden="true"></i> --}}
+                               target="_blank">
                                 <img src="/images/follow_us/LinkedInWhite.png" alt="LinkedIn Logo">
                             </a>
-                            {{-- <a href="#"><i class="fa fa-facebook-official allign" aria-hidden="true"></i></i></a> --}}
+                            
                         </div>
 
                     </div>
@@ -96,14 +98,10 @@
 
     <!--map-->
     <div class="map-container container">
-        <div class="map">
-            {{-- map image --}}
+        <div class="map mt-auto">
             <img src="img/contact/map.webp" alt="map" width="100%" class="img-fluid">
-            {{-- building image
-            <img src="img/contact/imageopt_2.png" alt="building" width="50%" class="img-fluid building"> --}}
-            {{-- parl owl iconic image  --}}
             <a href="https://goo.gl/maps/zWsBhtSGmc3SMmBB9" title="Click me to find us on map" target="_blank">
-                <img src="img/contact/Group824.png" alt="Parl Owl Iconic Logo" width="8%"
+                <img src="img/contact/mapLogo.png" alt="Parl Owl Iconic Logo" width="5%"
                      class="img-fluid parlowlIconicLogo">
             </a>
         </div>

@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\McqMarkingDetail;
 use App\Models\McqQuestion;
 use App\Models\McqTotalResult;
+use App\Models\ModelMcqTagAnalysis;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,14 +43,27 @@ class OnMcqSubmit implements ShouldQueue
     public function handle()
     {
         $detail_result = [];
+        $tag_detail_analysis = [];
         $total_marks = 0;
         foreach ($this->mcq as $key => $value) {
+            $mcqQuestion = McqQuestion::query()->find($key);
+            $gain_mark = $mcqQuestion->answer == $value ? 1 : 0;
             array_push($detail_result,[
                 'model_exam_id' => (int) $this->exam->id,
                 'mcq_question_id' => $key,
                 'student_id' => $this->student_id,
                 'mcq_ans' => (int) $value,
-                'gain_marks' =>  McqQuestion::query()->find($key)->answer == $value ? 1 : 0,
+                'gain_marks' =>  $gain_mark,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            array_push($tag_detail_analysis,[
+                'model_exam_id' => (int) $this->exam->id,
+                'mcq_question_id' => $key,
+                'student_id' => $this->student_id,
+                'exam_tag_id' => $mcqQuestion->exam_tag_id,
+                'gain_marks' =>  $gain_mark,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
@@ -68,6 +82,7 @@ class OnMcqSubmit implements ShouldQueue
         ];
 
         McqMarkingDetail::query()->insert($detail_result);
+        ModelMcqTagAnalysis::query()->insert($tag_detail_analysis);
         McqTotalResult::query()->create($total_result);
     }
 }

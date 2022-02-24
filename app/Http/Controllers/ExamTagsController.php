@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExamTag;
 use App\Models\ExamTopic;
+use App\Models\ModelExam;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -56,7 +57,7 @@ class ExamTagsController extends Controller
         }
 
         if($request->hasFile('solution_pdf')) {
-            $filename = $request->exam_topic_id.'_'.str_replace(' ', '_', $request->name).'_'.Carbon::today()->toDateString().'.pdf';
+            $filename = rand().'_'.str_replace(' ', '_', $request->name).'_'.Carbon::today()->toDateString().'.pdf';
             $path = $request->file('solution_pdf')->storeAs(
                 'tagsSolutionPdf', $filename, 'public'
             );
@@ -83,7 +84,11 @@ class ExamTagsController extends Controller
         ]);
 
         if($request->hasFile('solution_pdf')) {
-            $filename = $request->exam_topic_id.'_'.str_replace(' ', '_', $request->name).'_'.Carbon::today()->toDateString().'.pdf';
+            $exam_tag = ExamTag::query()->find($id);
+            if($exam_tag->solution_pdf) {
+                @unlink(public_path('storage/tagsSolutionPdf/'.$exam_tag->solution_pdf));
+            }
+            $filename = rand().'_'.str_replace(' ', '_', $request->name).'_'.Carbon::today()->toDateString().'.pdf';
             $path = $request->file('solution_pdf')->storeAs(
                 'tagsSolutionPdf', $filename, 'public'
             );

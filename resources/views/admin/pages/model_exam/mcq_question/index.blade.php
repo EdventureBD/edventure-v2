@@ -15,7 +15,14 @@
         </div>
     @endif
 
-    <a href="{{route('model.exam.index')}}" title="Back to exams"> <i class="far fa-hand-point-left"></i> </a>
+        <style>
+            td p img {
+                width: 100px !important;
+            }
+        </style>
+
+    <a href="{{route('model.exam.index')}}" title="Back to exams"> <span class="iconify text-info m-3 text-xl" data-icon="akar-icons:arrow-back-thick-fill"></span>
+    </a>
     <div style="justify-content: right;display: grid; text-align: end">
         <a
             href="#{{$exam->mcqQuestionsCount() === $exam->question_limit ? '' : 'createQuestion'}}"
@@ -34,7 +41,7 @@
 
     </div>
     @include('admin.pages.model_exam.mcq_question.create')
-
+    <b>Exam:</b> {{$exam->title}}
     <table class="table table-responsive table-striped">
 
         @if(count($exam_questions) > 0)
@@ -59,7 +66,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{!! $q->question !!}</td>
-                <td class="badge badge-pill badge-info" style="margin-top: auto;padding:5px">
+                <td class="badge badge-pill badge-info d-flex align-items-middle p-1 justify-content-center mx-3" >
                     {{$q->examTag->name}}
                 </td>
                 <td>{!! $q->field_1 !!}</td>
@@ -98,3 +105,5 @@
 @endsection
 
 @include('admin.pages.model_exam.mcq_question.utils')
+
+<script src="/js/new-dashboard/iconify-icons.js"></script>
