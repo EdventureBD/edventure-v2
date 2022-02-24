@@ -21,8 +21,8 @@ class ExamTag extends Model
         return $this->hasMany(ModelMcqTagAnalysis::class);
     }
 
-    public function usedInNumberOfQuestions()
+    public function usedInNumberOfQuestions($examId)
     {
-        return $this->modelMcqTagAnalysis()->distinct('mcq_question_id')->count();
+        return $this->modelMcqTagAnalysis()->where('model_exam_id', $examId)->distinct('mcq_question_id')->count();
     }
 }
