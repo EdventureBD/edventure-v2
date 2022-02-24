@@ -59,7 +59,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    {{--    /*******************************************************/--}}
    <script type="text/javascript">
-       if ( $(window).width() < 576 ) {
+       if ( $(window).width() < 821 ) {
            $('#imageLabel').show();
        } else {
            $('#imageLabel').hide();
@@ -91,7 +91,8 @@
                         if(res) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Photo Uploaded Successfully',
+                                title: 'Nice',
+                                text: 'Your Photo Uploaded Successfully',
                                 showClass: {
                                     popup: 'animate__animated animate__fadeInDown'
                                 },
@@ -106,7 +107,8 @@
                    error: function (jqXHR, textStatus, errorThrown) {
                        Swal.fire({
                            icon: 'warning',
-                           title: JSON.parse(jqXHR.responseText).errors.image[0],
+                           title: 'Oops..',
+                           text: JSON.parse(jqXHR.responseText).errors.image[0],
                            showClass: {
                                popup: 'animate__animated animate__fadeInDown'
                            },

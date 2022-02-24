@@ -2,7 +2,7 @@
 <a class="mr-1 btn btn-sm btn-outline-danger"
    href="#deleteQuestion{{ $q->id }}"
    data-toggle="modal"
-   title="Delete {!! $q->question !!}">
+   title="Delete?">
     <i class="far fa-trash-alt"></i>
 </a>
 

@@ -2,7 +2,7 @@
 <a class="mr-1 btn btn-outline-danger btn-sm"
    href="#deleteExam{{ $exam->id }}"
    data-toggle="modal"
-   title="Delete {{ $exam->title }}">
+   title="Delete?">
     <i class="far fa-trash-alt"></i>
 </a>
 

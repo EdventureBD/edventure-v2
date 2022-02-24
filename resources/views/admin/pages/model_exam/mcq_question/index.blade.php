@@ -17,7 +17,7 @@
 
         <style>
             td p img {
-                width: 15% !important;
+                width: 100px !important;
             }
         </style>
 
