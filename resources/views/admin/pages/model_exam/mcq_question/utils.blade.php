@@ -6,26 +6,62 @@
             $('#question').summernote({
                 placeholder: 'Enter Question',
                 height: 100,
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    }
+                }
             });
 
             $('#field_1').summernote({
                 placeholder: 'Option 1',
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    }
+                }
             });
 
             $('#field_2').summernote({
                 placeholder: 'Option 2',
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    }
+                }
             });
 
             $('#field_3').summernote({
                 placeholder: 'Option 3',
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    }
+                }
             });
 
             $('#field_4').summernote({
                 placeholder: 'Option 4',
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    }
+                }
             });
 
             $('#explanation').summernote({
                 placeholder: 'Explanation',
+                maximumImageFileSize: 500*1024, // 500 KB
+                callbacks:{
+                    onImageUploadError: function(msg){
+                        alert(msg + ' (500 KB)');
+                    }
+                }
             });
         })
 
