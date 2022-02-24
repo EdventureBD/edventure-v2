@@ -21,8 +21,8 @@
    {{-- Modal part --}}
    <!-- Modal -->
    @php
-   $disabled = false;
-         $disabled2 = false;
+      $disabled = false;
+      $disabled2 = false;
    @endphp
    @forelse ($batchTopics as $batchTopic)
       @php
@@ -56,7 +56,10 @@
                                  </a>
                               </li>
                               @php
-                                 if ($exam->exam_type == "Aptitude Test" && !$disabled && !$course_lecture->completed) $disabled = true;
+                                 if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) {
+                                    $disabled = true;
+                                    $disabled2 = true;
+                                 } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$course_lecture->completed) $disabled = true;
                                  elseif ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
                               @endphp
                            @endforeach
@@ -92,7 +95,10 @@
                               </a>
                            @endif
                            @php
-                              if ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
+                              if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) {
+                                 $disabled = true;
+                                 $disabled2 = true;
+                              } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
                               elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
                            @endphp
                         </li>

@@ -44,17 +44,27 @@ class BatchController extends Controller
             foreach($batchTopic->courseTopic->exams as $exam){
                 $scored_marks = 0;
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
+
+                if($exam->exam_type === "Aptitude Test" ){
+                    if(count($details_results)){
+                        $exam->has_been_attempted = true;
+                    }
+                    else{
+                        $exam->has_been_attempted = false;
+                    }
+                }
+
                 // dd(auth()->user()->id, $details_results);
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
                 
-                    if($scored_marks >= $exam->threshold_marks){
-                        $exam->test_passed = true;
-                    }
-                    else{
-                        $exam->test_passed = false;
-                    }
+                if($scored_marks >= $exam->threshold_marks){
+                    $exam->test_passed = true;
+                }
+                else{
+                    $exam->test_passed = false;
+                }
 
                 $lectures_in_this_exam = count($exam->course_lectures);
                 $completed_lecture_count = 0;
@@ -77,6 +87,8 @@ class BatchController extends Controller
             ->where('batch_id', $batch->id)
             ->where('course_id', $course->id)
             ->first();
+
+        // dd($batchTopics);
 
         return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
     }

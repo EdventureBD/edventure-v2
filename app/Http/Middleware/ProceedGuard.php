@@ -33,6 +33,16 @@ class ProceedGuard
                 $scored_marks = 0;
                 // $details_results = DetailsResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->get();
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
+
+                if($exam->exam_type === "Aptitude Test" ){
+                    if(count($details_results)){
+                        $exam->has_been_attempted = true;
+                    }
+                    else{
+                        $exam->has_been_attempted = false;
+                    }
+                }
+                
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
@@ -60,9 +70,9 @@ class ProceedGuard
             }
         }
 
+        $disabled = false;
+        $disabled2 = false;
         foreach ($batchTopics as $batchTopic) {
-            $disabled = false;
-            $disabled2 = false;
             foreach ($batchTopic->courseTopic->exams as $exam) {
                 if (count($exam->course_lectures)) {
                     foreach ($exam->course_lectures as $course_lecture) {
@@ -76,7 +86,10 @@ class ProceedGuard
                 }
                 
                 if (!$disabled2 && $request->route('exam_id') && $exam->id == $request->route('exam_id')) return $next($request);
-                elseif ($exam->exam_type === "Aptitude Test" && !$exam->test_passed) $disabled = true;
+                elseif ($exam->exam_type === "Aptitude Test" && !$exam->has_been_attempted) {
+                    $disabled = true;
+                    $disabled2 = true;
+                } elseif ($exam->exam_type === "Aptitude Test" && !$exam->test_passed) $disabled = true;
                 elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
                 elseif ($disabled2) abort(403);
             }
