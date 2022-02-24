@@ -169,6 +169,7 @@
                     }
                 });
             });
+            
             $('#topic_selecting').on("select2:selecting", function (e) {
                 $('#SelectedTopic').removeClass('d-none')
                 $('#topicName').html(e.params.args.data.text)
