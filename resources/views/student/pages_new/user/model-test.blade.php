@@ -16,9 +16,9 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-    <div id="info-detail" class="row mx-auto my-5">
-        <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">
-            <div class="d-flex flex-column justify-content-center mx-auto border px-5 my-3" id="journey-cart">
+    <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
+        <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
+            <div class="d-flex flex-column justify-content-center mx-auto border p-5 my-3" id="journey-cart">
                 <h5 class="fw-800 mx-auto">Amazing!</h5>
                 <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
                 <p class="fw-500 mx-auto" id="day-count">
@@ -69,9 +69,9 @@
             </div>
             {{-- subject selection part ends --}}
         </div>
-        <div id="info-middle-option" class=" my-3 col-md-3 px-0">
+        <div id="info-middle-option" class=" my-3 w-100 px-0">
             <div id="strength-title" class="strength-weakness-title-common">
-                <h2>Strength</h2>
+                <h2 class="my-auto">Strength</h2>
 {{--                <div>--}}
 {{--                    <a href="#"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>--}}
 {{--                </div>--}}
@@ -95,9 +95,9 @@
                 </div>
             </div>
         </div>
-        <div id="info-right-option" class="my-3 col-md-3 mx-md-5 px-0">
+        <div id="info-right-option" class="my-3 w-100 mx-md-5 px-0">
             <div id="weakness-title" class="strength-weakness-title-common">
-                <h2>Weakness</h2>
+                <h2 class="my-auto">Weakness</h2>
 {{--                <div>--}}
 {{--                    <a href="#"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>--}}
 {{--                </div>--}}
