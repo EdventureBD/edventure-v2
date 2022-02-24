@@ -198,6 +198,14 @@
    #info-part{
       margin-left: 0px;
    }
+   #info-detail {
+      flex-direction: column;
+   }
+}
+@media screen and (min-width: 800px) {
+   #info-detail {
+      width: 75%;
+   }
 }
 @media screen and (min-width: 992px) {
    #info-part {

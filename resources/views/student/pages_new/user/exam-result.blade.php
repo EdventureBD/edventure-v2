@@ -13,7 +13,7 @@
             text-align: center
         }
     </style>
-    <div class="mt-5 pt-5 p-5">
+    <div class="mt-5 p-5">
             <div class="container py-md-5 my-md-5">
                 <h3>Result Details:</h3>
                 <table class="table table-striped table-responsive align-content-center">
