@@ -61,18 +61,24 @@ class ProceedGuard
         }
 
         foreach ($batchTopics as $batchTopic) {
+            $disabled = false;
+            $disabled2 = false;
             foreach ($batchTopic->courseTopic->exams as $exam) {
                 if (count($exam->course_lectures)) {
                     foreach ($exam->course_lectures as $course_lecture) {
-                        if ($request->route('courseLecture') && $course_lecture->id == $request->route('courseLecture')->id) return $next($request);
-                        if (!$course_lecture->completed) {
-                            return abort(403);
+                        if (!$disabled2 && $request->route('courseLecture') && $course_lecture->id == $request->route('courseLecture')->id) return $next($request);
+                        elseif ($disabled && !$disabled2 && !$course_lecture->completed) {
+                            $disabled2 = true;
+                        } elseif ($disabled2) {
+                            abort(403);
                         }
                     }
                 }
                 
-                if ($request->route('exam_id') && $exam->id == $request->route('exam_id')) return $next($request);
-                elseif (!$exam->test_passed) return abort(403);
+                if (!$disabled2 && $request->route('exam_id') && $exam->id == $request->route('exam_id')) return $next($request);
+                elseif ($exam->exam_type === "Aptitude Test" && !$exam->test_passed) $disabled = true;
+                elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
+                elseif ($disabled2) abort(403);
             }
         }
 
