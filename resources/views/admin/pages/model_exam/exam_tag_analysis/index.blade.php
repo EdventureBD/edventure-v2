@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-outline-primary">Search</button>
+                <button class="btn btn-outline-primary">Analyse</button>
             </div>
 
             <div class="col-md-3">
