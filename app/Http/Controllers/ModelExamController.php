@@ -334,7 +334,7 @@ class ModelExamController extends Controller
         }
 
         if(request()->input('query.email')) {
-            $student_id = request()->input('q_countuery.email');
+            $student_id = request()->input('query.email');
             $results = $results->whereHas('student', function ($q) use ($student_id) {
                 $q->where('id', $student_id);
             });
