@@ -1,7 +1,7 @@
 <a class="mr-1 btn btn-outline-danger btn-sm"
    href="#deleteCategory{{ $topic->id }}"
    data-toggle="modal"
-   title="Delete {{ $topic->name }}">
+   title="Delete?">
     <i class="far fa-trash-alt"></i>
 </a>
 <div class="modal fade"
