@@ -1,4 +1,4 @@
-<link rel="icon" type="image/png" href="/img/landing/fav.png">
+<link rel="icon" type="image/png" href="/img/contact/mapLogo.png">
 
 <x-guest-layout>
 
@@ -79,7 +79,7 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3" style="background-color: #663193;">
+                <x-button class="ml-3" style="background:#FA9632">
                     {{ __('Login') }}
                 </x-button>
                

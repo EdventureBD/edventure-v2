@@ -9,7 +9,7 @@
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
                         <a href="{{route('course',$category->slug)}}" class="mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm text-white
-                            mx-1 bradius-15 bshadow-medium bg-purple px-4">{{$category->title}}</a>
+                            mx-1 bradius-15 bshadow-medium btn-orange-customed px-4">{{$category->title}}</a>
                     @else
                         <a href="{{route('course',$category->slug)}}" class="mb-3  d-inline-block course-category-single-js btn fw-800 text-xxsm text-purple
                             mx-1 bradius-15 bshadow-medium bg-white px-4">{{$category->title}}</a>

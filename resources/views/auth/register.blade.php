@@ -1,4 +1,4 @@
-<link rel="icon" type="image/png" href="/img/landing/fav.png">
+<link rel="icon" type="image/png" href="/img/contact/mapLogo.png">
 
 <x-guest-layout>
     <x-auth-card>
@@ -105,7 +105,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4" type="submit" style="background-color: #663193;">
+                <x-button class="ml-4" type="submit" style="background-color: #FA9632;">
                     {{ __('Register') }}
                 </x-button>
             </div>
