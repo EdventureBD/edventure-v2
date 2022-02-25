@@ -52,7 +52,7 @@
                                 <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক নিজের মতো</h2>
                             </div>
                             <div>
-                                <a href="{{route('register')}}" class="font-roboto text-xxsm btn btn-register btn-orange-customed text-white px-md-4 my-md-4 py-md-3 border">REGISTER NOW <i class="fa fa-arrow-right icon"></i></a>
+                                <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed text-white px-md-4 my-md-4 py-md-3 border">REGISTER NOW</a>
                             </div>
                         </div>
                         @endauth
@@ -79,7 +79,7 @@
             <div class=" @if($categories->count()>=7) course-category-js @endif course-category">
                 @foreach($categories as $category)
                     @if($category->slug==$selected_category_slug)
-                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium bg-purple ">{{$category->title}}</div>
+                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium btn-orange-customed ">{{$category->title}}</div>
                     @else
                         <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white ">{{$category->title}}</div>
                     @endif
@@ -105,7 +105,7 @@
                @endforeach
                 
             </div>
-            <a href="{{route('about_us')}}" class="btn text-xxsm text-white bg-purple px-4 py-2">Learn more about us</a>
+            <a href="{{route('about_us')}}" class="btn text-xxsm text-white btn-orange-customed px-4 py-2">Learn more about us</a>
         </div>
     </div> <!-- our exam section end -->
     
