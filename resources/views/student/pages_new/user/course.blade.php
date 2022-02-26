@@ -1,5 +1,13 @@
 @extends('student.pages_new.user.profile')
 
+<style>
+    .select2-purple .select2-container--default span span{
+        height: 2.35rem;
+    }
+    div .select2 .selection .select2-selection{
+        height: 2.35rem;
+    }
+</style>
 
 @section('mini-header')
     <div class="d-flex justify-content-between">
@@ -22,6 +30,7 @@
     </div>
 @endsection
 @section('content')
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <div id="info-detail" class="row mx-auto my-5">
         <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">
             <div class="d-flex flex-column justify-content-center mx-auto border px-5 my-3" id="journey-cart">
@@ -34,12 +43,12 @@
 
             <div>
                 <select
-                        class="select2 form-control"
-                        name="course"
-                        id="course_selecting"
-                        data-placeholder="Choose Course"
-                        data-dropdown-css-class="select2-purple"
-                        style="width: 100%; margin-top: -8px !important;">
+                    class="select2 form-control"
+                    name="course"
+                    id="course_selecting"
+                    data-placeholder="Choose Course"
+                    data-dropdown-css-class="select2-purple"
+                    style="width: 100%; margin-top: -8px !important;">
 
                     <option value="" disabled selected>Choose Course Topic</option>
 
@@ -167,9 +176,8 @@
     </div>
 @endsection
 
-{{-- icon's script part linked --}}
+@section('js')
 <script src="{{ asset('/js/new-dashboard/iconify-icons.js') }}"></script>
-{{-- icon's script part linked --}}
 
 {{-- frontend script part --}}
 <script>
@@ -196,8 +204,8 @@
     modelTestOption.addEventListener("click",modelTestButtonAction);
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
 {{-- <script>
     fetchCourseOption()
     $(document).on('click', '#course-option', function(){
@@ -233,6 +241,12 @@
 </script> --}}
 
 <script>
+    $(document).ready(function() {
+        $('.select2').select2({width:"100%"});
+    });
+</script>
+
+<script>
     $(document).on('change', '#course_selecting', function(){
         var course_id = $( this ).val();
         var course_name = $( this ).find('option:selected').text();
@@ -241,8 +255,6 @@
 
         $('#SelectedCourse').removeClass('d-none');
         $('#courseName').text(course_name);
-
-
 
         $('#mcq_strength').html('');
         $('#cq_strength').html('');
@@ -310,4 +322,5 @@
         });
     });
 </script>
+@endsection
 {{-- frontend script part ends --}}

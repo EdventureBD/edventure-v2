@@ -74,6 +74,7 @@
                         <tr>
                               <th class="bg-purple text-white text-center">Stem</th>
                               <th class="bg-purple text-white text-center">Question</th>
+                              <th class="bg-purple text-white text-center">Your<br/> Score</th>
                               <th class="bg-purple text-white text-center">Ave<br/> Score</th>
                               <th class="bg-purple text-white text-center">Your Answer</th>
                               <th class="bg-purple text-white text-center">Correct Answer</th>
@@ -90,6 +91,13 @@
                                     @endif
 
                                     <td class="bg-purple2 text-white">{!! $question->question !!}</td>
+                                    <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
+                                       @foreach($question->allDetailsResult as $findDetailsResult)
+                                          @if($findDetailsResult->student_id == auth()->user()->id)
+                                             {{ $findDetailsResult->gain_marks }}
+                                          @endif
+                                       @endforeach
+                                    </td>
                                     <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
                                        {{ $question->avg_score }}
                                     </td>
