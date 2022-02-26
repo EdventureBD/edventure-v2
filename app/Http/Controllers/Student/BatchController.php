@@ -54,7 +54,6 @@ class BatchController extends Controller
                     }
                 }
 
-                // dd(auth()->user()->id, $details_results);
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }

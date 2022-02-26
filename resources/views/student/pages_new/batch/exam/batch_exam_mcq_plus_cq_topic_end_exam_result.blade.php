@@ -25,9 +25,11 @@
             <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
 
             <div class="d-flex justify-content-end">
-               <div class="text-right">
-                  <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
-               </div>
+               @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
+                  <div class="text-right">
+                     <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
+                  </div>
+               @endif
                <div class="text-right ml-2">
                   <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
                </div>
@@ -64,7 +66,6 @@
                   </div>
                @endif
 
-
                @if($cqs_exist)
                   <div class="@if($mcqs_exist) mt-5 @endif">
                      <p class="text-center text-sm mt-3">CQ Marks : <b>{{$cq_marks_scored." out of ".$cq_total_marks}}</b></p>
@@ -73,12 +74,14 @@
                            <tr>
                                  <th class="bg-purple text-white text-center">Stem</th>
                                  <th class="bg-purple text-white text-center">Question</th>
+                                 <th class="bg-purple text-white text-center">Your<br/> Score</th>
                                  <th class="bg-purple text-white text-center">Ave<br/> Score</th>
                                  <th class="bg-purple text-white text-center">Your Answer</th>
                                  <th class="bg-purple text-white text-center">Correct Answer</th>
                            </tr>
                         </thead>
                         <tbody>
+
                            @foreach ($exam->topicEndExamCreativeQuestions as $key => $creative_question)
                               @foreach ($creative_question->question as $key2 => $question)
                                  @if ($creative_question->exam_papers)
@@ -88,6 +91,13 @@
                                        @endif
 
                                        <td class="bg-purple2 text-white">{!! $question->question !!}</td>
+                                       <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
+                                          @foreach($question->allDetailsResult as $findDetailsResult)
+                                             @if($findDetailsResult->student_id == auth()->user()->id)
+                                                {{ $findDetailsResult->gain_marks }}
+                                             @endif
+                                          @endforeach
+                                       </td>
                                        <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
                                           {{ $question->avg_score }}
                                        </td>
@@ -103,20 +113,20 @@
                                           <div class="modal fade" id="yourAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                              <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
-                                                <div class="modal-header">
-                                                   <h5 class="modal-title" id="exampleModalLabel">Your Answer</h5>
-                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                   </button>
-                                                </div>
-                                                <div class="modal-body">
+                                                   <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Your Answer</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                   </div>
+                                                   <div class="modal-body">
                                                       @if ($creative_question->exam_papers->submitted_text != null)
                                                          <textarea name="" id="" cols="30" rows="10">{!! $creative_question->exam_papers->submitted_text !!}</textarea>
                                                       @endif
-                                                      @if ($creative_question->exam_papers->submitted_pdf != null)
-                                                         <iframe src="{{ Storage::url($creative_question->exam_paper->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
+                                                      @if ($creative_question->exam_papers->submitted_pdf != null && Storage::disk('local')->exists($creative_question->exam_papers->submitted_pdf))
+                                                         <iframe src="{{ Storage::url($creative_question->exam_papers->submitted_pdf) }}" frameborder="0" width="100%" height="600px"></iframe>
                                                       @endif
-                                                </div>
+                                                   </div>
                                                 </div>
                                              </div>
                                           </div>
@@ -131,7 +141,7 @@
                                                    </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                      @if ( $creative_question->standard_ans_pdf != null)
+                                                      @if ($creative_question->standard_ans_pdf != null && Storage::disk('local')->exists($creative_question->standard_ans_pdf))
                                                          <iframe src="{{ Storage::url($creative_question->standard_ans_pdf) }}" frameborder="0"
                                                             width="100%" height="600px"></iframe>
                                                       @endif
@@ -140,13 +150,11 @@
                                              </div>
                                           </div>
 
-
                                        @endif
                                     </tr>
                                  @endif
                               @endforeach
                            @endforeach
-
 
                         </tbody>
                      </table>

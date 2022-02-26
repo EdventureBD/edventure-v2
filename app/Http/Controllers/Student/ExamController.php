@@ -96,7 +96,7 @@ class ExamController extends Controller
             if (!$canAttempt || ($canAttempt && $canAttempt->status == 0)) {
                 $questions = MCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                 //Inserting in the exam result as first attempt
-                (new ExamResult())->saveData(['exam_id' => $exam->id, 'exam_type' => $exam_type, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
+                (new ExamResult())->saveData(['exam_id' => $exam->id, 'exam_type' => $exam->exam_type, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
                 return view('student.pages_new.batch.exam.batch_exam_mcq', compact('questions', 'exam', 'batch'));
             }
 
