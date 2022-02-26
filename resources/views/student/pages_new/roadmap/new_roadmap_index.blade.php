@@ -11,15 +11,39 @@
             <h1 class="fw-800" id="roadmap-subject-topic-name">Physics</h1>
          </div>
       </div>
+
+      <div style="" class="mt-5 mx-5">
+         <div class="mt-5 mx-3">
+            @error('not_added_to_batch')
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong> Error !</strong> {{ $message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                  </button>
+               </div>
+            @enderror
+   
+            @error('not_enough_questions')
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong> Error !</strong> {{ $message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                  </button>
+               </div>
+            @enderror
+         </div>
+      </div>
+
       <div class="d-flex justify-content-center container mt-5 pt-4" id="ilandGrandParentContainer">
          <div class="row row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
-            
+
          </div>
       </div>
    </div>
 
    {{-- Modal part --}}
    <!-- Modal -->
+   
    @php
       $disabled = false;
       $disabled2 = false;
