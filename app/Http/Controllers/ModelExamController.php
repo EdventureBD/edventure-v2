@@ -105,6 +105,9 @@ class ModelExamController extends Controller
     public function update(UpdateModelExamRequest $request, $examId)
     {
         $inputs = $request->validated();
+        if($inputs['negative_marking'] == false) {
+            $inputs['negative_marking_value'] = 0;
+        }
         $exam = ModelExam::query()->find($examId);
 
         if($request->hasFile('solution_pdf')) {
