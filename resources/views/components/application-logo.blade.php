@@ -5,7 +5,7 @@
      #login-signup-logo {
           margin: 15px auto 0px; 
           opacity: .8;
-          max-width: 10%;
+          max-width: 6%;
      }
      @media screen and (max-width: 576px){
           #login-signup-logo {

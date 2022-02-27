@@ -18,7 +18,7 @@
             <div>
                 <x-label for="name" :value="__('Name')" />
 
-                <x-input id="name" placeholder="e.g. Fahim khan ridoy" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                <x-input id="name" placeholder="Enter your Name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                     autofocus />
             </div>
 
@@ -26,13 +26,13 @@
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')" />
 
-                <x-input placeholder="e.g. yourmail@test.com" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-input placeholder="Enter your Email" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <div>
                 <x-label for="phone" :value="__('Phone')" />
 
-                <x-input placeholder="e.g. 016xxxxxxxx" id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required
+                <x-input placeholder="015xxxxxxxx" id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required
                     autofocus />
             </div>
 
@@ -47,7 +47,7 @@
             <div class="py-2" x-data="{ show: true }">
                 <span for="password" class="px-1 text-sm text-gray-600">Password</span>
                 <div class="relative">
-                    <input placeholder="" type="password"
+                    <input placeholder="Enter your password" type="password"
                         class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"
                         id="password" name="password" required autocomplete="current-password">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -79,7 +79,7 @@
             <div class="py-2" x-data="{ show: true }">
                 <span for="password_confirmation" class="px-1 text-sm text-gray-600">Confirm Password</span>
                 <div class="relative">
-                    <input placeholder="" type="password" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"
+                    <input placeholder="Confirm your password" type="password" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"
                         id="password_confirmation" name="password_confirmation" required
                         autocomplete="confirm-password">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
