@@ -35,38 +35,39 @@
         ===========================Medical Campaign========================================
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --}}
     {{-- Medical Campaign part for landing page starts Here! --}}
-    <section class="header-banner bg-art pt-7">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 col-sm-6 py-md-5">
-                    <div class="pl-3">
+    <section class="relative" id="landing-image-new" style="padding-top: 25rem !important">
+        <div class="">
+            <div class="d-flex justify-content-start" >
+                {{-- <div class="col-md-5 col-sm-6 py-md-5"> --}}
+                <div>
+                    <div class="mt-0" id="text-in-landing">
                         @auth
-                        <h4 class="text-purple  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4><br>
-                        <h4 class="text-red  text-sm font-roboto">Welcome to the Edventure.</h4>
-                        <h2 class="text-sm fw-800 font-roboto mb-2 text-purple">To participate in the Olympiad, click on the button below or visit to the exam page.<h2><br>
-                        <a href="{{route('medi-olympiad')}}" class="font-roboto border text-xxsm btn btn-register btn-orange-customed text-white px-4">Jump to Olympiad <i class="fa fa-arrow-right icon"></i></a>
+                        <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4><br>
+                        <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
+                        <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2><br>
+                        <a href="{{route('profile')}}" class="font-roboto border text-xsm btn btn-register btn-orange-customed text-white px-4">Go to Dashboard</a>
                         @else
                         <div id="landing_greeting_and_register_button">
                             <div>
-                                <h4 class="text-red  text-md font-roboto">Edventure-এর সাথে</h4><br>
-                                <h2 class="text-lg fw-800 font-roboto text-purple">প্রস্তুতি হোক নিজের মতো</h2>
+                                <h4 class="text-white  text-md font-roboto">Edventure-এর সাথে</h4><br>
+                                <h2 class="text-lg fw-800 font-roboto text-white">প্রস্তুতি হোক <br> নিজের মতো</h2>
                             </div>
                             <div>
-                                <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed text-white px-md-4 my-md-4 py-md-3 border">REGISTER NOW</a>
+                                <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register text-white px-md-4 my-md-4 py-md-3 border" style="background: #6400c8">REGISTER NOW</a>
                             </div>
                         </div>
                         @endauth
                         
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-6">
+                {{-- <div class="col-md-7 col-sm-6"> --}}
                     {{-- ++++++++++Edventure Top banner++++++++++ --}}
                     
                     {{-- <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="Top banner Image"> --}}
 
                     {{-- Edventure Medical Campaign Banner --}}
-                    <img src="/img/medical_camp/medicampBanner.png" class="img-fluid" alt="Top banner Image">
-                </div>
+                    {{-- <img src="/img/medical_camp/medicampBanner.png" class="img-fluid" alt="Top banner Image"> --}}
+                {{-- </div> --}}
             </div>
         </div>
     </section>

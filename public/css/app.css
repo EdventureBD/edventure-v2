@@ -10995,6 +10995,26 @@ a:hover {
   background-image: url("/img/landing/top_background.png");
   background-size: cover;
 }
+#landing-image-new {
+  background-image: url("/img/landing/landing-new-image.jpg");
+  max-height: 10% !important;
+  background-repeat: no-repeat;
+  background-size: auto;
+  top: -50% !important;
+}
+@media screen and (min-width:578px) {
+  #text-in-landing {
+    padding-left: 145px;
+    margin-bottom: 150px;
+  }
+  
+}
+@media screen and (max-width: 576px) {
+ #text-in-landing {
+  margin: -200px 25px 40px 25px !important;
+  
+ }
+}
 
 .bg-white {
   background-color: #ffffff;
