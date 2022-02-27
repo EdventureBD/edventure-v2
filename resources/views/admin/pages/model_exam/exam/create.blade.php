@@ -129,6 +129,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <input type="number"
+                                   step="0.01"
                                    id="negative_marking_value"
                                    name="negative_marking_value"
                                    class="form-control"

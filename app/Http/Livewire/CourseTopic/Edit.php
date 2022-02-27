@@ -69,7 +69,10 @@ class Edit extends Component
         $course_topic = CourseTopic::find($this->course_topic->id);
         $course_topic->title = $data['title'];
         if (!empty($this->islandImage)) {
-            unlink(public_path($course_topic->island_image));
+            if($course_topic->island_image) {
+                unlink(public_path($course_topic->island_image));
+            }
+
             $course_topic->island_image = Storage::url($this->islandImage->store('public/roadmap/island_images'));
         }
         $course_topic->course_id = $data['courseId'];

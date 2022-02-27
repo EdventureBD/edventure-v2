@@ -47,7 +47,8 @@ class OnMcqSubmit implements ShouldQueue
         $total_marks = 0;
         foreach ($this->mcq as $key => $value) {
             $mcqQuestion = McqQuestion::query()->find($key);
-            $gain_mark = $mcqQuestion->answer == $value ? 1 : 0;
+            $gain_mark = $mcqQuestion->answer == $value ? 1 : ($this->exam->negative_marking ? -$this->exam->negative_marking_value  : 0);
+            logger('gain mark.', [$gain_mark]);
             array_push($detail_result,[
                 'model_exam_id' => (int) $this->exam->id,
                 'mcq_question_id' => $key,

@@ -19,7 +19,7 @@ class CreateModelMcqTagAnalysisTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('exam_tag_id');
             $table->unsignedBigInteger('mcq_question_id');
-            $table->integer('gain_marks');
+            $table->float('gain_marks');
             $table->foreign('model_exam_id')
                 ->references('id')->on('model_exams')
                 ->onDelete('cascade');
