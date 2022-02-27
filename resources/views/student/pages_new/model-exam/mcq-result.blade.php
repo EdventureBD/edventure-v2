@@ -12,7 +12,7 @@
     <div class="mx-md-5 mx-sm-0 my-5" style="max-width: 100%">
         <div class="my-5 py-5">
             <div>
-                <h4 class="fw-800">Exam Result: {{(int)$result->total_marks}} out of {{count($exam_answer)}}</h4>
+                <h4 class="fw-800">Exam Result: {{$result->total_marks}} out of {{count($exam_answer)}}</h4>
                 <table class="table table-responsive table-striped table-bordered max-w-100">
                     <thead class="bg-purple text-white text-center">
                         <tr>

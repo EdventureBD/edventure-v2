@@ -26,7 +26,7 @@ use smasif\ShurjopayLaravelPackage\ShurjopayService;
 |
 */
 // Medical olympiad 2022 route
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 Route::get('/medical-olympiad/medical-olympiad', function() {
     return view('landing.medi-olympiad');
 })->name('medi-olympiad');

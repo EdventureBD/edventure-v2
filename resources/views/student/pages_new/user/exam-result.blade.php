@@ -45,6 +45,9 @@
                     @endforelse
                     </tbody>
                 </table>
+                <div class="py-5 py-md-1 text-center d-flex justify-content-center">
+                    <p class="text-center">{{ $exam_results->withQueryString()->links('vendor.pagination.custom') }}</p>
+                </div>
             </div>
     </div>
 

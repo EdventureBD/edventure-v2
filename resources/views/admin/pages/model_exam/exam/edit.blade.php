@@ -135,6 +135,7 @@
             <div class="form-group col-md-3">
                 <input type="number"
                        step="0.01"
+                       value="{{$exam->negative_marking_value}}"
                        id="negative_marking_value"
                        name="negative_marking_value"
                        class="form-control"
