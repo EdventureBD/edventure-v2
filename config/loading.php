@@ -18,6 +18,6 @@ return [
     'overlay_opacity' => 0.8,
 
     // any custom css you want to override loading indicator styles with
-    'custom_css' => '',
+    'custom_css' => '.cp-eclipse{background:#6902C5} .cp-eclipse:before{border-right:solid 6px #6902C5} .cp-eclipse:after{border-left:solid 6px #6902C5}',
 
 ];

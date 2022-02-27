@@ -50,7 +50,6 @@
 
         }
         footer p{
-            padding-top: 160px;
             text-align: center;
         }
         a.w3hubs{
