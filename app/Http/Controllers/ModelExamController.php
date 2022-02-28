@@ -11,6 +11,8 @@ use App\Models\McqMarkingDetail;
 use App\Models\McqQuestion;
 use App\Models\McqTotalResult;
 use App\Models\ModelExam;
+use App\Models\ModelMcqTagAnalysis;
+use App\Models\PaymentOfExams;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -150,6 +152,10 @@ class ModelExamController extends Controller
     {
         ModelExam::query()->find($id)->delete();
         McqQuestion::query()->where('model_exam_id', $id)->delete();
+        McqTotalResult::query()->where('model_exam_id', $id)->delete();
+        McqMarkingDetail::query()->where('model_exam_id', $id)->delete();
+        ModelMcqTagAnalysis::query()->where('model_exam_id', $id)->delete();
+        PaymentOfExams::query()->where('model_exam_id', $id)->delete();
 
         return redirect()->back()->with('status','Exam Deleted Successfully');
     }
@@ -318,6 +324,10 @@ class ModelExamController extends Controller
         return view('student.pages_new.batch.exam.examSubmissionGreeting');
     }
 
+    /**
+     * Get exam results for admin to see of student attending the exams
+     * @return Application|Factory|View
+     */
     public function modelExamResult()
     {
 

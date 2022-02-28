@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         @endauth
-                        
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -57,12 +57,12 @@
                             </div>
                         </div>
                         @endauth
-                        
+
                     </div>
                 </div>
                 {{-- <div class="col-md-7 col-sm-6"> --}}
                     {{-- ++++++++++Edventure Top banner++++++++++ --}}
-                    
+
                     {{-- <img src="/img/landing/top-banner-final.webp" class="img-fluid" alt="Top banner Image"> --}}
 
                     {{-- Edventure Medical Campaign Banner --}}
@@ -73,49 +73,49 @@
     </section>
     <!--Medical Campaign part for landing page ends Here!-->
 
-    <div class="our-exams-section text-center py-5">
-        <div class="container">
-            <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>
-            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">Edventure এর সাথে হবে জোরদার পরীক্ষার প্রস্তুতি। বেছে নাও তোমার পছন্দের টেস্ট প্রিপারেশন মডিউল</p>
-            <div class=" @if($categories->count()>=7) course-category-js @endif course-category">
-                @foreach($categories as $category)
-                    @if($category->slug==$selected_category_slug)
-                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium btn-orange-customed ">{{$category->title}}</div>
-                    @else
-                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white ">{{$category->title}}</div>
-                    @endif
-                @endforeach
-                <div id="stop-click" >
-                   
-                </div>
-            </div>
-            
-            <div id="loading_gif" class="container" style="display: none">
-                <img src="/img/landing/loading.gif" alt="">
-            </div>
-            <div id="show-course-js" class="row justify-content-center my-5 ">
-                @foreach ($courses as $course)
-                <div class="col-md-4 col-lg-3 mb-3">
-                    <div class="single-exam mx-auto text-center p-4 mb-4 mb-md-0" style="background-image: url({{asset($course->banner)}}); " >
-                        <img src="{{asset($course->icon)}}" width="50" alt="">
-                        <h5 class="text-sm mt-2">{{$course->title}}</h5>
-                        <p class="text-md mt-2 fw-600 text-price">{{$course->price}}৳</p>
-                        <a href="{{route('course-preview', $course->slug)}}" class="btn btn-outline text-purple mt-2">Go To Exam</a>
-                    </div>
-                </div>
-               @endforeach
-                
-            </div>
-            <a href="{{route('about_us')}}" class="btn text-xxsm text-white btn-orange-customed px-4 py-2">Learn more about us</a>
-        </div>
-    </div> <!-- our exam section end -->
-    
+{{--    <div class="our-exams-section text-center py-5">--}}
+{{--        <div class="container">--}}
+{{--            <h3 class="text-purple text-md font-roboto">আমাদের পরীক্ষা সমূহ</h3>--}}
+{{--            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">Edventure এর সাথে হবে জোরদার পরীক্ষার প্রস্তুতি। বেছে নাও তোমার পছন্দের টেস্ট প্রিপারেশন মডিউল</p>--}}
+{{--            <div class=" @if($categories->count()>=7) course-category-js @endif course-category">--}}
+{{--                @foreach($categories as $category)--}}
+{{--                    @if($category->slug==$selected_category_slug)--}}
+{{--                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-white mx-1 bradius-15 bshadow-medium btn-orange-customed ">{{$category->title}}</div>--}}
+{{--                    @else--}}
+{{--                        <div id="{{$category->slug}}" onclick="myFunction(this.id)" class="mb-3 pl-3 course-category-single-js btn fw-800 text-xxsm text-purple mx-1 bradius-15 bshadow-medium bg-white ">{{$category->title}}</div>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--                <div id="stop-click" >--}}
+{{--                   --}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            --}}
+{{--            <div id="loading_gif" class="container" style="display: none">--}}
+{{--                <img src="/img/landing/loading.gif" alt="">--}}
+{{--            </div>--}}
+{{--            <div id="show-course-js" class="row justify-content-center my-5 ">--}}
+{{--                @foreach ($courses as $course)--}}
+{{--                <div class="col-md-4 col-lg-3 mb-3">--}}
+{{--                    <div class="single-exam mx-auto text-center p-4 mb-4 mb-md-0" style="background-image: url({{asset($course->banner)}}); " >--}}
+{{--                        <img src="{{asset($course->icon)}}" width="50" alt="">--}}
+{{--                        <h5 class="text-sm mt-2">{{$course->title}}</h5>--}}
+{{--                        <p class="text-md mt-2 fw-600 text-price">{{$course->price}}৳</p>--}}
+{{--                        <a href="{{route('course-preview', $course->slug)}}" class="btn btn-outline text-purple mt-2">Go To Exam</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--               @endforeach--}}
+{{--                --}}
+{{--            </div>--}}
+{{--            <a href="{{route('about_us')}}" class="btn text-xxsm text-white btn-orange-customed px-4 py-2">Learn more about us</a>--}}
+{{--        </div>--}}
+{{--    </div> <!-- our exam section end -->--}}
+
 
     <div class="our-package-section text-center py-5">
         <div class="container">
             <h3 class="text-purple text-md font-roboto">কি পাবে আমাদের প্ল্যাটফর্মে</h3>
-            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায় 
-                - ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয় 
+            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-purple-half">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়
+                - ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয়
                 - দেশসেরা অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন
                 </p>
             <div class="single-package bg-art py-5 px-3 mt-6">
@@ -183,7 +183,7 @@
     <div class="our-exams-section text-center py-5">
         <div class="container">
             <h3 class="text-purple text-lg fw-400 font-bebas">Featured Videos</h3>
-            <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">A few simple steps separate you from your 
+            <p class="fw-600 text-xsm max-w-38 w-100 mx-auto text-purple-half">A few simple steps separate you from your
                 upcoming journey. See how easy it is to learn.  </p>
             @include('landing.videos')
         </div>
