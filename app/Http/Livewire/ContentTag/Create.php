@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\ContentTag;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
@@ -14,6 +16,8 @@ use App\Models\Admin\CourseTopic;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
     public $title;
     public $categories;
     public $categoryId;
@@ -23,13 +27,28 @@ class Create extends Component
     public $courseId;
     public $topics;
     public $topicId;
-    // public $lectures;
+    public $solutionVideo;
+    public $solutionPdf;
     // public $lectureId;
 
     public function updatedTitle()
     {
         $this->validate([
             'title' => 'required|string|max:325'
+        ]);
+    }
+
+    public function updatedSolutionVideo()
+    {
+        $this->validate([
+            'solutionVideo' => ['string', 'min:3'],
+        ]);
+    }
+
+    public function updatedSolutionPdf()
+    {
+        $this->validate([
+            'solutionPdf' => ['file', 'mimes:pdf', 'max:50000'],
         ]);
     }
 
@@ -78,6 +97,13 @@ class Create extends Component
     public function saveBatchLecture()
     {
         $data = $this->validate();
+
+        if(isset($this->solutionPdf)){
+            dd('Has PDF');
+        }
+
+        dd($data);
+
         $content_tag = new ContentTag();
         $content_tag->title = $data['title'];
         $content_tag->slug  =(string) Str::uuid();

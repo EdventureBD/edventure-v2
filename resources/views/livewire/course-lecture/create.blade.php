@@ -172,6 +172,7 @@
                                         <iframe src="https://player.vimeo.com/video/{{ $url }}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
                                     @endif
                                 </div>
+                                
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                     <a href="{{ URL::previous() }}"><button type="button"

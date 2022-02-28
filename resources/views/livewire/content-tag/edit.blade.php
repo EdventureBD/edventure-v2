@@ -61,6 +61,59 @@
                                             @enderror
                                         </div>
                                     </div> --}}
+
+                                    {{-- Solution PDF --}}
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="pdf">Solution Pdf</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" wire:model="solutionPdf">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <span> {{ $solutionPdf->temporaryUrl() }} </span>
+                                            </div>
+                                            <div>
+                                                @error('solutionPdf')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    {{-- Solution Video --}}
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label class="col-form-label" for="solutionVideo">Lecture Video</label> <br>
+                                            <div class="input-group">
+                                                {{-- <label class="col-form-label" for="courseurl"> Video Url </label> <br> --}}
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">https://youtube.com/watch?v=</span>
+                                                </div>
+                                                <input type="text" wire:model="solutionVideo"
+                                                    class="form-control @error('solutionVideo') is-invalid @enderror"
+                                                    placeholder="Enter your youtube video id" />
+                                            </div>
+                                            <div>
+                                                @error('solutionVideo')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group">
+                                            @if ($solutionVideo)
+                                                <iframe width="560" height="315"
+                                                    src="https://www.youtube-nocookie.com/embed/{{ $solutionVideo }}"
+                                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                                    clipboard-write; encrypted-media; gyroscope;
+                                                    picture-in-picture" allowfullscreen>
+                                                </iframe>
+                                                {{-- vimeo player
+                                                <iframe src="https://player.vimeo.com/video/{{ $url }}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="card-footer">

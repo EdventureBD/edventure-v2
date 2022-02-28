@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\ContentTag;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Admin\Course;
 use App\Models\Admin\ContentTag;
@@ -11,6 +13,8 @@ use App\Models\Admin\CourseTopic;
 
 class Edit extends Component
 {
+    use WithFileUploads;
+
     public $contentTag;
 
     public $title;
@@ -21,11 +25,27 @@ class Edit extends Component
     public $course;
     public $topic;
     // public $lecture;
+    public $solutionVideo;
+    public $solutionPdf;
 
     public function updatedTitle()
     {
         $this->validate([
             'title' => 'required|string|max:325'
+        ]);
+    }
+
+    public function updatedSolutionVideo()
+    {
+        $this->validate([
+            'solutionVideo' => ['string', 'min:3'],
+        ]);
+    }
+
+    public function updatedSolutionPdf()
+    {
+        $this->validate([
+            'solutionPdf' => ['file', 'mimes:pdf', 'max:50000'],
         ]);
     }
 

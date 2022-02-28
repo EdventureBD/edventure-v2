@@ -83,7 +83,9 @@
                         @foreach ($mcq_content_tags as $mcq_content_tag)
                             @if($mcq_content_tag->percentage_scored != 'no data')
                                 @if($mcq_content_tag->percentage_scored > 80)
-                                    <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $mcq_content_tag->title }}</p>
+                                    <a href="#">
+                                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $mcq_content_tag->title }}</p>
+                                    </a>
                                 @endif
                             @endif
                         @endforeach
@@ -103,7 +105,9 @@
                         @foreach ($cq_content_tags as $cq_content_tag)
                             @if($cq_content_tag->percentage_scored != 'no data')
                                 @if($cq_content_tag->percentage_scored > 80)
-                                    <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $cq_content_tag->title }}</p>
+                                    <a href="#">
+                                        <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $cq_content_tag->title }}</p>
+                                    </a>
                                 @endif
                             @endif
                         @endforeach
@@ -132,7 +136,9 @@
                     @foreach ($mcq_content_tags as $mcq_content_tag)
                         @if($mcq_content_tag->percentage_scored !== 'no data')
                             @if($mcq_content_tag->percentage_scored < 20)
-                                <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $mcq_content_tag->title }}</p>
+                                <a href="#">
+                                    <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $mcq_content_tag->title }}</p>
+                                </a>
                             @endif
                         @endif
                     @endforeach
@@ -152,7 +158,9 @@
                         @if($cq_content_tag->percentage_scored !== 'no data')
 
                             @if($cq_content_tag->percentage_scored < 20)
-                                <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $cq_content_tag->title }}</p>
+                                <a href="#">
+                                    <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $cq_content_tag->title }}</p>
+                                </a>
                             @endif
                         @endif
                     @endforeach
