@@ -14,7 +14,7 @@
             <div>
                 <h4 class="fw-800">Exam Result: {{$result->total_marks}} out of {{count($exam_answer)}}</h4>
                 <table class="table table-responsive table-striped table-bordered max-w-100">
-                    <thead class="bg-purple text-white text-center">
+                    <thead class="text-white text-center" style="background: #6400c8">
                         <tr>
                             <td class="fit">SL</td>
                             <td class="fit">Question</td>
