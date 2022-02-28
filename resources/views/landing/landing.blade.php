@@ -35,7 +35,7 @@
         ===========================Medical Campaign========================================
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --}}
     {{-- Medical Campaign part for landing page starts Here! --}}
-    <section class="relative" id="landing-image-new" style="padding-top: 25rem !important">
+    <section class="relative" id="landing-image-new" style="">
         <div class="">
             <div class="d-flex justify-content-start" >
                 {{-- <div class="col-md-5 col-sm-6 py-md-5"> --}}
