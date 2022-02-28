@@ -39,7 +39,7 @@ class ModelMcqTagAnalysisController extends Controller
                 $mcq_tag_total_marks += 1;
                 $mcq_tag_scored_marks += $analysis->gain_marks;
             }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0 ;
             $tag->tag_total_marks = $mcq_tag_total_marks;
             $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
         }
@@ -70,7 +70,7 @@ class ModelMcqTagAnalysisController extends Controller
                 $mcq_tag_total_marks += 1;
                 $mcq_tag_scored_marks += $analysis->gain_marks;
             }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0;
             $tag->tag_total_marks = $mcq_tag_total_marks;
             $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
             unset($tag->modelMcqTagAnalysis);
@@ -126,7 +126,7 @@ class ModelMcqTagAnalysisController extends Controller
             }
             array_push($singleStudent,[
                 'id' => $student,
-                'marks' => $scored_marks,
+                'marks' => $scored_marks > 0 ? $scored_marks : 0,
                 'tags' => $tags,
                 'percentage' => $tags > 0 ? round((($scored_marks/$tags)*100), 2) : 0
             ]);
