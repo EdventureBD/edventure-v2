@@ -64,7 +64,7 @@
             <div class="text-center @if($exam_categories->count()>=7) course-category-js @endif ">
                 @foreach($exam_categories as $category)
                     <a href="{{route('model.exam',['c' => $category->id])}}"
-                       class="{{Illuminate\Support\Facades\Cache::get('exam_category') == $category->id ? 'text-white bg-purple' : 'text-purple bg-white'}} mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm
+                       class="{{Illuminate\Support\Facades\Cache::get('exam_category') == $category->id ? 'text-white btn-orange-customed' : 'text-purple bg-white'}} mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm
                             mx-1 bradius-15 bshadow-medium px-4">{{$category->name}}</a>
                 @endforeach
             </div>
@@ -75,7 +75,7 @@
             <div class="text-center @if($exam_topics->count()>=7) course-category-js @endif ">
                 @foreach($exam_topics as $topic)
                     <a href="{{route('model.exam',['t' => $topic->id])}}"
-                       class="{{Illuminate\Support\Facades\Cache::get('exam_topic') == $topic->id ? 'text-white bg-purple' : 'text-purple bg-white'}} mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm
+                       class="{{Illuminate\Support\Facades\Cache::get('exam_topic') == $topic->id ? 'text-white btn-orange-customed' : 'text-purple bg-white'}} mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm
                             mx-1 bradius-15 bshadow-medium px-4">{{$topic->name}}</a>
                 @endforeach
             </div>
