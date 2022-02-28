@@ -24,7 +24,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
-        @include('partials.facebook_pixel')
+{{--        @include('partials.facebook_pixel')--}}
     </head>
     <body>
 
