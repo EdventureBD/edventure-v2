@@ -45,7 +45,7 @@
                         <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4><br>
                         <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
                         <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2><br>
-                        <a href="{{route('profile.modelTest')}}" class="font-roboto border text-xsm btn btn-register btn-orange-customed text-white px-4">Go to Dashboard</a>
+                        <a href="{{route('profile.modelTest')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed text-white px-4" style="border: 1px solid #FA9632">Go to Dashboard</a>
                         @else
                         <div id="landing_greeting_and_register_button">
                             <div>
@@ -53,7 +53,7 @@
                                 <h2 class="text-lg fw-800 font-roboto text-white">প্রস্তুতি হোক <br> নিজের মতো</h2>
                             </div>
                             <div>
-                                <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register text-white px-md-4 my-md-4 py-md-3 border" style="background: #6400c8">REGISTER NOW</a>
+                                <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register text-white px-md-4 my-md-4 py-md-3" style="background: #6400c8; border: 1px solid #6400c8">REGISTER NOW</a>
                             </div>
                         </div>
                         @endauth
