@@ -101,11 +101,11 @@
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="examType">
                                                 <option value="" selected>Select Exam Type </option>
-                                                <option value="Assignment"
+                                                {{-- <option value="Assignment"
                                                     class="{{ $showAssignment ? '' : 'd-none' }}">
                                                     Assignment</option>
                                                 <option value="CQ">CQ</option>
-                                                <option value="MCQ">MCQ</option>
+                                                <option value="MCQ">MCQ</option> --}}
                                                 <option value="Aptitude Test">Aptitude Test</option>
                                                 <option value="Pop Quiz">Pop Quiz</option>
                                                 <option value="Topic End Exam">Topic End Exam</option>
@@ -183,20 +183,32 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="title" class="col-form-label">Order <span
-                                                    class="must-filled">*</span></label>
-                                            <input type="number" min="0" class="form-control" wire:model="order"
-                                                placeholder="Enter order in which this appears on an island(course_topic)">
-                                            @error('order')
-                                                <p style="color: red;">{{ $message }}</p>
-                                            @enderror
+                                    @if($showOrder)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="title" class="col-form-label">Order <span
+                                                        class="must-filled">*</span></label>
+                                                <input type="number" min="0" class="form-control" wire:model="order"
+                                                    placeholder="Enter order in which this appears on an island(course_topic)">
+                                                @error('order')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
+
+                                    {{-- @if($errors->first())
+                                        @php
+                                            dd($errors);
+                                        @endphp
+                                    @endif --}}
                                 </div>
 
-                                @error('aptitude_MCQ_exists')
+                                @error('aptitude_test_exists')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+
+                                @error('topic_end_exam_exists')
                                     <p style="color: red;">{{ $message }}</p>
                                 @enderror
 
