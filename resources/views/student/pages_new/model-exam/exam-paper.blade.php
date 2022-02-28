@@ -73,7 +73,7 @@
                     @endforeach
 
                     <div class="d-flex justify-content-center px-5">
-                        <button type="submit" class="btn text-xxsm fw-600 text-white bg-purple px-4 py-2 my-4">Submit</button>
+                        <button type="submit" class="btn text-xxsm fw-600 text-white btn-orange-customed px-4 py-2 my-4">Submit</button>
                     </div>
                 </form>
             </div>
