@@ -19,7 +19,7 @@
         <div class="container page__container">
             <div class="row">
                 <div class="col-12 mx-0 px-0">
-                    <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
+                    <div id="parent-timer" class="timer d-flex justify-content-center rounded">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
                                 <p class="text-white d-flex fw-500 m-0 rounded">
