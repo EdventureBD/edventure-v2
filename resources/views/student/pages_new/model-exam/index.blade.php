@@ -9,6 +9,61 @@
             padding: 14px 80px 18px 36px;
             cursor: pointer;
         }
+        .ribbon {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+        }
+        .ribbon::before,
+        .ribbon::after {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            display: block;
+            border: 5px solid #6400C8;
+        }
+        .ribbon span {
+            position: absolute;
+            display: block;
+            width: 225px;
+            padding: 15px 0;
+            background-color: #6400C8;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            color: #fff;
+            font: 700 18px/1 'Lato', sans-serif;
+            text-shadow: 0 1px 1px rgba(0,0,0,.2);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .ribbon-top-left {
+            top: -10px;
+            left: 12px;
+        }
+        @media(max-width:576px) {
+            .ribbon-top-left {
+                left: 53px;
+            }
+        }
+        .ribbon-top-left::before,
+        .ribbon-top-left::after {
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+        .ribbon-top-left::before {
+            top: 0;
+            right: 0;
+        }
+        .ribbon-top-left::after {
+            bottom: 0;
+            left: 0;
+        }
+        .ribbon-top-left span {
+            right: -25px;
+            top: 30px;
+            transform: rotate(-45deg);
+        }
 
         .card:hover{
             transform: scale(1.05);
@@ -92,6 +147,7 @@
 
                     @foreach ($exams as $exam)
                         @php($label = 'Take Exam')
+                        @php($d_none = 'd-none')
                         @php($href = route('model.exam.paper.mcq', \Illuminate\Support\Facades\Crypt::encrypt($exam->id)))
 
                         @if(count($exam->paymentOfExams) > 0 && auth()->check())
@@ -117,12 +173,14 @@
                             @foreach($exam->mcqTotalResult as $value)
                                 @if($value->student_id == auth()->user()->id)
                                     @php($label = 'View Result')
+                                    @php($d_none = '')
                                     @php($href = route('model.exam.paper.mcq', \Illuminate\Support\Facades\Crypt::encrypt($exam->id)))
                                     @break
                                 @endif
                             @endforeach
                         @endif
                         <div class="col-md-3 mb-4" style="max-width: 100%;padding-right: 0 !important;">
+                            <div class="{{$d_none}} ribbon ribbon-top-left"><span>done</span></div>
                             <div style="background-position: center center !important;
                                         background: url({{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}})"
                                  class="single-exam text-center mx-auto p-4 mb-md-0">
