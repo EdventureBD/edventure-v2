@@ -11,6 +11,13 @@
                 <div class="col-12">
                     <h3 class="text-gray d-flex justify-content-center m-0 fw-800">Exam : {{ $exam->title }}</h3>
                 </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="py-5">
+        <div class="container page__container">
+            <div class="row">
                 <div class="col-12 mx-0 px-0">
                     <div id="parent-timer" class="timer d-flex justify-content-center rounded bg-purple">
                         <div id="innerParent">
@@ -29,7 +36,7 @@
                                     <i class="c-point fas fa-angle-down"></i>
                                 </a>
                             </div>
-                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none">
+                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none overflow-auto">
 
                             </div>
                         </div>
@@ -39,17 +46,13 @@
                 </div>
                 <p class="h1 text-white-50 font-weight-light m-0 d-none"> <span id="countdownHour-xs"></span>:<span id="countdownMinuits-xs"></span>:<span id="countdownSecound-xs"></span></p>
             </div>
-        </div>
-    </div>
-    <div class="py-5">
-        <div class="container page__container">
             <div class="page-section">
                 <form action="{{route('model.exam.mcq.submit',$exam->id)}}" id="cqFormSubmit" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" id="exam_end_time" name="exam_end_time">
                     @foreach($exam->mcqQuestions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light p-2 d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light p-2 d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2" style="word-break: initial !important">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
 
                             <div class="container my-4">
                                 <div class="question d-flex justify-content-start">
