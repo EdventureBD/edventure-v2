@@ -59,8 +59,8 @@
 
                 <div id="SelectedCourse" class="d-none mx-auto category-progress text-white">
                     <div class="course-name">
-                        <div class="d-flex">
-                            <h5 id="courseName" class="fw-600 pl-4"></h5>
+                        <div class="d-flex" id="course_display">
+                            <h5 id="courseName" class="fw-400 pl-4"></h5>
                         </div>
                     </div>
                 </div>
@@ -225,8 +225,9 @@
     $(document).on('change', '#course_selecting', function(){
         var course_id = $( this ).val();
         var course_name = $( this ).find('option:selected').text();
+        $("#course_link").remove();
         
-        console.log(course_id);
+        // console.log(course_id);
 
         $('#SelectedCourse').removeClass('d-none');
         $('#courseName').text(course_name);
@@ -249,6 +250,9 @@
 
                 var mcq_tags = response.mcq_content_tags;
                 var cq_tags = response.cq_content_tags;
+                var batch_slug = response.batch_slug;
+
+                $('#course_display').append('<a id="course_link" href="batch/' + batch_slug + '/"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>');
 
                 // console.log(mcq_tags);
                 // console.log(cq_tags);

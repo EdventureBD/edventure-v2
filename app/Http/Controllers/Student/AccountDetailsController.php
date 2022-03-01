@@ -107,56 +107,63 @@ class AccountDetailsController extends Controller
 
     public function ajax_get_strengths_and_weaknesses(Request $request){
 
-        $mcq_content_tags = ContentTag::where('course_id', $request->course_id)->has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
-            return $query->where('student_id', auth()->user()->id)->where(function($query){
-                $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz MCQ')->orWhere('exam_type', 'Topic End Exam MCQ');
-            });
-        }])->get();
+        if($request->ajax()){
 
-        foreach($mcq_content_tags as $mcq_content_tag){
-            $mcq_tag_total_marks = 0;
-            $mcq_tag_scored_marks = 0;
-            foreach($mcq_content_tag->questionContentTagAnalysis as $analysis){
-                $mcq_tag_total_marks += 1;
-                $mcq_tag_scored_marks += $analysis->gain_marks;
-            }
-            $mcq_content_tag->tag_scored_marks = $mcq_tag_scored_marks;
-            $mcq_content_tag->tag_total_marks = $mcq_tag_total_marks;
-            $mcq_content_tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
-        }
+            $enrollment = BatchStudentEnrollment::where('course_id', $request->course_id)->where('student_id', auth()->user()->id)->first();
+            $batch = Batch::where('id', $enrollment->batch_id)->first();
 
-        $cq_content_tags = ContentTag::where('course_id', $request->course_id)->has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
-            return $query->where('student_id', auth()->user()->id)->where(function($query){
-                $query->Where('exam_type', 'Pop Quiz CQ')->orWhere('exam_type', 'Topic End Exam CQ');
-            });
-        }])->get();
+            $mcq_content_tags = ContentTag::where('course_id', $request->course_id)->has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
+                return $query->where('student_id', auth()->user()->id)->where(function($query){
+                    $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz MCQ')->orWhere('exam_type', 'Topic End Exam MCQ');
+                });
+            }])->get();
 
-        foreach($cq_content_tags as $cq_content_tag){
-            $cq_tag_total_marks = 0;
-            $cq_tag_scored_marks = 0;
-            foreach($cq_content_tag->questionContentTagAnalysis as $analysis){
-                // dd($analysis);
-                if($analysis->exam_type == 'Pop Quiz CQ'){
-                    $cq_question = PopQuizCQ::where('id', $analysis->question_id)->first();
-                    $cq_tag_total_marks = $cq_tag_total_marks + $cq_question->marks;
-                    $cq_tag_scored_marks += $analysis->gain_marks;
-
+            foreach($mcq_content_tags as $mcq_content_tag){
+                $mcq_tag_total_marks = 0;
+                $mcq_tag_scored_marks = 0;
+                foreach($mcq_content_tag->questionContentTagAnalysis as $analysis){
+                    $mcq_tag_total_marks += 1;
+                    $mcq_tag_scored_marks += $analysis->gain_marks;
                 }
-                elseif($analysis->exam_type == 'Topic End Exam CQ'){
-                    $cq_question = TopicEndExamCQ::where('id', $analysis->question_id)->first();
-                    $cq_tag_total_marks += $cq_question->marks;
-                    $cq_tag_scored_marks += $analysis->gain_marks;
-                }
+                $mcq_content_tag->tag_scored_marks = $mcq_tag_scored_marks;
+                $mcq_content_tag->tag_total_marks = $mcq_tag_total_marks;
+                $mcq_content_tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
             }
-            $cq_content_tag->tag_scored_marks = $cq_tag_scored_marks;
-            $cq_content_tag->tag_total_marks = $cq_tag_total_marks;
-            $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
-        }
 
-        return  [
-                    'mcq_content_tags' => $mcq_content_tags,
-                    'cq_content_tags' => $cq_content_tags
-                ];
+            $cq_content_tags = ContentTag::where('course_id', $request->course_id)->has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
+                return $query->where('student_id', auth()->user()->id)->where(function($query){
+                    $query->Where('exam_type', 'Pop Quiz CQ')->orWhere('exam_type', 'Topic End Exam CQ');
+                });
+            }])->get();
+
+            foreach($cq_content_tags as $cq_content_tag){
+                $cq_tag_total_marks = 0;
+                $cq_tag_scored_marks = 0;
+                foreach($cq_content_tag->questionContentTagAnalysis as $analysis){
+                    // dd($analysis);
+                    if($analysis->exam_type == 'Pop Quiz CQ'){
+                        $cq_question = PopQuizCQ::where('id', $analysis->question_id)->first();
+                        $cq_tag_total_marks = $cq_tag_total_marks + $cq_question->marks;
+                        $cq_tag_scored_marks += $analysis->gain_marks;
+
+                    }
+                    elseif($analysis->exam_type == 'Topic End Exam CQ'){
+                        $cq_question = TopicEndExamCQ::where('id', $analysis->question_id)->first();
+                        $cq_tag_total_marks += $cq_question->marks;
+                        $cq_tag_scored_marks += $analysis->gain_marks;
+                    }
+                }
+                $cq_content_tag->tag_scored_marks = $cq_tag_scored_marks;
+                $cq_content_tag->tag_total_marks = $cq_tag_total_marks;
+                $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
+            }
+
+            return  [
+                        'mcq_content_tags' => $mcq_content_tags,
+                        'cq_content_tags'  => $cq_content_tags,
+                        'batch_slug'         => $batch->slug
+                    ];
+        }
     }
 
     public function profileData()
