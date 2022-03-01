@@ -80,14 +80,14 @@ class Edit extends Component
     public function updatedOrder()
     {
         $this->validate([
-            'order' => 'required|numeric|integer|gt:-1'
+            'order' => 'numeric|integer|gte:0'
         ]);
     }
 
     public function updatedThreshold_marks()
     {
         $this->validate([
-            'threshold_marks' => 'required|numeric|integer|gt:-1'
+            'threshold_marks' => 'required|numeric|integer|gte:0'
         ]);
     }
 
@@ -148,7 +148,7 @@ class Edit extends Component
         'examType' => 'required',
         'marks' => 'required|numeric|integer|gt:0',
         'duration' => 'required|numeric|integer|gt:0',
-        'order' => 'required|numeric|integer|gt:-1',
+        // 'order' => 'required|numeric|integer|gt:-1',
         'threshold_marks' => 'required|numeric|integer|gte:0',
         'special' => 'nullable',
         'topicId' => 'nullable',
@@ -166,6 +166,10 @@ class Edit extends Component
     {
         if(!$this->special){
             $this->rules['topicId'] = 'required';
+        }
+
+        if($this->examType === "Pop Quiz"){
+            $this->rules['order'] = 'required|numeric|integer|gte:0';
         }
 
         $this->rules['title'] = 'required|string|max:325|unique:exams,title,'.$this->exam->id;
@@ -208,7 +212,12 @@ class Edit extends Component
         $exam->exam_type = $data['examType'];
         $exam->marks = $data['marks'];
         $exam->duration = $data['duration'];
-        $exam->order = $data['order'];
+        if($this->examType == "Pop Quiz"){
+            $exam->order = $data['order'];
+        }
+        else{
+            $exam->order = 0;
+        }
         $exam->threshold_marks = $data['threshold_marks'];
         $exam->question_limit = $data['quesLimit'];
         if($this->showQuestionLimit2){

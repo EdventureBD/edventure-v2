@@ -64,7 +64,12 @@
                      role="tabpanel"
                      aria-labelledby="pdf-tab">
                     @if($tag->solution_pdf)
-                        <embed src="{{Storage::url('tagsSolutionPdf/'.$tag->solution_pdf)}}"
+                        <embed 
+                            @if(Request::is('profile/course/pdf_and_video/*'))
+                                src="{{ asset($tag->solution_pdf) }}"
+                            @else
+                                src="{{ Storage::url('tagsSolutionPdf/'.$tag->solution_pdf) }}"
+                            @endif
                                style="overflow:hidden;height:550px;width:100%;top:0;left:0;right:0;bottom:0"
                                type="application/pdf">
                     @else

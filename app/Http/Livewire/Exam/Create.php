@@ -40,6 +40,8 @@ class Create extends Component
 
     public $showQuestionLimit2 = false;
 
+    public $showOrder = false;
+
     public function updatedCategoryId()
     {
         $this->intermediaryLevels = IntermediaryLevel::where('course_category_id', $this->categoryId)->get();
@@ -105,14 +107,14 @@ class Create extends Component
     public function updatedOrder()
     {
         $this->validate([
-            'order' => 'required|numeric|integer|gt:-1'
+            'order' => 'numeric|integer|gte:0'
         ]);
     }
 
     public function updatedThreshold_marks()
     {
         $this->validate([
-            'threshold_marks' => 'required|numeric|integer|gt:-1'
+            'threshold_marks' => 'required|numeric|integer|gte:0'
         ]);
     }
 
@@ -125,19 +127,28 @@ class Create extends Component
             // $this->showSpecialExam = false;
             $this->marks=10;
             $this->duration=1440;
-        } elseif( ($this->examType) == 'MCQ' || ($this->examType) == 'Aptitude Test') {
+        } 
+        elseif( ($this->examType) == 'MCQ' || ($this->examType) == 'Aptitude Test') {
             $this->quesLimit = '';
             $this->showQuestionLimit = true;
             $this->showQuestionLimit2 = false;
+            $this->showOrder = false;
             // $this->showSpecialExam = true;
             $this->marks=null;
             $this->validate([
                 'examType' => 'required'
             ]);
             $this->duration=null;
-        } elseif ( ($this->examType) == 'Pop Quiz' || ($this->examType) == 'Topic End Exam' ){
+        } 
+        elseif ( ($this->examType) == 'Pop Quiz'){
             $this->showQuestionLimit2 = true;
-        } elseif( ($this->examType) == 'CQ' ){
+            $this->showOrder = true;
+        }
+        elseif ( ($this->examType) == 'Topic End Exam'){
+            $this->showQuestionLimit2 = true;
+            $this->showOrder = false;
+        }
+        elseif( ($this->examType) == 'CQ' ){
             $this->showQuestionLimit2 = false;
         }
     }
@@ -163,7 +174,7 @@ class Create extends Component
         'examType' => 'required',
         'marks' => 'required|numeric|integer|gt:0',
         'duration' => 'required|numeric|integer|gt:0',
-        'order' => 'required|numeric|integer|gt:-1',
+        // 'order' => 'required|numeric|integer|gte:0',
         'threshold_marks' => 'required|numeric|integer|gte:0',
         'special' => 'nullable',
         'topicId' => 'nullable',
@@ -181,6 +192,10 @@ class Create extends Component
     {
         if(!$this->special){
             $this->rules['topicId'] = 'required';
+        }
+
+        if($this->examType === "Pop Quiz"){
+            $this->rules['order'] = 'required|numeric|integer|gte:0';
         }
 
         // $this->rules['title'] = 'required|string|max:325|unique:exams,title,'.$this->exam->id;
@@ -213,13 +228,23 @@ class Create extends Component
 
             return;
         }
-
-        $aptitude_test = Exam::where('exam_type', 'Aptitude Test')->where('course_id', $this->courseId)->where('topic_id', $this->topicId)->count();
         
         // if test type is aptitude test and an aptitude test already exists
-        if($this->examType == 'Aptitude Test' && $aptitude_test){
-            $this->addError('aptitude_MCQ_exists', 'An aptitude test for this island(i.e course topic) already exists !!');
-            return;
+        if($this->examType == 'Aptitude Test'){
+            $aptitude_test = Exam::where('exam_type', 'Aptitude Test')->where('course_id', $this->courseId)->where('topic_id', $this->topicId)->count();
+            if($aptitude_test){
+                $this->addError('aptitude_test_exists', 'An aptitude test for this island(i.e course topic) already exists !!');
+                return;
+            }
+        }
+
+        // if test type is aptitude test and an topic end exam test already exists
+        if($this->examType == 'Topic End Exam'){
+            $topic_end_exam = Exam::where('exam_type', 'Topic End Exam')->where('course_id', $this->courseId)->where('topic_id', $this->topicId)->count();
+            if($topic_end_exam){
+                $this->addError('topic_end_exam_exists', 'A topic end exam for this island(i.e course topic) already exists !!');
+                return;
+            }
         }
 
         $exam = new Exam;
@@ -232,7 +257,12 @@ class Create extends Component
         $exam->special = $data['special'];
         $exam->marks = $data['marks'];
         $exam->duration = $data['duration'];
-        $exam->order = $data['order'];
+        if($this->examType == "Pop Quiz"){
+            $exam->order = $data['order'];
+        }
+        else{
+            $exam->order = 0;
+        }
         $exam->threshold_marks = $data['threshold_marks'];
         $exam->question_limit = $data['quesLimit'];
         if($this->showQuestionLimit2){

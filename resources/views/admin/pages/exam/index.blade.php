@@ -75,12 +75,18 @@
                                                     <span class="badge bg-primary" > Special {{ $exam->exam_type }} </span>
                                                 @else
                                                     <span                                                   
-                                                        class="badge {{ $exam->exam_type == 'MCQ' ? 'bg-success' : '' }}
+                                                        class="badge
+                                                                    {{-- {{ $exam->exam_type == 'MCQ' ? 'bg-success' : '' }}
                                                                     {{ $exam->exam_type == 'CQ' ? 'bg-warning' : '' }}
                                                                     {{ $exam->exam_type == 'Assignment' ? 'bg-danger' : '' }}
                                                                     {{ $exam->exam_type == 'Aptitude Test' ? 'bg-dark' : '' }}
                                                                     {{ $exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
-                                                                    {{ $exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}">
+                                                                    {{ $exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}" --}}
+
+                                                                    {{ $exam->exam_type == 'Aptitude Test' ? 'bg-success' : '' }}
+                                                                    {{ $exam->exam_type == 'Pop Quiz' ? 'bg-warning' : '' }}
+                                                                    {{ $exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}"
+                                                                    >
                                                         
                                                         {{ $exam->exam_type }}
                                                     </span>
@@ -91,7 +97,13 @@
                                             <td class="text-center">{{ $exam->question_limit }}</td>
                                             <td class="text-center"> @if($exam->exam_type == "Pop Quiz" || $exam->exam_type == "Topic End Exam") {{ $exam->question_limit_2 }} @else N/A @endif</td>
 
-                                            <td class="text-center">{{ $exam->order }}</td>
+                                            <td class="text-center">
+                                                @if($exam->exam_type === "Pop Quiz")
+                                                    {{ $exam->order }}
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </td>
                                             <td class="text-center">
 
                                                 @if ($exam->exam_type == "Pop Quiz")

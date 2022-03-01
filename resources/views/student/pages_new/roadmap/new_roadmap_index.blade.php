@@ -98,7 +98,7 @@
                                     <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
                                  @endif
                               </div>
-                              <a 
+                              <a @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                  href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
                                  class="fw-800 modal-items text-white d-flex justify-content-center rounded">
                                  {{ Str::limit($exam->title, 23, '...') }}

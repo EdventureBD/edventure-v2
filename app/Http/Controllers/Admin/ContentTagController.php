@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ContentTag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContentTagController extends Controller
 {
@@ -32,6 +33,8 @@ class ContentTagController extends Controller
 
     public function destroy(ContentTag $contentTag)
     {
+        $fileName = "public/content_tags/pdf/" . substr($contentTag->solution_pdf, 26);
+        Storage::delete($fileName);
         $delete = $contentTag->delete();
         if ($delete) {
             return redirect()->route('content-tag.index')->with('status', 'Content Tag successfully deleted!');
