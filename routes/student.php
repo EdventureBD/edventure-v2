@@ -13,6 +13,7 @@ use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/profile/course/pdf_and_video/{tag_id}', [AccountDetailsController::class, 'course_tag_pdf_and_video'])->name('course.tag.pdf_and_video');
     Route::Post('/profile/image/upload', [AccountDetailsController::class, 'uploadImage'])->name('profile.image.upload');
 
     Route::group([], function(){
