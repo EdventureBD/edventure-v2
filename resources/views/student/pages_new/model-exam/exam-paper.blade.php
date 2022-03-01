@@ -49,7 +49,7 @@
                     <input type="hidden" id="exam_end_time" name="exam_end_time">
                     @foreach($exam->mcqQuestions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light p-2 d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light p-2 d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2" style="word-break: initial !important">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
 
                             <div class="container my-4">
                                 <div class="question d-flex justify-content-start">
