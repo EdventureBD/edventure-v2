@@ -97,20 +97,16 @@ class Create extends Component
     public function saveBatchLecture()
     {
         $data = $this->validate();
-
-        if(isset($this->solutionPdf)){
-            dd('Has PDF');
-        }
-
-        dd($data);
-
         $content_tag = new ContentTag();
         $content_tag->title = $data['title'];
         $content_tag->slug  =(string) Str::uuid();
         $content_tag->course_id = $data['courseId'];
         $content_tag->topic_id = $data['topicId'];
+        if (!empty($this->solutionPdf)) {
+            $content_tag->solution_pdf = Storage::url($this->solutionPdf->store('public/content_tags/pdf'));
+        }
+        $content_tag->solution_video = $this->solutionVideo;
         $content_tag->status = 1;
-
         $save = $content_tag->save();
 
         if ($save) {

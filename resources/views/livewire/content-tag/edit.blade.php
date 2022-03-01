@@ -49,6 +49,7 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
                                     {{-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseLecture">Lecture</label>
@@ -63,22 +64,23 @@
                                     </div> --}}
 
                                     {{-- Solution PDF --}}
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="pdf">Solution Pdf</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" wire:model="solutionPdf">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                                <span> {{ $solutionPdf->temporaryUrl() }} </span>
-                                            </div>
-                                            <div>
-                                                @error('solutionPdf')
-                                                    <p style="color: red;">{{ $message }}</p>
-                                                @enderror
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="pdf">Solution Pdf</label>
+                                                <div class="custom-file" wire:ignore>
+                                                    <input type="file" class="custom-file-input" id="customFile" wire:model="solutionPdf">
+                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                </div>
+                                                <div>
+                                                    @error('solutionPdf')
+                                                        <p style="color: red;">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
 
                                 <div class="row">
                                     {{-- Solution Video --}}

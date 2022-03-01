@@ -27,6 +27,7 @@ class Edit extends Component
     // public $lecture;
     public $solutionVideo;
     public $solutionPdf;
+    public $prevpdf;
 
     public function updatedTitle()
     {
@@ -64,8 +65,13 @@ class Edit extends Component
         $content_tag->course_id = $data['courseId'];
         $content_tag->topic_id = $data['topicId'];
         // $content_tag->lecture_id = $data['lectureId'];
+        if (!empty($this->solutionPdf)) {
+            $fileName = "public/content_tags/pdf/" . substr($this->prevpdf, 26);
+            Storage::delete($fileName);
+            $content_tag->solution_pdf = Storage::url($this->solutionPdf->store('public/content_tags/pdf'));
+        }
+        $content_tag->solution_video = $this->solutionVideo;
         $content_tag->status = 1;
-
         $save = $content_tag->save();
 
         if ($save) {
@@ -83,6 +89,7 @@ class Edit extends Component
         $this->courseId = $this->contentTag->course_id;
         $this->topicId = $this->contentTag->topic_id;
         // $this->lectureId = $this->contentTag->lecture_id;
+        $this->prevpdf = $this->contentTag->solution_pdf;
 
         $this->course = Course::where('id', $this->courseId)->first();
         $this->topic = CourseTopic::where('id', $this->topicId)->first();
