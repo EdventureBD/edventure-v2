@@ -41,7 +41,7 @@ class ModelMcqTagAnalysisController extends Controller
             }
             $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0 ;
             $tag->tag_total_marks = $mcq_tag_total_marks;
-            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($tag->tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
         }
         if($tag_type == 'weakness') {
             $tags = $tags->sortBy('percentage_scored');
@@ -72,7 +72,7 @@ class ModelMcqTagAnalysisController extends Controller
             }
             $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0;
             $tag->tag_total_marks = $mcq_tag_total_marks;
-            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($tag->tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
             unset($tag->modelMcqTagAnalysis);
         }
 
@@ -124,9 +124,10 @@ class ModelMcqTagAnalysisController extends Controller
                     $scored_marks += $value->gain_marks;
                 }
             }
+            $scored_marks = $scored_marks > 0 ? $scored_marks : 0;
             array_push($singleStudent,[
                 'id' => $student,
-                'marks' => $scored_marks > 0 ? $scored_marks : 0,
+                'marks' => $scored_marks,
                 'tags' => $tags,
                 'percentage' => $tags > 0 ? round((($scored_marks/$tags)*100), 2) : 0
             ]);
