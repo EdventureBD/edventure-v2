@@ -11192,13 +11192,14 @@ a:hover {
 }
 
 .btn.btn-outline {
-  border: 2px solid #653092;
-  color: #663193;
+  border: 2px solid #FA9632;
+  color: #FA9632;
   border-radius: 10px;
 }
 .btn.btn-outline:hover {
-  background-color: #663193;
-  color: #ffffff;
+  background-color: #FA9632;
+  color: white;
+  font-weight: 500;
 }
 
 .btn.bg-purple:hover {
