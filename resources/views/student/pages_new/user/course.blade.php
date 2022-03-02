@@ -59,7 +59,7 @@
 
                 <div id="SelectedCourse" class="d-none mx-auto category-progress text-white">
                     <div class="course-name">
-                        <div class="d-flex" id="course_display">
+                        <div class="d-flex justify-content-between" id="course_display">
                             <h5 id="courseName" class="fw-400 pl-4"></h5>
                         </div>
                     </div>

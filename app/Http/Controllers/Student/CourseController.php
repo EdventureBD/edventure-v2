@@ -133,15 +133,18 @@ class CourseController extends Controller
             ->where('batch_student_enrollments.student_id', auth()->user()->id)
             ->where('payments.student_id', auth()->user()->id)
             ->first();
+            
         if ($enrolled && $enrolled->status == 0) {
             return redirect()->route('course-preview', $course->slug);
         }
-        if($course->price<=0){
 
+        if($course->price <= 0){
+            // check if batch exists. If not, redirect with error.
             $courseFirstBatch = Batch::where('course_id', $course->id)->orderby('created_at','ASC')->select('id','slug')->first();
             if(!$courseFirstBatch){
                 return redirect()->back()->withErrors([ 'No batch is available now, please try again later!']);
             }
+
             $student=auth()->user();
             $payment = new Payment();
             $payment->student_id = $student->id;
@@ -157,7 +160,9 @@ class CourseController extends Controller
             $payment->days_for = 365;
             $payment->accepted = 1;
             $payment->save();
+
             $lastPayment = Payment::latest()->first();
+
             $batchStudentEnrollment = BatchStudentEnrollment::updateOrCreate(
                 [
                     'course_id' => $course->id,
@@ -185,7 +190,8 @@ class CourseController extends Controller
                     return redirect()->route('course-preview', $course->slug);
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
-            } else {
+            }
+            else {
                 $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
                 if (!$batch) {
                     return back()->withErrors([ 'No batch is available now, please try again later!']);

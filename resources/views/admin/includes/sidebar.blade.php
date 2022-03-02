@@ -182,6 +182,16 @@
                 </li>
                 {{-- END OF CONTENT TAG --}}
 
+                {{-- START OF COURSE CATEGORY --}}
+                <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">
+                    <a href="{{ route('bundle.index') }}"
+                        class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }} {{ request()->is('admin/bundle/create') ? 'active' : '' }}  {{ request()->is('admin/bundle/*') ? 'active' : '' }}">
+                        <i class="fas fa-list-ol"></i>
+                        <p>&nbsp; Bundles </p>
+                    </a>
+                </li>
+                {{-- END OF COURSE CATEGORY --}}
+
                 {{-- START OF EXAM SIDEBAR --}}
                 @include('admin.includes.sidebar_content.exam')
                 {{-- END OF EXAM SIDEBAR --}}
