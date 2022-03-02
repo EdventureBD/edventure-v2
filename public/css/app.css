@@ -11007,14 +11007,23 @@ a:hover {
 }
 #text-in-landing a {
   font-size: 1.5rem;
+  color: white;
 } 
+#text-in-landing a:hover{
+  background: wheat;
+  color: #FA9632;
+  border: 1px solid #FA9632;
+}
 @media screen and (max-width: 576px) {
   #text-in-landing {
     top: 90px;
     left: 25px;
    }
-   #text-in-landing h4, #text-in-landing h2, #text-in-landing a{
-     font-size: .7rem;
+   #text-in-landing h4, #text-in-landing h2{
+     font-size: .9rem;
+   }
+   #text-in-landing a{
+    font-size: .8rem;
    }
 }
 @media screen and (min-width: 577px) and (max-width: 768px) {
