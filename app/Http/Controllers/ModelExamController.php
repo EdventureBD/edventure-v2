@@ -279,9 +279,8 @@ class ModelExamController extends Controller
         $examId = Crypt::decrypt($examId);
 
         $exam = ModelExam::query()->where('id',$examId)->with(['mcqQuestions' => function($q) {
-                $q->inRandomOrder();
+                $q->orderByDesc('id');
         }])->firstOrFail();
-
 
         //If already attempted the exam, load exam results
         $student_id = auth()->user()->is_admin && request()->input('student_id') ?
