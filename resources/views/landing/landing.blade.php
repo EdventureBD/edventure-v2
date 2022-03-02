@@ -1,31 +1,4 @@
 <x-landing-layout>
-    {{-- <section class="relative" id="landing-image-new" style="">
-        <div class="">
-            <div class="d-flex justify-content-start" >
-                <div>
-                    <div class="mt-0" id="text-in-landing">
-                        @auth
-                        <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4><br>
-                        <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
-                        <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2><br>
-                        <a href="{{route('model.exam')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed text-white px-4" style="border: 1px solid #FA9632">Go For Exam</a>
-                        @else
-                        <div id="landing_greeting_and_register_button">
-                            <div>
-                                <h4 class="text-white  text-md font-roboto">Edventure-এর সাথে</h4><br>
-                                <h2 class="text-lg fw-800 font-roboto text-white">প্রস্তুতি হোক <br> নিজের মতো</h2>
-                            </div>
-                            <div>
-                                <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register text-white px-md-4 my-md-4 py-md-3" style="background: #6400c8; border: 1px solid #6400c8">REGISTER NOW</a>
-                            </div>
-                        </div>
-                        @endauth
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
     {{-- new landing banner part starts --}}
     <section class="" style="position:relative">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
@@ -75,7 +48,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/roadmapCardBanner.png" class=" img-fluid" alt="Roadmap Image">
+                        <img src="/img/landing/newLanding/roadMap.png" class=" img-fluid" alt="Roadmap Image">
                     </div>
                 </div>
             </div>
@@ -90,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/phoneCartBanner.png" class="img-fluid" alt="Dashboard Photo">
+                        <img src="/img/landing/newLanding/phoneDashboard.png" class="img-fluid" alt="Dashboard Photo">
                     </div>
                 </div>
             </div>
@@ -105,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/medical_camp/medicamp32.png" class="img-fluid" alt="">
+                        <img src="/img/landing/newLanding/discussionWithTeacher.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
