@@ -27,7 +27,7 @@
         </div>
     </section> --}}
     {{-- new landing banner part starts --}}
-    <section class="">
+    <section class="" style="position:relative">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
             <div class="col-5 p-0 m-0">
                 <img src="/img/landing/newLanding/landingImageBigScreenText.png" alt="text-part's Background" class="img-fluid h-75 w-100">
@@ -35,6 +35,25 @@
             <div class="col-7 p-0 m-0">
                 <img src="/img/landing/newLanding/landingImageBigScreen.png" alt="photo part in landing" class="img-fluid h-75 w-100">
             </div>
+        </div>
+        <div class="mt-0" id="text-in-landing">
+            @auth
+            <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4>
+            <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
+            <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
+            <a href="{{route('model.exam')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed text-white px-4" style="border: 1px solid #FA9632">Go For Exam</a>
+            @else
+            <div id="landing_greeting_and_register_button">
+                <div>
+                    <h4 class="text-white  text-md font-roboto">Edventure-এর সাথে</h4><br>
+                    <h2 class="text-lg fw-800 font-roboto text-white">প্রস্তুতি হোক <br> নিজের মতো</h2>
+                </div>
+                <div>
+                    <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register text-white px-md-4 my-md-4 py-md-3" style="background: #6400c8; border: 1px solid #6400c8">REGISTER NOW</a>
+                </div>
+            </div>
+            @endauth
+
         </div>
     </section>
     {{-- new landing banner part ends --}}
