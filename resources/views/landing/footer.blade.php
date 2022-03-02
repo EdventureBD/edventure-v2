@@ -41,7 +41,7 @@
                             <input type="text" name="email" placeholder="Enter your email address" style="color: black; font-size: 14px;"/>
                             <img src="/img/landing/subscribe_user.png" alt="">
                         </div>
-                        <button type="submit" class="btn text-xxsm text-white bg-purple fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
+                        <button type="submit" class="btn text-xxsm text-white btn-orange-customed fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
                     </form>
                 </div>
                 <div class="d-flex justify-content-between social-icons mt-3">
