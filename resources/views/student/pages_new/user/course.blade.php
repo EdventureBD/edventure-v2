@@ -65,8 +65,8 @@
 
                 <div id="SelectedCourse" class="d-none mx-auto category-progress text-white">
                     <div class="course-name">
-                        <div class="d-flex">
-                            <h5 id="courseName" class="fw-600 pl-4"></h5>
+                        <div class="d-flex" id="course_display">
+                            <h5 id="courseName" class="fw-400 pl-4"></h5>
                         </div>
                     </div>
                 </div>
@@ -86,13 +86,6 @@
                         <h5 class="fw-600">MCQ</h5>
                     </div>
                     <div class=" text-black" id="mcq_strength">
-                        @foreach ($mcq_content_tags as $mcq_content_tag)
-                            @if($mcq_content_tag->percentage_scored != 'no data')
-                                @if($mcq_content_tag->percentage_scored > 80)
-                                    <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $mcq_content_tag->title }}</p>
-                                @endif
-                            @endif
-                        @endforeach
                     </div>
                     <div>
                         <a href="#" style="text-decoration: none; color: black; font-weight:600;">
@@ -106,13 +99,6 @@
                         <h5 class="fw-600">CQ</h5>
                     </div>
                     <div class=" text-black" id="cq_strength">
-                        @foreach ($cq_content_tags as $cq_content_tag)
-                            @if($cq_content_tag->percentage_scored != 'no data')
-                                @if($cq_content_tag->percentage_scored > 80)
-                                    <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $cq_content_tag->title }}</p>
-                                @endif
-                            @endif
-                        @endforeach
                         {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p> --}}
                     </div>
                     <div>
@@ -135,13 +121,6 @@
                     <h5 class="fw-600">MCQ</h5>
                 </div>
                 <div class="text-black" id="mcq_weakness">
-                    @foreach ($mcq_content_tags as $mcq_content_tag)
-                        @if($mcq_content_tag->percentage_scored !== 'no data')
-                            @if($mcq_content_tag->percentage_scored < 20)
-                                <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $mcq_content_tag->title }}</p>
-                            @endif
-                        @endif
-                    @endforeach
                     {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p> --}}
                 </div>
                 <div>
@@ -154,14 +133,6 @@
                     <h5 class="fw-600">CQ</h5>
                 </div>
                 <div class="text-black" id="cq_weakness">
-                    @foreach ($cq_content_tags as $cq_content_tag)
-                        @if($cq_content_tag->percentage_scored !== 'no data')
-
-                            @if($cq_content_tag->percentage_scored < 20)
-                                <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">{{ $cq_content_tag->title }}</p>
-                            @endif
-                        @endif
-                    @endforeach
                     {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p> --}}
                 </div>
                 <div>
@@ -172,14 +143,18 @@
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center">
+
+    {{-- UI Arrows. Dunno what its for though. --}}
+
+    {{-- <div class="d-flex justify-content-center">
         <div>
             <span class="iconify mr-5" data-icon="fa-solid:angle-left"></span>
         </div>
         <div>
             <span class="iconify ml-5" data-icon="fa-solid:angle-right"></span>
         </div>
-    </div>
+    </div> --}}
+
 @endsection
 
 @section('js')
@@ -256,8 +231,9 @@
     $(document).on('change', '#course_selecting', function(){
         var course_id = $( this ).val();
         var course_name = $( this ).find('option:selected').text();
+        $("#course_link").remove();
         
-        console.log(course_id);
+        // console.log(course_id);
 
         $('#SelectedCourse').removeClass('d-none');
         $('#courseName').text(course_name);
@@ -280,6 +256,9 @@
 
                 var mcq_tags = response.mcq_content_tags;
                 var cq_tags = response.cq_content_tags;
+                var batch_slug = response.batch_slug;
+
+                $('#course_display').append('<a id="course_link" href="batch/' + batch_slug + '/"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>');
 
                 // console.log(mcq_tags);
                 // console.log(cq_tags);
@@ -292,10 +271,10 @@
                     {
                         if(mcq_tag.percentage_scored != "no data"){
                             if(mcq_tag.percentage_scored > 80){
-                                mcq_strength_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p>';
+                                mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
                             }
                             else if(mcq_tag.percentage_scored < 20){
-                                mcq_weakness_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p>';
+                                mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
                             }
                         }
                     });
@@ -312,10 +291,10 @@
                     {
                         if(cq_tag.percentage_scored != "no data"){
                             if(cq_tag.percentage_scored > 80){
-                                cq_strength_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p>';
+                                cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
                             else if(cq_tag.percentage_scored < 20){
-                                cq_weakness_tags_html += '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p>';
+                                cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
                         }
                     });

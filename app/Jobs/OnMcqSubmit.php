@@ -78,7 +78,7 @@ class OnMcqSubmit implements ShouldQueue
             'model_exam_id' => (int) $this->exam->id,
             'student_id' => $this->student_id,
             'exam_end_time' => $this->exam_end_time,
-            'total_marks' => $total_marks,
+            'total_marks' => $total_marks > 0 ? $total_marks : 0,
             'duration' => $this->exam->duration * 60
         ];
 

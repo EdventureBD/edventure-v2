@@ -13,6 +13,7 @@ use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');
+    Route::get('/profile/course/pdf_and_video/{tag_id}', [AccountDetailsController::class, 'course_tag_pdf_and_video'])->name('course.tag.pdf_and_video');
     Route::Post('/profile/image/upload', [AccountDetailsController::class, 'uploadImage'])->name('profile.image.upload');
 
     Route::group([], function(){
@@ -23,7 +24,6 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         Route::get('/model-test/tag-details/{id}', [ModelMcqTagAnalysisController::class, 'getAjaxTagAnalysis'])->name('tag.analysis.ajax');
         Route::get('/profile/model-test/tag-solutions/{tagId}', [ModelMcqTagAnalysisController::class, 'solutions'])->name('tag.solution');
     });
-
 
     Route::get('/profile/ajax_get_courses', [AccountDetailsController::class, 'ajax_get_courses'])->name('ajax-get-courses');
     Route::get('/profile/ajax_get_strengths_and_weaknesses', [AccountDetailsController::class, 'ajax_get_strengths_and_weaknesses'])->name('ajax-get-strengths-and-weaknesses');
