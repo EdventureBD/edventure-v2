@@ -1,5 +1,5 @@
 <x-landing-layout>
-    <section class="relative" id="landing-image-new" style="">
+    {{-- <section class="relative" id="landing-image-new" style="">
         <div class="">
             <div class="d-flex justify-content-start" >
                 <div>
@@ -23,6 +23,16 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </section> --}}
+    <section class="border border-1 pb-0">
+        <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
+            <div class="col-5 p-0 m-0">
+                <img src="/img/landing/newLanding/landingImageBigScreenText.png" alt="text-part's Background" class="img-fluid h-75 w-100">
+            </div>
+            <div class="col-7 p-0 m-0">
+                <img src="/img/landing/newLanding/landingImageBigScreen.png" alt="photo part in landing" class="img-fluid h-75 w-100">
             </div>
         </div>
     </section>
