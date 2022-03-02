@@ -26,7 +26,8 @@
             </div>
         </div>
     </section> --}}
-    <section class="border border-1 pb-0">
+    {{-- new landing banner part starts --}}
+    <section class="">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
             <div class="col-5 p-0 m-0">
                 <img src="/img/landing/newLanding/landingImageBigScreenText.png" alt="text-part's Background" class="img-fluid h-75 w-100">
@@ -36,6 +37,7 @@
             </div>
         </div>
     </section>
+    {{-- new landing banner part ends --}}
     <div class="our-package-section text-center py-5">
         <div class="container">
             <h3 class="text-dark text-md font-roboto">কি পাবে আমাদের প্ল্যাটফর্মে</h3>
