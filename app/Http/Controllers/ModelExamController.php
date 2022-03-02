@@ -12,6 +12,7 @@ use App\Models\McqQuestion;
 use App\Models\McqTotalResult;
 use App\Models\ModelExam;
 use App\Models\ModelMcqTagAnalysis;
+use App\Models\PaymentOfCategory;
 use App\Models\PaymentOfExams;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
@@ -232,7 +233,7 @@ class ModelExamController extends Controller
      */
     public function getModelExams()
     {
-        $exam_categories = ExamCategory::query()->get();
+        $exam_categories = ExamCategory::query()->with('paymentOfCategories')->get();
         $exam_topics = [];
         $exams = [];
 
@@ -242,6 +243,12 @@ class ModelExamController extends Controller
             Cache::forget('exam_topic');
         }
         if(request()->has('c')) {
+            $category = ExamCategory::query()->findOrFail(request()->get('c'));
+            if(!is_null($category->price) && $category->price != 0) {
+                if(!$this->paidForCategory(request()->get('c'),auth()->user()->id)) {
+                    return redirect()->back();
+                }
+            }
             $exam_topics = ExamTopic::query()
                                     ->whereHas('modelExam', function ($q) {
                                         $q->has('mcqQuestions')
@@ -381,5 +388,13 @@ class ModelExamController extends Controller
                             ->where('model_exam_id',$examId)
                             ->where('student_id',$studentId)
                             ->first();
+    }
+
+    private function paidForCategory($categoryId, $studentId)
+    {
+        return PaymentOfCategory::query()
+                                ->where('exam_category_id', $categoryId)
+                                ->where('user_id', $studentId)
+                                ->exists();
     }
 }

@@ -115,12 +115,63 @@
                     </div>
                 </div>
             @endif
-
             <div class="text-center @if($exam_categories->count()>=7) course-category-js @endif ">
                 @foreach($exam_categories as $category)
-                    <a href="{{route('model.exam',['c' => $category->id])}}"
+                    @php($href = route('model.exam',['c' => $category->id]))
+                    @php($payment_href = '/')
+                    @php($data_toggle = '')
+                    @php($icon = !empty($category->price) ? 'fas fa-lock' : '')
+
+                    @if(count($category->paymentOfCategories) > 0 && auth()->check())
+                        @foreach($category->paymentOfCategories as $value)
+                            @if($value->user_id == auth()->user()->id)
+                                @php($icon = !empty($category->price) ? 'fas fa-lock-open' : '')
+                                @php($href = route('model.exam',['c' => $category->id]))
+                                @break
+                            @else
+                                @php($icon = !empty($category->price) ? 'fas fa-lock' : '')
+                                @php($payment_href = route('category.single.payment.initialize', $category->id))
+                                @php($href = '#categoryDetail'.$category->id)
+                                @php($data_toggle = 'modal')
+                                @continue
+                            @endif
+                        @endforeach
+                    @else
+                        @if(!is_null($category->price) && $category->price != 0)
+                            @php($icon = !empty($category->price) ? 'fas fa-lock' : '')
+                            @php($payment_href = route('category.single.payment.initialize', $category->id))
+                            @php($href = '#categoryDetail'.$category->id)
+                            @php($data_toggle = 'modal')
+                        @endif
+                    @endif
+
+                    <a href="{{$href}}"
                        class="{{Illuminate\Support\Facades\Cache::get('exam_category') == $category->id ? 'text-white btn-orange-customed' : 'text-purple bg-white'}} mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm
-                            mx-1 bradius-15 bshadow-medium px-4">{{$category->name}}</a>
+                            mx-1 bradius-15 bshadow-medium px-4" data-toggle="{{$data_toggle}}">
+                        <i class="{{$icon}}"></i>
+                        {{$category->name}}</a>
+
+                    <div class="modal fade"
+                         id="categoryDetail{{ $category->id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Purchase
+                                        {{ $category->name }}</h4>
+                                    <button type="button" class="close"
+                                            data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    This is a bundle exam package <br>
+                                    Price: {{$category->price}} <br>
+                                    Details: {{$category->details}} <br>
+                                    <a class="btn btn-outline-success" href="{{$payment_href}}">Pay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </div>
             @if(count($exam_topics) > 0 )
