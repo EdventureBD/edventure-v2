@@ -10,8 +10,11 @@
             <div class="row">
                 <div class="col-12">
                     <h3 class="text-gray d-flex justify-content-center m-0 fw-800">Exam : {{ $exam->title }}</h3>
+                    <span style="color: red" class="mx-auto d-flex justify-content-center m-0 fw-800">
+                        {{$exam->negative_marking ?  'Caution: This exam contains '.$exam->negative_marking_value.' negative marking for every wrong answer. Please be careful while answering' : ''}}
+                    </span>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -90,9 +93,9 @@
 
     {{-- new vendor's code part starts --}}
     <script type="text/javascript">
-        
+
         var timeleft = {{$exam->duration * 60}};
-        
+
 
         // forontend design part's js starts
         let mcqQuestions = <?php echo json_encode($exam->mcqQuestions)?>;

@@ -9,7 +9,7 @@
                         <li><a href="{{route('about_us')}}">About</a></li>
                         <li><a href="{{route('contact_us')}}#shape-b-contact-box">Contact Us</a></li>
                         <li><a href="{{route('about_us')}}#ceo_message">Message From The Ceo</a></li>
-                    
+
                     </ul>
                 </div>
             </div>
@@ -46,14 +46,14 @@
                 </div>
                 <div class="d-flex justify-content-between social-icons mt-3">
                     <a href="https://www.facebook.com/edventurebd"><img src="/img/landing/facebook.png" alt="Facebook Image Icon"></a>
-            
+
                     <a href="https://www.instagram.com/edventurebd/?utm_medium=copy_link"><img src="/img/landing/instagram.png" alt="Instagram Image Icon"></a>
-                
+
                     <a href="https://www.linkedin.com/company/edventurebd/"><img src="/img/landing/linkedIn.png" alt="LinkedIn Image Icon"></a>
                 </div>
             </div>
         </div>
-       
+
         <div class="row mt-5">
             <div class="col-md-6 text-left">
                 <div class="single-footer-column">
@@ -70,8 +70,8 @@
         <div class="mt-5">
             <img class="img-fluid" src="/img/landing/shurjoPayFooter.webp" alt="shurjopay banner">
         </div>
-        
+
     </div>
 
-   
+
 </div>
