@@ -33,12 +33,12 @@ class BundleController extends Controller
 
         $bundle = Bundle::where('slug', $bundle_slug)->firstOrFail();
 
-        if (!empty($bundle->icon)) {
+        if(!empty($bundle->icon)) {
             $fileName = "public/bundle/icon/" . str_replace('/storage/bundle/icon/', '', $bundle->icon);
             Storage::delete($fileName);
         }
 
-        if (!empty($this->tempBanner)) {
+        if(!empty($this->tempBanner)) {
             $fileName = "public/bundle/banner/" . str_replace('/storage/bundle/banner/', '', $bundle->banner);
             Storage::delete($fileName);
         }

@@ -46,11 +46,11 @@
     <script>
         function calculatePrice(e)
         {
-            var months = e.value >= e.min ? e.value : e.min;
-            var max_months = "<?php echo $course->duration; ?>";
+            var months = parseInt(e.value) >= e.min ? parseInt(e.value) : e.min;
+            var max_months = parseInt("<?php echo $course->duration; ?>");
             if (months > max_months) months = max_months;
-            var price = "<?php echo $course->price; ?>";
-            var totalPrice = parseInt(months) * parseInt(price);
+            var price = parseInt("<?php echo $course->price; ?>");
+            var totalPrice = months * price;
             document.getElementById("enrolMonths").value = months;
             document.getElementById("coursePrice").value = totalPrice;
         }

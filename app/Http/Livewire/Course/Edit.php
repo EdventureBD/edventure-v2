@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Course;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Models\Admin\Course;
-use App\Models\Admin\IntermediaryLevel;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+
+// models
+use App\Models\Admin\Course;
+use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Bundle;
 
 class Edit extends Component
 {
@@ -20,6 +23,8 @@ class Edit extends Component
     public $description;
     public $price;
     public $intermediaryLevelId;
+    public $bundles;
+    public $bundleId;
     public $duration;
     public $url;
     public $image;
@@ -63,7 +68,14 @@ class Edit extends Component
     public function updatedIntermediaryLevelId()
     {
         $this->validate([
-            'intermediaryLevelId' => 'required'
+            'intermediaryLevelId' => 'required|numeric|integer'
+        ]);
+    }
+
+    public function updatedBundleId()
+    {
+        $this->validate([
+            'bundleId' => 'nullable|numeric|integer'
         ]);
     }
 
@@ -86,8 +98,17 @@ class Edit extends Component
         'description' => 'required|string|max:500',
         'url' => ['nullable', 'string', 'min:3'],
         'price' => 'required|integer|numeric|gt:-1',
-        'intermediaryLevelId' => 'required',
+        'intermediaryLevelId' => 'required|numeric|integer',
+        'bundleId' => 'nullable|numeric|integer',
         'duration' => 'required|numeric|between:1,36',
+    ];
+
+    protected $messages = [
+        'intermediaryLevelId.required' => 'Intermediary level is required.',
+        'intermediaryLevelId.numeric' => 'Intermediary level has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Intermediary level has to be a integer value.',
+        'intermediaryLevelId.numeric' => 'Bundle has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Bundle has to be a integer value.',
     ];
 
     public function updateCourse()
@@ -110,6 +131,12 @@ class Edit extends Component
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
         $course->intermediary_level_id = $data['intermediaryLevelId'];
+        if(empty($data['bundleId'])){
+            $course->bundle_id = null;
+        }
+        else{
+            $course->bundle_id = $data['bundleId'];
+        }
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];
@@ -131,13 +158,16 @@ class Edit extends Component
         $this->description = $this->course->description;
         $this->price = $this->course->price;
         $this->intermediaryLevelId = $this->course->intermediary_level_id;
+        $this->bundleId = $this->course->bundle_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
         $this->image = $this->course->icon;
         $this->banner = $this->course->banner;
         $this->deleteImage = $this->course->logo;
         $this->deleteBanner = $this->course->banner;
+
         $this->intermediary_levels = IntermediaryLevel::all();
+        $this->bundles = Bundle::all();
     }
 
     public function render()

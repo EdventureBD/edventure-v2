@@ -42,7 +42,8 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Category</th>
+                                        <th>Intermediary Level</th>
+                                        <th>Bundle</th>
                                         <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>
@@ -60,6 +61,8 @@
                                                 </a>
                                             </td>
                                             <td>{{ $course->name }}</td>
+                                            
+                                            <td>@if($course->bundle === null) N/A @else {{$course->bundle->bundle_name}} @endif</td>
                                             <td>
                                                 <img class="product-image " src="{{$course->icon}}" alt=""
                                                     srcset="">
@@ -134,7 +137,8 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Category</th>
+                                        <th>Intermediary Level</th>
+                                        <th>Bundle</th>
                                         <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>

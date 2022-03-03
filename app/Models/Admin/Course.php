@@ -5,8 +5,8 @@ namespace App\Models\Admin;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
-use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Bundle;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Admin\BatchStudentEnrollment;
@@ -24,6 +24,11 @@ class Course extends Model
     public function intermediaryLevel()
     {
         return $this->belongsTo(IntermediaryLevel::class, 'id', 'intermediary_level_id');
+    }
+
+    public function bundle()
+    {
+        return $this->belongsTo(Bundle::class);
     }
 
     public function Exam()

@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Course;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Models\Admin\Course;
-use Livewire\WithFileUploads;
-use App\Models\Admin\CourseCategory;
 use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
+
+// models
+use App\Models\Admin\Course;
+use App\Models\Admin\Bundle;
+use App\Models\Admin\CourseCategory;
 
 class Create extends Component
 {
@@ -15,6 +18,8 @@ class Create extends Component
 
     public $intermediary_levels;
     public $intermediaryLevelId;
+    public $bundles;
+    public $bundleId;
     public $title;
     public $description;
     public $duration;
@@ -59,7 +64,14 @@ class Create extends Component
     public function updatedIntermediaryLevelId()
     {
         $this->validate([
-            'intermediaryLevelId' => 'required'
+            'intermediaryLevelId' => 'required|numeric|integer'
+        ]);
+    }
+
+    public function updatedBundleId()
+    {
+        $this->validate([
+            'bundleId' => 'nullable|numeric|integer'
         ]);
     }
 
@@ -84,8 +96,17 @@ class Create extends Component
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
         'price' => 'required|integer|numeric|gt:-1',
-        'intermediaryLevelId' => 'required',
+        'intermediaryLevelId' => 'required|numeric|integer',
+        'bundleId' => 'nullable|numeric|integer',
         'duration' => 'required|numeric|between:1,36',
+    ];
+
+    protected $messages = [
+        'intermediaryLevelId.required' => 'Intermediary level is required.',
+        'intermediaryLevelId.numeric' => 'Intermediary level has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Intermediary level has to be a integer value.',
+        'intermediaryLevelId.numeric' => 'Bundle has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Bundle has to be a integer value.',
     ];
 
     public function saveCourse()
@@ -105,6 +126,12 @@ class Create extends Component
         $course->icon = $this->image;
         $course->banner = $this->banner;
         $course->intermediary_level_id = $data['intermediaryLevelId'];
+        if(empty($data['bundleId'])){
+            $course->bundle_id = null;
+        }
+        else{
+            $course->bundle_id = $data['bundleId'];
+        }
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];
@@ -120,6 +147,11 @@ class Create extends Component
             session()->flash('failed', 'Course added failed!');
             return redirect()->route('course.create');
         }
+    }
+
+    public function mount()
+    {
+        $this->bundles = Bundle::all();
     }
 
     public function render()
