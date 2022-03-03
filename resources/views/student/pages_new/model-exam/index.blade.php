@@ -155,19 +155,23 @@
                          id="categoryDetail{{ $category->id }}">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Purchase
-                                        {{ $category->name }}</h4>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                <div style="background: #6400c8; color: #FA9632" class="modal-header d-flex justify-content-center">
+                                    <h5 class="modal-title"><span class="font-weight-bolder">Disclaimer:</span> This is a paid bundle</h5>
+{{--                                    <button type="button" class="close"--}}
+{{--                                            data-dismiss="modal" aria-label="Close">--}}
+{{--                                        <span aria-hidden="true">&times;</span>--}}
+{{--                                    </button>--}}
                                 </div>
                                 <div class="modal-body">
-                                    This is a bundle exam package <br>
-                                    Price: {{$category->price}} <br>
-                                    Details: {{$category->details}} <br>
-                                    <a class="btn btn-outline-success" href="{{$payment_href}}">Pay</a>
+                                    <h3 class="fw-600">This Bundle Includes:</h3> <br>
+                                    <p>{{$category->details}}</p> <br>
+                                    <span style="color: #6400c8; font-size: 44px; font-weight: bolder;">
+                                        ৳ {{$category->price}}
+                                    </span>
+
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <a class="btn btn-outline-success" href="{{$payment_href}}">Pay Now</a>
                                 </div>
                             </div>
                         </div>
