@@ -3,10 +3,10 @@
     <section class="" style="position:relative">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
             <div class="col-5 p-0 m-0">
-                <img src="/img/landing/newLanding/landingImageBigScreenText.png" alt="text-part's Background" class="img-fluid h-75 w-100">
+                <img src="/img/landing/newLanding/landingImageBigScreenText.webp" alt="text-part's Background" class="img-fluid h-75 w-100">
             </div>
             <div class="col-7 p-0 m-0">
-                <img src="/img/landing/newLanding/landingImageBigScreen.png" alt="photo part in landing" class="img-fluid h-75 w-100">
+                <img src="/img/landing/newLanding/landingImageBigScreen.webp" alt="photo part in landing" class="img-fluid h-75 w-100">
             </div>
         </div>
         <div class="mt-0" id="text-in-landing">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/newLanding/roadMap.png" class=" img-fluid" alt="Roadmap Image">
+                        <img src="/img/landing/newLanding/roadMap.webp" class=" img-fluid" alt="Roadmap Image">
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/newLanding/phoneDashboard.png" class="img-fluid" alt="Dashboard Photo">
+                        <img src="/img/landing/newLanding/phoneDashboard.webp" class="img-fluid" alt="Dashboard Photo">
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/landing/newLanding/discussionWithTeacher.png" class="img-fluid" alt="">
+                        <img src="/img/landing/newLanding/discussionWithTeacher.webp" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
