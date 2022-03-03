@@ -35,57 +35,60 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+    //******************** OTP code starts here ***********************//
 
-        if (empty(request()->otp)) {
-            $request->validate(
-                [
-                    'name' => 'required|string|max:255',
-                    'email' => 'required|string|email|max:255|unique:users',
-                    'phone' => 'required|numeric|digits:11|unique:users',
-                    // 'verificationId' => 'required|min:200',
-                    'password' => 'required|string|confirmed|min:8',
-                ]
-                // , [
-                //     'verificationId.required' => 'Phone number verification failed!'
-                // ]
-            );
-            $input = $request->all();
-            return $this->sendOtp($input);
-        } else if (!empty(request()->otp)) {
-            if (Cache::get(request()->ip . '_otp') == request()->otp) {
-                $input = Cache::get(request()->ip . '_input');
-                Auth::login($user = User::create([
-                    'name' => $input['name'],
-                    'email' => $input['email'],
-                    'phone' => $input['phone'],
-                    'password' => Hash::make($input['password']),
-                    'is_admin' => 0,
-                    'user_type' => 3,
-                    'image' => null,
-                ]));
-                Cache::forget(request()->ip . '_otp');
-                Cache::forget(request()->ip . '_input');
-                // event(new Registered($user));
-                return redirect()->route('home');
-               // return redirect(RouteServiceProvider::StudentHOME);
-//               return redirect(Redirect::intended(RouteServiceProvider::StudentHOME)->getTargetUrl());
-            }
-        }
+//        if (empty(request()->otp)) {
+//            $request->validate(
+//                [
+//                    'name' => 'required|string|max:255',
+//                    'email' => 'required|string|email|max:255|unique:users',
+//                    'phone' => 'required|numeric|digits:11|unique:users',
+//                    // 'verificationId' => 'required|min:200',
+//                    'password' => 'required|string|confirmed|min:8',
+//                ]
+//            );
+//            $input = $request->all();
+//            return $this->sendOtp($input);
+//        } else if (!empty(request()->otp)) {
+//            if (Cache::get(request()->ip . '_otp') == request()->otp) {
+//                $input = Cache::get(request()->ip . '_input');
+//                Auth::login($user = User::create([
+//                    'name' => $input['name'],
+//                    'email' => $input['email'],
+//                    'phone' => $input['phone'],
+//                    'password' => Hash::make($input['password']),
+//                    'is_admin' => 0,
+//                    'user_type' => 3,
+//                    'image' => null,
+//                ]));
+//                Cache::forget(request()->ip . '_otp');
+//                Cache::forget(request()->ip . '_input');
+//                return redirect()->route('home');
+//            }
+//        }
+    //********************** OTP code ends here ******************************************//
 
 
-        // Auth::login($user = User::create([
-        //     'name' => $input['name'],
-        //     'email' => $input['email'],
-        //     'phone' => $input['phone'],
-        //     'password' => Hash::make($input['password']),
-        //     'is_admin' => 0,
-        //     'user_type' => 3,
-        //     'image' => null,
-        // ]));
+        $input = $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'phone' => 'required|numeric|digits:11|unique:users',
+                // 'verificationId' => 'required|min:200',
+                'password' => 'required|string|confirmed|min:8',
+            ]
+        );
+         Auth::login($user = User::create([
+             'name' => $input['name'],
+             'email' => $input['email'],
+             'phone' => $input['phone'],
+             'password' => Hash::make($input['password']),
+             'is_admin' => 0,
+             'user_type' => 3,
+             'image' => null,
+         ]));
 
-        // event(new Registered($user));
-
-        // return redirect(RouteServiceProvider::StudentHOME);
+        return redirect()->route('home');
     }
 
     public function sendOtp($input)
