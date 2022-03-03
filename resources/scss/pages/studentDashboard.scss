@@ -1,0 +1,43 @@
+.student-sidebar {
+    position: absolute;
+    background: purple;
+    height: 100%;
+    color: #fff;
+    top: 65px;
+    width: 68px;
+    min-height: 100vh;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            a {}
+        }
+    }
+}
+
+.dashboard-content {
+    margin-left: 68px;
+}
+
+@media (max-width: 767px) {
+    .dashboard-content {
+        margin-left: 0px;
+    }
+
+    .student-sidebar {
+        position: relative;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        min-height: auto;
+        ul {
+            li {
+                display: inline-block;
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+
+.navbar {
+    .collapse.navbar-collapse.show{
+        background-color: #f8f9fa;
+    }
+    .nav-item {
+        &.active,&:hover{
+            position: relative;
+            color: $purple;
+            font-weight: 800;
+            .nav-link{
+                color: $purple;
+                font-weight: 800;
+            }
+            &.has-dot:after{
+                position: absolute;
+                content: "";
+                width: 5px;
+                height: 5px;
+                left: calc(50% - 2px);
+                background: $purple;
+                border-radius: 50%;
+                bottom: 0px;
+            }
+        }
+    }
+}
+@media (max-width: 767px) {
+    .navbar{
+        background-color: #f8f9fa;
+        z-index: 99;
+    }
+}

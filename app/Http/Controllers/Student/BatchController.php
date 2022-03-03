@@ -1,0 +1,151 @@
+<?php
+
+namespace App\Http\Controllers\Student;
+
+use Illuminate\Http\Request;
+
+use App\Models\Admin\Batch;
+use App\Models\Admin\Course;
+use App\Models\Admin\LiveClass;
+use App\Models\Admin\BatchLecture;
+use App\Models\Admin\CourseLecture;
+use App\Http\Controllers\Controller;
+use App\Models\Admin\BatchStudentEnrollment;
+use App\Models\Admin\CompletedLectures;
+use App\Models\Student\exam\DetailsResult;
+use DateTime;
+
+class BatchController extends Controller
+{
+    public function batch()
+    {
+        $batches = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
+            ->where('batch_student_enrollments.student_id', auth()->user()->id)
+            ->where('payments.student_id', auth()->user()->id)
+            ->where('payments.accepted', 1)
+            ->get();
+        return view('student.pages.batch.index', compact('batches'));
+    }
+
+    public function batchLecture(Batch $batch)
+    {
+        $course = Course::where('id', $batch->course_id)->first();
+
+        $batchTopics = BatchLecture::with(['courseTopic.exams' => function($query){
+            return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order');
+        }, 'courseTopic.exams.course_lectures'])
+            ->where('batch_id', $batch->id)
+            ->where('course_id', $course->id)
+            ->get();
+
+        $island_images = [];
+        foreach($batchTopics as $batchTopic){
+            $island_images[] = $batchTopic->courseTopic->island_image;
+            foreach($batchTopic->courseTopic->exams as $exam){
+                $scored_marks = 0;
+                $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
+
+                if($exam->exam_type === "Aptitude Test" ){
+                    if(count($details_results)){
+                        $exam->has_been_attempted = true;
+                    }
+                    else{
+                        $exam->has_been_attempted = false;
+                    }
+                }
+
+                foreach($details_results as $details_result){
+                    $scored_marks = $scored_marks + $details_result->gain_marks;
+                }
+                
+                if($scored_marks >= $exam->threshold_marks){
+                    $exam->test_passed = true;
+                }
+                else{
+                    $exam->test_passed = false;
+                }
+
+                $lectures_in_this_exam = count($exam->course_lectures);
+                $completed_lecture_count = 0;
+                foreach($exam->course_lectures as $lecture){
+                    $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $lecture->id)->count();
+                    if($completed){
+                        $lecture->completed = true;
+                        $completed_lecture_count++;
+                    }
+                    else
+                        $lecture->completed = false;
+                }
+                $exam->lecture_count = $lectures_in_this_exam;
+                $exam->completed_lecture_count = $completed_lecture_count;
+                $exam->scored_marks = $scored_marks;
+            }
+        }
+
+        $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
+            ->where('batch_id', $batch->id)
+            ->where('course_id', $course->id)
+            ->first();
+
+        // dd($batchTopics);
+
+        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
+    }
+
+    public function lecture(Batch $batch, CourseLecture $courseLecture)
+    {
+        //setting next lecture & prev lecture
+        $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'desc')->first();
+        $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
+        $next_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '>', $courseLecture->id)->orderBy('created_at', 'asc')->first();
+        $next_lecture_link = $next_lecture ? route('topic_lecture', [$batch->slug, $next_lecture->slug]) : null;
+        // dd($next_lecture);
+
+        $course = Course::where('id', $batch->course_id)->first();
+        $liveClass = LiveClass::where('batch_id', $batch->id)
+            // ->where('course_id', $batch->course_id)
+            ->where('topic_id', $courseLecture->topic_id)
+            ->where('status', 1)
+            ->latest()->first();
+        $start_date = "";
+        $start_time = "";
+        $timeleft = 3000;
+        if (!empty($liveClass->start_date)) {
+            $start_date_time = new DateTime($liveClass->start_date . ' ' . $liveClass->start_time);
+            $today_time = new DateTime();
+            $timeleft_seconds = $start_date_time->format('U') - $today_time->format('U');
+            $timeleft = $timeleft_seconds;
+        }
+        return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_lecture_link', 'next_lecture_link'));
+    }
+
+    public function lecture_visit_confirmed_ajax($batch, $courseLecture){
+
+        $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture)->first();
+
+        if($completed){
+            $completed->delete();
+        }
+        else{
+            $completed = new CompletedLectures();
+            $completed->student_id = auth()->user()->id;
+            $completed->lecture_id = $courseLecture;
+            $completed->save();
+        }
+
+        return true;
+    }
+
+    public function get_lecture_visit_status_ajax($batch, $courseLecture){
+        $completed_lecture = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $courseLecture)->first();
+        if($completed_lecture){
+            return true;
+        }
+        else{
+            return false;
+        }
+        // $course_lecture = CourseLecture::where('id', $courseLecture)->first();
+        // return [$batch, $courseLecture, auth()->user()->id];
+        // return $completed_lecture;
+    }
+}

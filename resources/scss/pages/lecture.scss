@@ -1,0 +1,52 @@
+.lecture-page {
+
+    .nav-tabs .nav-link {
+        border-radius: 7px 7px 0 0;
+        font-weight: 600;
+
+        &:hover {
+            color: inherit;
+        }
+    }
+
+    .lecture-tab.card-header {
+        border-bottom: none;
+    }
+
+    a.lecture-navigation {
+        // position: absolute;
+        // top: calc(50% - 36px);
+        // left: -25px;
+        font-size: 18px;
+        color: $purple;
+
+        &.next {
+            left: auto;
+            right: -25px;
+        }
+    }
+
+    .count-timer {
+        font-size: 32px;
+        font-weight: 600;
+
+        span {
+            // border: 2px solid grey;
+            margin: 4px;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(165, 165, 42, 0.2);
+        }
+    }
+
+    @media (max-width: 767px) {
+        .count-timer {
+            font-size: 22px;
+        }
+
+        .nav-tabs .nav-link {
+            font-size: 18px;
+        }
+    }
+}
