@@ -16,17 +16,34 @@
     @endif
     <form action="{{route('exam.category.store')}}" method="POST">
         @csrf
-        <div class="input-group mb-3">
-            <input
-                required
-                type="text"
-                class="form-control"
-                name="name"
-                placeholder="Category name"
-                aria-label="Category name"
-                aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="submit">ADD</button>
+        <div class="d-flex">
+            <div class="col-md-4">
+                <input
+                    required
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="Category name"
+                    aria-label="Category name"
+                    aria-describedby="basic-addon2">
+            </div>
+            <div class="col-md-2">
+                <input type="text"
+                       name="price"
+                       class="form-control"
+                       placeholder="Price">
+            </div>
+        </div>
+        <div class="d-flex mt-5">
+            <div class="col-md-6">
+                <textarea
+                    id="details"
+                    name="details"
+                    class="form-control"
+                    placeholder="Details"></textarea>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-primary" type="submit">Create</button>
             </div>
         </div>
     </form>
@@ -37,6 +54,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Details</th>
                 <th scope="col">Created at</th>
                 <th scope="col">Action</th>
             </tr>
@@ -47,8 +66,11 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $category->name }}</td>
+                <td>{{ $category->price }}</td>
+                <td>{!! $category->details ?? 'N/a'  !!} </td>
                 <td>{{ date('F j, Y, g:i a', strtotime($category->created_at)) }}</td>
                 <td>
+                    @include('admin.pages.model_exam.exam_category.edit')
                     <a class="mr-1 btn btn-outline-danger btn-sm"
                        href="#deleteCategory{{ $category->id }}"
                        data-toggle="modal" title="Delete {{ $category->name }}">
@@ -105,4 +127,17 @@
             {{ $exam_categories->links() }}
         </div>
     @endif
+@endsection
+
+@section('js2')
+    <script>
+        $('#details').summernote({
+            placeholder: 'Details',
+            height: 150,
+        })
+        $('.detailsEdit').summernote({
+            placeholder: 'Details',
+            height: 200,
+        })
+    </script>
 @endsection

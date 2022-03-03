@@ -245,6 +245,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     //Exam Category
     Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
     Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
+    Route::put('/exam-category/{id}',[ExamCategoryController::class,'update'])->name('exam.category.update');
     Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
 
     //Exam Topic

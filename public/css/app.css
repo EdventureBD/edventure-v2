@@ -10996,50 +10996,45 @@ a:hover {
   background-size: cover;
 }
 /* new landing page css design part ends */
-#landing-image-new {
-  background: url("/img/landing/landing-new-image.jpg") no-repeat center center fixed;
-  /* -webkit-background-size: cover; */
-  /* -moz-background-size: cover; */
-  /* -o-background-size: cover; */
-  /* max-height: 10% !important; */
-  /* background-repeat: no-repeat; */
-  /* background-size: auto; */
-  /* top: -50% !important; */
-  padding-top: 30rem !important;
-  margin-top: -175px;
+
+#text-in-landing {
+  top: 25%;
+  left: 10%;
+  position: absolute;
+ }
+ #text-in-landing h4, #text-in-landing h2{
+  font-size: 3em;
 }
-@media screen and (min-width:578px) {
-  #text-in-landing {
-    padding-left: 145px;
-    margin-bottom: 150px;
-  }
-  
+#text-in-landing a {
+  font-size: 1.5rem;
+  color: white;
+} 
+#text-in-landing a:hover{
+  background: wheat;
+  color: #FA9632;
+  border: 1px solid #FA9632;
 }
 @media screen and (max-width: 576px) {
- #text-in-landing {
-  margin: -200px 25px 40px 65px !important;
-  
- }
- #landing-image-new {
-   background: url("/img/landing/written-part.jpg") left center fixed;
- }
-}
-@media screen and (max-width: 768px) {
-  #landing-image-new {
-    background: url("/img/landing/landing-new-image.jpg") no-repeat left center fixed;
-  }
   #text-in-landing {
-    margin: -200px 25px 40px 65px !important;
-    
+    top: 90px;
+    left: 25px;
+   }
+   #text-in-landing h4, #text-in-landing h2{
+     font-size: .9rem;
+   }
+   #text-in-landing a{
+    font-size: .8rem;
    }
 }
-/* @media screen and (max-width: 1200px) {
-  #landing-img-new {
-    background: url("/img/landing/landing-new-image.jpg") no-repeat right center fixed;
-    margin: -250px 25px 40px 25px !important;
-    padding-top: 150px;
-  }
-} */
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  #text-in-landing {
+    top: 100px;
+    left: 38px;
+   }
+   #text-in-landing h4, #text-in-landing h2, #text-in-landing a {
+     font-size: 1.5rem;
+   }
+}
 /* new landing page css design part ends */
 .bg-white {
   background-color: #ffffff;
