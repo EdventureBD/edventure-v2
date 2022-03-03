@@ -32,7 +32,7 @@
     <div class="row">
        <div class="col-md-9">
         @include('admin.pages.model_exam.exam_topic.filter')
-        
+
        </div>
        <div class="col-md-3">
         @include('admin.pages.model_exam.exam_topic.create')
@@ -47,17 +47,19 @@
                 <th class="fit" scope="col">#</th>
                 <th class="fit" scope="col">Topic</th>
                 <th class="fit" scope="col">Category</th>
+                <th class="fit" scope="col">Multiple Subject</th>
                 <th class="fit" scope="col">Created at</th>
                 <th class="fit" scope="col">Action</th>
             </tr>
             </thead>
         @endif
         <tbody>
-        @forelse ($exam_topics as $topic)
+        @forelse ($exam_topics as $index => $topic)
             <tr>
-                <td>{{$loop->iteration}}</td>
+                <td>{{$index + $exam_topics->firstItem()}}</td>
                 <td>{{ $topic->name }}</td>
                 <td>{{ $topic->examCategory->name }}</td>
+                <td>{{ empty($topic->multiple_subject) ? 'No' : 'Yes' }}</td>
                 <td>{{ date('F j, Y, g:i a', strtotime($topic->created_at)) }}</td>
                 <td style="display: flex">
                     @include('admin.pages.model_exam.exam_topic.edit')
