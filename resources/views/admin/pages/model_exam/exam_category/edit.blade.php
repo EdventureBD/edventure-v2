@@ -7,7 +7,7 @@
 
 <div class="modal fade"
      id="editCategory{{ $category->id }}">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit
@@ -40,12 +40,11 @@
                                    class="form-control"
                                    placeholder="Price">
                         </div>
-                        <div class="col-md-12">
+                        <div class="mt-3 col-md-12">
                             <textarea
-                                style="height: 150px"
                                 name="details"
-                                class="form-control"
-                                placeholder="Details">{{$category->details}}</textarea>
+                                class="form-control detailsEdit"
+                                placeholder="Details">{!! $category->details !!}</textarea>
                         </div>
                         <div class="col-md-12">
                             <button class="btn btn-outline-success" type="submit">Update</button>

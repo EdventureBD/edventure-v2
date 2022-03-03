@@ -2,7 +2,7 @@
     <style>
         .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
             color: #FA9632 !important;
-            
+
         }
         .nav-link:hover {
             color: #6400c8
@@ -17,23 +17,25 @@
             <nav>
                 <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
                     <a class="nav-link active"
-                       id="nav-home-tab"
-                       data-toggle="tab"
-                       href="#video"
-                       role="tab"
-                       aria-controls="video"
-                       aria-selected="true">Solution Video</a>
-                    <a class="nav-link"
                        id="nav-profile-tab"
                        data-toggle="tab"
                        href="#pdf"
                        role="tab"
                        aria-controls="pdf"
-                       aria-selected="false">Solution Pdf</a>
+                       aria-selected="false">Explanation Pdf</a>
+
+                    <a class="nav-link"
+                       id="nav-home-tab"
+                       data-toggle="tab"
+                       href="#video"
+                       role="tab"
+                       aria-controls="video"
+                       aria-selected="true">Explanation Video</a>
+
                 </div>
             </nav>
             <div class="tab-content mt-3" id="nav-tabContent">
-                <div class="tab-pane col-md-12 fade show active"
+                <div class="tab-pane col-md-12 fade"
                      id="video"
                      role="tabpanel"
                      aria-labelledby="video-tab">
@@ -52,19 +54,19 @@
                                 <i class="fa fa-video-slash"></i>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <p>No Solution Video Found</p>
+                                <p>No Explanation Video Available</p>
                             </div>
                         </div>
 
 
                     @endif
                 </div>
-                <div class="tab-pane col-md-12 fade"
+                <div class="tab-pane col-md-12 fade show active"
                      id="pdf"
                      role="tabpanel"
                      aria-labelledby="pdf-tab">
                     @if($tag->solution_pdf)
-                        <embed 
+                        <embed
                             @if(Request::is('profile/course/pdf_and_video/*'))
                                 src="{{ asset($tag->solution_pdf) }}"
                             @else
@@ -78,7 +80,7 @@
                                 <i class="fa fa-file-pdf"></i>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <p>No Solution pdf Found</p>
+                                <p>No Explanation Pdf Available</p>
                             </div>
                         </div>
 

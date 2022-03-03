@@ -33,14 +33,17 @@
                        class="form-control"
                        placeholder="Price">
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="d-flex mt-5">
+            <div class="col-md-6">
                 <textarea
-                       name="details"
-                       class="form-control"
-                       placeholder="Details"></textarea>
+                    id="details"
+                    name="details"
+                    class="form-control"
+                    placeholder="Details"></textarea>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-outline-primary" type="submit">ADD</button>
+                <button class="btn btn-outline-primary" type="submit">Create</button>
             </div>
         </div>
     </form>
@@ -64,7 +67,7 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->price }}</td>
-                <td>{{ $category->details ?? 'N/a' }}</td>
+                <td>{!! $category->details ?? 'N/a'  !!} </td>
                 <td>{{ date('F j, Y, g:i a', strtotime($category->created_at)) }}</td>
                 <td>
                     @include('admin.pages.model_exam.exam_category.edit')
@@ -124,4 +127,17 @@
             {{ $exam_categories->links() }}
         </div>
     @endif
+@endsection
+
+@section('js2')
+    <script>
+        $('#details').summernote({
+            placeholder: 'Details',
+            height: 150,
+        })
+        $('.detailsEdit').summernote({
+            placeholder: 'Details',
+            height: 200,
+        })
+    </script>
 @endsection

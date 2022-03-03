@@ -153,25 +153,28 @@
 
                     <div class="modal fade"
                          id="categoryDetail{{ $category->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div style="background: #6400c8; color: #FA9632" class="modal-header d-flex justify-content-center">
-                                    <h5 class="modal-title"><span class="font-weight-bolder">Disclaimer:</span> This is a paid bundle</h5>
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="border-radius: 25px; border: 3px solid #6400c8">
+                                <div style="background: #6400c8; color: #FA9632; -webkit-border-top-left-radius: 15px; -webkit-border-top-right-radius: 15px"
+                                     class="modal-header d-flex justify-content-center">
+                                    <h5 class="modal-title font-weight-bolder">Disclaimer: This is a paid bundle</h5>
 {{--                                    <button type="button" class="close"--}}
 {{--                                            data-dismiss="modal" aria-label="Close">--}}
 {{--                                        <span aria-hidden="true">&times;</span>--}}
 {{--                                    </button>--}}
                                 </div>
                                 <div class="modal-body">
-                                    <h3 class="fw-600">This Bundle Includes:</h3> <br>
-                                    <p>{{$category->details}}</p> <br>
+                                    <h3 class="font-weight-bolder">This bundle includes:</h3> <br>
+                                    <p>{!! $category->details  !!}</p> <br>
                                     <span style="color: #6400c8; font-size: 44px; font-weight: bolder;">
                                         ৳ {{$category->price}}
                                     </span>
 
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
-                                    <a class="btn btn-outline-success" href="{{$payment_href}}">Pay Now</a>
+                                    <a style="border-radius: 10px;background: #FA9632;color: white;" class="btn font-weight-bolder" href="{{$payment_href}}">
+                                        Pay Now
+                                    </a>
                                 </div>
                             </div>
                         </div>

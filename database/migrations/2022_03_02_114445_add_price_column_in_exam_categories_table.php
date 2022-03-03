@@ -15,7 +15,7 @@ class AddPriceColumnInExamCategoriesTable extends Migration
     {
         Schema::table('exam_categories', function (Blueprint $table) {
             $table->integer('price')->default(0)->nullable();
-            $table->string('details')->nullable();
+            $table->longText('details')->nullable();
         });
     }
 
