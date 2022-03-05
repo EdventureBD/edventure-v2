@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
+use App\Http\Controllers\Student\BundleController;
 use App\Utils\Payment;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
@@ -61,6 +62,17 @@ Route::get('/course/course-preview/{course}', [CourseController::class, 'courseP
 Route::get('/course/{category?}/{intermediary_level?}', [CourseController::class, 'course'])->name('course');
 // Preview Course
 Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
+
+
+
+
+// BUNDLE PREVIEW
+Route::get('/bundle/bundle-preview/{bundle_slug}', [BundleController::class, 'bundlePreview'])->name('bundle-preview');
+
+// BUNDLE ENROLL
+Route::get('/bundle/bundle-preview/{bundle}/enroll', [BundleController::class, 'bundle_enroll'])->name('bundle_enroll');
+
+
 
 
 // Roadmap Page-> should be-> Route::get('/course/course-preview/{course}/roadmap', [CourseController::class, 'roadmap'])->name('roadmap')

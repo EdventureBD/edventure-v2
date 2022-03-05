@@ -15,6 +15,7 @@ use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Bundle;
 use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
@@ -42,21 +43,33 @@ class CourseController extends Controller
         ->paginate(8)
         ->fragment('intermediary_levels');
 
-        if(isset($intermediary_level_slug)&&!empty($intermediary_level_slug)){
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('slug', $intermediary_level_slug)->first();
+        if(isset($intermediary_level_slug) && !empty($intermediary_level_slug)){
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)
+                                            ->where('slug', $intermediary_level_slug)
+                                            ->first();
         }
         else{
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('course_category_id', $category->id)->first();
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)
+                                            ->where('course_category_id', $category->id)
+                                            ->first();
         }
 
         if($selected_intermediary_level){
-            $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)->where('status', 1)->paginate(8)->fragment('intermediary_levels');
+            $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)
+                                ->where('status', 1)
+                                ->where('bundle_id', null)
+                                ->paginate(8)
+                                ->fragment('intermediary_levels');
+
+            $bundles = Bundle::where('intermediary_level_id', $selected_intermediary_level->id)
+                                ->get();
         }
         else{
-            $courses = [];
+            $courses = collect();
+            $bundles = collect();
         }
 
-        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses'));
+        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses', 'bundles'));
     }
 
     public function courseByCategory($category_slug){
@@ -209,7 +222,7 @@ class CourseController extends Controller
 
     public function processPayment(Course $course)
     {
-        dd('processPayment method');
+        // dd('processPayment method');
         $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id, auth()->user()->id);
         if ($enrolled) {
             $batch = (new Batch())->getById($enrolled->batch_id);

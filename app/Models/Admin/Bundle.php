@@ -19,8 +19,8 @@ class Bundle extends Model
         return $this->belongsTo(IntermediaryLevel::class);
     }
 
-    public function course()
+    public function courses()
     {
-        $this->hasMany(Course::class);
+        return $this->hasMany(Course::class, 'bundle_id', 'id');
     }
 }
