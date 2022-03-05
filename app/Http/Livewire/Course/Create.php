@@ -11,6 +11,7 @@ use Livewire\WithFileUploads;
 use App\Models\Admin\Course;
 use App\Models\Admin\Bundle;
 use App\Models\Admin\CourseCategory;
+use App\Models\Admin\Batch;
 
 class Create extends Component
 {
@@ -140,13 +141,27 @@ class Create extends Component
         $course->order = 0;
         $save = $course->save();
 
-        if ($save) {
-            session()->flash('status', 'Course successfully added!');
-            return redirect()->route('course.index');
-        } else {
-            session()->flash('failed', 'Course added failed!');
-            return redirect()->route('course.create');
+        if($course->bundle_id !== null){
+            $bundle = Bundle::where('id', $course->bundle_id)->first();
+            $batch = new Batch();
+            $batch->title = 'batch for bundle '.$bundle->bundle_name;
+            $batch->slug = uniqid();
+            $batch->batch_running_days = 0;
+            $batch->teacher_id = null;
+            $batch->student_limit = 10000;
+            $batch->course_id = $course->id;
+            $batch->status = 1;
+            $batch->order = 0;
+            $batch->save();
         }
+
+        // if ($save) {
+        //     session()->flash('status', 'Course successfully added!');
+        //     return redirect()->route('course.index');
+        // } else {
+        //     session()->flash('failed', 'Course added failed!');
+        //     return redirect()->route('course.create');
+        // }
     }
 
     public function mount()

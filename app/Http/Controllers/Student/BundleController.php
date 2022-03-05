@@ -125,7 +125,9 @@ class BundleController extends Controller
     }
 
     public function bundle_courses(Bundle $bundle){
-        dd('courses for bundle');
+        $bundle = Bundle::where('slug', $bundle->slug)->with('courses')->firstOrFail();
+
+        return view('student.pages_new.bundle.bundle_courses', compact('bundle'));
     }
 
     public function processPayment(Bundle $bundle, Request $request){
@@ -144,13 +146,12 @@ class BundleController extends Controller
         // request()->validate([
         //     'months'=>'numeric|min:'.$enroll_months
         // ]);
-
-
-        $price = $request->bundle_price;
+        // $days = request()->months * 30;
         
+        
+        
+        $price = $request->bundle_price;
         // dd($price);
-
-        $days = request()->months * 30;
         $shurjopay_service = new ShurjopayService();
         $trx_id = $shurjopay_service->generateTxId();
 
@@ -173,22 +174,7 @@ class BundleController extends Controller
         $bundle_payment->payment_account_number = '000';
         $bundle_payment->days_for = 365;
         $bundle_payment->accepted = 0;
-        // $bundle_payment->save();
-
-        $data = array(
-            'amount' => $request->bundle_price,
-            'student_id' => auth()->user()->id,
-            'bundle_id' => $bundle->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'contact' => $user->phone,
-            'trx_id' => $trx_id,
-            'payment_type' => 'SHURJO_PAY',
-            'amount' => $bundle->price,
-            'payment_account_number' => '000',
-            'days_for' => 365,
-            'accepted' => 0,
-        );
+        $bundle_payment->save();
 
         // "trx_id" =>  !empty($opt['trx']) ? $opt['trx'] : self::FREE,
         // "payment_type" =>  !empty($opt['payment_type']) ? $opt['payment_type'] : self::FREE,
@@ -198,6 +184,11 @@ class BundleController extends Controller
         // "accepted" => !empty($opt['accepted']) ? $opt['accepted'] : 0
 
         $success_url = route('bundle_payment_success', $bundle->slug);
-        $shurjopay_service->sendPayment($price, $success_url, $data);
+        $shurjopay_service->sendPayment($price, $success_url);
+    }
+
+    public function bundle_islands(Bundle $bundle)
+    {
+        
     }
 }
