@@ -144,7 +144,7 @@ class Create extends Component
         if($course->bundle_id !== null){
             $bundle = Bundle::where('id', $course->bundle_id)->first();
             $batch = new Batch();
-            $batch->title = 'batch for bundle '.$bundle->bundle_name;
+            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' id- '.uniqid();
             $batch->slug = uniqid();
             $batch->batch_running_days = 0;
             $batch->teacher_id = null;
@@ -155,13 +155,13 @@ class Create extends Component
             $batch->save();
         }
 
-        // if ($save) {
-        //     session()->flash('status', 'Course successfully added!');
-        //     return redirect()->route('course.index');
-        // } else {
-        //     session()->flash('failed', 'Course added failed!');
-        //     return redirect()->route('course.create');
-        // }
+        if ($save) {
+            session()->flash('status', 'Course successfully added!');
+            return redirect()->route('course.index');
+        } else {
+            session()->flash('failed', 'Course added failed!');
+            return redirect()->route('course.create');
+        }
     }
 
     public function mount()

@@ -99,9 +99,9 @@
                 <div class="col-lg-12">
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                         @php
-                            $show1 = true;
-                            $show2 = true;
-                            $show3 = true;
+                            $show = true;
+                            // $show2 = true;
+                            // $show3 = true;
                         @endphp
                         @forelse ($bundle->courses as $course)
                             @forelse ($course->courseTopic as $course_topic)
@@ -114,19 +114,19 @@
                                         </div>
                                     </div>
                                 @empty
-                                    @if($show3)
+                                    @if($show)
                                         <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
                                     @endif
                                     @php
-                                        $show3 = false;
+                                        $show = false;
                                     @endphp
                                 @endforelse
                             @empty
-                                @if($show2)
+                                @if($show)
                                     <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
                                 @endif
                                 @php
-                                    $show2 = false;
+                                    $show = false;
                                 @endphp
                             @endforelse
                             {{-- <div class="accordion__item  ">
@@ -137,11 +137,11 @@
                                 </div>
                             </div> --}}
                         @empty
-                            @if($show1)
+                            @if($show)
                                 <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
                             @endif
                             @php
-                                $show1 = false;
+                                $show = false;
                             @endphp
                         @endforelse
                     </div>

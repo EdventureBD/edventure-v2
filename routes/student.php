@@ -48,11 +48,11 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     // see the courses for a bundle
     Route::get('bundle/{bundle}/', [BundleController::class, 'bundle_courses'])->name('bundle_courses');
     // BUNDLE Process Payment
-    Route::post('bundle/process-payment/{bundle}', [BundleController::class, 'processPayment'])->name('bundle_payment_process');
+    Route::post('bundle/process-payment/{bundle_slug}', [BundleController::class, 'processPayment'])->name('bundle_payment_process');
     //BUNDLE Payment success
     Route::get('bundle/payment-success/{bundle}', [BundlePaymentController::class, 'paymentSuccess'])->name('bundle_payment_success');
-    // BUNDLE ISLANDS
-    Route::get('bundle/{batch}/', [BatchController::class, 'batchLecture'])->name('batch-lecture');
+    // // BUNDLE ISLANDS
+    // Route::get('bundle/{batch}/', [BatchController::class, 'batchLecture'])->name('bundle-islands');
 
 
 

@@ -25,14 +25,13 @@
          </div>
       </div>
 
-
       <div class="row row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
 
          @forelse ($bundle->courses as $key => $course)
-         <a href="#">
+         <a href="{{ route('batch-lecture', ['batch' => $course->Batch[0]->slug]) }}" style="color: white !important;">
             <div class="px-lg-5 px-sm-0 pb-5">
                <div data-toggle="modal" data-target="#courseTopicModal-291"><img src="/storage/roadmap/island_images/Y12TE8ga9IvqPNrrLu4qvg9pJ35lyHLJ1xW4uan3.png" alt="Iland image" class="img-fluid"></div>
-               <h6 class="text-center pt-2" style="">
+               <h6 class="text-center pt-2 font-weight-bold">
                   {{ $course->title }}
                </h6>
             </div>

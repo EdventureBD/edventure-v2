@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\BatchStudentEnrollment;
 use Illuminate\Http\Request;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
@@ -125,12 +126,13 @@ class BundleController extends Controller
     }
 
     public function bundle_courses(Bundle $bundle){
-        $bundle = Bundle::where('slug', $bundle->slug)->with('courses')->firstOrFail();
+        $bundle = Bundle::where('slug', $bundle->slug)->with('courses.Batch')->firstOrFail();
 
         return view('student.pages_new.bundle.bundle_courses', compact('bundle'));
     }
 
-    public function processPayment(Bundle $bundle, Request $request){
+    public function processPayment($bundle_slug, Request $request){
+
         // dd('Bundle processPayment method', $bundle, $request);
         // $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id, auth()->user()->id);
         // if ($enrolled) {
@@ -148,7 +150,13 @@ class BundleController extends Controller
         // ]);
         // $days = request()->months * 30;
         
-        
+        $bundle = Bundle::where('slug', $bundle_slug)->with([
+            'courses' => function($query){
+                return $query->select('id', 'title', 'slug', 'course_category_id', 'intermediary_level_id', 'bundle_id');
+            },
+            'courses.Batch' => function($query){
+                return $query->select('id', 'title', 'slug', 'course_id');
+            }])->first();
         
         $price = $request->bundle_price;
         // dd($price);
@@ -174,7 +182,25 @@ class BundleController extends Controller
         $bundle_payment->payment_account_number = '000';
         $bundle_payment->days_for = 365;
         $bundle_payment->accepted = 0;
-        $bundle_payment->save();
+        $save = $bundle_payment->save();
+
+        if($save){
+            foreach($bundle->courses as $course){
+                foreach($course->Batch as $batch){
+                    $batch_enrollment = new BatchStudentEnrollment();
+                    $batch_enrollment->batch_id = $batch->id;
+                    $batch_enrollment->payment_id = null;
+                    $batch_enrollment->course_id = $course->id;
+                    $batch_enrollment->student_id = auth()->user()->id;
+                    $batch_enrollment->batch_rank = null;
+                    $batch_enrollment->note_list = 'Enrollment for bundle id '.$bundle->id;
+                    $batch_enrollment->individual_batch_days = 0;
+                    $batch_enrollment->accessed_days = 365;
+                    $batch_enrollment->status = 1;
+                    $batch_enrollment->save();
+                }
+            }
+        }
 
         // "trx_id" =>  !empty($opt['trx']) ? $opt['trx'] : self::FREE,
         // "payment_type" =>  !empty($opt['payment_type']) ? $opt['payment_type'] : self::FREE,
