@@ -126,21 +126,23 @@
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="courseprice"> Course Price <span
-                                                    class="must-filled">*</span> </label>
-                                            <input type="number" min="0" wire:model="price"
-                                                class="form-control @error('price') is-invalid @enderror"
-                                                id="courseCategoryprice" placeholder="Enter your course price">
-                                            <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                Set this as per month price.
-                                            </small>
+                                    @if($show_price)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="courseprice"> Course Price <span
+                                                        class="must-filled">*</span> </label>
+                                                <input type="number" min="0" wire:model="price"
+                                                    class="form-control @error('price') is-invalid @enderror"
+                                                    id="courseCategoryprice" placeholder="Enter your course price">
+                                                <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                    Set this as per month price.
+                                                </small>
+                                            </div>
+                                            @error('price')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
                                         </div>
-                                        @error('price')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    @endif
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseDuration">Course Duration <span

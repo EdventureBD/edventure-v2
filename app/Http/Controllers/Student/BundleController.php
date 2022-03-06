@@ -39,14 +39,11 @@ class BundleController extends Controller
 
     public function bundle_enroll(Bundle $bundle)
     {
-        // dd($bundle);
         $enrolled = BundleStudentEnrollment::join('bundle_payments', 'bundle_payments.id', 'bundle_student_enrollments.payment_id')
             ->where('bundle_student_enrollments.bundle_id', $bundle->id)
             ->where('bundle_student_enrollments.student_id', auth()->user()->id)
             ->where('bundle_payments.student_id', auth()->user()->id)
             ->first();
-
-        // dd($enrolled);
         
         // if a student is enrolled and status is 0
         if ($enrolled && $enrolled->status == 0) {
@@ -55,18 +52,12 @@ class BundleController extends Controller
 
         // if course is free
         if($bundle->price <= 0){
-            // check if batch exists. If not, redirect with error.
-            // $bundleFirst = Bundle::where('bundle_id', $bundle->id)->orderby('created_at','ASC')->select('id','slug')->first();
-            // if(!$bundleFirst){
-            //     return redirect()->back()->withErrors([ 'No batch is available now, please try again later!']);
-            // }
 
             $student = auth()->user();
 
             $payment = new BundlePayment();
             $payment->student_id = $student->id;
             $payment->bundle_id = $bundle->id;
-            // $payment->batch_id = $bundleFirst->id;
             $payment->name = $student->name;
             $payment->email = $student->email;
             $payment->contact = $student->phone;
@@ -78,15 +69,13 @@ class BundleController extends Controller
             $payment->accepted = 1;
             $payment->save();
 
-            $batchStudentEnrollment = BundleStudentEnrollment::updateOrCreate(
+            $bundleStudentEnrollment = BundleStudentEnrollment::updateOrCreate(
                 [
                     'bundle_id' => $bundle->id,
                     'student_id' => $student->id
                 ],
                 [
-                    // 'batch_id' => $courseFirstBatch->id,
                     'payment_id' => $payment->id,
-                    // 'bundle_id' => $bundle->id,
                     'note_list' => "Free enrolment",
                     'student_id' => $student->id,
                     'individual_bundle_days' => 0,
@@ -95,30 +84,9 @@ class BundleController extends Controller
                 ]
             );
 
-            // dd("Free enrollment successful. Go to bundle page.");
-
             return redirect()->route('bundle_courses', $bundle->slug);
         }
-        // if course is NOT free
         else {
-            // if ($enrolled) {
-            //     $batch = Batch::where('id', $enrolled->batch_id)->first();
-                
-            //     if (($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) || $enrolled->status == 0) {
-            //         return redirect()->route('course-preview', $course->slug);
-            //     }
-            //     $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
-            // }
-            // else {
-            //     $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
-            //     if (!$batch) {
-            //         return back()->withErrors([ 'No batch is available now, please try again later!']);
-            //     }
-            //     $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
-            // }
-            // $paymentsNumber = PaymentNumber::all();
-            // $studentDetails = StudentDetails::where('user_id', auth()->user()->id)->first();
-            // dd($studentDetails);
             $student = auth()->user();
 
             return view('student.pages_new.bundle.confirm_enroll', compact('bundle', 'student'));
@@ -132,23 +100,6 @@ class BundleController extends Controller
     }
 
     public function processPayment($bundle_slug, Request $request){
-
-        // dd('Bundle processPayment method', $bundle, $request);
-        // $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id, auth()->user()->id);
-        // if ($enrolled) {
-        //     $batch = (new Batch())->getById($enrolled->batch_id);
-        //     $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
-        // }
-        // else {
-        //     $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
-
-        //     $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
-        // }
-        
-        // request()->validate([
-        //     'months'=>'numeric|min:'.$enroll_months
-        // ]);
-        // $days = request()->months * 30;
         
         $bundle = Bundle::where('slug', $bundle_slug)->with([
             'courses' => function($query){
@@ -159,14 +110,8 @@ class BundleController extends Controller
             }])->first();
         
         $price = $request->bundle_price;
-        // dd($price);
         $shurjopay_service = new ShurjopayService();
         $trx_id = $shurjopay_service->generateTxId();
-
-        //Creating payment with accepted =0 ;
-        // $payOpt = ['bundle_id'=>$bundle->id, 'accepted'=> 0, "trx"=>$trx_id, "payment_type"=>Payment::SHURJO_PAY, "days"=>$days, 'price'=>$price];
-        // $payment = (new Payment())->savePayment(auth()->user(), $course, $payOpt);
-        //Process Payment with ShurjoPay
 
         $user = auth()->user();
 
@@ -202,19 +147,7 @@ class BundleController extends Controller
             }
         }
 
-        // "trx_id" =>  !empty($opt['trx']) ? $opt['trx'] : self::FREE,
-        // "payment_type" =>  !empty($opt['payment_type']) ? $opt['payment_type'] : self::FREE,
-        // "amount" =>  !empty($opt['price']) ? $opt['price'] : 0,
-        // "payment_account_number" => !empty($opt['bank_trx']) ? $opt['bank_trx'] : "000",
-        // "days_for" => !empty($opt['days']) ? $opt['days'] : 365,
-        // "accepted" => !empty($opt['accepted']) ? $opt['accepted'] : 0
-
         $success_url = route('bundle_payment_success', $bundle->slug);
         $shurjopay_service->sendPayment($price, $success_url);
-    }
-
-    public function bundle_islands(Bundle $bundle)
-    {
-        
     }
 }

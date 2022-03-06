@@ -33,6 +33,7 @@ class Edit extends Component
     public $tempBanner;
     public $deleteImage;
     public $deleteBanner;
+    public $show_price;
 
     public function updatedTitle()
     {
@@ -74,9 +75,18 @@ class Edit extends Component
 
     public function updatedBundleId()
     {
-        $this->validate([
-            'bundleId' => 'nullable|numeric|integer'
-        ]);
+        if($this->bundleId){
+            $this->show_price = false;
+            $this->validate([
+                'bundleId' => 'required|numeric|integer'
+            ]);
+        }
+        else{
+            $this->show_price = true;
+            $this->validate([
+                'bundleId' => 'nullable|numeric|integer'
+            ]);
+        }
     }
 
     public function updatedPrice()
@@ -97,9 +107,9 @@ class Edit extends Component
         'title' => ['required', 'string', 'max:100'],
         'description' => 'required|string|max:500',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
+        'price' => 'nullable|integer|numeric|gt:-1',
         'duration' => 'required|numeric|between:1,36',
     ];
 
@@ -140,7 +150,12 @@ class Edit extends Component
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];
-        $course->price = $data['price'];
+        if($this->bundleId){
+            $course->price = 0;
+        }
+        else{
+            $course->price = $data['price'];
+        }
         $save = $course->save();
 
         if ($save) {
@@ -165,6 +180,10 @@ class Edit extends Component
         $this->banner = $this->course->banner;
         $this->deleteImage = $this->course->logo;
         $this->deleteBanner = $this->course->banner;
+
+        if($this->course->bundle_id !== null){
+            $this->show_price = false;
+        }
 
         $this->intermediary_levels = IntermediaryLevel::all();
         $this->bundles = Bundle::all();

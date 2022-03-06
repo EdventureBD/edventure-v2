@@ -181,39 +181,6 @@
 
 <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
-{{-- <script>
-    fetchCourseOption()
-    $(document).on('click', '#course-option', function(){
-        fetchCourseOption()
-    });
-
-    function fetchCourseOption() {
-        $('#category-selection').html('');
-        var html = ' <div class="mx-auto mt-3 d-flex justify-content-between border py-2" type="button" data-toggle="collapse" data-target="#categories" aria-expanded="false" aria-controls="collapseExample"> <div> <h6 class="fw-500" id="category-selection-text">Select Course</h6> </div> <div id="category-selection-icon"> <span class="iconify-inline" data-icon="ic:sharp-less-than" data-width="25" data-height="25" data-rotate="90deg" data-flip="horizontal"></span> </div> </div> ';
-
-        $.ajax({
-            url: '{{ route("ajax-get-courses") }}',
-            type: 'GET',
-            data: {},
-            success: function(response)
-            {
-                // console.log(response);
-                var enrolled_courses = response;
-
-                if (enrolled_courses.length > 0)
-                {
-                    jQuery.each(enrolled_courses, function(index, enrolled_course)
-                    {
-                        // html += '<option value="' + enrolled_courses.id + '">' + enrolled_courses.title + '</option>';
-                        html += '<div class="mx-auto category-progress collapse text-white" id="categories" data-id="' + enrolled_course.id + '" > <div class="category-name"> <div class="d-flex"> <h5 class="fw-600 pl-4">'  + enrolled_course.title +  '</h5> </div> <div class="progress"> </div> </div> <div class="category-link-icon"> <span class="iconify-inline" data-icon="ei:external-link" data-width="36" data-height="36" data-rotate="90deg" data-flip="horizontal"></span> </div> </div> ';
-                    });
-
-                    $('#category-selection').append(html);
-                }
-            }
-        });
-    }
-</script> --}}
 
 <script>
     $(document).ready(function() {
@@ -246,7 +213,7 @@
             data: { course_id: course_id },
             success: function(response)
             {
-                // console.log(response);
+                console.log(response);
 
                 var mcq_tags = response.mcq_content_tags;
                 var cq_tags = response.cq_content_tags;

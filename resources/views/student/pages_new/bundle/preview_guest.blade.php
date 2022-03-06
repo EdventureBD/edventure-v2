@@ -100,8 +100,6 @@
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
                         @php
                             $show = true;
-                            // $show2 = true;
-                            // $show3 = true;
                         @endphp
                         @forelse ($bundle->courses as $course)
                             @forelse ($course->courseTopic as $course_topic)
@@ -129,13 +127,6 @@
                                     $show = false;
                                 @endphp
                             @endforelse
-                            {{-- <div class="accordion__item  ">
-                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $course->id }} " data-parent="#parent">
-                                    <div class="col-11 title text-md-left text-center">
-                                        <span class="pl-4">{{ $course->title }} </span>
-                                    </div>
-                                </div>
-                            </div> --}}
                         @empty
                             @if($show)
                                 <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>

@@ -87,8 +87,6 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd($batchTopics);
-
         return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
     }
 
@@ -144,8 +142,5 @@ class BatchController extends Controller
         else{
             return false;
         }
-        // $course_lecture = CourseLecture::where('id', $courseLecture)->first();
-        // return [$batch, $courseLecture, auth()->user()->id];
-        // return $completed_lecture;
     }
 }

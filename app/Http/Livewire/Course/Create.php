@@ -30,6 +30,7 @@ class Create extends Component
     public $tempImage;
     public $tempBanner;
     public $url;
+    public $show_price = true;
 
     public function updatedTitle()
     {
@@ -71,15 +72,24 @@ class Create extends Component
 
     public function updatedBundleId()
     {
-        $this->validate([
-            'bundleId' => 'nullable|numeric|integer'
-        ]);
+        if($this->bundleId){
+            $this->show_price = false;
+            $this->validate([
+                'bundleId' => 'required|numeric|integer'
+            ]);
+        }
+        else{
+            $this->show_price = true;
+            $this->validate([
+                'bundleId' => 'nullable|numeric|integer'
+            ]);
+        }
     }
 
     public function updatedPrice()
     {
         $this->validate([
-            'price' => 'required|integer|numeric'
+            'price' => 'nullable|integer|numeric'
         ]);
     }
 
@@ -96,9 +106,9 @@ class Create extends Component
         'image' => 'nullable|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
+        'price' => 'nullable|integer|numeric|gt:-1',
         'duration' => 'required|numeric|between:1,36',
     ];
 
@@ -136,7 +146,12 @@ class Create extends Component
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];
-        $course->price = $data['price'];
+        if($this->bundleId){
+            $course->price = 0;
+        }
+        else{
+            $course->price = $data['price'];
+        }
         $course->status = 1;
         $course->order = 0;
         $save = $course->save();

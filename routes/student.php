@@ -40,8 +40,6 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
     Route::get('/course/course-preview/{course}/enroll/{payments}', [CourseController::class, 'invoice'])->name('invoice');
 
-    
-
     // BUNDLE INVOICE(ASK IF NEEDED OR NOT)
     // Route::get('/course/course-preview/{course}/enroll/{payments}', [CourseController::class, 'invoice'])->name('invoice');
     // BUNDLE
@@ -51,10 +49,6 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::post('bundle/process-payment/{bundle_slug}', [BundleController::class, 'processPayment'])->name('bundle_payment_process');
     //BUNDLE Payment success
     Route::get('bundle/payment-success/{bundle}', [BundlePaymentController::class, 'paymentSuccess'])->name('bundle_payment_success');
-    // // BUNDLE ISLANDS
-    // Route::get('bundle/{batch}/', [BatchController::class, 'batchLecture'])->name('bundle-islands');
-
-
 
     // BATCH
     Route::get('batch', [BatchController::class, 'batch'])->name('batch');

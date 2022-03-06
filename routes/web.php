@@ -57,19 +57,16 @@ Route::get('/error', function () {
 
 Route::view('/dashboard', 'dashboard')->middleware(['auth'])->name('dashboard');
 
-
 Route::get('/course/course-preview/{course}', [CourseController::class, 'coursePreview'])->name('course-preview');
 // Courses Page
 Route::get('/course/{category?}/{intermediary_level?}', [CourseController::class, 'course'])->name('course');
 // Preview Course
 Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
 
-
 // BUNDLE PREVIEW
 Route::get('/bundle/bundle-preview/{bundle_slug}', [BundleController::class, 'bundlePreview'])->name('bundle-preview');
 // BUNDLE ENROLL
 Route::get('/bundle/bundle-preview/{bundle}/enroll', [BundleController::class, 'bundle_enroll'])->name('bundle_enroll');
-
 
 // Roadmap Page-> should be-> Route::get('/course/course-preview/{course}/roadmap', [CourseController::class, 'roadmap'])->name('roadmap')
 // Route::get('/roadmap', [CourseController::class, 'roadmap'])->name('roadmap');
