@@ -101,7 +101,7 @@ function optionSelected(activeOp,inactiveOp1,inactiveOp2,inactiveOp3,mcqId) {
     let option3 = document.getElementById(`mcq_${mcqId}_${inactiveOp2}`);
     let option4 = document.getElementById(`mcq_${mcqId}_${inactiveOp3}`);
     selected.addEventListener("click", () => {
-        selected.setAttribute("style","background: #FCBF82");
+        selected.setAttribute("style","background: #FA9632");
         option2.removeAttribute("style");
         option3.removeAttribute("style");
         option4.removeAttribute("style");

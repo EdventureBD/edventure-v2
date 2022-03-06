@@ -1,99 +1,5 @@
-
 <x-landing-layout headerBg="white">
-    <style>
-        .card{
-            border-radius: 4px;
-            background: #fff;
-            box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-            padding: 14px 80px 18px 36px;
-            cursor: pointer;
-        }
-        .ribbon {
-            width: 150px;
-            height: 150px;
-            overflow: hidden;
-            position: absolute;
-        }
-        .ribbon::before,
-        .ribbon::after {
-            position: absolute;
-            z-index: -1;
-            content: '';
-            display: block;
-            border: 5px solid #6400C8;
-        }
-        .ribbon span {
-            position: absolute;
-            display: block;
-            width: 225px;
-            padding: 15px 0;
-            background-color: #6400C8;
-            box-shadow: 0 5px 10px rgba(0,0,0,.1);
-            color: #fff;
-            font: 700 18px/1 'Lato', sans-serif;
-            text-shadow: 0 1px 1px rgba(0,0,0,.2);
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        .ribbon-top-left {
-            top: -10px;
-            left: 12px;
-        }
-        @media(max-width:576px) {
-            .ribbon-top-left {
-                left: 53px;
-            }
-        }
-        .ribbon-top-left::before,
-        .ribbon-top-left::after {
-            border-top-color: transparent;
-            border-left-color: transparent;
-        }
-        .ribbon-top-left::before {
-            top: 0;
-            right: 0;
-        }
-        .ribbon-top-left::after {
-            bottom: 0;
-            left: 0;
-        }
-        .ribbon-top-left span {
-            right: -25px;
-            top: 30px;
-            transform: rotate(-45deg);
-        }
-
-        .card:hover{
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-        }
-
-        .card h3{
-            font-weight: 600;
-        }
-
-        .card img{
-            position: absolute;
-            top: 20px;
-            right: 15px;
-            max-height: 120px;
-        }
-
-        .card-1{
-            background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
-            background-repeat: no-repeat;
-            background-position: right;
-            background-size: 80px;
-        }
-
-        @media(max-width: 990px){
-            .card{
-                margin: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/model-exam-index.css">
     <div class="page-section">
         <div class="container">
             @include('partials.alert')
@@ -156,20 +62,21 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style="border-radius: 25px; border: 3px solid #6400c8">
                                 <div style="background: #6400c8; color: #FA9632; -webkit-border-top-left-radius: 15px; -webkit-border-top-right-radius: 15px"
-                                     class="modal-header d-flex justify-content-center">
-                                    <h5 class="modal-title font-weight-bolder">Disclaimer: This is a paid bundle</h5>
-{{--                                    <button type="button" class="close"--}}
-{{--                                            data-dismiss="modal" aria-label="Close">--}}
-{{--                                        <span aria-hidden="true">&times;</span>--}}
-{{--                                    </button>--}}
+                                     class="modal-header d-flex">
+                                    <h5 class="modal-title font-weight-bolder mx-auto">Disclaimer: This is a paid bundle</h5>
+                                   <button type="button" class="close text-white"
+                                           data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                   </button>
                                 </div>
                                 <div class="modal-body">
                                     <h3 class="font-weight-bolder">This bundle includes:</h3> <br>
-                                    <p>{!! $category->details  !!}</p> <br>
-                                    <span style="color: #6400c8; font-size: 44px; font-weight: bolder;">
+                                    <p>{!! $category->details  !!}</p>
+                                </div>
+                                <div>
+                                    <span style="color: #6400c8; font-size: 44px; font-weight: bolder;font-family:'Segoe UI', Roboto, Oxygen">
                                         ৳ {{$category->price}}
                                     </span>
-
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <a style="border-radius: 10px;background: #FA9632;color: white;" class="btn font-weight-bolder" href="{{$payment_href}}">

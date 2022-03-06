@@ -32,11 +32,10 @@
     {{-- new landing banner part ends --}}
     <div class="our-package-section text-center py-5">
         <div class="container">
-            <h3 class="text-dark text-md font-roboto">কি পাবে আমাদের প্ল্যাটফর্মে</h3>
-            <p class="fw-600 text-xxsm max-w-38 w-100 mx-auto text-dark">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়
-                - ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয়
-                - দেশসেরা অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন
-                </p>
+            <h3 class="text-dark text-md font-roboto mb-5">কি পাবে আমাদের প্ল্যাটফর্মে</h3>
+            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>
+            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয়</p>
+            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- দেশসেরা অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
             <div class="single-package py-5 px-3 mt-6">
                 <div class="row">
                     <div class="col-md-6">
