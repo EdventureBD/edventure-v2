@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     // Route::get('/course/course-preview/{course}/enroll/{payments}', [CourseController::class, 'invoice'])->name('invoice');
     // BUNDLE
     // see the courses for a bundle
-    Route::get('bundle/{bundle}/', [BundleController::class, 'bundle_courses'])->name('bundle_courses');
+    Route::get('bundle/{bundle}/', [BundleController::class, 'bundle_courses'])->name('bundle_courses')->middleware('canAccessBundle');
     // BUNDLE Process Payment
     Route::post('bundle/process-payment/{bundle_slug}', [BundleController::class, 'processPayment'])->name('bundle_payment_process');
     //BUNDLE Payment success
