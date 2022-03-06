@@ -33,6 +33,7 @@
                             @if($value->user_id == auth()->user()->id)
                                 @php($icon = !empty($category->price) ? 'fas fa-lock-open' : '')
                                 @php($href = route('model.exam',['c' => $category->id]))
+                                @php($data_toggle = '')
                                 @break
                             @else
                                 @php($icon = !empty($category->price) ? 'fas fa-lock' : '')
