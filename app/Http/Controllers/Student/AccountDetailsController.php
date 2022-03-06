@@ -55,6 +55,8 @@ class AccountDetailsController extends Controller
         }])
         ->get();
 
+        // dd($batch_student_enrollment);
+
         // Start counting how many courses the user completed
         $enrolled_course_count = 0;
         $completed_course_count = 0;

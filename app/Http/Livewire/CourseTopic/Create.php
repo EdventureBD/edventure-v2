@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\CourseTopic;
 
+use App\Models\Admin\Batch;
+use App\Models\Admin\BatchLecture;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -81,11 +83,23 @@ class Create extends Component
       $save = $course_topic->save();
 
       if ($save) {
+         $course = Course::where('id', $data['courseId'])->first();
+         if($course->bundle_id){
+            $batch = Batch::where('course_id', $course->id)->first();
+            $batchLecture = new BatchLecture();
+            $batchLecture->batch_id = $batch->id;
+            $batchLecture->course_id = $course->id;
+            $batchLecture->topic_id = $course_topic->id;
+            $batchLecture->status = 1;
+            $batchLecture->save();
+         }
+
          session()->flash('status', 'Course topic created successfully!');
          if ($route == "course.show") {
-               return redirect()->route('course.show', $slug);
-         } else {
-               return redirect()->route('course-topic.index');
+            return redirect()->route('course.show', $slug);
+         }
+         else {
+            return redirect()->route('course-topic.index');
          }
       } else {
          session()->flash('failed', 'Course topic created failed!');
