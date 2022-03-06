@@ -14,12 +14,25 @@ use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 class SinglePaymentController extends Controller
 {
+    /**
+     * initialize process for single model exam payment
+     * @param Request $request
+     * @param $examId
+     * @return void
+     */
     public function initialize(Request $request, $examId)
     {
         $exam = ModelExam::query()->find($examId);
         $this->sendPayment($exam->exam_price,route('single.payment.success', $examId));
     }
 
+    /**
+     * This function will only use for sending payment request to surjoPay service
+     * Need to generate a transaction id and the hit the payment service
+     * @param $amount
+     * @param $success_url
+     * @return void
+     */
     private function sendPayment($amount, $success_url)
     {
         $shurjopay_service = new ShurjopayService();
@@ -27,6 +40,12 @@ class SinglePaymentController extends Controller
         $shurjopay_service->sendPayment($amount, $success_url, []);
     }
 
+    /**
+     * After completing the exam payment process surjopay will redirect back to this route
+     * @param Request $request
+     * @param $examId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function paymentSuccess(Request $request, $examId)
     {
         if (request()->status != "Success") {
@@ -62,12 +81,23 @@ class SinglePaymentController extends Controller
         }
     }
 
+    /**
+     * initialize process for category model exam payment
+     * @param $categoryId
+     * @return void
+     */
     public function initializeCategoryPayment($categoryId)
     {
         $category = ExamCategory::query()->find($categoryId);
         $this->sendPayment($category->price,route('category.single.payment.success', $categoryId));
     }
 
+    /**
+     * After completing the category payment process surjopay will redirect back to this route
+     * @param Request $request
+     * @param $categoryId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function CategoryPaymentSuccess(Request $request, $categoryId)
     {
         if (request()->status != "Success") {
