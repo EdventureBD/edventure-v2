@@ -192,14 +192,18 @@
                                                     request()->is('admin/exam-tags') ||
                                                     request()->is('admin/model-exam') ||
                                                     request()->is('admin/model-exam/tag/analysis') ||
-                                                    request()->is('admin/model-exam/result/list') ? 'menu-open' : '' }}">
+                                                    request()->is('admin/model-exam/result/list') ||
+                                                    request()->is('admin/model-exam/payment/category') ||
+                                                    request()->is('admin/model-exam/payment/exam') ? 'menu-open' : '' }}">
                     <a href="#"
                        class="nav-link {{ request()->is('admin/exam-category') ||
                                           request()->is('admin/exam-topic') ||
                                           request()->is('admin/exam-tags') ||
                                           request()->is('admin/model-exam/result/list') ||
                                           request()->is('admin/model-exam/tag/analysis') ||
-                                          request()->is('admin/model-exam') ? 'active' : '' }}">
+                                          request()->is('admin/model-exam') ||
+                                          request()->is('admin/model-exam/payment/category') ||
+                                          request()->is('admin/model-exam/payment/exam')? 'active' : '' }}">
                         <i class="fas fa-paste"></i>
                         <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -246,6 +250,15 @@
                                class="nav-link {{ request()->is('admin/model-exam/tag/analysis') ? 'active' : '' }} ">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Exam Tag Analysis</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('model.exam.payment.category') }}"
+                               class="nav-link {{ request()->is('admin/model-exam/payment/category') ? 'active' : '' }}
+                               {{ request()->is('admin/model-exam/payment/exam') ? 'active' : '' }}">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Payments</p>
                             </a>
                         </li>
 
