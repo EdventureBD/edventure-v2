@@ -51,8 +51,6 @@
                         Model Test
                     </div>
                 </a>
-
-
             </div>
          </div>
          <div class="">
