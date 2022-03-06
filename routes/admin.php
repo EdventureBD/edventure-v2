@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ModelMcqTagAnalysisController;
+use App\Http\Controllers\SinglePaymentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamCategoryController;
@@ -283,6 +284,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     //Model Exam Tag analysis
     Route::get('/model-exam/tag/analysis',[ModelMcqTagAnalysisController::class,'tagAnalysisForAdmin'])->name('model.exam.tag.analysis');
+
+    //Payments
+    Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
+    Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
 
 
 
