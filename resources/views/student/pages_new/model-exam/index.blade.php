@@ -62,9 +62,9 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style="border-radius: 25px; border: 3px solid #6400c8">
                                 <div style="background: #6400c8; color: #FA9632; -webkit-border-top-left-radius: 15px; -webkit-border-top-right-radius: 15px"
-                                     class="modal-header d-flex">
-                                    <h5 class="modal-title font-weight-bolder mx-auto">Disclaimer: This is a paid bundle</h5>
-                                   <button type="button" class="close text-white"
+                                     class="modal-header d-flex justify-content-between">
+                                    <h5 class="modal-title font-weight-bolder ml-auto">Disclaimer: This is a paid bundle</h5>
+                                   <button type="button" class="close text-white  text-center"
                                            data-dismiss="modal" aria-label="Close">
                                        <span aria-hidden="true">&times;</span>
                                    </button>
