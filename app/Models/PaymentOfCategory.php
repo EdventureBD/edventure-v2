@@ -10,4 +10,19 @@ class PaymentOfCategory extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function singlePayment()
+    {
+        return $this->belongsTo(SinglePayment::class);
+    }
+
+    public function examCategory()
+    {
+        return $this->belongsTo(ExamCategory::class);
+    }
 }

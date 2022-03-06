@@ -132,4 +132,77 @@ class SinglePaymentController extends Controller
             return redirect()->route('model.exam')->with(['failed' =>"Payment failed, please try again!"]);
         }
     }
+
+    public function getCategoryPayment()
+    {
+        $category_payments = PaymentOfCategory::query()
+                                                ->with('user')
+                                                ->with('singlePayment')
+                                                ->with('examCategory');
+
+        if(request()->input('query.category')) {
+            $category = trim(request()->input('query.category'));
+            $category_payments = $category_payments->whereHas('examCategory',function ($q) use ($category) {
+                $q->where('id', $category);
+            });
+        }
+
+        if(request()->input('query.student')) {
+            $student = trim(request()->input('query.student'));
+            $category_payments = $category_payments->whereHas('user',function ($q) use ($student) {
+                $q->where('phone','like', $student.'%');
+                $q->orWhere('email','like', $student.'%');
+                $q->orWhere('name','like', $student.'%');
+            });
+        }
+
+        if(request()->input('query.tnx')) {
+            $tnxId = trim(request()->input('query.tnx'));
+            $category_payments = $category_payments->whereHas('singlePayment',function ($q) use ($tnxId) {
+                $q->where('tnx_id', $tnxId);
+            });
+        }
+
+        $category_payments = $category_payments->paginate(10);
+        $categories = ExamCategory::query()->get();
+
+        return view('admin.pages.model_exam.payments.category-payment', compact('category_payments','categories'));
+    }
+
+    public function getExamPayment()
+    {
+        $exam_payments = PaymentOfExams::query()
+                                        ->with('user')
+                                        ->with('singlePayment')
+                                        ->with('modelExam');
+
+
+        if(request()->input('query.exam')) {
+            $exam = trim(request()->input('query.exam'));
+            $exam_payments = $exam_payments->whereHas('modelExam',function ($q) use ($exam) {
+                $q->where('id', $exam);
+            });
+        }
+
+        if(request()->input('query.student')) {
+            $student = trim(request()->input('query.student'));
+            $exam_payments = $exam_payments->whereHas('user',function ($q) use ($student) {
+                $q->where('phone','like', $student.'%');
+                $q->orWhere('email','like', $student.'%');
+                $q->orWhere('name','like', $student.'%');
+            });
+        }
+
+        if(request()->input('query.tnx')) {
+            $tnxId = trim(request()->input('query.tnx'));
+            $exam_payments = $exam_payments->whereHas('singlePayment',function ($q) use ($tnxId) {
+                $q->where('tnx_id', $tnxId);
+            });
+        }
+
+        $exam_payments = $exam_payments->paginate(10);
+        $exams = ModelExam::query()->get();
+
+        return view('admin.pages.model_exam.payments.exam-payment', compact('exam_payments','exams'));
+    }
 }

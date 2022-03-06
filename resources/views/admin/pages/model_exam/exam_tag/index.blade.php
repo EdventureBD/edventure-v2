@@ -29,13 +29,13 @@
             height: 2.35rem;
         }
     </style>
-    
-    
+
+
 
     <div class="row">
         <div class="col-md-9">
             @include('admin.pages.model_exam.exam_tag.filter')
-         
+
         </div>
         <div class="col-md-3">
             @include('admin.pages.model_exam.exam_tag.create')
@@ -84,7 +84,7 @@
     </table>
     @if ($exam_tags->hasPages())
         <div class="pagination-wrapper">
-            {{ $exam_tags->links() }}
+            {{ $exam_tags->withQueryString()->links() }}
         </div>
     @endif
 
