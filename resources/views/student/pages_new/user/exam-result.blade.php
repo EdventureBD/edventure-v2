@@ -28,7 +28,7 @@
                     @forelse($exam_results as $result)
                     <tr>
                         <td>{{$result->modelExam->title}}</td>
-                        <td>{{$result->total_marks}}</td>
+                        <td>{{$result->total_marks > 0 ? $result->total_marks : 0}}</td>
                         <td>
                             <a target="_blank" href="{{route('model.exam.paper.mcq',['id'=>\Illuminate\Support\Facades\Crypt::encrypt($result->modelExam->id)])}}"
                                class="btn btn-sm btn-outline-primary">
