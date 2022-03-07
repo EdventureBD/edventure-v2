@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'Course',
-'pageName'=>'Course',
-'secondPageName'=>'Course'
+'title'=>'Bundle',
+'pageName'=>'Bundle',
+'secondPageName'=>'Create Bundle'
 ])
 
 @section('css1')
@@ -17,19 +17,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Courses</h3>
+                            <h3 class="card-title">Bundles</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
-                                        <a href="{{ route('courseCSV') }}">
-                                            <button class="btn btn-info"><i class="fas fa-download"></i>&nbsp;&nbsp;
-                                                Export Courses
-                                            </button>
-                                        </a>
-                                        <a href="{{ route('course.create') }}">
+                                        <a href="{{ route('bundle.create') }}">
                                             <button class="btn btn-info"><i
-                                                    class="fas fa-plus-square"></i>&nbsp;&nbsp;Course</button>
+                                                    class="fas fa-plus-square"></i>&nbsp;&nbsp; Bundle </button>
                                         </a>
                                     </div>
                                 </div>
@@ -43,7 +38,6 @@
                                         <th>SL. No</th>
                                         <th>Name</th>
                                         <th>Intermediary Level</th>
-                                        <th>Bundle</th>
                                         <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>
@@ -52,56 +46,52 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($courses as $course)
+                                    @foreach ($bundles as $bundle)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <a href="{{ route('course.show', $course->slug) }}" title="See Details">
-                                                    {{ $course->title }}
-                                                </a>
+                                                {{ $bundle->bundle_name }}
                                             </td>
-                                            <td>{{ $course->name }}</td>
-                                            
-                                            <td>@if($course->bundle === null) N/A @else {{$course->bundle->bundle_name}} @endif</td>
+                                            <td>{{ $bundle->intermediary_level->title }}</td>
                                             <td>
-                                                <img class="product-image " src="{{$course->icon}}" alt=""
+                                                <img class="product-image" src="{{$bundle->icon}}" alt=""
                                                     srcset="">
                                             </td>
 
-                                            <td>{{ $course->price }} taka</td>
-                                            <td>{{ $course->duration }} month</td>
+                                            <td>{{ $bundle->price }} taka</td>
+                                            <td>{{ $bundle->duration }} month</td>
                                             <td>
                                                 <input type="checkbox" class="customControlInput"
-                                                    id="single-col-{{ $course->id }}" data-id="{{ $course->id }}"
+                                                    id="single-col-{{ $bundle->id }}" data-id="{{ $bundle->id }}"
                                                     data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                                     data-on="Active" data-off="InActive"
-                                                    {{ $course->status ? 'checked' : '' }}>
+                                                    {{ $bundle->status ? 'checked' : '' }}>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1"
-                                                        href="{{ route('course.show', $course->slug) }}"
+                                                    {{-- <a class="mr-1"
+                                                        href="{{ route('course.show', $bundle->slug) }}"
                                                         title="See Details">
                                                         <button type="button" class="btn btn-success"><i
                                                                 class="fas fa-eye"></i></button>
-                                                    </a>
+                                                    </a> --}}
                                                     <a class="mr-1"
-                                                        href="{{ route('course.edit', $course->slug) }}"
-                                                        title="Edit {{ $course->title }}">
+                                                        href="{{ route('bundle.edit', $bundle->slug) }}"
+                                                        title="Edit {{ $bundle->title }}">
                                                         <button type="button" class="btn btn-info"><i
                                                                 class="far fa-edit"></i></button>
                                                     </a>
-                                                    <a class="mr-1" href="#deleteCourse{{ $course->id }}"
-                                                        data-toggle="modal" title="Delete {{ $course->title }}">
+                                                    <a class="mr-1" href="#deleteBundle{{ $bundle->id }}"
+                                                        data-toggle="modal" title="Delete {{ $bundle->title }}">
                                                         <button type="button" class="btn btn-danger"><i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </a>
-                                                    <div class="modal fade" id="deleteCourse{{ $course->id }}">
+                                                    <div class="modal fade" id="deleteBundle{{ $bundle->id }}">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title">Delete
-                                                                        {{ $course->title }} Course</h4>
+                                                                        {{ $bundle->title }} Bundle</h4>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -114,7 +104,7 @@
                                                                     <button type="button" class="btn btn-outline-light"
                                                                         data-dismiss="modal">Close</button>
                                                                     <form
-                                                                        action="{{ route('course.destroy', $course->slug) }}"
+                                                                        action="{{ route('bundle.destroy', $bundle->slug) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')
@@ -138,7 +128,6 @@
                                         <th>SL. No</th>
                                         <th>Name</th>
                                         <th>Intermediary Level</th>
-                                        <th>Bundle</th>
                                         <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>
@@ -167,10 +156,13 @@
                 if (confirm("Do you want to change the status?")) {
                     var status = $(this).prop('checked') == true ? 1 : 0;
                     var id = $(this).data('id');
+
+                    console.log(status, id)
+
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url: "changeCourseStatus",
+                        url: "changeBundleStatus",
                         data: {
                             'status': status,
                             'id': id
@@ -179,7 +171,9 @@
                             console.log(data.success);
                         }
                     });
-                } else {
+
+                } 
+                else {
                     if ($("#single-col-" + $(this).data('id')).prop("checked") == true) {
                         $("#single-col-" + $(this).data('id')).prop('checked', false);
                     } else if ($("#single-col-" + $(this).data('id')).prop("checked") == false) {
