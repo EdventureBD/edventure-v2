@@ -1,6 +1,6 @@
 <x-landing-layout>
     {{-- new landing banner part starts --}}
-    <section class="position-fixed w-100" style="position:relative">
+    <section class="position-fixed w-100">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
             <div class="col-5 p-0 m-0">
                 <img src="/img/landing/newLanding/landingImageBigScreenText.webp" alt="text-part's Background" class="img-fluid h-75 w-100">
