@@ -1,17 +1,19 @@
         /* paid exam's modal part's css in overflow starts*/
         /* width */
         .modal-body::-webkit-scrollbar {
-            width: 1px;
+            width: 5px;
         }
     
         /* Track */
         .modal-body::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+            background: rgb(199, 196, 196); 
+             
         }
         
         /* Handle */
         .modal-body::-webkit-scrollbar-thumb {
-            background: #888; 
+            background: #6400c8; 
+             
         }
         
         /* Handle on hover */
