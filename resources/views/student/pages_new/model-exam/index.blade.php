@@ -147,7 +147,7 @@
                         @endif
                         <div class="col-md-3 mb-4" style="max-width: 100%;padding-right: 0 !important;">
                             <div class="{{$d_none}} ribbon ribbon-top-left"><span>done</span></div>
-                            <div style="background-position: center center !important;
+                            <div style="background-position: center center !important;background-size:cover !important;
                                         background: url({{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}})"
                                  class="single-exam text-center mx-auto p-4 mb-md-0">
                                 <h5 style="line-height: 1.5em; height: 3em; width: 100%; overflow: hidden;" class="text-center mt-2">{{ $exam->title }} </h5>
