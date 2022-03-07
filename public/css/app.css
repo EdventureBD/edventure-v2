@@ -12035,3 +12035,32 @@ svg.eye-icon {
   color: #653092;
   font-size: 35px;
 }
+/* landing page parallax part  starts*/
+@media screen and (min-width:1081px) {
+  .our-package-section {
+    top: 950px;
+    margin-bottom: 950px;
+  }
+}
+
+@media screen and (max-width:1080px) {
+  .our-package-section {
+    top: 550px;
+    margin-bottom: 550px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .our-package-section {
+    top: 450px;
+    margin-bottom: 450px;
+  }
+}
+@media screen and (max-width:576px) {
+  .our-package-section {
+    top: 250px;
+    margin-bottom: 250px;
+  }
+}
+
+/* landing page parallax part ends */
