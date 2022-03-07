@@ -52,6 +52,16 @@
             <div class="mx-md-2">
                 <button type="submit" class="btn btn-outline-primary">Find</button>
             </div>
+{{--            <div class="mx-md-2">--}}
+{{--                <form action="/">--}}
+{{--                    <select class="form-control">--}}
+{{--                        <button type="submit" class="btn btn-outline-primary">Highest</button>--}}
+{{--                        <option value="">Sort By</option>--}}
+{{--                        <option value=""></option>--}}
+{{--                        <option value="">Lowest</option>--}}
+{{--                    </select>--}}
+{{--                </form>--}}
+{{--            </div>--}}
             <div class="">
                 <a href="{{route('model.exam.result')}}" class="btn btn-outline-secondary">Clear</a>
             </div>

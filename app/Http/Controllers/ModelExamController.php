@@ -294,7 +294,6 @@ class ModelExamController extends Controller
                                                     request()->input('student_id') :
                                                     auth()->user()->id;
         if(auth()->check() && $result = $this->examAttended($examId, $student_id)) {
-
             $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
                                             ->where('model_exam_id', $examId)
                                             ->where('student_id',$student_id)
@@ -374,7 +373,7 @@ class ModelExamController extends Controller
             });
         }
 
-        $results = $results->paginate(5);
+        $results = $results->orderByDesc('total_marks')->paginate(5);
 
         return view('admin.pages.model_exam.result.index', compact('results','filters'));
     }

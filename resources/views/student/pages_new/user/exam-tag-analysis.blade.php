@@ -12,6 +12,10 @@
             border: 1px solid rgba(0, 0, 0, 0.185);
             text-align: center
         }
+        .page-item.active .page-link {
+            background-color: #fa9632;
+            border-color: #fa9632;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <div class="pt-5">
