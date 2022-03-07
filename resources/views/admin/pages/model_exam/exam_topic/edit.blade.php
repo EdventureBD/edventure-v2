@@ -55,6 +55,16 @@
                                 </div>
                             </div>
                         </div>
+{{--                        <div class="col-md-6">--}}
+{{--                            <div class="input-group mb-3">--}}
+{{--                                <input--}}
+{{--                                    value="{{$topic->multiple_subject}}"--}}
+{{--                                    type="checkbox"--}}
+{{--                                    {{ $topic->multiple_subject == 1 ? 'checked' : '' }}--}}
+{{--                                    class="form-control"--}}
+{{--                                    name="multiple_subject">Multiple Subjects--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </form>
             </div>

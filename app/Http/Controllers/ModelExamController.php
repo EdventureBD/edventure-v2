@@ -317,18 +317,21 @@ class ModelExamController extends Controller
             'mcq' => 'required',
             'exam_end_time' => 'required'
         ]);
+        $exam = ModelExam::query()->find($examId);
         $topics = [];
         $student_id = auth()->user()->id;
         $exam_results = McqTotalResult::query()->where('student_id', $student_id)->with('modelExam')->get();
-        $topics = ExamTopic::query()->where('exam_category_id',ModelExam::find($examId)->exam_category_id)->get();
+        $topics = ExamTopic::query()
+                            ->whereHas('modelExam', function ($q) {
+                                $q->has('mcqQuestions')
+                            ->where('visibility',1);
+                            })->where('exam_category_id',$exam->exam_category_id)->get();
 
         if ($this->examAttended($examId, $student_id)) {
             return redirect()->back()->withErrors('You have already attempted on this exam!!');
         }
 
         $mcq = $inputs['mcq'];
-
-        $exam = ModelExam::query()->find($examId);
 
         OnMcqSubmit::dispatch($mcq,$exam,$inputs['exam_end_time'],$student_id);
 

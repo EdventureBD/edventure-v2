@@ -43,8 +43,10 @@ class ExamTopicController extends Controller
     {
         $inputs =  $request->validate([
             'name' => 'required',
-            'exam_category_id' => 'required'
+            'exam_category_id' => 'required',
+            'multiple_subject' => 'nullable'
         ]);
+        $inputs['multiple_subject'] = $request->has('multiple_subject') ? 1 : 0;
 
         if($this->checkDuplicateTopicName($inputs['exam_category_id'],$inputs['name'])) {
 
@@ -106,13 +108,15 @@ class ExamTopicController extends Controller
     {
         $inputs =  $request->validate([
             'name' => 'required',
-            'exam_category_id' => 'required'
+            'exam_category_id' => 'required',
+            'multiple_subject' => 'nullable'
         ]);
+//        $inputs['multiple_subject'] = $request->has('multiple_subject') ? 1 : 0;
 
-        if($this->checkDuplicateTopicName($inputs['exam_category_id'],$inputs['name'])) {
-
-            return redirect()->back()->with(['failed' => 'This topic is already added to a category']);
-        }
+//        if($this->checkDuplicateTopicName($inputs['exam_category_id'],$inputs['name'])) {
+//
+//            return redirect()->back()->with(['failed' => 'This topic is already added to a category']);
+//        }
 
         ExamTopic::query()->where('id', $id)->update($inputs);
 

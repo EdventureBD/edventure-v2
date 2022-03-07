@@ -16,14 +16,27 @@ class McqQuestionController extends Controller
 {
     public function index($examId)
     {
-        $exam = ModelExam::query()->where('id',$examId)->firstOrFail();
+        $exam = ModelExam::query()
+                        ->with('topic')
+                        ->where('id',$examId)->firstOrFail();
+
         $exam_questions = McqQuestion::query()->with('examTag')
                         ->where('model_exam_id',$examId)
                         ->orderByDesc('created_at')
                         ->paginate(5);
-        $tags = ExamTag::query()
-                        ->where('exam_topic_id', $exam->exam_topic_id)
-                        ->get();
+
+        $tags = ExamTag::query();
+        if($exam->topic->multiple_subject == true) {
+            $tags = $tags->whereHas('examTopic', function($eT) use ($exam){
+                $eT->whereHas('examCategory', function ($eC) use ($exam) {
+                    $eC->where('id', $exam->exam_category_id);
+                });
+            });
+        } else {
+            $tags = $tags->where('exam_topic_id', $exam->exam_topic_id);
+        }
+
+        $tags = $tags->get();
         return view('admin.pages.model_exam.mcq_question.index', compact('exam','tags','exam_questions'));
     }
 
