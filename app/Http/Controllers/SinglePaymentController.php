@@ -84,11 +84,18 @@ class SinglePaymentController extends Controller
     /**
      * initialize process for category model exam payment
      * @param $categoryId
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse|void
      */
     public function initializeCategoryPayment($categoryId)
     {
         $category = ExamCategory::query()->find($categoryId);
+        $alreadyPaid = PaymentOfCategory::query()->where('exam_category_id', $categoryId)
+            ->where('user_id', auth()->user()->id)->exists();
+
+        if($alreadyPaid) {
+            return redirect()->route('model.exam',['c' => $categoryId]);
+        }
+
         $this->sendPayment($category->price,route('category.single.payment.success', $categoryId));
     }
 
@@ -163,7 +170,7 @@ class SinglePaymentController extends Controller
             });
         }
 
-        $category_payments = $category_payments->paginate(10);
+        $category_payments = $category_payments->orderByDesc('created_at')->groupBy(DB::raw('single_payment_id'))->paginate(10);
         $categories = ExamCategory::query()->get();
 
         return view('admin.pages.model_exam.payments.category-payment', compact('category_payments','categories'));
@@ -205,4 +212,5 @@ class SinglePaymentController extends Controller
 
         return view('admin.pages.model_exam.payments.exam-payment', compact('exam_payments','exams'));
     }
+
 }

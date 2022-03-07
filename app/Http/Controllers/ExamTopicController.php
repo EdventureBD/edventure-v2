@@ -111,7 +111,7 @@ class ExamTopicController extends Controller
             'exam_category_id' => 'required',
             'multiple_subject' => 'nullable'
         ]);
-        $inputs['multiple_subject'] = $request->has('multiple_subject') ? 1 : 0;
+//        $inputs['multiple_subject'] = $request->has('multiple_subject') ? 1 : 0;
 
 //        if($this->checkDuplicateTopicName($inputs['exam_category_id'],$inputs['name'])) {
 //

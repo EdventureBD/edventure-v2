@@ -45,8 +45,10 @@ class ModelMcqTagAnalysisController extends Controller
         }
         if($tag_type == 'weakness') {
             $tags = $tags->sortBy('percentage_scored');
-        } else {
+        } elseif($tag_type == 'strength') {
             $tags = $tags->sortByDesc('percentage_scored');
+        } else{
+            abort(404);
         }
 
         return $tags;
