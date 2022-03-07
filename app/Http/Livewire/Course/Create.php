@@ -4,10 +4,14 @@ namespace App\Http\Livewire\Course;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Models\Admin\Course;
-use Livewire\WithFileUploads;
-use App\Models\Admin\CourseCategory;
 use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
+
+// models
+use App\Models\Admin\Course;
+use App\Models\Admin\Bundle;
+use App\Models\Admin\CourseCategory;
+use App\Models\Admin\Batch;
 
 class Create extends Component
 {
@@ -15,6 +19,8 @@ class Create extends Component
 
     public $intermediary_levels;
     public $intermediaryLevelId;
+    public $bundles;
+    public $bundleId;
     public $title;
     public $description;
     public $duration;
@@ -24,6 +30,7 @@ class Create extends Component
     public $tempImage;
     public $tempBanner;
     public $url;
+    public $show_price = true;
 
     public function updatedTitle()
     {
@@ -59,14 +66,30 @@ class Create extends Component
     public function updatedIntermediaryLevelId()
     {
         $this->validate([
-            'intermediaryLevelId' => 'required'
+            'intermediaryLevelId' => 'required|numeric|integer'
         ]);
+    }
+
+    public function updatedBundleId()
+    {
+        if($this->bundleId){
+            $this->show_price = false;
+            $this->validate([
+                'bundleId' => 'required|numeric|integer'
+            ]);
+        }
+        else{
+            $this->show_price = true;
+            $this->validate([
+                'bundleId' => 'nullable|numeric|integer'
+            ]);
+        }
     }
 
     public function updatedPrice()
     {
         $this->validate([
-            'price' => 'required|integer|numeric'
+            'price' => 'nullable|integer|numeric'
         ]);
     }
 
@@ -83,9 +106,18 @@ class Create extends Component
         'image' => 'nullable|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
-        'price' => 'required|integer|numeric|gt:-1',
-        'intermediaryLevelId' => 'required',
+        'intermediaryLevelId' => 'required|numeric|integer',
+        'bundleId' => 'nullable|numeric|integer',
+        'price' => 'nullable|integer|numeric|gt:-1',
         'duration' => 'required|numeric|between:1,36',
+    ];
+
+    protected $messages = [
+        'intermediaryLevelId.required' => 'Intermediary level is required.',
+        'intermediaryLevelId.numeric' => 'Intermediary level has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Intermediary level has to be a integer value.',
+        'intermediaryLevelId.numeric' => 'Bundle has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Bundle has to be a integer value.',
     ];
 
     public function saveCourse()
@@ -105,13 +137,38 @@ class Create extends Component
         $course->icon = $this->image;
         $course->banner = $this->banner;
         $course->intermediary_level_id = $data['intermediaryLevelId'];
+        if(empty($data['bundleId'])){
+            $course->bundle_id = null;
+        }
+        else{
+            $course->bundle_id = $data['bundleId'];
+        }
         $course->description = $data['description'];
         $course->duration = $data['duration'];
         $course->trailer = $data['url'];
-        $course->price = $data['price'];
+        if($this->bundleId){
+            $course->price = 0;
+        }
+        else{
+            $course->price = $data['price'];
+        }
         $course->status = 1;
         $course->order = 0;
         $save = $course->save();
+
+        if($course->bundle_id !== null){
+            $bundle = Bundle::where('id', $course->bundle_id)->first();
+            $batch = new Batch();
+            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' id- '.uniqid();
+            $batch->slug = uniqid();
+            $batch->batch_running_days = 0;
+            $batch->teacher_id = null;
+            $batch->student_limit = 10000;
+            $batch->course_id = $course->id;
+            $batch->status = 1;
+            $batch->order = 0;
+            $batch->save();
+        }
 
         if ($save) {
             session()->flash('status', 'Course successfully added!');
@@ -120,6 +177,11 @@ class Create extends Component
             session()->flash('failed', 'Course added failed!');
             return redirect()->route('course.create');
         }
+    }
+
+    public function mount()
+    {
+        $this->bundles = Bundle::all();
     }
 
     public function render()

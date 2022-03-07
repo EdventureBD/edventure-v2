@@ -8,21 +8,21 @@
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Course</span>
+                            <h3 class="card-title">Edit Bundle</span>
                             </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" wire:submit.prevent="updateCourse">
+                            <form role="form" wire:submit.prevent="updateBundle">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseTitle"> Course Title <span
+                                            <label class="col-form-label" for="bundle_name"> Bundle Name <span
                                                     class="must-filled">*</span> </label>
-                                            <input type="text" wire:model="title"
-                                                class="form-control @error('title') is-invalid @enderror"
-                                                id="courseTitle" placeholder="Enter your course category title">
-                                            @error('title')
+                                            <input type="text" wire:model="bundle_name"
+                                                class="form-control @error('bundle_name') is-invalid @enderror"
+                                                id="bundle_name" placeholder="Enter your bundle name">
+                                            @error('bundle_name')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -34,14 +34,13 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Course
-                                                        Icon</label>
+                                                    <label for="exampleInputFile" class="col-form-label"> Bundle Icon </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" wire:model="image"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course icon (240px*240px)</label>
+                                                                for="exampleInputFile">Bundle icon (240px*240px)</label>
                                                         </div>
                                                     </div>
                                                     @error('image')
@@ -67,14 +66,13 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Course
-                                                        Banner</label>
+                                                    <label for="exampleInputFile" class="col-form-label">Bundle Banner</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" wire:model="banner"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course Banner
+                                                                for="exampleInputFile">Bundle Banner
                                                                 (576px*642px)</label>
                                                         </div>
                                                     </div>
@@ -97,11 +95,27 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Intermediary Level <span
+                                            <label class="col-form-label" for="bundlePrice"> Bundle Price <span
+                                                    class="must-filled">*</span> </label>
+                                            <input type="number" min="0" wire:model="price"
+                                                class="form-control @error('price') is-invalid @enderror"
+                                                id="bundlePrice" placeholder="Enter your bundle price">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Set this as per month price.
+                                            </small>
+                                        </div>
+                                        @error('price')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="bundleName">Intermediary Level <span
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="intermediaryLevelId">
                                                 <option value="" selected>Select Intermediary Level</option>
@@ -116,48 +130,13 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Bundle <span
-                                                    class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="bundleId">
-                                                <option value="" selected>Select Bundle</option>
-                                                @foreach ($bundles as $bundle)
-                                                    <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                If nothing is selected, then course will not be considered part of a bundle.
-                                            </small>
-                                        </div>
-                                        @error('bundleId')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    @if($show_price)
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="coursePrice"> Course Price <span
-                                                        class="must-filled">*</span> </label>
-                                                <input type="number" min="0" wire:model="price"
-                                                    class="form-control @error('price') is-invalid @enderror"
-                                                    id="coursePrice" placeholder="Enter your course price">
-                                                <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                    Set this as per month price.
-                                                </small>
-                                            </div>
-                                            @error('price')
-                                                <p style="color: red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    @endif
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="courseDuration">Course Duration <span
+                                            <label class="col-form-label" for="bundleDuration">Bundle Duration <span
                                                     class="must-filled">*</span></label>
                                             <input type="number" min="1" wire:model="duration"
                                                 class="form-control @error('duration') is-invalid @enderror"
-                                                id="courseDuration" placeholder="Enter your course duration">
+                                                id="bundleDuration" placeholder="Enter your bundle duration">
                                             <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                Enter an aproximate month to finish this course.
+                                                Enter an aproximate month to finish this bundle.
                                             </small>
                                             @error('duration')
                                                 <p style="color: red;">{{ $message }}</p>
@@ -167,20 +146,20 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="courseDescription"> Course Description <span
+                                    <label class="col-form-label" for="bundleDescription"> Bund;e Description <span
                                             class="must-filled">*</span></label>
                                     <textarea rows="5" type="text" wire:model="description"
                                         class="form-control @error('description') is-invalid @enderror"
-                                        id="courseDescription" placeholder="Enter your course description"></textarea>
+                                        id="bundleDescription" placeholder="Enter your bundle description"></textarea>
                                     <small id="passwordHelpBlock" class="form-text text-secondary">
-                                        Edit details about this course. Remember not more than 500 characters.
+                                        Edit details about this bundle. Remember not more than 500 characters.
                                     </small>
                                     @error('description')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="col-form-label" for="courseurl">Treailer </label> <br>
+                                    <label class="col-form-label" for="bundleurl">Treailer </label> <br>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">https://youtube.com/watch?v=</span>

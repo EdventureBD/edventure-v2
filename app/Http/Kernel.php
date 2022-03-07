@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'is_student' => \App\Http\Middleware\IsStudent::class,
         'canAccess' => \App\Http\Middleware\canAccess::class,
         'proceed_guard' => \App\Http\Middleware\ProceedGuard::class,
+        'canAccessBundle' => \App\Http\Middleware\canAccessBundle::class,
     ];
 }

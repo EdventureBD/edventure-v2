@@ -5,12 +5,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="text-white">{{ $course->title }}</h1>
-                    <p class="lead text-white-50 measure-hero-lead">{{ $course->description }}</p>
+                    <h1 class="text-white">{{ $bundle->bundle_name }}</h1>
+                    <p class="lead text-white-50 measure-hero-lead">{{ $bundle->description }}</p>
                 </div>
                 <div class="col-md-4">
                     <div class="d-flex align-items-center justify-content-start">
-                        @if(!empty($course->trailer))<a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2"  data-toggle="modal" data-target="#showTrailer">Watch
+                        @if(!empty($bundle->trailer))<a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2"  data-toggle="modal" data-target="#showTrailer">Watch
                             trailer <i class="fas fa-play ml-2"></i>
                         </a>@endif
                         <div class="modal fade" id="showTrailer" tabindex="-1" role="dialog" aria-labelledby="showTrailer" aria-hidden="true">
@@ -23,14 +23,13 @@
                                 </div>
                                 <div class="modal-body">
                                     
-                                    <iframe  src="https://www.youtube.com/embed/{{$course->trailer ? $course->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" width="100%" height="420px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe  src="https://www.youtube.com/embed/{{$bundle->trailer ? $bundle->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" width="100%" height="420px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         
                                 </div>
                             </div>
                             </div>
                         </div>
-                            <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($course->price > 0) Enroll Now @else Enroll Now (free) @endif</a>
-                            
+                        <a href="{{ route('bundle_enroll', $bundle->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($bundle->price > 0) Enroll Now @else Enroll Now (free) @endif</a>
                     </div>
                 </div>
             </div>
@@ -41,14 +40,14 @@
             <ul class="flex align-items-sm-center my-3 ">
                 <li class="nav-item navbar-list__item d-inline-block">
                     <i class="far fa-clock"></i>
-                    {{ $course->duration }} month
+                    {{ $bundle->duration }} month
                 </li>
                 <li class="nav-item navbar-list__item ml-4 d-inline-block">
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M18.09,10.5V9H9.59V4.5A1.5,1.5 0 0,0 8.09,3A1.5,1.5 0 0,0 6.59,4.5A1.5,1.5 0 0,0 8.09,6V9H5.09V10.5H8.09V16.7C8.09,19.06 10,20.97 12.34,21C14.68,20.96 16.54,19.04 16.5,16.7C16.5,15.11 15.75,13.61 14.5,12.62C14.28,12.44 14.05,12.28 13.8,12.15C13.58,12.05 13.34,12 13.1,12C12.39,12 11.74,12.39 11.39,13C11.2,13.3 11.1,13.65 11.1,14C11.11,15.1 12,16 13.11,16C13.73,16 14.31,15.69 14.69,15.2C14.9,15.67 15,16.18 15,16.7C15.04,18.2 13.86,19.45 12.34,19.5C10.81,19.5 9.58,18.23 9.59,16.7V10.5H18.09Z" />
                     </svg>
-                    {{ $course->price }}
+                    {{ $bundle->price }}
                 </li>
 
             </ul>
@@ -76,25 +75,70 @@
                 </div>
             </div>
             
+            <h1 class="text-center mt-3" style="font-weight: 600;"> Courses </h1>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
-                        @forelse ($course_topics as $batchTopic)
-                            <div class="accordion__item  ">
-                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $batchTopic->id }} " data-parent="#parent">
+                        @forelse ($bundle->courses as $course)
+                            <div class="accordion__item">
+                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $course->id }} " data-parent="#parent">
                                     <div class="col-11 title text-md-left text-center">
-                                        <span class="pl-4">{{ $batchTopic->title }} </span>
+                                        <span class="pl-4">{{ $course->title }} </span>
                                     </div>
-                                    
                                 </div>
-                                
                             </div>
                         @empty
-                            No Topics found
+                            No Courses found
                         @endforelse
                     </div>
                 </div>
             </div>
+
+            <h1 class="text-center mt-3" style="font-weight: 600;"> Lectures </h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
+                        @php
+                            $show = true;
+                        @endphp
+                        @forelse ($bundle->courses as $course)
+                            @forelse ($course->courseTopic as $course_topic)
+                                @forelse ($course_topic->CourseLecture as $lecture)
+                                    <div class="accordion__item">
+                                        <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $lecture->id }} " data-parent="#parent">
+                                            <div class="col-11 title text-md-left text-center">
+                                                <span class="pl-4">{{ $lecture->title }} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @empty
+                                    @if($show)
+                                        <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
+                                    @endif
+                                    @php
+                                        $show = false;
+                                    @endphp
+                                @endforelse
+                            @empty
+                                @if($show)
+                                    <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
+                                @endif
+                                @php
+                                    $show = false;
+                                @endphp
+                            @endforelse
+                        @empty
+                            @if($show)
+                                <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
+                            @endif
+                            @php
+                                $show = false;
+                            @endphp
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <script>

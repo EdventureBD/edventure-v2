@@ -8,7 +8,7 @@
             <a href="{{route("home")}}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
          <div class="my-auto pr-5 mx-auto">
-            <h1 class="fw-800" id="roadmap-subject-topic-name">Physics</h1>
+            <h1 class="fw-800" id="roadmap-subject-topic-name">{{ $course->title }}</h1>
          </div>
       </div>
 

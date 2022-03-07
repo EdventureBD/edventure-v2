@@ -8,21 +8,21 @@
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Course</span>
-                            </h3>
+                            <h3 class="card-title">Create Bundle</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" wire:submit.prevent="updateCourse">
+                            <form role="form" wire:submit.prevent="saveBundle">
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseTitle"> Course Title <span
+                                            <label class="col-form-label" for="bundleName"> Bundle Name <span
                                                     class="must-filled">*</span> </label>
-                                            <input type="text" wire:model="title"
-                                                class="form-control @error('title') is-invalid @enderror"
-                                                id="courseTitle" placeholder="Enter your course category title">
-                                            @error('title')
+                                            <input type="text" wire:model="bundle_name"
+                                                class="form-control @error('bundle_name') is-invalid @enderror"
+                                                id="bundleName" placeholder="Enter your bundle name">
+                                            @error('bundle_name')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -34,14 +34,14 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Course
+                                                    <label for="exampleInputFile" class="col-form-label">Bundle
                                                         Icon</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" wire:model="image"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course icon (240px*240px)</label>
+                                                                for="exampleInputFile">Bundle icon (240px*240px)</label>
                                                         </div>
                                                     </div>
                                                     @error('image')
@@ -51,11 +51,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($tempImage)
-                                                    <img style="width:100px; border-radius: 50%" class="product-image"
-                                                        src="{{ $tempImage->temporaryUrl() }}" alt="">
+                                                    <img style="width:100px; border-radius: 50%" class="product-image" src="{{ $tempImage->temporaryUrl() }}"
+                                                        alt="">
                                                 @else
-                                                    <img style="width:100px; border-radius: 50%"
-                                                        src="{{ $image }}" alt="...">
+                                                    <img style="width:100px; border-radius: 50%" src="http://placehold.it/240x240" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="image">
                                                     <p style="color: indigo">Uploading icon ....</p>
@@ -67,15 +66,14 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Course
+                                                    <label for="exampleInputFile" class="col-form-label">Bundle
                                                         Banner</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" wire:model="banner"
                                                                 class="custom-file-input hidden" id="exampleInputFile">
                                                             <label class="custom-file-label"
-                                                                for="exampleInputFile">Course Banner
-                                                                (576px*642px)</label>
+                                                                for="exampleInputFile">Bundle Banner (576px*642px)</label>
                                                         </div>
                                                     </div>
                                                     @error('banner')
@@ -85,11 +83,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($tempBanner)
-                                                    <img style="width:100px;" class="img-fluid product-image"
-                                                        src="{{ $tempBanner->temporaryUrl() }}" alt="">
+                                                    <img class="product-image" src="{{ $tempBanner->temporaryUrl() }}"
+                                                        alt="">
                                                 @else
-                                                    <img style="width:100px;" class="img-fluid"
-                                                        src="{{ $banner }}" alt="...">
+                                                    <img class="img-fluid" src="http://placehold.it/576x642" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>
@@ -98,10 +95,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Intermediary Level <span
+                                            <label class="col-form-label" for="bundleprice"> Bundle Price <span
+                                                    class="must-filled">*</span> </label>
+                                            <input type="number" min="0" wire:model="price"
+                                                class="form-control @error('price') is-invalid @enderror"
+                                                id="bundleCategoryprice" placeholder="Enter your bundle price">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Set this as per month price.
+                                            </small>
+                                        </div>
+                                        @error('price')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="Name">Intermediary Level <span
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="intermediaryLevelId">
                                                 <option value="" selected>Select Intermediary Level</option>
@@ -116,48 +129,13 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Bundle <span
+                                            <label class="col-form-label" for="bundleDuration">Bundle Duration <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="bundleId">
-                                                <option value="" selected>Select Bundle</option>
-                                                @foreach ($bundles as $bundle)
-                                                    <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                If nothing is selected, then course will not be considered part of a bundle.
-                                            </small>
-                                        </div>
-                                        @error('bundleId')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    @if($show_price)
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="coursePrice"> Course Price <span
-                                                        class="must-filled">*</span> </label>
-                                                <input type="number" min="0" wire:model="price"
-                                                    class="form-control @error('price') is-invalid @enderror"
-                                                    id="coursePrice" placeholder="Enter your course price">
-                                                <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                    Set this as per month price.
-                                                </small>
-                                            </div>
-                                            @error('price')
-                                                <p style="color: red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    @endif
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="courseDuration">Course Duration <span
-                                                    class="must-filled">*</span></label>
-                                            <input type="number" min="1" wire:model="duration"
+                                            <input type="number" min="1" max="36" wire:model="duration"
                                                 class="form-control @error('duration') is-invalid @enderror"
-                                                id="courseDuration" placeholder="Enter your course duration">
+                                                id="bundleDuration" placeholder="Enter your bundle duration (month)">
                                             <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                Enter an aproximate month to finish this course.
+                                                Enter an aproximate month to finish this bundle.
                                             </small>
                                             @error('duration')
                                                 <p style="color: red;">{{ $message }}</p>
@@ -165,22 +143,22 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="col-form-label" for="courseDescription"> Course Description <span
-                                            class="must-filled">*</span></label>
+                                    <label class="col-form-label" for="bundleDescription"> Bundle Description <span
+                                            class="must-filled">*</span>
+                                    </label>
                                     <textarea rows="5" type="text" wire:model="description"
                                         class="form-control @error('description') is-invalid @enderror"
-                                        id="courseDescription" placeholder="Enter your course description"></textarea>
+                                        id="bundleDescription" placeholder="Enter your bundle description"></textarea>
                                     <small id="passwordHelpBlock" class="form-text text-secondary">
-                                        Edit details about this course. Remember not more than 500 characters.
+                                        Enter some details about this bundle. Remember not more than 500 characters.
                                     </small>
                                     @error('description')
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="col-form-label" for="courseurl">Treailer </label> <br>
+                                    <label class="col-form-label" for="bundleurl">Treailer </label> <br>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">https://youtube.com/watch?v=</span>
@@ -199,7 +177,6 @@
                                         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
                                         clipboard-write; encrypted-media; gyroscope;
                                         picture-in-picture" allowfullscreen></iframe>
-
                                         {{-- vimeo player
                                         <iframe src="https://player.vimeo.com/video/{{ $url }}" width="640"
                                             height="360" frameborder="0"
@@ -208,7 +185,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary">Create</button>
                                     <a href="{{ URL::previous() }}"><button type="button"
                                             class="btn btn-danger">Back</button></a>
                                 </div>

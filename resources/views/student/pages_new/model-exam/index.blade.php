@@ -63,9 +63,9 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style="border-radius: 25px; border: 3px solid #6400c8">
                                 <div style="background: #6400c8; color: #FA9632; -webkit-border-top-left-radius: 15px; -webkit-border-top-right-radius: 15px"
-                                     class="modal-header d-flex">
-                                    <h5 class="modal-title font-weight-bolder mx-auto">Disclaimer: This is a paid bundle</h5>
-                                   <button type="button" class="close text-white"
+                                     class="modal-header d-flex justify-content-between">
+                                    <h5 class="modal-title font-weight-bolder ml-auto">Disclaimer: This is a paid bundle</h5>
+                                   <button type="button" class="close text-white  text-center"
                                            data-dismiss="modal" aria-label="Close">
                                        <span aria-hidden="true">&times;</span>
                                    </button>
@@ -150,8 +150,7 @@
                             <div style="background-position: center center !important;
                                         background: url({{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}})"
                                  class="single-exam text-center mx-auto p-4 mb-md-0">
-                                <h5 style="max-height: 100px; white-space: nowrap; width: 100%; overflow: hidden;
-                                text-overflow: ellipsis;" class="text-center mt-2">{{ $exam->title }} </h5>
+                                <h5 style="line-height: 1.5em; height: 3em; width: 100%; overflow: hidden;" class="text-center mt-2">{{ $exam->title }} </h5>
                                 <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
                                 <div class=" text-center d-block">
                                     <a

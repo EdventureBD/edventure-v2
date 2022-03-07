@@ -15,6 +15,7 @@ use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
+use App\Models\Admin\Bundle;
 use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
@@ -42,21 +43,33 @@ class CourseController extends Controller
         ->paginate(8)
         ->fragment('intermediary_levels');
 
-        if(isset($intermediary_level_slug)&&!empty($intermediary_level_slug)){
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('slug', $intermediary_level_slug)->first();
+        if(isset($intermediary_level_slug) && !empty($intermediary_level_slug)){
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)
+                                            ->where('slug', $intermediary_level_slug)
+                                            ->first();
         }
         else{
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('course_category_id', $category->id)->first();
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)
+                                            ->where('course_category_id', $category->id)
+                                            ->first();
         }
 
         if($selected_intermediary_level){
-            $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)->where('status', 1)->paginate(8)->fragment('intermediary_levels');
+            $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)
+                                ->where('status', 1)
+                                ->where('bundle_id', null)
+                                ->paginate(8)
+                                ->fragment('intermediary_levels');
+
+            $bundles = Bundle::where('intermediary_level_id', $selected_intermediary_level->id)
+                                ->get();
         }
         else{
-            $courses = [];
+            $courses = collect();
+            $bundles = collect();
         }
 
-        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses'));
+        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses', 'bundles'));
     }
 
     public function courseByCategory($category_slug){
@@ -133,15 +146,20 @@ class CourseController extends Controller
             ->where('batch_student_enrollments.student_id', auth()->user()->id)
             ->where('payments.student_id', auth()->user()->id)
             ->first();
+        
+        // if a student is enrolled and status is 0
         if ($enrolled && $enrolled->status == 0) {
             return redirect()->route('course-preview', $course->slug);
         }
-        if($course->price<=0){
 
+        // if course is free
+        if($course->price <= 0){
+            // check if batch exists. If not, redirect with error.
             $courseFirstBatch = Batch::where('course_id', $course->id)->orderby('created_at','ASC')->select('id','slug')->first();
             if(!$courseFirstBatch){
                 return redirect()->back()->withErrors([ 'No batch is available now, please try again later!']);
             }
+
             $student=auth()->user();
             $payment = new Payment();
             $payment->student_id = $student->id;
@@ -157,7 +175,7 @@ class CourseController extends Controller
             $payment->days_for = 365;
             $payment->accepted = 1;
             $payment->save();
-            $lastPayment = Payment::latest()->first();
+
             $batchStudentEnrollment = BatchStudentEnrollment::updateOrCreate(
                 [
                     'course_id' => $course->id,
@@ -165,7 +183,7 @@ class CourseController extends Controller
                 ],
                 [
                     'batch_id' => $courseFirstBatch->id,
-                    'payment_id' => $lastPayment->id,
+                    'payment_id' => $payment->id,
                     'course_id' => $course->id,
                     'note_list' => "Free enrolment",
                     'student_id' => $student->id,
@@ -175,9 +193,9 @@ class CourseController extends Controller
                 ]
             );
             return redirect()->route('batch-lecture', $courseFirstBatch->slug);
-        } else {
-
-            
+        }
+        // if course is NOT free
+        else {
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
                 
@@ -185,7 +203,8 @@ class CourseController extends Controller
                     return redirect()->route('course-preview', $course->slug);
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
-            } else {
+            }
+            else {
                 $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
                 if (!$batch) {
                     return back()->withErrors([ 'No batch is available now, please try again later!']);
@@ -203,12 +222,13 @@ class CourseController extends Controller
 
     public function processPayment(Course $course)
     {
-        // dd(request()->all());
+        // dd('processPayment method');
         $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id, auth()->user()->id);
         if ($enrolled) {
             $batch = (new Batch())->getById($enrolled->batch_id);
             $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
-        } else {
+        }
+        else {
             $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
 
             $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
@@ -221,7 +241,7 @@ class CourseController extends Controller
         $price = $course->price * request()->months;
         // dd($price);
         $days = request()->months * 30;
-        $shurjopay_service = new ShurjopayService(); 
+        $shurjopay_service = new ShurjopayService();
         $trx_id = $shurjopay_service->generateTxId(); 
 
         //Creating payment with accepted =0 ;
@@ -229,7 +249,7 @@ class CourseController extends Controller
         $payment = (new Payment())->savePayment(auth()->user(), $course, $payOpt);
         //Process Payment with ShurjoPay
         $success_url = route('payment.success', $course->slug);
-        $shurjopay_service->sendPayment($price, $success_url, []); 
+        $shurjopay_service->sendPayment($price, $success_url, []);
     }
 
     public function invoice(Course $course, Payment $payments)
