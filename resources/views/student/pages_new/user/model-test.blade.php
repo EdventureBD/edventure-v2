@@ -210,7 +210,7 @@
                                         $('#weaknessMessage').html('')
                                         $('#weaknessDetailsText').css('display','block')
                                         $('#mcq_weakness').append('' +
-                                            '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
+                                            '<p id="" class="mx-2 badge rounded-pill" style="background: #DEDEDE;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100px;">' +
                                             '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
                                             '</p>')
                                     }
@@ -221,7 +221,7 @@
                                         $('#strengthMessage').html('')
                                         $('#strengthDetailsText').css('display','block')
                                         $('#mcq_strength').append('' +
-                                            '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
+                                            '<p id="" class="mx-2 badge rounded-pill" style="background: #DEDEDE;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100px;">' +
                                             '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
                                             '</p>')
                                     }
