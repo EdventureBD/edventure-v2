@@ -13,16 +13,17 @@
             text-align: center
         }
     </style>
-    <div class=" pt-5">
-        <div class="mt-5 pt-5 p-5">
-            <div class="container mb-md-5 pb-md-5">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <div class="pt-5">
+        <div class="mt-5 px-md-5">
+            <div class="mb-md-5 pb-md-5">
                 @if($tag_type == 'weakness')
                     <h2>Weakness Analysis</h2>
                 @else
                     <h2>Strength Analysis</h2>
                 @endif
 
-                <table class="table table-striped table-responsive align-content-center">
+                <table id="tableData" class="table table-striped table-responsive align-content-center">
                     <thead>
                     <tr>
                         <td class="fit col">Tags</td>
@@ -56,3 +57,9 @@
     </div>
 
 </x-landing-layout>
+
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $('#tableData').DataTable()
+</script>

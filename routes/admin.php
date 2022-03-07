@@ -295,6 +295,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
     Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
 
+    /**************************************** Model Exam ****************************************/
 
 
 });

@@ -21,7 +21,7 @@ class ExamTagsController extends Controller
      */
     public function index()
     {
-        $exam_topics = ExamTopic::query()->with('examCategory')->get();
+        $exam_topics = ExamTopic::query()->with('examCategory')->where('multiple_subject',0)->get();
         $exam_tags = ExamTag::query()->with('examTopic');
 
         if(request()->input('query.topic')) {
