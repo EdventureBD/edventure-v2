@@ -32,10 +32,10 @@
                                 </p>
                             </div>
                             <div id="dropdownIcon" >
-                                <a href="#" id="close_collapse_icon" class="d-none">
+                                <a href="javascript:void(0)" id="close_collapse_icon" class="d-none">
                                     <i class="c-point fas fa-angle-up"></i>
                                 </a>
-                                <a href="#" id="open_collapse_icon" class="d-block">
+                                <a href="javascript:void(0)" id="open_collapse_icon" class="d-block">
                                     <i class="c-point fas fa-angle-down"></i>
                                 </a>
                             </div>

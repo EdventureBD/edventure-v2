@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group pl-0">
                         <label for="months">Enrolled months</label>
-                        <input id="enrolMonths" type="number" onchange="calculatePrice(this)" min="{{$enroll_months}}" class="form-control" name="months" value="{{$enroll_months}}" />
+                        <input id="enrolMonths" type="number" min="{{$enroll_months}}" max="{{ $course->duration }}" class="form-control" name="months" value="{{$enroll_months}}" />
                     </div>
                     <div class="form-group pl-0">
                         <label for="coursePrice">Payable Amount</label>
@@ -43,16 +43,16 @@
         </div>
         
     </div>
-    <script>
+    {{-- <script>
         function calculatePrice(e)
         {
-            var months = e.value >= e.min ? e.value : e.min;
-            var max_months = "<?php echo $course->duration; ?>";
+            var months = parseInt(e.value) >= e.min ? parseInt(e.value) : e.min;
+            var max_months = parseInt("<?php echo $course->duration; ?>");
             if (months > max_months) months = max_months;
-            var price = "<?php echo $course->price; ?>";
-            var totalPrice = parseInt(months) * parseInt(price);
+            var price = parseInt("<?php echo $course->price; ?>");
+            var totalPrice = months * price;
             document.getElementById("enrolMonths").value = months;
             document.getElementById("coursePrice").value = totalPrice;
         }
-    </script>
+    </script> --}}
 </x-landing-layout>

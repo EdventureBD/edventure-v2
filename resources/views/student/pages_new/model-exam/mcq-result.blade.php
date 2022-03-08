@@ -21,6 +21,7 @@
                             <td class="fit">Answer</td>
                             <td class="fit">Your Answer</td>
                             <td class="fit">Explanation</td>
+                            <td class="fit">Success Rate</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +42,8 @@
                                     {!! $answer->mcqQuestion->field_4 !!}
                                 @endif
                             </td>
-                            <td class="text-white text-center {{$answer->mcqQuestion->answer == $answer->mcq_ans ? 'bg-success' : 'bg-danger'}}">
+                            <td class="text-center"
+                                style="background:{{empty($answer->mcq_ans) && !empty($exam->negative_marking) ? '' : ($answer->mcqQuestion->answer == $answer->mcq_ans ? '#9DCA7B' : '#DD7575')}}; color: black; font-weight: 600">
                                 @if($answer->mcq_ans == 1)
                                     {!! $answer->mcqQuestion->field_1 !!}
                                 @elseif($answer->mcq_ans == 2)
@@ -53,6 +55,12 @@
                                 @endif
                             </td>
                             <td class="text-center">{!! $answer->mcqQuestion->explanation  !!}</td>
+                            @if($answer->mcqQuestion->modelMcqQuestionAnalysis)
+                                <td class="text-center">{{number_format(($answer->mcqQuestion->modelMcqQuestionAnalysis->correct/$answer->mcqQuestion->modelMcqQuestionAnalysis->attempted) * 100, 2).' %'}}</td>
+                            @else
+                                <td class="text-center"> 0 % </td>
+                            @endif
+
                         </tr>
                     @endforeach
                     </tbody>

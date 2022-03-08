@@ -9,6 +9,8 @@ use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\PaymentController;
 use App\Http\Controllers\Student\ProgressController;
 use App\Http\Controllers\Student\AccountDetailsController;
+use App\Http\Controllers\Student\BundleController;
+use App\Http\Controllers\Student\BundlePaymentController;
 use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
@@ -37,6 +39,16 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
 
     Route::get('/course/course-preview/{course}/enroll', [CourseController::class, 'enroll'])->name('enroll');
     Route::get('/course/course-preview/{course}/enroll/{payments}', [CourseController::class, 'invoice'])->name('invoice');
+
+    // BUNDLE INVOICE(ASK IF NEEDED OR NOT)
+    // Route::get('/course/course-preview/{course}/enroll/{payments}', [CourseController::class, 'invoice'])->name('invoice');
+    // BUNDLE
+    // see the courses for a bundle
+    Route::get('bundle/{bundle}/', [BundleController::class, 'bundle_courses'])->name('bundle_courses')->middleware('canAccessBundle');
+    // BUNDLE Process Payment
+    Route::post('bundle/process-payment/{bundle_slug}', [BundleController::class, 'processPayment'])->name('bundle_payment_process');
+    //BUNDLE Payment success
+    Route::get('bundle/payment-success/{bundle}', [BundlePaymentController::class, 'paymentSuccess'])->name('bundle_payment_success');
 
     // BATCH
     Route::get('batch', [BatchController::class, 'batch'])->name('batch');

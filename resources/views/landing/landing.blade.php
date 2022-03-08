@@ -1,6 +1,6 @@
 <x-landing-layout>
     {{-- new landing banner part starts --}}
-    <section class="" style="position:relative">
+    <section class="position-fixed w-100">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
             <div class="col-5 p-0 m-0">
                 <img src="/img/landing/newLanding/landingImageBigScreenText.webp" alt="text-part's Background" class="img-fluid h-75 w-100">
@@ -30,7 +30,7 @@
         </div>
     </section>
     {{-- new landing banner part ends --}}
-    <div class="our-package-section text-center py-5">
+    <div class="our-package-section text-center py-5 position-relative bg-white">
         <div class="container">
             <h3 class="text-dark text-md font-roboto mb-5">কি পাবে আমাদের প্ল্যাটফর্মে</h3>
             <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>

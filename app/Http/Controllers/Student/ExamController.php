@@ -804,6 +804,8 @@ class ExamController extends Controller
                 ])
                 ->firstOrFail();
 
+            // dd($exam);
+
             // if CQ exam result exists and is checked, then the user has attended exam and is checked. Then paper+marks+analytics is shown
             $cq_exam_result = ExamResult::where('exam_id', $exam->id)
             ->where('batch_id', $batch->id)

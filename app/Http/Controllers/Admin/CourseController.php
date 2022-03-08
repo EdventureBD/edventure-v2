@@ -16,6 +16,9 @@ class CourseController extends Controller
         $courses = Course::join('intermediary_levels', 'courses.intermediary_level_id', '=', 'intermediary_levels.id')
         ->select('courses.*', 'intermediary_levels.title as name')
         ->orderByRaw('courses.created_at DESC')
+        ->with(['bundle' => function($query){
+            return $query->select('id', 'bundle_name');
+        }])
         ->get();
 
         return view('admin.pages.course.index', compact('courses'));

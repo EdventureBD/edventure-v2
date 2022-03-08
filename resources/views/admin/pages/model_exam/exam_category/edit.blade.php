@@ -34,7 +34,7 @@
                                 aria-describedby="basic-addon2">
                         </div>
                         <div class="col-md-6">
-                            <input type="text"
+                            <input type="number"
                                    name="price"
                                    value="{{$category->price}}"
                                    class="form-control"

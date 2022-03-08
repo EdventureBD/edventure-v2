@@ -13,6 +13,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\CSVController;
 
+use App\Http\Controllers\Admin\BundleController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\MCQController;
 use App\Http\Controllers\Admin\CQController;
@@ -122,6 +123,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/changeQuestionContentTagStatus', [QuestionContentTagController::class, 'changeQuestionContentTagStatus']);
     // END OF LIVE CLASS
 
+    // START OF BUNDLES
+    Route::resource('/bundle', BundleController::class, ['except' => ['show', 'store', 'update']]);
+    Route::get('/changeBundleStatus', [BundleController::class, 'changeBundleStatus']);
+    // END OF BUNDLES
+
     // START OF EXAM
     Route::resource('/exam', ExamController::class, ['except' => ['store', 'update']]);
     Route::get('/exam/{exam}/add-question', [ExamController::class, 'addQuestion'])->name('addQuestion');
@@ -137,14 +143,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
     // END OF EXAM
 
-    // START OF EXAM
+    // START OF BATCH EXAM
     Route::resource('/batch-exam', BatchExamController::class, ['except' => ['show', 'store', 'update']]);
     Route::get('/changeBatchExamStatus', [BatchExamController::class, 'changeBatchExamStatus']);
-    // END OF EXAM
+    // END OF  BATCH EXAM
 
-    // START OF EXAM
+    // START OF EXAM ATTEMPT
     Route::resource('/student-exam-attempt', StudentExamAttemptController::class, ['except' => ['show', 'store', 'update']]);
-    // END OF EXAM
+    // END OF EXAM ATTEMPT
 
     // START OF CQ EXAM
     // Route::get('{exam}/creative-question/{creative-question}', [CQController::class, 'creativeQuestion'])->name('creative-question');
@@ -289,6 +295,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
     Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
 
+    /**************************************** Model Exam ****************************************/
 
 
 });

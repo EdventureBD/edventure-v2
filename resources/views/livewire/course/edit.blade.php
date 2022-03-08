@@ -97,24 +97,8 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="coursePrice"> Course Price <span
-                                                    class="must-filled">*</span> </label>
-                                            <input type="number" min="0" wire:model="price"
-                                                class="form-control @error('price') is-invalid @enderror"
-                                                id="coursePrice" placeholder="Enter your course price">
-                                            <small id="passwordHelpBlock" class="form-text text-secondary">
-                                                Set this as per month price.
-                                            </small>
-                                        </div>
-                                        @error('price')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Intermediary Level <span
@@ -130,6 +114,41 @@
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="courseName">Bundle <span
+                                                    class="must-filled">*</span></label>
+                                            <select class="form-control" wire:model="bundleId">
+                                                <option value="" selected>Select Bundle</option>
+                                                @foreach ($bundles as $bundle)
+                                                    <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                If nothing is selected, then course will not be considered part of a bundle.
+                                            </small>
+                                        </div>
+                                        @error('bundleId')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    @if($show_price)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="coursePrice"> Course Price <span
+                                                        class="must-filled">*</span> </label>
+                                                <input type="number" min="0" wire:model="price"
+                                                    class="form-control @error('price') is-invalid @enderror"
+                                                    id="coursePrice" placeholder="Enter your course price">
+                                                <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                    Set this as per month price.
+                                                </small>
+                                            </div>
+                                            @error('price')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    @endif
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseDuration">Course Duration <span

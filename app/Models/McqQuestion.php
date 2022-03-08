@@ -40,4 +40,9 @@ class McqQuestion extends Model
     {
         return $this->belongsTo(ExamTag::class);
     }
+
+    public function modelMcqQuestionAnalysis()
+    {
+        return $this->hasOne(ModelMcqQuestionAnalysis::class);
+    }
 }

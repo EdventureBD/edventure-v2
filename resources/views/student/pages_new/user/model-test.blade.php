@@ -200,22 +200,31 @@
                     url: url,
                     success: function (response) {
                         if(response.length > 0) {
+                            let strengthCount = 0;
+                            let weaknessCount = 0;
                             response.forEach((item, index)=>{
                                 url = window.location.origin+'/profile/model-test/tag-solutions/'+item.id
                                 if(item.percentage_scored <= 60) {
-                                    $('#weaknessMessage').html('')
-                                    $('#weaknessDetailsText').css('display','block')
-                                    $('#mcq_weakness').append('' +
-                                        '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
-                                        '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
-                                        '</p>')
+                                    weaknessCount++;
+                                    if(weaknessCount <= 6) {
+                                        $('#weaknessMessage').html('')
+                                        $('#weaknessDetailsText').css('display','block')
+                                        $('#mcq_weakness').append('' +
+                                            '<p id="" class="mx-2 badge rounded-pill" style="background: #DEDEDE;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100px;">' +
+                                            '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
+                                            '</p>')
+                                    }
+
                                 } else if(item.percentage_scored >= 90) {
-                                    $('#strengthMessage').html('')
-                                    $('#strengthDetailsText').css('display','block')
-                                    $('#mcq_strength').append('' +
-                                        '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
-                                        '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
-                                        '</p>')
+                                    strengthCount++;
+                                    if(strengthCount <= 6) {
+                                        $('#strengthMessage').html('')
+                                        $('#strengthDetailsText').css('display','block')
+                                        $('#mcq_strength').append('' +
+                                            '<p id="" class="mx-2 badge rounded-pill" style="background: #DEDEDE;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100px;">' +
+                                            '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
+                                            '</p>')
+                                    }
                                 }
 
                             })

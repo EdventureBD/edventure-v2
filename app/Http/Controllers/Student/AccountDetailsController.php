@@ -55,6 +55,8 @@ class AccountDetailsController extends Controller
         }])
         ->get();
 
+        // dd($batch_student_enrollment);
+
         // Start counting how many courses the user completed
         $enrolled_course_count = 0;
         $completed_course_count = 0;
@@ -288,7 +290,7 @@ class AccountDetailsController extends Controller
 
     public function getTopic($categoryId)
     {
-        $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->get();
+        $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->where('multiple_subject',0)->get();
 
         return response()->json($topics);
     }

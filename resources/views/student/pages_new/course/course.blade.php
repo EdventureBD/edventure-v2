@@ -36,7 +36,7 @@
                 @endif
             </div>
 
-            @if ( count($courses) > 0 )
+            @if ( count($courses) > 0 || count($bundles) > 0 )
                 <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                     <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>
                 </div>
@@ -53,10 +53,24 @@
                             </div>
                         </div>
                     @endforeach
+
+                    @foreach ($bundles as $bundle)
+                        <div class="col-md-3 mb-4">
+                            <div class="single-exam text-center mx-auto p-4 mb-md-0" style="background-image: url({{asset($bundle->banner)}});">
+                                <img src="{{asset($bundle->icon)}}" width="50" alt="">
+                                <h5 class="text-center text-sm mt-2">{{ $bundle->bundle_name }} </h5>
+                                <p class=" text-center text-md mt-2 fw-600 text-price">{{$bundle->price}}৳</p>
+                                <div class=" text-center d-block ">
+                                    <a href="{{ route('bundle-preview', $bundle->slug ) }}"  class="btn btn-outline text-purple mt-2">See Course</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
                 </div>
             @else
                 <div class="text-center py-4">
-                    <h1>No Courses For This Intermediary Level Exist !!</h1>
+                    <h1>No Courses or Bundles For This Intermediary Level Exist !!</h1>
                 </div>
             @endif
         </div>
