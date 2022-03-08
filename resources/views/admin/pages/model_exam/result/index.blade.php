@@ -54,6 +54,7 @@
                 <th class="fit" scope="col">Exam duration</th>
                 <th class="fit" scope="col">Time taken</th>
                 <th class="fit" scope="col">Payment Status</th>
+                <th class="fit" scope="col">Exam Time</th>
                 <th class="fit" scope="col">Action</th>
             </tr>
             </thead>
@@ -75,6 +76,7 @@
                 <td style="width: 30%; border-radius: 25px; padding: 5px; margin: 8% 15%" class="badge badge-info">
                     {{ !is_null($result->modelExam->exam_price) && $result->modelExam->exam_price != 0 ? 'PAID' : 'FREE' }}
                 </td>
+                <td>{{ date('F j, Y, g:i a', strtotime($result->created_at)) }}</td>
                 <td>
                     <a target="_blank" href="{{route('model.exam.paper.mcq',['id'=>\Illuminate\Support\Facades\Crypt::encrypt($result->modelExam->id), 'student_id'=> $result->student->id])}}" class="btn btn-outline-primary btn-sm">
                         <i class="fa fa-info-circle"></i>

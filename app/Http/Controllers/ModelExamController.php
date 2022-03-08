@@ -294,7 +294,9 @@ class ModelExamController extends Controller
                                                     request()->input('student_id') :
                                                     auth()->user()->id;
         if(auth()->check() && $result = $this->examAttended($examId, $student_id)) {
-            $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
+            $exam_answer = McqMarkingDetail::query()->with(['mcqQuestion' => function($q) {
+                                                $q->with('modelMcqQuestionAnalysis');
+                                            }])
                                             ->where('model_exam_id', $examId)
                                             ->where('student_id',$student_id)
                                             ->get();
