@@ -47,7 +47,7 @@
         @forelse ($category_payments as $payment)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{ $payment->user->name }}</td>
+                <td>{{ $payment->user->name }} {{$payment->singlePayment->id}}</td>
                 <td>{{ $payment->user->email }}</td>
                 <td>{{ $payment->user->phone }}</td>
                 <td>{{ $payment->examCategory->name }}</td>
