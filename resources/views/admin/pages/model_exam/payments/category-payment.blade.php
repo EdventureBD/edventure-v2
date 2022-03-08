@@ -39,6 +39,7 @@
                     <th class="fit" scope="col">Category</th>
                     <th class="fit" scope="col">Amount</th>
                     <th class="fit" scope="col">Tnx</th>
+                    <th class="fit" scope="col">Platform</th>
                     <th class="fit" scope="col">Payment On</th>
                 </tr>
             </thead>
@@ -53,6 +54,7 @@
                 <td>{{ $payment->examCategory->name }}</td>
                 <td>{{ $payment->singlePayment->amount }}</td>
                 <td>{{ $payment->singlePayment->tnx_id }}</td>
+                <td>{{ $payment->singlePayment->platform }}</td>
                 <td>{{ date('j/m/y, g:i a', strtotime($payment->created_at)) }}</td>
             </tr>
         @empty
