@@ -47,13 +47,13 @@
         @forelse ($category_payments as $payment)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{ $payment->user->name }}</td>
+                <td>{{ $payment->user->name }} {{$payment->id}}</td>
                 <td>{{ $payment->user->email }}</td>
                 <td>{{ $payment->user->phone }}</td>
                 <td>{{ $payment->examCategory->name }}</td>
                 <td>{{ $payment->singlePayment->amount }}</td>
                 <td>{{ $payment->singlePayment->tnx_id }}</td>
-                <td>{{ date('F j, Y, g:i a', strtotime($payment->created_at)) }}</td>
+                <td>{{ date('j/m/y, g:i a', strtotime($payment->created_at)) }}</td>
             </tr>
         @empty
             <div class="d-flex justify-content-center">
