@@ -55,7 +55,12 @@
                                 @endif
                             </td>
                             <td class="text-center">{!! $answer->mcqQuestion->explanation  !!}</td>
-                            <td class="text-center">{{number_format(($answer->mcqQuestion->modelMcqQuestionAnalysis->correct/$answer->mcqQuestion->modelMcqQuestionAnalysis->attempted) * 100, 2).' %'}}</td>
+                            @if($answer->mcqQuestion->modelMcqQuestionAnalysis)
+                                <td class="text-center">{{number_format(($answer->mcqQuestion->modelMcqQuestionAnalysis->correct/$answer->mcqQuestion->modelMcqQuestionAnalysis->attempted) * 100, 2).' %'}}</td>
+                            @else
+                                <td class="text-center"> 0 % </td>
+                            @endif
+
                         </tr>
                     @endforeach
                     </tbody>
