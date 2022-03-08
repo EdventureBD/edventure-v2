@@ -21,6 +21,7 @@
                             <td class="fit">Answer</td>
                             <td class="fit">Your Answer</td>
                             <td class="fit">Explanation</td>
+                            <td class="fit">Success Rate</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,6 +55,7 @@
                                 @endif
                             </td>
                             <td class="text-center">{!! $answer->mcqQuestion->explanation  !!}</td>
+                            <td class="text-center">{{number_format(($answer->mcqQuestion->modelMcqQuestionAnalysis->correct/$answer->mcqQuestion->modelMcqQuestionAnalysis->attempted) * 100, 2).' %'}}</td>
                         </tr>
                     @endforeach
                     </tbody>

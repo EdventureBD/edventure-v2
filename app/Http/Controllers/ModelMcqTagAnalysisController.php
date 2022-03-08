@@ -39,9 +39,10 @@ class ModelMcqTagAnalysisController extends Controller
                 $mcq_tag_total_marks += 1;
                 $mcq_tag_scored_marks += $analysis->gain_marks;
             }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0 ;
+            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? ceil($mcq_tag_scored_marks) : 0 ;
             $tag->tag_total_marks = $mcq_tag_total_marks;
             $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($tag->tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            unset($tag->modelMcqTagAnalysis);
         }
         if($tag_type == 'weakness') {
             $tags = $tags->sortBy('percentage_scored');
