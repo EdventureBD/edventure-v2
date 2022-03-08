@@ -125,13 +125,13 @@ class SinglePaymentController extends Controller
 
             $payment = SinglePayment::query()->create($inputs);
 
-            $inputs = [
+            $paymentInputs = [
                 'single_payment_id' => $payment->id,
                 'exam_category_id'=> $categoryId,
                 'user_id' => auth()->user()->id
             ];
 
-            PaymentOfCategory::query()->create($inputs);
+            PaymentOfCategory::query()->create($paymentInputs);
             DB::commit();
             return redirect()->route('model.exam')->with(['success'=>"Payment Successful"]);
         } catch (\Exception $e) {
