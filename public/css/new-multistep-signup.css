@@ -48,7 +48,8 @@ p {
 }
 
 #msform input,
-#msform textarea {
+#msform textarea,
+#msform select {
     padding: 8px 15px 8px 15px;
     border: 1px solid #FA9632;
     border-radius: 14.29px;
@@ -162,24 +163,29 @@ p {
     font-weight: 400
 }
 
-#progressbar #account:before {
+#progressbar #progress-name:before {
     font-family: FontAwesome;
-    content: "\f13e"
+    content: "1"
 }
 
-#progressbar #personal:before {
+#progressbar #progress-phone:before {
     font-family: FontAwesome;
-    content: "\f007"
+    content: "2"
 }
 
-#progressbar #payment:before {
+#progressbar #progress-email:before {
     font-family: FontAwesome;
-    content: "\f030"
+    content: "3"
 }
 
-#progressbar #confirm:before {
+#progressbar #progress-district:before {
     font-family: FontAwesome;
-    content: "\f00c"
+    content: "4"
+}
+
+#progressbar #progress-password:before {
+    font-family: FontAwesome;
+    content: "5"
 }
 
 #progressbar li:before {
