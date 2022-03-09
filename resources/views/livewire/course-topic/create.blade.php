@@ -104,23 +104,100 @@
                                        </div>
                                  </div>
                               @endif --}}
-
-                              <div class="col-md-4">
-                                 <div class="form-group">
-                                       <label class="col-form-label" for="islandImage"> Island Image <span class="must-filled">*</span> </label>
-                                       <div class="custom-file">
-                                          <input type="file" class="custom-file-input" id="customFile" wire:model="islandImage">
-                                          <label class="custom-file-label" for="customFile">Choose Image</label>
-                                       </div>
+                              <div class="row">
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label class="col-form-label" for="zerostarislandImage"> Zero Star Island Image <span class="must-filled">*</span> </label>
+                                          <div class="custom-file">
+                                             <input type="file" class="custom-file-input" id="customFile" wire:model="zeroStarIslandImage">
+                                             <label class="custom-file-label" for="customFile">Choose Image</label>
+                                          </div>
+                                    </div>
+                                    <div>
+                                          @if ($zeroStarIslandImage)
+                                             Preview:
+                                             <img src="{{ $zeroStarIslandImage->temporaryUrl() }}">
+                                          @endif
+                                          @error('zeroStarIslandImage')
+                                             <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                    </div>
                                  </div>
-                                 <div>
-                                       @if ($islandImage)
-                                          Preview:
-                                          <img src="{{ $islandImage->temporaryUrl() }}">
-                                       @endif
-                                       @error('islandImage')
-                                          <p style="color: red;">{{ $message }}</p>
-                                       @enderror
+
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label class="col-form-label" for="onestarislandImage"> One Star Island Image <span class="must-filled">*</span> </label>
+                                          <div class="custom-file">
+                                             <input type="file" class="custom-file-input" id="customFile" wire:model="oneStarIslandImage">
+                                             <label class="custom-file-label" for="customFile">Choose Image</label>
+                                          </div>
+                                    </div>
+                                    <div>
+                                          @if ($oneStarIslandImage)
+                                             Preview:
+                                             <img src="{{ $oneStarIslandImage->temporaryUrl() }}">
+                                          @endif
+                                          @error('oneStarIslandImage')
+                                             <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                    </div>
+                                 </div>
+   
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label class="col-form-label" for="twostarislandImage"> Two Star Island Image <span class="must-filled">*</span> </label>
+                                          <div class="custom-file">
+                                             <input type="file" class="custom-file-input" id="customFile" wire:model="twoStarIslandImage">
+                                             <label class="custom-file-label" for="customFile">Choose Image</label>
+                                          </div>
+                                    </div>
+                                    <div>
+                                          @if ($twoStarIslandImage)
+                                             Preview:
+                                             <img src="{{ $twoStarIslandImage->temporaryUrl() }}">
+                                          @endif
+                                          @error('twoStarIslandImage')
+                                             <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                    </div>
+                                 </div>
+   
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label class="col-form-label" for="threestarislandImage"> Three Star Island Image <span class="must-filled">*</span> </label>
+                                          <div class="custom-file">
+                                             <input type="file" class="custom-file-input" id="customFile" wire:model="threeStarIslandImage">
+                                             <label class="custom-file-label" for="customFile">Choose Image</label>
+                                          </div>
+                                    </div>
+                                    <div>
+                                          @if ($threeStarIslandImage)
+                                             Preview:
+                                             <img src="{{ $threeStarIslandImage->temporaryUrl() }}">
+                                          @endif
+                                          @error('threeStarIslandImage')
+                                             <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label class="col-form-label" for="disabledislandImage"> Disabled Island Image <span class="must-filled">*</span> </label>
+                                          <div class="custom-file">
+                                             <input type="file" class="custom-file-input" id="customFile" wire:model="disabledIslandImage">
+                                             <label class="custom-file-label" for="customFile">Choose Image</label>
+                                          </div>
+                                    </div>
+                                    <div>
+                                          @if ($disabledIslandImage)
+                                             Preview:
+                                             <img src="{{ $disabledIslandImage->temporaryUrl() }}">
+                                          @endif
+                                          @error('disabledIslandImage')
+                                             <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                    </div>
                                  </div>
                               </div>
 
