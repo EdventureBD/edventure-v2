@@ -13,8 +13,8 @@
             text-align: center
         }
     </style>
-    <div class="mt-5 p-5">
-            <div class="container py-md-5 my-md-5">
+    <div class="mt-5 px-md-5">
+            <div class="py-md-5 my-md-5 mt-6">
                 <h3>Result Details:</h3>
                 <table class="table table-striped table-responsive align-content-center">
                     <thead>
@@ -28,7 +28,7 @@
                     @forelse($exam_results as $result)
                     <tr>
                         <td>{{$result->modelExam->title}}</td>
-                        <td>{{$result->total_marks}}</td>
+                        <td>{{$result->total_marks > 0 ? $result->total_marks : 0}}</td>
                         <td>
                             <a target="_blank" href="{{route('model.exam.paper.mcq',['id'=>\Illuminate\Support\Facades\Crypt::encrypt($result->modelExam->id)])}}"
                                class="btn btn-sm btn-outline-primary">
@@ -45,6 +45,9 @@
                     @endforelse
                     </tbody>
                 </table>
+                <div class="py-5 py-md-1 text-center d-flex justify-content-center">
+                    <p class="text-center">{{ $exam_results->withQueryString()->links('vendor.pagination.custom') }}</p>
+                </div>
             </div>
     </div>
 

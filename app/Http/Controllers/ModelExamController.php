@@ -11,6 +11,9 @@ use App\Models\McqMarkingDetail;
 use App\Models\McqQuestion;
 use App\Models\McqTotalResult;
 use App\Models\ModelExam;
+use App\Models\ModelMcqTagAnalysis;
+use App\Models\PaymentOfCategory;
+use App\Models\PaymentOfExams;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -105,6 +108,9 @@ class ModelExamController extends Controller
     public function update(UpdateModelExamRequest $request, $examId)
     {
         $inputs = $request->validated();
+        if($inputs['negative_marking'] == false) {
+            $inputs['negative_marking_value'] = 0;
+        }
         $exam = ModelExam::query()->find($examId);
 
         if($request->hasFile('solution_pdf')) {
@@ -147,6 +153,10 @@ class ModelExamController extends Controller
     {
         ModelExam::query()->find($id)->delete();
         McqQuestion::query()->where('model_exam_id', $id)->delete();
+        McqTotalResult::query()->where('model_exam_id', $id)->delete();
+        McqMarkingDetail::query()->where('model_exam_id', $id)->delete();
+        ModelMcqTagAnalysis::query()->where('model_exam_id', $id)->delete();
+        PaymentOfExams::query()->where('model_exam_id', $id)->delete();
 
         return redirect()->back()->with('status','Exam Deleted Successfully');
     }
@@ -223,7 +233,7 @@ class ModelExamController extends Controller
      */
     public function getModelExams()
     {
-        $exam_categories = ExamCategory::query()->get();
+        $exam_categories = ExamCategory::query()->with('paymentOfCategories')->get();
         $exam_topics = [];
         $exams = [];
 
@@ -233,6 +243,12 @@ class ModelExamController extends Controller
             Cache::forget('exam_topic');
         }
         if(request()->has('c')) {
+            $category = ExamCategory::query()->findOrFail(request()->get('c'));
+            if(!is_null($category->price) && $category->price != 0) {
+                if(!$this->paidForCategory(request()->get('c'),auth()->user()->id)) {
+                    return redirect()->back();
+                }
+            }
             $exam_topics = ExamTopic::query()
                                     ->whereHas('modelExam', function ($q) {
                                         $q->has('mcqQuestions')
@@ -269,16 +285,18 @@ class ModelExamController extends Controller
     {
         $examId = Crypt::decrypt($examId);
 
-        $exam = ModelExam::query()->where('id',$examId)->with('mcqQuestions')->firstOrFail();
-
+        $exam = ModelExam::query()->where('id',$examId)->with(['mcqQuestions' => function($q) {
+                $q->orderByDesc('id');
+        }])->firstOrFail();
 
         //If already attempted the exam, load exam results
         $student_id = auth()->user()->is_admin && request()->input('student_id') ?
                                                     request()->input('student_id') :
                                                     auth()->user()->id;
         if(auth()->check() && $result = $this->examAttended($examId, $student_id)) {
-
-            $exam_answer = McqMarkingDetail::query()->with('mcqQuestion')
+            $exam_answer = McqMarkingDetail::query()->with(['mcqQuestion' => function($q) {
+                                                $q->with('modelMcqQuestionAnalysis');
+                                            }])
                                             ->where('model_exam_id', $examId)
                                             ->where('student_id',$student_id)
                                             ->get();
@@ -300,7 +318,15 @@ class ModelExamController extends Controller
             'mcq' => 'required',
             'exam_end_time' => 'required'
         ]);
+        $exam = ModelExam::query()->find($examId);
+        $topics = [];
         $student_id = auth()->user()->id;
+        $exam_results = McqTotalResult::query()->where('student_id', $student_id)->with('modelExam')->get();
+        $topics = ExamTopic::query()
+                            ->whereHas('modelExam', function ($q) {
+                                $q->has('mcqQuestions')
+                            ->where('visibility',1);
+                            })->where('exam_category_id',$exam->exam_category_id)->get();
 
         if ($this->examAttended($examId, $student_id)) {
             return redirect()->back()->withErrors('You have already attempted on this exam!!');
@@ -308,13 +334,15 @@ class ModelExamController extends Controller
 
         $mcq = $inputs['mcq'];
 
-        $exam = ModelExam::query()->find($examId);
-
         OnMcqSubmit::dispatch($mcq,$exam,$inputs['exam_end_time'],$student_id);
 
-        return view('student.pages_new.batch.exam.examSubmissionGreeting');
+        return view('student.pages_new.batch.exam.examSubmissionGreeting', compact('exam_results','topics'));
     }
 
+    /**
+     * Get exam results for admin to see of student attending the exams
+     * @return Application|Factory|View
+     */
     public function modelExamResult()
     {
 
@@ -334,7 +362,7 @@ class ModelExamController extends Controller
         }
 
         if(request()->input('query.email')) {
-            $student_id = request()->input('q_countuery.email');
+            $student_id = request()->input('query.email');
             $results = $results->whereHas('student', function ($q) use ($student_id) {
                 $q->where('id', $student_id);
             });
@@ -347,7 +375,7 @@ class ModelExamController extends Controller
             });
         }
 
-        $results = $results->paginate(5);
+        $results = $results->orderByDesc('total_marks')->paginate(5);
 
         return view('admin.pages.model_exam.result.index', compact('results','filters'));
     }
@@ -364,5 +392,13 @@ class ModelExamController extends Controller
                             ->where('model_exam_id',$examId)
                             ->where('student_id',$studentId)
                             ->first();
+    }
+
+    private function paidForCategory($categoryId, $studentId)
+    {
+        return PaymentOfCategory::query()
+                                ->where('exam_category_id', $categoryId)
+                                ->where('user_id', $studentId)
+                                ->exists();
     }
 }

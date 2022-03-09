@@ -27,7 +27,7 @@ use smasif\ShurjopayLaravelPackage\ShurjopayService;
 |
 */
 // Medical olympiad 2022 route
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 Route::get('/medical-olympiad/medical-olympiad', function() {
     return view('landing.medi-olympiad');
 })->name('medi-olympiad');
@@ -35,16 +35,17 @@ Route::get('/medical-olympiad/medical-olympiad', function() {
 // Medical olympiad 2022 route ends
 
 Route::get('/', function () {
-    $categories=CourseCategory::where('status',1)->select('title','id','slug')->orderBy('id', "ASC")->get();
-    $selected_category_id=$categories[0]->id;
-    $selected_category_slug=$categories[0]->slug;
-    $courses = Course::where('status', 1)
-                    ->where('course_category_id',$selected_category_id)
-                    ->orderBy('order')
-                    ->select('title','slug','icon','banner','course_category_id','price')
-                    ->take(8)
-                    ->get();
-    return view('landing.landing', compact('courses','categories','selected_category_slug'));
+//    $categories=CourseCategory::where('status',1)->select('title','id','slug')->orderBy('id', "ASC")->get();
+//    $selected_category_id=$categories[0]->id;
+//    $selected_category_slug=$categories[0]->slug;
+//    $courses = Course::where('status', 1)
+//                    ->where('course_category_id',$selected_category_id)
+//                    ->orderBy('order')
+//                    ->select('title','slug','icon','banner','course_category_id','price')
+//                    ->take(8)
+//                    ->get();
+//    return view('landing.landing', compact('courses','categories','selected_category_slug'));
+    return view('landing.landing');
 })->name('home');
 
 Route::get('/ajax-course-request/{category}', [CourseController::class, 'courseByCategory']);
@@ -76,17 +77,6 @@ Route::get('/bundle/bundle-preview/{bundle}/enroll', [BundleController::class, '
 require __DIR__ . '/auth.php';
 
 
-Route::get('/test', function(){
-    $shurjopay_service = new ShurjopayService();
-    $trx_id = $shurjopay_service->generateTxId();
-    $success_url = route('ok');
-    $shurjopay_service->sendPayment(1, $success_url, []);
-});
-
-//Route::get('/ok', function(Request $request){
-//    return $request->all();
-//})->name('ok');
-
 Route::get('/about-us', function(){
     return view('landing.about_us');
 })->name('about_us');
@@ -114,6 +104,9 @@ Route::post('/model-exam/submit/{id}', [ModelExamController::class,'submitMcq'])
 //single payment api
 Route::get('/single-payment/{examId}', [SinglePaymentController::class,'initialize'])->name('single.payment.initialize')->middleware('auth');
 Route::get('/single-payment-success/{examId}', [SinglePaymentController::class,'paymentSuccess'])->name('single.payment.success')->middleware('auth');
+Route::get('/single-payment-category/{categoryId}', [SinglePaymentController::class,'initializeCategoryPayment'])->name('category.single.payment.initialize')->middleware('auth');
+Route::get('/single-payment-category-success/{categoryId}', [SinglePaymentController::class,'CategoryPaymentSuccess'])->name('category.single.payment.success')->middleware('auth');
+
 
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
 Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');

@@ -1,6 +1,8 @@
 /* Exam Timer new css starts*/
 #parent-timer {
     color: white;
+    max-height: 100%;
+    background: #6400c8;
 }
 #dropdownIcon {
     margin: 0px auto;
@@ -31,7 +33,7 @@
 #parent-timer {
     border: 1px solid gray;
     box-shadow: 5px 10px 18px #888888;
-    top:30% !important;
+    top:17% !important;
 }
 #popUpExamPageBanner {
     background: #D5BDEA;
@@ -163,6 +165,37 @@ label p {
         width: 100%;
         word-spacing: 2px
     }
+    #questionMap span {
+        font-size: 12px;
+    }
+    h3, .h3 {
+        font-size: 1.25rem;
+    }
 }
 
 /* new vendor's css part ends */
+
+/* scroll bar in exam map  */
+#questionMap {
+    max-height: 75%;
+}
+/* width */
+    div#questionMap::-webkit-scrollbar {
+        width: 1px;
+    }
+  
+  /* Track */
+  div#questionMap::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  div#questionMap::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  div#questionMap::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+/* scroll bar in exam map  */

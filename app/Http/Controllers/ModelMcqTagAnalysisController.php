@@ -39,14 +39,17 @@ class ModelMcqTagAnalysisController extends Controller
                 $mcq_tag_total_marks += 1;
                 $mcq_tag_scored_marks += $analysis->gain_marks;
             }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? ceil($mcq_tag_scored_marks) : 0 ;
             $tag->tag_total_marks = $mcq_tag_total_marks;
-            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($tag->tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            unset($tag->modelMcqTagAnalysis);
         }
         if($tag_type == 'weakness') {
             $tags = $tags->sortBy('percentage_scored');
-        } else {
+        } elseif($tag_type == 'strength') {
             $tags = $tags->sortByDesc('percentage_scored');
+        } else{
+            abort(404);
         }
 
         return $tags;
@@ -60,7 +63,7 @@ class ModelMcqTagAnalysisController extends Controller
             $q->where('student_id',$user->id);
         })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
             $q->where('student_id',$user->id);
-        }])->take(20)->get();
+        }])->get();
 
 
         foreach($tags as $tag){
@@ -70,9 +73,9 @@ class ModelMcqTagAnalysisController extends Controller
                 $mcq_tag_total_marks += 1;
                 $mcq_tag_scored_marks += $analysis->gain_marks;
             }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks;
+            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0;
             $tag->tag_total_marks = $mcq_tag_total_marks;
-            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($mcq_tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
+            $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($tag->tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
             unset($tag->modelMcqTagAnalysis);
         }
 
@@ -124,6 +127,7 @@ class ModelMcqTagAnalysisController extends Controller
                     $scored_marks += $value->gain_marks;
                 }
             }
+            $scored_marks = $scored_marks > 0 ? $scored_marks : 0;
             array_push($singleStudent,[
                 'id' => $student,
                 'marks' => $scored_marks,

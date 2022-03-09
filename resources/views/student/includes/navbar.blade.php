@@ -31,8 +31,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('course') }}"
-                        class="nav-link {{ request()->is('course') ? 'active' : '' }} 
-                                                                    {{ request()->is('course/course-preview/*') ? 'active' : '' }} 
+                        class="nav-link {{ request()->is('course') ? 'active' : '' }}
+                                                                    {{ request()->is('course/course-preview/*') ? 'active' : '' }}
                                                                     ">
                         Courses
                     </a>
@@ -40,8 +40,8 @@
                 @auth
                     @if (auth()->user()->is_admin == 0)
                         <li
-                            class="nav-item {{ request()->is('batch') ? 'active' : '' }} 
-                                            {{ request()->is('batch/*') ? 'active' : '' }} 
+                            class="nav-item {{ request()->is('batch') ? 'active' : '' }}
+                                            {{ request()->is('batch/*') ? 'active' : '' }}
                                             ">
                             <a href="{{ route('batch') }}" class="nav-link">Batches</a>
                         </li>
@@ -66,14 +66,14 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><strong>Account</strong></div>
-                                <a class="dropdown-item" href="{{ route('profile', Auth()->user()->id) }}">My
+                                <a class="dropdown-item" href="{{ route('profile.modelTest', Auth()->user()->id) }}">My
                                     Profile</a>
                                 <a class="dropdown-item" href="{{ route('batch') }}">My Batch</a>
                                 <a class="dropdown-item" href="billing.html">Billing</a>
                                 <a class="dropdown-item" href="{{ route('payments', auth()->user()->id) }}">Payments</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); 
+                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                                                                             this.closest('form').submit();">
                                         Log out
                                     </a>

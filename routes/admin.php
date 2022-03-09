@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ModelMcqTagAnalysisController;
+use App\Http\Controllers\SinglePaymentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamCategoryController;
@@ -251,6 +252,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     //Exam Category
     Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
     Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
+    Route::put('/exam-category/{id}',[ExamCategoryController::class,'update'])->name('exam.category.update');
     Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
 
     //Exam Topic
@@ -289,6 +291,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     //Model Exam Tag analysis
     Route::get('/model-exam/tag/analysis',[ModelMcqTagAnalysisController::class,'tagAnalysisForAdmin'])->name('model.exam.tag.analysis');
 
+    //Payments
+    Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
+    Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
+
+    /**************************************** Model Exam ****************************************/
 
 
 });

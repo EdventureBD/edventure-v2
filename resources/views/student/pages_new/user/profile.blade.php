@@ -6,7 +6,12 @@
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       {{-- custom css linked --}}
-
+       <style>
+           /*a.disabled {*/
+           /*    pointer-events: none;*/
+           /*    color: #ccc;*/
+           /*}*/
+       </style>
       <div id="parent-div" class="mt-md-5 pt-5 p-5">
          <div id="info-part" class="d-md-flex justify-content-around align-items-middle">
 
@@ -34,7 +39,7 @@
                     </div>
             </div>
             <div class="d-flex max-h-10 justify-content-center mt-md-5 pt-5">
-                <a href="{{route('profile')}}" class="text-decoration-none">
+                <a id="courseBtn" href="Javascript:void(0)" class="text-decoration-none">
                     <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                          class="px-4 py-2 border my-auto fw-600" id="course-option">
                         Course
@@ -46,8 +51,6 @@
                         Model Test
                     </div>
                 </a>
-
-
             </div>
          </div>
          <div class="">
@@ -65,6 +68,19 @@
            $('#imageLabel').hide();
        }
 
+       $('#courseBtn').click(function () {
+           Swal.fire({
+               icon: 'info',
+               title: 'Surprise!!',
+               text: 'Coming Soon..',
+               showClass: {
+                   popup: 'animate__animated animate__fadeInDown'
+               },
+               hideClass: {
+                   popup: 'animate__animated animate__fadeOutUp'
+               }
+           })
+       });
 
        $('.avatar-upload').mouseover(function () {
            $('#imageLabel').show();

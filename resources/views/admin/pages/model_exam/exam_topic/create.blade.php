@@ -44,6 +44,15 @@
                                     aria-describedby="basic-addon2">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <input
+                                    value="1"
+                                    type="checkbox"
+                                    class="form-control"
+                                    name="multiple_subject">Multiple Subjects
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
