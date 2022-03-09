@@ -113,14 +113,17 @@ class BatchController extends Controller
             }
 
             if($previous_aptitude_test_passed || $previous_topic_end_exam_passed){
-                if($batchTopic->percentage_completion > 66.66){
+                if($batchTopic->percentage_completion > 100){
                     $island_images[] = $batchTopic->courseTopic->three_star_island_image;
                 }
-                elseif($batchTopic->percentage_completion > 33.33){
+                elseif($batchTopic->percentage_completion > 66){
                     $island_images[] = $batchTopic->courseTopic->two_star_island_image;
                 }
-                elseif($batchTopic->percentage_completion >= 0){
+                elseif($batchTopic->percentage_completion > 33){
                     $island_images[] = $batchTopic->courseTopic->one_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 0){
+                    $island_images[] = $batchTopic->courseTopic->zero_star_island_image;
                 }
             } else {
                 $island_images[] = $batchTopic->courseTopic->disabled_island_image;
