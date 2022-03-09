@@ -213,7 +213,7 @@
             data: { course_id: course_id },
             success: function(response)
             {
-                console.log(response);
+                // console.log(response);
 
                 var mcq_tags = response.mcq_content_tags;
                 var cq_tags = response.cq_content_tags;
