@@ -1,5 +1,47 @@
 @extends('auth.new.layout')
 @section('content')
+<link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+<style>
+    .select2-purple .select2-container--default span span{
+        height: 2.35rem;
+    }
+    div .select2 .selection .select2-selection{
+        height: 2.35rem;
+        border-radius: 14.29px;
+    }
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #FA9632 !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #2C3E50; !important;
+    }
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #FA9632;
+        color: white;
+    }
+    .select2-container--open .select2-dropdown--below {
+        border-top: none;
+        border-bottom-left-radius: 15px !important;
+        border-bottom-right-radius: 15px !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        background: #FA9632;
+        height: 100%;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 0px 14.23px 14.23px 0px;
+        
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b{
+        border-color: white transparent transparent transparent;
+        width: 10px;
+    }
+    .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent white transparent;
+    border-width: 0 4px 5px 4px;
+}
+</style>
 <div class="">
     <div class="row justify-content-center">
         <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -43,10 +85,20 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
-                            <select required name="district">
+                            {{-- <select required name="district">
                                 <option value="">জেলা</option>
                                 <option>Des</option>
                                 <option>bides</option>
+                            </select> --}}
+                            <select
+                                class="select2"
+                                name="district"
+                                id="district"
+                                data-placeholder="জেলা"
+                                data-dropdown-css-class="select2-purple">
+                                    <option value=""></option>
+                                    <option>Des</option>
+                                    <option>bides</option>
                             </select>
                         </div> 
                         <input type="button" name="next" class="next action-button" value="Next" /> 
@@ -81,4 +133,9 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
+<script>
+    $('.select2').select2()
+</script>
 @endsection
