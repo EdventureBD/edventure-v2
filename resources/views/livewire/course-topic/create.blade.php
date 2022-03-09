@@ -107,6 +107,25 @@
                               <div class="row">
                                  <div class="col-md-4">
                                     <div class="form-group">
+                                          <label class="col-form-label" for="zerostarislandImage"> Zero Star Island Image <span class="must-filled">*</span> </label>
+                                          <div class="custom-file">
+                                             <input type="file" class="custom-file-input" id="customFile" wire:model="zeroStarIslandImage">
+                                             <label class="custom-file-label" for="customFile">Choose Image</label>
+                                          </div>
+                                    </div>
+                                    <div>
+                                          @if ($zeroStarIslandImage)
+                                             Preview:
+                                             <img src="{{ $zeroStarIslandImage->temporaryUrl() }}">
+                                          @endif
+                                          @error('zeroStarIslandImage')
+                                             <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-4">
+                                    <div class="form-group">
                                           <label class="col-form-label" for="onestarislandImage"> One Star Island Image <span class="must-filled">*</span> </label>
                                           <div class="custom-file">
                                              <input type="file" class="custom-file-input" id="customFile" wire:model="oneStarIslandImage">

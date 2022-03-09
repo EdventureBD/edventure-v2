@@ -27,6 +27,7 @@ class Edit extends Component
     public $courseId;
     public $course_topic;
     public $title;
+    public $zeroStarIslandImage;
     public $oneStarIslandImage;
     public $twoStarIslandImage;
     public $threeStarIslandImage;
@@ -38,6 +39,7 @@ class Edit extends Component
         'courseCategoryId' => ['required'],
         'intermediaryLevelId' => ['required'],
         'courseId' => ['required'],
+        'zeroStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
         'oneStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
         'twoStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
         'threeStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
@@ -59,6 +61,13 @@ class Edit extends Component
     public function updatedIntermediaryLevelId()
     {
         $this->all_courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+    }
+
+    public function updatedZeroStarIslandImage()
+    {
+        $this->validate([
+            'zeroStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
+        ]);
     }
 
     public function updatedOneStarIslandImage()
@@ -91,24 +100,38 @@ class Edit extends Component
 
     public function updateCourseTopic()
     {
-        $this->rules['title'] = ['required', 'string', 'max:200', 'unique:course_topics,title,'.$this->course_topic->id];
+        $this->rules['title'] = ['required', 'string', 'max:200', 'unique:course_topics,title,'.$this->course_topic->id];        
         $data = $this->validate();
         $course_topic = CourseTopic::find($this->course_topic->id);
         $course_topic->title = $data['title'];
+        if (!empty($this->zeroStarIslandImage)) {
+            if(file_exists(public_path($course_topic->zero_star_island_image))){
+                unlink(public_path($course_topic->zero_star_island_image));
+            }
+            $course_topic->zero_star_island_image = Storage::url($this->zeroStarIslandImage->store('public/roadmap/island_images'));
+        }
         if (!empty($this->oneStarIslandImage)) {
-            unlink(public_path($course_topic->one_star_island_image));
+            if(file_exists(public_path($course_topic->one_star_island_image))){
+                unlink(public_path($course_topic->one_star_island_image));
+            }
             $course_topic->one_star_island_image = Storage::url($this->oneStarIslandImage->store('public/roadmap/island_images'));
         }
         if (!empty($this->twoStarIslandImage)) {
-            unlink(public_path($course_topic->two_star_island_image));
+            if(file_exists(public_path($course_topic->two_star_island_image))){
+                unlink(public_path($course_topic->two_star_island_image));
+            }
             $course_topic->two_star_island_image = Storage::url($this->twoStarIslandImage->store('public/roadmap/island_images'));
         }
         if (!empty($this->threeStarIslandImage)) {
-            unlink(public_path($course_topic->three_star_island_image));
+            if(file_exists(public_path($course_topic->three_star_island_image))){
+                unlink(public_path($course_topic->three_star_island_image));
+            }
             $course_topic->three_star_island_image = Storage::url($this->threeStarIslandImage->store('public/roadmap/island_images'));
         }
         if (!empty($this->disabledIslandImage)) {
-            unlink(public_path($course_topic->disabled_island_image));
+            if(file_exists(public_path($course_topic->disabled_island_image))){
+                unlink(public_path($course_topic->disabled_island_image));
+            }
             $course_topic->disabled_island_image = Storage::url($this->disabledIslandImage->store('public/roadmap/island_images'));
         }
         $course_topic->course_id = $data['courseId'];

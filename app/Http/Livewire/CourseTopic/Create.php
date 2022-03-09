@@ -24,6 +24,7 @@ class Create extends Component
    public $intermediaryLevelId;
    public $title;
    public $courseId;
+   public $zeroStarIslandImage;
    public $oneStarIslandImage;
    public $twoStarIslandImage;
    public $threeStarIslandImage;
@@ -36,6 +37,7 @@ class Create extends Component
       'categoryId' => ['required'],
       'intermediaryLevelId' => ['required'],
       'courseId' => ['required'],
+      'zeroStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
       'oneStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
       'twoStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
       'threeStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
@@ -57,6 +59,13 @@ class Create extends Component
    public function updatedIntermediaryLevelId()
    {
       $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+   }
+
+   public function updatedZeroStarIslandImage()
+   {
+      $this->validate([
+         'zeroStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
+      ]);
    }
 
    public function updatedOneStarIslandImage()
@@ -93,6 +102,9 @@ class Create extends Component
       $course_topic = new CourseTopic;
       $course_topic->title = $data['title'];
       $course_topic->slug = (string) Str::uuid();
+      if (!empty($this->zeroStarIslandImage)) {
+         $course_topic->zero_star_island_image = Storage::url($this->zeroStarIslandImage->store('public/roadmap/island_images'));
+      }
       if (!empty($this->oneStarIslandImage)) {
          $course_topic->one_star_island_image = Storage::url($this->oneStarIslandImage->store('public/roadmap/island_images'));
       }
