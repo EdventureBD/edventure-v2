@@ -128,7 +128,8 @@ class SinglePaymentController extends Controller
             $paymentInputs = [
                 'single_payment_id' => $payment->id,
                 'exam_category_id'=> $categoryId,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'tnx_id'=> $request->tx_id,
             ];
 
             PaymentOfCategory::query()->create($paymentInputs);
