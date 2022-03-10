@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student\StudentDetails;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use GuzzleHttp\Client;
@@ -74,8 +75,8 @@ class RegisteredUserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'phone' => 'required|numeric|digits:11|unique:users',
-                // 'verificationId' => 'required|min:200',
                 'password' => 'required|string|confirmed|min:8',
+                'class' => 'required'
             ]
         );
          Auth::login($user = User::create([
@@ -87,6 +88,16 @@ class RegisteredUserController extends Controller
              'user_type' => 3,
              'image' => null,
          ]));
+
+         StudentDetails::query()->create([
+             'user_id' => $user->id,
+             'gender' => 'n/a',
+             'contact' => $input['phone'],
+             'class' => $input['class'],
+             'institution' => 'n/a',
+             'address' => 'n/a'
+
+         ]);
 
         return redirect()->route('home');
     }
