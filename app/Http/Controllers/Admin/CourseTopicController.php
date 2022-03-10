@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\CourseTopic;
-use App\Models\Admin\CourseCategory;
 use Illuminate\Http\Request;
 
 class CourseTopicController extends Controller
@@ -31,7 +30,24 @@ class CourseTopicController extends Controller
 
     public function destroy(CourseTopic $course_topic)
     {
+        if(file_exists(public_path($course_topic->zero_star_island_image))){
+            unlink(public_path($course_topic->zero_star_island_image));
+        }
+        if(file_exists(public_path($course_topic->one_star_island_image))){
+            unlink(public_path($course_topic->one_star_island_image));
+        }
+        if(file_exists(public_path($course_topic->two_star_island_image))){
+            unlink(public_path($course_topic->two_star_island_image));
+        }
+        if(file_exists(public_path($course_topic->three_star_island_image))){
+            unlink(public_path($course_topic->three_star_island_image));
+        }
+        if(file_exists(public_path($course_topic->disabled_island_image))){
+            unlink(public_path($course_topic->disabled_island_image));
+        }
+
         $delete = $course_topic->delete();
+
         if ($delete) {
             return redirect()->route('course-topic.index')->with('status', 'Course topic successfully deleted!');
         } else {
