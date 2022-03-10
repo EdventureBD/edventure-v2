@@ -61,7 +61,7 @@ class UserController extends Controller
 
     public function allStudent()
     {
-        $users = User::where('user_type', 3)->get();
+        $users = User::where('user_type', 3)->with('studentDetails')->get();
         return view('admin.pages.user.index', compact('users'));
 
         // for LIVEWIRE
