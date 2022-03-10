@@ -128,7 +128,8 @@ class SinglePaymentController extends Controller
             $paymentInputs = [
                 'single_payment_id' => $payment->id,
                 'exam_category_id'=> $categoryId,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'tnx_id'=> $request->tx_id,
             ];
 
             PaymentOfCategory::query()->create($paymentInputs);
@@ -170,7 +171,7 @@ class SinglePaymentController extends Controller
             });
         }
 
-        $category_payments = $category_payments->orderByDesc('created_at')->groupBy('single_payment_id')->paginate(10);
+        $category_payments = $category_payments->orderByDesc('created_at')->groupBy('tnx_id')->paginate(10);
         $categories = ExamCategory::query()->get();
 
         return view('admin.pages.model_exam.payments.category-payment', compact('category_payments','categories'));
