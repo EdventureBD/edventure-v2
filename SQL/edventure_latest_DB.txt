@@ -19,9 +19,53 @@ CREATE TABLE `aptitude_test_mcqs` (
 
 
 
-CREATE TABLE `virtual_academy_server`.`intermediary_level` ( `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT , `course_category_id` BIGINT(20) UNSIGNED NOT NULL ,
+CREATE TABLE `virtual_academy_server`.`intermediary_levels` ( `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT , `course_category_id` BIGINT(20) UNSIGNED NOT NULL ,
  `title` VARCHAR(255) NULL DEFAULT NULL , `slug` VARCHAR(255) NOT NULL , `status` TINYINT NOT NULL , `created_at` TIMESTAMP NULL , `updated_at` TIMESTAMP NULL ,
  PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+ CREATE TABLE `bundle_payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `bundle_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `trx_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` int(10) UNSIGNED NOT NULL,
+  `payment_account_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `days_for` int(10) UNSIGNED NOT NULL,
+  `accepted` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `bundle_student_enrollments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `bundle_id` bigint(20) UNSIGNED NOT NULL,
+  `payment_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `note_list` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `individual_bundle_days` int(11) NOT NULL,
+  `accessed_days` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `completed_lectures` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `lecture_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 
@@ -156,6 +200,34 @@ CREATE TABLE `topic_end_exam_mcqs` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+ALTER TABLE `bundle_payments`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `bundle_payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+COMMIT;
+
+
+
+ALTER TABLE `bundle_student_enrollments`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `bundle_student_enrollments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
+
+
+
+ALTER TABLE `completed_lectures`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `completed_lectures`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+COMMIT;
+
 
 
 ALTER TABLE `aptitude_test_mcqs`
