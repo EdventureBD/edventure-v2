@@ -22,27 +22,34 @@
                     autofocus />
             </div>
 
+                <div class="mt-3">
+                    <x-label for="class" :value="__('Education Level')" />
+{{--                    <label for="class">Education Level</label>--}}
+                    <select style="width: 100%" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="class" id="class">
+                        <option value="">Choose Education Level</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_6}}">Class 6</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_7}}">Class 7</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_8}}">Class 8</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_9}}">Class 9</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_10}}">Class 10</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_11}}">Class 11</option>
+                        <option value="{{\App\Enum\EducationLevel::CLASS_12}}">Class 12</option>
+                    </select>
+                </div>
+
             <!-- Email Address -->
-            <div class="mt-4">
+            <div class="mt-3">
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input placeholder="Enter your Email" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            <div>
+            <div class="mt-3">
                 <x-label for="phone" :value="__('Phone')" />
 
                 <x-input placeholder="015xxxxxxxx" id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required
                     autofocus />
             </div>
-
-            <!-- Password -->
-            {{-- <div class="mt-4">
-                <x-label  for="password" :value="__('Password')" />
-
-                <x-input  id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="new-password" />
-            </div> --}}
 
             <div class="py-2" x-data="{ show: true }">
                 <span for="password" class="px-1 text-sm text-gray-600">Password</span>
@@ -67,14 +74,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Confirm Password -->
-            {{-- <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                    name="password_confirmation" required />
-            </div> --}}
 
             <div class="py-2" x-data="{ show: true }">
                 <span for="password_confirmation" class="px-1 text-sm text-gray-600">Confirm Password</span>
@@ -116,7 +115,7 @@
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
               <!--
                 Background overlay, show/hide based on modal state.
-          
+
                 Entering: "ease-out duration-300"
                   From: "opacity-0"
                   To: "opacity-100"
@@ -125,13 +124,13 @@
                   To: "opacity-0"
               -->
               <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-          
+
               <!-- This element is to trick the browser into centering the modal contents. -->
               <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-          
+
               <!--
                 Modal panel, show/hide based on modal state.
-          
+
                 Entering: "ease-out duration-300"
                   From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                   To: "opacity-100 translate-y-0 sm:scale-100"
@@ -142,7 +141,7 @@
               <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div class="bg-white px-6 pt-5 pb-4 sm:p-8 sm:pb-4">
                   <div class="">
-                    
+
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                         Confirm your mobile
@@ -168,7 +167,7 @@
               </div>
             </div>
           </div>
-        
+
         <script>
             function togglePassword(type)
             {
