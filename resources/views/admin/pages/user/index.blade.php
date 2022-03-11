@@ -107,6 +107,7 @@
                                         <th>Email</th>
                                         <th>User Type</th>
                                         <th>Image</th>
+                                        <th>Class</th>
                                         <th>Created</th>
                                         <th>Action</th>
                                     </tr>
@@ -147,6 +148,7 @@
                                                     @endif
                                                 @endif
                                             </td>
+                                            <td>{{$user->studentDetails ? \App\Enum\EducationLevel::Level[$user->studentDetails->class] : 'n/a' }}</td>
                                             <td>{{ $user->created_at->format('d M y - g:i A') }}</td>
                                             <td>
                                                 <div class="btn-group">
