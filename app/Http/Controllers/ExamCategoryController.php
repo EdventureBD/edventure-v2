@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExamCategory;
+use App\Models\ExamTag;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -30,6 +31,8 @@ class ExamCategoryController extends Controller
     {
         $inputs =  $request->validate([
             'name' => 'required|unique:exam_categories',
+            'price' => 'nullable|numeric',
+            'details' => 'nullable',
         ]);
 
         ExamCategory::create($inputs);
@@ -59,5 +62,23 @@ class ExamCategoryController extends Controller
     private function hasTopics($categoryId)
     {
         return ExamCategory::query()->where('id',$categoryId)->has('examTopics')->exists();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $inputs =  $request->validate([
+            'name' => 'required',
+            'price' => 'nullable|numeric',
+            'details' => 'nullable',
+        ]);
+//        if(ExamCategory::query()->where('name',$inputs['name'])->exists()) {
+//            unset($inputs['name']);
+//        }
+//
+//        return $inputs;
+
+        ExamCategory::query()->where('id', $id)->update($inputs);
+
+        return redirect()->back()->with(['status' => 'Category Updated Successfully']);
     }
 }

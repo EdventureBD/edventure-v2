@@ -5,6 +5,13 @@
 ])
 
 @section('content')
+    <style>
+        .table td.fit,
+        .table th.fit {
+            white-space: nowrap;
+            width: 1%;
+        }
+    </style>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -14,31 +21,18 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('exam.category.store')}}" method="POST">
-        @csrf
-        <div class="input-group mb-3">
-            <input
-                required
-                type="text"
-                class="form-control"
-                name="name"
-                placeholder="Category name"
-                aria-label="Category name"
-                aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="submit">ADD</button>
-            </div>
-        </div>
-    </form>
-    <table class="table">
+    @include('admin.pages.model_exam.exam_category.create')
+    <table class="table table-responsive table-striped">
 
         @if(count($exam_categories) > 0)
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Action</th>
+                <th class="fit" scope="col">#</th>
+                <th class="fit" scope="col">Category</th>
+                <th class="fit" scope="col">Price</th>
+                <th class="fit" scope="col">Details</th>
+                <th class="fit" scope="col">Created at</th>
+                <th class="fit" scope="col">Action</th>
             </tr>
         </thead>
         @endif
@@ -47,45 +41,13 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $category->name }}</td>
+                <td>{{ $category->price }}</td>
+                <td>{!! $category->details ?? 'N/a'  !!} </td>
                 <td>{{ date('F j, Y, g:i a', strtotime($category->created_at)) }}</td>
                 <td>
-                    <a class="mr-1 btn btn-outline-danger btn-sm"
-                       href="#deleteCategory{{ $category->id }}"
-                       data-toggle="modal" title="Delete {{ $category->name }}">
-                        <i class="far fa-trash-alt"></i>
-                    </a>
-                    <div class="modal fade"
-                         id="deleteCategory{{ $category->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-light">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Delete
-                                        {{ $category->name }}</h4>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure??</p>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    <form
-                                        action="{{ route('exam.category.destroy', $category->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit"
-                                                class="btn btn-outline-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
+                    @include('admin.pages.model_exam.exam_category.edit')
+                    @include('admin.pages.model_exam.exam_category.delete')
+
                 </td>
             </tr>
         @empty
@@ -102,7 +64,20 @@
     </table>
     @if ($exam_categories->hasPages())
         <div class="pagination-wrapper">
-            {{ $exam_categories->links() }}
+            {{ $exam_categories->withQueryString()->links() }}
         </div>
     @endif
+@endsection
+
+@section('js2')
+    <script>
+        $('#details').summernote({
+            placeholder: 'Details',
+            height: 150,
+        })
+        $('.detailsEdit').summernote({
+            placeholder: 'Details',
+            height: 200,
+        })
+    </script>
 @endsection

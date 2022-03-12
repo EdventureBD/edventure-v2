@@ -15,17 +15,17 @@
                 @auth
                     <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}
                                                 {{ request()->is('profile/model-test') ? 'active' : '' }}">
-                    <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
+                    <a class="nav-link text-purple-half "  href="{{route('profile.modelTest')}}">DASHBOARD</a>
                 </li>
                 @endauth
             @endif
 
-            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
-                                         {{ request()->is('course/course-preview/*') ? 'active' : '' }}
-                                         {{ request()->is('batch/*') ? 'active' : '' }}"
-            >
-            <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>
-            </li>
+{{--            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}--}}
+{{--                                         {{ request()->is('course/course-preview/*') ? 'active' : '' }}--}}
+{{--                                         {{ request()->is('batch/*') ? 'active' : '' }}"--}}
+{{--            >--}}
+{{--            <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>--}}
+{{--            </li>--}}
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
                 <a class="nav-link text-purple-half"
@@ -62,11 +62,11 @@
                                 @if(Auth::user()->is_admin==1)
                                     <a class="dropdown-item" href="{{route('admin.index')}}">Admin Dashboard</a>
                                 @else
-                                <a class="dropdown-item" href="{{route('profile')}}">My Dashboard</a>
+                                <a class="dropdown-item" href="{{route('profile.modelTest')}}">My Dashboard</a>
                                 @endif
-                                @if(Auth::user()->is_admin== 0 && request()->is('profile/model-test'))
-                                    <a class="dropdown-item" href="{{route('student.model.test.result')}}">Exams</a>
-                                @endif
+{{--                                @if(Auth::user()->is_admin== 0 && request()->is('profile/model-test'))--}}
+{{--                                    <a class="dropdown-item" href="{{route('student.model.test.result')}}">Exams</a>--}}
+{{--                                @endif--}}
 {{--                                <a class="dropdown-item" href="#">All courses</a>--}}
 
                                 <form method="POST" action="{{ route('logout') }}">

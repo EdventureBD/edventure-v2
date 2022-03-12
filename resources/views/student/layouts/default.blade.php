@@ -24,7 +24,7 @@
     <link type="text/css" href="{{ asset('student/public/css/custom.css') }}" rel="stylesheet">
 
     <!--favicon-->
-    <link rel="icon" type="image/png" href="{{ asset('student/public/images/only-owl.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/contact/mapLogo.png') }}">
     <!----style------>
     <link type="text/css" href="{{ asset('student/public/css/style.css') }}" rel="stylesheet">
     <!----flickity------>

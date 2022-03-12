@@ -7,6 +7,12 @@
     div .select2 .selection .select2-selection{
         height: 2.35rem;
     }
+    .select2-container--default .select2-selection--single {
+        border: 2px solid #6400c8 !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #6400c8 !important;
+    }
 </style>
 
 @section('mini-header')
@@ -69,10 +75,10 @@
         </div>
         <div id="info-middle-option" class=" my-3 col-md-3 px-0">
             <div id="strength-title" class="strength-weakness-title-common">
-                <h2>Strength</h2>
-                <div>
+                <h2 class="my-auto">Strength</h2>
+                {{-- <div>
                     <a href="#"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>
-                </div>
+                </div> --}}
             </div>
             <div class="p-3" id="strength-body">
                 <div class="strength-weakness-cq-mcq" id="">
@@ -105,10 +111,10 @@
         </div>
         <div id="info-right-option" class="my-3 col-md-3 mx-md-5 px-0">
             <div id="weakness-title" class="strength-weakness-title-common">
-                <h2>Weakness</h2>
-                <div>
+                <h2 class="my-auto">Weakness</h2>
+                {{-- <div>
                     <a href="#"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>
-                </div>
+                </div> --}}
             </div>
             <div class="p-3" id="weakness-body">
                 <div class="strength-weakness-cq-mcq" id="">

@@ -17,14 +17,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
  <!--favicon-->
-    <link rel="icon" type="image/png" href="{{ asset('img/landing/fav.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/contact/mapLogo.png') }}">
         <!-- Font Awesome Icons -->
         <link type="text/css" href="{{ asset('student/public/css/fontawesome.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
-        @include('partials.facebook_pixel')
+{{--        @include('partials.facebook_pixel')--}}
     </head>
     <body>
 

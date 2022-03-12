@@ -1,0 +1,124 @@
+        /* paid exam's modal part's css in overflow starts*/
+        /* width */
+        .modal-body::-webkit-scrollbar {
+            width: 5px;
+        }
+    
+        /* Track */
+        .modal-body::-webkit-scrollbar-track {
+            background: rgb(199, 196, 196); 
+             
+        }
+        
+        /* Handle */
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #6400c8; 
+             
+        }
+        
+        /* Handle on hover */
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        /* paid exam's modal part's css in overflow ends */
+        .card{
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+            padding: 14px 80px 18px 36px;
+            cursor: pointer;
+        }
+        .ribbon {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+        }
+        .ribbon::before,
+        .ribbon::after {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            display: block;
+            border: 5px solid #6400C8;
+        }
+        .ribbon span {
+            position: absolute;
+            display: block;
+            width: 225px;
+            padding: 15px 0;
+            background-color: #6400C8;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            color: #fff;
+            font: 700 18px/1 'Lato', sans-serif;
+            text-shadow: 0 1px 1px rgba(0,0,0,.2);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .ribbon-top-left {
+            top: -10px;
+            left: 12px;
+        }
+        @media(max-width:576px) {
+            .ribbon-top-left {
+                left: 53px;
+            }
+        }
+        .ribbon-top-left::before,
+        .ribbon-top-left::after {
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+        .ribbon-top-left::before {
+            top: 0;
+            right: 0;
+        }
+        .ribbon-top-left::after {
+            bottom: 0;
+            left: 0;
+        }
+        .ribbon-top-left span {
+            right: -25px;
+            top: 30px;
+            transform: rotate(-45deg);
+        }
+
+        .card:hover{
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        }
+
+        .card h3{
+            font-weight: 600;
+        }
+
+        .card img{
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            max-height: 120px;
+        }
+
+        .card-1{
+            background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
+            background-repeat: no-repeat;
+            background-position: right;
+            background-size: 80px;
+        }
+
+        @media(max-width: 990px){
+            .card{
+                margin: 20px;
+            }
+        }
+        .modal-body {
+            max-height: 375px;
+            overflow-y:scroll
+        }
+        @media screen and (max-height: 576px) {
+            .modal-body {
+                max-height: 150px;
+            }
+        }

@@ -10995,7 +10995,47 @@ a:hover {
   background-image: url("/img/landing/top_background.png");
   background-size: cover;
 }
+/* new landing page css design part ends */
 
+#text-in-landing {
+  top: 25%;
+  left: 10%;
+  position: absolute;
+ }
+ #text-in-landing h4, #text-in-landing h2{
+  font-size: 3em;
+}
+#text-in-landing a {
+  font-size: 1.5rem;
+  color: white;
+} 
+#text-in-landing a:hover{
+  background: wheat;
+  color: #FA9632;
+  border: 1px solid #FA9632;
+}
+@media screen and (max-width: 576px) {
+  #text-in-landing {
+    top: 90px;
+    left: 25px;
+   }
+   #text-in-landing h4, #text-in-landing h2{
+     font-size: .9rem;
+   }
+   #text-in-landing a{
+    font-size: .8rem;
+   }
+}
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  #text-in-landing {
+    top: 100px;
+    left: 38px;
+   }
+   #text-in-landing h4, #text-in-landing h2, #text-in-landing a {
+     font-size: 1.5rem;
+   }
+}
+/* new landing page css design part ends */
 .bg-white {
   background-color: #ffffff;
 }
@@ -11081,7 +11121,7 @@ a:hover {
 }
 
 .bshadow-medium {
-  box-shadow: 0 1px 13px -2px rgba(66, 16, 153, 0.555);
+  box-shadow: 0 1px 8px -2px rgba(66, 16, 153, 0.555);
 }
 
 .c-point {
@@ -11122,7 +11162,7 @@ a:hover {
   padding: 10px;
 }
 .btn-register .icon {
-  color: #663193;
+  color: #FA9632;
   font-size: 12px;
   background: #ffffff;
   border-radius: 50px;
@@ -11147,13 +11187,14 @@ a:hover {
 }
 
 .btn.btn-outline {
-  border: 2px solid #653092;
-  color: #663193;
+  border: 2px solid #FA9632;
+  color: #FA9632;
   border-radius: 10px;
 }
 .btn.btn-outline:hover {
-  background-color: #663193;
-  color: #ffffff;
+  background-color: #FA9632;
+  color: white;
+  font-weight: 500;
 }
 
 .btn.bg-purple:hover {
@@ -11994,3 +12035,32 @@ svg.eye-icon {
   color: #653092;
   font-size: 35px;
 }
+/* landing page parallax part  starts*/
+@media screen and (min-width:1081px) {
+  .our-package-section {
+    top: 950px;
+    margin-bottom: 950px;
+  }
+}
+
+@media screen and (max-width:1080px) {
+  .our-package-section {
+    top: 550px;
+    margin-bottom: 550px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .our-package-section {
+    top: 450px;
+    margin-bottom: 450px;
+  }
+}
+@media screen and (max-width:576px) {
+  .our-package-section {
+    top: 250px;
+    margin-bottom: 250px;
+  }
+}
+
+/* landing page parallax part ends */

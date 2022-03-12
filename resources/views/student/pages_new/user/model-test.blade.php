@@ -8,6 +8,15 @@
     div .select2 .selection .select2-selection{
         height: 2.35rem;
     }
+    .select2-container--default .select2-selection--single {
+        border: 2px solid #6400c8 !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #6400c8 !important;
+    }
+    #journey-cart:hover {
+        box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
+    }
 </style>
 @section('mini-header')
     <div class="d-flex justify-content-between">
@@ -26,13 +35,16 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
         <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
-            <div class="d-flex flex-column justify-content-center mx-auto border p-5 my-3" id="journey-cart">
-                <h5 class="fw-800 mx-auto">Amazing!</h5>
-                <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
-                <p class="fw-500 mx-auto" id="day-count">
-                    You are on a 16 Day streak
-                </p>
-            </div>
+            <a href="{{route('student.model.test.result')}}">
+                <div class="d-flex flex-column justify-content-center mx-auto border p-5 my-3" id="journey-cart">
+                    <h5 class="fw-800 mx-auto">Diagnosis</h5>
+                    <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
+                    <p class="fw-500 mx-auto">
+                        <i style="font-size: 70px" class="fas fa-diagnoses"></i>
+                    </p>
+                </div>
+            </a>
+
             {{-- subject selection part --}}
             <div>
                 <select
@@ -169,7 +181,7 @@
                     }
                 });
             });
-            
+
             $('#topic_selecting').on("select2:selecting", function (e) {
                 $('#SelectedTopic').removeClass('d-none')
                 $('#topicName').html(e.params.args.data.text)
@@ -188,22 +200,31 @@
                     url: url,
                     success: function (response) {
                         if(response.length > 0) {
+                            let strengthCount = 0;
+                            let weaknessCount = 0;
                             response.forEach((item, index)=>{
                                 url = window.location.origin+'/profile/model-test/tag-solutions/'+item.id
                                 if(item.percentage_scored <= 60) {
-                                    $('#weaknessMessage').html('')
-                                    $('#weaknessDetailsText').css('display','block')
-                                    $('#mcq_weakness').append('' +
-                                        '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
-                                        '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
-                                        '</p>')
+                                    weaknessCount++;
+                                    if(weaknessCount <= 6) {
+                                        $('#weaknessMessage').html('')
+                                        $('#weaknessDetailsText').css('display','block')
+                                        $('#mcq_weakness').append('' +
+                                            '<p id="" class="mx-2 badge rounded-pill" style="background: #DEDEDE;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100px;">' +
+                                            '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
+                                            '</p>')
+                                    }
+
                                 } else if(item.percentage_scored >= 90) {
-                                    $('#strengthMessage').html('')
-                                    $('#strengthDetailsText').css('display','block')
-                                    $('#mcq_strength').append('' +
-                                        '<p id="" class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' +
-                                        '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
-                                        '</p>')
+                                    strengthCount++;
+                                    if(strengthCount <= 6) {
+                                        $('#strengthMessage').html('')
+                                        $('#strengthDetailsText').css('display','block')
+                                        $('#mcq_strength').append('' +
+                                            '<p id="" class="mx-2 badge rounded-pill" style="background: #DEDEDE;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100px;">' +
+                                            '<a target="_blank" href="'+url+'" class="text-decoration-none">'+item.name+'</a>' +
+                                            '</p>')
+                                    }
                                 }
 
                             })
