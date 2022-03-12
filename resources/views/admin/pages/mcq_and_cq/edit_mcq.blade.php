@@ -95,9 +95,6 @@
                                           @if ($mcq->image)
                                              <img class="product-image" src="{{ $mcq->image}}"
                                                    id="previewImg" class="avatar" alt="...">
-                                          @else
-                                             <img class="product-image" src="http://placehold.it/150x100"
-                                                   id="previewImg" class="avatar" alt="...">
                                           @endif
                                        </div>
                                  </div>

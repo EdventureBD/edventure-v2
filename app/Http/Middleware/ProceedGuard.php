@@ -73,6 +73,7 @@ class ProceedGuard
         $disabled = false;
         $disabled2 = false;
         foreach ($batchTopics as $batchTopic) {
+            if ($disabled && !$disabled2) $disabled = false;
             foreach ($batchTopic->courseTopic->exams as $exam) {
                 if (count($exam->course_lectures)) {
                     foreach ($exam->course_lectures as $course_lecture) {

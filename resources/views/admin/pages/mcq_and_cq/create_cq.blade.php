@@ -87,10 +87,6 @@
                                                    @enderror
                                              </div>
                                           </div>
-                                          <div class="col-md-4">
-                                             <img class="product-image" src="http://placehold.it/150x100"
-                                                   id="previewCreative_question" class="avatar" alt="...">
-                                          </div>
                                        </div>
 
                                  </div>
@@ -129,10 +125,6 @@
                                                       <p style="color: red;">{{ $message }}</p>
                                                    @enderror
                                              </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                             <img class="product-image" src="http://placehold.it/150x100"
-                                                   id="previewImg" class="avatar" alt="...">
                                           </div>
                                        </div>
                                  </div>
@@ -203,10 +195,6 @@
                                                    @enderror
                                              </div>
                                           </div>
-                                          <div class="col-md-4">
-                                             <img class="product-image" src="http://placehold.it/150x100"
-                                                   id="previewImg" class="avatar" alt="...">
-                                          </div>
                                        </div>
                                  </div>
 
@@ -275,10 +263,6 @@
                                                       <p style="color: red;">{{ $message }}</p>
                                                    @enderror
                                              </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                             <img class="product-image" src="http://placehold.it/150x100"
-                                                   id="previewImg" class="avatar" alt="...">
                                           </div>
                                        </div>
                                  </div>
@@ -349,10 +333,6 @@
                                                       <p style="color: red;">{{ $message }}</p>
                                                    @enderror
                                              </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                             <img class="product-image" src="http://placehold.it/150x100"
-                                                   id="previewImg" class="avatar" alt="...">
                                           </div>
                                        </div>
                                  </div>

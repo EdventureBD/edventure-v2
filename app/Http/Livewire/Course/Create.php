@@ -12,6 +12,7 @@ use App\Models\Admin\Course;
 use App\Models\Admin\Bundle;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\Batch;
+use App\Models\Admin\IntermediaryLevel;
 
 class Create extends Component
 {
@@ -131,11 +132,15 @@ class Create extends Component
             $imageUrl2 = $this->banner->store('public/course');
             $this->banner = Storage::url($imageUrl2);
         }
+
+        $intermediary_level = IntermediaryLevel::where('id', $data['intermediaryLevelId'])->firstOrFail();
+
         $course = new Course();
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
         $course->icon = $this->image;
         $course->banner = $this->banner;
+        $course->course_category_id = $intermediary_level->course_category_id;
         $course->intermediary_level_id = $data['intermediaryLevelId'];
         if(empty($data['bundleId'])){
             $course->bundle_id = null;

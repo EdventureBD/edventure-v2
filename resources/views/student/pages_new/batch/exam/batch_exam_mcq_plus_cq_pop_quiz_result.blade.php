@@ -92,11 +92,7 @@
 
                                        <td class="bg-purple2 text-white">{!! $question->question !!}</td>
                                        <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
-                                          @foreach($question->allDetailsResult as $findDetailsResult)
-                                             @if($findDetailsResult->student_id == auth()->user()->id)
-                                                {{ $findDetailsResult->gain_marks }}
-                                             @endif
-                                          @endforeach
+                                          {{ $question->detailsResult->gain_marks }}
                                        </td>
                                        <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
                                           {{ $question->avg_score }}
