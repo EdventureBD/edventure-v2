@@ -381,3 +381,42 @@ ALTER TABLE `topic_end_exam_mcqs`
   ADD CONSTRAINT `topic_end_exam_mcqs_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`);
 COMMIT;
 
+ALTER TABLE `bundle_payments` CHANGE `amount` `amount` INT(11) UNSIGNED NOT NULL;
+
+ALTER TABLE `bundle_payments` CHANGE `days_for` `days_for` INT(11) UNSIGNED NOT NULL;
+
+ALTER TABLE `intermediary_levels` CHANGE `title` `title` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `intermediary_levels` CHANGE `slug` `slug` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `question` `question` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `slug` `slug` CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field1` `field1` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field2` `field2` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field3` `field3` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field4` `field4` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `explanation` `explanation` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `question` `question` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `slug` `slug` CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field1` `field1` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field2` `field2` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field3` `field3` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field4` `field4` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `explanation` `explanation` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
