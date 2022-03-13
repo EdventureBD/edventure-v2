@@ -90,9 +90,6 @@
                                              @if ($cq->image)
                                                    <img class="product-image" src="{{ Storage::url($cq->image) }}"
                                                       id="previewImg" class="avatar" alt="...">
-                                             @else
-                                                   <img class="product-image" src="http://placehold.it/150x100"
-                                                      id="previewImg" class="avatar" alt="...">
                                              @endif
                                           </div>
                                        </div>
@@ -138,9 +135,6 @@
                                                    <img class="product-image"
                                                       src="{{ Storage::url($cquestion1->image) }}" id="previewImg"
                                                       class="avatar" alt="...">
-                                             @else
-                                                   <img class="product-image" src="http://placehold.it/150x100"
-                                                      id="previewImg" class="avatar" alt="...">
                                              @endif
                                           </div>
                                        </div>
@@ -223,9 +217,6 @@
                                                    <img class="product-image"
                                                       src="{{ Storage::url($cquestion2->image) }}" id="previewImg"
                                                       class="avatar" alt="...">
-                                             @else
-                                                   <img class="product-image" src="http://placehold.it/150x100"
-                                                      id="previewImg" class="avatar" alt="...">
                                              @endif
                                           </div>
                                        </div>
@@ -308,9 +299,6 @@
                                                    <img class="product-image"
                                                       src="{{ Storage::url($cquestion3->image) }}" id="previewImg"
                                                       class="avatar" alt="...">
-                                             @else
-                                                   <img class="product-image" src="http://placehold.it/150x100"
-                                                      id="previewImg" class="avatar" alt="...">
                                              @endif
                                           </div>
                                        </div>
@@ -392,9 +380,6 @@
                                                    <img class="product-image"
                                                       src="{{ Storage::url($cquestion4->image) }}" id="previewImg"
                                                       class="avatar" alt="...">
-                                             @else
-                                                   <img class="product-image" src="http://placehold.it/150x100"
-                                                      id="previewImg" class="avatar" alt="...">
                                              @endif
                                           </div>
                                        </div>

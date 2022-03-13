@@ -43,13 +43,13 @@
 
    {{-- Modal part --}}
    <!-- Modal -->
-   
    @php
       $disabled = false;
       $disabled2 = false;
    @endphp
    @forelse ($batchTopics as $batchTopic)
       @php
+         if ($disabled && !$disabled2) $disabled = false;
       @endphp
       <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
