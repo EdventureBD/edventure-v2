@@ -66,6 +66,9 @@
                             <h5 id="categoryName" class="fw-600 pl-4"></h5>
                         </div>
                     </div>
+                    <div>
+                        <div id="categoryLink"></div>
+                    </div>
                 </div>
             </div>
 
@@ -154,12 +157,15 @@
             $('#strengthDetailsText').css('display','none')
 
             $('#category_selecting').on("select2:selecting", function (e) {
+                let origin = window.location.origin;
+                query_category_id = e.params.args.data.id
+                let href = origin + '/model-exam?c=' + query_category_id;
                 $('#SelectedCategory').removeClass('d-none')
                 $('#categoryName').html(e.params.args.data.text)
+                $('#categoryLink').html('<a style="padding: 22px;background-color: #fa9632;border-radius: 10px;" target="_blank" href="'+href+'"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>')
                 $('#SelectedTopic').addClass('d-none')
 
-                query_category_id = e.params.args.data.id
-                let url = window.location.origin + '/model-test/topic/' + query_category_id;
+                let url = origin + '/model-test/topic/' + query_category_id;
                 $('#topic_selecting').empty();
                 $.ajax({
                     type: "GET",
