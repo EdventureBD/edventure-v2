@@ -260,6 +260,12 @@ class ModelExamController extends Controller
         }
 
         if(request()->has('t') || Cache::has('exam_category')) {
+            $category = ExamCategory::query()->findOrFail(Cache::get('exam_category'));
+            if(!is_null($category->price) && $category->price != 0) {
+                if(!$this->paidForCategory(Cache::get('exam_category'),auth()->user()->id)) {
+                    return redirect()->route('model.exam');
+                }
+            }
             $exams = ModelExam::query()->with('mcqTotalResult')->with('paymentOfExams')
                                 ->where('exam_topic_id', request()->get('t'))
                                 ->where('exam_category_id', Cache::get('exam_category'))
