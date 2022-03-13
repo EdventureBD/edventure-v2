@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers\Student;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Utils\Edvanture;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+// models
 use App\Models\Admin\CQ;
 use App\Models\Admin\MCQ;
+use App\Models\Admin\Assignment;
 use App\Models\Admin\AptitudeTestMCQ;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
-use Illuminate\Http\Request;
-use App\Models\Admin\Assignment;
-use App\Http\Controllers\Controller;
+use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CreativeQuestion;
 use App\Models\Admin\TopicEndExamMCQ;
@@ -25,9 +32,6 @@ use App\Models\Student\exam\TopicEndExamCqExamPaper;
 use App\Models\Student\exam\PopQuizCqExamPaper;
 use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
-use App\Utils\Edvanture;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 
 class ExamController extends Controller
@@ -741,6 +745,9 @@ class ExamController extends Controller
     }
 
     public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
+
+        $course = Course::where('id', $course_topic->course_id)->firstOrFail();
+        // dd($course_topic);
 
         if ($exam_type == Edvanture::APTITUDETEST) {
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();

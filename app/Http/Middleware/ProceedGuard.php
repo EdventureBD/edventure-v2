@@ -78,6 +78,7 @@ class ProceedGuard
                 if (count($exam->course_lectures)) {
                     foreach ($exam->course_lectures as $course_lecture) {
                         if (!$disabled2 && $request->route('courseLecture') && $course_lecture->id == $request->route('courseLecture')->id) return $next($request);
+                        elseif ($exam->exam_type == 'Topic End Exam' && !$exam->test_passed) $disabled2 = true;
                         elseif ($disabled && !$disabled2 && !$course_lecture->completed) {
                             $disabled2 = true;
                         } elseif ($disabled2) {
@@ -91,6 +92,7 @@ class ProceedGuard
                     $disabled = true;
                     $disabled2 = true;
                 } elseif ($exam->exam_type === "Aptitude Test" && !$exam->test_passed) $disabled = true;
+                elseif ($exam->exam_type == 'Topic End Exam' && !$exam->test_passed) $disabled2 = true;
                 elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
                 elseif ($disabled2) abort(403);
             }
