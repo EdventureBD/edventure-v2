@@ -49,7 +49,7 @@
    @endphp
    @forelse ($batchTopics as $batchTopic)
       @php
-         if ($disabled && !$disabled2) $disabled = false;
+         // if ($disabled && !$disabled2) $disabled = false;
       @endphp
       <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
@@ -61,7 +61,6 @@
                <div class="modal-body">
                   <ul>
                      @forelse ($batchTopic->courseTopic->exams as $exam)
-                     {{-- $exam->exam_type == "Aptitude Test" --}}
                         @if (count($exam->course_lectures))
                            @foreach ($exam->course_lectures as $course_lecture)
                               <li>
@@ -84,6 +83,7 @@
                                     $disabled = true;
                                     $disabled2 = true;
                                  } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$course_lecture->completed) $disabled = true;
+                                 elseif ($exam->exam_type == "Topic End Exam" && !$course_lecture->completed) $disabled2 = true;
                                  elseif ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
                               @endphp
                            @endforeach
@@ -123,6 +123,7 @@
                                  $disabled = true;
                                  $disabled2 = true;
                               } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
+                              elseif ($exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
                               elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
                            @endphp
                         </li>
@@ -140,6 +141,98 @@
       </div>
    @empty
    @endforelse
+
+{{-- 
+   @php
+      $disabled = false; // Last Aptitude exam passed
+      $disabled2 = true; // last Aptitude exam attempted
+      $disabled3 = true; // Last Lecture/Other Exam Completed
+      $disabled4 = true; // Last TEE Completed
+   @endphp
+   @forelse ($batchTopics as $batchTopic)
+      <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header border">
+                  <h5 class="modal-title mx-auto fw-800" id="exampleModalLabel"> Exams for {{ $batchTopic->courseTopic->title }}</h5>
+                  </button>
+               </div> 
+               <div class="modal-body">
+                  <ul>
+                     @forelse ($batchTopic->courseTopic->exams as $exam)
+                        @if (count($exam->course_lectures))
+                           @foreach ($exam->course_lectures as $course_lecture)
+                              <li>
+                                 <div class="w-25">
+                                    @if($disabled || ($disabled2 && $disabled3 && $disabled4))
+                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                    @else
+                                       <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                    @endif
+                                 </div>
+                                 <a
+                                    @if(!($disabled || ($disabled2 && $disabled3 && $disabled4))) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                    href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
+                                    class="fw-800 modal-items text-white d-flex justify-content-center rounded">
+                                    {{ Str::limit($course_lecture->title, 23, '...') }}
+                                 </a>
+                                 @php
+                                    if($course_lecture->completed == false){
+                                       $disabled3 = false;
+                                    }
+                                 @endphp
+                              </li>
+                           @endforeach
+                        @endif
+
+                        <li>
+                           <div class="w-25">
+                              @if($disabled || ($disabled2 && $disabled3 && $disabled4))
+                                 <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
+                              @else
+                                 <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                              @endif
+                           </div>
+                           <a @if(!($disabled || ($disabled2 && $disabled3 && $disabled4))) style="pointer-events: none; cursor: default; color: grey;" @endif
+                              href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
+                              class="fw-800 modal-items text-white d-flex justify-content-center rounded">
+                              {{ Str::limit($exam->title, 23, '...') }}
+                           </a>
+                           @php
+                              if($exam->exam_type == "Aptitude Test"){
+                                 if($exam->previous_aptitude_test_passed == false){
+                                    $disabled1 = false;
+                                 }
+                                 if($exam->has_been_attempted == false){
+                                    $disabled2 = false;
+                                 }
+                              }
+                              elseif($exam->exam_type == "Pop Quiz"){
+                                 if($exam->test_passed == false){
+                                    $disabled3 = false;
+                                 }
+                              }
+                              elseif($exam->exam_type == "Topic End Exam") {
+                                 if($exam->previous_topic_end_exam_passed == false){
+                                    $disabled4 = false;
+                                 }
+                              }
+                           @endphp
+                        </li>
+                     @empty
+                        <h3 class="flex text-center pr-5">No exams found. Please contact administrators.</h3>
+                     @endforelse
+
+                  </ul>
+               </div>
+               <div class="modal-footer mx-auto">
+                  <a class="close" data-dismiss="modal" aria-label="Close"> <img src="/img/road_map/back.png" alt="modal closing button" class="img-fluid" id="roadmap-modal-close-btn"></a>
+               </div>
+            </div>
+         </div>
+      </div>
+   @empty
+   @endforelse --}}
 
    
    {{-- modal part ends  --}}
