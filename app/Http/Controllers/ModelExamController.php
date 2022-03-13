@@ -305,6 +305,7 @@ class ModelExamController extends Controller
                                             }])
                                             ->where('model_exam_id', $examId)
                                             ->where('student_id',$student_id)
+                                            ->groupBy(['model_exam_id','mcq_question_id'])
                                             ->get();
             return view('student.pages_new.model-exam.mcq-result',compact('result','exam_answer','exam'));
         }
@@ -354,7 +355,7 @@ class ModelExamController extends Controller
 
         $results =  McqTotalResult::query()->with(['modelExam' => function($q) {
             $q->with('topic')->with('category');
-        }])->with('student');
+        }])->groupBy(['student_id','model_exam_id'])->with('student');
 
         //filterable data for result search
         $filters['student'] = McqTotalResult::query()->with('student:id,name,email')->get()->unique('student_id');
