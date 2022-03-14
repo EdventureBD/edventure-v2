@@ -13,12 +13,23 @@
         {{-- custom css link starts  --}}
         <link rel="stylesheet" href="/css/new-multistep-signup.css">
         {{-- custom css link ends  --}}
+
+        <style>
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            input[type="number"] {
+                -moz-appearance: textfield;
+            }
+        </style>
     </head>
     <body>
         @yield('content')
 
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-        
+
         {{-- <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script> --}}
         {{-- custom js link  --}}
         <script src="/js/new-multistep-signup.js"></script>
