@@ -19,6 +19,7 @@
     .select2-container--default .select2-results__option--highlighted[aria-selected] {
         background-color: #FA9632;
         color: white;
+        border-bottom-left-radius: 14.29px !important;
     }
     .select2-container--open .select2-dropdown--below {
         border-top: none;
