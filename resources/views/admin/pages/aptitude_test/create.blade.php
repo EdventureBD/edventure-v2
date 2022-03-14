@@ -84,10 +84,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <img class="product-image" src="http://placehold.it/150x100" id="previewImg"
-                                                class="avatar" alt="...">
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">

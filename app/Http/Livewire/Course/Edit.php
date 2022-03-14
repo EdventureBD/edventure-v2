@@ -135,11 +135,15 @@ class Edit extends Component
             $this->banner = Storage::url($imageUrl2);;
             Storage::delete($this->deleteBanner);
         }
+
+        $intermediary_level = IntermediaryLevel::where('id', $data['intermediaryLevelId'])->firstOrFail();
+
         $course = Course::find($this->course->id);
         $course->icon = $this->image;
         $course->banner = $this->banner;
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
+        $course->course_category_id = $intermediary_level->course_category_id;
         $course->intermediary_level_id = $data['intermediaryLevelId'];
         if(empty($data['bundleId'])){
             $course->bundle_id = null;

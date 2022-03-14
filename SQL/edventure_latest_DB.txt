@@ -1,0 +1,422 @@
+CREATE TABLE `aptitude_test_mcqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field1` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `field2` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `field3` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `field4` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer` int(11) NOT NULL,
+  `explanation` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `number_of_attempt` int(11) NOT NULL,
+  `gain_marks` int(11) NOT NULL,
+  `success_rate` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `virtual_academy_server`.`intermediary_levels` ( `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT , `course_category_id` BIGINT(20) UNSIGNED NOT NULL ,
+ `title` VARCHAR(255) NULL DEFAULT NULL , `slug` VARCHAR(255) NOT NULL , `status` TINYINT NOT NULL , `created_at` TIMESTAMP NULL , `updated_at` TIMESTAMP NULL ,
+ PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+ CREATE TABLE `bundle_payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `bundle_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `trx_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` int(10) UNSIGNED NOT NULL,
+  `payment_account_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `days_for` int(10) UNSIGNED NOT NULL,
+  `accepted` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `bundle_student_enrollments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `bundle_id` bigint(20) UNSIGNED NOT NULL,
+  `payment_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `note_list` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `individual_bundle_days` int(11) NOT NULL,
+  `accessed_days` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `completed_lectures` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `lecture_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+CREATE TABLE `pop_quiz_cqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marks` int(11) NOT NULL,
+  `creative_question_id` bigint(20) UNSIGNED NOT NULL,
+  `number_of_attempt` int(11) NOT NULL,
+  `gain_marks` int(11) NOT NULL,
+  `success_rate` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+CREATE TABLE `pop_quiz_creative_questions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `creative_question` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `standard_ans_pdf` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+CREATE TABLE `pop_quiz_cq_exam_papers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `exam_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `creative_question_id` bigint(20) UNSIGNED NOT NULL,
+  `batch_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `submitted_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `submitted_pdf` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `checked_paper` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `pop_quiz_mcqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` longtext DEFAULT NULL,
+  `slug` char(36) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `field1` longtext DEFAULT NULL,
+  `field2` longtext DEFAULT NULL,
+  `field3` longtext DEFAULT NULL,
+  `field4` longtext DEFAULT NULL,
+  `answer` int(11) NOT NULL,
+  `explanation` longtext DEFAULT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `number_of_attempt` int(11) NOT NULL,
+  `gain_marks` int(11) NOT NULL,
+  `success_rate` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+CREATE TABLE `topic_end_exam_cqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marks` int(11) NOT NULL,
+  `creative_question_id` bigint(20) UNSIGNED NOT NULL,
+  `number_of_attempt` int(11) NOT NULL,
+  `gain_marks` int(11) NOT NULL,
+  `success_rate` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `topic_end_exam_creative_questions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `creative_question` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `standard_ans_pdf` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `topic_end_exam_cq_exam_papers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `exam_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `creative_question_id` bigint(20) UNSIGNED NOT NULL,
+  `batch_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `submitted_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `submitted_pdf` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `checked_paper` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `topic_end_exam_mcqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` longtext DEFAULT NULL,
+  `slug` char(36) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `field1` longtext DEFAULT NULL,
+  `field2` longtext DEFAULT NULL,
+  `field3` longtext DEFAULT NULL,
+  `field4` longtext DEFAULT NULL,
+  `answer` int(11) NOT NULL,
+  `explanation` longtext DEFAULT NULL,
+  `exam_id` bigint(20) UNSIGNED NOT NULL,
+  `number_of_attempt` int(11) NOT NULL,
+  `gain_marks` int(11) NOT NULL,
+  `success_rate` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+ALTER TABLE `bundle_payments`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `bundle_payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+COMMIT;
+
+
+
+ALTER TABLE `bundle_student_enrollments`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `bundle_student_enrollments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
+
+
+
+ALTER TABLE `completed_lectures`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `completed_lectures`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+COMMIT;
+
+
+
+ALTER TABLE `aptitude_test_mcqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aptitude_test_mcqs_exam_id_foreign` (`exam_id`);
+ALTER TABLE `aptitude_test_mcqs`
+  ADD CONSTRAINT `aptitude_test_mcqs_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+
+
+ALTER TABLE `content_tags` ADD `solution_pdf` VARCHAR(255) NULL DEFAULT NULL AFTER `lecture_id`, ADD `solution_video` VARCHAR(255) NULL DEFAULT NULL AFTER `solution_pdf`;
+
+
+
+ALTER TABLE `courses` ADD `intermediary_level_id` BIGINT UNSIGNED NOT NULL AFTER `course_category_id`,
+ ADD `bundle_id` BIGINT UNSIGNED NULL DEFAULT NULL AFTER `intermediary_level_id`;
+
+
+
+ALTER TABLE `course_lectures` ADD `exam_id` BIGINT UNSIGNED NOT NULL AFTER `topic_id`;
+
+
+
+ALTER TABLE `course_topics` ADD `zero_star_island_image` VARCHAR(255) NOT NULL AFTER `slug`, ADD `one_star_island_image` VARCHAR(255) NOT NULL AFTER `zero_star_island_image`,
+ ADD `two_star_island_image` VARCHAR(255) NOT NULL AFTER `one_star_island_image`, ADD `three_star_island_image` VARCHAR(255) NOT NULL AFTER `two_star_island_image`,
+ ADD `disabled_island_image` VARCHAR(255) NOT NULL AFTER `three_star_island_image`;
+ALTER TABLE `course_topics` ADD `intermediary_level_id` BIGINT UNSIGNED NOT NULL AFTER `course_id`;
+
+
+
+ALTER TABLE `exams` CHANGE `question_limit` `question_limit` INT(11) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `exams` ADD `question_limit_2` INT(11) UNSIGNED NULL DEFAULT NULL AFTER `question_limit`;
+ALTER TABLE `exams` CHANGE `order` `order` INT(11) NULL DEFAULT '0';
+ALTER TABLE `exams` ADD `threshold_marks` INT(11) NOT NULL AFTER `order`;
+
+ALTER TABLE `exam_results` ADD `exam_type` VARCHAR(255) NOT NULL AFTER `exam_id`;
+ALTER TABLE `exam_results` ADD `checked` TINYINT(4) NULL DEFAULT NULL AFTER `status`;
+
+
+
+ALTER TABLE `pop_quiz_creative_questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pop_quiz_creative_questions_exam_id_foreign` (`exam_id`);
+
+ALTER TABLE `pop_quiz_creative_questions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `pop_quiz_creative_questions`
+  ADD CONSTRAINT `pop_quiz_creative_questions_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+ALTER TABLE `pop_quiz_cqs`
+  ADD CONSTRAINT `pop_quiz_cqs_pop_quiz_creative_question_id_foreign` FOREIGN KEY (`creative_question_id`) REFERENCES `pop_quiz_creative_questions`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+
+
+ALTER TABLE `pop_quiz_cqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pop_quiz_cqs_creative_question_id_foreign` (`creative_question_id`);
+
+ALTER TABLE `pop_quiz_cqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1038;
+
+
+
+ALTER TABLE `pop_quiz_cq_exam_papers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pop_quiz_cq_exam_papers_exam_id_foreign` (`exam_id`),
+  ADD KEY `pop_quiz_cq_exam_papers_creative_question_id_foreign` (`creative_question_id`),
+  ADD KEY `pop_quiz_cq_exam_papers_batch_id_foreign` (`batch_id`),
+  ADD KEY `pop_quiz_cq_exam_papers_student_id_foreign` (`student_id`);
+
+ALTER TABLE `pop_quiz_cq_exam_papers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+
+ALTER TABLE `pop_quiz_cq_exam_papers`
+  ADD CONSTRAINT `pop_quiz_cq_exam_papers_batch_id_foreign` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pop_quiz_cq_exam_papers_creative_question_id_foreign` FOREIGN KEY (`creative_question_id`) REFERENCES `pop_quiz_creative_questions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pop_quiz_cq_exam_papers_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pop_quiz_cq_exam_papers_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+
+
+ALTER TABLE `pop_quiz_mcqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pop_quiz_mcqs_exam_id_foreign` (`exam_id`);
+
+ALTER TABLE `pop_quiz_mcqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+ALTER TABLE `pop_quiz_mcqs`
+  ADD CONSTRAINT `pop_quiz_mcqs_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`);
+COMMIT;
+
+
+
+ALTER TABLE `topic_end_exam_creative_questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `topic_end_exam_creative_questions_exam_id_foreign` (`exam_id`);
+
+ALTER TABLE `topic_end_exam_creative_questions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+
+ALTER TABLE `topic_end_exam_creative_questions`
+  ADD CONSTRAINT `topic_end_exam_creative_questions_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+ALTER TABLE `topic_end_exam_cqs`
+  ADD CONSTRAINT `topic_end_exam_cqs_topic_end_exam_creative_question_id_foreign` FOREIGN KEY (`creative_question_id`) REFERENCES `topic_end_exam_creative_questions`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+
+
+ALTER TABLE `topic_end_exam_cqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `topic_end_exam_cqs_creative_question_id_foreign` (`creative_question_id`);
+
+ALTER TABLE `topic_end_exam_cqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1038;
+
+
+
+ALTER TABLE `topic_end_exam_cq_exam_papers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `topic_end_exam_cq_exam_papers_exam_id_foreign` (`exam_id`),
+  ADD KEY `topic_end_exam_cq_exam_papers_creative_question_id_foreign` (`creative_question_id`),
+  ADD KEY `topic_end_exam_cq_exam_papers_batch_id_foreign` (`batch_id`),
+  ADD KEY `topic_end_exam_cq_exam_papers_student_id_foreign` (`student_id`);
+
+ALTER TABLE `topic_end_exam_cq_exam_papers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+ALTER TABLE `topic_end_exam_cq_exam_papers`
+  ADD CONSTRAINT `topic_end_exam_cq_exam_papers_batch_id_foreign` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `topic_end_exam_cq_exam_papers_creative_question_id_foreign` FOREIGN KEY (`creative_question_id`) REFERENCES `topic_end_exam_creative_questions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `topic_end_exam_cq_exam_papers_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `topic_end_exam_cq_exam_papers_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+
+
+ALTER TABLE `topic_end_exam_mcqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `topic_end_exam_mcqs_exam_id_foreign` (`exam_id`);
+
+ALTER TABLE `topic_end_exam_mcqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+ALTER TABLE `topic_end_exam_mcqs`
+  ADD CONSTRAINT `topic_end_exam_mcqs_exam_id_foreign` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`);
+COMMIT;
+
+ALTER TABLE `bundle_payments` CHANGE `amount` `amount` INT(11) UNSIGNED NOT NULL;
+
+ALTER TABLE `bundle_payments` CHANGE `days_for` `days_for` INT(11) UNSIGNED NOT NULL;
+
+ALTER TABLE `intermediary_levels` CHANGE `title` `title` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `intermediary_levels` CHANGE `slug` `slug` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `question` `question` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `slug` `slug` CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field1` `field1` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field2` `field2` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field3` `field3` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `field4` `field4` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `pop_quiz_mcqs` CHANGE `explanation` `explanation` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `question` `question` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `slug` `slug` CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field1` `field1` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field2` `field2` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field3` `field3` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `field4` `field4` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `topic_end_exam_mcqs` CHANGE `explanation` `explanation` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;

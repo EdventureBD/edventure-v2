@@ -260,6 +260,12 @@ class ModelExamController extends Controller
         }
 
         if(request()->has('t') || Cache::has('exam_category')) {
+            $category = ExamCategory::query()->findOrFail(Cache::get('exam_category'));
+            if(!is_null($category->price) && $category->price != 0) {
+                if(!$this->paidForCategory(Cache::get('exam_category'),auth()->user()->id)) {
+                    return redirect()->route('model.exam');
+                }
+            }
             $exams = ModelExam::query()->with('mcqTotalResult')->with('paymentOfExams')
                                 ->where('exam_topic_id', request()->get('t'))
                                 ->where('exam_category_id', Cache::get('exam_category'))
@@ -299,6 +305,8 @@ class ModelExamController extends Controller
                                             }])
                                             ->where('model_exam_id', $examId)
                                             ->where('student_id',$student_id)
+                                            ->groupBy(['model_exam_id','mcq_question_id'])
+                                            ->orderByDesc('created_at')
                                             ->get();
             return view('student.pages_new.model-exam.mcq-result',compact('result','exam_answer','exam'));
         }
@@ -321,7 +329,6 @@ class ModelExamController extends Controller
         $exam = ModelExam::query()->find($examId);
         $topics = [];
         $student_id = auth()->user()->id;
-        $exam_results = McqTotalResult::query()->where('student_id', $student_id)->with('modelExam')->get();
         $topics = ExamTopic::query()
                             ->whereHas('modelExam', function ($q) {
                                 $q->has('mcqQuestions')
@@ -336,7 +343,7 @@ class ModelExamController extends Controller
 
         OnMcqSubmit::dispatch($mcq,$exam,$inputs['exam_end_time'],$student_id);
 
-        return view('student.pages_new.batch.exam.examSubmissionGreeting', compact('exam_results','topics'));
+        return view('student.pages_new.batch.exam.examSubmissionGreeting', compact('topics'));
     }
 
     /**
@@ -348,7 +355,7 @@ class ModelExamController extends Controller
 
         $results =  McqTotalResult::query()->with(['modelExam' => function($q) {
             $q->with('topic')->with('category');
-        }])->with('student');
+        }])->groupBy(['student_id','model_exam_id'])->with('student');
 
         //filterable data for result search
         $filters['student'] = McqTotalResult::query()->with('student:id,name,email')->get()->unique('student_id');

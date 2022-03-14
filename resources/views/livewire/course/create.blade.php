@@ -51,8 +51,6 @@
                                                 @if ($tempImage)
                                                     <img style="width:100px; border-radius: 50%" class="product-image" src="{{ $tempImage->temporaryUrl() }}"
                                                         alt="">
-                                                @else
-                                                    <img style="width:100px; border-radius: 50%" src="http://placehold.it/240x240" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="image">
                                                     <p style="color: indigo">Uploading icon ....</p>
@@ -83,8 +81,6 @@
                                                 @if ($tempBanner)
                                                     <img class="product-image" src="{{ $tempBanner->temporaryUrl() }}"
                                                         alt="">
-                                                @else
-                                                    <img class="img-fluid" src="http://placehold.it/576x642" alt="...">
                                                 @endif
                                                 <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>

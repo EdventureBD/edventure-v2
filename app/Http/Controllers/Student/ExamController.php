@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers\Student;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Utils\Edvanture;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+// models
 use App\Models\Admin\CQ;
 use App\Models\Admin\MCQ;
+use App\Models\Admin\Assignment;
 use App\Models\Admin\AptitudeTestMCQ;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
-use Illuminate\Http\Request;
-use App\Models\Admin\Assignment;
-use App\Http\Controllers\Controller;
+use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CreativeQuestion;
 use App\Models\Admin\TopicEndExamMCQ;
@@ -25,9 +32,6 @@ use App\Models\Student\exam\TopicEndExamCqExamPaper;
 use App\Models\Student\exam\PopQuizCqExamPaper;
 use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
-use App\Utils\Edvanture;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 
 class ExamController extends Controller
@@ -742,6 +746,9 @@ class ExamController extends Controller
 
     public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
 
+        $course = Course::where('id', $course_topic->course_id)->firstOrFail();
+        // dd($course_topic);
+
         if ($exam_type == Edvanture::APTITUDETEST) {
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
 
@@ -792,11 +799,11 @@ class ExamController extends Controller
         if ($exam_type == Edvanture::TOPICENDEXAM) {
 
             $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
-                'topicEndExamCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
-                    return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
-                },
                 'topicEndExamCreativeQuestions.question' => function($query) {
                     return $query->has('detailsResult');
+                },
+                'topicEndExamCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
+                    return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', 'Topic End Exam');
                 },
                 'topicEndExamCreativeQuestions.exam_papers' => function($query) use ($batch) {
                     return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
@@ -925,7 +932,9 @@ class ExamController extends Controller
 
                     // analysis for CQs
                     $all_analysis_cqs = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)
-                    ->with(['question.allDetailsResult'])
+                    ->with(['question.allDetailsResult' => function($query){
+                        $query->where('exam_type', "Topic End Exam");
+                    }])
                     ->get();
 
                     foreach($all_analysis_cqs as $cq){
@@ -1021,15 +1030,15 @@ class ExamController extends Controller
         if ($exam_type == Edvanture::POPQUIZ) {
 
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->with([
-                    'popQUizCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
-                        return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
-                    },
                     'popQuizCreativeQuestions.question' => function($query) {
                         return $query->has('detailsResult');
                     },
+                    'popQuizCreativeQuestions.question.detailsResult' => function($query) use ($batch) {
+                        return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', 'Pop Quiz');
+                    },
                     'popQuizCreativeQuestions.exam_papers' => function($query) use ($batch) {
                         return $query->where('batch_id', $batch->id)->where('student_id', auth()->user()->id);
-                    }
+                    },
                     ])
                     ->firstOrFail();
 
@@ -1151,7 +1160,10 @@ class ExamController extends Controller
 
                         // analysis for CQs
                         $all_analysis_cqs = PopQuizCreativeQuestion::where('exam_id', $exam->id)
-                        ->with(['question.allDetailsResult'])
+                        ->with([
+                            'question.allDetailsResult' => function($query){
+                                $query->where('exam_type', "Pop Quiz");
+                            }])
                         ->get();
 
                         foreach($all_analysis_cqs as $cq){
@@ -1185,6 +1197,7 @@ class ExamController extends Controller
                 }
 
                 if($mcq_exam_result || ($cq_exam_result && $cq_exam_result->checked == 1)){
+
                     return view('student.pages_new.batch.exam.batch_exam_mcq_plus_cq_pop_quiz_result',
                     compact(
                         'exam',
