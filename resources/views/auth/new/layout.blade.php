@@ -11,6 +11,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
         {{-- cdn links for css starts --}}
+        {{-- font awesome cdn --}}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+        {{-- font awesome cdn --}}
 
         {{-- custom css link starts  --}}
         <link rel="stylesheet" href="/css/new-multistep-signup.css">

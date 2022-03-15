@@ -74,12 +74,14 @@ p {
 }
 
 #msform .action-button {
-    width: 100px;
+    width: 61px;
+    height: 61px;
     background: #FA9632;
     font-weight: bold;
     color: white;
-    border: 0 none;
-    border-radius: 15px;
+    border: 7px solid rgb(248, 213, 177);
+    box-sizing: border-box;
+    border-radius: 50%;
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 0px 10px 5px;
@@ -90,16 +92,18 @@ p {
 #msform .action-button:focus {
     background-color: #ffddbb;
     color: #FA9632;
-    border: 1px solid #FA9632;
+    border: 7px solid #FA9632;
 }
 
 #msform .action-button-previous {
-    width: 100px;
-    background: #FA9632;
+    width: 61px;
+    height: 61px;
+    background: #9b9a99;
     font-weight: bold;
     color: white;
-    border: 0 none;
-    border-radius: 15px;
+    border: 7px solid rgb(207, 200, 194);
+    box-sizing: border-box;
+    border-radius: 50%;
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px 10px 0px;
@@ -108,8 +112,9 @@ p {
 
 #msform .action-button-previous:hover,
 #msform .action-button-previous:focus {
-    background-color: #ffddbb;
-    color: #FA9632;
+    background-color: rgb(207, 200, 194);
+    color: #9b9a99;
+    border: 7px solid #9b9a99;
 }
 
 .card {
@@ -165,31 +170,31 @@ p {
 
 #progressbar #progress-name:before {
     font-family: FontAwesome;
-    content: "1"
+    content: "১"
 }
 
 #progressbar #progress-phone:before {
     font-family: FontAwesome;
-    content: "2"
+    content: "২"
 }
 
 #progressbar #progress-class:before {
     font-family: FontAwesome;
-    content: "3"
+    content: "৩"
 }
 #progressbar #progress-district:before {
     font-family: FontAwesome;
-    content: "4"
+    content: "৪"
 }
 
 #progressbar #progress-email:before {
     font-family: FontAwesome;
-    content: "5"
+    content: "৫"
 }
 
 #progressbar #progress-password:before {
     font-family: FontAwesome;
-    content: "6"
+    content: "৬"
 }
 
 #progressbar li:before {
@@ -364,6 +369,7 @@ border-width: 0 4px 5px 4px;
         width: 32px;
         height: 32px;
         line-height: 27px;
+        font-size: 14px;
     }
     #progressbar li:after{
         top: 15px;

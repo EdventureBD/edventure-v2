@@ -47,7 +47,7 @@
                                 type="button"
                                 id="name_next_btn"
                                 name="name_next_btn"
-                                class="btn fixed-btn next action-button"> Next
+                                class="btn fixed-btn next action-button"> <i class="fas fa-arrow-right"></i>
                         </button>
                     </fieldset>
                     <fieldset>
@@ -60,17 +60,18 @@
                                 1. Your Phone number must be a valid number that is not already associated with another account in Edventure. <br> (আপনার ফোন নম্বরটি অবশ্যই একটি কার্যকর নম্বর হতে হবে যা ইতিমধ্যেই এডভেঞ্চারে অন্য অ্যাকাউন্টের সাথে যুক্ত নয়)
                             </p>
                         </div>
-                        <input type="button"
+                        <button type="button"
                                id="phone_next_btn"
                                disabled
                                name="next"
                                class="btn fixed-btn next action-button"
-                               value="Next" />
-                        <input type="button"
+                               value="Next"><i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="button"
                                id="phone_previous_btn"
                                name="previous"
                                class="previous fixed-btn-previous action-button-previous"
-                               value="Previous" />
+                               value="Previous"><i class="fas fa-arrow-left"></i></button>
                     </fieldset>
                     <fieldset>
                         <div class="form-card my-5">
@@ -92,17 +93,19 @@
                             </select>
                             <span style="color:#fa9632" id="class_error"></span>
                         </div>
-                        <input disabled
+                        <button disabled
                                type="button"
                                id="class_next_btn"
                                name="next"
                                class="btn fixed-btn next action-button"
-                               value="Next" />
-                        <input type="button"
+                               value="Next"><i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="button"
                                id="class_previous_btn"
                                name="previous"
                                class="previous fixed-btn-previous action-button-previous"
-                               value="Previous" />
+                               value="Previous"><i class="fas fa-arrow-left"></i>
+                        </button>
                     </fieldset>
                     <fieldset>
                         <div class="form-card my-5">
@@ -120,17 +123,19 @@
                             </select>
                             <span style="color:#fa9632" id="district_error"></span>
                         </div>
-                        <input disabled
+                        <button disabled
                                type="button"
                                id="district_next_btn"
                                name="next"
                                class="btn fixed-btn next action-button"
-                               value="Next" />
-                        <input type="button"
+                               value="Next"><i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="button"
                                id="district_previous_btn"
                                name="previous"
                                class="previous fixed-btn-previous action-button-previous"
-                               value="Previous" />
+                               value="Previous"><i class="fas fa-arrow-left"></i>
+                        </button>
                     </fieldset>
                     <fieldset>
                         <div class="form-card mt-5">
@@ -143,17 +148,19 @@
                             <p>2. In case of resetting the password, you need access to this email ID later. <br> (পাসওয়ার্ড রিসেট করার ক্ষেত্রে, আপনাকে পরে এই ইমেল আইডি অ্যাক্সেস করতে হবে)</p>
 
                         </div>
-                        <input disabled
+                        <button disabled
                                type="button"
                                id="email_next_btn"
                                name="next"
                                class="btn fixed-btn next action-button"
-                               value="Next" />
-                        <input type="button"
+                               value="Next"><i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="button"
                                id="email_previous_btn"
                                name="previous"
                                class="previous fixed-btn-previous action-button-previous"
-                               value="Previous" />
+                               value="Previous"><i class="fas fa-arrow-left"></i>
+                        </button>
                     </fieldset>
                     <fieldset>
                         <div class="form-card mt-5">
@@ -165,17 +172,19 @@
                             <p>1. Your password must be of 8 letters. The letters may include A-Z, a-z, 0-9 and symbols. <br> (আপনার পাসওয়ার্ড অবশ্যই ৮ অক্ষরের হতে হবে। অক্ষরগুলিতে A-Z, a-z, 0-9 এবং প্রতীক অন্তর্ভুক্ত থাকতে পারে)</p>
 
                         </div>
-                        <input disabled
+                        <button disabled
                                type="submit"
                                id="password_next_btn"
                                name="next"
                                class="btn fixed-btn action-button"
-                               value="Submit" />
-                        <input type="button"
+                               value="Submit"><i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="button"
                                id="password_previous_btn"
                                name="previous"
                                class="previous fixed-btn-previous action-button-previous"
-                               value="Previous" />
+                               value="Previous"><i class="fas fa-arrow-left"></i>
+                        </button>
                     </fieldset>
                      <!-- progressbar -->
                      <div id="progressBar-parent">
