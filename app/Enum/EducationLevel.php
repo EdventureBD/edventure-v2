@@ -10,6 +10,8 @@ interface EducationLevel {
     const CLASS_10 = 10;
     const CLASS_11 = 11;
     const CLASS_12 = 12;
+    const ADMISSION = 13;
+    const JOB = 18;
 
     const Level = [
         '6' => 'Level 6',
@@ -19,5 +21,7 @@ interface EducationLevel {
         '10' => 'Level 10',
         '11' => 'Level 11',
         '12' => 'Level 12',
+        '13' => 'ADMISSION',
+        '18' => 'JOB',
     ];
 }

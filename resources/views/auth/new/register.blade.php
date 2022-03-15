@@ -8,12 +8,15 @@
             <div class="card px-0 pt-4 pb-0">
                 <p class="text-right">Already a member? <a href="{{route('login')}}" style="color: #fa9632;text-decoration:none;">Sign In</a></p>
                 @if (count($errors) > 0)
-                    <div style="padding: 0.75rem 3.25rem; border-radius: 14.5px;" class="alert alert-danger">
+                    <div style="padding: 0.75rem 3.25rem; border-radius: 14.5px;" class="alert alert-danger alert-dismissible fade show" role="alert">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
                 <form id="msform" action="{{route("submitRegister")}}" method="POST">
@@ -75,17 +78,30 @@
                                 class="select2"
                                 name="class"
                                 id="class"
-                                data-placeholder="শ্রেণী"
+                                data-placeholder="তুমি কোন ক্ষেত্রে সাহায্য চাচ্ছ"
                                 data-dropdown-css-class="select2-purple">
                                 <option value=""></option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_6}}">Class 6</option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_7}}">Class 7</option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_8}}">Class 8</option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_9}}">Class 9</option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_10}}">Class 10</option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_11}}">Class 11</option>
-                                <option value="{{\App\Enum\EducationLevel::CLASS_12}}">Class 12</option>
+                                <option value="0">ক্লাস ৬-১২</option>
+                                <option value="13">বিশ্ববিদ্দালয় ভর্তি পরীক্ষা</option>
+                                <option value="18">চাকরিতে নিয়োগ পরীক্ষা প্রস্তুতি</option>
                             </select>
+
+                            <div id="class_selection" style="display: none" class="mt-5">
+                                <select
+                                    id="selected_class"
+                                    class="select2"
+                                    data-placeholder="শ্রেণী"
+                                    data-dropdown-css-class="select2-purple">
+                                    <option value=""></option>
+                                    <option value="6">ক্লাস ৬</option>
+                                    <option value="7">ক্লাস ৭</option>
+                                    <option value="8">ক্লাস ৮</option>
+                                    <option value="9">ক্লাস ৯</option>
+                                    <option value="10">ক্লাস ১০</option>
+                                    <option value="11">ক্লাস ১১</option>
+                                    <option value="12">ক্লাস ১২</option>
+                                </select>
+                            </div>
                             <span style="color:#fa9632" id="class_error"></span>
                         </div>
                         <button disabled
@@ -186,7 +202,7 @@
                         <ul id="progressbar" style="display: flex">
                             <li class="active" id="progress-name"><strong>নাম</strong></li>
                             <li id="progress-phone"><strong>মোবাইল নাম্বার</strong></li>
-                            <li id="progress-class"><strong>শ্রেণী</strong></li>
+                            <li id="progress-class"><strong>লেভেল</strong></li>
                             <li id="progress-district"><strong>জেলা</strong></li>
                             <li id="progress-email"><strong>ইমেইল</strong></li>
                             <li id="progress-password"><strong>পাসওয়ার্ড</strong></li>

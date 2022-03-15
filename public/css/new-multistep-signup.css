@@ -406,6 +406,12 @@ border-width: 0 4px 5px 4px;
     #progressbar li{
         font-size: 11px;
     }
+    .alert-danger {
+        position: absolute;
+        z-index: 1;
+        /*background-color: rgba(252,235,237,.8);*/
+        font-size: 0.8rem;
+    }
 }
 
 

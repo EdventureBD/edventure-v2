@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Enum\District;
+use App\Enum\EducationLevel;
 use App\Http\Controllers\Controller;
 use App\Models\Student\StudentDetails;
 use App\Models\User;
@@ -26,7 +27,8 @@ class RegisteredUserController extends Controller
     {
         // return view('auth.register');
         $districts = District::List;
-        return view('auth.new.register', compact('districts'));
+        $levels = EducationLevel::Level;
+        return view('auth.new.register', compact('districts','levels'));
     }
 
     /**

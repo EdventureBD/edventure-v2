@@ -74,9 +74,22 @@ $(document).ready(function () {
     })
 
 });
-// custom js part starts 
+// ****************************** custom js part starts *********************************************** //
 
-$('.select2').select2()
+    $('#class').on("select2:selecting", function (e) {
+        if(e.params.args.data.id == 0) {
+            $('#class_selection').css('display','block')
+            $('#class').removeProp('name')
+            $('#selected_class').prop('name','class')
+        } else {
+            $('#class_selection').css('display','none')
+            $('#selected_class').removeProp('name')
+            $('#class').prop('name','class')
+        }
+    })
+
+
+    $('.select2').select2()
     if($('#name').val() !== '') {
         $('#name_next_btn').prop("disabled", false);
     }
@@ -157,7 +170,7 @@ $('.select2').select2()
         } else if (password !== confirmPassword) {
             $('#password_error').html("Confirm Password doesn't match")
             $('#password_next_btn').prop("disabled", true);
-        } else if(password.length <= 8) {
+        } else if(password.length <= 7) {
             $('#password_error').html("Password must be atleast 8 character")
             $('#password_next_btn').prop("disabled", true);
         } else {
@@ -170,4 +183,4 @@ $('.select2').select2()
         $('#msform').submit()
     })
 
-// custom js part ends
+// **************************** custom js part ends ************************ //
