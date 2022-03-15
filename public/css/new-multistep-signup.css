@@ -338,6 +338,15 @@ border-width: 0 4px 5px 4px;
         right: 120px;
         bottom: 190px;
     }
+    #progressbar li:after{
+        top: 15px;
+    }
+    #progressbar li:before {
+        width: 32px;
+        height: 32px;
+        line-height: 27px;
+        font-size: 14px;
+    }
 }
 @media screen and (max-width:576px) {
      #left-section {
