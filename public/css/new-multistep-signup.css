@@ -290,13 +290,17 @@ border-width: 0 4px 5px 4px;
 }
 .fixed-btn {
     position: fixed;
-    right: 10px;
+    right: 390px;
     bottom: 150px;
 }
-
+.fixed-btn-first-child {
+    position: fixed;
+    right: 435px;
+    bottom: 150px;
+}
 .fixed-btn-previous {
     position: fixed;
-    right: 110px;
+    right: 470px;
     bottom: 150px;
 }
 #progressBar-parent {
@@ -308,6 +312,13 @@ border-width: 0 4px 5px 4px;
 @media  screen and (min-width:1200px) {
     #left-section {
         height: 937px;
+    }
+}
+@media screen and (max-width:992px) {
+    .fixed-btn-first-child {
+        position: fixed;
+        right: 305px;
+        bottom: 150px;
     }
 }
 @media screen and (max-width:768px) {
@@ -329,13 +340,18 @@ border-width: 0 4px 5px 4px;
     }
     .fixed-btn {
         position: fixed;
-        right: 20px;
+        right: 133px;
         bottom: 190px;
+    }
+    .fixed-btn-first-child {
+        position: fixed;
+        right: 175px;
+        bottom: 210px;
     }
 
     .fixed-btn-previous {
         position: fixed;
-        right: 120px;
+        right: 200px;
         bottom: 190px;
     }
     #progressbar li:after{
@@ -365,13 +381,17 @@ border-width: 0 4px 5px 4px;
     }
     .fixed-btn {
         position: fixed;
-        right: 20px;
+        right: 136px;
         bottom: 150px;
     }
-
+    .fixed-btn-first-child {
+        position: fixed;
+        right: 175px;
+        bottom: 150px;
+    }
     .fixed-btn-previous {
         position: fixed;
-        right: 120px;
+        right: 210px;
         bottom: 150px;
     }
     #progressbar li:before {

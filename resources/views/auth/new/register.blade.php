@@ -47,7 +47,7 @@
                                 type="button"
                                 id="name_next_btn"
                                 name="name_next_btn"
-                                class="btn fixed-btn next action-button"> <i class="fas fa-arrow-right"></i>
+                                class="btn next action-button fixed-btn-first-child"> <i class="fas fa-arrow-right"></i>
                         </button>
                     </fieldset>
                     <fieldset>
