@@ -74,3 +74,100 @@ $(document).ready(function () {
     })
 
 });
+// custom js part starts 
+
+$('.select2').select2()
+    if($('#name').val() !== '') {
+        $('#name_next_btn').prop("disabled", false);
+    }
+
+    if($('#phone').val() !== '') {
+        $('#phone_next_btn').prop("disabled", false);
+    }
+
+    if($('#email').val() !== '') {
+        $('#email_next_btn').prop("disabled", false);
+    }
+
+    $('#name').on('change keyup', function () {
+        if($('#name').val() == '') {
+            $('#name_error').html('Please Enter your name')
+            $('#name_next_btn').prop("disabled", true);
+        } else {
+            $('#name_error').html('')
+            $('#name_next_btn').prop("disabled", false);
+        }
+    })
+
+    $('#phone').on('change keyup', function () {
+        let phone = $('#phone').val()
+        if(phone === '') {
+            $('#phone_error').html('Please Enter a valid phone number')
+            $('#phone_next_btn').prop("disabled", true);
+        } else if(phone.length !== 11) {
+            $('#phone_error').html('Phone number must be 11 digits')
+            $('#phone_next_btn').prop("disabled", true);
+        } else {
+            $('#phone_error').html('')
+            $('#phone_next_btn').prop("disabled", false);
+        }
+    })
+
+    $('#class').on('change', function () {
+        if($('#class').val() === '') {
+            $('#class_error').html('Please choose your class')
+            $('#class_next_btn').prop("disabled", true);
+        } else {
+            $('#class_error').html('')
+            $('#class_next_btn').prop("disabled", false);
+        }
+    })
+
+    $('#district').on('change', function () {
+        if($('#district').val() === '') {
+            $('#district_error').html('Please choose your district')
+            $('#district_next_btn').prop("disabled", true);
+        } else {
+            $('#district_error').html('')
+            $('#district_next_btn').prop("disabled", false);
+        }
+    })
+
+    $('#email').on('change keyup', function () {
+        let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let email = $('#email').val()
+        if(email === '') {
+            $('#email_error').html('Please Enter a valid email')
+            $('#email_next_btn').prop("disabled", true);
+        } else if(!email.match(regexEmail)) {
+            $('#email_error').html("Email must contain '@' and '.'")
+            $('#email_next_btn').prop("disabled", true);
+        } else {
+            $('#email_error').html('')
+            $('#email_next_btn').prop("disabled", false);
+        }
+    })
+
+    $('#password,#password_confirmation').on('change keyup', function () {
+        let password = $('#password').val()
+        let confirmPassword = $('#password_confirmation').val()
+        if(password === '' || confirmPassword === '') {
+            $('#password_error').html('Please Enter your password')
+            $('#password_next_btn').prop("disabled", true);
+        } else if (password !== confirmPassword) {
+            $('#password_error').html("Confirm Password doesn't match")
+            $('#password_next_btn').prop("disabled", true);
+        } else if(password.length <= 8) {
+            $('#password_error').html("Password must be atleast 8 character")
+            $('#password_next_btn').prop("disabled", true);
+        } else {
+            $('#password_error').html('')
+            $('#password_next_btn').prop("disabled", false);
+        }
+    })
+
+    $('#password_next_btn').click(function () {
+        $('#msform').submit()
+    })
+
+// custom js part ends
