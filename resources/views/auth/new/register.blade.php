@@ -3,15 +3,10 @@
 <div class="">
     <div class="row mr-auto" style="overflow-y: hidden">
         <div class="col-md-6" id="left-section">
-            {{-- <img src="https://www.bennet.org/blog/responsive-images-busy-people/images/curiosity-medium.jpg" alt="Mars Curiosity Rover takes an excellent selfie."
-            srcset="
-                    https://www.bennet.org/blog/responsive-images-busy-people/images/curiosity-large.jpg  1120w,
-                    https://www.bennet.org/blog/responsive-images-busy-people/images/curiosity-medium.jpg 720w,
-                    https://www.bennet.org/blog/responsive-images-busy-people/images/curiosity-small.jpg  400w"
-            sizes="(min-width: 40em) calc(66.6vw - 4em),100vw"> --}}
         </div>
         <div class="col-md-6 col-sm-12" id="right-section">
             <div class="card px-0 pt-4 pb-0">
+                <p class="text-right">Already a member? <a href="{{route('login')}}" style="color: #fa9632;text-decoration:none;">Sign In</a></p>
                 @if (count($errors) > 0)
                     <div style="padding: 0.75rem 3.25rem; border-radius: 14.5px;" class="alert alert-danger">
                         <ul>
