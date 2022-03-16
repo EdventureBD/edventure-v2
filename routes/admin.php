@@ -48,8 +48,6 @@ use Illuminate\Support\Facades\Session;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], function () {
     Route::get('/index', [AdminController::class, 'AdminIndex'])->name('admin.index');
-    Route::get('/update-password', [AdminController::class, 'updatePassword'])->name('admin.update.password');
-    Route::put('/update-password/submit', [AdminController::class, 'submitUpdatePassword'])->name('admin.update.password.submit');
 
     // START OF USER
     Route::resource('/user', UserController::class);
