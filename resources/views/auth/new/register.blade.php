@@ -26,9 +26,9 @@
 {{--                    </div>--}}
 
                     <a href="{{route("home")}}" class="w-25 mx-auto">
-                        <img src="/img/contact/mapLogo.png" alt="" class="img-fluid w-25">
+                        <img src="/img/new-signup-page/officialLogo.png" alt="Edventure Brand Logo" class="img-fluid">
                     </a>
-                    <fieldset>
+                    <fieldset style="margin-top: 29px">
                         <h2 id="heading">Sign up to Edventure</h2>
                         <div class="form-card">
                             <input required type="text" id="name" name="name" value="{{old('name')}}" placeholder="নাম" />
