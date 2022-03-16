@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form style="margin-left: 10%" action="" method="POST" autocomplete="off">
+    <form style="margin-left: 10%" action="{{route('admin.update.password.submit')}}" method="POST" autocomplete="off">
         @csrf
         @method('PUT')
         <div class="form-group row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -23,5 +24,17 @@ class AdminController extends Controller
             'current_password' => 'required',
             'password' => 'required|confirmed',
         ]);
+
+        if (!Hash::check($inputs['current_password'], auth()->user()->getAuthPassword())) {
+            return redirect()->back()->with(['failed' => 'Your current password does not match']);
+        }
+
+        if(Hash::check($inputs['password'], auth()->user()->getAuthPassword())) {
+            return redirect()->back()->with(['failed' => 'Your have entered your old password']);
+        }
+
+        auth()->user()->password = Hash::make($inputs['password']);
+        auth()->user()->save();
+        return redirect()->back()->with(['status' => 'Your password updated successfully']);
     }
 }
