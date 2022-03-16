@@ -82,7 +82,7 @@
                                 data-dropdown-css-class="select2-purple">
                                 <option value=""></option>
                                 <option value="0">ক্লাস ৬-১২</option>
-                                <option value="13">বিশ্ববিদ্দালয় ভর্তি পরীক্ষা</option>
+                                <option value="13">বিশ্ববিদ্যালয় ভর্তি পরীক্ষা</option>
                                 <option value="18">চাকরিতে নিয়োগ পরীক্ষা প্রস্তুতি</option>
                             </select>
 

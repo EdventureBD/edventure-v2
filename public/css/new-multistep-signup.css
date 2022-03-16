@@ -8,7 +8,7 @@
 /*}*/
 
 p {
-    color: grey
+    color: grey;
 }
 
 #heading {
@@ -38,7 +38,10 @@ p {
     padding-bottom: 20px;
     position: relative
 }
-
+#right-section {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+}
 .form-card {
     text-align: left
 }
@@ -161,7 +164,7 @@ p {
 
 #progressbar li {
     list-style-type: none;
-    font-size: 15px;
+    font-size: 12px;
     width: 25%;
     float: left;
     position: relative;
@@ -290,24 +293,24 @@ border-width: 0 4px 5px 4px;
 }
 .fixed-btn {
     position: fixed;
-    right: 390px;
+    right: 415px;
     bottom: 150px;
 }
 .fixed-btn-first-child {
     position: fixed;
-    right: 435px;
+    right: 460px;
     bottom: 150px;
 }
 .fixed-btn-previous {
     position: fixed;
-    right: 470px;
+    right: 495px;
     bottom: 150px;
 }
 #progressBar-parent {
     position: fixed;
     bottom: 0;
-    width: 46%;
-    right: 45px;
+    right: 108px;
+    width: 42%;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 50px;
@@ -366,6 +369,13 @@ border-width: 0 4px 5px 4px;
         line-height: 27px;
         font-size: 14px;
     }
+    #right-section {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+    p {
+        font-size: .9rem;
+    }
 }
 @media screen and (max-width:576px) {
      #left-section {
@@ -376,10 +386,12 @@ border-width: 0 4px 5px 4px;
     }
     #right-section {
         margin: 0px 20px;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
     }
     #progressBar-parent {
-        width: 100% !important;
-        right: 32px !important;
+        width: 90% !important;
+        right: 40px !important;
         bottom: 0 !important;
     }
     .fixed-btn {
@@ -414,6 +426,9 @@ border-width: 0 4px 5px 4px;
         z-index: 1;
         /*background-color: rgba(252,235,237,.8);*/
         font-size: 0.8rem;
+    }
+    p {
+        font-size: .8rem;
     }
 }
 
