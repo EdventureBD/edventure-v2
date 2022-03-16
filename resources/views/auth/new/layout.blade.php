@@ -16,6 +16,12 @@
 
         {{-- font awesome cdn --}}
 
+        {{-- google font's cdn starts --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+        {{-- google font's cdn ends --}}
+
         {{-- custom css link starts  --}}
         <link rel="stylesheet" href="/css/new-multistep-signup.css">
         {{-- custom css link ends  --}}
