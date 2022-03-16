@@ -245,7 +245,7 @@ p {
     height: 2.35rem;
 }
 div .select2 .selection .select2-selection{
-    height: 2.35rem;
+    height: 3.35rem;
     border-radius: 15.13px;
 }
 .select2-container--default .select2-selection--single {
@@ -309,6 +309,9 @@ border-width: 0 4px 5px 4px;
     width: 46%;
     right: 45px;
 }
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 50px;
+} 
 @media  screen and (min-width:1200px) {
     #left-section {
         height: 937px;
