@@ -50,16 +50,16 @@ p {
 #msform input,
 #msform textarea,
 #msform select {
-    padding: 8px 15px 8px 15px;
-    border: 1px solid #FA9632;
-    border-radius: 14.29px;
+    padding: 14px 15px 8px 15px;
+    border: 1.9px solid #FA9632;
+    border-radius: 15.13px;
     margin-bottom: 25px;
     margin-top: 2px;
     width: 100%;
     box-sizing: border-box;
     font-family: montserrat;
     color: #2C3E50;
-    background-color: #ECEFF1;
+    /*background-color: #ECEFF1;*/
     font-size: 16px;
     letter-spacing: 1px
 }
@@ -246,7 +246,7 @@ p {
 }
 div .select2 .selection .select2-selection{
     height: 2.35rem;
-    border-radius: 14.29px;
+    border-radius: 15.13px;
 }
 .select2-container--default .select2-selection--single {
     border: 1px solid #FA9632 !important;
@@ -269,7 +269,7 @@ div .select2 .selection .select2-selection{
     height: 100% !important;
     padding-left: 25px;
     padding-right: 25px;
-    border-radius: 0px 14.23px 14.23px 0px;
+    border-radius: 0px 15.13px 15.13px 0px;
     color: white !important;
 
 }
