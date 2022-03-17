@@ -16,6 +16,7 @@ use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
 use App\Models\Admin\Bundle;
+use App\Models\BundleStudentEnrollment;
 use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
@@ -85,6 +86,21 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
+      if($course->bundle_id != null){
+         // checks if bundle exists. Else, will throw not found error
+         $bundle = Bundle::where('id', $course->bundle_id)->firstOrFail();
+         if(Auth::check()){
+            $enrollment = BundleStudentEnrollment::where('bundle_id', $bundle->id)->where('student_id', auth()->user()->id)->first();
+            // check if this dude is enrolled in this bundle or not
+            if($enrollment == null){
+               return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Access Denied! You are not enrolled in this bundle.']);
+            }
+         }
+         else{
+            return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Please login/register to access this bundle.']);
+         }
+      }
+
         $batch = '';
         $enrolled = '';
         $lectures = [];
