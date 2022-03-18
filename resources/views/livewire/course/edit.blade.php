@@ -118,7 +118,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Bundle <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="bundleId">
+                                            <select class="form-control" wire:model="bundleId" disabled>
                                                 <option value="" selected>Select Bundle</option>
                                                 @foreach ($bundles as $bundle)
                                                     <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
@@ -132,8 +132,27 @@
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    @if($show_teachers)
+                                        <div class="col-md-4" wire:key="teachers">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="teachers">Teacher<span
+                                                        class="must-filled">*</span></label>
+                                                <select class="form-control" wire:model="teacherId">
+                                                    <option value="" selected>Select Teacher</option>
+                                                    @foreach ($teachers as $teacher)
+                                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @error('teacherId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    @endif
+
                                     @if($show_price)
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" wire:key="price">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="coursePrice"> Course Price <span
                                                         class="must-filled">*</span> </label>
