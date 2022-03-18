@@ -72,8 +72,8 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         // Route::get('batch/{batch}/special-exam/{exam}/question', [ExamController::class, 'specialExamQuestion'])->name('specialExamQuestion');
         Route::post('batch/{batch}/{exam}/result', [ExamController::class, 'submit'])->name('submit');
 
+
     });
-    
     Route::get('submission-status', function () {
         return view('student.pages_new.batch.exam.examSubmissionGreeting');
     });

@@ -49,7 +49,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-4">
+                                            <div class="col-md-4">
                                                 @if ($tempImage)
                                                     <img style="width:100px; border-radius: 50%" class="product-image"
                                                         src="{{ $tempImage->temporaryUrl() }}" alt="">
@@ -60,7 +60,7 @@
                                                 <div wire:loading wire:target="image">
                                                     <p style="color: indigo">Uploading icon ....</p>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -83,7 +83,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-4">
+                                            <div class="col-md-4">
                                                 @if ($tempBanner)
                                                     <img style="width:100px;" class="img-fluid product-image"
                                                         src="{{ $tempBanner->temporaryUrl() }}" alt="">
@@ -94,7 +94,7 @@
                                                 <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Bundle <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="bundleId" disabled>
+                                            <select class="form-control" wire:model="bundleId">
                                                 <option value="" selected>Select Bundle</option>
                                                 @foreach ($bundles as $bundle)
                                                     <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
@@ -132,27 +132,8 @@
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-                                    @if($show_teachers)
-                                        <div class="col-md-4" wire:key="teachers">
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="teachers">Teacher<span
-                                                        class="must-filled">*</span></label>
-                                                <select class="form-control" wire:model="teacherId">
-                                                    <option value="" selected>Select Teacher</option>
-                                                    @foreach ($teachers as $teacher)
-                                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            @error('teacherId')
-                                                <p style="color: red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    @endif
-
                                     @if($show_price)
-                                        <div class="col-md-4" wire:key="price">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="coursePrice"> Course Price <span
                                                         class="must-filled">*</span> </label>

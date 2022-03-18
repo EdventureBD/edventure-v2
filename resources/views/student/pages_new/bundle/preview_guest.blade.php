@@ -58,17 +58,17 @@
     <div class="border-bottom-2 py-5 bg-light-gray">
         <div class="container page__container max-w-50 w-100">
             @if(Session::has('message'))
-                <div class="alert alert-warning">{{ Session::get('message') }}</div>
+            <div class="alert alert-warning">{{ Session::get('message') }}</div>
             @endif
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="pb-0 mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <div class="page-separator">
                 <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm"><span class="fw-700">Solution Of The Exams</span>
                     <p class="text-gray text-xxsm fw-200  lh-5">Solution videos and PDFs will appear here after everyone has completed all the exams</p>
