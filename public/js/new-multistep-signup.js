@@ -180,7 +180,15 @@ $(document).ready(function () {
     })
 
     $('#password_next_btn').click(function () {
-        $('#msform').submit()
+        if ($('#terms').is(':checked')) {
+            $('#msform').unbind().submit()
+        } else {
+            $("#msform").submit(function(e){
+                e.preventDefault();
+            });
+            $('#terms_error').html('Please check this to continue')
+        }
+
     })
 
 // **************************** custom js part ends ************************ //
