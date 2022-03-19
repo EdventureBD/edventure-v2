@@ -48,7 +48,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 @if ($tempImage)
                                                     <img style="width:100px; border-radius: 50%" class="product-image"
                                                         src="{{ $tempImage->temporaryUrl() }}" alt="">
@@ -59,7 +59,7 @@
                                                 <div wire:loading wire:target="image">
                                                     <p style="color: indigo">Uploading icon ....</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -81,7 +81,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 @if ($tempBanner)
                                                     <img style="width:100px;" class="img-fluid product-image"
                                                         src="{{ $tempBanner->temporaryUrl() }}" alt="">
@@ -92,7 +92,7 @@
                                                 <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 
