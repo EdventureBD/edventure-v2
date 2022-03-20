@@ -315,6 +315,9 @@ border-width: 0 4px 5px 4px;
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 50px;
 }
+.terms-input {
+    margin-left: 0px !important;
+}
 @media  screen and (min-width:1200px) {
     #left-section {
         height: 937px;
@@ -342,23 +345,23 @@ border-width: 0 4px 5px 4px;
     #progressBar-parent {
         width: 50% !important;
         right: 30px !important;
-        bottom: 50px !important;
+        bottom: 150px !important;
     }
     .fixed-btn {
         position: fixed;
         right: 133px;
-        bottom: 190px;
+        bottom: 290px;
     }
     .fixed-btn-first-child {
         position: fixed;
         right: 175px;
-        bottom: 210px;
+        bottom: 290px;
     }
 
     .fixed-btn-previous {
         position: fixed;
         right: 200px;
-        bottom: 190px;
+        bottom: 290px;
     }
     #progressbar li:after{
         top: 15px;
@@ -378,14 +381,11 @@ border-width: 0 4px 5px 4px;
     }
     .terms-div {
         font-size: 12px !important;
-        margin-top: 200px !important;
+        margin-top: 20px !important;
         line-height: 0px;
     }
     .terms-label {
         width: 200px !important;
-    }
-    .terms-input {
-        margin-left: 312px !important;
     }
     #terms_error{
         margin-top: 10px;
@@ -406,22 +406,22 @@ border-width: 0 4px 5px 4px;
     #progressBar-parent {
         width: 90% !important;
         right: 40px !important;
-        bottom: 0 !important;
+        bottom: 70px !important;
     }
     .fixed-btn {
         position: fixed;
         right: 136px;
-        bottom: 130px;
+        bottom: 200px;
     }
     .fixed-btn-first-child {
         position: fixed;
         right: 175px;
-        bottom: 150px;
+        bottom: 200px;
     }
     .fixed-btn-previous {
         position: fixed;
         right: 210px;
-        bottom: 130px;
+        bottom: 200px;
     }
     #progressbar li:before {
         width: 32px;
@@ -446,14 +446,11 @@ border-width: 0 4px 5px 4px;
     }
     .terms-div {
         font-size: 12px !important;
-        margin-top: -32px !important;
+        margin-top: 10px !important;
         line-height: 0px;
     }
     .terms-label {
         width: 200px !important;
-    }
-    .terms-input {
-        margin-left: 253px !important;
     }
     #terms_error{
         margin-top: 10px;

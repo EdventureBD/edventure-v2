@@ -186,11 +186,11 @@
                             <p>1. Your password must be of 8 letters. The letters may include A-Z, a-z, 0-9 and symbols. <br> (আপনার পাসওয়ার্ড অবশ্যই ৮ অক্ষরের হতে হবে। অক্ষরগুলিতে A-Z, a-z, 0-9 এবং প্রতীক অন্তর্ভুক্ত থাকতে পারে)</p>
 
                         </div>
-                        <div style="margin-top: 200px" class="text-right terms-div">
-                            <div style="margin-left: 711px" class="terms-input">
-                                <input id="terms" name="terms" type="checkbox">
+                        <div class="text-left terms-div">
+                            <div class="terms-input d-flex justify-content-start align-items-center">
+                                <input id="terms" name="terms" type="checkbox" style="width:15px !important" class="my-auto mr-2">
+                                <span>Agree to <a target="_blank" href="{{route('terms_condition')}}" class="terms-label" style="text-decoration: none">Terms & condition</a></span>
                             </div>
-                            <a target="_blank" href="{{route('terms_condition')}}" class="terms-label" style="width: 426px; text-decoration: none">Terms & condition</a>
                             <div style="color:#fa9632" id="terms_error"></div>
                         </div>
 
