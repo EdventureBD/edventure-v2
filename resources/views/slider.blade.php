@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>eDventure</title>
+        <title>Slider</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
         <style>
             * {
@@ -14,7 +14,7 @@
 
             }
             body {
-                background: linear-gradient(#3f51b5,#000);
+                background: white;
             }
             .main {
                 width: 550px;
@@ -34,6 +34,7 @@
                 width: 200px;
                 height: 200px;
                 border-radius: 7px;
+                opacity: 0.2;
             }
 
             .swiper-slide img{
@@ -44,12 +45,34 @@
             .swiper-slide-active {
                 transform: scale(1.2);
                 transition: .4s;
+                opacity: 1;
             }
+
+            /*.swiper {*/
+            /*    width: 300px;*/
+            /*    height: 300px;*/
+            /*    position: absolute;*/
+            /*    left: 50%;*/
+            /*    top: 50%;*/
+            /*    margin-left: -150px;*/
+            /*    margin-top: -150px;*/
+            /*}*/
+
+            /*.swiper-slide {*/
+            /*    background-position: center center;*/
+            /*    background-size: cover;*/
+            /*}*/
+
+            /*.swiper-slide img {*/
+            /*    display: block;*/
+            /*    width: 100%;*/
+            /*    height: 100%;*/
+            /*}*/
         </style>
     </head>
     <body>
         <div class="main">
-            <div class="swiper-container">
+            <div class="swiper swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
@@ -78,6 +101,18 @@
                 centeredSlides: true,
                 grabCursor: true,
                 loop: true,
+                // effect: "cube",
+                // grabCursor: true,
+                // cubeEffect: {
+                //     shadow: true,
+                //     slideShadows: true,
+                //     shadowOffset: 20,
+                //     shadowScale: 0.94,
+                // },
+                // autoplay: {
+                //     delay: 2500,
+                //     disableOnInteraction: false,
+                // },
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
