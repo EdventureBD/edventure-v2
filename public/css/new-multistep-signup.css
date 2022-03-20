@@ -323,11 +323,14 @@ border-width: 0 4px 5px 4px;
         height: 937px;
     }
 }
-@media screen and (max-width:992px) {
+@media screen and (max-width: 1024px) {
     .fixed-btn-first-child {
         position: fixed;
         right: 305px;
         bottom: 150px;
+    }
+    #left-section {
+        height: 1080px !important;
     }
 }
 @media screen and (max-width:768px) {

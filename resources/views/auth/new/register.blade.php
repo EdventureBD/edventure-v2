@@ -189,7 +189,7 @@
                         <div class="text-left terms-div">
                             <div class="terms-input d-flex justify-content-start align-items-center">
                                 <input id="terms" name="terms" type="checkbox" style="width:15px !important" class="my-auto mr-2">
-                                <span>Agree to <a target="_blank" href="{{route('terms_condition')}}" class="terms-label" style="text-decoration: none">Terms & condition</a></span>
+                                <span style="font-weight: 600" class="my-auto">Agree to <a target="_blank" href="{{route('terms_condition')}}" class="terms-label" style="text-decoration: none">Terms & Condition</a></span>
                             </div>
                             <div style="color:#fa9632" id="terms_error"></div>
                         </div>
