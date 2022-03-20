@@ -45,11 +45,13 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-between social-icons mt-3">
-                    <a href="https://www.facebook.com/edventurebd"><img src="/img/landing/facebook.png" alt="Facebook Image Icon"></a>
+                    <a href="https://www.facebook.com/edventurebd"><img src="https://img.icons8.com/color/48/000000/facebook-circled--v1.png" alt="Facebook Image Icon"></a>
 
-                    <a href="https://www.instagram.com/edventurebd/?utm_medium=copy_link"><img src="/img/landing/instagram.png" alt="Instagram Image Icon"></a>
+                    <a href="https://www.instagram.com/edventurebd/?utm_medium=copy_link"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram Image Icon"></a>
 
-                    <a href="https://www.linkedin.com/company/edventurebd/"><img src="/img/landing/linkedIn.png" alt="LinkedIn Image Icon"></a>
+                    <a href="https://www.linkedin.com/company/edventurebd/"><img src="https://img.icons8.com/color/48/000000/linkedin-circled--v1.png" alt="LinkedIn Image Icon"></a>
+
+                    <a href="https://www.youtube.com/channel/UCX2ekn8irJjBE4u5-ox7hhQ"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="LinkedIn Image Icon"></a>
                 </div>
             </div>
         </div>
