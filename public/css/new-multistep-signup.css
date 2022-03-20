@@ -318,19 +318,67 @@ border-width: 0 4px 5px 4px;
 .terms-input {
     margin-left: 0px !important;
 }
-@media  screen and (min-width:1200px) {
+@media  screen and (max-width:1920px) and (max-height: 1080px){
     #left-section {
         height: 937px;
+    }
+}
+@media screen and (max-width: 1366px) and (max-height:768px) {
+    .fixed-btn-first-child {
+        position: fixed;
+        right: 315px;
+        bottom: 80px;
+    }
+    #left-section {
+        height: 768px !important;
+    }
+    .fixed-btn {
+        position: fixed;
+        right: 275px;
+        bottom: 80px;
+    }
+    .fixed-btn-previous{
+        position: fixed;
+        right: 345px;
+        bottom: 80px;
+    }
+    #progressBar-parent {
+        width: 50% !important;
+        right: 30px !important;
+        bottom: -25px !important;
+    }
+    #right-section {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
     }
 }
 @media screen and (max-width: 1024px) {
     .fixed-btn-first-child {
         position: fixed;
-        right: 305px;
-        bottom: 150px;
+        right: 235px;
+        bottom: 350px;
     }
     #left-section {
         height: 1080px !important;
+    }
+    .fixed-btn {
+        position: fixed;
+        right: 195px;
+        bottom: 350px;
+    }
+    .fixed-btn-previous{
+        position: fixed;
+        right: 265px;
+        bottom: 350px;
+    }
+    #progressBar-parent {
+        width: 50% !important;
+        right: 30px !important;
+        bottom: 200px !important;
+    }
+    #right-section {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
     }
 }
 @media screen and (max-width:768px) {
