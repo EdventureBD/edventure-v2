@@ -113,6 +113,6 @@ Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');
 
 
 
-Route::get('/test-otp', function() {
-    return view('test_otp');
-})->name('send_otp');
+Route::get('/test', function() {
+    return view('slider');
+});

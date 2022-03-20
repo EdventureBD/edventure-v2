@@ -314,7 +314,7 @@ border-width: 0 4px 5px 4px;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 50px;
-} 
+}
 @media  screen and (min-width:1200px) {
     #left-section {
         height: 937px;
@@ -376,6 +376,20 @@ border-width: 0 4px 5px 4px;
     p {
         font-size: .9rem;
     }
+    .terms-div {
+        font-size: 12px !important;
+        margin-top: 200px !important;
+        line-height: 0px;
+    }
+    .terms-label {
+        width: 200px !important;
+    }
+    .terms-input {
+        margin-left: 312px !important;
+    }
+    #terms_error{
+        margin-top: 10px;
+    }
 }
 @media screen and (max-width:576px) {
      #left-section {
@@ -397,7 +411,7 @@ border-width: 0 4px 5px 4px;
     .fixed-btn {
         position: fixed;
         right: 136px;
-        bottom: 150px;
+        bottom: 130px;
     }
     .fixed-btn-first-child {
         position: fixed;
@@ -407,7 +421,7 @@ border-width: 0 4px 5px 4px;
     .fixed-btn-previous {
         position: fixed;
         right: 210px;
-        bottom: 150px;
+        bottom: 130px;
     }
     #progressbar li:before {
         width: 32px;
@@ -429,6 +443,20 @@ border-width: 0 4px 5px 4px;
     }
     p {
         font-size: .8rem;
+    }
+    .terms-div {
+        font-size: 12px !important;
+        margin-top: -32px !important;
+        line-height: 0px;
+    }
+    .terms-label {
+        width: 200px !important;
+    }
+    .terms-input {
+        margin-left: 253px !important;
+    }
+    #terms_error{
+        margin-top: 10px;
     }
 }
 

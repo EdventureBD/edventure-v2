@@ -104,7 +104,8 @@
                             </div>
                             <span style="color:#fa9632" id="class_error"></span>
                         </div>
-                        <button disabled
+                        <button
+                                disabled
                                type="button"
                                id="class_next_btn"
                                name="next"
@@ -134,7 +135,8 @@
                             </select>
                             <span style="color:#fa9632" id="district_error"></span>
                         </div>
-                        <button disabled
+                        <button
+                                disabled
                                type="button"
                                id="district_next_btn"
                                name="next"
@@ -159,7 +161,8 @@
                             <p>2. In case of resetting the password, you need access to this email ID later. <br> (পাসওয়ার্ড রিসেট করার ক্ষেত্রে, আপনাকে পরে এই ইমেল আইডি অ্যাক্সেস করতে হবে)</p>
 
                         </div>
-                        <button disabled
+                        <button
+                                disabled
                                type="button"
                                id="email_next_btn"
                                name="next"
@@ -183,7 +186,16 @@
                             <p>1. Your password must be of 8 letters. The letters may include A-Z, a-z, 0-9 and symbols. <br> (আপনার পাসওয়ার্ড অবশ্যই ৮ অক্ষরের হতে হবে। অক্ষরগুলিতে A-Z, a-z, 0-9 এবং প্রতীক অন্তর্ভুক্ত থাকতে পারে)</p>
 
                         </div>
-                        <button disabled
+                        <div style="margin-top: 200px" class="text-right terms-div">
+                            <div style="margin-left: 711px" class="terms-input">
+                                <input id="terms" name="terms" type="checkbox">
+                            </div>
+                            <a target="_blank" href="{{route('terms_condition')}}" class="terms-label" style="width: 426px; text-decoration: none">Terms & condition</a>
+                            <div style="color:#fa9632" id="terms_error"></div>
+                        </div>
+
+                        <button
+                                disabled
                                type="submit"
                                id="password_next_btn"
                                name="next"
