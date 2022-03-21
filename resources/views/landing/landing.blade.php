@@ -1,5 +1,30 @@
 <x-landing-layout>
-    
+    <style>
+       @media screen and (max-width:576px){
+           p {
+               font-size: 0.9rem !important;
+           }
+            #syllabus-mapping,#weakness-detection,#personal-session {
+                flex-direction: column;
+            }
+            .card-main-image, .card-main-image div,.card-main-info {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .card-main-info p {
+                font-size: .95rem !important;
+            }
+            .card-main-info h4 {
+                font-size: 1.05rem;
+            }
+            h3 {
+                font-size: 1.45rem !important;
+            }
+            .our-package-section div h3 {
+                margin-bottom: 15px !important;
+            }
+       }
+    </style>
     {{-- new landing banner part starts --}}
     <section class="position-fixed w-100">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
@@ -83,12 +108,12 @@
                 </div>
             </div> --}}
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="syllabus-mapping">
-                <div class="d-flex justify-content-sm-center justify-content-md-start" style="width: 65%">
+                <div class="d-flex justify-content-sm-center justify-content-md-start card-main-image" style="width: 65%">
                     <div class="w-100 d-flex justify-content-start">
                         <img src="/img/landing/newLanding/roadMap.webp" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
-                <div class="d-flex flex-column" style="width: 35%">
+                <div class="d-flex flex-column card-main-info" style="width: 35%">
                     <div class="w-25 ml-auto mr-5">
                         <img src="/img/medical_camp/medicamp11.png" alt="" class="img-fluid">
                     </div>
@@ -99,12 +124,12 @@
                 </div>
             </div>
             <div class="d-flex align-items-center flex-sm-column flex-md-row-reverse my-0 py-0" id="weakness-detection">
-                <div class="d-flex justify-content-end" style="width: 65%">
+                <div class="d-flex justify-content-end card-main-image" style="width: 65%">
                     <div class="w-100 d-flex justify-content-end">
                         <img src="/img/landing/newLanding/mobileDashboard.webp" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
-                <div class="d-flex flex-column" style="width: 35%">
+                <div class="d-flex flex-column card-main-info" style="width: 35%">
                     <div class="w-25 mx-5">
                         <img src="/img/medical_camp/medicamp21.png" alt="" class="img-fluid">
                     </div>
@@ -115,12 +140,12 @@
                 </div>
             </div>
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="personal-session">
-                <div class="d-flex justify-content-start" style="width: 65%">
+                <div class="d-flex justify-content-start card-main-image" style="width: 65%">
                     <div class="w-100 d-flex justify-content-start">
                         <img src="/img/landing/newLanding/socialGroup.webp" alt="discussion banner image" class="img-fluid">
                     </div>
                 </div>
-                <div class="d-flex flex-column" style="width: 35%">
+                <div class="d-flex flex-column card-main-info" style="width: 35%">
                     <div class="w-25 ml-auto mr-5">
                         <img src="/img/medical_camp/medicamp31.png" alt="" class="img-fluid">
                     </div>
