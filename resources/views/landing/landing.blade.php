@@ -27,36 +27,59 @@
        }
        /* swiper css part starts */
        .main {
-            width: 550px;
-            height: 50vh;
+            width: 100%;
+            height: 60vh;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
             background: #fdfdfd;
+            
         }
         .swiper-container {
-            height: 350px;
+            height: 535px;
+           
         }
         .swiper-wrapper {
             align-items: center;
         }
         .swiper-slide {
-            width: 200px;
-            height: 200px;
-            border-radius: 7px;
+            width: 400px;
+            height: 267px;
+            border-radius: 17px;
             opacity: 0.2;
         }
 
         .swiper-slide img{
-            width: 200px;
-            height: 200px;
-            border-radius: 7px;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px 15px 0 0;
         }
         .swiper-slide-active {
             transform: scale(1.2);
-            transition: .4s;
+            transition: .84s;
             opacity: 1;
+            z-index: 2;
+            
         }
+        .swiper-slide-active img {
+            width: 100%;
+            height: 100%;
+        }
+        .card {
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 15px 15px 0 0;
+                filter: drop-shadow(0px 103.559px 168.131px rgba(0, 0, 0, 0.100973)) drop-shadow(0px 23.1312px 37.5543px rgba(0, 0, 0, 0.149027)) drop-shadow(0px 6.88678px 11.1809px rgba(0, 0, 0, 0.25));
+        }
+        .card-body {
+            min-height: initial !important;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+            bottom: -5px !important;
+        }
+        
         /* swiper css part ends  */
     </style>
     {{-- new landing banner part starts --}}
@@ -191,16 +214,31 @@
             </div>
         </div>
         {{-- swiper part starts --}}
-        <section>
+       
 
             <div class="main">
                 <div class="swiper swiper-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+                            <div class="card">
+                                <img class="card-img-top" src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+
+                                <div class="card-body d-flex justify-content-between">
+                                  <h5 class="card-title">Card title</h5>
+                                  <a href="#" class="btn btn-primary">Click To Join</a>
+                                </div>
+                              </div>
+                            {{-- <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt=""> --}}
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+                            <div class="card">
+                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+
+                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
+                                  <h5 class="card-title">Card title</h5>
+                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
+                                </div>
+                              </div>
                         </div>
                         <div class="swiper-slide">
                             <img src="https://images.pexels.com/photos/1421/road-nature-hand-path.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
@@ -208,9 +246,9 @@
                         <div class="swiper-slide">
                             <img src="https://media.istockphoto.com/photos/photography-camera-lens-concept-picture-id843408508?k=20&m=843408508&s=612x612&w=0&h=s4rhaeVZJ2nn2Aa2hQLK6ZX4NTmbHnb-ZfjsBSZUsdY=" alt="">
                         </div>
-                        <div class="swiper-slide">
+                        {{-- <div class="swiper-slide">
                             <img src="https://media.istockphoto.com/photos/lense-picture-id1264340404?k=20&m=1264340404&s=612x612&w=0&h=F95ZhcKlyy1ZTSj7AeZnXKN6O5EWe-otedcQc31wkVw=" alt="">
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -220,7 +258,7 @@
             <script>
                 var swiper = new Swiper(".swiper-container", {
                     slidesPerView: 'auto',
-                    spaceBetween: 30,
+                    spaceBetween: 200,
                     centeredSlides: true,
                     grabCursor: true,
                     loop: true,
@@ -232,15 +270,17 @@
                     //     shadowOffset: 20,
                     //     shadowScale: 0.94,
                     // },
-                    autoplay: {
-                        delay: 5500,
-                        disableOnInteraction: false,
-                    },
+                    // autoplay: {
+                    //     delay: 5500,
+                    //     disableOnInteraction: false,
+                    // },
                     pagination: {
                         el: ".swiper-pagination",
                         clickable: true,
                     },
                 });
+                // document.getElementByClassName("card-body").style.min-height = 'null';
+                // document.getElementsByClassName('class-name')
             </script>
         </section>
         {{-- swiper part ends  --}}
