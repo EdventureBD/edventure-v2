@@ -79,6 +79,50 @@
         .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
             bottom: -5px !important;
         }
+       /*  @media screen and (max-width: 1080px) {
+            .swiper-container {
+                height: 583px !important;
+            }
+            .swiper-wrapper {
+                transform: translate3d(-2064.5px, -60px, 0px) !important;
+            }
+            
+        } */
+        
+        @media screen and (max-width: 768px){
+            .sqiper-container {
+                height: 583px !important;
+            }
+            .sqiper-wrapper {
+                transform: translate3d(-2804px, -39px, 0px)
+                
+            }
+            
+        }
+        @media screen and (max-width : 576px) {
+            .swiper-slide-active {
+                transform: scale(.75);
+                transition: .84s;
+                
+            }
+            .swiper-container {
+                height: 412px !important;
+            }
+            .sqiper-wrapper {
+                transform: translate3d(-2465px, -66px, 0px) !important;
+                
+            }
+            .card-main-info div, .card-main-info h4, .card-main-info p {
+                margin-left: auto !important;
+                margin-right: auto !important;
+                text-align: center !important;
+                padding-left: 5px !important;
+                padding-right: 5px !important;
+               
+            }
+            
+        }
+        
         
         /* swiper css part ends  */
     </style>
@@ -171,7 +215,7 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%">
-                    <div class="w-25 ml-auto mr-5">
+                    <div class="w-25 ml-md-auto mr-md-5">
                         <img src="/img/medical_camp/medicamp11.png" alt="" class="img-fluid">
                     </div>
                     <div class="mx-5">
@@ -215,37 +259,67 @@
         </div>
         {{-- swiper part starts --}}
        
-
+        <section>
             <div class="main">
                 <div class="swiper swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
+                        {{-- <div class="swiper-slide">
                             <div class="card">
                                 <img class="card-img-top" src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
 
                                 <div class="card-body d-flex justify-content-between">
-                                  <h5 class="card-title">Card title</h5>
-                                  <a href="#" class="btn btn-primary">Click To Join</a>
+                                  <h6 class="card-title text-truncate">Card title </h6>
+                                  <a href="#" class="btn btn-orange-customed">Click To Join</a>
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+                            </div>
+                        </div> --}}
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+
+                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
+                                  <h6 class="card-title">English for today with Zaki</h6>
+                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
                                 </div>
                               </div>
-                            {{-- <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt=""> --}}
                         </div>
                         <div class="swiper-slide">
                             <div class="card">
                                 <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
 
                                 <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
-                                  <h5 class="card-title">Card title</h5>
+                                  <h6 class="card-title">English for today with Zaki</h6>
                                   <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
                                 </div>
                               </div>
                         </div>
                         <div class="swiper-slide">
+                            <div class="card">
+                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+
+                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
+                                  <h6 class="card-title">English for today with Zaki</h6>
+                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+
+                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
+                                  <h6 class="card-title">English for today with Zaki</h6>
+                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
+                                </div>
+                              </div>
+                        </div>
+                        {{-- <div class="swiper-slide">
                             <img src="https://images.pexels.com/photos/1421/road-nature-hand-path.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
                         </div>
                         <div class="swiper-slide">
                             <img src="https://media.istockphoto.com/photos/photography-camera-lens-concept-picture-id843408508?k=20&m=843408508&s=612x612&w=0&h=s4rhaeVZJ2nn2Aa2hQLK6ZX4NTmbHnb-ZfjsBSZUsdY=" alt="">
-                        </div>
+                        </div> --}}
                         {{-- <div class="swiper-slide">
                             <img src="https://media.istockphoto.com/photos/lense-picture-id1264340404?k=20&m=1264340404&s=612x612&w=0&h=F95ZhcKlyy1ZTSj7AeZnXKN6O5EWe-otedcQc31wkVw=" alt="">
                         </div> --}}
@@ -270,10 +344,10 @@
                     //     shadowOffset: 20,
                     //     shadowScale: 0.94,
                     // },
-                    // autoplay: {
-                    //     delay: 5500,
-                    //     disableOnInteraction: false,
-                    // },
+                    autoplay: {
+                        delay: 5500,
+                        disableOnInteraction: false,
+                    },
                     pagination: {
                         el: ".swiper-pagination",
                         clickable: true,
