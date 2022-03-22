@@ -34,7 +34,7 @@ class ProceedGuard
                 // $details_results = DetailsResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->get();
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
 
-                if($exam->exam_type === "Aptitude Test" ){
+                if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($details_results)){
                         $exam->has_been_attempted = true;
                     }
@@ -79,7 +79,7 @@ class ProceedGuard
                     foreach ($exam->course_lectures as $course_lecture) {
                         if (!$disabled2 && $request->route('courseLecture') && $course_lecture->id == $request->route('courseLecture')->id) return $next($request);
                         elseif ($exam->exam_type == 'Topic End Exam' && !$exam->test_passed) $disabled2 = true;
-                        elseif ($disabled && !$disabled2 && !$course_lecture->completed) {
+                        elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$course_lecture->completed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) {
                             $disabled2 = true;
                         } elseif ($disabled2) {
                             abort(403);
@@ -93,7 +93,7 @@ class ProceedGuard
                     $disabled2 = true;
                 } elseif ($exam->exam_type === "Aptitude Test" && !$exam->test_passed) $disabled = true;
                 elseif ($exam->exam_type == 'Topic End Exam' && !$exam->test_passed) $disabled2 = true;
-                elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
+                elseif ($disabled && !$disabled2 &&  (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                 elseif ($disabled2) abort(403);
             }
         }
