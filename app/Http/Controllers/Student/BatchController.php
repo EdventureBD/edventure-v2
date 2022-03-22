@@ -59,7 +59,10 @@ class BatchController extends Controller
 
                 if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($details_results)){
-                        $number_of_completed_nodes++;
+                        // Remove this if-condition(line 63 to 65) but keep line 64 intact if they want progress to increase when pop quiz is attempted and not passed
+                        if($exam->exam_type === "Aptitude Test"){
+                            $number_of_completed_nodes++;
+                        }
                         $exam->has_been_attempted = true;
                     }
                     else{
@@ -117,7 +120,7 @@ class BatchController extends Controller
             }
 
             if($key == 0 || ($previous_topic_end_exam_passed)){
-                if($batchTopic->percentage_completion >= 99){
+                if($batchTopic->percentage_completion >= 100){
                     $island_images[] = $batchTopic->courseTopic->three_star_island_image;
                 }
                 elseif($batchTopic->percentage_completion >= 66){
