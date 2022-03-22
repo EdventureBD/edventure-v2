@@ -10,9 +10,9 @@ use Livewire\WithFileUploads;
 // models
 use App\Models\Admin\Course;
 use App\Models\Admin\Bundle;
+use App\Models\Admin\CourseCategory;
 use App\Models\Admin\Batch;
 use App\Models\Admin\IntermediaryLevel;
-use App\Models\User;
 
 class Create extends Component
 {
@@ -22,8 +22,6 @@ class Create extends Component
     public $intermediaryLevelId;
     public $bundles;
     public $bundleId;
-    public $teachers;
-    public $teacherId;
     public $title;
     public $description;
     public $duration;
@@ -34,7 +32,6 @@ class Create extends Component
     public $tempBanner;
     public $url;
     public $show_price = true;
-    public $show_teachers = false;
 
     public function updatedTitle()
     {
@@ -78,31 +75,23 @@ class Create extends Component
     {
         if($this->bundleId){
             $this->show_price = false;
-            $this->show_teachers = true;
+            $this->validate([
+                'bundleId' => 'required|numeric|integer'
+            ]);
         }
         else{
             $this->show_price = true;
-            $this->show_teachers = false;
+            $this->validate([
+                'bundleId' => 'nullable|numeric|integer'
+            ]);
         }
-        $this->validate([
-           'bundleId' => 'nullable|numeric|integer'
-        ]);
-    }
-
-    public function updatedTeacherId()
-    {
-       $this->validate([
-            'teacherId' => 'required|numeric|integer'
-       ]);
     }
 
     public function updatedPrice()
     {
-      if($this->bundleId){
-         $this->validate([
-            'price' => 'required|numeric|integer|gt:0'
-         ]);
-      }
+        $this->validate([
+            'price' => 'nullable|integer|numeric'
+        ]);
     }
 
     public function updatedDescription()
@@ -113,13 +102,14 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => 'required|string|max:100|unique:courses',
+        'title' => ['required', 'string', 'max:100', 'unique:courses'],
         'banner' => 'nullable|image|mimes:jpeg,jpg,png',
         'image' => 'nullable|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
+        'price' => 'nullable|integer|numeric|gt:-1',
         'duration' => 'required|numeric|between:1,36',
     ];
 
@@ -132,18 +122,8 @@ class Create extends Component
     ];
 
     public function saveCourse()
-    { 
-        if($this->bundleId){
-            $this->rules['teacherId'] = 'required|integer|numeric';
-            $this->rules['price'] = 'nullable|integer|numeric';
-         }
-         else{
-            $this->rules['teacherId'] = 'nullable|integer|numeric';
-            $this->rules['price'] = 'required|integer|numeric|gt:-1';
-         }
-
+    {
         $data = $this->validate();
-
         if ($this->image) {
             $imageUrl = $this->image->store('public/course');
             $this->image = Storage::url($imageUrl);
@@ -184,10 +164,10 @@ class Create extends Component
         if($course->bundle_id !== null){
             $bundle = Bundle::where('id', $course->bundle_id)->first();
             $batch = new Batch();
-            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' bundle id- '.$bundle->id;
+            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' id- '.uniqid();
             $batch->slug = uniqid();
             $batch->batch_running_days = 0;
-            $batch->teacher_id = $this->teacherId;
+            $batch->teacher_id = null;
             $batch->student_limit = 10000;
             $batch->course_id = $course->id;
             $batch->status = 1;
@@ -207,7 +187,6 @@ class Create extends Component
     public function mount()
     {
         $this->bundles = Bundle::all();
-        $this->teachers = User::where('user_type', 2)->get();
     }
 
     public function render()

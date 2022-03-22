@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class StudentDetails extends Model
 {
     use HasFactory;
+    protected $guarded  = ['id'];
     protected static $logName = "Edit Account";
     public function getDescriptionForEvent(string $eventName): string
     {
