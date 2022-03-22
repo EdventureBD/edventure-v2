@@ -1,6 +1,24 @@
 <x-landing-layout>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <style>
+        #social-media-heading {
+            font-family: 'Bebas Neue';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 66px;
+            line-height: 79px;
+            letter-spacing: -0.02em;
+            color: #1D1D1D;
+        }
+        #social-media-description {
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 34px;
+            text-align: center;
+            color: rgba(29, 29, 29, 0.5);
+        }
        @media screen and (max-width:576px){
            p {
                font-size: 0.9rem !important;
@@ -97,6 +115,18 @@
                 transform: translate3d(-2804px, -39px, 0px)
                 
             }
+            #social-media-heading {
+                font-size: 50px;
+            }
+            #social-media-description {
+                font-size: 21px;
+            }
+            .social-media-parent-container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
             
         }
         @media screen and (max-width : 576px) {
@@ -119,6 +149,31 @@
                 padding-left: 5px !important;
                 padding-right: 5px !important;
                
+            }
+            #social-media-heading{
+                font-family: 'Bebas Neue';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: -0.02em;
+                color: #1D1D1D;
+
+            }
+            #social-media-description {
+                font-family: 'Raleway';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 10px;
+                line-height: 24px;
+                text-align: center;
+                color: rgba(29, 29, 29, 0.5);
+            }
+            .social-media-parent-container {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
             }
             
         }
@@ -260,6 +315,10 @@
         {{-- swiper part starts --}}
        
         <section>
+            <div class="social-media-parent-container">
+                <h2 id="social-media-heading">Join us on Facebook Group</h2>
+                <p id="social-media-description">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>
+            </div>
             <div class="main">
                 <div class="swiper swiper-container">
                     <div class="swiper-wrapper">
