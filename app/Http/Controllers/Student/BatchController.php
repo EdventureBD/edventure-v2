@@ -39,13 +39,14 @@ class BatchController extends Controller
             ->get();
 
         $island_images = [];
-        foreach($batchTopics as $batchTopic){
+
+        $previous_aptitude_test_passed = true;
+        $previous_topic_end_exam_passed = true;
+        foreach($batchTopics as $key => $batchTopic){
+
             // nodes can be lectures or courses. Counting how many out of total are completed.
             $number_of_nodes = 0;
             $number_of_completed_nodes = 0;
-
-            $previous_aptitude_test_passed = true;
-            $previous_topic_end_exam_passed = true;
 
             // $island_images[] = $batchTopic->courseTopic->island_image;
             foreach($batchTopic->courseTopic->exams as $exam){
@@ -56,7 +57,7 @@ class BatchController extends Controller
                 $scored_marks = 0;
                 $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
 
-                if($exam->exam_type === "Aptitude Test" ){
+                if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($details_results)){
                         $number_of_completed_nodes++;
                         $exam->has_been_attempted = true;
@@ -72,7 +73,6 @@ class BatchController extends Controller
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
-                
                 
                 if($scored_marks >= $exam->threshold_marks){
                     if($exam->exam_type !== "Aptitude Test" ){
@@ -106,36 +106,35 @@ class BatchController extends Controller
                 $exam->lecture_count = $lectures_in_this_exam;
                 $exam->completed_lecture_count = $completed_lecture_count;
                 $exam->scored_marks = $scored_marks;
-
-                
-                // calculate completion percentage using total nodes and completed nodes
-                if($number_of_nodes == 0){
-                    $batchTopic->percentage_completion = 0;
-                }
-                else{
-                    $batchTopic->percentage_completion = ($number_of_completed_nodes/$number_of_nodes)*100;
-                }
-
-                if($previous_aptitude_test_passed || $previous_topic_end_exam_passed){
-                    if($batchTopic->percentage_completion > 100){
-                        $island_images[] = $batchTopic->courseTopic->three_star_island_image;
-                    }
-                    elseif($batchTopic->percentage_completion > 66){
-                        $island_images[] = $batchTopic->courseTopic->two_star_island_image;
-                    }
-                    elseif($batchTopic->percentage_completion > 33){
-                        $island_images[] = $batchTopic->courseTopic->one_star_island_image;
-                    }
-                    elseif($batchTopic->percentage_completion >= 0){
-                        $island_images[] = $batchTopic->courseTopic->zero_star_island_image;
-                    }
-                } else {
-                    $island_images[] = $batchTopic->courseTopic->disabled_island_image;
-                }
-
-                $previous_aptitude_test_passed = $aptitude_test_passed;
-                $previous_topic_end_exam_passed = $topic_end_exam_passed;
             }
+
+            // calculate completion percentage using total nodes and completed nodes
+            if($number_of_nodes == 0){
+                $batchTopic->percentage_completion = 0;
+            }
+            else{
+                $batchTopic->percentage_completion = ($number_of_completed_nodes/$number_of_nodes)*100;
+            }
+
+            if($key == 0 || ($previous_topic_end_exam_passed)){
+                if($batchTopic->percentage_completion >= 99){
+                    $island_images[] = $batchTopic->courseTopic->three_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 66){
+                    $island_images[] = $batchTopic->courseTopic->two_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 33){
+                    $island_images[] = $batchTopic->courseTopic->one_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 0){
+                    $island_images[] = $batchTopic->courseTopic->zero_star_island_image;
+                }
+            } else {
+                $island_images[] = $batchTopic->courseTopic->disabled_island_image;
+            }
+
+            $previous_aptitude_test_passed = $aptitude_test_passed;
+            $previous_topic_end_exam_passed = $topic_end_exam_passed;
         }
 
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
@@ -143,7 +142,7 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd($batchTopics);
+        // dd($batchTopics, $island_images);
 
         return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
     }

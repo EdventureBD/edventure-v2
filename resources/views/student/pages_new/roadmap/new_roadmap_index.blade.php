@@ -84,7 +84,7 @@
                                     $disabled2 = true;
                                  } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$course_lecture->completed) $disabled = true;
                                  elseif ($exam->exam_type == "Topic End Exam" && !$course_lecture->completed) $disabled2 = true;
-                                 elseif ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
+                                 elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$course_lecture->completed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                               @endphp
                            @endforeach
                         @endif
@@ -124,7 +124,7 @@
                                  $disabled2 = true;
                               } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
                               elseif ($exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
-                              elseif ($disabled && !$disabled2 && !$exam->test_passed) $disabled2 = true;
+                              elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                            @endphp
                         </li>
                      @empty
@@ -142,8 +142,7 @@
    @empty
    @endforelse
 
-{{-- 
-   @php
+   {{-- @php
       $disabled = false; // Last Aptitude exam passed
       $disabled2 = true; // last Aptitude exam attempted
       $disabled3 = true; // Last Lecture/Other Exam Completed
@@ -268,10 +267,10 @@
                      // Iland down star's part 
                      let divstars = document.createElement("div");
                      divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
-                     divstars.innerHTML = `<img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                     <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                     <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                     `;
+                     divstars.innerHTML = ``;
+                     // <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                     // <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                     // <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                      div.appendChild(divstars);
                      landsParentDiv.appendChild(div);
                      if(landCounter == ilandImages.length){
@@ -335,10 +334,10 @@
                         // Iland down star's part 
                         let divstars = document.createElement("div");
                         divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
-                        divstars.innerHTML = `<img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                        <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                        <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
-                        `;
+                        divstars.innerHTML = ``;
+                        // <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                        // <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
+                        // <img src="/img/road_map/starFill.png" alt="Iland image" class="img-fluid">
                         div.appendChild(divstars);
                         landsParentDiv.appendChild(div);
                         if(landCounter == ilandImages.length){

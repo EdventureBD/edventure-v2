@@ -20,16 +20,16 @@
                 @endauth
             @endif
 
-           <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
-                                        {{ request()->is('course/course-preview/*') ? 'active' : '' }}
-                                        {{ request()->is('batch/*') ? 'active' : '' }}"
-           >
-           <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>
-           </li>
+            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
+                                            {{ request()->is('course/course-preview/*') ? 'active' : '' }}
+                                            {{ request()->is('batch/*') ? 'active' : '' }}"
+            >
+            <a class="nav-link text-purple-half" href="{{route('course')}}">COURSES</a>
+            </li>
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
                 <a class="nav-link text-purple-half"
-                   href="{{route('model.exam')}}">EXAMS</a>
+                    href="{{route('model.exam')}}">EXAMS</a>
             </li>
 
             <li class="nav-item has-dot {{Route::current()->getName() == 'about_us' ? 'active' : ''}}">
