@@ -46,10 +46,11 @@
    @php
       $disabled = false;
       $disabled2 = false;
-      $previous_island_completed = true;
+      $previous_island_topic_end_exam_passed = true;
    @endphp
    @forelse ($batchTopics as $batchTopic)
-      @if($previous_island_completed)
+      @php if ($disabled && !$disabled2) $disabled = false; @endphp
+      @if($previous_island_topic_end_exam_passed)
          <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
@@ -78,12 +79,7 @@
                                     </a>
                                  </li>
                                  @php
-                                    if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) {
-                                       $disabled = true;
-                                       $disabled2 = true;
-                                    } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$course_lecture->completed) $disabled = true;
-                                    elseif ($exam->exam_type == "Topic End Exam" && !$course_lecture->completed) $disabled2 = true;
-                                    elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$course_lecture->completed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
+                                    if ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
                                  @endphp
                               @endforeach
                            @endif
@@ -118,11 +114,16 @@
                                  </a>
                               @endif
                               @php
+                                 // set previous island TEE passed to false if not passed. WIll generate modal based on that.
+                                 if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false){
+                                    $previous_island_topic_end_exam_passed = false;
+                                 }
+
                                  if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) {
                                     $disabled = true;
                                     $disabled2 = true;
                                  } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
-                                 elseif ($exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
+                                 elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
                                  elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                               @endphp
                            </li>
@@ -130,18 +131,6 @@
                         @empty
                            <h3 class="flex text-center pr-5">No exams found. Please contact administrators.</h3>
                         @endforelse
-
-                        @if ($previous_island_completed == true)
-                           <h1> True </h1>
-                        @else
-                           <h1> False </h1>
-                        @endif
-
-                        @php
-                           if($batchTopic->percentage_completion < 100){
-                              $previous_island_completed = false;
-                           }
-                        @endphp
 
                      </ul>
                   </div>
@@ -154,7 +143,7 @@
       @endif
    @empty
       <div>
-         <h1 class="text-center mx-auto"> No Course Topics Added Yet !! Please Coontact System Admin. </h1>
+         <h1 class="text-center mx-auto"> No Course Topics(i.e Islands) Added Yet !! Please Coontact System Admin. </h1>
       </div>
    @endforelse
 

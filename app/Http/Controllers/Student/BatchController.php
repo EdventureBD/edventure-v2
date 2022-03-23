@@ -33,10 +33,19 @@ class BatchController extends Controller
 
         $batchTopics = BatchLecture::with(['courseTopic.exams' => function($query){
             return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order');
-        }, 'courseTopic.exams.course_lectures'])
-            ->where('batch_id', $batch->id)
-            ->where('course_id', $course->id)
-            ->get();
+        },
+        'courseTopic.exams.details_results' => function($query){
+            return $query->where('student_id', auth()->user()->id);
+        },
+        'courseTopic.exams.course_lectures.completed_lectures' => function($query){
+            return $query->where('student_id', auth()->user()->id);
+        }
+        ])
+        ->where('batch_id', $batch->id)
+        ->where('course_id', $course->id)
+        ->get();
+
+        // dd(CompletedLectures::where('student_id', auth()->user()->id)->orderBy('created_at', 'desc')->first(), $batchTopics);
 
         $island_images = [];
 
@@ -55,7 +64,8 @@ class BatchController extends Controller
                 
                 $number_of_nodes++;
                 $scored_marks = 0;
-                $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
+                $details_results = $exam->details_results->where('exam_type', $exam->exam_type);
+                // $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
 
                 if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($details_results)){
@@ -97,8 +107,8 @@ class BatchController extends Controller
                 $completed_lecture_count = 0;
                 foreach($exam->course_lectures as $lecture){
                     $number_of_nodes++;
-                    $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $lecture->id)->count();
-                    if($completed){
+                    // if there is an entry in completed_lectures column for this student
+                    if(count($lecture->completed_lectures) > 0){
                         $number_of_completed_nodes++;
                         $lecture->completed = true;
                         $completed_lecture_count++;
