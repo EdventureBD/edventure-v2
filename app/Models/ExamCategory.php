@@ -12,12 +12,26 @@ class ExamCategory extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'teachers' => 'array',
+    ];
+
+    protected $appends = [
+        'teacher_lists'
+    ];
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($query) {
+            $query->uuid = uuid();
             $query->price = $query->price ?? 0;
+            $query->time_allotted = $query->time_allotted ?? 0;
+            $query->full_solutions = $query->full_solutions ?? 0;
+            $query->paper_final = $query->paper_final ?? 0;
+            $query->subject_final = $query->subject_final ?? 0;
+            $query->final_exam = $query->final_exam ?? 0;
+            $query->offer_price = $query->offer_price ?? 0;
         });
     }
 
@@ -34,5 +48,18 @@ class ExamCategory extends Model
     public function paymentOfCategories()
     {
         return $this->hasMany(PaymentOfCategory::class,'exam_category_id','id');
+    }
+
+    public function getTeacherListsAttribute()
+    {
+        $ids = !empty($this->attributes['teachers']) ? json_decode($this->attributes['teachers']) : null;
+        $teachers = null;
+
+        if($ids) {
+            $userId = array_values($ids);
+            $teachers = User::query()->whereIn('id',$userId)->get();
+        }
+
+        return $teachers;
     }
 }

@@ -224,60 +224,73 @@ class ModelExamController extends Controller
     }
 
     /**
-     * Load model exam landing page to show available exams to student
-     * Same path is used to load exam categories, exam topics.
-     * Same path is used to load exams according to selected category and topic.
-     * @return Application|Factory|View
+     * Load exam category
+     * @return Application|Factory|View|\Illuminate\Http\RedirectResponse
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function getModelExams()
     {
-        $exam_categories = ExamCategory::query()->with('paymentOfCategories')->get();
+        $exam_categories = ExamCategory::query()->get();
         $exam_topics = [];
         $exams = [];
 
-        if(!request()->has('c') && !request()->has('t')) {
-            Cache::forget('exam_topics');
-            Cache::forget('exam_category');
-            Cache::forget('exam_topic');
-        }
         if(request()->has('c')) {
-            $category = ExamCategory::query()->findOrFail(request()->get('c'));
+            $category = $exam_categories->where('uuid',request()->get('c'))->first();
+
+            abort_if(!$category, 404);
+
             if(!is_null($category->price) && $category->price != 0) {
-                if(!$this->paidForCategory(request()->get('c'),auth()->user()->id)) {
-                    return redirect()->back();
+                if(auth()->check() && $this->paidForCategory($category->id,auth()->user()->id)) {
+                    return redirect()->route('model.exam.category.topics',$category->uuid);
+                }
+            } else {
+                if(auth()->check() && $this->attemptedTOExamOfCategory($category->id,auth()->user()->id)) {
+                    return redirect()->route('model.exam.category.topics',$category->uuid);
                 }
             }
-            $exam_topics = ExamTopic::query()
-                                    ->whereHas('modelExam', function ($q) {
-                                        $q->has('mcqQuestions')
-                                            ->where('visibility',1);
-                                    })
-                                    ->where('exam_category_id', request()->get('c'))->get();
-            Cache::forever('exam_topics',$exam_topics);
-            Cache::forever('exam_category', request()->get('c'));
+
+            return view('student.pages_new.model-exam.category-details',compact('category'));
+        }
+        return view('student.pages_new.model-exam.category',compact('exam_categories','exam_topics','exams'));
+    }
+
+    /**
+     * Load topics and exam for specific category
+     * @param $uuid
+     * @return Application|Factory|View|\Illuminate\Http\RedirectResponse
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function getModelExamsTopics($uuid)
+    {
+        $category = ExamCategory::query()->where('uuid',$uuid)->firstOrFail();
+        Cache::forget('exam_topic');
+        $exams = [];
+
+        if(!is_null($category->price) && $category->price != 0) {
+            if(auth()->check() && !$this->paidForCategory($category->id,auth()->user()->id)) {
+                return redirect()->route('model.exam',['c' => $category->uuid]);
+            }
         }
 
-        if(request()->has('t') || Cache::has('exam_category')) {
-            $category = ExamCategory::query()->findOrFail(Cache::get('exam_category'));
-            if(!is_null($category->price) && $category->price != 0) {
-                if(!$this->paidForCategory(Cache::get('exam_category'),auth()->user()->id)) {
-                    return redirect()->route('model.exam');
-                }
-            }
+        $exam_topics = ExamTopic::query()
+                                ->whereHas('modelExam', function ($q) {
+                                    $q->has('mcqQuestions')->where('visibility',1);
+                                })
+                                ->where('exam_category_id', $category->id)->get();
+
+        if(request()->has('t')) {
+            Cache::forever('exam_topic', request()->get('t'));
             $exams = ModelExam::query()->with('mcqTotalResult')->with('paymentOfExams')
                                 ->where('exam_topic_id', request()->get('t'))
-                                ->where('exam_category_id', Cache::get('exam_category'))
+                                ->where('exam_category_id', $category->id)
                                 ->where('visibility',1)
                                 ->has('mcqQuestions')
                                 ->orderByDesc('created_at')
                                 ->paginate(4);
-            $exam_topics = Cache::get('exam_topics');
-            Cache::forever('exam_topic', request()->get('t'));
         }
-
-        return view('student.pages_new.model-exam.index',compact('exam_categories','exam_topics','exams'));
+        return view('student.pages_new.model-exam.index', compact('category','exam_topics','exams'));
     }
 
 
@@ -330,6 +343,7 @@ class ModelExamController extends Controller
         $topics = [];
         $student_id = auth()->user()->id;
         $topics = ExamTopic::query()
+                            ->with('examCategory')
                             ->whereHas('modelExam', function ($q) {
                                 $q->has('mcqQuestions')
                             ->where('visibility',1);
@@ -401,11 +415,33 @@ class ModelExamController extends Controller
                             ->first();
     }
 
+    /**
+     * Check if a student already paid for a category
+     * @param $categoryId
+     * @param $studentId
+     * @return bool
+     */
     private function paidForCategory($categoryId, $studentId)
     {
         return PaymentOfCategory::query()
                                 ->where('exam_category_id', $categoryId)
                                 ->where('user_id', $studentId)
+                                ->exists();
+    }
+
+    /**
+     * Check if a student already attempted to any exam of a specific category
+     * @param $categoryId
+     * @param $studentId
+     * @return bool
+     */
+    private function attemptedTOExamOfCategory($categoryId, $studentId)
+    {
+        return McqTotalResult::query()
+                                ->whereHas('modelExam', function ($q) use ($categoryId) {
+                                    $q->where('exam_category_id', $categoryId);
+                                })
+                                ->where('student_id',$studentId)
                                 ->exists();
     }
 }

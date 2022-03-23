@@ -51,7 +51,7 @@ class SinglePaymentController extends Controller
         if (request()->status != "Success") {
             return redirect()->route('model.exam')->with(['failed' =>"Payment failed, please try again!"]);
         }
-
+        $exam = ModelExam::query()->where('id',$examId)->with('category')->first();
         DB::beginTransaction();
 
         try {
@@ -74,10 +74,10 @@ class SinglePaymentController extends Controller
 
             PaymentOfExams::query()->create($inputs);
             DB::commit();
-            return redirect()->route('model.exam')->with(['success'=>"Payment Successful"]);
+            return redirect()->route('model.exam.category.topics',$exam->category->uuid)->with(['success'=>"Payment Successful"]);
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('model.exam')->with(['failed' =>"Payment failed, please try again!"]);
+            return redirect()->route('model.exam.category.topics',$exam->category->uuid)->with(['failed' =>"Payment failed, please try again!"]);
         }
     }
 
@@ -93,7 +93,7 @@ class SinglePaymentController extends Controller
             ->where('user_id', auth()->user()->id)->exists();
 
         if($alreadyPaid) {
-            return redirect()->route('model.exam',['c' => $categoryId]);
+            return redirect()->route('model.exam.category.topics',$category->uuid);
         }
 
         $this->sendPayment($category->price,route('category.single.payment.success', $categoryId));
