@@ -1,186 +1,12 @@
 <x-landing-layout>
+    {{-- swiper cdn link  --}}
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    <style>
-        #social-media-heading {
-            font-family: 'Bebas Neue';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 66px;
-            line-height: 79px;
-            letter-spacing: -0.02em;
-            color: #1D1D1D;
-        }
-        #social-media-description {
-            font-family: 'Raleway';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 22px;
-            line-height: 34px;
-            text-align: center;
-            color: rgba(29, 29, 29, 0.5);
-        }
-       @media screen and (max-width:576px){
-           p {
-               font-size: 0.9rem !important;
-           }
-            #syllabus-mapping,#weakness-detection,#personal-session {
-                flex-direction: column;
-            }
-            .card-main-image, .card-main-image div,.card-main-info {
-                width: 100% !important;
-                justify-content: center !important;
-            }
-            .card-main-info p {
-                font-size: .95rem !important;
-            }
-            .card-main-info h4 {
-                font-size: 1.05rem;
-            }
-            h3 {
-                font-size: 1.45rem !important;
-            }
-            .our-package-section div h3 {
-                margin-bottom: 15px !important;
-            }
-       }
-       /* swiper css part starts */
-       .main {
-            width: 100%;
-            height: 60vh;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            background: #fdfdfd;
-            
-        }
-        .swiper-container {
-            height: 535px;
-           
-        }
-        .swiper-wrapper {
-            align-items: center;
-        }
-        .swiper-slide {
-            width: 400px;
-            height: 267px;
-            border-radius: 17px;
-            opacity: 0.2;
-        }
+    {{-- swiper cdn link --}}
 
-        .swiper-slide img{
-            width: 100%;
-            height: 100%;
-            border-radius: 15px 15px 0 0;
-        }
-        .swiper-slide-active {
-            transform: scale(1.2);
-            transition: .84s;
-            opacity: 1;
-            z-index: 2;
-            
-        }
-        .swiper-slide-active img {
-            width: 100%;
-            height: 100%;
-        }
-        .card {
-                width: 100% !important;
-                height: 100% !important;
-                border-radius: 15px 15px 0 0;
-                filter: drop-shadow(0px 103.559px 168.131px rgba(0, 0, 0, 0.100973)) drop-shadow(0px 23.1312px 37.5543px rgba(0, 0, 0, 0.149027)) drop-shadow(0px 6.88678px 11.1809px rgba(0, 0, 0, 0.25));
-        }
-        .card-body {
-            min-height: initial !important;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-        }
-        .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
-            bottom: -5px !important;
-        }
-       /*  @media screen and (max-width: 1080px) {
-            .swiper-container {
-                height: 583px !important;
-            }
-            .swiper-wrapper {
-                transform: translate3d(-2064.5px, -60px, 0px) !important;
-            }
-            
-        } */
-        
-        @media screen and (max-width: 768px){
-            .sqiper-container {
-                height: 583px !important;
-            }
-            .sqiper-wrapper {
-                transform: translate3d(-2804px, -39px, 0px)
-                
-            }
-            #social-media-heading {
-                font-size: 50px;
-            }
-            #social-media-description {
-                font-size: 21px;
-            }
-            .social-media-parent-container {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-            
-        }
-        @media screen and (max-width : 576px) {
-            .swiper-slide-active {
-                transform: scale(.75);
-                transition: .84s;
-                
-            }
-            .swiper-container {
-                height: 412px !important;
-            }
-            .sqiper-wrapper {
-                transform: translate3d(-2465px, -66px, 0px) !important;
-                
-            }
-            .card-main-info div, .card-main-info h4, .card-main-info p {
-                margin-left: auto !important;
-                margin-right: auto !important;
-                text-align: center !important;
-                padding-left: 5px !important;
-                padding-right: 5px !important;
-               
-            }
-            #social-media-heading{
-                font-family: 'Bebas Neue';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 20px;
-                line-height: 24px;
-                letter-spacing: -0.02em;
-                color: #1D1D1D;
-
-            }
-            #social-media-description {
-                font-family: 'Raleway';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 10px;
-                line-height: 24px;
-                text-align: center;
-                color: rgba(29, 29, 29, 0.5);
-            }
-            .social-media-parent-container {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            
-        }
-        
-        
-        /* swiper css part ends  */
-    </style>
+    {{-- custom css link --}}
+    <link rel="stylesheet" href="/css/landing-page.css">
+    {{-- custom css link  --}}
+    
     {{-- new landing banner part starts --}}
     <section class="position-fixed w-100">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
@@ -218,51 +44,7 @@
             <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>
             <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয়</p>
             <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- দেশসেরা অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
-            {{-- <div class="single-package py-5 px-3 mt-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="ml-4">
-                            <div class="package-icon text-left"><img src="/img/medical_camp/medicamp11.png" class="img-fluid" alt="roadmap icon" /></div>
-                            <h4 class="text-xmd fw-800 text-left mt-3">সিলেবাস ম্যাপিং</h4>
-                            <p class="text-xsm fw-400 text-gray text-left">পরীক্ষার প্রস্তুতিতে বসে সিলেবাসের মহাসমুদ্রে যাতে হারিয়ে না যাও- সেজন্য আমরা পুরো সিলেবাসকে ম্যাপ করে দিচ্ছি
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/landing/newLanding/roadMap.webp" class=" img-fluid" alt="Roadmap Image">
-                    </div>
-                </div>
-            </div>
-            <div class="single-package py-5 px-3 mt-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="ml-4">
-                        <div class="package-icon text-left"><img src="/img/medical_camp/medicamp21.png" class="img-fluid" alt="Dashboard Image" /></div>
-                        <h4 class="text-xmd fw-800  text-left mt-3">টপিকভিত্তিক উইকনেস ডিটেকশন</h4>
-                        <p class="text-xsm fw-400 text-gray text-left mt-3">বাংলাদেশের একমাত্র প্ল্যাটফর্ম হিসেবে Edventure এ পরীক্ষা দিয়েই জানতে পারবে ঠিক কোন চ্যাপ্টারের কোন টপিকে তুমি দুর্বল
-                        </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/landing/newLanding/phoneDashboard.webp" class="img-fluid" alt="Dashboard Photo">
-                    </div>
-                </div>
-            </div>
-            <div class="single-package py-5 px-3 mt-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="ml-4">
-                        <div class="package-icon text-left"><img src="/img/medical_camp/medicamp31.png" class="img-fluid" alt="Result" /></div>
-                        <h4 class="text-xmd fw-800  text-left mt-3">টিচারদের সাথে পারসোনাল সেশন</h4>
-                        <p class="text-xsm fw-400 text-gray text-left mt-3">দেশসেরা শিক্ষকদের সাথে পারসোনাল সেশন বুক করে তোমার সমস্যা শেয়ার করতে পারো, সমাধান দিবে তারাই!
-                        </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="/img/landing/newLanding/discussionWithTeacher.webp" class="img-fluid" alt="">
-                    </div>
-                </div>
-            </div> --}}
+            {{-- inner contents starts --}}
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="syllabus-mapping">
                 <div class="d-flex justify-content-sm-center justify-content-md-start card-main-image" style="width: 65%">
                     <div class="w-100 d-flex justify-content-start">
@@ -311,6 +93,7 @@
                     </div>
                 </div>
             </div>
+            {{-- inner contents ends  --}}
         </div>
         {{-- swiper part starts --}}
        
@@ -322,17 +105,6 @@
             <div class="main">
                 <div class="swiper swiper-container">
                     <div class="swiper-wrapper">
-                        {{-- <div class="swiper-slide">
-                            <div class="card">
-                                <img class="card-img-top" src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
-
-                                <div class="card-body d-flex justify-content-between">
-                                  <h6 class="card-title text-truncate">Card title </h6>
-                                  <a href="#" class="btn btn-orange-customed">Click To Join</a>
-                                </div>
-                                <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
-                            </div>
-                        </div> --}}
                         <div class="swiper-slide">
                             <div class="card">
                                 <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
@@ -373,15 +145,6 @@
                                 </div>
                               </div>
                         </div>
-                        {{-- <div class="swiper-slide">
-                            <img src="https://images.pexels.com/photos/1421/road-nature-hand-path.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="https://media.istockphoto.com/photos/photography-camera-lens-concept-picture-id843408508?k=20&m=843408508&s=612x612&w=0&h=s4rhaeVZJ2nn2Aa2hQLK6ZX4NTmbHnb-ZfjsBSZUsdY=" alt="">
-                        </div> --}}
-                        {{-- <div class="swiper-slide">
-                            <img src="https://media.istockphoto.com/photos/lense-picture-id1264340404?k=20&m=1264340404&s=612x612&w=0&h=F95ZhcKlyy1ZTSj7AeZnXKN6O5EWe-otedcQc31wkVw=" alt="">
-                        </div> --}}
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
