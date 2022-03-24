@@ -1,8 +1,18 @@
 /* Exam Timer new css starts*/
 #parent-timer {
-    color: white;
+    background-color: white;
     max-height: 100%;
-    background: #6400c8;
+    color: #6400c8 !important;
+}
+
+.timer {
+    top: 16rem;
+    border-radius: 0px;
+}
+.sticky {
+    position: fixed;
+    top: 6.9%;
+    width: 100%;
 }
 #dropdownIcon {
     margin: 0px auto;
@@ -11,7 +21,7 @@
 }
 #dropdownIcon a{
     text-decoration: none;
-    color: white;
+    color: #6400c8 !important;
     margin: 0px auto;
     padding: 0px auto;
 }
@@ -31,13 +41,15 @@
     text-decoration: none;
 }
 #parent-timer {
-    border: 1px solid gray;
-    box-shadow: 5px 10px 18px #888888;
-    top:17% !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    /* top: 23.9% !important; */
+    width: -webkit-fill-available;
+    right: 0px;
+    
 }
 #popUpExamPageBanner {
     background: #D5BDEA;
-    box-shadow: 2px 5px 10px #888888;
+    
 }
 #timer p{
     font-family: Verdana, Tahoma, sans-serif;
@@ -199,3 +211,19 @@ label p {
     background: #555; 
   }
 /* scroll bar in exam map  */
+@media  screen and (min-width: 992px) {
+    .timer {
+        top: 14rem;
+    }
+    .sticky {
+        top: 6.9% !important;
+    }
+} 
+@media screen and (min-width: 579px) and (max-width: 768px){
+    .sticky {
+        top: 6.5% !important;
+    }
+}
+.question table, .question table td, .question table tr, .question span, .question div, .question p {
+    word-break: break-word;
+}

@@ -1,10 +1,5 @@
 <x-landing-layout headerBg="white">
     <link rel="stylesheet" href="/css/mcq-plus-timer.css">
-    <style>
-        .question table, .question table td, .question table tr, .question span, .question div, .question p {
-            word-break: break-word;
-        }
-    </style>
     <div class="course-info py-5 border-secondary" id="popUpExamPageBanner">
         <div class="container pt-5">
             <div class="row">
@@ -22,10 +17,10 @@
         <div class="container page__container">
             <div class="row">
                 <div class="col-12 mx-0 px-0">
-                    <div id="parent-timer" class="timer d-flex justify-content-center rounded">
+                    <div id="parent-timer" class="timer d-flex justify-content-center">
                         <div id="innerParent">
                             <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
-                                <p class="text-white d-flex fw-500 m-0 rounded">
+                                <p class="d-flex fw-500 m-0 rounded">
                                     <span id="countdownHour"></span>:
                                     <span id="countdownMinuits"></span>:
                                     <span id="countdownSecound"></span>
@@ -105,3 +100,12 @@
 
     <script src="/js/mcqExamPlusTimer.js"></script>
 </x-landing-layout>
+ <script>
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 100){
+            $('#parent-timer').addClass('sticky')
+        } else{
+            $('#parent-timer').removeClass('sticky')
+        }
+    });
+</script>
