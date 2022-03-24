@@ -6,7 +6,7 @@ use App\Models\Admin\Course;
 use App\Models\Admin\BatchExam;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
-
+use App\Models\Student\exam\DetailsResult;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,5 +48,10 @@ class Exam extends Model
     public function course_lectures()
     {
         return $this->hasMany(CourseLecture::class, 'exam_id');
+    }
+
+    public function details_results()
+    {
+        return $this->hasMany(DetailsResult::class, 'exam_id');
     }
 }

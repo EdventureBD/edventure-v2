@@ -41,7 +41,7 @@
 
         <div class="font-sans text-gray-900 antialiased" id="app">
             <div class="landing-page">
-                @if(!request()->is("batch/*"))
+                @if(!request()->is("batch/*") && !request()->is("bundle/*"))
                     @include('landing.header', ['headerBg'=>$headerBg])
                 @endif
                 {{ $slot }}
