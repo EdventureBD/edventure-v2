@@ -128,10 +128,12 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease 0s;
             cursor: pointer;
+            text-shadow: 2px 1px 4px black;
         }
 
         .category-details-action-btn:hover {
-            background-color: #ffb300;
+            /*background-color: #ffb300;*/
+            background-color: #f2a44b;
             box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
             color: #fff;
             transform: translateY(-7px);
