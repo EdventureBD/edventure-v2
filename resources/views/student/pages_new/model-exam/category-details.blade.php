@@ -63,16 +63,23 @@
             filter: drop-shadow(0px 103.559px 168.131px rgba(0, 0, 0, 0.100973)) drop-shadow(0px 23.1312px 37.5543px rgba(0, 0, 0, 0.149027)) drop-shadow(0px 6.88678px 11.1809px rgba(0, 0, 0, 0.25));
 
         }
-        .panel-heading:before {
+        #headingOne:before,
+        #headingTwo:before {
             font-family: 'Font Awesome 5 Free';
             content: "\f107";
             float: right;
             transition: all 0.5s;
         }
-        .panel-heading.active:before {
+        #headingOne.active:before,
+        #headingTwo.active:before{
             -webkit-transform: rotate(180deg);
             -moz-transform: rotate(180deg);
             transform: rotate(180deg);
+        }
+        .sticky {
+            position: fixed;
+            top: 10% !important;
+            width: 30%;
         }
     </style>
 <div class="page-section">
@@ -87,7 +94,13 @@
                     <div class="row">
                         <div class="col-md-6 d-flex mt-3">
                             <img src="/img/category_details/icons8-users-48.png"/>
-                            <span class="marginLeft10">এক্সামটি দিয়েছে <br> 84</span>
+                            <span class="marginLeft10">এক্সামটি দিয়েছে <br>
+                                @if(!is_null($category->price) && $category->price != 0)
+                                    {{$category->payment_of_categories_count <= 84 ? 84 : $category->payment_of_categories_count}}
+                                @else
+                                    {{$category->total_participation_count <= 84 ? 84 : $category->total_participation_count}}
+                                @endif
+                            </span>
                         </div>
 
                         @if(!empty($category->time_allotted) && !is_null($category->time_allotted))
@@ -205,7 +218,7 @@
                                 </h2>
                             </div>
                             <div id="itemOne"
-                                 class="panel-collapse collapse mt-2"
+                                 class="panel-collapse collapse mt-2 one"
                                  aria-labelledby="headingOne">
                                 পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
                             </div>
@@ -228,7 +241,7 @@
                                 </h2>
                             </div>
                             <div id="itemTwo"
-                                 class="panel-collapse collapse mt-2"
+                                 class="panel-collapse collapse mt-2 two"
                                  aria-labelledby="headingTwo">
                                 পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
                             </div>
@@ -238,34 +251,37 @@
             </div>
 
             <div class="col-md-6 mt-5">
-                <iframe
-                    id="iframe"
-                    src="{{'https://www.youtube-nocookie.com/embed/'.$category->category_video}}"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
+                <div class="test">
+                    <iframe
+                        id="iframe"
+                        src="{{'https://www.youtube-nocookie.com/embed/'.$category->category_video}}"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
 
 
-                <div class="payment-btn text-center" style="border: 1px solid #eeeeee;border-radius: 15px; padding: 10px">
-                    @php($href = auth()->check() ? route('category.single.payment.initialize', $category->id) : 'javascript:void(0)')
-                    @php($loginAlert = auth()->check() ? '' : 'loginAlert')
-                    <div>
-                        @if(!is_null($category->offer_price) && $category->offer_price != 0)
-                            <spna class="offer-price">{{$category->offer_price}}</spna>
-                            <spna style="text-decoration: line-through;" class="actual-price">{{$category->price}}</spna><br>
-                            <a class="{{$loginAlert}} btn btn-outline-primary" href="{{$href}}">Pay now</a>
+                    <div class="payment-btn text-center" style="border: 1px solid #eeeeee;border-radius: 15px; padding: 10px">
+                        @php($href = auth()->check() ? route('category.single.payment.initialize', $category->id) : 'javascript:void(0)')
+                        @php($loginAlert = auth()->check() ? '' : 'loginAlert')
+                        <div>
+                            @if(!is_null($category->offer_price) && $category->offer_price != 0)
+                                <spna class="offer-price">{{$category->offer_price}}</spna>
+                                <spna style="text-decoration: line-through;" class="actual-price">{{$category->price}}</spna><br>
+                                <a class="{{$loginAlert}} btn btn-outline-primary" href="{{$href}}">Pay now</a>
 
-                        @elseif(!is_null($category->price) && $category->price != 0)
-                            <spna class="actual-price">{{$category->price}}</spna><br>
-                            <a class="{{$loginAlert}} btn btn-outline-primary" href="{{$href}}">Pay now</a>
+                            @elseif(!is_null($category->price) && $category->price != 0)
+                                <spna class="actual-price">{{$category->price}}</spna><br>
+                                <a class="{{$loginAlert}} btn btn-outline-primary" href="{{$href}}">Pay now</a>
 
-                        @else
-                            <a class="btn btn-outline-primary" href="{{route('model.exam.category.topics',$category->uuid)}}">Go for exam</a>
-                        @endif
+                            @else
+                                <a class="btn btn-outline-primary" href="{{route('model.exam.category.topics',$category->uuid)}}">Go for exam</a>
+                            @endif
+                        </div>
+
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>
@@ -273,6 +289,13 @@
 </x-landing-layout>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 100){
+            $('.payment-btn').addClass('sticky')
+        } else{
+            $('.payment-btn').removeClass('sticky')
+        }
+    });
     $('.loginAlert').on('click', function () {
         Swal.fire({
             icon: 'info',
@@ -287,11 +310,19 @@
     })
 
 
-    $('.panel-collapse').on('show.bs.collapse', function () {
-        $('.panel-heading').addClass('active');
+    $('.one').on('show.bs.collapse', function () {
+        $('#headingOne').addClass('active');
     });
 
-    $('.panel-collapse').on('hide.bs.collapse', function () {
-        $('.panel-heading').removeClass('active');
+    $('.one').on('hide.bs.collapse', function () {
+        $('#headingOne').removeClass('active');
+    });
+
+    $('.two').on('show.bs.collapse', function () {
+        $('#headingTwo').addClass('active');
+    });
+
+    $('.two').on('hide.bs.collapse', function () {
+        $('#headingTwo').removeClass('active');
     });
 </script>

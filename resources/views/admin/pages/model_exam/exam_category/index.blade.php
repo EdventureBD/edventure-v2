@@ -71,7 +71,7 @@
                     Final exam : {{$category->final_exam ?? 0}}<br>
                 </td>
                 <td>
-                    @if(count($category->teacher_lists) > 0)
+                    @if($category->teacher_lists)
                         <ul>
                         @foreach($category->teacher_lists as $teacher)
                                 <li>{{$teacher->name}}</li>

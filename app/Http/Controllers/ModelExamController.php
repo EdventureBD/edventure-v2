@@ -231,14 +231,20 @@ class ModelExamController extends Controller
      */
     public function getModelExams()
     {
-        $exam_categories = ExamCategory::query()->get();
+        $exam_categories = ExamCategory::query()
+                                        ->where('visibility',1)
+                                        ->withCount('paymentOfCategories')
+                                        ->withCount('totalParticipation')
+                                        ->get();
         $exam_topics = [];
         $exams = [];
 
         if(request()->has('c')) {
             $category = $exam_categories->where('uuid',request()->get('c'))->first();
 
+
             abort_if(!$category, 404);
+
 
             if(!is_null($category->price) && $category->price != 0) {
                 if(auth()->check() && $this->paidForCategory($category->id,auth()->user()->id)) {
@@ -264,7 +270,7 @@ class ModelExamController extends Controller
      */
     public function getModelExamsTopics($uuid)
     {
-        $category = ExamCategory::query()->where('uuid',$uuid)->firstOrFail();
+        $category = ExamCategory::query()->where('uuid',$uuid)->where('visibility',1)->firstOrFail();
         Cache::forget('exam_topic');
         $exams = [];
 

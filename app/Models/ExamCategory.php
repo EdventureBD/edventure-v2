@@ -45,6 +45,10 @@ class ExamCategory extends Model
         return $this->hasOne(ModelExam::class);
     }
 
+    public function totalParticipation()
+    {
+        return $this->hasManyThrough(McqTotalResult::class, ModelExam::class);
+    }
     public function paymentOfCategories()
     {
         return $this->hasMany(PaymentOfCategory::class,'exam_category_id','id');
