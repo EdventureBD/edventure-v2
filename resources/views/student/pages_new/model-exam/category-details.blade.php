@@ -4,7 +4,7 @@
     <style>
         #iframe {
             width: 100%!important;
-            height: 24%!important;
+            height: 248px!important;
             border-radius: 15px;
         }
         .includes {
@@ -78,14 +78,89 @@
         }
         .sticky {
             position: fixed;
-            top: 10% !important;
-            width: 30%;
+            top: 8% !important;
+            width: 531px;
+        }
+
+        @media (max-width: 768px) {
+            .sticky {
+                top: 7% !important;
+                width: 320px !important;
+            }
+        }
+        @media (max-width: 576px) {
+            .sticky {
+                top: 9% !important;
+                width: 330px !important;
+            }
+            #parent-div {
+                flex-direction: column-reverse;
+            }
+        }
+
+        @media (min-width: 578px) {
+            #parent-div {
+                flex-direction: row;
+            }
+        }
+        .payment-btn {
+            border: 1px solid #fa9632;
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+
+        .category-details-action-btn:before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f0a9";
+            float: right;
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        .category-details-action-btn {
+            padding: 15px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 800;
+            background-color: #FA9632;
+            color: white;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+        }
+
+        .category-details-action-btn:hover {
+            background-color: #ffb300;
+            box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        .offer-price {
+            font-size: 30px;
+        }
+
+        .offer-price:before {
+            content: '৳';
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        .actual-price {
+            font-size: 30px;
+        }
+
+        .actual-price:before {
+            content: '৳';
+            font-size: 20px;
+            margin-right: 5px;
         }
     </style>
 <div class="page-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6  mt-5">
+        <div class="d-flex mb-3" id="parent-div">
+            <div class="w-100  mt-5">
                 <h1 class="bold-header">
                     {{$category->name}}
                 </h1>
@@ -183,18 +258,28 @@
                         </div>
                     </nav>
                     <div style="border: 25px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
-                        <div class="tab-pane col-md-12 fade active show"
+                        <div style="padding: 10px" class="tab-pane text-center col-md-12 fade active show"
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
-                            {!! $category->details !!}
+                            @if($category->details)
+                                {!! $category->details !!}
+                            @else
+                                <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
+                                <span style="color: grey">এক্সামের বিস্তারিত এখানে দেয়া হবে</span>
+                            @endif
 
                         </div>
-                        <div class="tab-pane col-md-12 fade"
+                        <div style="padding: 10px" class="tab-pane text-center col-md-12 fade"
                              id="examRoutine"
                              role="tabpanel"
                              aria-labelledby="examRoutine-tab">
-                            <img style="width: 100%; height: 100%" src="{{Storage::url('categoryRoutine/'.$category->routine_image)}}" alt="">
+                            @if($category->routine_image)
+                                <img style="width: 100%; height: 100%" src="{{Storage::url('categoryRoutine/'.$category->routine_image)}}" alt="">
+                            @else
+                                <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
+                                <spna style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</spna>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -203,9 +288,9 @@
                     <h5 class="bold-header">সচারচর জিজ্ঞাসা</h5>
                     <div class="accordion mt-5" id="accordionExample">
                         <div class="tabtab">
-                            <div style="background-color: #eeeeee; border-radius: 15px; padding: 10px">
+                            <div style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                 <h2 class="mb-0">
-                                    <button style="color: #6400c8; font-weight: bold; outline: none !important;"
+                                    <button style="color: #6400c8; font-weight: bold;"
                                             class="btn btn-block text-left panel-heading"
                                             type="button"
                                             data-toggle="collapse"
@@ -225,10 +310,10 @@
                         </div>
 
                         <div class="tabtab">
-                            <div class="mt-4" style="background-color: #eeeeee; border-radius: 15px; padding: 10px">
+                            <div class="mt-4" style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                 <h2 class="mb-0">
                                     <button
-                                        style="color: #6400c8; font-weight: bold"
+                                        style="color: #6400c8; font-weight: bold;"
                                         class="btn btn-block text-left panel-heading"
                                         type="button"
                                         data-toggle="collapse"
@@ -250,7 +335,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mt-5">
+            <div class="w-100 ml-md-5 mt-5">
                 <div class="test">
                     <iframe
                         id="iframe"
@@ -261,24 +346,32 @@
                     </iframe>
 
 
-                    <div class="payment-btn text-center" style="border: 1px solid #eeeeee;border-radius: 15px; padding: 10px">
+                    <div class="payment-btn text-center">
                         @php($href = auth()->check() ? route('category.single.payment.initialize', $category->id) : 'javascript:void(0)')
                         @php($loginAlert = auth()->check() ? '' : 'loginAlert')
                         <div>
                             @if(!is_null($category->offer_price) && $category->offer_price != 0)
-                                <spna class="offer-price">{{$category->offer_price}}</spna>
-                                <spna style="text-decoration: line-through;" class="actual-price">{{$category->price}}</spna><br>
-                                <a class="{{$loginAlert}} btn btn-outline-primary" href="{{$href}}">Pay now</a>
+                                <div class="d-flex justify-content-around">
+                                    <span style="text-decoration: line-through; color: red" class="actual-price">{{$category->price}}</span>
+
+                                    <span style="" class="offer-price">{{$category->offer_price}}</span>
+                                </div>
+                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">এক্সামটি কিনুন</a>
 
                             @elseif(!is_null($category->price) && $category->price != 0)
-                                <spna class="actual-price">{{$category->price}}</spna><br>
-                                <a class="{{$loginAlert}} btn btn-outline-primary" href="{{$href}}">Pay now</a>
+                                <span class="actual-price">{{$category->price}}</span><br>
+                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">এক্সামটি কিনুন</a>
 
                             @else
-                                <a class="btn btn-outline-primary" href="{{route('model.exam.category.topics',$category->uuid)}}">Go for exam</a>
+                                <a class="btn category-details-action-btn" href="{{route('model.exam.category.topics',$category->uuid)}}">পরীক্ষার জন্য যান</a>
                             @endif
                         </div>
 
+                    </div>
+
+                    <div class="payment-info text-center mt-2">
+                        <span style="font-size: 13px; color: grey">এক্সামটি কিনুন, বাটনটিতে ক্লিক করলে আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। </span><br>
+                        <span style="font-size: 13px; color: grey">পেমেন্ট প্রক্রিয়া বিস্তারিত জানতে এই </span> <a style="text-decoration: none; font-size: 13px; margin-left: 2px" href="/">ভিডিও দেখুন </a>
                     </div>
                 </div>
 
@@ -290,7 +383,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(window).scroll(function(){
-        if($(this).scrollTop() > 100){
+        if($(this).scrollTop() > 300){
             $('.payment-btn').addClass('sticky')
         } else{
             $('.payment-btn').removeClass('sticky')
