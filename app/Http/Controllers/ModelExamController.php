@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Converter;
 use App\Http\Requests\CreateModelExamRequest;
 use App\Http\Requests\UpdateModelExamRequest;
 use App\Jobs\OnMcqSubmit;
