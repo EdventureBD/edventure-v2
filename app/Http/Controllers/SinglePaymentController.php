@@ -96,7 +96,9 @@ class SinglePaymentController extends Controller
             return redirect()->route('model.exam.category.topics',$category->uuid);
         }
 
-        $this->sendPayment($category->price,route('category.single.payment.success', $categoryId));
+        $amount = $this->amountToPay($category);
+
+        $this->sendPayment($amount,route('category.single.payment.success', $categoryId));
     }
 
     /**
@@ -212,6 +214,21 @@ class SinglePaymentController extends Controller
         $exams = ModelExam::query()->get();
 
         return view('admin.pages.model_exam.payments.exam-payment', compact('exam_payments','exams'));
+    }
+
+    /**
+     * amount to pay for category will be calculated here
+     * @param $category
+     * @param null $coupon
+     * @return mixed
+     */
+    private function amountToPay($category, $coupon = null)
+    {
+        if(!is_null($category->offer_price) && !empty($category->offer_price)) {
+            return $category->offer_price;
+        }
+
+        return $category->price;
     }
 
 }
