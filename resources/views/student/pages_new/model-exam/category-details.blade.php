@@ -55,6 +55,7 @@
             background-color: #6400c8;
             border-color: #6400c8 #6400c8 #6400c8;
             padding: 15px;
+            text-shadow: 2px 1px 4px black;
         }
         .nav-tabs {
             border-bottom: none;
@@ -292,7 +293,7 @@
                         <div class="tabtab">
                             <div style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                 <h2 class="mb-0">
-                                    <button style="color: #6400c8; font-weight: bold;"
+                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
                                             class="btn btn-block text-left panel-heading"
                                             type="button"
                                             data-toggle="collapse"
@@ -315,7 +316,7 @@
                             <div class="mt-4" style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                 <h2 class="mb-0">
                                     <button
-                                        style="color: #6400c8; font-weight: bold;"
+                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
                                         class="btn btn-block text-left panel-heading"
                                         type="button"
                                         data-toggle="collapse"
