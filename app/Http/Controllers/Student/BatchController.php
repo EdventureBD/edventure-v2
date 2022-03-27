@@ -31,21 +31,42 @@ class BatchController extends Controller
     {
         $course = Course::where('id', $batch->course_id)->first();
 
-        $batchTopics = BatchLecture::with(['courseTopic.exams' => function($query){
-            return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order');
-        }, 'courseTopic.exams.course_lectures'])
-            ->where('batch_id', $batch->id)
-            ->where('course_id', $course->id)
-            ->get();
+        $batchTopics = BatchLecture::select('id', 'topic_id')
+        ->with([
+        'courseTopic' => function($query){
+            return $query->select('id', 'title', 'slug', 'zero_star_island_image', 'one_star_island_image', 'two_star_island_image', 'three_star_island_image', 'disabled_island_image');
+        },
+        'courseTopic.exams' => function($query){
+            return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order')
+            ->select('id', 'title', 'slug', 'topic_id', 'exam_type', 'threshold_marks');
+        },
+        'courseTopic.exams.details_results' => function($query){
+            return $query->where('student_id', auth()->user()->id)
+            ->select('id', 'exam_id', 'exam_type', 'gain_marks');
+        },
+        'courseTopic.exams.course_lectures' => function($query){
+            return $query->select('id', 'title', 'slug', 'exam_id');
+        },
+        'courseTopic.exams.course_lectures.completed_lectures' => function($query){
+            return $query->where('student_id', auth()->user()->id)
+            ->select('id', 'lecture_id');
+        }
+        ])
+        ->where('batch_id', $batch->id)
+        ->where('course_id', $course->id)
+        ->get();
+
+        // dd(CompletedLectures::where('student_id', auth()->user()->id)->orderBy('created_at', 'desc')->first(), $batchTopics);
 
         $island_images = [];
-        foreach($batchTopics as $batchTopic){
+
+        $previous_aptitude_test_passed = true;
+        $previous_topic_end_exam_passed = true;
+        foreach($batchTopics as $key => $batchTopic){
+
             // nodes can be lectures or courses. Counting how many out of total are completed.
             $number_of_nodes = 0;
             $number_of_completed_nodes = 0;
-
-            $previous_aptitude_test_passed = true;
-            $previous_topic_end_exam_passed = true;
 
             // $island_images[] = $batchTopic->courseTopic->island_image;
             foreach($batchTopic->courseTopic->exams as $exam){
@@ -54,11 +75,15 @@ class BatchController extends Controller
                 
                 $number_of_nodes++;
                 $scored_marks = 0;
-                $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
+                $details_results = $exam->details_results->where('exam_type', $exam->exam_type);
+                // $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
 
-                if($exam->exam_type === "Aptitude Test" ){
+                if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($details_results)){
-                        $number_of_completed_nodes++;
+                        // Remove this if-condition(line 63 to 65) but keep line 64 intact if they want progress to increase when pop quiz is attempted and not passed
+                        if($exam->exam_type === "Aptitude Test"){
+                            $number_of_completed_nodes++;
+                        }
                         $exam->has_been_attempted = true;
                     }
                     else{
@@ -72,7 +97,6 @@ class BatchController extends Controller
                 foreach($details_results as $details_result){
                     $scored_marks = $scored_marks + $details_result->gain_marks;
                 }
-                
                 
                 if($scored_marks >= $exam->threshold_marks){
                     if($exam->exam_type !== "Aptitude Test" ){
@@ -94,8 +118,8 @@ class BatchController extends Controller
                 $completed_lecture_count = 0;
                 foreach($exam->course_lectures as $lecture){
                     $number_of_nodes++;
-                    $completed = CompletedLectures::where('student_id', auth()->user()->id)->where('lecture_id', $lecture->id)->count();
-                    if($completed){
+                    // if there is an entry in completed_lectures column for this student
+                    if(count($lecture->completed_lectures) > 0){
                         $number_of_completed_nodes++;
                         $lecture->completed = true;
                         $completed_lecture_count++;
@@ -106,36 +130,35 @@ class BatchController extends Controller
                 $exam->lecture_count = $lectures_in_this_exam;
                 $exam->completed_lecture_count = $completed_lecture_count;
                 $exam->scored_marks = $scored_marks;
-
-                
-                // calculate completion percentage using total nodes and completed nodes
-                if($number_of_nodes == 0){
-                    $batchTopic->percentage_completion = 0;
-                }
-                else{
-                    $batchTopic->percentage_completion = ($number_of_completed_nodes/$number_of_nodes)*100;
-                }
-
-                if($previous_aptitude_test_passed || $previous_topic_end_exam_passed){
-                    if($batchTopic->percentage_completion > 100){
-                        $island_images[] = $batchTopic->courseTopic->three_star_island_image;
-                    }
-                    elseif($batchTopic->percentage_completion > 66){
-                        $island_images[] = $batchTopic->courseTopic->two_star_island_image;
-                    }
-                    elseif($batchTopic->percentage_completion > 33){
-                        $island_images[] = $batchTopic->courseTopic->one_star_island_image;
-                    }
-                    elseif($batchTopic->percentage_completion >= 0){
-                        $island_images[] = $batchTopic->courseTopic->zero_star_island_image;
-                    }
-                } else {
-                    $island_images[] = $batchTopic->courseTopic->disabled_island_image;
-                }
-
-                $previous_aptitude_test_passed = $aptitude_test_passed;
-                $previous_topic_end_exam_passed = $topic_end_exam_passed;
             }
+
+            // calculate completion percentage using total nodes and completed nodes
+            if($number_of_nodes == 0){
+                $batchTopic->percentage_completion = 0;
+            }
+            else{
+                $batchTopic->percentage_completion = ($number_of_completed_nodes/$number_of_nodes)*100;
+            }
+
+            if($key == 0 || ($previous_topic_end_exam_passed)){
+                if($batchTopic->percentage_completion >= 100){
+                    $island_images[] = $batchTopic->courseTopic->three_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 66){
+                    $island_images[] = $batchTopic->courseTopic->two_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 33){
+                    $island_images[] = $batchTopic->courseTopic->one_star_island_image;
+                }
+                elseif($batchTopic->percentage_completion >= 0){
+                    $island_images[] = $batchTopic->courseTopic->zero_star_island_image;
+                }
+            } else {
+                $island_images[] = $batchTopic->courseTopic->disabled_island_image;
+            }
+
+            $previous_aptitude_test_passed = $aptitude_test_passed;
+            $previous_topic_end_exam_passed = $topic_end_exam_passed;
         }
 
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)
@@ -143,7 +166,7 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd($batchTopics);
+        // dd($batchTopics, $island_images);
 
         return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
     }

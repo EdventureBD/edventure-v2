@@ -57,7 +57,7 @@
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->question !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->popQuizMCQ->explanation }}</td>
+                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->explanation !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
                            @endforeach

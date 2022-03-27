@@ -32,4 +32,9 @@ class CourseLecture extends Model
     {
         return $this->belongsTo(Exam::class);
     }
+
+    public function completed_lectures()
+    {
+        return $this->hasMany(CompletedLectures::class, 'lecture_id');
+    }
 }
