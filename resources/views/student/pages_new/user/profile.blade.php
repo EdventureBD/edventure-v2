@@ -39,7 +39,7 @@
                     </div>
             </div>
             <div class="d-flex max-h-10 justify-content-center mt-md-5 pt-5">
-                <a id="courseBtn" href="Javascript:void(0)" class="text-decoration-none">
+                <a id="courseBtn" href="{{route('profile')}}" class="text-decoration-none">
                     <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                             class="px-4 py-2 border my-auto fw-600" id="course-option">
                         Course
