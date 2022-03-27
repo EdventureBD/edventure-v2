@@ -107,7 +107,7 @@
 </x-landing-layout>
  <script>
     $(window).scroll(function(){
-        if($(this).scrollTop() > 100){
+        if($(this).scrollTop() > 1){
             $('#parent-timer').addClass('sticky')
         } else{
             $('#parent-timer').removeClass('sticky')
