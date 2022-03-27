@@ -12064,3 +12064,11 @@ svg.eye-icon {
 }
 
 /* landing page parallax part ends */
+
+/* footer parts custom css  */
+@media screen and (max-width:768px) and (min-width: 577px) {
+  .social-icons a img {
+    width: 1.9rem;
+  }
+}
+/* footer parts custom css  */
