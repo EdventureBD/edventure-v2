@@ -14,10 +14,10 @@ class canAccessBundle
     public function handle(Request $request, Closure $next)
     {
         $bundle = $request->route('bundle');
-        if(is_string($bundle)) $batch = Bundle::findOrFail($bundle);
+        if(is_string($bundle)) 
+            $bundle = Bundle::findOrFail($bundle);
 
         $bundle_student_enrollment = BundleStudentEnrollment::where('bundle_id', $bundle->id)->where('student_id', auth()->user()->id)->first();
-        // dd($bundle, $bundle_student_enrollment);
         
         if ($bundle_student_enrollment) {
             return $next($request);

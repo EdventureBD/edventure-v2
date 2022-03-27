@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('admin.index') }}" class="brand-link">
         <img src="{{ asset('logo2.png') }}" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">eDventure</span>
+        <span class="brand-text font-weight-light">Edventure</span>
     </a>
 
     <!-- Sidebar -->
@@ -333,6 +333,16 @@
                         class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
                         <i class="fas fa-cog"></i>
                         <p>&nbsp;&nbsp;Settings</p>
+                    </a>
+                </li>
+                {{-- END OF SETTINGS --}}
+
+                {{-- START OF SETTINGS --}}
+                <li class="nav-item {{ request()->is('admin/social-group') ? 'menu-open' : '' }}">
+                    <a href="{{ route('social.group.index') }}"
+                       class="nav-link {{ request()->is('admin/social-group') ? 'active' : '' }}">
+                        <img src="https://img.icons8.com/external-obvious-flat-kerismaker/30/000000/external-internet-marketing-internet-marketing-flat-obvious-flat-kerismaker-9.png"/>
+                        <p>&nbsp;&nbsp;Social Group</p>
                     </a>
                 </li>
                 {{-- END OF SETTINGS --}}

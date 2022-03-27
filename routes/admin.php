@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ModelMcqTagAnalysisController;
 use App\Http\Controllers\SinglePaymentController;
+use App\Http\Controllers\SocialGroupController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamCategoryController;
@@ -48,8 +49,6 @@ use Illuminate\Support\Facades\Session;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], function () {
     Route::get('/index', [AdminController::class, 'AdminIndex'])->name('admin.index');
-    Route::get('/update-password', [AdminController::class, 'updatePassword'])->name('admin.update.password');
-    Route::put('/update-password/submit', [AdminController::class, 'submitUpdatePassword'])->name('admin.update.password.submit');
 
     // START OF USER
     Route::resource('/user', UserController::class);
@@ -298,6 +297,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     /**************************************** Model Exam ****************************************/
 
+
+    Route::get('/social-group',[SocialGroupController::class,'index'])->name('social.group.index');
+    Route::post('/social-group',[SocialGroupController::class,'store'])->name('social.group.store');
+    Route::delete('/social-group/{id}',[SocialGroupController::class,'destroy'])->name('social.group.delete');
+    Route::put('/social-group/{id}',[SocialGroupController::class,'update'])->name('social.group.update');
 
 });
 
