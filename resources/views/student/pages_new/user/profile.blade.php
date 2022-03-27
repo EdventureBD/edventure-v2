@@ -68,19 +68,19 @@
         $('#imageLabel').hide();
     }
 
-    $('#courseBtn').click(function () {
-        Swal.fire({
-            icon: 'info',
-            title: 'Surprise!!',
-            text: 'Coming Soon..',
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            }
-        })
-    });
+    // $('#courseBtn').click(function () {
+    //     Swal.fire({
+    //         icon: 'info',
+    //         title: 'Surprise!!',
+    //         text: 'Coming Soon..',
+    //         showClass: {
+    //             popup: 'animate__animated animate__fadeInDown'
+    //         },
+    //         hideClass: {
+    //             popup: 'animate__animated animate__fadeOutUp'
+    //         }
+    //     })
+    // });
 
     $('.avatar-upload').mouseover(function () {
         $('#imageLabel').show();
