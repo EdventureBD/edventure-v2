@@ -204,7 +204,7 @@ label p {
 
 /* scroll bar in exam map  */
 #questionMap {
-    max-height: 75%;
+    max-height: 45%;
 }
 /* width */
     div#questionMap::-webkit-scrollbar {
@@ -248,5 +248,8 @@ label p {
     }
     img {
         vertical-align: baseline !important;
+    }
+    .sticky {
+        top: 6.9%;
     }
 }
