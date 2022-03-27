@@ -15,11 +15,11 @@
                 @auth
                     <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}
                                                 {{ request()->is('profile/model-test') ? 'active' : '' }}">
-                    <a class="nav-link text-purple-half "  href="{{route('profile.modelTest')}}">DASHBOARD</a>
+                    <a class="nav-link text-purple-half "  href="{{route('profile')}}">DASHBOARD</a>
                 </li>
                 @endauth
             @endif
-            
+
             <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
                                             {{ request()->is('course/course-preview/*') ? 'active' : '' }}
                                             {{ request()->is('batch/*') ? 'active' : '' }}"
