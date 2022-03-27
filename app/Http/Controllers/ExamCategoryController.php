@@ -38,6 +38,7 @@ class ExamCategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
         $inputs =  $request->validated();
+
         if($request->hasFile('routine_image')) {
             $file = $request->file('routine_image');
             $filename = rand().'_'.Carbon::today()->toDateString().'.'.$file->getClientOriginalExtension();
@@ -45,6 +46,15 @@ class ExamCategoryController extends Controller
                 'categoryRoutine', $filename, 'public'
             );
             $inputs['routine_image'] = $filename;
+        }
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = rand().'_'.Carbon::today()->toDateString().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs(
+                'categoryImage', $filename, 'public'
+            );
+            $inputs['image'] = $filename;
         }
 
         ExamCategory::create($inputs);
@@ -98,6 +108,20 @@ class ExamCategoryController extends Controller
                 'categoryRoutine', $filename, 'public'
             );
             $inputs['routine_image'] = $filename;
+        }
+
+
+        if($request->hasFile('image')) {
+            $category = ExamCategory::query()->find($id);
+            if($category->image) {
+                @unlink(public_path('storage/categoryImage/'.$category->image));
+            }
+            $file = $request->file('image');
+            $filename = rand().'_'.Carbon::today()->toDateString().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs(
+                'categoryImage', $filename, 'public'
+            );
+            $inputs['image'] = $filename;
         }
 
         ExamCategory::query()->where('id', $id)->update($inputs);

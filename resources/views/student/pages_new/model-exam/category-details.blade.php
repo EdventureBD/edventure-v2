@@ -174,10 +174,10 @@
                             <img src="/img/category_details/icons8-users-48.png"/>
                             <span class="marginLeft10">এক্সামটি দিয়েছে <br>
                                 @if(!is_null($category->price) && $category->price != 0)
-                                    @php($number = $category->payment_of_categories_count <= 84 ? 84 : $category->payment_of_categories_count)
+                                    @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)
                                     {{\App\Enum\Converter::en2bn($number)}} জন
                                 @else
-                                    @php($number = $category->total_participation_count <= 84 ? 84 : $category->total_participation_count)
+                                    @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
                                     {{\App\Enum\Converter::en2bn($number)}} জন
                                 @endif
                             </span>

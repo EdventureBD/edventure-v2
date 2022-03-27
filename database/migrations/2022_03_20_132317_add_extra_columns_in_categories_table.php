@@ -28,7 +28,7 @@ class AddExtraColumnsInCategoriesTable extends Migration
                 ->default(0)
                 ->nullable()
                 ->comment('0 => category is not publicly visible, 1 => category is publicly visible');
-
+            $table->string('image')->nullable();
         });
 
         $categories = \App\Models\ExamCategory::query()->get();
@@ -57,6 +57,7 @@ class AddExtraColumnsInCategoriesTable extends Migration
             $table->dropColumn('category_video');
             $table->dropColumn('offer_price');
             $table->dropColumn('visibility');
+            $table->dropColumn('image');
         });
     }
 }

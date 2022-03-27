@@ -39,6 +39,7 @@
                 <th class="fit" scope="col">Price</th>
                 <th class="fit" scope="col">Offer price</th>
                 <th class="fit" scope="col">Details</th>
+                <th class="fit" scope="col">Image</th>
                 <th class="fit" scope="col">Visible</th>
                 <th class="fit" scope="col">Time allotted</th>
                 <th class="fit" scope="col">Full solutions</th>
@@ -59,6 +60,13 @@
                 <td>{{ $category->price ?? 0}}</td>
                 <td>{{ $category->offer_price ?? 0 }}</td>
                 <td>{!! $category->details ?? 'N/a'  !!} </td>
+                <td>
+                    @if($category->image)
+                        <img height="100" width="100" src="{{Storage::url('categoryImage/'.$category->image)}}" alt="">
+                    @else
+                        <div class="badge badge-info">No Image</div>
+                    @endif
+                </td>
                 <td>
                     <input onclick="visibilityUpdate({{$category->id}})"
                            {{ $category->visibility == 1 ? 'checked' : '' }} type="checkbox">

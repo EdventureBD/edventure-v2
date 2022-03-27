@@ -34,7 +34,8 @@ class UpdateCategoryRequest extends FormRequest
             'final_exam' => 'nullable|numeric',
             'details' => 'nullable',
             'teachers' => 'nullable|array',
-            'routine_image' => 'nullable|image|mimes:jpg,jpeg,png|max:10000',
+            'routine_image' => 'nullable|image|mimes:jpg,jpeg,png|max:1000',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:1000',
             'category_video' => 'nullable',
             'offer_price' => 'nullable|numeric|lt:price',
         ];

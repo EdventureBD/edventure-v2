@@ -236,7 +236,7 @@ class ModelExamController extends Controller
                                         ->where('visibility',1)
                                         ->withCount('paymentOfCategories')
                                         ->withCount('totalParticipation')
-                                        ->get();
+                                        ->paginate(6);
         $exam_topics = [];
         $exams = [];
 

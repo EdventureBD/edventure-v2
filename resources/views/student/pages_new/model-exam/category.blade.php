@@ -17,6 +17,11 @@
                                     <div
                                         class="single-exam text-center mx-auto p-4 mb-md-0">
                                         <h5 style="line-height: 1.5em; height: 3em; width: 100%; overflow: hidden;" class="text-center mt-2">{{ $category->name }} </h5>
+                                        <div>
+                                            @if($category->image)
+                                            <img height="100" width="100" src="{{Storage::url('categoryImage/'.$category->image)}}" alt="">
+                                            @endif
+                                        </div>
                                         <div class="text-center d-block custom-shadow">
                                             <a
                                                 href="{{route('model.exam',['c' => $category->uuid])}}"
@@ -29,6 +34,9 @@
                             </div>
                         @endforeach
                     </div>
+                </div>
+                <div class="py-5 py-md-1 text-center d-flex justify-content-center">
+                    <p class="text-center">{{ $exam_categories->withQueryString()->links('vendor.pagination.custom') }}</p>
                 </div>
             @else
                 <div class="py-4">

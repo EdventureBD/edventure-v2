@@ -78,6 +78,8 @@
                                 <h5 style="line-height: 1.5em; height: 3em; width: 100%; overflow: hidden;" class="text-center mt-2">{{ $exam->title }} </h5>
                                 @if(!is_null($exam->exam_price) && $exam->exam_price != 0)
                                     <p class=" text-center text-md mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
+                                @else
+                                    <p class=" text-center text-md mt-2 fw-600 text-price">Free</p>
                                 @endif
                                 <div style="margin-top: 40px" class="text-center d-block">
                                     <a
