@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="questionMap" class="row row-cols-6 mx-0 px-0 text-center d-none overflow-auto w-100" >
+                        <div id="questionMap" class="mx-0 px-0 text-center d-none overflow-auto w-100" >
     
                         </div>
                     </div>

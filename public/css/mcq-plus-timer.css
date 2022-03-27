@@ -29,6 +29,12 @@
 /* Exam Timer new css ends */
 
 /* cq_mcq_php_blade part's css start */
+#questionMap {
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-gap: 5px;
+
+}
 #questionMap span{
     color: black;
     font-size: 16px;
