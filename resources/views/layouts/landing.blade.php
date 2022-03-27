@@ -27,16 +27,16 @@
 {{--        @include('partials.facebook_pixel')--}}
     </head>
     <body>
-    <!-- Messenger Chat Plugin Code -->
+    <!-- Messenger Chat plugin Code -->
     <div id="fb-root"></div>
 
-    <!-- Your Chat Plugin code -->
+    <!-- Your Chat plugin code -->
     <div id="fb-customer-chat" class="fb-customerchat">
     </div>
 
     <script>
         var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "1353963408033833");
+        chatbox.setAttribute("page_id", "104157968710619");
         chatbox.setAttribute("attribution", "biz_inbox");
     </script>
 
@@ -53,7 +53,7 @@
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            js.src = 'https://connect.facebook.net/en_GB/sdk/xfbml.customerchat.js';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
