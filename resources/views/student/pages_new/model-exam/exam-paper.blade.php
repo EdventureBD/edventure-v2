@@ -19,10 +19,10 @@
                 <div class="col-12 mx-0 px-0">
                     <div id="parent-timer" class="timer d-flex justify-content-center flex-column">
                         <div id="innerParent" class="d-flex container">
-                            <div>
-                                <p style="width:100%; font-weight: 600;" class="my-auto" id="question-paette">QUESTION PALETTE</p>
+                            <div class="d-flex" >
+                                <p  class="my-auto fw-600" id="question-palette" style="width: max-content">QUESTION PALETTE</p>
                             </div>
-                            <div id="timer" class="w-100 mx-5 px-0 d-flex justify-content-center">
+                            <div id="timer" class="w-100 mx-md-5 px-0 d-flex justify-content-center">
                                 <p class="d-flex fw-500 m-0 rounded">
                                     <span id="countdownHour"></span>:
                                     <span id="countdownMinuits"></span>:
@@ -31,11 +31,15 @@
                             </div>
                             <div id="dropdownIcon-questionMap-parent">
                                 <div id="dropdownIcon" >
-                                    <a href="javascript:void(0)" id="close_collapse_icon" class="d-none px-2 my-auto" style="background-color: #FA9632; border: 1px solid #FA9632; border-radius: 20px;">
-                                        <i class="c-point fas fa-angle-up text-white"></i>
+                                    <a href="javascript:void(0)" id="close_collapse_icon" class="d-none px-2 my-auto">
+                                        {{-- <i class="c-point fas fa-angle-up text-white"></i> --}}
+                                        {{-- style="background-color: #FA9632; border: 1px solid #FA9632; border-radius: 20px;" --}}
+                                        <img src="/img/exam-page/drop_down_off.png" alt="" class="img-fluid">
                                     </a>
-                                    <a href="javascript:void(0)" id="open_collapse_icon" class="d-block px-2 my-auto" style="background-color: #FA9632; border: 1px solid #FA9632; border-radius: 20px;">
-                                        <i class="c-point fas fa-angle-down text-white"></i>
+                                    <a href="javascript:void(0)" id="open_collapse_icon" class="d-block px-2 my-auto">
+                                        {{-- <i class="c-point fas fa-angle-down text-white"></i> --}}
+                                        {{-- style="background-color: #FA9632; border: 1px solid #FA9632; border-radius: 20px;" --}}
+                                        <img src="/img/exam-page/drop_down_on.png" alt="" class="img-fluid">
                                     </a>
                                 </div>
                             </div>

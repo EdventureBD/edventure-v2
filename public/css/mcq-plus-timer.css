@@ -236,3 +236,11 @@ label p {
 .question table, .question table td, .question table tr, .question span, .question div, .question p {
     word-break: break-word;
 }
+@media screen and (max-width:576px){
+    #question-palette {
+        font-size: 14px;
+    }
+    img {
+        vertical-align: baseline !important;
+    }
+}
