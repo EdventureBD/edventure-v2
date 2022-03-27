@@ -6,7 +6,7 @@
     {{-- custom css link --}}
     <link rel="stylesheet" href="/css/landing-page.css">
     {{-- custom css link  --}}
-    
+
     {{-- new landing banner part starts --}}
     <section class="position-fixed w-100">
         <div class="row pt-5 pb-0 mx-0 px-0 my-0 ">
@@ -96,7 +96,8 @@
             {{-- inner contents ends  --}}
         </div>
         {{-- swiper part starts --}}
-       
+
+        @if(count($social_group) > 0)
         <section>
             <div class="social-media-parent-container">
                 <h2 id="social-media-heading">Join us on Facebook Group</h2>
@@ -105,46 +106,48 @@
             <div class="main">
                 <div class="swiper swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+                        @foreach($social_group as $group)
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <img src="{{Storage::url('socialBanner/'.$group->banner)}}" alt="">
 
-                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
-                                  <h6 class="card-title">English for today with Zaki</h6>
-                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card">
-                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+                                    <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
+                                      <h6 class="card-title">{{$group->title}}</h6>
+                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Click To Join</a>
+                                    </div>
+                                  </div>
+                            </div>
+                        @endforeach
+{{--                        <div class="swiper-slide">--}}
+{{--                            <div class="card">--}}
+{{--                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">--}}
 
-                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
-                                  <h6 class="card-title">English for today with Zaki</h6>
-                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card">
-                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+{{--                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">--}}
+{{--                                  <h6 class="card-title">English for today with Zaki</h6>--}}
+{{--                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>--}}
+{{--                                </div>--}}
+{{--                              </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="swiper-slide">--}}
+{{--                            <div class="card">--}}
+{{--                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">--}}
 
-                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
-                                  <h6 class="card-title">English for today with Zaki</h6>
-                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card">
-                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">
+{{--                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">--}}
+{{--                                  <h6 class="card-title">English for today with Zaki</h6>--}}
+{{--                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>--}}
+{{--                                </div>--}}
+{{--                              </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="swiper-slide">--}}
+{{--                            <div class="card">--}}
+{{--                                <img src="https://media.istockphoto.com/photos/lens-image-dslr-manhattan-downtown-city-new-york-hand-picture-id901169654?k=20&m=901169654&s=612x612&w=0&h=BEzK22AQ7PrtCrIrIL92l7YvENVBLqE7Qurxu4m5iD4=" alt="">--}}
 
-                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
-                                  <h6 class="card-title">English for today with Zaki</h6>
-                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>
-                                </div>
-                              </div>
-                        </div>
+{{--                                <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">--}}
+{{--                                  <h6 class="card-title">English for today with Zaki</h6>--}}
+{{--                                  <a style="border-radius: 15px;" href="#" class="btn btn-orange-customed">Click To Join</a>--}}
+{{--                                </div>--}}
+{{--                              </div>--}}
+{{--                        </div>--}}
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -179,6 +182,7 @@
                 // document.getElementsByClassName('class-name')
             </script>
         </section>
+        @endif
         {{-- swiper part ends  --}}
     </div>
 </x-landing-layout>
