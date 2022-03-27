@@ -189,12 +189,18 @@
             });
 
             $('#topic_selecting').on("select2:selecting", function (e) {
+                let weakness = $('#weaknessDetailsText');
+                let strength = $('#strengthDetailsText');
+                let strengthUrl = window.location.origin + '/profile/model-test/tag-details?type=strength&tags=' + e.params.args.data.id;
+                let weaknessUrl = window.location.origin + '/profile/model-test/tag-details?type=weakness&tags=' + e.params.args.data.id;
                 $('#SelectedTopic').removeClass('d-none')
                 $('#topicName').html(e.params.args.data.text)
                 $('#mcq_strength').html('')
                 $('#mcq_weakness').html('')
-                $('#weaknessDetailsText').css('display','none')
-                $('#strengthDetailsText').css('display','none')
+                weakness.prop('href',weaknessUrl)
+                strength.prop('href',strengthUrl)
+                weakness.css('display','none')
+                strength.css('display','none')
                 $('#weaknessMessage').html('Weakness will be shown here')
                 $('#strengthMessage').html('Strength will be shown here')
                 // $('#strengthMessage').css('display','block')

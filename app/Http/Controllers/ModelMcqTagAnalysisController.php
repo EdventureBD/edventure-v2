@@ -12,8 +12,9 @@ class ModelMcqTagAnalysisController extends Controller
     {
         $user = auth()->user();
         $tag_type = request()->input('type');
+        $topic = request()->input('tags');
 
-        $tags = $this->getAnalysis($user,$tag_type);
+        $tags = $this->getAnalysis($user,$tag_type,$topic);
 
         return view('student.pages_new.user.exam-tag-analysis',compact('user','tags','tag_type'));
     }
@@ -24,12 +25,16 @@ class ModelMcqTagAnalysisController extends Controller
         return view('student.pages_new.user.exam-tag-solution',compact('tag'));
     }
 
-    protected function getAnalysis($user, $tag_type = null){
+    protected function getAnalysis($user, $tag_type = null, $topic = null){
         $tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($user) {
             $q->where('student_id',$user->id);
         })->with(['modelMcqTagAnalysis' => function($q) use ($user) {
             $q->where('student_id',$user->id);
-        }])->get();
+        }]);
+        if($topic) {
+            $tags = $tags->where('exam_topic_id',$topic);
+        }
+        $tags = $tags->get();
 
 
         foreach($tags as $tag){
@@ -73,7 +78,7 @@ class ModelMcqTagAnalysisController extends Controller
                 $mcq_tag_total_marks += 1;
                 $mcq_tag_scored_marks += $analysis->gain_marks;
             }
-            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? $mcq_tag_scored_marks : 0;
+            $tag->tag_scored_marks = $mcq_tag_scored_marks > 0 ? ceil($mcq_tag_scored_marks) : 0;
             $tag->tag_total_marks = $mcq_tag_total_marks;
             $tag->percentage_scored = $mcq_tag_total_marks > 0 ? round((($tag->tag_scored_marks/$mcq_tag_total_marks)*100), 2) : 'no data';
             unset($tag->modelMcqTagAnalysis);
