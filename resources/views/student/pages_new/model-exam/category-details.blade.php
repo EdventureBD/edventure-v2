@@ -174,9 +174,11 @@
                             <img src="/img/category_details/icons8-users-48.png"/>
                             <span class="marginLeft10">এক্সামটি দিয়েছে <br>
                                 @if(!is_null($category->price) && $category->price != 0)
-                                    {{$category->payment_of_categories_count <= 84 ? 84 : $category->payment_of_categories_count}}
+                                    @php($number = $category->payment_of_categories_count <= 84 ? 84 : $category->payment_of_categories_count)
+                                    {{\App\Enum\Converter::en2bn($number)}} জন
                                 @else
-                                    {{$category->total_participation_count <= 84 ? 84 : $category->total_participation_count}}
+                                    @php($number = $category->total_participation_count <= 84 ? 84 : $category->total_participation_count)
+                                    {{\App\Enum\Converter::en2bn($number)}} জন
                                 @endif
                             </span>
                         </div>
@@ -184,21 +186,21 @@
                         @if(!empty($category->time_allotted) && !is_null($category->time_allotted))
                             <div class="col-md-6 d-flex mt-3">
                                 <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">সময় লাগবে <br> {{$category->time_allotted}} ঘন্টা</span>
+                                <span class="marginLeft10">সময় লাগবে <br> {{\App\Enum\Converter::en2bn($category->time_allotted)}} ঘন্টা</span>
                             </div>
                         @endif
 
                         @if(!empty($category->full_solutions) && !is_null($category->full_solutions))
                             <div class="col-md-6 d-flex mt-3">
                                 <img src="/img/category_details/icons8-users-48.png"/>
-                                <span class="marginLeft10">পূর্ণাঙ্গ সমাধান <br> {{$category->full_solutions}}+</span>
+                                <span class="marginLeft10">পূর্ণাঙ্গ সমাধান <br> {{\App\Enum\Converter::en2bn($category->full_solutions)}}+</span>
                             </div>
                         @endif
 
                         @if(!empty($category->paper_final) && !is_null($category->paper_final))
                             <div class="col-md-6 d-flex mt-3">
                                 <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">পেপার ফাইনাল <br> {{$category->paper_final}} টি</span>
+                                <span class="marginLeft10">পেপার ফাইনাল <br> {{\App\Enum\Converter::en2bn($category->paper_final)}} টি</span>
                             </div>
                         @endif
 
@@ -206,7 +208,7 @@
                         @if(!empty($category->subject_final) && !is_null($category->subject_final))
                             <div class="col-md-6 d-flex mt-3">
                                 <img src="/img/category_details/icons8-users-48.png"/>
-                                <span class="marginLeft10">সাবজেক্ট ফাইনাল <br> {{$category->subject_final}} টি</span>
+                                <span class="marginLeft10">সাবজেক্ট ফাইনাল <br> {{\App\Enum\Converter::en2bn($category->subject_final)}} টি</span>
                             </div>
                         @endif
 
@@ -214,7 +216,7 @@
                         @if(!empty($category->final_exam) && !is_null($category->final_exam))
                             <div class="col-md-6 d-flex mt-3">
                                 <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">ফাইনাল মডেল টেস্ট <br> {{$category->final_exam}} টি</span>
+                                <span class="marginLeft10">ফাইনাল মডেল টেস্ট <br> {{\App\Enum\Converter::en2bn($category->final_exam)}} টি</span>
                             </div>
                         @endif
 

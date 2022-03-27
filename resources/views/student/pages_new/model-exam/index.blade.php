@@ -25,7 +25,11 @@
             </div>
         @else
             <div class="py-4">
-                <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700">No Topics Found</div>
+                <div class="text-center bradius-10 py-2 w-100 text-gray text-sm fw-700">
+                    Topics will be added soon<br>
+                    <img style="width: 60%;margin-top: 20px;" src="/img/category_details/topic_not_found.svg" alt="">
+                </div>
+
             </div>
         @endif
 
