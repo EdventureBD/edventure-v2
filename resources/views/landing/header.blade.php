@@ -12,15 +12,6 @@
             <li class="nav-item has-dot">
             </li>
 
-            @if (Route::has('login'))
-                @auth
-                    <li class="nav-item has-dot {{ request()->is('profile') ? 'active' : '' }}
-                                                {{ request()->is('profile/model-test') ? 'active' : '' }}">
-                    <a class="nav-link text-white "  href="{{route('profile')}}">DASHBOARD</a>
-                </li>
-                @endauth
-            @endif
-
             <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
                                             {{ request()->is('course/course-preview/*') ? 'active' : '' }}
                                             {{ request()->is('batch/*') ? 'active' : '' }}"
@@ -42,51 +33,35 @@
                 <a class="nav-link text-white " href="{{route('all-blogs')}}">BLOGS</a>
             </li>
             <li class="nav-item has-dot {{Route::current()->getName()=='contact_us' ? 'active' : ''}}">
-            <a class="nav-link text-white" href="{{route('contact_us')}}">CONTACT US</a>
+                <a class="nav-link text-white" href="{{route('contact_us')}}">CONTACT US</a>
+            </li>
+            <li class="nav-item has-dot {{request()->is('profile/*') ? 'active' : ''}}">
+                @if(auth()->check() && auth()->user()->user_type == 1)
+                    <a class="nav-link text-white" href="{{route('admin.index')}}">Admin Dashboard</a>
+                @elseif(auth()->check() && auth()->user()->user_type == 3)
+                    <a class="nav-link text-white" href="{{route('profile.modelTest')}}">My Dashboard</a>
+                @endif
             </li>
             {{-- <li class="nav-item has-dot">
             <a class="nav-link text-purple-half" href="#">HELP</a>
             </li> --}}
         </ul>
-        @if (Route::has('login'))
-                @auth
-                    <div class="nav navbar-nav flex-nowrap d-flex mr-16pt">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
-                                data-caret="false" aria-expanded="false">
-                                <span class="avatar avatar-sm mr-8pt2">
-                                    <span class="avatar-title rounded-circle text-white" style="padding: 8px 10px; background:#FA9632"><i class="fas fa-user"></i></span>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-header"><strong>Account</strong></div>
-                                @if(Auth::user()->is_admin==1)
-                                    <a class="dropdown-item" href="{{route('admin.index')}}">Admin Dashboard</a>
-                                @else
-                                <a class="dropdown-item" href="{{route('profile.modelTest')}}">My Dashboard</a>
-                                @endif
-{{--                                @if(Auth::user()->is_admin== 0 && request()->is('profile/model-test'))--}}
-{{--                                    <a class="dropdown-item" href="{{route('student.model.test.result')}}">Exams</a>--}}
-{{--                                @endif--}}
-{{--                                <a class="dropdown-item" href="#">All courses</a>--}}
+        @auth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                    Log out
+                </a>
+            </form>
+        @endauth
 
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
-                                                                            this.closest('form').submit();">
-                                        Log out
-                                    </a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @else
+        @guest
         <div class="my-2 my-lg-0">
             <a class="nav-item active my-2 my-sm-0 pr-3" href="{{route('register')}}">SIGN UP</a>
             <a class="btn my-2 my-sm-0 btn-orange-customed" href="{{route('login')}}">LOG IN</a>
         </div>
-        @endauth
-        @endif
+        @endguest
     </div>
 </nav>
 {{-- new navbar part's code ends --}}
