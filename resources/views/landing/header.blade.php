@@ -57,7 +57,7 @@
         @endauth
 
         @guest
-        <div class="my-2 my-lg-0">
+        <div class="my-2 my-lg-0" id="login-signup-btn-parent-div">
             <a class="nav-item active my-2 my-sm-0 pr-3" href="{{route('register')}}">SIGN UP</a>
             <a class="btn my-2 my-sm-0 btn-orange-customed" href="{{route('login')}}">LOG IN</a>
         </div>

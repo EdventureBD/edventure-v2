@@ -3137,7 +3137,7 @@ input[type=button].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.35rem 0;
+  padding: 0.35rem 62px 0.35rem 62px;
   clear: both;
   font-weight: 800;
   color: white;
@@ -3994,6 +3994,7 @@ input[type=button].btn-block {
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
+  font-weight: 800;
 }
 .navbar-nav .dropdown-menu {
   position: static;
@@ -11484,7 +11485,7 @@ a:hover {
   content: "";
   width: 5px;
   height: 5px;
-  left: calc(50% - 2px);
+  left: 37px;
   background: #FA9632;
   border-radius: 50%;
   bottom: 0px;
@@ -12005,6 +12006,9 @@ svg.eye-icon {
 .navbar-light .navbar-nav .nav-link{
   color: #727272;
 }
+.navbar-nav .nav-link {
+  padding-left: 62px;
+}
 .navbar .nav-item.active, .navbar .nav-item:hover {
   color: white;
 }
@@ -12066,6 +12070,9 @@ svg.eye-icon {
   .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
     bottom: 20px;
   }
+  #login-signup-btn-parent-div {
+    padding-left: 60px !important;
+  }
 }
 
 /* landing page parallax part ends */
@@ -12077,6 +12084,13 @@ svg.eye-icon {
   }
   .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
     bottom: 20px;
+    left: 74px;
+  }
+  .navbar-nav .nav-link {
+    padding-left: 120px;
+  }
+  #login-signup-btn-parent-div {
+    padding-left: 120px !important;
   }
 }
 /* footer parts custom css  */
