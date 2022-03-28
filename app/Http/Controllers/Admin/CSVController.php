@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\ExamExport;
+use App\Exports\ModelExamResultExport;
+use App\Exports\ModelExamTagAnalysisExport;
 use App\Exports\SlugExport;
 use App\Imports\UserImport;
 use App\Exports\UsersExport;
@@ -91,5 +93,18 @@ class CSVController extends Controller
         ]);
         $slug = $request->slug;
         return Excel::download(new SlugExport($slug), 'Slugs.xlsx');
+    }
+
+    public function exportFromModelExam(Request $request) {
+        if(request()->has('examResult')) {
+            return Excel::download(new ModelExamResultExport, 'Results.xlsx');
+        } else if(request()->has('tagAnalysis')) {
+            $examId = request()->input('tagAnalysis');
+            return Excel::download(new ModelExamTagAnalysisExport($examId), 'tagAnalysis.xlsx');
+        } else {
+            return redirect()->back()->with('warning', 'Nothing To Export');
+        }
+
+
     }
 }

@@ -11,7 +11,8 @@ class UserController extends Controller
     public function index()
     {
         // WITHOUT LIVEWIRE
-        $users = User::orderBy('user_type')->get();
+        $users = User::query();
+        $users = $this->getUser($users);
         return view('admin.pages.user.index', compact('users'));
 
         // FOR LIVEWIRE
@@ -33,15 +34,16 @@ class UserController extends Controller
     {
         $delete = $user->delete();
         if ($delete) {
-            return redirect()->route('user.index')->with('status', 'Course topic successfully deleted!');
+            return redirect()->route('user.index')->with('status', 'Successfully deleted!');
         } else {
-            return redirect()->route('user.index')->with('failed', 'Course topic deletion failed!');
+            return redirect()->route('user.index')->with('failed', 'Failed to delete!');
         }
     }
 
     public function allAdmin()
     {
-        $users = User::where('user_type', 1)->get();
+        $users = User::where('user_type', 1);
+        $users = $this->getUser($users);
         return view('admin.pages.user.index', compact('users'));
 
         // for LIVEWIRE
@@ -51,7 +53,8 @@ class UserController extends Controller
 
     public function allTeacher()
     {
-        $users = User::where('user_type', 2)->get();
+        $users = User::where('user_type', 2);
+        $users = $this->getUser($users);;
         return view('admin.pages.user.index', compact('users'));
 
         // for LIVEWIRE
@@ -61,11 +64,24 @@ class UserController extends Controller
 
     public function allStudent()
     {
-        $users = User::where('user_type', 3)->with('studentDetails')->get();
+        $users = User::where('user_type', 3)->with('studentDetails');
+
+        $users = $this->getUser($users);
         return view('admin.pages.user.index', compact('users'));
 
         // for LIVEWIRE
         // $type = [3];
         // return view('admin.pages.user.index', compact('type'));
+    }
+
+    private function getUser($users)
+    {
+        if(request()->has('query.user')) {
+            $userQuery = trim(request()->input('query.user'));
+            $users->where('phone','like', $userQuery.'%');
+            $users->orWhere('email','like', $userQuery.'%');
+            $users->orWhere('name','like', $userQuery.'%');
+        }
+        return $users->orderBy('created_at')->paginate(10);
     }
 }
