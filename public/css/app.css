@@ -12092,5 +12092,9 @@ svg.eye-icon {
   #login-signup-btn-parent-div {
     padding-left: 120px !important;
   }
+  .dropdown-item {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
 }
 /* footer parts custom css  */
