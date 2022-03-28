@@ -11419,8 +11419,8 @@ a:hover {
    .navbar-light .navbar-nav .nav-link {
     color: #727272;
   }
-  .navbar .nav-item.active, .navbar .nav-item:hover {
-    color: #727272 !important;
+  .navbar .nav-item.active .navbar .nav-item:hover {
+    color: white !important;
   }
   /* navbar part's css  */
   .course-category-js .slick-next {
@@ -11466,7 +11466,7 @@ a:hover {
 }
 
 .navbar .collapse.navbar-collapse.show {
-  background-color: #f8f9fa;
+  background-color: #6400C8;
 }
 .navbar .nav-item.active, .navbar .nav-item:hover {
   position: relative;
@@ -11474,7 +11474,7 @@ a:hover {
   font-weight: 800;
 }
 .navbar .nav-item.active .nav-link, .navbar .nav-item:hover .nav-link {
-  color: #FA9632;
+  color: #FA9632 !important;
   font-weight: 800;
 }
 .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
@@ -12061,6 +12061,9 @@ svg.eye-icon {
     top: 250px;
     margin-bottom: 250px;
   }
+  .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
+    bottom: 20px;
+  }
 }
 
 /* landing page parallax part ends */
@@ -12069,6 +12072,9 @@ svg.eye-icon {
 @media screen and (max-width:768px) and (min-width: 577px) {
   .social-icons a img {
     width: 1.9rem;
+  }
+  .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
+    bottom: 20px;
   }
 }
 /* footer parts custom css  */
