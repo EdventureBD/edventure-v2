@@ -1,5 +1,5 @@
 {{-- new navbar part's code  --}}
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top bg-purple-customed">
     <a class="navbar-brand" href="{{route('home')}}"><img src="/img/landing/edventureFinalLogo.png" width="220px" alt="EdventureLogo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,9 +37,9 @@
             </li>
             <li class="nav-item has-dot {{request()->is('profile/*') ? 'active' : ''}}">
                 @if(auth()->check() && auth()->user()->user_type == 1)
-                    <a class="nav-link text-white" href="{{route('admin.index')}}">Admin Dashboard</a>
+                    <a class="nav-link text-white" href="{{route('admin.index')}}">ADMIN DASHBOARD</a>
                 @elseif(auth()->check() && auth()->user()->user_type == 3)
-                    <a class="nav-link text-white" href="{{route('profile.modelTest')}}">My Dashboard</a>
+                    <a class="nav-link text-white" href="{{route('profile.modelTest')}}">MY DASHBOARD</a>
                 @endif
             </li>
             {{-- <li class="nav-item has-dot">
@@ -51,7 +51,7 @@
                 @csrf
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                    Log out
+                    LOG OUT
                 </a>
             </form>
         @endauth

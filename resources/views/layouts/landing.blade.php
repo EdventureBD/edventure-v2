@@ -32,7 +32,7 @@
                     position: fixed;
                     top: 50px;
                     left: 0;
-                    padding-left: 15px;
+                    padding-left: 24px;
                     padding-right: 15px;
                     padding-bottom: 15px;
                     width: 75%;
@@ -47,7 +47,7 @@
                     transition: left 300ms ease-in-out;
                 }
                 .navbar-toggler.collapsed ~ .navbar-collapse {
-                    transition: left 500ms ease-in-out;
+                    transition: left 700ms ease-in-out;
                 }
             }
             .glass {
@@ -62,7 +62,7 @@
                 font-family: "Font Awesome 5 Free";
                 content: "\f805"; /* fa-bars, fa-navicon */
             }
-            .bg-light {
+            .bg-purple-customed {
                 background-color: #6400C8 !important;
             }
             .bg-dark {
