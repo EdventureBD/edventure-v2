@@ -23,6 +23,19 @@
                             <h3 class="card-title">User List</h3>
 
                             <div class="card-tools">
+                                <form action="">
+                                <div class="input-group mb-3">
+                                    <input type="text"
+                                           name="query[user]"
+                                           class="form-control"
+                                           placeholder="User name/email/phone"
+                                           aria-label="Recipient's username"
+                                           aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="input-group-text btn btn-outline-primary" id="basic-addon2">search</button>
+                                    </div>
+                                </div>
+                                </form>
                                 <div class="input-group input-group-sm">
                                     <div>
                                         <a href="{{ route('usersExportCSV') }}" class="btn btn-info">
@@ -208,18 +221,12 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL. No</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>User Type</th>
-                                        <th>Image</th>
-                                        <th>Created</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
+                            @if ($users->hasPages())
+                                <div class="pagination-wrapper">
+                                    {{ $users->withQueryString()->links() }}
+                                </div>
+                            @endif
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -264,16 +271,16 @@
 
 @section('js2')
     <script>
-        $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
+        // $(function() {
+        //     $("#example1").DataTable();
+        //     $('#example2').DataTable({
+        //         "paging": true,
+        //         "lengthChange": false,
+        //         "searching": false,
+        //         "ordering": true,
+        //         "info": true,
+        //         "autoWidth": false,
+        //     });
+        // });
     </script>
 @endsection

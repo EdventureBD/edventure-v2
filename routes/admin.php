@@ -294,6 +294,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
     Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
 
+
+    //Export from admin side
+    Route::get('download-as-csv', [CSVController::class, 'exportFromModelExam'])->name('model.exam.csv');
+
+
     /**************************************** Model Exam ****************************************/
 
 
