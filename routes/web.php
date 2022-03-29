@@ -15,6 +15,8 @@ use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\BundleController;
 use App\Utils\Payment;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,5 +107,9 @@ Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');
 
 
 Route::get('/test', function() {
+//    Role::create(['name' => 'Documentation']);
+    $role = Role::query()->where('name','Documentation')->first();
+    $permission = Permission::create(['name' => 'test']);
+    $role->givePermissionTo($permission);
     return view('slider');
 });

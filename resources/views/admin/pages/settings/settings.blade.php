@@ -1,6 +1,6 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Settings', 
-                                    'pageName'=>'Settings', 
+                                    'title'=>'Settings',
+                                    'pageName'=>'Settings',
                                     'secondPageName'=>'Settings'
                                 ])
 
@@ -25,8 +25,10 @@
                         role="tab" aria-controls="change-password" aria-selected="true">Change Password</a>
                     <a class="nav-link" id="change-profile-picture-tab" data-toggle="pill" href="#change-profile-picture"
                         role="tab" aria-controls="change-profile-picture" aria-selected="false">Change Profile picture</a>
-                    <a class="nav-link" id="paymentsNumber-tab" data-toggle="pill" href="#paymentsNumber"
-                        role="tab" aria-controls="paymentsNumber" aria-selected="false">Payments Number</a>
+                    @can('settings')
+                        <a class="nav-link" id="paymentsNumber-tab" data-toggle="pill" href="#paymentsNumber"
+                            role="tab" aria-controls="paymentsNumber" aria-selected="false">Payments Number</a>
+                    @endcan
                     {{-- <a class="nav-link" id="settings-tab" data-toggle="pill" href="#settings"
                         role="tab" aria-controls="settings" aria-selected="false">Settings</a> --}}
                 </div>
@@ -39,9 +41,11 @@
                     <div class="tab-pane fade" id="change-profile-picture" role="tabpanel" aria-labelledby="change-profile-picture-tab">
                         @livewire('settings.change-profile-picture')
                     </div>
-                    <div class="tab-pane fade" id="paymentsNumber" role="tabpanel" aria-labelledby="paymentsNumber-tab">
-                        @livewire('settings.payments-number')
-                    </div>
+                    @can('settings')
+                        <div class="tab-pane fade" id="paymentsNumber" role="tabpanel" aria-labelledby="paymentsNumber-tab">
+                            @livewire('settings.payments-number')
+                        </div>
+                    @endcan
                     {{-- <div class="tab-pane fade" id="settings" role="tabpanel"
                         aria-labelledby="settings-tab">
                         Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis
