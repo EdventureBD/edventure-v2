@@ -62,6 +62,7 @@
                 </td>
                 <td>
                     @if($user->roles[0]->name == 'Super Admin')
+                        <i style="font-weight: bolder; color: #fa9632;font-size: 28px;" class="fas fa-crown"></i>
                     @else
                         @include('admin.pages.role_permission.assign_role.delete')
                     @endif
