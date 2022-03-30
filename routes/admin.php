@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ModelMcqTagAnalysisController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SinglePaymentController;
 use App\Http\Controllers\SocialGroupController;
 use Illuminate\Support\Facades\Route;
@@ -51,151 +52,159 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/index', [AdminController::class, 'AdminIndex'])->name('admin.index');
 
     // START OF USER
-    Route::resource('/user', UserController::class);
-    Route::get('/allAdmin', [UserController::class, 'allAdmin'])->name('allAdmin');
-    Route::get('/allTeacher', [UserController::class, 'allTeacher'])->name('allTeacher');
-    Route::get('/allStudent', [UserController::class, 'allStudent'])->name('allStudent');
+    Route::group(['middleware' => ['permission:user']], function () {
+        Route::resource('/user', UserController::class);
+        Route::get('/allAdmin', [UserController::class, 'allAdmin'])->name('allAdmin');
+        Route::get('/allTeacher', [UserController::class, 'allTeacher'])->name('allTeacher');
+        Route::get('/allStudent', [UserController::class, 'allStudent'])->name('allStudent');
+    });
+
 
     // START OF USER SETTINGS
     Route::get('/settings', [SettingsController::class, 'settings'])->name('admin.settings');
     Route::get('/changePassword', [SettingsController::class, 'changePassword'])->name('admin.changePassword');
 
-    // START OF COURSE
-    Route::resource('/course', CourseController::class, ['except' => ['store', 'update']]);
-    Route::get('/changeCourseStatus', [CourseController::class, 'changeCourseStatus']);
-    Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
-    // END OF COURSE
+    Route::group(['middleware' => ['permission:course']], function () {
+        // START OF COURSE
+        Route::resource('/course', CourseController::class, ['except' => ['store', 'update']]);
+        Route::get('/changeCourseStatus', [CourseController::class, 'changeCourseStatus']);
+        Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
+        // END OF COURSE
 
-    // START OF COURSE
-    Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus']);
-    // END OF COURSE
+        // START OF COURSE
+        Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus']);
+        // END OF COURSE
 
-    // START OF COURSE CATEGORY
-    Route::resource('/course-category', CourseCategoryController::class, ['except' => ['store', 'update']]);
-    Route::get('/changeCoursCategoryStatus', [CourseCategoryController::class, 'changeCourseCategoryStatus']);
-    // END OF COURSE CATEGORY
+        // START OF COURSE CATEGORY
+        Route::resource('/course-category', CourseCategoryController::class, ['except' => ['store', 'update']]);
+        Route::get('/changeCoursCategoryStatus', [CourseCategoryController::class, 'changeCourseCategoryStatus']);
+        // END OF COURSE CATEGORY
 
-    // START OF COURSE TOPIC
-    Route::resource('/course-topic', CourseTopicController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeCourseTopicStatus', [CourseTopicController::class, 'changeCourseTopicStatus']);
-    Route::get('/customCourseTopic/{course_category}/{course}', [CourseTopicController::class, 'customCourseTopic'])->name('showcustomcoursetopic');
-    // END OF COURSE TOPIC
+        // START OF COURSE TOPIC
+        Route::resource('/course-topic', CourseTopicController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeCourseTopicStatus', [CourseTopicController::class, 'changeCourseTopicStatus']);
+        Route::get('/customCourseTopic/{course_category}/{course}', [CourseTopicController::class, 'customCourseTopic'])->name('showcustomcoursetopic');
+        // END OF COURSE TOPIC
 
-    // START OF COURSE LECTURE
-    Route::resource('/course-lecture', CourseLectureController::class, ['except' => ['store', 'update']]);
-    Route::get('/changeCourseLectureStatus', [CourseLectureController::class, 'changeCourseLectureStatus']);
-    // END OF COURSE LECTURE
+        // START OF COURSE LECTURE
+        Route::resource('/course-lecture', CourseLectureController::class, ['except' => ['store', 'update']]);
+        Route::get('/changeCourseLectureStatus', [CourseLectureController::class, 'changeCourseLectureStatus']);
+        // END OF COURSE LECTURE
 
-    // START OF BATCH
-    Route::resource('/batch', BatchController::class, ['except' => ['store', 'update']]);
-    Route::get('/changeBatchStatus', [BatchController::class, 'changeBatchStatus']);
-    Route::get('/changeStudentStatus', [BatchController::class, 'changeStudentStatus'])->name('changeStudentStatus');
-    Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
-    Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
-    Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
-    Route::get('/batch-rank-update', function () {
-        Artisan::call("update:batch-rank");
-        Session::put('status', 'Batch rank updated successful!');
-        return redirect()->back();
-    })->name('batch-rank');
-    // END OF BATCH
+        // START OF BATCH
+        Route::resource('/batch', BatchController::class, ['except' => ['store', 'update']]);
+        Route::get('/changeBatchStatus', [BatchController::class, 'changeBatchStatus']);
+        Route::get('/changeStudentStatus', [BatchController::class, 'changeStudentStatus'])->name('changeStudentStatus');
+        Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
+        Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
+        Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
+        Route::get('/batch-rank-update', function () {
+            Artisan::call("update:batch-rank");
+            Session::put('status', 'Batch rank updated successful!');
+            return redirect()->back();
+        })->name('batch-rank');
+        // END OF BATCH
 
-    // START OF BATCH LECTURE
-    Route::resource('/batch-lecture', BatchLectureController::class, ['except' => ['show', 'update']]);
-    Route::get('/changeBatchLectureStatus', [BatchLectureController::class, 'changeBatchLectureStatus']);
-    // END OF BATCH LECTURE
+        // START OF BATCH LECTURE
+        Route::resource('/batch-lecture', BatchLectureController::class, ['except' => ['show', 'update']]);
+        Route::get('/changeBatchLectureStatus', [BatchLectureController::class, 'changeBatchLectureStatus']);
+        // END OF BATCH LECTURE
 
-    // START OF LIVE CLASS
-    Route::resource('/live-class', LiveClassController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeLiveClassStatus', [LiveClassController::class, 'changeLiveClassStatus']);
-    // END OF LIVE CLASS
+        // START OF LIVE CLASS
+        Route::resource('/live-class', LiveClassController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeLiveClassStatus', [LiveClassController::class, 'changeLiveClassStatus']);
+        // END OF LIVE CLASS
+
+        // START OF LIVE CLASS
+        Route::resource('/content-tag', ContentTagController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeContentTagStatus', [ContentTagController::class, 'changeContentTagStatus']);
+        Route::resource('/question-content-tag', QuestionContentTagController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeQuestionContentTagStatus', [QuestionContentTagController::class, 'changeQuestionContentTagStatus']);
+        // END OF LIVE CLASS
+
+        // START OF BUNDLES
+        Route::resource('/bundle', BundleController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeBundleStatus', [BundleController::class, 'changeBundleStatus']);
+        // END OF BUNDLES
+    });
 
     // START OF PAYMENT
-    Route::resource('/payment', PaymentController::class, ['except' => ['show', 'store', 'update']]);
+    Route::resource('/payment', PaymentController::class, ['except' => ['show', 'store', 'update']])->middleware(['permission:payment']);
     // END OF PAYMENT
 
-    // START OF LIVE CLASS
-    Route::resource('/content-tag', ContentTagController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeContentTagStatus', [ContentTagController::class, 'changeContentTagStatus']);
-    Route::resource('/question-content-tag', QuestionContentTagController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeQuestionContentTagStatus', [QuestionContentTagController::class, 'changeQuestionContentTagStatus']);
-    // END OF LIVE CLASS
+    Route::group(['middleware' => ['permission:course_exam']], function () {
+        // START OF EXAM
+        Route::resource('/exam', ExamController::class, ['except' => ['store', 'update']]);
+        Route::get('/exam/{exam}/add-question', [ExamController::class, 'addQuestion'])->name('addQuestion');
+        // Add MCQ and CQ for POP QUIZ and TOPIC END EXAM
+        Route::get('/exam/{exam}/add-question-CQ-only', [ExamController::class, 'addQuestion_CQ_only'])->name('addQuestion_CQ_only');
+        Route::get('/exam/{exam}/add-question-MCQ-only', [ExamController::class, 'addQuestion_MCQ_only'])->name('addQuestion_MCQ_only');
+        Route::post('/exam/{exam}/excel-add-question', [ExamController::class, 'excelAddQuestion'])->name('excelAddQuestion');
+        Route::get('/all-mcq', [ExamController::class, 'allMCQ'])->name('showAllMCQ');
+        Route::get('/all-cq', [ExamController::class, 'allCQ'])->name('showAllCQ');
+        Route::get('/all-assignment', [ExamController::class, 'allAssignment'])->name('showAllAssignment');
+        Route::get('/all-aptitude-test', [ExamController::class, 'allAT'])->name('showAllAT');
+        Route::get('/all-pop-quiz', [ExamController::class, 'allPQ'])->name('showAllPQ');
+        Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
+        // END OF EXAM
 
-    // START OF BUNDLES
-    Route::resource('/bundle', BundleController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeBundleStatus', [BundleController::class, 'changeBundleStatus']);
-    // END OF BUNDLES
+        // START OF BATCH EXAM
+        Route::resource('/batch-exam', BatchExamController::class, ['except' => ['show', 'store', 'update']]);
+        Route::get('/changeBatchExamStatus', [BatchExamController::class, 'changeBatchExamStatus']);
+        // END OF  BATCH EXAM
 
-    // START OF EXAM
-    Route::resource('/exam', ExamController::class, ['except' => ['store', 'update']]);
-    Route::get('/exam/{exam}/add-question', [ExamController::class, 'addQuestion'])->name('addQuestion');
-    // Add MCQ and CQ for POP QUIZ and TOPIC END EXAM
-    Route::get('/exam/{exam}/add-question-CQ-only', [ExamController::class, 'addQuestion_CQ_only'])->name('addQuestion_CQ_only');
-    Route::get('/exam/{exam}/add-question-MCQ-only', [ExamController::class, 'addQuestion_MCQ_only'])->name('addQuestion_MCQ_only');
-    Route::post('/exam/{exam}/excel-add-question', [ExamController::class, 'excelAddQuestion'])->name('excelAddQuestion');
-    Route::get('/all-mcq', [ExamController::class, 'allMCQ'])->name('showAllMCQ');
-    Route::get('/all-cq', [ExamController::class, 'allCQ'])->name('showAllCQ');
-    Route::get('/all-assignment', [ExamController::class, 'allAssignment'])->name('showAllAssignment');
-    Route::get('/all-aptitude-test', [ExamController::class, 'allAT'])->name('showAllAT');
-    Route::get('/all-pop-quiz', [ExamController::class, 'allPQ'])->name('showAllPQ');
-    Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
-    // END OF EXAM
+        // START OF EXAM ATTEMPT
+        Route::resource('/student-exam-attempt', StudentExamAttemptController::class, ['except' => ['show', 'store', 'update']]);
+        // END OF EXAM ATTEMPT
 
-    // START OF BATCH EXAM
-    Route::resource('/batch-exam', BatchExamController::class, ['except' => ['show', 'store', 'update']]);
-    Route::get('/changeBatchExamStatus', [BatchExamController::class, 'changeBatchExamStatus']);
-    // END OF  BATCH EXAM
+        // START OF CQ EXAM
+        // Route::get('{exam}/creative-question/{creative-question}', [CQController::class, 'creativeQuestion'])->name('creative-question');
+        Route::resource('{exam}/cq', CQController::class);
+        // Route::resource('/exam/cq', CQController::class, ['except' => ['store', 'update']]);
+        // END OF CQ EXAM
 
-    // START OF EXAM ATTEMPT
-    Route::resource('/student-exam-attempt', StudentExamAttemptController::class, ['except' => ['show', 'store', 'update']]);
-    // END OF EXAM ATTEMPT
+        // START OF MCQ EXAM
+        Route::resource('{exam}/mcq', MCQController::class);
+        // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
+        // END OF MCQ EXAM
 
-    // START OF CQ EXAM
-    // Route::get('{exam}/creative-question/{creative-question}', [CQController::class, 'creativeQuestion'])->name('creative-question');
-    Route::resource('{exam}/cq', CQController::class);
-    // Route::resource('/exam/cq', CQController::class, ['except' => ['store', 'update']]);
-    // END OF CQ EXAM
+        // START OF ASSIGNMENT
+        Route::resource('{exam}/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
+        // Route::resource('/exam/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
+        // END OF ASSIGNMENT
 
-    // START OF MCQ EXAM
-    Route::resource('{exam}/mcq', MCQController::class);
-    // Route::resource('/exam/mcq', MCQController::class, ['except' => ['store', 'update']]);
-    // END OF MCQ EXAM
+        // START OF APTITUDE TEST MCQ EXAM
+        Route::resource('{exam}/aptitude-test-mcqs', AptitudeTestMCQController::class);
+        // END OF Aptitude Test MCQ EXAM
 
-    // START OF ASSIGNMENT
-    Route::resource('{exam}/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
-    // Route::resource('/exam/assignment', AssignmentController::class, ['except' => ['store', 'update']]);
-    // END OF ASSIGNMENT
+        // START OF POP QUIZ MCQ EXAM
+        Route::resource('{exam}/pop-quiz-mcq', PopQuizMCQController::class)->except(['index']);
+        Route::get('{exam}/pop-quiz-all-questions', [PopQuizMCQController::class, 'all'])->name('pop-quiz-all');
+        // END OF POP QUIZ MCQ EXAM
 
-    // START OF APTITUDE TEST MCQ EXAM
-    Route::resource('{exam}/aptitude-test-mcqs', AptitudeTestMCQController::class);
-    // END OF Aptitude Test MCQ EXAM
+        // START OF POP QUIZ CQ EXAM
+        Route::resource('{exam}/pop-quiz-cq', PopQuizCQController::class)->except(['index']);
+        // END OF POP QUIZ CQ EXAM
 
-    // START OF POP QUIZ MCQ EXAM
-    Route::resource('{exam}/pop-quiz-mcq', PopQuizMCQController::class)->except(['index']);
-    Route::get('{exam}/pop-quiz-all-questions', [PopQuizMCQController::class, 'all'])->name('pop-quiz-all');
-    // END OF POP QUIZ MCQ EXAM
+        // START OF TOPIC END EXAM MCQ EXAM
+        Route::resource('{exam}/topic-end-exam-mcq', TopicEndExamMCQController::class)->except(['index']);
+        Route::get('{exam}/topic-end-exam-all-questions', [TopicEndExamMCQController::class, 'all'])->name('topic-end-exam-all');
+        // END OF TOPIC END EXAM MCQ EXAM
 
-    // START OF POP QUIZ CQ EXAM
-    Route::resource('{exam}/pop-quiz-cq', PopQuizCQController::class)->except(['index']);
-    // END OF POP QUIZ CQ EXAM
+        // START OF TOPIC END EXAM CQ EXAM
+        Route::resource('{exam}/topic-end-exam-cq', TopicEndExamCQController::class)->except(['index']);
+        // END OF TOPIC END EXAM CQ EXAM
 
-    // START OF TOPIC END EXAM MCQ EXAM
-    Route::resource('{exam}/topic-end-exam-mcq', TopicEndExamMCQController::class)->except(['index']);
-    Route::get('{exam}/topic-end-exam-all-questions', [TopicEndExamMCQController::class, 'all'])->name('topic-end-exam-all');
-    // END OF TOPIC END EXAM MCQ EXAM
+        // START OF ASSIGNMENT
+        Route::resource('/request', RequestController::class, ['except' => ['store', 'update']]);
+        // END OF ASSIGNMENT
+    });
 
-    // START OF TOPIC END EXAM CQ EXAM
-    Route::resource('{exam}/topic-end-exam-cq', TopicEndExamCQController::class)->except(['index']);
-    // END OF TOPIC END EXAM CQ EXAM
-
-    // START OF ASSIGNMENT
-    Route::resource('/request', RequestController::class, ['except' => ['store', 'update']]);
-    // END OF ASSIGNMENT
 
     // START OF BLOG
-    Route::resource('/blog', BlogController::class);
-    Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus']);
+    Route::resource('/blog', BlogController::class)->middleware(['permission:other']);
+    Route::get('/changeBlogStatus', [BlogController::class, 'changeBlogStatus'])->middleware(['permission:other']);
     // END OF BLOG
 
     // START OF EXAM SUBMISSION
@@ -244,55 +253,74 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('download-slug', [CSVController::class, 'slugExport'])->name('slugExport');
 
     // START OF IMAGE UPLOAD
-    Route::resource('upload-image', ImageUploadController::class);
+    Route::resource('upload-image', ImageUploadController::class)->middleware(['permission:other']);
 
     /**************************************** Model Exam ****************************************/
 
     //Exam Category
-    Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
-    Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
-    Route::put('/exam-category/{id}',[ExamCategoryController::class,'update'])->name('exam.category.update');
-    Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
+    Route::group(['middleware' => ['permission:model_exam_category']], function () {
+        Route::get('/exam-category',[ExamCategoryController::class,'index'])->name('exam.category.index');
+        Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
+        Route::put('/exam-category/{id}',[ExamCategoryController::class,'update'])->name('exam.category.update');
+        Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
+    });
 
     //Exam Topic
-    Route::get('/exam-topic',[ExamTopicController::class,'index'])->name('exam.topic.index');
-    Route::get('/exam-topic/{id}',[ExamTopicController::class,'show'])->name('exam.topic.show');
-    Route::post('/exam-topic',[ExamTopicController::class,'store'])->name('exam.topic.store');
-    Route::put('/exam-topic/{id}',[ExamTopicController::class,'update'])->name('exam.topic.update');
-    Route::delete('/exam-topic/{id}',[ExamTopicController::class,'destroy'])->name('exam.topic.destroy');
+    Route::group(['middleware' => ['permission:model_exam_topics']], function () {
+        Route::get('/exam-topic',[ExamTopicController::class,'index'])->name('exam.topic.index');
+        Route::get('/exam-topic/{id}',[ExamTopicController::class,'show'])->name('exam.topic.show');
+        Route::post('/exam-topic',[ExamTopicController::class,'store'])->name('exam.topic.store');
+        Route::put('/exam-topic/{id}',[ExamTopicController::class,'update'])->name('exam.topic.update');
+        Route::delete('/exam-topic/{id}',[ExamTopicController::class,'destroy'])->name('exam.topic.destroy');
+    });
+
 
     //Exam Tags
-    Route::get('/exam-tags',[ExamTagsController::class,'index'])->name('exam.tags.index');
-    Route::get('/exam-tags/{id}',[ExamTagsController::class,'show'])->name('exam.tags.show');
-    Route::post('/exam-tags',[ExamTagsController::class,'store'])->name('exam.tags.store');
-    Route::put('/exam-tags/{id}',[ExamTagsController::class,'update'])->name('exam.tags.update');
-    Route::delete('/exam-tags/{id}',[ExamTagsController::class,'destroy'])->name('exam.tags.destroy');
+    Route::group(['middleware' => ['permission:model_exam_tags']], function () {
+        Route::get('/exam-tags',[ExamTagsController::class,'index'])->name('exam.tags.index');
+        Route::get('/exam-tags/{id}',[ExamTagsController::class,'show'])->name('exam.tags.show');
+        Route::post('/exam-tags',[ExamTagsController::class,'store'])->name('exam.tags.store');
+        Route::put('/exam-tags/{id}',[ExamTagsController::class,'update'])->name('exam.tags.update');
+        Route::delete('/exam-tags/{id}',[ExamTagsController::class,'destroy'])->name('exam.tags.destroy');
+    });
+
 
     //Model Exam
-    Route::get('/model-exam',[ModelExamController::class,'index'])->name('model.exam.index');
-    Route::get('/model-exam/visibility/{id}',[ModelExamController::class,'updateExamVisibility'])->name('model.exam.visibility');
-    Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
-    Route::get('/model-exam/list/{categoryId}/{topicId}',[ModelExamController::class,'getExamByCategoryAndTopic'])->name('model.exam.list');
-    Route::get('/model-exam/downloadPdf/{id}',[ModelExamController::class,'downloadSolutionPdf'])->name('model.exam.pdf');
+    Route::group(['middleware' => ['permission:model_exam']], function () {
+        Route::get('/model-exam',[ModelExamController::class,'index'])->name('model.exam.index');
+        Route::get('/model-exam/visibility/{id}',[ModelExamController::class,'updateExamVisibility'])->name('model.exam.visibility');
+        Route::get('/model-exam/topics/{id}',[ModelExamController::class,'getTopicsByCategory'])->name('model.exam.topics');
+        Route::get('/model-exam/list/{categoryId}/{topicId}',[ModelExamController::class,'getExamByCategoryAndTopic'])->name('model.exam.list');
+        Route::get('/model-exam/downloadPdf/{id}',[ModelExamController::class,'downloadSolutionPdf'])->name('model.exam.pdf');
+        Route::get('/model-exam/{id}',[ModelExamController::class,'edit'])->name('model.exam.edit');
+    });
+
     Route::post('/model-exam',[ModelExamController::class,'store'])->name('model.exam.store');
     Route::put('/model-exam/{id}',[ModelExamController::class,'update'])->name('model.exam.update');
-    Route::get('/model-exam/{id}',[ModelExamController::class,'edit'])->name('model.exam.edit');
     Route::delete('/model-exam/{id}',[ModelExamController::class,'destroy'])->name('model.exam.destroy');
-    Route::get('/model-exam/result/list',[ModelExamController::class,'modelExamResult'])->name('model.exam.result');
+    Route::get('/model-exam/result/list',[ModelExamController::class,'modelExamResult'])->name('model.exam.result')->middleware(['permission:model_exam_result']);
 
     //Model Exam Question
-    Route::get('/model-exam/question/{id}',[McqQuestionController::class,'index'])->name('model.exam.question.index');
-    Route::get('/model-exam/question/edit/{slug}',[McqQuestionController::class,'edit'])->name('model.exam.question.edit');
-    Route::put('/model-exam/question/{id}',[McqQuestionController::class,'update'])->name('model.exam.question.update');
-    Route::post('/model-exam/question/{id}',[McqQuestionController::class,'store'])->name('model.exam.question.store');
-    Route::delete('/model-exam/question/{slug}',[McqQuestionController::class,'destroy'])->name('model.exam.question.destroy');
+    Route::group(['middleware' => ['permission:model_exam']], function () {
+        Route::get('/model-exam/question/{id}',[McqQuestionController::class,'index'])->name('model.exam.question.index');
+        Route::get('/model-exam/question/edit/{slug}',[McqQuestionController::class,'edit'])->name('model.exam.question.edit');
+        Route::put('/model-exam/question/{id}',[McqQuestionController::class,'update'])->name('model.exam.question.update');
+        Route::post('/model-exam/question/{id}',[McqQuestionController::class,'store'])->name('model.exam.question.store');
+        Route::delete('/model-exam/question/{slug}',[McqQuestionController::class,'destroy'])->name('model.exam.question.destroy');
+    });
+
 
     //Model Exam Tag analysis
-    Route::get('/model-exam/tag/analysis',[ModelMcqTagAnalysisController::class,'tagAnalysisForAdmin'])->name('model.exam.tag.analysis');
+    Route::group(['middleware' => ['permission:model_exam_tag_analysis']], function () {
+        Route::get('/model-exam/tag/analysis',[ModelMcqTagAnalysisController::class,'tagAnalysisForAdmin'])->name('model.exam.tag.analysis');
+    });
 
     //Payments
-    Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
-    Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
+    Route::group(['middleware' => ['permission:model_exam_payment']], function () {
+        Route::get('/model-exam/payment/category',[SinglePaymentController::class,'getCategoryPayment'])->name('model.exam.payment.category');
+        Route::get('/model-exam/payment/exam',[SinglePaymentController::class,'getExamPayment'])->name('model.exam.payment.exam');
+    });
+
 
 
     //Export from admin side
@@ -301,11 +329,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     /**************************************** Model Exam ****************************************/
 
+    /**************************************** Social Group ****************************************/
+    Route::group(['middleware' => ['permission:other']], function () {
+        Route::get('/social-group',[SocialGroupController::class,'index'])->name('social.group.index');
+        Route::post('/social-group',[SocialGroupController::class,'store'])->name('social.group.store');
+        Route::delete('/social-group/{id}',[SocialGroupController::class,'destroy'])->name('social.group.delete');
+        Route::put('/social-group/{id}',[SocialGroupController::class,'update'])->name('social.group.update');
+    });
 
-    Route::get('/social-group',[SocialGroupController::class,'index'])->name('social.group.index');
-    Route::post('/social-group',[SocialGroupController::class,'store'])->name('social.group.store');
-    Route::delete('/social-group/{id}',[SocialGroupController::class,'destroy'])->name('social.group.delete');
-    Route::put('/social-group/{id}',[SocialGroupController::class,'update'])->name('social.group.update');
+
+    /**************************************** Social Group ****************************************/
+
+
+
+    /**************************************** Role & permission ****************************************/
+    Route::group(['middleware' => ['permission:role_permission']], function () {
+        Route::get('/role', [RolePermissionController::class, 'index'])->name('role.index');
+        Route::post('/role', [RolePermissionController::class, 'store'])->name('role.create');
+        Route::Put('/role/{id}', [RolePermissionController::class, 'update'])->name('role.update');
+        Route::delete('/role/{id}', [RolePermissionController::class, 'destroy'])->name('role.delete');
+        Route::get('/role/assign', [RolePermissionController::class, 'assignRoleIndex'])->name('role.assign.index');
+        Route::post('/role/assign', [RolePermissionController::class, 'assignRoleStore'])->name('role.assign.create');
+        Route::delete('/role/assign/{user}', [RolePermissionController::class, 'assignRoleDestroy'])->name('role.assign.delete');
+    });
+
+    /**************************************** Role & permission ****************************************/
 
 });
 

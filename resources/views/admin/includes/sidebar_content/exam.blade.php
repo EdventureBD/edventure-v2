@@ -1,59 +1,59 @@
 <li
-    class="nav-item has-treeview {{ request()->is('admin/exam') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/exam/create') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/exam/*/edit') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/exam/*') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/add-mcq/*') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/student-exam-attempt') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/cq/*') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/mcq/*') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-cq') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }} 
+    class="nav-item has-treeview {{ request()->is('admin/exam') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/exam/create') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/exam/*/edit') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/exam/*') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/add-mcq/*') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/student-exam-attempt') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/cq/*') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/mcq/*') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-cq') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }}
 
                                 {{-- NEW --}}
-                                {{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }} 
+                                {{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
 
-                                {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }} 
-                                {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }} 
+                                {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
                                 {{-- END NEW --}}
 ">
     <a href="#"
-        class="nav-link {{ request()->is('admin/exam') ? 'active' : '' }} 
-{{ request()->is('admin/exam/create') ? 'active' : '' }} 
-{{ request()->is('admin/exam/*/edit') ? 'active' : '' }} 
-{{ request()->is('admin/exam/*') ? 'active' : '' }} 
-{{ request()->is('admin/add-mcq/*') ? 'active' : '' }} 
-{{ request()->is('admin/student-exam-attempt') ? 'active' : '' }} 
-{{ request()->is('admin/cq/*') ? 'active' : '' }} 
-{{ request()->is('admin/mcq/*') ? 'active' : '' }} 
-{{ request()->is('admin/all-mcq') ? 'active' : '' }} 
-{{ request()->is('admin/all-cq') ? 'active' : '' }} 
-{{ request()->is('admin/all-assignment') ? 'active' : '' }} 
+        class="nav-link {{ request()->is('admin/exam') ? 'active' : '' }}
+{{ request()->is('admin/exam/create') ? 'active' : '' }}
+{{ request()->is('admin/exam/*/edit') ? 'active' : '' }}
+{{ request()->is('admin/exam/*') ? 'active' : '' }}
+{{ request()->is('admin/add-mcq/*') ? 'active' : '' }}
+{{ request()->is('admin/student-exam-attempt') ? 'active' : '' }}
+{{ request()->is('admin/cq/*') ? 'active' : '' }}
+{{ request()->is('admin/mcq/*') ? 'active' : '' }}
+{{ request()->is('admin/all-mcq') ? 'active' : '' }}
+{{ request()->is('admin/all-cq') ? 'active' : '' }}
+{{ request()->is('admin/all-assignment') ? 'active' : '' }}
 
 {{-- NEW --}}
-{{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }} 
-{{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }} 
-{{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }} 
+{{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
+{{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
+{{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
 
-{{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }} 
-{{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }} 
-{{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }} 
+{{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
+{{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
+{{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
 {{-- END NEW --}}
 ">
         <i class="fas fa-paste"></i>
         <p>&nbsp; Exam<i class="right fas fa-angle-left"></i></p>
     </a>
-    <ul class="nav nav-treeview">
+    <ul class="nav ml-5 nav-treeview">
 
         <li
-            class="nav-item has-treeview {{ request()->is('admin/exam') ? 'menu-open' : '' }} 
-        {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }} 
-        {{ request()->is('admin/all-cq') ? 'menu-open' : '' }} 
-        {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }} 
+            class="nav-item has-treeview {{ request()->is('admin/exam') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-cq') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }}
         ">
             <a href="{{ route('showAllMCQ') }}"
                 class="nav-link {{ request()->is('admin/all-mcq') ? 'active' : '' }} ">
