@@ -322,6 +322,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     });
 
 
+
+    //Export from admin side
+    Route::get('download-as-csv', [CSVController::class, 'exportFromModelExam'])->name('model.exam.csv');
+
+
     /**************************************** Model Exam ****************************************/
 
     /**************************************** Social Group ****************************************/

@@ -65,6 +65,10 @@
             <div class="">
                 <a href="{{route('model.exam.result')}}" class="btn btn-outline-secondary">Clear</a>
             </div>
+
+            <div class="">
+                <a href="{{route('model.exam.csv',['examResult'])}}" class="btn btn-outline-danger">Export</a>
+            </div>
         </div>
     </div>
 </form>

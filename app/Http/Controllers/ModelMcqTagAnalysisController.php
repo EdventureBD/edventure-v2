@@ -108,6 +108,7 @@ class ModelMcqTagAnalysisController extends Controller
                 $studentCount = $individual['student_count'];
             }
         }
+
         return view('admin.pages.model_exam.exam_tag_analysis.index', compact('exams','tags','selectedExam','studentCount'));
     }
 

@@ -3137,17 +3137,17 @@ input[type=button].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.35rem 62px 0.35rem 62px;
   clear: both;
-  font-weight: 400;
-  color: #212529;
+  font-weight: 800;
+  color: white;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
   border: 0;
 }
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #16181b;
+  color: #FA9632;
   text-decoration: none;
   background-color: #e9ecef;
 }
@@ -3994,6 +3994,7 @@ input[type=button].btn-block {
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
+  font-weight: 800;
 }
 .navbar-nav .dropdown-menu {
   position: static;
@@ -4320,10 +4321,12 @@ input[type=button].btn-block {
 }
 .navbar-dark .navbar-toggler {
   color: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.1);
+  /* border-color: rgba(255, 255, 255, 0.1); */
 }
 .navbar-dark .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-image: url('/img/landing/nav-collapse-burger.png');
+  height: 30;
+  width: 30;
 }
 .navbar-dark .navbar-text {
   color: rgba(255, 255, 255, 0.5);
@@ -11419,8 +11422,8 @@ a:hover {
    .navbar-light .navbar-nav .nav-link {
     color: #727272;
   }
-  .navbar .nav-item.active, .navbar .nav-item:hover {
-    color: #727272 !important;
+  .navbar .nav-item.active .navbar .nav-item:hover {
+    color: white !important;
   }
   /* navbar part's css  */
   .course-category-js .slick-next {
@@ -11466,7 +11469,7 @@ a:hover {
 }
 
 .navbar .collapse.navbar-collapse.show {
-  background-color: #f8f9fa;
+  background-color: #6400C8;
 }
 .navbar .nav-item.active, .navbar .nav-item:hover {
   position: relative;
@@ -11474,7 +11477,7 @@ a:hover {
   font-weight: 800;
 }
 .navbar .nav-item.active .nav-link, .navbar .nav-item:hover .nav-link {
-  color: #FA9632;
+  color: #FA9632 !important;
   font-weight: 800;
 }
 .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
@@ -11482,7 +11485,7 @@ a:hover {
   content: "";
   width: 5px;
   height: 5px;
-  left: calc(50% - 2px);
+  left: 37px;
   background: #FA9632;
   border-radius: 50%;
   bottom: 0px;
@@ -12003,8 +12006,11 @@ svg.eye-icon {
 .navbar-light .navbar-nav .nav-link{
   color: #727272;
 }
+.navbar-nav .nav-link {
+  padding-left: 62px;
+}
 .navbar .nav-item.active, .navbar .nav-item:hover {
-  color: #727272;
+  color: white;
 }
 /* navbar part's css  */
 
@@ -12061,6 +12067,12 @@ svg.eye-icon {
     top: 250px;
     margin-bottom: 250px;
   }
+  .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
+    bottom: 20px;
+  }
+  #login-signup-btn-parent-div {
+    padding-left: 60px !important;
+  }
 }
 
 /* landing page parallax part ends */
@@ -12069,6 +12081,20 @@ svg.eye-icon {
 @media screen and (max-width:768px) and (min-width: 577px) {
   .social-icons a img {
     width: 1.9rem;
+  }
+  .navbar .nav-item.active.has-dot:after, .navbar .nav-item:hover.has-dot:after {
+    bottom: 20px;
+    left: 74px;
+  }
+  .navbar-nav .nav-link {
+    padding-left: 120px;
+  }
+  #login-signup-btn-parent-div {
+    padding-left: 120px !important;
+  }
+  .dropdown-item {
+    padding-left: 120px;
+    padding-right: 120px;
   }
 }
 /* footer parts custom css  */

@@ -14,6 +14,9 @@
         {{-- font awesome cdn --}}
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 
+        {{-- favicon link  --}}
+        <link rel="icon" type="image/png" href="{{ asset('img/contact/mapLogo.png') }}">
+        {{-- favicon link  --}}
         {{-- font awesome cdn --}}
 
         {{-- google font's cdn starts --}}

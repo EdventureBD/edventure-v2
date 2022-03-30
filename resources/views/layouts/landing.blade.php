@@ -25,6 +25,50 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
 {{--        @include('partials.facebook_pixel')--}}
+        <style>
+            
+            @media (max-width: 992px) {
+                .navbar-collapse {
+                    position: fixed;
+                    top: 50px;
+                    left: 0;
+                    padding-left: 24px;
+                    padding-right: 15px;
+                    padding-bottom: 15px;
+                    width: 75%;
+                    height: 100%;
+                }
+                .navbar-collapse.collapsing {
+                    left: -75%;
+                    transition: height 0s ease;
+                }
+                .navbar-collapse.show {
+                    left: 0;
+                    transition: left 300ms ease-in-out;
+                }
+                .navbar-toggler.collapsed ~ .navbar-collapse {
+                    transition: left 700ms ease-in-out;
+                }
+            }
+            .glass {
+                /*background-color: rgba(255, 255, 255, .15);*/
+                /*backdrop-filter: blur(5px);*/
+                filter: blur(5px);
+            }
+            .navbar-toggler-icon {
+                background-image: none;
+            }
+            .test::before {
+                font-family: "Font Awesome 5 Free";
+                content: "\f805"; /* fa-bars, fa-navicon */
+            }
+            .bg-purple-customed {
+                background-color: #6400C8 !important;
+            }
+            .bg-dark {
+                background-color: #953dd2!important;
+            }
+        </style>
     </head>
     <body>
     <!-- Messenger Chat plugin Code -->
@@ -74,9 +118,12 @@
                 @if(!request()->is("batch/*") && !request()->is("bundle/*"))
                     @include('landing.header', ['headerBg'=>$headerBg])
                 @endif
-                {{ $slot }}
-                {{-- @yield('content') --}}
-                @include('landing.footer')
+                <div class="wholeBody">
+                    {{ $slot }}
+                    {{-- @yield('content') --}}
+                    @include('landing.footer')
+                </div>
+                
             </div>
         </div>
         <!-- Scripts -->
@@ -85,5 +132,21 @@
         @yield('js')
         @include('partials.custom_sctipt')
         @include('partials.after_body_analytics')
+        {{-- new navbar collapse code  --}}
+        <script>
+            $('.navbar-collapse').on('show.bs.collapse', function () {
+                $('.wholeBody').addClass('glass');
+                $('.wholeBody').css('pointer-events','none');
+            });
+            $('.navbar-collapse').on('hide.bs.collapse', function () {
+                $('.wholeBody').removeClass('glass');
+                $('.wholeBody').css('pointer-events','auto');
+            });
+            /* $('.hey').on('click', function () {
+                $('.navbar-collapse').removeClass('show');
+                $('.hey').removeClass('glass');
+            }); */
+        </script>
+        {{-- new navbar collapse code ends  --}}
     </body>
 </html>
