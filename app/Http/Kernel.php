@@ -68,5 +68,8 @@ class Kernel extends HttpKernel
         'canAccess' => \App\Http\Middleware\canAccess::class,
         'proceed_guard' => \App\Http\Middleware\ProceedGuard::class,
         'canAccessBundle' => \App\Http\Middleware\canAccessBundle::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }
