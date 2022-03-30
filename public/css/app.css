@@ -11077,11 +11077,12 @@ a:hover {
 
 .bottom-border {
   position: relative;
+  font-weight: 600;
 }
 .bottom-border:after {
   height: 2px;
   position: absolute;
-  background-color: #959595;
+  background-color: white;
   left: 0;
   top: 40px;
   width: 40px;
@@ -11580,20 +11581,25 @@ a:hover {
   list-style: none;
 }
 .single-footer-column a {
-  color: #86898C;
-  font-size: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .single-input-group {
   height: 50px;
-  border: 2px solid #C4C4C4;
+  border: 2px solid white;
   border-radius: 10px;
   padding: 5px;
+}
+.single-input-group input::placeholder {
+  color: white;
 }
 .single-input-group input {
   border: none;
   padding: 5px;
   width: 100%;
+  background-color: #6400c8;
 }
 .single-input-group img {
   width: 24px;

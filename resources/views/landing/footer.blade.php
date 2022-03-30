@@ -1,6 +1,5 @@
-
-<div class="footer-section position-relative bg-white">
-    <div class="container pt-5 pb-4">
+<div class="footer-section position-relative" style="background-color: #6400c8; color: white">
+    <div class="px-md-5 mx-3 pt-5 pb-4">
         <div class="row">
             <div class="col-md-3">
                 <div class="single-footer-column">
@@ -38,7 +37,7 @@
                     <p class="text-xxsm bottom-border">SUBSCRIBE NOW</p>
                     <form action="" class="subscribe-form mt-5">
                         <div class="d-flex single-input-group justify-content-between">
-                            <input type="text" name="email" placeholder="Enter your email address" style="color: black; font-size: 14px;"/>
+                            <input type="text" name="email" placeholder="Enter your email address" style="color: white; font-size: 14px;"/>
                             <img src="/img/landing/subscribe_user.png" alt="">
                         </div>
                         <button type="submit" class="btn text-xxsm text-white btn-orange-customed fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
@@ -59,7 +58,7 @@
         <div class="row mt-5">
             <div class="col-md-6 text-left">
                 <div class="single-footer-column">
-                    <a href="#">Copyright © 2021 Edventure Ltd . All rights reserved.</a>
+                    <a href="#">Copyright © 2022 Edventure Ltd . All rights reserved.</a>
                 </div>
             </div>
             <div class="col-md-6 text-right text-left-footer">

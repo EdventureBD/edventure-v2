@@ -51,7 +51,7 @@
                         <img src="/img/landing/newLanding/roadMap.webp" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
-                <div class="d-flex flex-column card-main-info" style="width: 35%">
+                <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-1">
                     <div class="w-25 ml-md-auto mr-md-5">
                         <img src="/img/medical_camp/medicamp11.png" alt="" class="img-fluid">
                     </div>
@@ -67,7 +67,7 @@
                         <img src="/img/landing/newLanding/mobileDashboard.webp" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
-                <div class="d-flex flex-column card-main-info" style="width: 35%">
+                <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-2">
                     <div class="w-25 mx-5">
                         <img src="/img/medical_camp/medicamp21.png" alt="" class="img-fluid">
                     </div>
@@ -83,7 +83,7 @@
                         <img src="/img/landing/newLanding/socialGroup.webp" alt="discussion banner image" class="img-fluid">
                     </div>
                 </div>
-                <div class="d-flex flex-column card-main-info" style="width: 35%">
+                <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-3">
                     <div class="w-25 ml-auto mr-5">
                         <img src="/img/medical_camp/medicamp31.png" alt="" class="img-fluid">
                     </div>
