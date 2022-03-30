@@ -1,4 +1,12 @@
 <x-landing-layout headerBg="white">
+    <style>
+        #select-category {
+            margin-top: 10px;
+            margin-bottom: 33px;
+            font-weight: 500;
+            font-size: 22px;
+        }
+    </style>
     <link rel="stylesheet" href="/css/model-exam-index.css">
     <div class="page-section">
         <div class="container">
@@ -6,9 +14,9 @@
 
             @if(count($exam_categories) > 0)
                 <div class="py-4">
-                    <div class="text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Exams Category</div>
+                    <div class="text-center bradius-10 py-2 w-100 text-sm " style="font-weight: 900; color: #76777A"> Exams Category</div>
                     @if(!request()->has('c'))
-                        <div class="text-center"> Select a Category</div>
+                        <div class="text-center" id="select-category"> Select a Category</div>
                     @endif
                     <div class="row">
                         @foreach($exam_categories as $category)
