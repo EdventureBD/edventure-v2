@@ -16,6 +16,20 @@
     text-align: center;
     color: rgba(29, 29, 29, 0.5);
 }
+@media  screen and (min-width: 1365px) and (max-width: 1920px) {
+    #card-main-info-1 {
+        position: relative;
+        right: 110px;
+    }
+    #card-main-info-2 {
+        position: relative;
+        left: 110px;
+    }
+    #card-main-info-3 {
+        position: relative;
+        right: 110px;
+    }
+}
 @media screen and (max-width:576px){
    p {
        font-size: 0.9rem !important;
