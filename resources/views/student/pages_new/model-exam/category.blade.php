@@ -1,5 +1,6 @@
 <x-landing-layout headerBg="white">
     <link rel="stylesheet" href="/css/model-exam-index.css">
+    <link rel="stylesheet" href="/css/tooltip.css">
 
     <div class="page-section">
         <div class="container">
@@ -20,7 +21,7 @@
                                     style="border-radius: 26px;padding: 14px 14px !important;width: 248px;height: 301px;">
                                     <div class="card-header fw-800"
                                         style="color: #6400C8;font-size: 22px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                                        data-toggle="tooltip" data-placement="right" title="{{ $category->name }}">
+                                        data-toggle="tooltip" data-placement="top" title="{{ $category->name }}">
                                         {{ $category->name }}
                                     </div>
                                     <div class="card-body">
@@ -96,3 +97,8 @@
         }
     </script>
 </x-landing-layout>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
