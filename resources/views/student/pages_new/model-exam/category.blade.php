@@ -6,6 +6,16 @@
             font-weight: 500;
             font-size: 22px;
         }
+        @media screen and (max-width:768px) and (min-width: 577px) {
+            .category-cards-parent {
+                margin-left: 25px !important;
+            }
+        }
+        @media screen and (max-width:576px) {
+            .category-cards-parent {
+                margin-left: 33px !important;
+            }
+        }
     </style>
     <link rel="stylesheet" href="/css/model-exam-index.css">
     <div class="page-section">
@@ -18,7 +28,7 @@
                     @if(!request()->has('c'))
                         <div class="text-center" id="select-category"> Select a Category</div>
                     @endif
-                    <div class="row" style="row-gap: 35px">
+                    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 category-cards-parent" style="row-gap: 35px">
                         @foreach($exam_categories as $category)
                             {{-- <div class="col-md-4">
                                 <div class="col-md-3 mb-4" style="max-width: 100%;padding-right: 0 !important;">
@@ -39,7 +49,7 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="col-md-4">
+                            <div class="">
                                 <div class="card text-center" style="border-radius: 26px;padding: 14px 14px !important;width: 248px;
                                 height: 301px;">
                                     <div class="card-header fw-800 text-capitalize">
