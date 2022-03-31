@@ -60,8 +60,9 @@ class Create extends Component
         'phone' => 'required|numeric|digits:11',
         'user_type' => 'required',
         'education' => ['required_if:user_type,2'],
-        'year_of_experience' => ['required_if:user_type,2','numeric'],
-        'expertise' => ['required_if:user_type,2','regex:~^([a-z0-9]+,)+$~i']
+        'year_of_experience' => ['required_if:user_type,2'],
+        'expertise' => ['required_if:user_type,2']
+//        'regex:~^([a-z0-9]+,)+$~i'
     ];
 
     protected $customMessages = [
@@ -77,6 +78,7 @@ class Create extends Component
             $imageUrl = $this->image->store('public/user');
             $this->image = Storage::url($imageUrl);
         }
+
         $user = User::query()->create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -88,13 +90,7 @@ class Create extends Component
         ]);
 
         if($user->user_type == 2) {
-            TeacherDetail::query()->create([
-                'user_id' => $user->id,
-                'education' => $data['education'],
-                'year_of_experience' => $data['year_of_experience'],
-                'expertise' => $data['expertise'],
-                'status' => 1
-            ]);
+            $this->createTeacherDetails($user,$data);
         }
 
         if (!$user) {
@@ -102,7 +98,8 @@ class Create extends Component
             return redirect()->route('user.create');
         }
 
-        session()->flash('status', 'User successfully added!');
+        $label = $user->user_type == 1 ? 'Admin' : ($user->user_type == 2 ? 'Teacher' : 'Student');
+        session()->flash('status', $label.' added successfully!');
         return redirect()->route('user.create');
     }
 
@@ -123,6 +120,17 @@ class Create extends Component
         } else {
             return $this->show = false;
         }
+    }
+
+    public function createTeacherDetails($user,$data)
+    {
+        TeacherDetail::query()->create([
+            'user_id' => $user->id,
+            'education' => $data['education'],
+            'year_of_experience' => $data['year_of_experience'],
+            'expertise' => $data['expertise'],
+            'status' => 1
+        ]);
     }
 
 }
