@@ -23,6 +23,7 @@ class Create extends Component
     public $education;
     public $year_of_experience;
     public $expertise;
+    public $show = false;
 
     public function updatedName()
     {
@@ -52,25 +53,25 @@ class Create extends Component
         ]);
     }
 
-//    protected $rules = ;
+    protected $rules = [
+        'name' => 'string|required|max:325',
+        'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
+        'email' => 'email:rfc,dns|unique:users|required',
+        'phone' => 'required|numeric|digits:11',
+        'user_type' => 'required',
+        'education' => ['required_if:user_type,2'],
+        'year_of_experience' => ['required_if:user_type,2','numeric'],
+        'expertise' => ['required_if:user_type,2','regex:~^([a-z0-9]+,)+$~i']
+    ];
 
     protected $customMessages = [
-        'required' => 'The :attribute field is required.'
+        'required_if' => 'The :attribute is required.',
+        'expertise.regex' => "The :attribute format is invalid. It should be 'comma(,)' seperated"
     ];
 
     public function saveUser()
     {
-        $data = $this->validate([
-            'name' => 'string|required|max:325',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
-            'email' => 'email:rfc,dns|unique:users|required',
-            'phone' => 'required|numeric|digits:11',
-            'user_type' => 'required',
-            'education' => ['required_if:user_type,2'],
-            'year_of_experience' => ['required_if:user_type,2','number'],
-            'expertise' => ['required_if:user_type,2']
-        ],
-        [ 'required_if' => 'The :attribute is required.']);
+        $data = $this->validate($this->rules, $this->customMessages);
 
         if ($this->image) {
             $imageUrl = $this->image->store('public/user');
@@ -113,6 +114,15 @@ class Create extends Component
     public function render()
     {
         return view('livewire.user.create');
+    }
+
+    public function changeEvent($value)
+    {
+        if($value == 2) {
+            return $this->show = true;
+        } else {
+            return $this->show = false;
+        }
     }
 
 }

@@ -90,7 +90,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="userType">User Type <span
                                                     style="color: red">*</span></label>
-                                            <select id="user_type" class="form-control" wire:model="user_type">
+                                            <select wire:click="changeEvent($event.target.value)" id="user_type" class="form-control" wire:model="user_type">
                                                 <option value="" selected>Select user type</option>
                                                 @foreach ($user_types as $user_type)
                                                     <option value="{{ $user_type->id }}">{{ $user_type->name }}</option>
@@ -102,8 +102,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row d-none" id="teacher_div">
+                                @if($show)
+                                <div class="row" id="teacher_div">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="education"> Teacher Education <span
@@ -136,14 +136,14 @@
                                                     style="color: red">*</span></label>
                                             <input type="text" wire:model="expertise"
                                                    class="form-control @error('expertise') is-invalid @enderror" id="expertise"
-                                                   placeholder="physics,math">
+                                                   placeholder="physics, math,">
                                         </div>
                                         @error('expertise')
                                         <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
-
+                                @endif
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
