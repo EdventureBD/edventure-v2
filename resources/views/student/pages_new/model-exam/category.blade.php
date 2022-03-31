@@ -18,12 +18,11 @@
                     @if(!request()->has('c'))
                         <div class="text-center" id="select-category"> Select a Category</div>
                     @endif
-                    <div class="row">
+                    <div class="row" style="row-gap: 35px">
                         @foreach($exam_categories as $category)
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <div class="col-md-3 mb-4" style="max-width: 100%;padding-right: 0 !important;">
-                                    <div
-                                        class="single-exam text-center mx-auto p-4 mb-md-0">
+                                    <div class="single-exam text-center mx-auto p-4 mb-md-0">
                                         <h5 style="line-height: 1.5em; height: 3em; width: 100%; overflow: hidden;" class="text-center mt-2">{{ $category->name }} </h5>
                                         <div>
                                             @if($category->image)
@@ -37,6 +36,22 @@
                                                 See Details
                                             </a>
                                         </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="col-md-4">
+                                <div class="card text-center" style="border-radius: 26px;padding: 14px 14px !important;width: 248px;
+                                height: 301px;">
+                                    <div class="card-header fw-800 text-capitalize">
+                                        {{ $category->name }} 
+                                    </div>
+                                    <div class="card-body">
+                                         @if($category->image)
+                                            <img class="img-fluid" src="{{Storage::url('categoryImage/'.$category->image)}}" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <a href="{{route('model.exam',['c' => $category->uuid])}}" class="btn btn-orange-customed">See Detail</a>
                                     </div>
                                 </div>
                             </div>
