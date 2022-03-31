@@ -26,7 +26,7 @@
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
 {{--        @include('partials.facebook_pixel')--}}
         <style>
-            
+
             @media (max-width: 992px) {
                 .navbar-collapse {
                     position: fixed;
@@ -121,9 +121,11 @@
                 <div class="wholeBody">
                     {{ $slot }}
                     {{-- @yield('content') --}}
+                @if(!request()->is("model-exam/submit/*"))
                     @include('landing.footer')
+                @endif
                 </div>
-                
+
             </div>
         </div>
         <!-- Scripts -->
