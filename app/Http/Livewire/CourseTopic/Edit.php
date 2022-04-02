@@ -100,7 +100,7 @@ class Edit extends Component
 
     public function updateCourseTopic()
     {
-        $this->rules['title'] = ['required', 'string', 'max:200', 'unique:course_topics,title,'.$this->course_topic->id];        
+        $this->rules['title'] = ['required', 'string', 'max:200', 'unique:course_topics,title,'.$this->course_topic->id];
         $data = $this->validate();
         $course_topic = CourseTopic::find($this->course_topic->id);
         $course_topic->title = $data['title'];

@@ -72,7 +72,7 @@ class BatchController extends Controller
             foreach($batchTopic->courseTopic->exams as $exam){
                 $aptitude_test_passed = $previous_aptitude_test_passed;
                 $topic_end_exam_passed = $previous_topic_end_exam_passed;
-                
+
                 $number_of_nodes++;
                 $scored_marks = 0;
                 $details_results = $exam->details_results->where('exam_type', $exam->exam_type);

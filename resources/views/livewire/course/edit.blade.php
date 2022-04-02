@@ -97,13 +97,55 @@
                                             </div> --}}
                                         </div>
                                     </div>
+
+
+
+
+									@if($show_island_image)
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-8">
+														<div class="form-group">
+														<label for="exampleInputFile" class="col-form-label">Course
+															Island Image</label>
+														<div class="input-group">
+															<div class="custom-file">
+																	<input type="file" wire:model="islandImage"
+																	class="custom-file-input hidden" id="exampleInputFile">
+																	<label class="custom-file-label"
+																	for="exampleInputFile">Course Island Image (576px*642px)</label>
+															</div>
+														</div>
+														@error('island_image')
+															<p style="color: red;">{{ $message }}</p>
+														@enderror
+														</div>
+												</div>
+												{{-- <div class="col-md-4">
+														@if ($tempBanner)
+														<img class="product-image" src="{{ $tempBanner->temporaryUrl() }}"
+															alt="">
+														@endif
+														<div wire:loading wire:target="banner">
+														<p style="color: indigo">Uploading banner ....</p>
+														</div>
+												</div> --}}
+											</div>
+										</div>
+									@endif
+
+
                                 </div>
+
+
+
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Intermediary Level <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="intermediaryLevelId">
+                                            <select class="form-control" wire:model="intermediaryLevelId" disabled>
                                                 <option value="" selected>Select Intermediary Level</option>
                                                 @foreach ($intermediary_levels as $intermediary)
                                                     <option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
