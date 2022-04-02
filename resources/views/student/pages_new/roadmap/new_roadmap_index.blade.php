@@ -143,7 +143,7 @@
       @endif
    @empty
       <div>
-         <h1 class="text-center mx-auto"> No Course Topics(i.e Islands) Added Yet !! Please Coontact System Admin. </h1>
+         <h1 class="text-center mx-auto"> No Course Topics(i.e Islands) Added Yet !! Please Contact System Admin. </h1>
       </div>
    @endforelse
 
