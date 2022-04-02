@@ -747,7 +747,6 @@ class ExamController extends Controller
     public function batchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
 
         $course = Course::where('id', $course_topic->course_id)->firstOrFail();
-        // dd($course_topic);
 
         if ($exam_type == Edvanture::APTITUDETEST) {
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
@@ -762,6 +761,10 @@ class ExamController extends Controller
                 // serve exam if the student hasn't completed and submitted an exam. Else, serve pending message/exam result.
                 if ( $canAttempt->status == 0 ) {
                     $questions = AptitudeTestMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+
+                    if($questions->count() < $exam->question_limit){
+                        return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
+                    }
 
                     return view('student.pages_new.batch.exam.batch_exam_aptitude_test', compact('questions', 'exam', 'batch'));
                 }
