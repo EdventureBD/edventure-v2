@@ -105,7 +105,6 @@ class BundleController extends Controller
    }
 
    public function processPayment($bundle_slug, Request $request){
-      
       $bundle = Bundle::where('slug', $bundle_slug)->with([
             'courses' => function($query){
                return $query->select('id', 'title', 'slug', 'course_category_id', 'intermediary_level_id', 'bundle_id');
