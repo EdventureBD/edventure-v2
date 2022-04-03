@@ -64,6 +64,12 @@
             filter: drop-shadow(0px 103.559px 168.131px rgba(0, 0, 0, 0.100973)) drop-shadow(0px 23.1312px 37.5543px rgba(0, 0, 0, 0.149027)) drop-shadow(0px 6.88678px 11.1809px rgba(0, 0, 0, 0.25));
 
         }
+        #examDetails {
+            height: 559px;
+        }
+        #examRoutine {
+            height: 559px;
+        }
         #headingOne:before,
         #headingTwo:before {
             font-family: 'Font Awesome 5 Free';
@@ -96,6 +102,12 @@
             }
             #parent-div {
                 flex-direction: column-reverse;
+            }
+            #examDetails {
+                height: 435px;
+            }
+            #examRoutine {
+                height: 435px;
             }
         }
 
@@ -159,6 +171,8 @@
             font-size: 20px;
             margin-right: 5px;
         }
+       
+        
     </style>
 <div class="page-section">
     <div class="container">
@@ -264,8 +278,8 @@
 
                         </div>
                     </nav>
-                    <div style="border: 25px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
-                        <div style="padding: 10px" class="tab-pane text-center col-md-12 fade active show"
+                    <div style="border: 5px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
+                        <div style="padding: 10px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade active show"
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
@@ -277,7 +291,7 @@
                             @endif
 
                         </div>
-                        <div style="padding: 10px" class="tab-pane text-center col-md-12 fade"
+                        <div style="padding: 10px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade"
                              id="examRoutine"
                              role="tabpanel"
                              aria-labelledby="examRoutine-tab">
@@ -285,7 +299,7 @@
                                 <img style="width: 100%; height: 100%" src="{{Storage::url('categoryRoutine/'.$category->routine_image)}}" alt="">
                             @else
                                 <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
-                                <spna style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</spna>
+                                <span style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</span>
                             @endif
                         </div>
                     </div>
