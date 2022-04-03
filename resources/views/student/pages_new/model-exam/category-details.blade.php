@@ -173,22 +173,22 @@
         }
         /* customised slim scroll bar part  */
           /* width */
-          div#examDetails::-webkit-scrollbar,div#examRoutine::-webkit-scrollbar {
+          div#examDetails::-webkit-scrollbar,div#examRoutine::-webkit-scrollbar,div.teachers div::-webkit-scrollbar {
             width: 1px;
         }
   
         /* Track */
-        div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track {
+        div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track,div.teachers div::-webkit-scrollbar-track {
             background: #f1f1f1; 
         }
         
         /* Handle */
-        div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb {
+        div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb,div.teachers div::-webkit-scrollbar-thumb {
             background: #6400C8; 
         }
         
         /* Handle on hover */
-        div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover {
+        div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover,div.teachers div::-webkit-scrollbar-thumb:hover {
             background: #555; 
         }
         /* customised slim scroll bar part  */
@@ -261,9 +261,9 @@
                 @if($category->teacher_lists)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষকবৃন্দ</h5>
-                        <div class="d-flex" style="border-radius: 25px; background-color: #eeeeee; padding: 10px">
+                        <div class="d-flex overflow-x-scroll" style="border-radius: 25px; background-color: #eeeeee; padding: 10px">
                             @foreach($category->teacher_lists as $teacher)
-                                <div class="text-center" style="display: inline-grid; padding-right: 10px; padding-left: 10px; align-content: center; border-right: 1px solid lightgrey;">
+                                <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
                                         <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
                                     @else
