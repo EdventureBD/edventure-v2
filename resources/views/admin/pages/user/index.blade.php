@@ -170,9 +170,9 @@
                                             @elseif($user->user_type == 2)
                                                 <td>
                                                     @if($user->teacherDetails)
-                                                        Education: {{$user->teacherDetails->education ?? 'n/a'}}<br>
-                                                        Year of experience: {{$user->teacherDetails->year_of_experience ?? 'n/a'}}<br>
-                                                        Expertise: {{$user->teacherDetails->expertise ?? 'n/a'}}
+                                                        <b>Education:</b> {{$user->teacherDetails->education ?? 'n/a'}}<br>
+                                                        <b>Year of experience:</b> {{$user->teacherDetails->year_of_experience ?? 'n/a'}}<br>
+                                                        <b>Expertise:</b> {{$user->teacherDetails->expertise ?? 'n/a'}}
                                                     @else
                                                         n/a
                                                     @endif
