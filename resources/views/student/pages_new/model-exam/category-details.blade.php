@@ -245,20 +245,22 @@
 
                 <div class="exam-details mt-5">
                     <nav>
-                        <div class="nav custom-shadow nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                        <div class="nav custom-shadow nav-tabs d-flex justify-content-center align-items-center" id="nav-tab" role="tablist">
                             <a class="nav-link active"
                                data-toggle="tab"
                                href="#examDetails"
                                role="tab"
                                aria-controls="examDetails"
-                               aria-selected="true">এক্সাম বিস্তারিত</a>
+                               aria-selected="true"
+                               style="border-top-right-radius: 0px !important; padding:15px">এক্সাম বিস্তারিত</a>
 
                             <a class="nav-link"
                                data-toggle="tab"
                                href="#examRoutine"
                                role="tab"
                                aria-controls="examRoutine"
-                               aria-selected="false">রুটিন</a>
+                               aria-selected="false"
+                               style="border-top-left-radius: 0px !important; padding: 15px">রুটিন</a>
 
                         </div>
                     </nav>
