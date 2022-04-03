@@ -53,4 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(StudentDetails::class, 'user_id', 'id');
     }
+
+    public function teacherDetails()
+    {
+        return $this->hasOne(TeacherDetail::class, 'user_id', 'id');
+    }
 }
