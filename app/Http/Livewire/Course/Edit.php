@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use File;
 
 // models
 use App\Models\Admin\Course;
@@ -33,12 +34,16 @@ class Edit extends Component
     public $url;
     public $image;
     public $banner;
+    public $islandImage;
     public $tempImage;
     public $tempBanner;
+    public $tempIslandImage;
     public $deleteImage;
     public $deleteBanner;
+    public $deleteIslandImage;
     public $show_price;
     public $show_teachers;
+    public $show_island_image = false;
 
     public function updatedTitle()
     {
@@ -55,6 +60,11 @@ class Edit extends Component
     public function updatedBanner()
     {
         $this->tempBanner = $this->banner;
+    }
+
+    public function updatedIslandImage()
+    {
+        $this->tempIslandImage = $this->islandImage;
     }
 
     public function updatedDuration()
@@ -95,9 +105,9 @@ class Edit extends Component
 
     public function updatedTeacherId()
     {
-       $this->validate([
-            'teacherId' => 'required|numeric|integer'
-       ]);
+        $this->validate([
+                'teacherId' => 'required|numeric|integer'
+        ]);
     }
 
     public function updatedPrice()
@@ -117,7 +127,7 @@ class Edit extends Component
     protected $rules = [
         'title' => 'required|string|max:100',
         'banner' => 'nullable|image|mimes:jpeg,jpg,png',
-        'image' => 'nullable|mimes:jpeg,jpg,png',
+        'image' => 'nullable|image|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
         'intermediaryLevelId' => 'required|numeric|integer',
@@ -135,36 +145,83 @@ class Edit extends Component
 
     public function updateCourse()
     {
-      if($this->bundleId){
-         $this->rules['teacherId'] = 'required|integer|numeric';
-         $this->rules['price'] = 'nullable|integer|numeric';
-      }
-      else{
-         $this->rules['teacherId'] = 'nullable|integer|numeric';
-         $this->rules['price'] = 'required|integer|numeric|gt:-1';
-      }
+        if($this->bundleId){
+            $this->rules['teacherId'] = 'required|integer|numeric';
+            $this->rules['price'] = 'nullable|integer|numeric';
+        }
+        else{
+            $this->rules['teacherId'] = 'nullable|integer|numeric';
+            $this->rules['price'] = 'required|integer|numeric|gt:-1';
+        }
 
         $data = $this->validate();
 
-        if ($this->tempImage) {
-            $imageUrl = $this->image->store('public/course');
-            $this->image = Storage::url($imageUrl);
-            Storage::delete($this->deleteImage);
-        }
+        // dd($this->tempImage, $this->tempBanner, $this->tempIslandImage, $this->deleteImage, $this->deleteBanner, $this->deleteIslandImage);
+
+        // if($this->deleteImage && file_exists(public_path($this->deleteImage))){
+        //     unlink(public_path($this->deleteImage));
+        // }
+        // if ($this->tempImage) {
+        //     $imageUrl = $this->image->store('public/course');
+        //     $this->image = Storage::url($imageUrl);
+        // }
         
-        if ($this->tempBanner) {
-            $imageUrl2 = $this->banner->store('public/course');
-            $this->banner = Storage::url($imageUrl2);
-            Storage::delete($this->deleteBanner);
-        }
+        // if($this->deleteBanner && file_exists(public_path($this->deleteBanner))){
+        //     unlink(public_path($this->deleteBanner));
+        // }
+        // if ($this->tempBanner) {
+        //     $imageUrl2 = $this->banner->store('public/course');
+        //     $this->banner = Storage::url($imageUrl2);
+        // }
+
+        // if ($this->tempIslandImage){
+        //     $imageUrl3 = $this->islandImage->store('public/course');
+        //     $this->islandImage = Storage::url($imageUrl3);
+        //     if($this->deleteIslandImage && file_exists(public_path($this->deleteIslandImage))){
+        //         unlink(public_path($this->deleteIslandImage));
+        //     }
+        // }
 
         $intermediary_level = IntermediaryLevel::where('id', $data['intermediaryLevelId'])->firstOrFail();
 
         $course = Course::find($this->course->id);
         $course->title = $data['title'];
         $course->slug = Str::slug($data['title']);
-        $course->icon = $this->image;
-        $course->banner = $this->banner;
+
+        if($this->deleteImage && file_exists(public_path($this->deleteImage))){
+            unlink(public_path($this->deleteImage));
+            $course->icon = null;
+        }
+        if($this->tempImage){
+            // if ($this->tempImage) {
+                $imageUrl = $this->image->store('public/course');
+                $this->image = Storage::url($imageUrl);
+            // }
+            $course->icon = $this->image;
+        }
+
+        if($this->deleteBanner && file_exists(public_path($this->deleteBanner))){
+            unlink(public_path($this->deleteBanner));
+            $course->banner = null;
+        }
+        if($this->tempBanner){
+            // if ($this->tempBanner) {
+                $imageUrl2 = $this->banner->store('public/course');
+                $this->banner = Storage::url($imageUrl2);
+            // }
+            $course->banner = $this->banner;
+        }
+
+        if($this->tempIslandImage){
+            // if ($this->tempIslandImage){
+                $imageUrl3 = $this->islandImage->store('public/course');
+                $this->islandImage = Storage::url($imageUrl3);
+                if($this->deleteIslandImage && file_exists(public_path($this->deleteIslandImage))){
+                    unlink(public_path($this->deleteIslandImage));
+                }
+            // }
+            $course->island_image = $this->islandImage;
+        }
         $course->course_category_id = $intermediary_level->course_category_id;
         $course->intermediary_level_id = $data['intermediaryLevelId'];
       //   if(empty($data['bundleId'])){
@@ -208,24 +265,28 @@ class Edit extends Component
         $this->bundleId = $this->course->bundle_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
-        $this->image = $this->course->icon;
-        $this->banner = $this->course->banner;
-        $this->deleteImage = $this->course->logo;
+        // $this->tempImage = $this->course->logo;
+        // $this->tempBanner = $this->course->banner;
+        // $this->tempIslandImage = $this->course->island_image;
+        $this->deleteImage = $this->course->icon;
         $this->deleteBanner = $this->course->banner;
+        $this->deleteIslandImage = $this->course->island_image;
 
         $this->teachers = User::where('user_type', 2)->get();
         $batch = Batch::where('course_id', $this->course->id)->first();
         if($batch){
-           $this->teacherId = $batch->teacher_id;
+            $this->teacherId = $batch->teacher_id;
         }
 
         if($this->course->bundle_id !== null){
             $this->show_price = false;
             $this->show_teachers = true;
+            $this->show_island_image = true;
         }
         else{
             $this->show_price = true;
             $this->show_teachers = false;
+            $this->show_island_image = false;
         }
 
         $this->intermediary_levels = IntermediaryLevel::all();
