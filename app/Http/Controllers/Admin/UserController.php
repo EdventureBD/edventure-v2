@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         // WITHOUT LIVEWIRE
-        $users = User::query();
+        $users = User::query()->with('studentDetails');
         $users = $this->getUser($users);
         return view('admin.pages.user.index', compact('users'));
 
@@ -42,7 +42,7 @@ class UserController extends Controller
 
     public function allAdmin()
     {
-        $users = User::where('user_type', 1);
+        $users = User::where('user_type', 1)->with('studentDetails');
         $users = $this->getUser($users);
         return view('admin.pages.user.index', compact('users'));
 
@@ -53,7 +53,7 @@ class UserController extends Controller
 
     public function allTeacher()
     {
-        $users = User::where('user_type', 2);
+        $users = User::where('user_type', 2)->with('studentDetails');
         $users = $this->getUser($users);;
         return view('admin.pages.user.index', compact('users'));
 
