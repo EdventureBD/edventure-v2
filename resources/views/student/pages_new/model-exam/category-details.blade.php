@@ -171,7 +171,27 @@
             font-size: 20px;
             margin-right: 5px;
         }
-       
+        /* customised slim scroll bar part  */
+          /* width */
+          div#examDetails::-webkit-scrollbar,div#examRoutine::-webkit-scrollbar {
+            width: 1px;
+        }
+  
+        /* Track */
+        div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        
+        /* Handle */
+        div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb {
+            background: #6400C8; 
+        }
+        
+        /* Handle on hover */
+        div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        /* customised slim scroll bar part  */
         
     </style>
 <div class="page-section">
@@ -279,27 +299,31 @@
                         </div>
                     </nav>
                     <div style="border: 5px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
-                        <div style="padding: 10px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade active show"
+                        <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade active show"
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
                             @if($category->details)
                                 {!! $category->details !!}
                             @else
-                                <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
-                                <span style="color: grey">এক্সামের বিস্তারিত এখানে দেয়া হবে</span>
+                                <div class="text-center">
+                                    <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
+                                    <span style="color: grey">এক্সামের বিস্তারিত এখানে দেয়া হবে</span>
+                                </div>
                             @endif
 
                         </div>
-                        <div style="padding: 10px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade"
+                        <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade"
                              id="examRoutine"
                              role="tabpanel"
                              aria-labelledby="examRoutine-tab">
                             @if($category->routine_image)
                                 <img style="width: 100%; height: 100%" src="{{Storage::url('categoryRoutine/'.$category->routine_image)}}" alt="">
                             @else
-                                <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
-                                <span style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</span>
+                                <div class="text-center">
+                                    <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
+                                    <span style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</span>
+                                </div>
                             @endif
                         </div>
                     </div>
