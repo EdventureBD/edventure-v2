@@ -13,6 +13,43 @@
                     @if (!request()->has('c'))
                         <div class="text-center" id="select-category"> Select a Category</div>
                     @endif
+                    {{-- =============================************************===================================== --}}
+                    {{-- customed card for being used everywhere --}}
+
+                    {{-- <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 category-cards-parent"
+                        style="row-gap: 35px">
+                        @foreach ($exam_categories as $category)
+                            <div class="">
+                                <div class="card text-center"
+                                    style="border-radius: 26px;padding: 14px 14px !important;width: 248px;height: 301px;">
+                                    <div class="card-header fw-800"
+                                        style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+                                        data-toggle="tooltip" data-placement="top" title="{{ $category->name }}">
+                                        {{ $category->name }}
+                                    </div>
+                                    <div class="card-body">
+                                        @if ($category->image)
+                                            <img class="img-fluid" height="96" width="112"
+                                                src="{{ Storage::url('categoryImage/' . $category->image) }}"
+                                                alt="Exam category image">
+                                        @else
+                                            <img class="img-fluid" height="96" width="112"
+                                                src="/img/category_details/default-image.png" alt="Exam category image">
+                                        @endif
+
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <a href="{{ route('model.exam', ['c' => $category->uuid]) }}"
+                                            class="btn text-white fw-700 btn-detail">See Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div> --}}
+
+                    {{-- customed card for being used everywhere ends --}}
+                    {{-- =====================================********************************================================= --}}
+
                     <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 category-cards-parent"
                         style="row-gap: 35px">
                         @foreach ($exam_categories as $category)

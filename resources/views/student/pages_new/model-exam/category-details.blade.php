@@ -14,9 +14,9 @@
 
                 <div class="includes">
                     <div class="row">
-                        <div class="col-md-6 d-flex my-md-1">
+                        <div class="col-md-6 d-flex my-2">
                             <div class="col-4 p-0 my-auto">
-                                <img class="img-fluid" src="/img/category_details/participant.png" alt="participant's photo"/>
+                                <img class="img-fluid" src="/img/category_details/participant1.png" alt="participant's photo"/>
                             </div>
                             <div class="col-8 d-flex flex-column p-0 my-auto">
                                 <div class="text-nowrap detail-parts-font">এক্সামটি দিয়েছে </div>
@@ -33,9 +33,9 @@
                         </div>
 
                         @if(!empty($category->time_allotted) && !is_null($category->time_allotted))
-                            <div class="col-md-6 d-flex my-md-1">
+                            <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/timer.png" alt="timer's photo">
+                                    <img class="img-fluid" src="/img/category_details/timer1.png" alt="timer's photo">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
@@ -47,9 +47,9 @@
                         @endif
 
                         @if(!empty($category->full_solutions) && !is_null($category->full_solutions))
-                            <div class="col-md-6 d-flex my-md-1">
+                            <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="completeSolution">
+                                    <img class="img-fluid" src="/img/category_details/completeSolution1.png" alt="completeSolution">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">পূর্ণাঙ্গ সমাধান </div>
@@ -61,9 +61,9 @@
                         @endif
 
                         @if(!empty($category->paper_final) && !is_null($category->paper_final))
-                            <div class="col-md-6 d-flex my-md-1">
+                            <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="paperFinal">
+                                    <img class="img-fluid" src="/img/category_details/paperFinal1.png" alt="paperFinal">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">পেপার ফাইনাল </div>
@@ -76,9 +76,9 @@
 
 
                         @if(!empty($category->subject_final) && !is_null($category->subject_final))
-                            <div class="col-md-6 d-flex my-md-1">
+                            <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/subjectFinal.png" alt="subjectFinal">
+                                    <img class="img-fluid" src="/img/category_details/subjectFinal1.png" alt="subjectFinal">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">সাবজেক্ট ফাইনাল </div>
@@ -91,9 +91,9 @@
 
 
                         @if(!empty($category->final_exam) && !is_null($category->final_exam))
-                            <div class="col-md-6 d-flex my-md-1">
+                            <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/modelTest.png" alt="FinalModelTest">
+                                    <img class="img-fluid" src="/img/category_details/modelTest1.png" alt="FinalModelTest">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">ফাইনাল মডেল টেস্ট </div>
