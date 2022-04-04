@@ -33,6 +33,16 @@ class Edit extends Component
     public $threeStarIslandImage;
     public $disabledIslandImage;
 
+
+
+    public $temp_zeroStarIslandImage;
+    public $temp_oneStarIslandImage;
+    public $temp_twoStarIslandImage;
+    public $temp_threeStarIslandImage;
+    public $temp_disabledIslandImage;
+
+
+
     public $show = false;
 
     protected $rules = [
@@ -155,6 +165,12 @@ class Edit extends Component
         $this->title = $this->course_topic->title;
         $this->all_course_categories = CourseCategory::all();
 
+        $this->temp_zeroStarIslandImage = $this->course_topic->zero_star_island_image;
+        $this->temp_oneStarIslandImage = $this->course_topic->one_star_island_image;
+        $this->temp_twoStarIslandImage = $this->course_topic->two_star_island_image;
+        $this->temp_threeStarIslandImage = $this->course_topic->three_star_island_image;
+        $this->temp_disabledIslandImage = $this->course_topic->disabled_island_image;
+        
         $this->courseId = $this->course_topic->course_id;
         $this->course = Course::where('id', $this->courseId)->firstOrFail();
         $this->intermediaryLevelId = $this->course_topic->intermediary_level_id;

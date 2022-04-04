@@ -17,7 +17,6 @@ use App\Models\Admin\AptitudeTestMCQ;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
-use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CreativeQuestion;
 use App\Models\Admin\TopicEndExamMCQ;

@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CompletedLectures;
 use App\Models\Admin\CourseTopic;
-use App\Models\Student\exam\DetailsResult;
 use App\Models\Admin\Exam;
 use DateTime;
 

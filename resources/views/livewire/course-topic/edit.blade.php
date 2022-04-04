@@ -111,8 +111,10 @@
                                     </div>
                                     <div>
                                           @if ($zeroStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $zeroStarIslandImage->temporaryUrl() }}">
+                                             <img style="width: 200px;" src="{{ $zeroStarIslandImage->temporaryUrl() }}">
+                                          @elseif ($temp_zeroStarIslandImage)
+                                             <img style="width: 200px;" class="img-fluid"
+                                             src="{{ asset($temp_zeroStarIslandImage) }}" alt="...">
                                           @endif
                                           @error('zeroStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -130,8 +132,10 @@
                                     </div>
                                     <div>
                                           @if ($oneStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $oneStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $oneStarIslandImage->temporaryUrl() }}">
+                                          @elseif ($temp_oneStarIslandImage)
+                                             <img style="width: 200px;" class="img-fluid"
+                                             src="{{ asset($temp_oneStarIslandImage) }}" alt="...">
                                           @endif
                                           @error('oneStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -149,8 +153,10 @@
                                     </div>
                                     <div>
                                           @if ($twoStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $twoStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $twoStarIslandImage->temporaryUrl() }}">
+                                          @elseif ($temp_twoStarIslandImage)
+                                             <img style="width: 200px;" class="img-fluid"
+                                             src="{{ asset($temp_twoStarIslandImage) }}" alt="...">
                                           @endif
                                           @error('twoStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -168,8 +174,10 @@
                                     </div>
                                     <div>
                                           @if ($threeStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $threeStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $threeStarIslandImage->temporaryUrl() }}">
+                                          @elseif ($temp_threeStarIslandImage)
+                                             <img style="width: 200px;" class="img-fluid"
+                                             src="{{ asset($temp_threeStarIslandImage) }}" alt="...">
                                           @endif
                                           @error('threeStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -187,8 +195,10 @@
                                     </div>
                                     <div>
                                           @if ($disabledIslandImage)
-                                             Preview:
-                                             <img src="{{ $disabledIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $disabledIslandImage->temporaryUrl() }}">
+                                          @elseif ($temp_disabledIslandImage)
+                                             <img style="width: 200px;" class="img-fluid"
+                                             src="{{ asset($temp_disabledIslandImage) }}" alt="...">
                                           @endif
                                           @error('disabledIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
