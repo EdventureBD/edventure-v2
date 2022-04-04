@@ -86,6 +86,9 @@
     top: 8% !important;
     width: 531px;
 }
+.detail-parts-font {
+    font-size: 12.1525px;
+}
 @media screen and (width: 1366px){
     .sticky {
         top: 12% !important;
@@ -94,6 +97,9 @@
 @media screen and (max-width: 820px){
     .sticky {
         width: 319px;
+    }
+    .detail-parts-font {
+        font-size: 13px;
     }
     #examDetails,#examRoutine {
         height: 435px;
@@ -118,6 +124,9 @@
     }
     #examRoutine {
         height: 435px;
+    }
+    .detail-parts-font {
+        font-size: 14px;
     }
 }
 
@@ -150,14 +159,14 @@
     padding: 15px;
     border-radius: 15px;
     width: 100%;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 800;
     background-color: #FA9632;
     color: white;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
-    text-shadow: 2px 1px 4px black;
+    text-shadow: 1px 1px 2px black;
 }
 
 .category-details-action-btn:hover {

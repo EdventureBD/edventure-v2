@@ -1,7 +1,9 @@
 <x-landing-layout headerBg="white">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- custom css link  --}}
     <link rel="stylesheet" href="/css/category-details.css">
+    {{-- custom css link ends  --}}
 <div class="page-section">
     <div class="container">
         <div class="d-flex mb-3" id="parent-div">
@@ -12,53 +14,93 @@
 
                 <div class="includes">
                     <div class="row">
-                        <div class="col-md-6 d-flex mt-3">
-                            <img src="/img/category_details/icons8-users-48.png"/>
-                            <span class="marginLeft10">এক্সামটি দিয়েছে <br>
-                                @if(!is_null($category->price) && $category->price != 0)
-                                    @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)
-                                    {{\App\Enum\Converter::en2bn($number)}} জন
-                                @else
-                                    @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
-                                    {{\App\Enum\Converter::en2bn($number)}} জন
-                                @endif
-                            </span>
+                        <div class="col-md-6 d-flex my-md-1">
+                            <div class="col-4 p-0 my-auto">
+                                <img class="img-fluid" src="/img/category_details/participant.png" alt="participant's photo"/>
+                            </div>
+                            <div class="col-8 d-flex flex-column p-0 my-auto">
+                                <div class="text-nowrap detail-parts-font">এক্সামটি দিয়েছে </div>
+                                <div class="text-nowrap detail-parts-font">
+                                    @if(!is_null($category->price) && $category->price != 0)
+                                        @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)
+                                        {{\App\Enum\Converter::en2bn($number)}} জন
+                                    @else
+                                        @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
+                                        {{\App\Enum\Converter::en2bn($number)}} জন
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         @if(!empty($category->time_allotted) && !is_null($category->time_allotted))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">সময় লাগবে <br> {{\App\Enum\Converter::en2bn($category->time_allotted)}} ঘন্টা</span>
+                            <div class="col-md-6 d-flex my-md-1">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/timer.png" alt="timer's photo">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->time_allotted)}} ঘন্টা
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
                         @if(!empty($category->full_solutions) && !is_null($category->full_solutions))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-users-48.png"/>
-                                <span class="marginLeft10">পূর্ণাঙ্গ সমাধান <br> {{\App\Enum\Converter::en2bn($category->full_solutions)}}+</span>
+                            <div class="col-md-6 d-flex my-md-1">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="completeSolution">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">পূর্ণাঙ্গ সমাধান </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->full_solutions)}}+
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
                         @if(!empty($category->paper_final) && !is_null($category->paper_final))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">পেপার ফাইনাল <br> {{\App\Enum\Converter::en2bn($category->paper_final)}} টি</span>
+                            <div class="col-md-6 d-flex my-md-1">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="paperFinal">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">পেপার ফাইনাল </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->paper_final)}} টি
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
 
                         @if(!empty($category->subject_final) && !is_null($category->subject_final))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-users-48.png"/>
-                                <span class="marginLeft10">সাবজেক্ট ফাইনাল <br> {{\App\Enum\Converter::en2bn($category->subject_final)}} টি</span>
+                            <div class="col-md-6 d-flex my-md-1">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/subjectFinal.png" alt="subjectFinal">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">সাবজেক্ট ফাইনাল </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->subject_final)}} টি
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
 
                         @if(!empty($category->final_exam) && !is_null($category->final_exam))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">ফাইনাল মডেল টেস্ট <br> {{\App\Enum\Converter::en2bn($category->final_exam)}} টি</span>
+                            <div class="col-md-6 d-flex my-md-1">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/modelTest.png" alt="FinalModelTest">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">ফাইনাল মডেল টেস্ট </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->final_exam)}} টি
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
