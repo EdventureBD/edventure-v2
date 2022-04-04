@@ -17,7 +17,10 @@
             <div class="container">
                   <div class="py-5" style="display: flex; flex-direction: column;">
                      <h1 class="display-5 text-sm text-dark max-w-38 mx-auto fw-600" style="text-align: center">Your submitted answer is being reviewed. Please wait</h1>
-                     <a href="{{ route('batch-lecture', ['batch' => $batch->slug]) }}" class="btn text-xxsm text-white bg-purple px-3 py-2 mx-auto mt-3">Go Back</a>
+                     <div class="d-flex mx-auto">
+                        <a href="{{ route('batch-lecture', ['batch' => $batch->slug]) }}" class="btn text-xxsm text-white bg-purple px-3 py-2 mt-3 mx-1">Go Back<i class="fas fa-arrow-up ml-2"></i></a>
+                        @if(!empty($next_link)) <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple px-3 py-2 mt-3 mx-1">Next <i class="fas fa-angle-double-right ml-1"></i></a> @endif
+                     </div>
                   </div>
             </div>
          </div>
