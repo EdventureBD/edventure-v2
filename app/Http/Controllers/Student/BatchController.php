@@ -12,7 +12,8 @@ use App\Models\Admin\CourseLecture;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CompletedLectures;
-use App\Models\Student\exam\DetailsResult;
+use App\Models\Admin\CourseTopic;
+use App\Models\Admin\Exam;
 use DateTime;
 
 class BatchController extends Controller
@@ -173,12 +174,40 @@ class BatchController extends Controller
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
     {
+        $exam = Exam::find($courseLecture->exam_id);
         //setting next lecture & prev lecture
-        $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '<', $courseLecture->id)->orderBy('created_at', 'desc')->first();
-        $prev_lecture_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
-        $next_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)->where('id', '>', $courseLecture->id)->orderBy('created_at', 'asc')->first();
-        $next_lecture_link = $next_lecture ? route('topic_lecture', [$batch->slug, $next_lecture->slug]) : null;
-        // dd($next_lecture);
+        $prev_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)
+                                        ->where('id', '<', $courseLecture->id)
+                                        ->with(['exam' => function($query){
+                                            return $query->select('id', 'slug', 'exam_type');
+                                        }])
+                                        ->orderBy('created_at', 'desc')
+                                        ->first();
+        $prev_link = $prev_lecture ? route('topic_lecture', [$batch->slug, $prev_lecture->slug]) : null;
+        
+        // get the next lecture
+        $next_lecture = CourseLecture::where('topic_id', $courseLecture->topic_id)
+                                        ->where('exam_id', $exam->id)
+                                        ->where('id', '>', $courseLecture->id)
+                                        ->with(['exam' => function($query){
+                                            return $query->select('id', 'slug', 'exam_type');
+                                        }])
+                                        ->orderBy('created_at', 'asc')
+                                        ->first();
+
+        // if next lecture exists, then generate link for that lecture
+        if($next_lecture){
+            $next_link = route('topic_lecture', [$batch->slug, $next_lecture->slug]);
+            $next_link_btn_text = "Next Lecture";
+        }
+        // else generate link for that exam
+        else{
+            $course_topic = CourseTopic::where('id', $courseLecture->topic_id)->select('id', 'slug', 'course_id')->first();
+            $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type]);
+            $next_link_btn_text = "Next Exam";
+        }
+
+        // dd($next_link, $courseLecture, $next_lecture, $prev_lecture);
 
         $course = Course::where('id', $batch->course_id)->first();
         $liveClass = LiveClass::where('batch_id', $batch->id)
@@ -195,7 +224,7 @@ class BatchController extends Controller
             $timeleft_seconds = $start_date_time->format('U') - $today_time->format('U');
             $timeleft = $timeleft_seconds;
         }
-        return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_lecture_link', 'next_lecture_link'));
+        return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_link', 'next_link', 'next_link_btn_text'));
     }
 
     public function lecture_visit_confirmed_ajax($batch, $courseLecture){
@@ -204,15 +233,17 @@ class BatchController extends Controller
 
         if($completed){
             $completed->delete();
+            $completion_status = false;
         }
         else{
             $completed = new CompletedLectures();
             $completed->student_id = auth()->user()->id;
             $completed->lecture_id = $courseLecture;
             $completed->save();
+            $completion_status = true;
         }
 
-        return true;
+        return ['success' => true, 'completed' => $completion_status];
     }
 
     public function get_lecture_visit_status_ajax($batch, $courseLecture){

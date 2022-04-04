@@ -2,13 +2,13 @@
     <!-- Header Layout Content -->
         <div class="mdk-header-layout__content page-content ">
             <div class="container lecture-page page__container page-section position-relative">
-                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-angle-double-left"></i> Back to course</a>
+                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-arrow-up mr-2"></i> Back to course</a>
                 <div class="d-flex justify-content-between">
                     <div>
-                        @if(!empty($prev_lecture_link))<a href="{{$prev_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif
+                        {{-- @if(!empty($prev_link))<a href="{{$prev_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif --}}
                     </div>
                     <div>
-                        @if(!empty($next_lecture_link))<a href="{{$next_lecture_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20">Next Lecture<i class="fas fa-angle-right"></i></a>@endif
+                        @if(!empty($next_link))<a id="next-btn" href="{{$next_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20 d-none">{{ $next_link_btn_text }}<i class="fas fa-angle-double-right ml-1"></i></a>@endif
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -161,6 +161,7 @@
                 if(response){
                     $("#lecture_viewed").attr("checked", true);
                     // $("#lecture_viewed").attr("disabled", true);
+                    $('#next-btn').removeClass('d-none')
                 }
 
                 var confirm_request_url = "/batch/{{ $batch->id }}/ajax/confirm/{{ $courseLecture->id }}";
@@ -171,9 +172,14 @@
                         data: { },
                         success: function(response)
                         {
-                            if(response){
+                            console.log(response.success, response.completed);
+                            if(response.success){
                                 $("#lecture_viewed").attr("checked", true);
                                 // $("#lecture_viewed").attr("disabled", true);
+                                if(response.completed)
+                                    $('#next-btn').removeClass('d-none')
+                                else
+                                    $('#next-btn').addClass('d-none')
                             }
                         }
                     });

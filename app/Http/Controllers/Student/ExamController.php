@@ -501,6 +501,53 @@ class ExamController extends Controller
             }
 
             if($cq_result && $cq_result->checked == 0){
+
+                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
+                // Get Next Pop Quiz
+                if($exam->exam_type == "Pop Quiz"){
+
+                    // Get Next Pop Quiz for link generation
+                    $next_exam = Exam::where(function ($query)use($exam){
+                        $query->where('exam_type', 'Pop Quiz')->orderBy('order')->where('order', '>', $exam->order);
+                    })
+                    // ->where('order', '>', $exam->order)
+                    ->where('course_id', $exam->course_id)
+                    ->where('topic_id', $exam->topic_id)
+                    ->with([
+                        'course_lectures' => function($query){
+                            return $query->select('id', 'slug', 'course_id', 'topic_id', 'exam_id');
+                        },
+                    ])
+                    ->select('id', 'slug', 'course_id', 'topic_id', 'exam_type')
+                    ->first();
+
+                    // if next pop quiz is not found, get topic end exam
+                    if(empty($next_exam)){
+                        $next_exam = Exam::where(function ($query)use($exam){
+                            $query->where('exam_type', 'Topic End Exam');
+                        })
+                        // ->where('order', '>', $exam->order)
+                        ->where('course_id', $exam->course_id)
+                        ->where('topic_id', $exam->topic_id)
+                        ->with([
+                            'course_lectures' => function($query){
+                                return $query->select('id', 'slug', 'course_id', 'topic_id', 'exam_id');
+                            },
+                        ])
+                        ->select('id', 'slug', 'course_id', 'topic_id', 'exam_type')
+                        ->first();
+                    }
+
+                    // If next pop quiz has lecture, then generate link for that
+                    if(count($next_exam->course_lectures) > 0){
+                        $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]->slug]);
+                    }
+                    // else generate link for the quiz
+                    else{
+                        $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $next_exam->id, $next_exam->exam_type]);
+                    }
+                }
+
                 return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
             }
 
@@ -794,8 +841,39 @@ class ExamController extends Controller
                     ->get();
     
                     $weakAnalysis = $analysis;
+
+                    // get next pop quiz
+                    $next_exam = Exam::where('exam_type', "Pop Quiz")
+                                        ->where('course_id', $course->id)->where('topic_id', $course_topic->id)
+                                        ->select('id', 'slug', 'course_id', 'topic_id', 'exam_type', 'order')
+                                        ->orderBy('order')
+                                        ->with(['course_lectures' => function($query){
+                                                return $query->select('id', 'slug', 'course_id', 'topic_id', 'exam_id')->where('status', 1);
+                                            },
+                                        ])
+                                        ->first();
+
+                    if(empty($next_exam->course_lectures[0])){
+                        $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $next_exam->id, $next_exam->exam_type]);
+                    }
+                    else{
+                        $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]]);
+                    }
                 
-                    return view('student.pages_new.batch.exam.canAttemp', compact('canAttempt', 'exam', 'batch', 'detailsResults', 'analysis', 'weakAnalysis', 'max', 'min', 'course_topic', 'batch', 'exam'));
+                    return view('student.pages_new.batch.exam.canAttemp',
+                                compact('canAttempt',
+                                        'exam',
+                                        'batch',
+                                        'detailsResults',
+                                        'analysis',
+                                        'weakAnalysis',
+                                        'max',
+                                        'min',
+                                        'course_topic',
+                                        'batch',
+                                        'exam',
+                                        'next_link'
+                                    ));
                 }
         }
 
@@ -1058,6 +1136,47 @@ class ExamController extends Controller
                 ->where('exam_type', 'Pop Quiz MCQ')
                 ->first();
 
+                // Get Next Pop Quiz for link generation
+                $next_exam = Exam::where(function ($query)use($exam){
+                    $query->where('exam_type', 'Pop Quiz')->orderBy('order')->where('order', '>', $exam->order);
+                })
+                // ->where('order', '>', $exam->order)
+                ->where('course_id', $exam->course_id)
+                ->where('topic_id', $exam->topic_id)
+                ->with([
+                    'course_lectures' => function($query){
+                        return $query->select('id', 'slug', 'course_id', 'topic_id', 'exam_id');
+                    },
+                ])
+                ->select('id', 'slug', 'course_id', 'topic_id', 'exam_type')
+                ->first();
+
+                // if next pop quiz is not found, get topic end exam
+                if(empty($next_exam)){
+                    $next_exam = Exam::where(function ($query)use($exam){
+                        $query->where('exam_type', 'Topic End Exam');
+                    })
+                    // ->where('order', '>', $exam->order)
+                    ->where('course_id', $exam->course_id)
+                    ->where('topic_id', $exam->topic_id)
+                    ->with([
+                        'course_lectures' => function($query){
+                            return $query->select('id', 'slug', 'course_id', 'topic_id', 'exam_id');
+                        },
+                    ])
+                    ->select('id', 'slug', 'course_id', 'topic_id', 'exam_type')
+                    ->first();
+                }
+
+                // If next pop quiz has lecture, then generate link for that
+                if(count($next_exam->course_lectures) > 0){
+                    $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]->slug]);
+                }
+                // else generate link for the quiz
+                else{
+                    $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $next_exam->id, $next_exam->exam_type]);
+                }
+
                 if($mcq_exam_result){
                     // contains only details of MCQ exams
                     $mcq_details_results = DetailsResult::where('exam_id', $exam->id)
@@ -1148,7 +1267,7 @@ class ExamController extends Controller
                 if($cq_exam_result){
                     if($cq_exam_result->checked == 0) {
                         // Paper Checking Pending
-                        return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
+                        return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam', 'next_link'));
                     }
                     elseif($cq_exam_result->checked == 1) {
 
@@ -1215,6 +1334,7 @@ class ExamController extends Controller
                         'cqs_exist',
                         'cq_total_marks',
                         'cq_marks_scored',
+                        'next_link'
                     ));
                 }
 
