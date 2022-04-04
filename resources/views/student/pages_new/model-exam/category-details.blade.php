@@ -88,17 +88,29 @@
             top: 8% !important;
             width: 531px;
         }
-
+        @media screen and (width: 1366px){
+            .sticky {
+                top: 12% !important;
+            }
+        }
+        @media screen and (max-width: 820px){
+            .sticky {
+                width: 319px;
+            }
+            #examDetails,#examRoutine {
+                height: 435px;
+            }
+        }
         @media (max-width: 768px) {
             .sticky {
                 top: 7% !important;
-                width: 320px !important;
+                width: 321px !important;
             }
         }
         @media (max-width: 576px) {
             .sticky {
                 top: 9% !important;
-                width: 330px !important;
+                width: 365px !important;
             }
             #parent-div {
                 flex-direction: column-reverse;
@@ -114,6 +126,12 @@
         @media (min-width: 578px) {
             #parent-div {
                 flex-direction: row;
+            }
+        }
+        @media screen and (max-width: 392px){
+            .sticky {
+                width: 345px !important;
+                top: 10% !important;
             }
         }
         .payment-btn {

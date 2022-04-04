@@ -20,7 +20,7 @@
                                 <div class="card text-center"
                                     style="border-radius: 26px;padding: 14px 14px !important;width: 248px;height: 301px;">
                                     <div class="card-header fw-800"
-                                        style="color: #6400C8;font-size: 22px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+                                        style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
                                         data-toggle="tooltip" data-placement="top" title="{{ $category->name }}">
                                         {{ $category->name }}
                                     </div>
