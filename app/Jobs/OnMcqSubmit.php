@@ -51,7 +51,9 @@ class OnMcqSubmit implements ShouldQueue
         $questionAnalysis = ModelMcqQuestionAnalysis::query()->where('model_exam_id',$this->exam->id)->get();
         foreach ($this->mcq as $key => $value) {
             $mcqQuestion = $questions->where('id',$key)->first();
-            $gain_mark = $mcqQuestion->answer == $value ? 1 : ($this->exam->negative_marking ? -$this->exam->negative_marking_value  : 0);
+            $gain_mark = $mcqQuestion->answer == $value ? 1
+                                                        : (empty($value) ? 0
+                                                        : ($this->exam->negative_marking ? -$this->exam->negative_marking_value  : 0));
             $detail_result[] = [
                 'model_exam_id' => (int)$this->exam->id,
                 'mcq_question_id' => $key,
