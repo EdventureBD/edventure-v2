@@ -12,7 +12,7 @@
                 </p>
             </div>
         </div>
-    </section> 
+    </section>
     <!--header banner end-->
 
     <!--Contact form -->
@@ -31,7 +31,7 @@
                         <input required type="email" name="email" id="email" placeholder="Enter your Email">
 
                         <br>
-                        <input required type="text" name="message" id="message" placeholder="Write a Message"/>
+                        <textarea style="background: #363536; width: 83%; color: white" class="mt-5" required type="text" name="message" id="message" placeholder="Write a Message"></textarea>
                         <br>
 
                         <div id="Contact_us_action_button" class="w-80 row">
@@ -84,7 +84,7 @@
                                target="_blank">
                                 <img src="/images/follow_us/LinkedInWhite.png" alt="LinkedIn Logo">
                             </a>
-                            
+
                         </div>
 
                     </div>

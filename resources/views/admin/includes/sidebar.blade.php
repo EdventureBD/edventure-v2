@@ -408,6 +408,16 @@
                 </li>
                 {{-- END OF SETTINGS --}}
 
+                {{-- START OF CONTACT-US --}}
+                <li class="nav-item {{ request()->is('admin/contact-us') ? 'menu-open' : '' }}">
+                    <a href="{{ route('contact.us.index') }}"
+                       class="nav-link {{ request()->is('admin/contact-us') ? 'active' : '' }}">
+                        <i class="fas fa-address-card"></i>
+                        <p>&nbsp;&nbsp;Contacted-us</p>
+                    </a>
+                </li>
+                {{-- END OF CONTACT-US --}}
+
                 @can('other')
                 {{-- START OF SETTINGS --}}
                 <li class="nav-item {{ request()->is('admin/social-group') ? 'menu-open' : '' }}">
