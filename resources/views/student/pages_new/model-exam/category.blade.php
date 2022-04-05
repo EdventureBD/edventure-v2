@@ -20,6 +20,12 @@
             color: #6400C8;
             width: 100%;
         }
+        .vertical-line {
+            width: 1px;
+            height:70%;
+            background:#bbbdc2; 
+            margin-left: 10px;
+        }
     </style>
     <div class="page-section">
         <div class="container">
@@ -74,7 +80,7 @@
                         <div class="card col-md-5 card-parent-div">
                             <h5 class="card-title mx-auto card-title-customed" data-toggle="tooltip" data-placement="top" title="{{ $category->name }}">{{ $category->name }}</h5>
                             <div class="row no-gutters">
-                                <div class="col-md-4 d-flex flex-column" style="justify-content: space-evenly">
+                                <div class="col-4 d-flex flex-column" style="justify-content: space-evenly">
                                     <div class="d-flex justify-content-center align-items-center">
                                         @if ($category->image)
                                             <img class="img-fluid" height="96" width="112"
@@ -92,7 +98,10 @@
                                         <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
                                         <span class="iconify" data-icon="ant-design:star-filled" style="color: #c4c4c4;"></span>                                    </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="my-auto vertical-line">
+                                    
+                                </div>
+                                <div class="col-7">
                                     <div class="card-body">
                                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
