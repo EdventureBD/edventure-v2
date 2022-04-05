@@ -26,7 +26,7 @@
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
 {{--        @include('partials.facebook_pixel')--}}
         <style>
-            
+
             @media (max-width: 992px) {
                 .navbar-collapse {
                     position: fixed;
@@ -67,6 +67,10 @@
             }
             .bg-dark {
                 background-color: #953dd2!important;
+            }
+            #language-dropdown:hover {
+                background: #fa9632;
+                color: white;
             }
         </style>
     </head>
@@ -123,7 +127,7 @@
                     {{-- @yield('content') --}}
                     @include('landing.footer')
                 </div>
-                
+
             </div>
         </div>
         <!-- Scripts -->

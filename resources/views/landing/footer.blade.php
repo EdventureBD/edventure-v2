@@ -3,44 +3,44 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="single-footer-column">
-                    <p class="text-xxsm bottom-border">CONTACT</p>
+                    <p class="text-xxsm bottom-border">{{__('index.contact')}}</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="{{route('about_us')}}">About</a></li>
-                        <li><a href="{{route('contact_us')}}#shape-b-contact-box">Contact Us</a></li>
-                        <li><a href="{{route('about_us')}}#ceo_message">Message From The Ceo</a></li>
+                        <li><a href="{{route('about_us')}}">{{__('index.about')}}</a></li>
+                        <li><a href="{{route('contact_us')}}#shape-b-contact-box">{{__('index.contact_us')}}</a></li>
+                        <li><a href="{{route('about_us')}}#ceo_message">{{__('index.message_from_the_ceo')}}</a></li>
 
                     </ul>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="single-footer-column">
-                    <p class="text-xxsm bottom-border">COMMUNITY</p>
+                    <p class="text-xxsm bottom-border">{{__('index.community')}}</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a target="blank" href="https://www.facebook.com/edventurebd">Facebook</a></li>
-                        <li><a target="blank" href="https://www.linkedin.com/company/edventurebd/">Linkedin</a></li>
-                        <li><a target="blank" href="https://www.instagram.com/edventurebd/">Instagram</a></li>
+                        <li><a target="blank" href="https://www.facebook.com/edventurebd">{{__('index.facebook')}}</a></li>
+                        <li><a target="blank" href="https://www.linkedin.com/company/edventurebd/">{{__('index.linkedin')}}</a></li>
+                        <li><a target="blank" href="https://www.instagram.com/edventurebd/">{{__('index.instagram')}}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="single-footer-column">
-                    <p class="text-xxsm bottom-border">INFORMATION</p>
+                    <p class="text-xxsm bottom-border">{{__('index.information')}}</p>
                     <ul class="ml-0 p-0 mt-4">
-                        <li><a href="{{route('terms_condition')}}">Terms & Condition</a></li>
-                        <li><a href="{{route('privacy_policy')}}">Privacy Policy</a></li>
-                        <li><a href="{{route('refund_return_policy')}}">Refund and Return Policy</a></li>
+                        <li><a href="{{route('terms_condition')}}">{{__('index.terms_&_condition')}}</a></li>
+                        <li><a href="{{route('privacy_policy')}}">{{__('index.privacy_policy')}}</a></li>
+                        <li><a href="{{route('refund_return_policy')}}">{{__('index.refund_return_policy')}}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="single-footer-column">
-                    <p class="text-xxsm bottom-border">SUBSCRIBE NOW</p>
+                    <p class="text-xxsm bottom-border">{{__('index.subscribe_now')}}</p>
                     <form action="" class="subscribe-form mt-5">
                         <div class="d-flex single-input-group justify-content-between">
-                            <input type="text" name="email" placeholder="Enter your email address" style="color: white; font-size: 14px;"/>
+                            <input type="text" name="email" placeholder="{{__('index.enter_your_email_address')}}" style="color: white; font-size: 14px;"/>
                             <img src="/img/landing/subscribe_user.png" alt="">
                         </div>
-                        <button type="submit" class="btn text-xxsm text-white btn-orange-customed fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
+                        <button type="submit" class="btn text-xxsm text-white btn-orange-customed fw-800 px-4 py-2 w-100 mt-3">{{__('index.subscribe_now')}}</button>
                     </form>
                 </div>
                 <div class="d-flex justify-content-between social-icons mt-3">
@@ -58,12 +58,12 @@
         <div class="row mt-5">
             <div class="col-md-6 text-left">
                 <div class="single-footer-column">
-                    <a href="#">Copyright © 2022 Edventure Ltd . All rights reserved.</a>
+                    <a href="#">{{__('index.copyright')}}</a>
                 </div>
             </div>
             <div class="col-md-6 text-right text-left-footer">
                 <div class="single-footer-column">
-                    <a href="tel:+8801746483678"  class="font-arial mr-4">+8801746483678</a>
+                    <a href="tel:+8801746483678"  class="font-arial mr-4">{{__('index.business_number')}}</a>
                     <a href = "mailto: business@edventurebd.com" class="mr-4">business@edventurebd.com</a>
                 </div>
             </div>

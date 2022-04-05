@@ -10,10 +10,12 @@ use App\Models\Admin\Course;
 use App\Models\Admin\CourseCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\BundleController;
 use App\Utils\Payment;
+use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -104,6 +106,15 @@ Route::get('/single-payment-category-success/{categoryId}', [SinglePaymentContro
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
 Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');
 
+//language Switch route
+
+Route::get('/language/{lang}', function ($lang) {
+
+    if (array_key_exists($lang, Config::get('language'))) {
+        Session::put('appLocale', $lang);
+    }
+    return redirect()->back();
+})->name('lang.switch');
 
 
 Route::get('/test', function() {

@@ -3,7 +3,7 @@
     <div class="page-section ">
         <div class="container ">
             <div class="py-4">
-                <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Courses Category</div>
+                <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700">{{__('index.course_category')}}</div>
             </div>
             <div class="text-center @if($categories->count()>=7) course-category-js @endif ">
                 @foreach($categories as $category)
@@ -42,7 +42,7 @@
                 </div>
                 <div class="row justify-content-center py-3 card-group-row mb-lg-8pt">
                     @foreach ($courses as $course)
-                        <div class="col-md-3 mb-4">                        
+                        <div class="col-md-3 mb-4">
                             <div class="single-exam text-center mx-auto p-4 mb-md-0" style="background-image: url({{asset($course->banner)}});">
                                 <img src="{{asset($course->icon)}}" width="50" alt="">
                                 <h5 class="text-center text-sm mt-2">{{ $course->title }} </h5>
