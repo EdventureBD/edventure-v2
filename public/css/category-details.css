@@ -96,7 +96,7 @@
 }
 @media screen and (max-width: 820px){
     .sticky {
-        width: 319px;
+        width: 252px !important;
     }
     .detail-parts-font {
         font-size: 13px;
@@ -108,7 +108,7 @@
 @media (max-width: 768px) {
     .sticky {
         top: 7% !important;
-        width: 321px !important;
+        width: 242px !important;
     }
 }
 @media (max-width: 576px) {
@@ -135,10 +135,41 @@
         flex-direction: row;
     }
 }
+@media screen and (max-width:414px) {
+    .sticky {
+        width: 382px !important;
+    }
+}
+@media screen and (max-width: 393px) {
+    .sticky {
+        width: 364px !important;
+    }
+}
 @media screen and (max-width: 392px){
     .sticky {
         width: 345px !important;
         top: 10% !important;
+    }
+}
+@media screen and (max-width:390px) {
+    .sticky {
+        width:360px !important;
+    }
+}
+@media screen and (max-width: 360px) {
+    .sticky {
+        width: 330px !important;
+    }
+}
+@media screen and (max-width: 330px) {
+    .sticky {
+        width: 330px !important;
+    }
+}
+@media screen and (max-width: 280px) {
+    .sticky {
+        width: 250px !important;
+        top: 14% !important;
     }
 }
 .payment-btn {
