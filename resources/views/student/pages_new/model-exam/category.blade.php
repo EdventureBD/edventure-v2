@@ -69,33 +69,35 @@
                     {{-- customed card for being used everywhere ends --}}
                     {{-- =====================================********************************================================= --}}
 
-                    <div class="row justify-content-center"
-                        style="gap: 45px">
+                    <div class="row justify-content-center" style="gap: 45px">
                         @foreach ($exam_categories as $category)
                         <div class="card col-md-5 card-parent-div">
                             <h5 class="card-title mx-auto card-title-customed" data-toggle="tooltip" data-placement="top" title="{{ $category->name }}">{{ $category->name }}</h5>
                             <div class="row no-gutters">
-                              <div class="col-md-4 d-flex flex-column" style="justify-content: space-evenly">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    @if ($category->image)
-                                        <img class="img-fluid" height="96" width="112"
-                                            src="{{ Storage::url('categoryImage/' . $category->image) }}"
-                                            alt="Exam category image">
-                                    @else
-                                        <img class="img-fluid" height="96" width="112"
-                                            src="/img/category_details/default-image.png" alt="Exam category image">
-                                    @endif
+                                <div class="col-md-4 d-flex flex-column" style="justify-content: space-evenly">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        @if ($category->image)
+                                            <img class="img-fluid" height="96" width="112"
+                                                src="{{ Storage::url('categoryImage/' . $category->image) }}"
+                                                alt="Exam category image">
+                                        @else
+                                            <img class="img-fluid" height="96" width="112"
+                                                src="/img/category_details/default-image.png" alt="Exam category image">
+                                        @endif
+                                    </div>
+                                    <div class="position-relative d-flex bottom-0" style="justify-content: space-evenly">
+                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
+                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
+                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
+                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
+                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #c4c4c4;"></span>                                    </div>
                                 </div>
-                                <div class="progress position-relative bottom-0">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                              </div>
                             </div>
                           </div>
                         @endforeach
@@ -159,3 +161,4 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+<script src="/js/new-dashboard/iconify-icons.js"></script>
