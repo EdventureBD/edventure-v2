@@ -23,8 +23,18 @@
         .vertical-line {
             width: 1px;
             height:70%;
-            background:#bbbdc2; 
+            background:#DDDDDD; 
             margin-left: 10px;
+            margin-right: 10px;
+        }
+        .card-text-customed {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 11.1928px;
+            line-height: 21px;
+            color: #6C686E;
+            margin-left: 5px;
         }
     </style>
     <div class="page-section">
@@ -103,8 +113,36 @@
                                 </div>
                                 <div class="col-7">
                                     <div class="card-body">
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        <div class="row row-cols-2">
+                                            <div class="d-flex justify-content-start">
+                                                <span class="iconify" data-icon="akar-icons:book" style="color: #6c686e;"></span>
+                                                <div class="card-text-customed">
+                                                    24 MCQ
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-start">
+                                                <span class="iconify" data-icon="clarity:alarm-clock-line" style="color: #6c686e;"></span>
+                                                <div class="card-text-customed">
+                                                    50 min
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-start">
+                                                <span class="iconify" data-icon="emojione-monotone:spiral-notepad" style="color: #6c686e;"></span>
+                                                <div class="card-text-customed">
+                                                    6 Notes
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-start">
+                                                <span class="iconify" data-icon="eva:people-outline" style="color: #6c686e;"></span>
+                                                <div class="card-text-customed">
+                                                    312 Students
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="btn btn-success">See Detail</a>
                                     </div>
                                 </div>
                             </div>
