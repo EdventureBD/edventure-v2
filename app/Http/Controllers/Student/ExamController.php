@@ -296,19 +296,57 @@ class ExamController extends Controller
         }
 
         if ($exam->exam_type == Edvanture::APTITUDETEST) {
-            $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
-            if ($result && $result->status == 1) {
-                return $this->sendResponse([]);
-            }
-            $questions = $request->q;
-            $answers = $request->a;
-            $save = $this->processAptitudeTestMCQ($questions, $answers, $batch, $exam, 1, $result);
-            if ($save) {
-                if ($request->ajax()) {
-                    return $this->sendResponse([]);
+
+            $validateData = $request->validate([
+                'mcq_ques' => 'required',
+            ]);
+
+            $exam_result = ExamResult::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->first();
+
+            if(!$exam_result){
+                $total_marks = count($request->mcq_ques);
+                $scored_marks = 0;
+                
+                foreach($request->mcq_ques as $key => $mcq){
+                    $mcq_question = AptitudeTestMCQ::where('id', $key)->select('id', 'answer', 'exam_id')->first();
+    
+                    $details_result = new DetailsResult();
+                    $details_result->exam_id = $exam->id;
+                    $details_result->exam_type = "Aptitude Test";
+                    $details_result->question_id = $key;
+                    $details_result->batch_id = $batch->id;
+                    $details_result->student_id = auth()->user()->id;
+                    if($mcq_question->answer == $mcq){
+                        $details_result->gain_marks = 1;
+                        $scored_marks += 1;
+                    }
+                    else{
+                        $details_result->gain_marks = 0;
+                        $scored_marks += 0;
+                    }
+                    $details_result->mcq_ans = $mcq;
+                    $details_result->status = 1;
+                    $details_result->save();
                 }
 
-                return view('student.pages_new.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
+                $exam_result = new ExamResult();
+                $exam_result->exam_id = $exam->id;
+                $exam_result->exam_type = "Aptitude Test";
+                $exam_result->batch_id = $batch->id;
+                $exam_result->student_id = auth()->user()->id;
+                $exam_result->gain_marks = $scored_marks;
+                $exam_result->status = 1;
+                $exam_result->checked = 1;
+                $exam_result->save();
+
+                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
+    
+                return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
+            }
+            else{
+                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
+
+                return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
         }
 
@@ -798,22 +836,18 @@ class ExamController extends Controller
         if ($exam_type == Edvanture::APTITUDETEST) {
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
 
-                $canAttempt = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
-                
-                if(!$canAttempt){
-                    // Inserting in the exam result as first attempt
-                    $canAttempt = (new ExamResult())->saveData(['exam_id' => $exam->id, 'exam_type' => $exam_type, 'batch_id' => $batch->id, 'student_id' => auth()->user()->id, 'gain_marks' => 0, 'status' => 0]);
-                }
+                $canAttempt = ExamResult::where('exam_id', $exam_id)->where('exam_type', 'Aptitude Test')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
 
                 // serve exam if the student hasn't completed and submitted an exam. Else, serve pending message/exam result.
-                if ( $canAttempt->status == 0 ) {
-                    $questions = AptitudeTestMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
+                if ( !$canAttempt ) {
+                    $mcq_questions = AptitudeTestMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
 
-                    if($questions->count() < $exam->question_limit){
+                    if($mcq_questions->count() < $exam->question_limit){
                         return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                     }
 
-                    return view('student.pages_new.batch.exam.batch_exam_aptitude_test', compact('questions', 'exam', 'batch'));
+                    return view('student.pages_new.batch.exam.batch_exam_aptitude_test', compact('mcq_questions', 'exam', 'batch'));
+                    // return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'exam', 'batch'));
                 }
                 else{
                     $total_marks = 0;
