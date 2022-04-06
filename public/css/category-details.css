@@ -84,7 +84,8 @@
 .sticky {
     position: fixed;
     top: 8% !important;
-    width: 531px;
+    /* width: 531px; */
+    width: 27.8%
 }
 .detail-parts-font {
     font-size: 12.1525px;
@@ -92,11 +93,25 @@
 @media screen and (width: 1366px){
     .sticky {
         top: 12% !important;
+        width: 39%;
+    }
+}
+@media screen and (max-width: 1080px) {
+    .sticky {
+        width: 41.5%;
+    }
+}
+@media screen and (max-width: 992px) {
+    #parent-div {
+        flex-direction: column-reverse;
+    }
+    .sticky {
+        width: 85% !important;
     }
 }
 @media screen and (max-width: 820px){
     .sticky {
-        width: 252px !important;
+        width: 84% !important;
     }
     .detail-parts-font {
         font-size: 13px;
@@ -104,17 +119,20 @@
     #examDetails,#examRoutine {
         height: 435px;
     }
+    #parent-div {
+        flex-direction: column-reverse;
+    }
 }
 @media (max-width: 768px) {
     .sticky {
         top: 7% !important;
-        width: 242px !important;
+        width: 90% !important;
     }
 }
 @media (max-width: 576px) {
     .sticky {
         top: 9% !important;
-        width: 365px !important;
+        width: 92% !important;
     }
     #parent-div {
         flex-direction: column-reverse;
@@ -130,48 +148,6 @@
     }
 }
 
-@media (min-width: 578px) {
-    #parent-div {
-        flex-direction: row;
-    }
-}
-@media screen and (max-width:414px) {
-    .sticky {
-        width: 382px !important;
-    }
-}
-@media screen and (max-width: 393px) {
-    .sticky {
-        width: 364px !important;
-    }
-}
-@media screen and (max-width: 392px){
-    .sticky {
-        width: 345px !important;
-        top: 10% !important;
-    }
-}
-@media screen and (max-width:390px) {
-    .sticky {
-        width:360px !important;
-    }
-}
-@media screen and (max-width: 360px) {
-    .sticky {
-        width: 330px !important;
-    }
-}
-@media screen and (max-width: 330px) {
-    .sticky {
-        width: 330px !important;
-    }
-}
-@media screen and (max-width: 280px) {
-    .sticky {
-        width: 250px !important;
-        top: 14% !important;
-    }
-}
 .payment-btn {
     border: 1px solid #fa9632;
     border-radius: 15px;

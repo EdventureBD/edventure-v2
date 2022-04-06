@@ -54,7 +54,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">পূর্ণাঙ্গ সমাধান </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{\App\Enum\Converter::en2bn($category->full_solutions)}}+
+                                        {{\App\Enum\Converter::en2bn($category->full_solutions)}} <span style="font-size: 20px;font-weight: 600;">+</span>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                 </div>
             </div>
 
-            <div class="w-100 ml-md-5 mt-5">
+            <div class="w-100 ml-lg-5 mt-5">
                 <div class="test">
                     <iframe
                         id="iframe"

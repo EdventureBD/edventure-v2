@@ -114,8 +114,8 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <a href="{{ route('model.exam', ['c' => $category->uuid]) }}"
-                                            {{-- class="btn text-white fw-700 btn-detail" --}}
-                                            class="btn btn-success fw-700"
+                                            class="btn text-white fw-700 btn-detail"
+                                            {{-- class="btn btn-success fw-700" --}}
                                             style="box-sizing: border-box;border-radius: 10px;">See Detail</a>
                                     </div>
                                 </div>
