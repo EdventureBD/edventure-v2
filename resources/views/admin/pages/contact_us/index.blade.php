@@ -6,6 +6,28 @@
 
 @section('content')
     <style>
+        /* customised slim scroll bar part  */
+        /* width */
+        div.message::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        /* Track */
+        div.message::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        div.message::-webkit-scrollbar-thumb {
+            background: salmon;
+            border-radius: 15pt;
+        }
+
+        /* Handle on hover */
+        div.message::-webkit-scrollbar-thumb:hover {
+            background: #8315f1;
+        }
+        /* customised slim scroll bar part  */
         *{
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -41,6 +63,7 @@
             background-color: white;
             width: 100%;
             /*min-height: 250px * 1.618;*/
+            height: 250px;
 
             display: -webkit-box;
 
@@ -184,13 +207,16 @@
                         </div>
 
                         <hr/>
-                        <p>{{$list->message}}</p>
+                        <div class="w-100 message px-2 my-3" style="overflow-y: scroll;">
+                            <p class="text-justify" style="word-break: initial !important">{{$list->message}}</p>
+                        </div>
+
                     </div>
                 </div>
 
         @empty
             <div class="d-flex justify-content-center">
-                <p>No Exam Found</p>
+                <p>No one contacted yet</p>
             </div>
             <div class="d-flex justify-content-center">
                 <img src="{{asset('admin/notFound.svg')}}" width="193" height="130"/>
