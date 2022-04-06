@@ -148,3 +148,61 @@
         margin-left: 33px !important;
     }
 }
+.card-parent-div {
+    background: #FFFFFF;
+    box-shadow: 0px 15.1668px 55.1519px rgba(0, 0, 0, 0.12), 0px 3.3877px 12.3189px rgba(0, 0, 0, 0.0715329), 0px 1.00861px 3.66766px rgba(0, 0, 0, 0.0484671);
+    border-radius: 26px;
+    height: 250px
+}
+.card-title-customed {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #6400C8;
+    width: 100%;
+}
+.vertical-line {
+    width: 1px;
+    height:70%;
+    background:#DDDDDD; 
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.card-text-customed {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11.1928px;
+    line-height: 21px;
+    color: #6C686E;
+    margin-left: 5px;
+}
+#categories-section {
+    gap: 45px;
+}
+@media screen and (max-width: 768px){
+    #categories-section {
+        gap: 10px;
+    }
+    .card-text-customed {
+        font-size: 15.1928px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .card-text-customed {
+        font-size: 8.5px;
+        /* font-size: .65rem; */
+    }
+    #categories-section {
+        gap: 10px;
+    }
+    .card-body {
+        padding : 1.15rem !important;
+    }
+}

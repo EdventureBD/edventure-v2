@@ -1,42 +1,7 @@
 <x-landing-layout headerBg="white">
     <link rel="stylesheet" href="/css/model-exam-index.css">
     <link rel="stylesheet" href="/css/tooltip.css">
-    <style>
-        .card-parent-div {
-            background: #FFFFFF;
-            box-shadow: 0px 15.1668px 55.1519px rgba(0, 0, 0, 0.12), 0px 3.3877px 12.3189px rgba(0, 0, 0, 0.0715329), 0px 1.00861px 3.66766px rgba(0, 0, 0, 0.0484671);
-            border-radius: 26px;
-        }
-        .card-title-customed {
-            font-family: 'Raleway';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 22px;
-            line-height: 26px;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: #6400C8;
-            width: 100%;
-        }
-        .vertical-line {
-            width: 1px;
-            height:70%;
-            background:#DDDDDD; 
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .card-text-customed {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 11.1928px;
-            line-height: 21px;
-            color: #6C686E;
-            margin-left: 5px;
-        }
-    </style>
+
     <div class="page-section">
         <div class="container">
             @include('partials.alert')
@@ -85,9 +50,9 @@
                     {{-- customed card for being used everywhere ends --}}
                     {{-- =====================================********************************================================= --}}
 
-                    <div class="row justify-content-center" style="gap: 45px">
+                    <div class="row justify-content-center" id="categories-section">
                         @foreach ($exam_categories as $category)
-                        <div class="card col-md-5 card-parent-div">
+                        <div class="card col-lg-5 card-parent-div">
                             <h5 class="card-title mx-auto card-title-customed" data-toggle="tooltip" data-placement="top" title="{{ $category->name }}">{{ $category->name }}</h5>
                             <div class="row no-gutters">
                                 <div class="col-4 d-flex flex-column" style="justify-content: space-evenly">
@@ -138,11 +103,20 @@
                                                     312 Students
                                                 </div>
                                             </div>
+                                            <div class="d-flex justify-content-start">
+                                                <span class="iconify" data-icon="healthicons:money-bag-outline" style="color: #6c686e;"></span>
+                                                <div class="card-text-customed">
+                                                    PAID
+                                                </div>
+                                            </div>
                                         </div>
                                        
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <a href="#" class="btn btn-success">See Detail</a>
+                                        <a href="{{ route('model.exam', ['c' => $category->uuid]) }}"
+                                            {{-- class="btn text-white fw-700 btn-detail" --}}
+                                            class="btn btn-success fw-700"
+                                            style="box-sizing: border-box;border-radius: 10px;">See Detail</a>
                                     </div>
                                 </div>
                             </div>
