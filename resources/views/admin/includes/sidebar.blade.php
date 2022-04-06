@@ -409,6 +409,7 @@
                 {{-- END OF SETTINGS --}}
 
                 {{-- START OF CONTACT-US --}}
+                @can('contact_us')
                 <li class="nav-item {{ request()->is('admin/contact-us') ? 'menu-open' : '' }}">
                     <a href="{{ route('contact.us.index') }}"
                        class="nav-link {{ request()->is('admin/contact-us') ? 'active' : '' }}">
@@ -416,6 +417,7 @@
                         <p>&nbsp;&nbsp;Contacted-us</p>
                     </a>
                 </li>
+                @endcan
                 {{-- END OF CONTACT-US --}}
 
                 @can('other')

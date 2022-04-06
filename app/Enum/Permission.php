@@ -19,5 +19,6 @@ interface Permission {
         'model_exam_result' => 'Model Exam Result',
         'model_exam_tag_analysis' => 'Model Exam Tag Analysis',
         'model_exam_payment' => 'Model Exam Payment',
+        'contact_us' => 'Contact Us'
     ];
 }
