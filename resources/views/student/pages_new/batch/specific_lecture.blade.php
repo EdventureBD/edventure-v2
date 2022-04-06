@@ -2,7 +2,7 @@
     <!-- Header Layout Content -->
         <div class="mdk-header-layout__content page-content ">
             <div class="container lecture-page page__container page-section position-relative">
-                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-arrow-up mr-2"></i> Back to course</a>
+                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-arrow-up mr-2"></i> Go Back to Journey </a>
                 <div class="d-flex justify-content-between">
                     <div>
                         {{-- @if(!empty($prev_link))<a href="{{$prev_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif --}}

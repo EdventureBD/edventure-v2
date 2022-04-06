@@ -20,7 +20,7 @@
                         </div>
                     @endif
                     <div class="text-right ml-2">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Back to course <i class="fas fa-arrow-up ml-2"> </i></a>
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
                     </div>
                     <div class="text-right ml-2">
                         <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{ $next_link }}"> Next <i class="fas fa-angle-double-right ml-1"></i></a>
