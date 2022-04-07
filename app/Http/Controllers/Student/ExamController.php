@@ -833,6 +833,8 @@ class ExamController extends Controller
 
         $course = Course::where('id', $course_topic->course_id)->firstOrFail();
 
+        // dd($course, $course_topic, $batch, $exam_id, $exam_type);
+
         if ($exam_type == Edvanture::APTITUDETEST) {
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
 
