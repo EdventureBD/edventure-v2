@@ -2,13 +2,14 @@
     <!-- Header Layout Content -->
         <div class="mdk-header-layout__content page-content ">
             <div class="container lecture-page page__container page-section position-relative">
-                <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-arrow-up mr-2"></i> Go Back to Journey </a>
-                <div class="d-flex justify-content-between">
+                {{-- <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-4" href="{{ route('course-preview', $course->slug) }}"><i class="fas fa-arrow-up mr-2"></i> Go Back to Journey </a> --}}
+                <div class="d-flex justify-content-between pt-5">
                     <div>
-                        {{-- @if(!empty($prev_link))<a href="{{$prev_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif --}}
+                        {{-- @if(!empty($prev_link))<a href="{{$prev_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-3 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif --}}
+                        <a href="{{ route('course-preview', $course->slug) }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3"><i class="fas fa-arrow-up mr-2"></i> Go Back to Journey </a>
                     </div>
                     <div>
-                        @if(!empty($next_link))<a id="next-btn" href="{{$next_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20 d-none">{{ $next_link_btn_text }}<i class="fas fa-angle-double-right ml-1"></i></a>@endif
+                        @if(!empty($next_link))<a id="next-btn" href="{{$next_link}}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 d-none">{{ $next_link_btn_text }}<i class="fas fa-angle-double-right ml-1"></i></a>@endif
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -92,7 +93,7 @@
                                                             <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">{{$liveClass->title}}</p>
                                                             
                                                             <div id="countdownTimer" class="text-center text-gray-50 count-timer my-4 font-arial"></div>
-                                                            <a class="btn text-xxxsm text-white bg-purple fw-800 px-2 py-2 w-20" target="blank" href="{{$liveClass->live_link}}">View Content </a>
+                                                            <a class="btn text-xxxsm text-white bg-purple fw-800 px-3 py-2 w-20" target="blank" href="{{$liveClass->live_link}}">View Content </a>
                                                         </div>
                                                         @else 
                                                         <div class="mx-auto mt-5 mb-5 text-center">

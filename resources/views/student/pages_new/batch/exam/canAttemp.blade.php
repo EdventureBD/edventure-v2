@@ -16,14 +16,14 @@
                 <div class="d-flex justify-content-end">
                     @if( $exam->exam_type !== "Aptitude Test" && $total_gain_marks < $exam->threshold_marks )
                         <div class="text-right">
-                            <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
+                            <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
                         </div>
                     @endif
                     <div class="text-right ml-2">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
                     </div>
                     <div class="text-right ml-2">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{ $next_link }}"> Next <i class="fas fa-angle-double-right ml-1"></i></a>
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{ $next_link }}"> Next <i class="fas fa-angle-double-right ml-1"></i></a>
                     </div>
                 </div>
 
