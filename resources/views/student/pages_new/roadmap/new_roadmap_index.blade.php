@@ -296,6 +296,12 @@
                      else
                         divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                      // modal part 
+                     // tooltip for disabled islands
+                     if(ilandImageDisabled[landCounter]){
+                        divIland.setAttribute("data-toggle","tooltip");
+                        divIland.setAttribute("data-placement","bottom");
+                        divIland.setAttribute("title","Please go through the previous content to unlock this island");
+                     }
                      divIland.setAttribute("data-toggle","modal");
                      divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                      div.appendChild(divIland);
@@ -361,8 +367,17 @@
                         div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
                         // Iland image part 
                         let divIland = document.createElement("div");
-                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                        if(ilandImageDisabled[landCounter])
+                           divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                        else
+                           divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                         // modal part 
+                        // tooltip for disabled islands
+                        if(ilandImageDisabled[landCounter]){
+                           divIland.setAttribute("data-toggle","tooltip");
+                           divIland.setAttribute("data-placement","bottom");
+                           divIland.setAttribute("title","Please go through the previous content to unlock this island");
+                        }
                         divIland.setAttribute("data-toggle","modal");
                         divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                         div.appendChild(divIland);
