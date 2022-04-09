@@ -85,6 +85,7 @@ class BatchController extends Controller
         // dd(CompletedLectures::where('student_id', auth()->user()->id)->orderBy('created_at', 'desc')->first(), $batchTopics);
 
         $island_images = [];
+        $island_images_disabled = [];
 
         $previous_aptitude_test_passed = true;
         $previous_topic_end_exam_passed = true;
@@ -238,18 +239,23 @@ class BatchController extends Controller
             if($key == 0 || ($previous_topic_end_exam_passed)){
                 if($batchTopic->percentage_completion >= 100){
                     $island_images[] = $batchTopic->courseTopic->three_star_island_image;
+                    $island_images_disabled[] = 0;
                 }
                 elseif($batchTopic->percentage_completion >= 66){
                     $island_images[] = $batchTopic->courseTopic->two_star_island_image;
+                    $island_images_disabled[] = 0;
                 }
                 elseif($batchTopic->percentage_completion >= 33){
                     $island_images[] = $batchTopic->courseTopic->one_star_island_image;
+                    $island_images_disabled[] = 0;
                 }
                 elseif($batchTopic->percentage_completion >= 0){
                     $island_images[] = $batchTopic->courseTopic->zero_star_island_image;
+                    $island_images_disabled[] = 0;
                 }
             } else {
                 $island_images[] = $batchTopic->courseTopic->disabled_island_image;
+                $island_images_disabled[] = 1;
             }
 
             $previous_aptitude_test_passed = $aptitude_test_passed;
@@ -261,9 +267,9 @@ class BatchController extends Controller
             ->where('course_id', $course->id)
             ->first();
 
-        // dd($batchTopics, $island_images);
+        // dd($batchTopics, $island_images, $island_images_disabled);
 
-        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images'));
+        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images', 'island_images_disabled'));
     }
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)
