@@ -67,8 +67,8 @@
                                     <a
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                        href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                       class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5">
-                                       {{ Str::limit($course_lecture->title, 23, '...') }}
+                                       class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                       {{ Str::limit($course_lecture->title, 22, '...') }}
                                     </a>
                                     <div class="w-25">
 
@@ -97,8 +97,8 @@
                               @if($exam->exam_type == "Aptitude Test")
                                  <a @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                     href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                    class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5">
-                                    {{ Str::limit($exam->title, 23, '...') }}
+                                    class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                    {{ Str::limit($exam->title, 22, '...') }}
                                  </a>
                                  <div class="w-25">
 
@@ -118,12 +118,12 @@
                                  <a
                                     @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                     href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                    class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) || ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)))) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5">
-                                    {{ Str::limit($exam->title, 23, '...') }}
+                                    class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                    {{ Str::limit($exam->title, 22, '...') }}
                                  </a>
                                  <div class="w-25">
 
-                                    @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) || ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))))
+                                    @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))
                                        <div style="height:50px;"></div>
                                     @elseif (!$disabled2)
                                        <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">

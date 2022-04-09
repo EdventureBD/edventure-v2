@@ -129,7 +129,7 @@ class BatchController extends Controller
                 // $exam_results = $exam->exam_results;
                 // $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
 
-                if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
+                // if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($exam->exam_results)){
                         // Remove this if-condition(line 63 to 65) but keep line 64 intact if they want progress to increase when pop quiz is attempted and not passed
                         if($exam->exam_type === "Aptitude Test"){
@@ -140,7 +140,7 @@ class BatchController extends Controller
                     else{
                         $exam->has_been_attempted = false;
                     }
-                }
+                // }
                 
                 $exam->previous_aptitude_test_passed = $previous_aptitude_test_passed;
                 $exam->previous_topic_end_exam_passed = $previous_topic_end_exam_passed;
