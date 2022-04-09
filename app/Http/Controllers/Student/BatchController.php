@@ -30,7 +30,29 @@ class BatchController extends Controller
 
     public function batchLecture(Batch $batch)
     {
-        $course = Course::where('id', $batch->course_id)->first();
+        // geting data for back url as well as searching data
+        $course = Course::where('id', $batch->course_id)
+                ->select('id', 'slug', 'course_category_id', 'intermediary_level_id', 'bundle_id')
+                ->with([
+                        'bundle' => function($query){
+                            $query->select('id', 'slug');
+                        },
+                        'intermediaryLevel' => function($query){
+                            $query->select('id', 'course_category_id', 'slug');
+                        },
+                        'intermediaryLevel.courseCategory' => function($query){
+                            $query->select('id', 'slug');
+                        },
+                    ])
+                ->first();
+        
+        // setting back url
+        if($course->bundle != null){
+            $back_url = route('bundle_courses' ,[ 'bundle' => $course->bundle->slug]);
+        }
+        else{
+            $back_url = route('course') . "/" . $course->intermediaryLevel->courseCategory->slug . "/" . $course->intermediaryLevel->slug;
+        }
 
         // $batchTopics = BatchLecture::select('id', 'topic_id')
         // ->with([
@@ -269,7 +291,7 @@ class BatchController extends Controller
 
         // dd($batchTopics, $island_images, $island_images_disabled);
 
-        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images', 'island_images_disabled'));
+        return view('student.pages_new.roadmap.new_roadmap_index', compact('batch', 'course', 'batchTopics', 'accessedDays', 'island_images', 'island_images_disabled', 'back_url'));
     }
 
     public function lecture(Batch $batch, CourseLecture $courseLecture)

@@ -5,7 +5,7 @@
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
       <div class="d-flex fixed-top" id="roadmap-nav">
          <div class="my-auto pl-3">
-            <a href="{{route("home")}}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
+            <a href="{{ $back_url }}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
          <div class="my-auto pr-5 mx-auto">
             <h1 class="fw-800" id="roadmap-subject-topic-name">{{ $bundle->bundle_name }}</h1>
