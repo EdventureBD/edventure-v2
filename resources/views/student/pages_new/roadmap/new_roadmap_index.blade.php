@@ -54,11 +54,13 @@
          <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
-                  <div class="modal-header border">
+                  <div class="modal-header border" style="display: flex;align-items: center;">
                      <h5 class="modal-title mx-auto fw-800" id="exampleModalLabel"> Exams for {{ $batchTopic->courseTopic->title }}</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-bottom: -0.5rem; opacity: 1 !important;">
+                        <span aria-hidden="true" style="font-size: 3rem; font-weight:600; color:#8c00ff !important;">&times;</span>
                      </button>
                   </div> 
-                  <div class="modal-body">
+                  <div class="modal-body" style="padding-top: 25px; padding-bottom: 25px;">
                      <ul>
                         @forelse ($batchTopic->courseTopic->exams as $exam)
                            @if (count($exam->course_lectures))
@@ -159,9 +161,9 @@
 
                      </ul>
                   </div>
-                  <div class="modal-footer mx-auto">
+                  {{-- <div class="modal-footer mx-auto">
                      <a class="close" data-dismiss="modal" aria-label="Close"> <img src="/img/road_map/back.png" alt="modal closing button" class="img-fluid" id="roadmap-modal-close-btn"></a>
-                  </div>
+                  </div> --}}
                </div>
             </div>
          </div>
