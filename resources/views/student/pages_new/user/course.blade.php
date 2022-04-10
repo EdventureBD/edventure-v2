@@ -222,10 +222,7 @@
         var bundle_id = $( this ).val();
         var bundle_name = $( this ).find('option:selected').text();
 
-        // $('#courseName').addClass('d-none');
-        // $('#courseName').text(course_name);
         $('#course_selecting').html('');
-        // $("#course_link").remove();
 
         $.ajax({
             url: '{{ route("ajax-get-courses-for-bundle") }}',
@@ -284,7 +281,7 @@
                 var cq_tags = response.cq_content_tags;
                 var batch_slug = response.batch_slug;
 
-                $('#course_display').append('<a id="course_link" href="batch/' + batch_slug + '/"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>');
+                $('#course_display').append('<a id="course_link" href="/batch/' + batch_slug + '/"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>');
 
                 // console.log(mcq_tags);
                 // console.log(cq_tags);
