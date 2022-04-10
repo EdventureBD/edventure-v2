@@ -21,7 +21,7 @@
                 @foreach($exam_topics as $topic)
                     <a href="{{route('model.exam.category.topics',['uuid' => $category->uuid,'t' => $topic->id])}}"
                        class="{{Illuminate\Support\Facades\Cache::get('exam_topic') == $topic->id ? 'text-white btn-orange-customed' : 'text-purple bg-white'}} mb-3 d-inline-block course-category-single-js btn fw-800 text-xxsm
-                            mx-1 bradius-15 bshadow-medium px-4">{{$topic->name}}</a>
+                            mx-1 bradius-15 bshadow-medium px-4" style="box-shadow: 0px 9px 80px rgba(249, 150, 51, 0.173674), 0px 2.01027px 17.869px rgba(249, 150, 51, 0.256326), 0px 0.598509px 5.32008px rgba(249, 150, 51, 0.43);">{{$topic->name}}</a>
                 @endforeach
             </div>
         @else
@@ -71,50 +71,13 @@
                                 @endif
                             @endforeach
                         @endif
-                        {{-- <div class="col-md-3 mb-4" style="max-width: 100%;padding-right: 0 !important;">
-                            <div class="{{$d_none}} ribbon ribbon-top-left"><span>done</span></div>
-                            <div style=""
-                                 class="single-exam text-center mx-auto p-4 mb-md-0">
-                            
-                                <div class="card-header text-center mt-2 fw-800"
-                                    style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                                    data-toggle="tooltip" 
-                                    data-placement="top" 
-                                    title="{{ $exam->title }}">
-                                    {{ $exam->title }}
-                                </div>
-                                @if(!is_null($exam->exam_price) && $exam->exam_price != 0)
-                                    <p class=" text-center text-sm mt-2 fw-600 text-price">{{(int)($exam->exam_price)}}৳</p>
-                                @else
-                                    <p class=" text-center text-sm mt-2 fw-600 text-price">Free</p>
-                                @endif
-                                <div class="card-body">
-                                    @if ($exam->image)
-                                        <img class="img-fluid" height="96" width="112"
-                                            src="{{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}}"
-                                            alt="Exam image">
-                                    @else
-                                        <img class="img-fluid" height="96" width="112"
-                                            src="/img/category_details/default-image.png" alt="Exam image">
-                                    @endif
-        
-                                </div>
-
-                                <div class="card-footer text-muted">
-                                    <a
-                                        href="{{!auth()->check() ? 'javascript:void(0);' : $href}}"
-                                        class="{{auth()->check() && auth()->user()->is_admin == 1 ? 'disabled' : ''}}{{!auth()->check() ? 'logInAlert' : ''}} btn text-white fw-700 btn-detail">
-                                        {{$label}}
-                                    </a>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="">
+                        
+                        <div>
                             <div class="card text-center"
-                                style="border-radius: 26px;padding: 14px 14px !important;width: 248px;height: 301px;">
+                                style="border-radius: 26px;width: 248px;height: 301px;padding:0px !important">
                                 <div class="{{$d_none}} ribbon ribbon-top-left"><span>done</span></div>
                                 <div class="card-header fw-800"
-                                    style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+                                    style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border-radius: 26px 26px 0 0"
                                     data-toggle="tooltip" 
                                     data-placement="top" 
                                     title="{{ $exam->title }}">
@@ -131,43 +94,25 @@
                                     @endif
 
                                 </div>
-                                <div class="card-footer text-muted">
-                                    <a href="{{!auth()->check() ? 'javascript:void(0);' : $href}}"
-                                                class="{{auth()->check() && auth()->user()->is_admin == 1 ? 'disabled' : ''}}{{!auth()->check() ? 'logInAlert' : ''}} btn text-white fw-700 btn-detail">
-                                                {{$label}}
-                                    </a>
-                                </div>
+
+                                <a href="{{!auth()->check() ? 'javascript:void(0);' : $href}}"
+                                    class="{{auth()->check() && auth()->user()->is_admin == 1 ? 'disabled' : ''}}{{!auth()->check() ? 'logInAlert' : ''}}">
+                                    <div class="card-footer fw-700 text-white d-flex justify-content-between" style="border-radius: 0 0 26px 26px;background:#FA9632">
+                                        @if(!is_null($exam->exam_price) && $exam->exam_price != 0)
+                                            <span class="py-auto" style="font-size: .9rem;">{{(int)($exam->exam_price)}} ৳</span>
+                                        @else
+                                            <span style="font-size: .9rem">FREE</span>
+                                        @endif
+                                        
+                                        <span style="font-size: .9rem">{{$label}}</span>
+                                    </div>
+                                </a>
+
+                                
                             </div>
                         </div>
                     @endforeach
-                    {{--######################## new design starts++++++++++++++++++++++++++++++++ --}}
-                    {{-- <div class="card text-center"
-                        style="border-radius: 26px;padding: 14px 14px !important;width: 248px;height: 301px;">
-                        <div class="{{$d_none}} ribbon ribbon-top-left"><span>done</span></div>
-                        <div class="card-header fw-800"
-                            style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                            data-toggle="tooltip" 
-                            data-placement="top" 
-                            title="Exam Name">
-                            Exam Name
-                        </div>
-                        <div class="card-body">
-                            @if ($exam)
-                                <img class="img-fluid" height="96" width="112"
-                                    src="{{$exam->image ? Storage::url('examImage/'.$exam->image) : ''}}"
-                                    alt="Exam image">
-                            @else
-                                <img class="img-fluid" height="96" width="112"
-                                    src="/img/category_details/default-image.png" alt="Exam image">
-                            @endif
-
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#"
-                                class="btn text-white fw-700 btn-detail">Take Exam</a>
-                        </div>
-                    </div> --}}
-                    {{--################################# new design ends +++++++++++++++++++++++++++ --}}
+                    
                 </div>
                 <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                     <p class="text-center">{{ $exams->withQueryString()->links('vendor.pagination.custom') }}</p>
