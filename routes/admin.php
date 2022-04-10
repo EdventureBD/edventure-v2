@@ -363,6 +363,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     /**************************************** Role & permission ****************************************/
 
+    /**************************************** Free Category Access ****************************************/
+    Route::group(['middleware' => ['permission:free_category_access']], function () {
+        Route::get('/category-access',[ExamCategoryController::class,'categoryAccessIndex'])->name('category.access.index');
+        Route::post('/category-access',[ExamCategoryController::class,'confirmCategoryAccess'])->name('category.access.confirm');
+    });
+
+    /**************************************** Role & permission ****************************************/
+
 });
 
 require __DIR__ . '/auth.php';
