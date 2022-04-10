@@ -147,6 +147,9 @@
     .category-cards-parent {
         margin-left: 33px !important;
     }
+    .card {
+        margin: 13px;
+    }
 }
 .card-parent-div {
     background: #FFFFFF;
