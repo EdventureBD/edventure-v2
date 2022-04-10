@@ -8,6 +8,9 @@
             font-weight: bolder;
             color: #6400c8;
         }
+        .card-footer:hover {
+            background: #6400c8 !important;
+        }
     </style>
 <div class="page-section">
     <div class="container">
