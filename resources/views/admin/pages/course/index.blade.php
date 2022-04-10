@@ -42,7 +42,7 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Intermediary Level</th>
+                                        <th>Program</th>
                                         <th>Bundle</th>
                                         <th>Icon</th>
                                         <th>Price</th>
@@ -137,7 +137,7 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Intermediary Level</th>
+                                        <th>Program</th>
                                         <th>Bundle</th>
                                         <th>Icon</th>
                                         <th>Price</th>

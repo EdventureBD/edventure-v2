@@ -69,6 +69,7 @@ class ExamResult extends AppModel
     public function getExamResult($exam_id, $batch_id, $user_id)
     {
         return ExamResult::where('exam_id', $exam_id)
+            ->where('exam_type', 'Aptitude Test')
             ->where('batch_id', $batch_id)
             ->where('student_id', $user_id)
             ->first();

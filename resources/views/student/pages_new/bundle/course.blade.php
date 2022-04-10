@@ -18,7 +18,7 @@
             </div>
 
             <div class="py-4">
-                <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Intermediary Levels </div>
+                <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Programs </div>
             </div>
             <div class="text-center @if($intermediary_levels->count()>=7) course-category-js @endif">
                 @if ( count($intermediary_levels) > 0 )
@@ -70,7 +70,7 @@
                 </div>
             @else
                 <div class="text-center py-4">
-                    <h1>No Courses or Bundles For This Intermediary Level Exist !!</h1>
+                    <h1>No Courses or Bundles For This Program Exist !!</h1>
                 </div>
             @endif
         </div>

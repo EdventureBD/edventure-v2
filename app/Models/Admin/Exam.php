@@ -6,6 +6,7 @@ use App\Models\Admin\Course;
 use App\Models\Admin\BatchExam;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
+use App\Models\Student\exam\ExamResult;
 use App\Models\Student\exam\DetailsResult;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,5 +54,10 @@ class Exam extends Model
     public function details_results()
     {
         return $this->hasMany(DetailsResult::class, 'exam_id');
+    }
+
+    public function exam_results()
+    {
+        return $this->hasMany(ExamResult::class, 'exam_id');
     }
 }
