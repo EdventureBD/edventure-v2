@@ -168,7 +168,8 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => 'required|string|max:325|unique:exams',
+        // 'title' => 'required|string|max:325|unique:exams',
+        'title' => 'required|string|max:325',
         'courseId' => 'required',
         'topicId' => 'nullable',
         'examType' => 'required',
@@ -181,7 +182,7 @@ class Create extends Component
     ];
 
     protected $messages = [
-        'title.unique' => 'The exam name already exists. Choose a different name',
+        // 'title.unique' => 'The exam name already exists. Choose a different name',
         'quesLimit.required' => 'Question limit is required',
         'quesLimit.numeric' => 'Question limit has to be a number',
         'quesLimit.integer' => 'Question limit has to be a integer',

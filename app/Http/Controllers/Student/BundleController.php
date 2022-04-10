@@ -99,9 +99,26 @@ class BundleController extends Controller
    }
 
    public function bundle_courses(Bundle $bundle){
-      $bundle = Bundle::where('slug', $bundle->slug)->with('courses.Batch')->firstOrFail();
+      $bundle = Bundle::where('slug', $bundle->slug)
+            ->select('id', 'intermediary_level_id', 'bundle_name', 'slug')
+            ->with([
+            'courses' => function($query){
+               $query->select('id', 'slug', 'island_image', 'course_category_id', 'intermediary_level_id', 'bundle_id');
+            },
+            'courses.Batch' => function($query){
+               $query->select('id', 'slug', 'course_id');
+            },
+            'intermediary_level' => function($query){
+               $query->select('id', 'course_category_id', 'slug');
+            },
+            'intermediary_level.courseCategory' => function($query){
+               $query->select('id', 'slug');
+            },
+         ])->firstOrFail();
 
-      return view('student.pages_new.bundle.bundle_courses', compact('bundle'));
+         $back_url = route('course') . "/" . $bundle->intermediary_level->courseCategory->slug . "/" . $bundle->intermediary_level->slug;
+
+      return view('student.pages_new.bundle.bundle_courses', compact('bundle', 'back_url'));
    }
 
    public function processPayment($bundle_slug, Request $request){

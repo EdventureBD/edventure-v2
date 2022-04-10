@@ -128,9 +128,9 @@ class Create extends Component
     ];
 
     protected $messages = [
-        'intermediaryLevelId.required' => 'Intermediary level is required.',
-        'intermediaryLevelId.numeric' => 'Intermediary level has to be a numeric value.',
-        'intermediaryLevelId.integer' => 'Intermediary level has to be a integer value.',
+        'intermediaryLevelId.required' => 'Program is required.',
+        'intermediaryLevelId.numeric' => 'Program has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Program has to be a integer value.',
         'intermediaryLevelId.numeric' => 'Bundle has to be a numeric value.',
         'intermediaryLevelId.integer' => 'Bundle has to be a integer value.',
     ];

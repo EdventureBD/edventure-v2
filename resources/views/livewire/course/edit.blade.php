@@ -143,10 +143,10 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Intermediary Level <span
+                                            <label class="col-form-label" for="courseName">Program <span
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="intermediaryLevelId" disabled>
-                                                <option value="" selected>Select Intermediary Level</option>
+                                                <option value="" selected>Select Program</option>
                                                 @foreach ($intermediary_levels as $intermediary)
                                                     <option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
                                                 @endforeach

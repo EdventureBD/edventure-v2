@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="intermediaryLevel">Intermediary Level</label>
+                                            <label class="col-form-label" for="intermediaryLevel">Program</label>
                                             <select id="intermediaryLevel" class="form-control" wire:model="intermediaryLevelId">
                                                 <option value="" selected>Select intermedairy ievel</option>
                                                 @foreach($intermediaryLevels as $intermediaryLevel)

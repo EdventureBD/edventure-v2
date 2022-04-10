@@ -13,6 +13,10 @@
     .select2-container--default .select2-selection--single .select2-selection__placeholder {
         color: #6400c8 !important;
     }
+    #journey-cart:hover {
+        
+        box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
+    }
 </style>
 
 @section('mini-header')
@@ -39,12 +43,31 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <div id="info-detail" class="row mx-auto my-5">
         <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">
-            <div class="d-flex flex-column justify-content-center mx-auto border px-5 my-3" id="journey-cart">
-                <h5 class="fw-800 mx-auto">Amazing!</h5>
+            <div class="d-flex flex-column justify-content-center mx-auto border px-4 py-2 my-4" id="journey-cart" style="height: auto !important;">
+                {{-- <h5 class="mx-auto">Select a course to view Strengths and Weaknesses</h5> --}}
                 <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
                 <p class="fw-500 mx-auto" id="day-count">
-                    You are on a 16 Day streak
+                    Select a course to view Strengths and Weaknesses
                 </p>
+            </div>
+
+            <div class="mb-3">
+                <select
+                    class="select2 form-control"
+                    name="bundle"
+                    id="bundle_selecting"
+                    data-placeholder="Choose Bundle"
+                    data-dropdown-css-class="select2-purple"
+                    style="width: 100%; margin-top: -8px !important;">
+
+                    <option value="" disabled selected>Choose Bundle</option>
+
+                    <option value="0">Non Bundle Courses</option>
+                    
+                    @foreach ($enrolled_bundles as $enrolled_bundle)
+                        <option value="{{ $enrolled_bundle->bundle->id }}"> {{ $enrolled_bundle->bundle->bundle_name }} </option>
+                    @endforeach
+                </select>
             </div>
 
             <div>
@@ -56,7 +79,7 @@
                     data-dropdown-css-class="select2-purple"
                     style="width: 100%; margin-top: -8px !important;">
 
-                    <option value="" disabled selected>Choose Course Topic</option>
+                    <option value="" disabled selected>Choose Course</option>
 
                     @foreach ($enrolled_courses as $course)
                         <option value="{{ $course->id }}">{{ $course->title }}</option>
@@ -195,13 +218,49 @@
 </script>
 
 <script>
+    $(document).on('change', '#bundle_selecting', function(){
+        var bundle_id = $( this ).val();
+        var bundle_name = $( this ).find('option:selected').text();
+
+        // $('#courseName').addClass('d-none');
+        // $('#courseName').text(course_name);
+        $('#course_selecting').html('');
+        // $("#course_link").remove();
+
+        $.ajax({
+            url: '{{ route("ajax-get-courses-for-bundle") }}',
+            type: 'GET',
+            data: { bundle_id: bundle_id },
+            success: function(response)
+            {
+                $("#course_selecting").html('');
+                var courses = response
+                course_list = '<option value="" disabled selected>Choose Course</option>'
+
+                console.log(courses)
+
+                if (courses.length > 0){
+                    jQuery.each(courses, function(index, course)
+                    {
+                        course_list += '<option value="' + course.id + '">' + course.title + '</option>'
+                    });
+                }
+
+                console.log(course_list)
+                $('#course_selecting').append(course_list);
+            }
+        });
+    });
+</script>
+
+<script>
     $(document).on('change', '#course_selecting', function(){
         var course_id = $( this ).val();
         var course_name = $( this ).find('option:selected').text();
-        $("#course_link").remove();
-        
-        // console.log(course_id);
 
+        console.log(course_id, course_name)
+
+        $("#course_link").remove();
         $('#SelectedCourse').removeClass('d-none');
         $('#courseName').text(course_name);
 
@@ -219,7 +278,7 @@
             data: { course_id: course_id },
             success: function(response)
             {
-                // console.log(response);
+                // console.log(course_id, response);
 
                 var mcq_tags = response.mcq_content_tags;
                 var cq_tags = response.cq_content_tags;
