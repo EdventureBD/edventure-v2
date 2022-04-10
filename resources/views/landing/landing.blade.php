@@ -47,8 +47,8 @@
             {{-- inner contents starts --}}
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="syllabus-mapping">
                 <div class="d-flex justify-content-sm-center justify-content-md-start card-main-image" style="width: 65%">
-                    <div class="w-100 d-flex justify-content-start">
-                        <img src="/img/landing/newLanding/roadMap.webp" alt="roadmap" class="img-fluid">
+                    <div class="w-100 d-flex justify-content-start m-5">
+                        <img src="/img/landing/newLanding/roadMap.png" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-1">
@@ -63,8 +63,8 @@
             </div>
             <div class="d-flex align-items-center flex-sm-column flex-md-row-reverse my-0 py-0" id="weakness-detection">
                 <div class="d-flex justify-content-end card-main-image" style="width: 65%">
-                    <div class="w-100 d-flex justify-content-end">
-                        <img src="/img/landing/newLanding/mobileDashboard.webp" alt="roadmap" class="img-fluid">
+                    <div class="w-100 d-flex justify-content-end m-5">
+                        <img src="/img/landing/newLanding/mobileDashboard.png" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-2">
@@ -79,8 +79,8 @@
             </div>
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="personal-session">
                 <div class="d-flex justify-content-start card-main-image" style="width: 65%">
-                    <div class="w-100 d-flex justify-content-start">
-                        <img src="/img/landing/newLanding/socialGroup.webp" alt="discussion banner image" class="img-fluid">
+                    <div class="w-100 d-flex justify-content-start m-5">
+                        <img src="/img/landing/newLanding/socialGroup.png" alt="discussion banner image" class="img-fluid">
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-3">
