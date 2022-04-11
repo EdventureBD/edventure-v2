@@ -155,7 +155,7 @@ class Edit extends Component
     ];
 
     protected $messages = [
-        'title.unique' => 'The exam name already exists. Choose a different name',
+        // 'title.unique' => 'The exam name already exists. Choose a different name',
         'quesLimit.required' => 'Question limit is required',
         'quesLimit.numeric' => 'Question limit has to be a number',
         'quesLimit.integer' => 'Question limit has to be a integer',
@@ -172,7 +172,8 @@ class Edit extends Component
             $this->rules['order'] = 'required|numeric|integer|gte:0';
         }
 
-        $this->rules['title'] = 'required|string|max:325|unique:exams,title,'.$this->exam->id;
+        // $this->rules['title'] = 'required|string|max:325|unique:exams,title,'.$this->exam->id;
+        $this->rules['title'] = 'required|string|max:325';
 
         if($this->showQuestionLimit2){
             $this->rules['quesLimit'] = 'required|numeric|integer|gte:0';

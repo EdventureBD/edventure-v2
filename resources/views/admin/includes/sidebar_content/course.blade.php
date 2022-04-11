@@ -39,7 +39,7 @@
                             {{ request()->is('admin/intermediary_level') ? 'active': '' }} {{ request()->is(' admin/intermediary_level/create') ? 'active': '' }} {{ request()->is(' admin/intermediary_level/*/edit') ? 'active': '' }}
                             ">
                                 <i class="fas fa-chalkboard"></i>
-                                <p>&nbsp; Intermediary Levels </p>
+                                <p>&nbsp; Programs </p>
                             </a>
                         </li>
 

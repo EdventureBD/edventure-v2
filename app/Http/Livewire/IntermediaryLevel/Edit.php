@@ -57,13 +57,13 @@ class Edit extends Component
             $this->title = '';
             $this->categoryId = '';
             $this->empty_categoryId = '';
-            session()->flash('status', 'Intermediary Level successfully updated!');
+            session()->flash('status', 'Program successfully updated!');
             return redirect()->route('intermediary_level.index');
         } else {
             $this->title = '';
             $this->categoryId = '';
             $this->empty_categoryId = '';
-            session()->flash('failed', 'Intermediary Level update failed!');
+            session()->flash('failed', 'Program update failed!');
             return redirect()->route('intermediary_level.create');
         }
     }

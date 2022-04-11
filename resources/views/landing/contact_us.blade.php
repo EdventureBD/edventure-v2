@@ -29,7 +29,9 @@
                         <input required type="email" name="email" id="email" placeholder="{{__('index.enter_your_email_address')}}">
 
                         <br>
-                        <input required type="text" name="message" id="message" placeholder="{{__('index.write_a_message')}}"/>
+
+                        <textarea style="background: #363536; width: 83%; color: white" class="mt-5" required type="text" name="message" id="message" placeholder="Write a Message"></textarea>
+
                         <br>
 
                         <div id="Contact_us_action_button" class="w-80 row">

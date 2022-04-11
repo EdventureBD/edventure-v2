@@ -39,12 +39,12 @@ class Create extends Component
         if ($created) {
             $this->title = '';
             $this->categoryId = '';
-            session()->flash('status', 'Intermediary Level successfully added!');
+            session()->flash('status', 'Program successfully added!');
             return redirect()->route('intermediary_level.index');
         } else {
             $this->title = '';
             $this->categoryId = '';
-            session()->flash('failed', 'Intermediary Level added failed!');
+            session()->flash('failed', 'Program added failed!');
             return redirect()->route('intermediary_level.create');
         }
     }

@@ -5,7 +5,7 @@
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
       <div class="d-flex fixed-top" id="roadmap-nav">
          <div class="my-auto pl-3">
-            <a href="{{route("home")}}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
+            <a href="{{ $back_url }}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
          <div class="my-auto pr-5 mx-auto">
             <h1 class="fw-800" id="roadmap-subject-topic-name">{{ $course->title }}</h1>
@@ -54,29 +54,40 @@
          <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
-                  <div class="modal-header border">
+                  <div class="modal-header border" style="display: flex;align-items: center;">
                      <h5 class="modal-title mx-auto fw-800" id="exampleModalLabel"> Exams for {{ $batchTopic->courseTopic->title }}</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-bottom: -0.5rem; opacity: 1 !important;">
+                        <span aria-hidden="true" style="font-size: 3rem; font-weight:600; color:#8c00ff !important;">&times;</span>
                      </button>
                   </div> 
-                  <div class="modal-body">
+                  <div class="modal-body" style="padding-top: 25px; padding-bottom: 25px;">
                      <ul>
                         @forelse ($batchTopic->courseTopic->exams as $exam)
                            @if (count($exam->course_lectures))
                               @foreach ($exam->course_lectures as $course_lecture)
                                  <li>
-                                    <div class="w-25">
-                                       @if($disabled2)
-                                          <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
-                                       @else
-                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
-                                       @endif
-                                    </div>
                                     <a
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                        href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                       class="fw-800 modal-items text-white d-flex justify-content-center rounded">
-                                       {{ Str::limit($course_lecture->title, 23, '...') }}
+                                       class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                       {{ Str::limit($course_lecture->title, 22, '...') }}
                                     </a>
+                                    <div class="w-25">
+
+                                       @if ($disabled && !$disabled2 && !$course_lecture->completed)
+                                          <div style="height:50px;"></div>
+                                       @elseif($disabled2)
+                                          <div style="height:50px;"></div>
+                                       @else
+                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                       @endif
+
+                                       {{-- @if($disabled2)
+                                          <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                       @else
+                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                       @endif --}}
+                                    </div>
                                  </li>
                                  @php
                                     if ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
@@ -86,32 +97,48 @@
 
                            <li>
                               @if($exam->exam_type == "Aptitude Test")
-                                 <div class="w-25">
-                                    @if($disabled2)
-                                       <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
-                                    @else
-                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                                    @endif
-                                 </div>
                                  <a @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                     href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                    class="fw-800 modal-items text-white d-flex justify-content-center rounded">
-                                    {{ Str::limit($exam->title, 23, '...') }}
+                                    class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                    {{ Str::limit($exam->title, 22, '...') }}
                                  </a>
-                              @else
                                  <div class="w-25">
-                                    @if($disabled2)
+
+                                    @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted)
+                                       <div style="height:50px;"></div>
+                                    @else 
+                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
+                                    @endif
+
+                                    {{-- @if($disabled2)
                                        <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
                                     @else
                                        <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                                    @endif
+                                    @endif --}}
                                  </div>
+                              @else
                                  <a
                                     @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                     href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                    class="fw-800 modal-items text-white d-flex justify-content-center rounded">
-                                    {{ Str::limit($exam->title, 23, '...') }}
+                                    class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                    {{ Str::limit($exam->title, 22, '...') }}
                                  </a>
+                                 <div class="w-25">
+
+                                    @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))
+                                       <div style="height:50px;"></div>
+                                    @elseif (!$disabled2)
+                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
+                                    @else
+                                       <div style="height:50px;"></div>
+                                    @endif
+
+                                    {{-- @if($disabled2)
+                                       <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                    @else
+                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
+                                    @endif --}}
+                                 </div>
                               @endif
                               @php
                                  // set previous island TEE passed to false if not passed. WIll generate modal based on that.
@@ -134,9 +161,9 @@
 
                      </ul>
                   </div>
-                  <div class="modal-footer mx-auto">
+                  {{-- <div class="modal-footer mx-auto">
                      <a class="close" data-dismiss="modal" aria-label="Close"> <img src="/img/road_map/back.png" alt="modal closing button" class="img-fluid" id="roadmap-modal-close-btn"></a>
-                  </div>
+                  </div> --}}
                </div>
             </div>
          </div>
@@ -254,6 +281,8 @@
 
       let ilandImages = JSON.parse(atob('{{ base64_encode(json_encode($island_images)) }}'));
 
+      let ilandImageDisabled = JSON.parse(atob('{{ base64_encode(json_encode($island_images_disabled)) }}'));
+
       while(totalLands){
          // onStream design
          for(let i = 0; i  <5; i++){
@@ -264,8 +293,17 @@
                      div.classList.add("px-lg-5","px-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
-                     divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                     if(ilandImageDisabled[landCounter])
+                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                     else
+                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                      // modal part 
+                     // tooltip for disabled islands
+                     if(ilandImageDisabled[landCounter]){
+                        divIland.setAttribute("data-toggle","tooltip");
+                        divIland.setAttribute("data-placement","bottom");
+                        divIland.setAttribute("title","Please go through the previous content to unlock this island");
+                     }
                      divIland.setAttribute("data-toggle","modal");
                      divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                      div.appendChild(divIland);
@@ -331,8 +369,17 @@
                         div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
                         // Iland image part 
                         let divIland = document.createElement("div");
-                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                        if(ilandImageDisabled[landCounter])
+                           divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                        else
+                           divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                         // modal part 
+                        // tooltip for disabled islands
+                        if(ilandImageDisabled[landCounter]){
+                           divIland.setAttribute("data-toggle","tooltip");
+                           divIland.setAttribute("data-placement","bottom");
+                           divIland.setAttribute("title","Please go through the previous content to unlock this island");
+                        }
                         divIland.setAttribute("data-toggle","modal");
                         divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                         div.appendChild(divIland);

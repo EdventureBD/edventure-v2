@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\TeacherDetail;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\UserType;
@@ -19,6 +20,10 @@ class Create extends Component
     public $user_types;
     public $image;
     public $phone;
+    public $education;
+    public $year_of_experience;
+    public $expertise;
+    public $show = false;
 
     public function updatedName()
     {
@@ -53,38 +58,49 @@ class Create extends Component
         'image' => 'nullable|image|mimes:jpeg,jpg,png|max:4096',
         'email' => 'email:rfc,dns|unique:users|required',
         'phone' => 'required|numeric|digits:11',
-        'user_type' => 'required'
+        'user_type' => 'required',
+        'education' => ['required_if:user_type,2'],
+        'year_of_experience' => ['required_if:user_type,2'],
+        'expertise' => ['required_if:user_type,2']
+//        'regex:~^([a-z0-9]+,)+$~i'
+    ];
+
+    protected $customMessages = [
+        'required_if' => 'The :attribute is required.',
+        'expertise.regex' => "The :attribute format is invalid. It should be 'comma(,)' seperated"
     ];
 
     public function saveUser()
     {
-        $data = $this->validate();
+        $data = $this->validate($this->rules, $this->customMessages);
+
         if ($this->image) {
             $imageUrl = $this->image->store('public/user');
             $this->image = Storage::url($imageUrl);
         }
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->phone = $data['phone'];
-        $user->image = $this->image;
-        if (($data['user_type']) == 1) {
-            $user->is_admin = 1;
-        } else {
-            $user->is_admin = 0;
+
+        $user = User::query()->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'image' => $this->image,
+            'is_admin' => $data['user_type'] == 1 ? 1 : 0,
+            'user_type' => $data['user_type'],
+            'password' => Hash::make(12345678),
+        ]);
+
+        if($user->user_type == 2) {
+            $this->createTeacherDetails($user,$data);
         }
-        $user->user_type = $data['user_type'];
-        $user->password = Hash::make(12345678);
 
-        $save = $user->save();
-
-        if ($save) {
-            session()->flash('status', 'User successfully added!');
-            return redirect()->route('user.index');
-        } else {
+        if (!$user) {
             session()->flash('failed', 'User added failed!');
             return redirect()->route('user.create');
         }
+
+        $label = $user->user_type == 1 ? 'Admin' : ($user->user_type == 2 ? 'Teacher' : 'Student');
+        session()->flash('status', $label.' added successfully!');
+        return redirect()->route('user.create');
     }
 
     public function mount()
@@ -96,4 +112,25 @@ class Create extends Component
     {
         return view('livewire.user.create');
     }
+
+    public function changeEvent($value)
+    {
+        if($value == 2) {
+            return $this->show = true;
+        } else {
+            return $this->show = false;
+        }
+    }
+
+    public function createTeacherDetails($user,$data)
+    {
+        TeacherDetail::query()->create([
+            'user_id' => $user->id,
+            'education' => $data['education'],
+            'year_of_experience' => $data['year_of_experience'],
+            'expertise' => $data['expertise'],
+            'status' => 1
+        ]);
+    }
+
 }

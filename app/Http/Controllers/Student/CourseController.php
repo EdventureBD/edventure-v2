@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Admin\Payment;
 use App\Models\Admin\CourseTopic;
 use App\Models\Admin\CourseLecture;
-use App\Models\Admin\PaymentNumber;
+// use App\Models\Admin\PaymentNumber;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Student\StudentDetails;
+// use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
 use App\Models\Admin\Bundle;
 use App\Models\BundleStudentEnrollment;
-use App\Utils\Payment as UtilsPayment;
+// use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
@@ -30,19 +30,25 @@ class CourseController extends Controller
         ->select('title','slug')
         ->get();
 
-        if(isset($category_slug)&&!empty($category_slug)){
+        if(isset($category_slug) && !empty($category_slug)){
             $category=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
-        }else{
-            $category=CourseCategory::where('status',1)->first();
+            $selected_category_slug = $category->slug;
+        }
+        else{
+            $category=null;
+            $selected_category_slug = null;
         }
 
-        $selected_category_slug=$category->slug;
-
-        $intermediary_levels = IntermediaryLevel::where('status', 1)
-        ->where('course_category_id',$category->id)
-        ->select('title', 'slug', 'course_category_id')
-        ->paginate(8)
-        ->fragment('intermediary_levels');
+        if($category){
+            $intermediary_levels = IntermediaryLevel::where('status', 1)
+            ->where('course_category_id', $category->id)
+            ->select('title', 'slug', 'course_category_id')
+            ->paginate(8)
+            ->fragment('intermediary_levels');
+        }
+        else{
+            $intermediary_levels = null;
+        }
 
         if(isset($intermediary_level_slug) && !empty($intermediary_level_slug)){
             $selected_intermediary_level = IntermediaryLevel::where('status',1)
@@ -50,10 +56,8 @@ class CourseController extends Controller
                                             ->first();
         }
         else{
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)
-                                            ->where('course_category_id', $category->id)
-                                            ->first();
-        }
+            $selected_intermediary_level = null;
+        } 
 
         if($selected_intermediary_level){
             $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)
@@ -70,7 +74,7 @@ class CourseController extends Controller
             $bundles = collect();
         }
 
-        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'selected_intermediary_level', 'intermediary_levels', 'courses', 'bundles'));
+        return view('student.pages_new.course.course', compact('categories','selected_category_slug', 'intermediary_levels', 'selected_intermediary_level', 'courses', 'bundles'));
     }
 
     public function courseByCategory($category_slug){
@@ -86,20 +90,20 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
-      if($course->bundle_id != null){
-         // checks if bundle exists. Else, will throw not found error
-         $bundle = Bundle::where('id', $course->bundle_id)->firstOrFail();
-         if(Auth::check()){
-            $enrollment = BundleStudentEnrollment::where('bundle_id', $bundle->id)->where('student_id', auth()->user()->id)->first();
-            // check if this dude is enrolled in this bundle or not
-            if($enrollment == null){
-               return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Access Denied! You are not enrolled in this bundle.']);
+        if($course->bundle_id != null){
+            // checks if bundle exists. Else, will throw not found error
+            $bundle = Bundle::where('id', $course->bundle_id)->firstOrFail();
+            if(Auth::check()){
+                $enrollment = BundleStudentEnrollment::where('bundle_id', $bundle->id)->where('student_id', auth()->user()->id)->first();
+                // check if this dude is enrolled in this bundle or not
+                if($enrollment == null){
+                return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Access Denied! You are not enrolled in this bundle.']);
+                }
             }
-         }
-         else{
-            return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Please login/register to access this bundle.']);
-         }
-      }
+            else{
+                return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Please login/register to access this bundle.']);
+            }
+        }
 
         $batch = '';
         $enrolled = '';

@@ -125,7 +125,9 @@
                 <div class="wholeBody">
                     {{ $slot }}
                     {{-- @yield('content') --}}
+                @if(!request()->is("model-exam/submit/*"))
                     @include('landing.footer')
+                @endif
                 </div>
 
             </div>

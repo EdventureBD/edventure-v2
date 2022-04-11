@@ -37,7 +37,7 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Intermediary Level</th>
+                                        <th>Program</th>
                                         <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>
@@ -127,7 +127,7 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Intermediary Level</th>
+                                        <th>Program</th>
                                         <th>Icon</th>
                                         <th>Price</th>
                                         <th>Duration</th>

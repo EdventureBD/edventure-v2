@@ -118,9 +118,8 @@ Route::get('/language/{lang}', function ($lang) {
 
 
 Route::get('/test', function() {
-//    Role::create(['name' => 'Documentation']);
-    $role = Role::query()->where('name','Documentation')->first();
-    $permission = Permission::create(['name' => 'test']);
-    $role->givePermissionTo($permission);
+
     return view('slider');
 });
+
+
