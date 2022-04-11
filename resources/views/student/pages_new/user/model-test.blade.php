@@ -22,7 +22,7 @@
     <div class="d-flex justify-content-between">
         <div class="d-flex flex-column fw-800 mr-3">
             <div>
-                Exams Attended
+                {{__('index.exams_attended')}}
             </div>
             <div class="mx-auto">
                 {{$exam_attended_count}}

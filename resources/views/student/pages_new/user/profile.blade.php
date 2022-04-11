@@ -32,7 +32,8 @@
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-top ml-3">
                         <div class="d-flex">
-                            <h3 class="fw-600">{{ $user->name }}</h3><span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
+                            <h3 class="fw-600">{{ $user->name }}</h3>
+                            <span class="iconify-inline" data-icon="emojione-monotone:hand-with-fingers-splayed" data-width="36" data-height="36"></span>
                         </div>
                         <div class="w-100 h-0 border border-gray m-0 p-0 horizontal-line"></div>
                         @yield('mini-header')
@@ -42,13 +43,13 @@
                 <a id="courseBtn" href="{{route('profile')}}" class="text-decoration-none">
                     <div style="{{request()->is('profile') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                             class="px-4 py-2 border my-auto fw-600" id="course-option">
-                        Course
+                        {{__('index.course')}}
                     </div>
                 </a>
                 <a href="{{route('profile.modelTest')}}" class="text-decoration-none">
                     <div style="{{request()->is('profile/model-test') ? 'background: #FA9632 ; color: white; border: 1px solid #FA9632 !important' : 'background: white ; color: black; border: 1px solid #FA9632 !important'}}"
                             class="px-4 py-2 border my-auto fw-600" id="model-test-option">
-                        Model Test
+                        {{__('index.model_test')}}
                     </div>
                 </a>
             </div>

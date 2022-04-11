@@ -4,15 +4,13 @@
     <section class="header-banner pt-7 container">
         <div class="container-fluid">
             <div class="pl-3">
-                <h3 class="text-purple text-lg fw-400 font-bebas">CONTACT</h3>
-                <p id="contact-us-banner-text" class="fw-600 text-xsm  w-100 text-purple-half">A group of passionate
-                    educators striving to make education easy, fun, and personal with the help of technology. We want to
-                    increase the accessibility of quality education while empowering learners, parents, and teachers
-                    alike.
+                <h3 class="text-purple text-lg fw-400 font-bebas">{{__('index.contact_us')}}</h3>
+                <p id="contact-us-banner-text" class="fw-600 text-xsm  w-100 text-purple-half">
+                    {{__('index.contact_us_details')}}
                 </p>
             </div>
         </div>
-    </section> 
+    </section>
     <!--header banner end-->
 
     <!--Contact form -->
@@ -21,26 +19,26 @@
 
             <div class="shape-a">
                 <div class="form-box">
-                    <h3>We’d love to hear from <span>you!</span></h3>
+                    <h3>{{__('index.we_love_to_hear_from')}} <span>{{__('index.you')}}</span></h3>
 
                     <form action="{{route('store.contact.us')}}" method="POST" class="form-group">
                         @csrf
-                        <input required type="text" name="name" id="name" placeholder="Enter your Name"/>
+                        <input required type="text" name="name" id="name" placeholder="{{__('index.enter_your_name')}}"/>
 
                         <br>
-                        <input required type="email" name="email" id="email" placeholder="Enter your Email">
+                        <input required type="email" name="email" id="email" placeholder="{{__('index.enter_your_email_address')}}">
 
                         <br>
-                        <input required type="text" name="message" id="message" placeholder="Write a Message"/>
+                        <input required type="text" name="message" id="message" placeholder="{{__('index.write_a_message')}}"/>
                         <br>
 
                         <div id="Contact_us_action_button" class="w-80 row">
                             <button type="submit" class="btn-submit col-4 mx-3 d-flex justify-content-center"
-                                    style="border: 1px solid black">Submit
+                                    style="border: 1px solid black">{{__('index.submit')}}
                             </button>
 
                             <button type="reset" class="btn-submit btn-cancel col-4 mx-3  d-flex justify-content-center"
-                                    style="border: 1px solid black">Cancel
+                                    style="border: 1px solid black">{{__('index.cancel')}}
                             </button>
                         </div>
                     </form>
@@ -55,17 +53,16 @@
 
                     <div class="text-box">
 
-                        <h3>Contact <span>Information</span></h3>
-                        <p>117, Kazi Nazrul Islam<br>
-                            Avenue 1000 Dhaka, Dhaka
-                            <br>Division, Bangladesh</p>
-                        <p>Call us: +8801746483678<br>
-                            We are open from Sunday - Thursday:
+                        <h3>{{__('index.contact')}} <span>{{__('index.information')}}</span></h3>
+                        <p>{{__('index.117_kazi_nazrul_islam')}}<br>
+                             {{__('index.dhaka_1000_bangladesh')}}</p>
+                        <p>{{__('index.call_us_8801746483678')}}<br>
+                            {{__('index.we_are_open_from_sunday_thursday')}}
                             <br>
-                            10:00 AM- 7:00 PM
+                            {{__('index.office_time')}}
                             <br>
-                            E-mail: business@edventurebd.com</p>
-                        <h4>Follow us</h4>
+                            {{__('index.email')}}: business@edventurebd.com</p>
+                        <h4>{{__('index.follow_us')}}</h4>
 
                         <div class="icon-box">
 
@@ -84,7 +81,7 @@
                                target="_blank">
                                 <img src="/images/follow_us/LinkedInWhite.png" alt="LinkedIn Logo">
                             </a>
-                            
+
                         </div>
 
                     </div>

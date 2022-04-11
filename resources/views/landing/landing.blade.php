@@ -21,13 +21,13 @@
             @auth
             <h4 class="text-white  text-sm font-roboto">{{__('index.hey')}}, {{auth()->user()->name}} !</h4>
             <h4 class="text-white  text-sm font-roboto">{{__('index.welcome_to_the_edventure')}}</h4>
-            <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
+            <h2 class="text-sm fw-800 font-roboto mb-2 text-white">{{__('index.landing_cover_line_2')}} <br> {{__('index.landing_cover_line_3')}}<h2>
             <a href="{{route('model.exam')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed px-4">{{__('index.go_for_exam')}}</a>
             @else
             <div id="landing_greeting_and_register_button">
                 <div>
-                    <h4 class="text-white  text-md font-roboto">Edventure-এর সাথে</h4><br>
-                    <h2 class="text-lg fw-800 font-roboto text-white">প্রস্তুতি হোক <br> নিজের মতো</h2>
+                    <h2 class="text-white fw-800 font-roboto">{{__('index.landing_cover_line_1')}}</h2><br>
+                    <h2 class="fw-800 text-white">{{__('index.landing_cover_line_2')}} <br> {{__('index.landing_cover_line_3')}}</h2>
                 </div>
                 <div>
                     <a href="{{route('register')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed px-md-4 my-md-4 py-md-3">{{__('index.register_now')}}</a>
@@ -40,10 +40,10 @@
     {{-- new landing banner part ends --}}
     <div class="our-package-section text-center py-5 position-relative bg-white">
         <div class="">
-            <h3 class="text-dark text-md font-roboto mb-5">কী পাবে আমাদের প্ল্যাটফর্মে</h3>
-            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>
-            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- ডিজিটাল রিপোর্টের মাধ্যমে নিমিষেই জেনে যাবে এক্সামের সকল খুঁটিনাটি বিষয়</p>
-            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- দেশসেরা অভিজ্ঞ শিক্ষকের সল্‌ভ ক্লাস ও সাজেশন</p>
+            <h3 class="text-dark text-md font-roboto mb-5">{{__('index.what_to_expect_on_our_platform')}}</h3>
+            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- {{__('index.what_to_expect_on_our_platform_point_1')}}</p>
+            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- {{__('index.what_to_expect_on_our_platform_point_2')}}</p>
+            <p class="fw-600 text-xxsm max-w-100 w-100 mx-auto text-dark">- {{__('index.what_to_expect_on_our_platform_point_3')}}</p>
             {{-- inner contents starts --}}
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="syllabus-mapping">
                 <div class="d-flex justify-content-sm-center justify-content-md-start card-main-image" style="width: 65%">
@@ -56,8 +56,8 @@
                         <img src="/img/medical_camp/medicamp11.png" alt="" class="img-fluid">
                     </div>
                     <div class="mx-5">
-                        <h4 class="text-xmd fw-800 text-right mt-3">সিলেবাস ম্যাপিং</h4>
-                        <p class="text-xsm fw-400 text-gray text-right">পরীক্ষার প্রস্তুতিতে বসে সিলেবাসের মহাসমুদ্রে যাতে হারিয়ে না যাও- সেজন্য আমরা পুরো সিলেবাসকে ম্যাপ করে দিচ্ছি</p>
+                        <h4 class="text-xmd fw-800 text-right mt-3">{{__('index.syllabus_mapping')}}</h4>
+                        <p class="text-xsm fw-400 text-gray text-right">{{__('index.syllabus_mapping_details')}}</p>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                         <img src="/img/medical_camp/medicamp21.png" alt="" class="img-fluid">
                     </div>
                     <div class="mx-5">
-                        <h4 class="text-xmd fw-800 text-left mt-3">টপিকভিত্তিক উইকনেস ডিটেকশন</h4>
-                        <p class="text-xsm fw-400 text-gray text-left">বাংলাদেশের একমাত্র প্ল্যাটফর্ম হিসেবে Edventure এ পরীক্ষা দিয়েই জানতে পারবে ঠিক কোন চ্যাপ্টারের কোন টপিকে তুমি দুর্বল</p>
+                        <h4 class="text-xmd fw-800 text-left mt-3">{{__('index.topic_based_weakness_detection')}}</h4>
+                        <p class="text-xsm fw-400 text-gray text-left">{{__('index.topic_based_weakness_detection_details')}}</p>
                     </div>
                 </div>
             </div>
@@ -88,8 +88,8 @@
                         <img src="/img/medical_camp/medicamp31.png" alt="" class="img-fluid">
                     </div>
                     <div class="mx-5">
-                        <h4 class="text-xmd fw-800 text-right mt-3">টিচারদের সাথে পারসোনাল সেশন</h4>
-                        <p class="text-xsm fw-400 text-gray text-right">দেশসেরা শিক্ষকদের সাথে পারসোনাল সেশন বুক করে তোমার সমস্যা শেয়ার করতে পারো, সমাধান দিবে তারাই!</p>
+                        <h4 class="text-xmd fw-800 text-right mt-3">{{__('index.personal_sessions_with_teachers')}}</h4>
+                        <p class="text-xsm fw-400 text-gray text-right">{{__('index.personal_sessions_with_teachers_details')}}</p>
                     </div>
                 </div>
             </div>
@@ -100,8 +100,8 @@
         @if(count($social_group) > 0)
         <section>
             <div class="social-media-parent-container">
-                <h2 id="social-media-heading">Join us on Facebook Group</h2>
-                <p id="social-media-description">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>
+                <h2 id="social-media-heading">{{__('index.join_us_on_facebook_group')}}</h2>
+                <p id="social-media-description">- {{__('index.what_to_expect_on_our_platform_point_1')}}</p>
             </div>
             <div class="main">
                 <div class="swiper swiper-container">
@@ -113,7 +113,7 @@
 
                                     <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
                                       <h6 class="card-title">{{$group->title}}</h6>
-                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Click To Join</a>
+                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">{{__('index.click_to_join')}}</a>
                                     </div>
                                   </div>
                             </div>

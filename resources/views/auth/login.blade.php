@@ -20,7 +20,7 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <label class="block font-medium text-sm text-gray-700" for="email">{{__('index.email')}}</label>
 
                 <x-input placeholder="e.g. yourmail@test.com" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
                     autofocus />
@@ -37,7 +37,8 @@
             </div> --}}
 
             <div class="py-2" x-data="{ show: true }">
-                <span class="px-1 text-sm text-gray-600">Password</span>
+{{--                <span class="px-1 text-sm text-gray-600">Password</span>--}}
+                <label class="block font-medium text-sm text-gray-700" for="password">{{__('index.password')}}</label>
                 <div class="relative">
                     <input placeholder="" type="password"
                         class="rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full" style="border:1px solid #FA9632"
@@ -64,7 +65,7 @@
             <!-- Remember Me -->
             <div class="block mt-4">
                 {{-- <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" 
+                    <input id="remember_me" type="checkbox"
                         class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         name="remember">
                     <span class="ml-2 text-sm text-gray-600" >{{ __('Remember me') }}</span>
@@ -72,19 +73,20 @@
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" style="text-decoration:none;"
                         href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('index.forgot_your_password') }}
                     </a>
                 @endif
             </div>
 
             <div class="my-5" style="display: flex;
             justify-content: center;">
-                
 
-                <x-button class="" style="background:#FA9632">
-                    {{ __('Login') }}
-                </x-button>
-               
+                <button type="submit"
+                        class="px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
+                        style="background:#FA9632">
+                    {{ __('index.log_in') }}
+                </button>
+
             </div>
             {{-- <a href="{{route('login.facebook')}}" class="block bg-gray-200 text-center p-4 font-bold rounded my-5 text-black"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 width="35" height="35"
@@ -98,7 +100,7 @@
                 @if (Route::has('register'))
                 <a class="block text-center underline text-sm text-gray-600 hover:text-gray-900 " style="text-decoration:none;"
                     href="{{ route('register') }}">
-                    {{ __('Need a new account ?') }}
+                    {{ __('index.need_a_new_account') }}
                 </a>
             @endif
         </form>
@@ -112,5 +114,5 @@
             }
         </script>
     </x-auth-card>
-    
+
 </x-guest-layout>
