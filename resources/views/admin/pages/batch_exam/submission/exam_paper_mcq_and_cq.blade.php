@@ -34,7 +34,7 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 @foreach($mcq_exam_results as $exam_result)
+                                 {{-- @foreach($mcq_exam_results as $exam_result)
                                        <tr>
                                           <td>{{ $loop->iteration }}</td>
                                           <td class="text-center">{{ $exam_result->student->name }}</td>
@@ -58,6 +58,35 @@
                                                    'exam_type' => $exam_result->exam->exam_type
                                              ]) }}">See Details</a>
                                           </td>
+                                       </tr>
+                                 @endforeach --}}
+
+                                 @foreach($student_exam_attempts as $student_exam_attempt)
+                                       <tr>
+                                          @if($student_exam_attempt->exam_type == $exam_result_mcq_type)
+                                             <td>{{ $loop->iteration }}</td>
+                                             <td class="text-center">{{ $student_exam_attempt->student->name }}</td>
+                                             <td class="text-center">{{ $batch->title }}</td>
+                                             <td class="text-center">{{ $student_exam_attempt->exam->title }}</td>
+                                             <td class="text-center">
+                                                <span
+                                                      class="badge 
+                                                                  {{ $student_exam_attempt->exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
+                                                                  {{ $student_exam_attempt->exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}
+                                                                  ">
+                                                      {{ $student_exam_attempt->exam->exam_type }} (MCQ)
+                                                </span>
+                                             </td>
+                                             <td class="text-center">{{ $student_exam_attempt->gain_marks }}</td>
+                                             <td class="text-center">
+                                                <a href="{{ route('seeDetailsMcqOnly', [
+                                                      'batch' => $batch,
+                                                      'student' => $student_exam_attempt->student,
+                                                      'exam' => $student_exam_attempt->exam,
+                                                      'exam_type' => $student_exam_attempt->exam->exam_type
+                                                ]) }}">See Details</a>
+                                             </td>
+                                          @endif
                                        </tr>
                                  @endforeach
                               </tbody>
@@ -96,7 +125,7 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 @foreach ($student_exam_attempts as $student_exam_attempt)
+                                 {{-- @foreach ($student_exam_attempts as $student_exam_attempt)
                                     <tr>
                                           <td>{{ $loop->iteration }}</td>
                                           <td class="text-center">{{ $student_exam_attempt->student->name }}</td>
@@ -141,6 +170,55 @@
                                                 Details</a>
                                           </td>
                                     </tr>
+                                 @endforeach --}}
+
+                                 @foreach ($student_exam_attempts as $student_exam_attempt)
+                                    @if($student_exam_attempt->exam_type == $exam_result_cq_type)
+                                       <tr>
+                                             <td>{{ $loop->iteration }}</td>
+                                             <td class="text-center">{{ $student_exam_attempt->student->name }}</td>
+                                             <td class="text-center">{{ $batch->title }}</td>
+                                             <td class="text-center">{{ $student_exam_attempt->exam->title }}</td>
+                                             <td class="text-center">
+                                                <span
+                                                class="badge 
+                                                            {{ $student_exam_attempt->exam->exam_type == 'Pop Quiz' ? 'bg-secondary' : '' }}
+                                                            {{ $student_exam_attempt->exam->exam_type == 'Topic End Exam' ? 'bg-info' : '' }}
+                                                            ">
+
+                                                   {{ $student_exam_attempt->exam->exam_type }} (CQ)
+                                                </span>
+                                             </td>
+                                             <td class="text-center">
+                                                {{-- @foreach ($cq_exam_results as $exam_result)
+                                                   @if ($exam_result->student_id == $student_exam_attempt->student_id) --}}
+                                                      @if($student_exam_attempt->checked)
+                                                         Yes
+                                                      @else
+                                                         No
+                                                      @endif
+                                                   {{-- @endif
+                                                @endforeach --}}
+                                             </td>
+                                             <td class="text-center">
+                                                {{-- @foreach ($cq_exam_results as $exam_result)
+                                                   @if ($exam_result->student_id == $student_exam_attempt->student_id) --}}
+                                                         {{ $student_exam_attempt->gain_marks }}
+                                                   {{-- @endif
+                                                @endforeach --}}
+                                             </td>
+                                             <td class="text-center">
+                                                <a
+                                                   href="{{ route('seeDetailsCqOnly', [
+                                                   'batch' => $batch,
+                                                   'student' => $student_exam_attempt->student,
+                                                   'exam' => $student_exam_attempt->exam,
+                                                   'exam_type' => $student_exam_attempt->exam->exam_type,
+                                                ]) }}">See
+                                                   Details</a>
+                                             </td>
+                                       </tr>
+                                    @endif
                                  @endforeach
                               </tbody>
                               <tfoot>

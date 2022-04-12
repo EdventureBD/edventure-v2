@@ -27,6 +27,7 @@ use App\Models\Admin\QuestionContentTag;
 use App\Models\Student\exam\ExamPaper;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\StudentExamAttempt;
+use App\Models\Admin\StudentTopicEndExamAttempt;
 use App\Models\Student\exam\CqExamPaper;
 use App\Models\Student\exam\TopicEndExamCqExamPaper;
 use App\Models\Student\exam\PopQuizCqExamPaper;
@@ -579,14 +580,16 @@ class ExamController extends Controller
                     // If next pop quiz has lecture, then generate link for that
                     if(count($next_exam->course_lectures) > 0){
                         $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]->slug]);
+                        $next_link_btn_text = "Next Lecture";
                     }
                     // else generate link for the quiz
                     else{
                         $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $next_exam->id, $next_exam->exam_type]);
+                        $next_link_btn_text = "Next Exam";
                     }
                 }
 
-                return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam'));
+                return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam', 'next_link', 'next_link_btn_text'));
             }
 
             else{
@@ -891,9 +894,11 @@ class ExamController extends Controller
 
                     if(empty($next_exam->course_lectures[0])){
                         $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $next_exam->id, $next_exam->exam_type]);
+                        $next_link_btn_text = "Next Exam";
                     }
                     else{
                         $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]]);
+                        $next_link_btn_text = "Next Lecture";
                     }
                 
                     return view('student.pages_new.batch.exam.canAttemp',
@@ -908,7 +913,8 @@ class ExamController extends Controller
                                         'course_topic',
                                         'batch',
                                         'exam',
-                                        'next_link'
+                                        'next_link',
+                                        'next_link_btn_text'
                                     ));
                 }
         }
@@ -1112,6 +1118,17 @@ class ExamController extends Controller
                     return redirect()->back()->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
                 }
 
+                // for topic end exams only, make a "topic_end_exam_attempt" if none exist.
+                $topic_end_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam->id)->where('student_id', auth()->user()->id)->first();
+
+                if(!$topic_end_exam_attempt){
+                    $topic_end_exam_attempt = new StudentTopicEndExamAttempt();
+                    $topic_end_exam_attempt->topic_end_exam_id = $exam->id;
+                    $topic_end_exam_attempt->student_id = auth()->user()->id;
+                    $topic_end_exam_attempt->attempts = 0;
+                    $topic_end_exam_attempt->save();
+                }
+
                 $canAttempt = TopicEndExamCqExamPaper::where('exam_id', $exam->id)
                 ->where('batch_id', $batch->id)
                 ->where('student_id', auth()->user()->id)
@@ -1189,7 +1206,7 @@ class ExamController extends Controller
 
                 // if next pop quiz is not found, get topic end exam
                 if(empty($next_exam)){
-                    $next_exam = Exam::where(function ($query)use($exam){
+                    $next_exam = Exam::where(function ($query){
                         $query->where('exam_type', 'Topic End Exam');
                     })
                     // ->where('order', '>', $exam->order)
@@ -1204,13 +1221,21 @@ class ExamController extends Controller
                     ->first();
                 }
 
+                $next_exam_type_TEE = false;
+
                 // If next pop quiz has lecture, then generate link for that
                 if(count($next_exam->course_lectures) > 0){
                     $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]->slug]);
+                    $next_link_btn_text = "Next Lecture";
                 }
                 // else generate link for the quiz
                 else{
                     $next_link = route('batch-test', [$course_topic->slug, $batch->slug, $next_exam->id, $next_exam->exam_type]);
+                    $next_link_btn_text = "Next Exam";
+
+                    if($next_exam->exam_type == "Topic End Exam"){
+                        $next_exam_type_TEE = true;
+                    }
                 }
 
                 if($mcq_exam_result){
@@ -1303,7 +1328,7 @@ class ExamController extends Controller
                 if($cq_exam_result){
                     if($cq_exam_result->checked == 0) {
                         // Paper Checking Pending
-                        return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam', 'next_link'));
+                        return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam', 'next_link', 'next_link_btn_text', 'next_exam_type_TEE'));
                     }
                     elseif($cq_exam_result->checked == 1) {
 
@@ -1370,7 +1395,8 @@ class ExamController extends Controller
                         'cqs_exist',
                         'cq_total_marks',
                         'cq_marks_scored',
-                        'next_link'
+                        'next_link',
+                        'next_link_btn_text'
                     ));
                 }
 

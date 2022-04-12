@@ -73,7 +73,7 @@
                                                     <div class="player__embed ">
                                                         <iframe width="100%" height="315"
                                                             src="https://www.youtube-nocookie.com/embed/{{ $courseLecture->url }}"
-                                                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
                                                         clipboard-write; encrypted-media; gyroscope;
                                                         picture-in-picture" allowfullscreen></iframe>
                                                         {{-- <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/{{ $courseLecture->url }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}

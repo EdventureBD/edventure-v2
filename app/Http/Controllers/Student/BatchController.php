@@ -98,12 +98,16 @@ class BatchController extends Controller
         'courseTopic.exams.course_lectures.completed_lectures' => function($query){
             return $query->where('student_id', auth()->user()->id)
             ->select('id', 'lecture_id');
-        }
+        },
+        'courseTopic.exams.exam_attempts' => function($query){
+            return $query->where('student_id', auth()->user()->id)->select('id', 'topic_end_exam_id', 'student_id', 'attempts');
+        },
         ])
         ->where('batch_id', $batch->id)
         ->where('course_id', $course->id)
         ->get();
 
+        // dd($batchTopics);
         // dd(CompletedLectures::where('student_id', auth()->user()->id)->orderBy('created_at', 'desc')->first(), $batchTopics);
 
         $island_images = [];
