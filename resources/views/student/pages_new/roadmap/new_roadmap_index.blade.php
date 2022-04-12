@@ -61,105 +61,114 @@
                      </button>
                   </div> 
                   <div class="modal-body" style="padding-top: 25px; padding-bottom: 25px;">
-                     <ul>
-                        @forelse ($batchTopic->courseTopic->exams as $exam)
-                           @if (count($exam->course_lectures))
-                              @foreach ($exam->course_lectures as $course_lecture)
-                                 <li>
-                                    <a
-                                       @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                       href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                       class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       {{ Str::limit($course_lecture->title, 22, '...') }}
+                     {{-- @if($batchTopic->courseTopic->exams->last()->exam_attempts->count() > 0 && $batchTopic->courseTopic->exams->last()->exam_attempts->last()->attempts < 3) --}}
+                        <ul>
+                           @forelse ($batchTopic->courseTopic->exams as $exam)
+                              @if (count($exam->course_lectures))
+                                 @foreach ($exam->course_lectures as $course_lecture)
+                                    <li>
+                                       <a
+                                          @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                          href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
+                                          class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                          {{ Str::limit($course_lecture->title, 22, '...') }}
+                                       </a>
+                                       <div class="w-25">
+
+                                          @if ($disabled && !$disabled2 && !$course_lecture->completed)
+                                             <div style="height:50px;"></div>
+                                          @elseif($disabled2)
+                                             <div style="height:50px;"></div>
+                                          @else
+                                             <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                          @endif
+
+                                          {{-- @if($disabled2)
+                                             <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                          @else
+                                             <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                          @endif --}}
+                                       </div>
+                                    </li>
+                                    @php
+                                       if ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
+                                    @endphp
+                                 @endforeach
+                              @endif
+
+                              <li>
+                                 @if($exam->exam_type == "Aptitude Test")
+                                    <a @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                       href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
+                                       class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                       {{ Str::limit($exam->title, 22, '...') }}
                                     </a>
                                     <div class="w-25">
 
-                                       @if ($disabled && !$disabled2 && !$course_lecture->completed)
+                                       @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted)
                                           <div style="height:50px;"></div>
-                                       @elseif($disabled2)
-                                          <div style="height:50px;"></div>
-                                       @else
-                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                       @else 
+                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
                                        @endif
 
                                        {{-- @if($disabled2)
                                           <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
                                        @else
-                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
                                        @endif --}}
                                     </div>
-                                 </li>
+                                 @else
+                                    <a
+                                       @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                       href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
+                                       class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                       {{ Str::limit($exam->title, 22, '...') }}
+                                    </a>
+                                    <div class="w-25">
+
+                                       @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))
+                                          <div style="height:50px;"></div>
+                                       @elseif (!$disabled2)
+                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
+                                       @else
+                                          <div style="height:50px;"></div>
+                                       @endif
+
+                                       {{-- @if($disabled2)
+                                          <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
+                                       @else
+                                          <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
+                                       @endif --}}
+                                    </div>
+                                 @endif
                                  @php
-                                    if ($disabled && !$disabled2 && !$course_lecture->completed) $disabled2 = true;
+                                    // set previous island TEE passed to false if not passed. WIll generate modal based on that.
+                                    if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false){
+                                       $previous_island_topic_end_exam_passed = false;
+                                    }
+
+                                    // keep count of previous island TEE attempted. Lock or unlock next island based on that
+                                    // if($exam->exam_type == "Topic End Exam" && $exam->exam_attempts->count() > 0){
+                                    //    $previous_island_topic_end_exam_attempts = $exam->exam_attempts[0]->attempts;
+                                    // }
+
+                                    if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) {
+                                       $disabled = true;
+                                       $disabled2 = true;
+                                    } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
+                                    elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
+                                    elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                                  @endphp
-                              @endforeach
-                           @endif
+                              </li>
 
-                           <li>
-                              @if($exam->exam_type == "Aptitude Test")
-                                 <a @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                    href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                    class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                    {{ Str::limit($exam->title, 22, '...') }}
-                                 </a>
-                                 <div class="w-25">
+                           @empty
+                              <h3 class="flex text-center pr-5">No exams found. Please contact administrators.</h3>
+                           @endforelse
 
-                                    @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted)
-                                       <div style="height:50px;"></div>
-                                    @else 
-                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                                    @endif
-
-                                    {{-- @if($disabled2)
-                                       <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
-                                    @else
-                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                                    @endif --}}
-                                 </div>
-                              @else
-                                 <a
-                                    @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                    href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                    class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                    {{ Str::limit($exam->title, 22, '...') }}
-                                 </a>
-                                 <div class="w-25">
-
-                                    @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))
-                                       <div style="height:50px;"></div>
-                                    @elseif (!$disabled2)
-                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                                    @else
-                                       <div style="height:50px;"></div>
-                                    @endif
-
-                                    {{-- @if($disabled2)
-                                       <img src="/img/road_map/wrongSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
-                                    @else
-                                       <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
-                                    @endif --}}
-                                 </div>
-                              @endif
-                              @php
-                                 // set previous island TEE passed to false if not passed. WIll generate modal based on that.
-                                 if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false){
-                                    $previous_island_topic_end_exam_passed = false;
-                                 }
-
-                                 if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) {
-                                    $disabled = true;
-                                    $disabled2 = true;
-                                 } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
-                                 elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
-                                 elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
-                              @endphp
-                           </li>
-
-                        @empty
-                           <h3 class="flex text-center pr-5">No exams found. Please contact administrators.</h3>
-                        @endforelse
-
-                     </ul>
+                        </ul>
+                     {{-- @else
+                        <h3 class="flex text-center pr-5">You have already attempted the topic end exam 3 times. Please contact administrators to unlock the next module.</h3>
+                     @endif --}}
                   </div>
                   {{-- <div class="modal-footer mx-auto">
                      <a class="close" data-dismiss="modal" aria-label="Close"> <img src="/img/road_map/back.png" alt="modal closing button" class="img-fluid" id="roadmap-modal-close-btn"></a>
