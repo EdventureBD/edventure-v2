@@ -333,7 +333,14 @@ class BatchController extends Controller
             $next_link_btn_text = "Next Exam";
         }
 
-        // dd($next_link, $courseLecture, $next_lecture, $prev_lecture);
+        if($exam->exam_type == "Topic End Exam" && !$next_lecture){
+            $next_exam_type_TEE = "Topic End Exam";
+        }
+        else{
+            $next_exam_type_TEE = null;
+        }
+
+        // dd($next_link, $courseLecture, $next_lecture, $prev_lecture, $exam);
 
         $course = Course::where('id', $batch->course_id)->first();
         $liveClass = LiveClass::where('batch_id', $batch->id)
@@ -350,7 +357,7 @@ class BatchController extends Controller
             $timeleft_seconds = $start_date_time->format('U') - $today_time->format('U');
             $timeleft = $timeleft_seconds;
         }
-        return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_link', 'next_link', 'next_link_btn_text'));
+        return view('student.pages_new.batch.specific_lecture', compact('batch', 'courseLecture', 'course', 'liveClass', 'start_date', 'start_time', 'timeleft', 'prev_link', 'next_link', 'next_link_btn_text', 'next_exam_type_TEE'));
     }
 
     public function lecture_visit_confirmed_ajax($batch, $courseLecture){
