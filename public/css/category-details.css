@@ -212,7 +212,7 @@
 
 /* Track */
 div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track,div.teachers div::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #f1f1f1;
 }
 
 /* Handle */
@@ -223,7 +223,32 @@ div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thum
 
 /* Handle on hover */
 div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover,div.teachers div::-webkit-scrollbar-thumb:hover {
-    background: #8315f1; 
+    background: #8315f1;
 }
 /* customised slim scroll bar part  */
 
+.coupon-btn {
+    font-weight: 800;
+    background-color: #FA9632;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-shadow: 1px 1px 2px black;
+}
+
+.coupon-btn:hover {
+    background-color: #f2a44b;
+    box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
+    color: #fff;
+}
+
+#cancle_promo:hover {
+    background: #f2a44b !important;
+    color: #fff;
+}
+
+#promo_code:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: 11px 2px 14px rgba(231, 128, 108, 0.4);
+}

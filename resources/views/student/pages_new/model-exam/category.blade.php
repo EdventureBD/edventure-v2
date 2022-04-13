@@ -10,9 +10,6 @@
                 <div class="py-4">
                     <div class="text-center bradius-10 py-2 w-100 text-sm " style="font-weight: 900; color: #76777A">
                         Exams Category</div>
-                    @if (!request()->has('c'))
-                        <div class="text-center" id="select-category"> Select a Category</div>
-                    @endif
                     {{-- =============================************************===================================== --}}
                     {{-- customed card for being used everywhere --}}
 
@@ -67,14 +64,24 @@
                                         @endif
                                     </div>
                                     <div class="position-relative d-flex bottom-0" style="justify-content: space-evenly">
-                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
-                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
-                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
-                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
-                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #c4c4c4;"></span>                                    </div>
+                                        @php($rand =  rand(4,5))
+                                        @for($i=1;$i<=5;$i++)
+                                            @php($rand =  rand(4,5))
+                                            @if($rand < $i)
+                                                <span class="iconify" data-icon="ant-design:star-filled" style="color: #c4c4c4;"></span>
+                                            @else
+                                                <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>
+                                            @endif
+
+{{--                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>--}}
+{{--                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>--}}
+{{--                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #fa9632;"></span>--}}
+{{--                                        <span class="iconify" data-icon="ant-design:star-filled" style="color: #c4c4c4;"></span>--}}
+                                        @endfor
+                                    </div>
                                 </div>
                                 <div class="my-auto vertical-line">
-                                    
+
                                 </div>
                                 <div class="col-7">
                                     <div class="card-body">
@@ -82,35 +89,42 @@
                                             <div class="d-flex justify-content-start">
                                                 <span class="iconify" data-icon="akar-icons:book" style="color: #6c686e;"></span>
                                                 <div class="card-text-customed">
-                                                    24 MCQ
+                                                    {{array_sum([$category->paper_final,$category->subject_final,$category->final_exam])}}
+                                                    Exams
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-start">
                                                 <span class="iconify" data-icon="clarity:alarm-clock-line" style="color: #6c686e;"></span>
                                                 <div class="card-text-customed">
-                                                    50 min
+                                                    {{!empty($category->time_allotted) ? $category->time_allotted.' min' : 'Not set'}}
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-start">
                                                 <span class="iconify" data-icon="emojione-monotone:spiral-notepad" style="color: #6c686e;"></span>
                                                 <div class="card-text-customed">
-                                                    6 Notes
+                                                    {{!empty($category->full_solutions) ? $category->full_solutions.' solutions' : 'Not set'}}
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-start">
-                                                <span class="iconify" data-icon="eva:people-outline" style="color: #6c686e;"></span>
-                                                <div class="card-text-customed">
-                                                    312 Students
-                                                </div>
-                                            </div>
+{{--                                            <div class="d-flex justify-content-start">--}}
+{{--                                                <span class="iconify" data-icon="eva:people-outline" style="color: #6c686e;"></span>--}}
+{{--                                                <div class="card-text-customed">--}}
+{{--                                                    @if(!is_null($category->price) && $category->price != 0)--}}
+{{--                                                        @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)--}}
+{{--                                                        {{$number}} Students--}}
+{{--                                                    @else--}}
+{{--                                                        @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)--}}
+{{--                                                        {{$number}} Students--}}
+{{--                                                    @endif--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                             <div class="d-flex justify-content-start">
                                                 <span class="iconify" data-icon="healthicons:money-bag-outline" style="color: #6c686e;"></span>
                                                 <div class="card-text-customed">
-                                                    PAID
+                                                    {{!empty($category->price) && !is_null($category->price) ? 'PAID' : 'FREE'}}
                                                 </div>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <a href="{{ route('model.exam', ['c' => $category->uuid]) }}"
