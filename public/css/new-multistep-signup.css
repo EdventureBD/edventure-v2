@@ -328,17 +328,17 @@ border-width: 0 4px 5px 4px;
     }
     .fixed-btn-previous {
         position:relative;
-        right: 302px;
+        right: 40%;
         bottom: -69px;
     }
     .fixed-btn {
         position: relative;
-        right: 266px;
+        right: 38%;
         bottom: -70px;
     }
     .fixed-btn-first-child {
         position: relative;
-        right: 332px;
+        right: 45.5%;
         bottom: -40px;
     }
 }
@@ -419,6 +419,35 @@ border-width: 0 4px 5px 4px;
         padding-right: 50px !important;
     }
 }
+@media screen and (max-width:992px) {
+    #right-section {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+    #heading {
+        font-size: 30px;
+    }
+    .fixed-btn-first-child {
+        position: relative;
+        right: 158px;
+        bottom: -25px;
+    }
+    #progressbar li:before {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        line-height: 32px;
+    }
+    #progressbar li:after {
+        top: 17px;
+    }
+    .fixed-btn {
+        right: 121px
+    }
+    .fixed-btn-previous {
+        right: 129px;
+    }
+}
 @media screen and (max-width:768px) {
     #heading {
         font-size: 25px;
@@ -438,18 +467,18 @@ border-width: 0 4px 5px 4px;
     }
     .fixed-btn {
         position: relative;
-        right: 100px;
+        right: 34.5%;
         bottom: 0px;
     }
     .fixed-btn-first-child {
         position: relative;
-        right: 150px;
+        right: 45%;
         bottom: 0px;
     }
 
     .fixed-btn-previous {
         position: relative;
-        right: 130px;
+        right: 34%;
         bottom: 0px;
     }
     #progressbar li:after{
@@ -503,17 +532,17 @@ border-width: 0 4px 5px 4px;
     }
     .fixed-btn {
         position: relative;
-        right: 80px;
+        right: 28%;
         bottom: 0px;
     }
     .fixed-btn-first-child {
         position: relative;
-        right: 145px;
+        right: 41%;
         bottom: 0px;
     }
     .fixed-btn-previous {
         position: relative;
-        right: 110px;
+        right: 34%;
         bottom: 0px;
     }
     #progressbar li:before {
