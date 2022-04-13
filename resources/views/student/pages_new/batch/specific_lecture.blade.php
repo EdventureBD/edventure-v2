@@ -8,9 +8,37 @@
                         {{-- @if(!empty($prev_link))<a href="{{$prev_link}}" class="btn text-xxxsm text-white bg-purple fw-800 px-3 py-2 w-20"><i class="fas fa-angle-left"></i> Prev Lecture</a>@endif --}}
                         <a href="{{ route('course-preview', $course->slug) }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3"><i class="fas fa-arrow-up mr-2"></i> Go Back to Journey </a>
                     </div>
-                    <div>
+                    {{-- <div>
                         @if(!empty($next_link))<a id="next-btn" href="{{$next_link}}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 d-none">{{ $next_link_btn_text }}<i class="fas fa-angle-double-right ml-1"></i></a>@endif
+                    </div> --}}
+                    {{-- If next exam type is TEE generate a confirmation modal with button --}}
+                    @if(isset($next_exam_type_TEE) && $next_exam_type_TEE)
+                    <button type="button" id="next-btn" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1 d-none" data-toggle="modal" data-target="#exampleModalLong">  {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i> </button>
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center" id="exampleModalLongTitle"> Confirm continue </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="font-size: 3rem; font-weight:600; color:#8c00ff !important;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                You are about to attempt a Topic End Exam. Are you sure you wish to continue ?
+                            </div>
+                            <div class="modal-footer d-flex justify-content-between">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
+                            </div>
+                        </div>
+                        </div>
                     </div>
+                    {{-- Else generate a normal btn --}}
+                    @else
+                        <div>
+                            @if(!empty($next_link))<a id="next-btn" href="{{$next_link}}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 d-none">{{ $next_link_btn_text }}<i class="fas fa-angle-double-right ml-1"></i></a>@endif
+                        </div>
+                    @endif
                 </div>
                 <div class="d-flex justify-content-between">
                     <div>
@@ -118,36 +146,6 @@
         </div>
     <!-- // END Header Layout Content -->
 
-<script type="text/javascript">
-    var timeleft = "<?php echo $timeleft; ?>";
-    var downloadTimer = setInterval(function () {
-        timeleft--;
-        var hours = 0;
-        var minH = 0;
-        var min = 0;
-        var sec = timeleft > 0 ? timeleft : 0;
-        if (timeleft >=3600) {
-            hours = Math.floor(timeleft/3600);
-            minH = parseInt(timeleft % 3600) ;
-            min = Math.floor(minH / 60);
-            sec = parseInt(minH % 60);
-        } else if (timeleft >= 60) {
-            min = Math.floor(timeleft / 60);
-            sec = parseInt(timeleft % 60);
-        } 
-        if (timeleft > 0) {
-            document.getElementById('countdownTimer').innerHTML = "<p class='h2 text-xsm text-gray-50 font-weight-light m-0 text-center my-4'>Time Left </p><span> "+hours+" Hour </span><span> "+min+" Min </span><span> "+sec+" Sec </span>";
-        } 
-        
-
-        if (timeleft <= 0) {
-            // document.getElementById('exam-form').submit();
-            clearInterval(downloadTimer);
-        }
-
-    }, 1000);
-</script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
@@ -159,6 +157,7 @@
             data: { },
             success: function(response)
             {
+                console.log(1)
                 if(response){
                     $("#lecture_viewed").attr("checked", true);
                     // $("#lecture_viewed").attr("disabled", true);
@@ -173,7 +172,8 @@
                         data: { },
                         success: function(response)
                         {
-                            console.log(response.success, response.completed);
+                            console.log(2)
+                            // console.log(response.success, response.completed);
                             if(response.success){
                                 $("#lecture_viewed").attr("checked", true);
                                 // $("#lecture_viewed").attr("disabled", true);
