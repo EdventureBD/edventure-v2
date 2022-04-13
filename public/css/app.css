@@ -11034,6 +11034,9 @@ a:hover {
    #text-in-landing h4, #text-in-landing h2, #text-in-landing a {
      font-size: 1.5rem;
    }
+   .social-icons img {
+    width: 30px !important;
+  }
 }
 /* new landing page css design part ends */
 .bg-white {

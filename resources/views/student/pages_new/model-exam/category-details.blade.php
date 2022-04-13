@@ -1,165 +1,9 @@
 <x-landing-layout headerBg="white">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        #iframe {
-            width: 100%!important;
-            height: 248px!important;
-            border-radius: 15px;
-        }
-        .includes {
-            border: 1px solid #fa9632;
-            border-radius: 15px;
-            padding: 15px;
-            font-weight: bold;
-        }
-        .marginLeft10 {
-            margin-left: 10px
-        }
-        .bold-header {
-            font-weight: bolder;
-            color: #6400c8;
-        }
-        .scroll-y {
-            overflow-y: auto;
-            max-height: 10vh;
-        }
-
-        .scroll-x {
-            overflow-x: auto;
-            overflow-y: hidden;
-            max-width: 50%;
-            height: 100px;
-        }
-        .nav-tabs .nav-link {
-            border: 3px solid #6400c8;
-            color: #6400c8;
-            width: 50%;
-            text-align: center;
-            font-weight: bold;
-        }
-        .nav-tabs .nav-link:hover {
-            border: 3px solid #6400c8;
-        }
-        .nav-tabs .nav-link:nth-child(1) {
-            border-top-left-radius: 15px;
-            border-bottom-left-radius: 15px;
-        }
-
-        .nav-tabs .nav-link:nth-child(2) {
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
-        }
-        .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-            color: white;
-            background-color: #6400c8;
-            border-color: #6400c8 #6400c8 #6400c8;
-            padding: 15px;
-            text-shadow: 2px 1px 4px black;
-        }
-        .nav-tabs {
-            border-bottom: none;
-        }
-        .custom-shadow {
-            filter: drop-shadow(0px 103.559px 168.131px rgba(0, 0, 0, 0.100973)) drop-shadow(0px 23.1312px 37.5543px rgba(0, 0, 0, 0.149027)) drop-shadow(0px 6.88678px 11.1809px rgba(0, 0, 0, 0.25));
-
-        }
-        #headingOne:before,
-        #headingTwo:before {
-            font-family: 'Font Awesome 5 Free';
-            content: "\f107";
-            float: right;
-            transition: all 0.5s;
-        }
-        #headingOne.active:before,
-        #headingTwo.active:before{
-            -webkit-transform: rotate(180deg);
-            -moz-transform: rotate(180deg);
-            transform: rotate(180deg);
-        }
-        .sticky {
-            position: fixed;
-            top: 8% !important;
-            width: 531px;
-        }
-
-        @media (max-width: 768px) {
-            .sticky {
-                top: 7% !important;
-                width: 320px !important;
-            }
-        }
-        @media (max-width: 576px) {
-            .sticky {
-                top: 9% !important;
-                width: 330px !important;
-            }
-            #parent-div {
-                flex-direction: column-reverse;
-            }
-        }
-
-        @media (min-width: 578px) {
-            #parent-div {
-                flex-direction: row;
-            }
-        }
-        .payment-btn {
-            border: 1px solid #fa9632;
-            border-radius: 15px;
-            padding: 10px;
-            background-color: #fafafa;
-        }
-
-        .category-details-action-btn:before {
-            font-family: 'Font Awesome 5 Free';
-            content: "\f0a9";
-            float: right;
-            margin-left: 5px;
-            font-size: 20px;
-        }
-        .category-details-action-btn {
-            padding: 15px;
-            border-radius: 15px;
-            width: 100%;
-            font-size: 15px;
-            font-weight: 800;
-            background-color: #FA9632;
-            color: white;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease 0s;
-            cursor: pointer;
-            text-shadow: 2px 1px 4px black;
-        }
-
-        .category-details-action-btn:hover {
-            /*background-color: #ffb300;*/
-            background-color: #f2a44b;
-            box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
-            color: #fff;
-            transform: translateY(-7px);
-        }
-
-        .offer-price {
-            font-size: 30px;
-        }
-
-        .offer-price:before {
-            content: '৳';
-            font-size: 20px;
-            margin-right: 5px;
-        }
-
-        .actual-price {
-            font-size: 30px;
-        }
-
-        .actual-price:before {
-            content: '৳';
-            font-size: 20px;
-            margin-right: 5px;
-        }
-    </style>
+    {{-- custom css link  --}}
+    <link rel="stylesheet" href="/css/category-details.css">
+    {{-- custom css link ends  --}}
 <div class="page-section">
     <div class="container">
         <div class="d-flex mb-3" id="parent-div">
@@ -170,53 +14,93 @@
 
                 <div class="includes">
                     <div class="row">
-                        <div class="col-md-6 d-flex mt-3">
-                            <img src="/img/category_details/icons8-users-48.png"/>
-                            <span class="marginLeft10">এক্সামটি দিয়েছে <br>
-                                @if(!is_null($category->price) && $category->price != 0)
-                                    @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)
-                                    {{\App\Enum\Converter::en2bn($number)}} জন
-                                @else
-                                    @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
-                                    {{\App\Enum\Converter::en2bn($number)}} জন
-                                @endif
-                            </span>
+                        <div class="col-md-6 d-flex my-2">
+                            <div class="col-4 p-0 my-auto">
+                                <img class="img-fluid" src="/img/category_details/participant.png" alt="participant's photo"/>
+                            </div>
+                            <div class="col-8 d-flex flex-column p-0 my-auto">
+                                <div class="text-nowrap detail-parts-font">এক্সামটি দিয়েছে </div>
+                                <div class="text-nowrap detail-parts-font">
+                                    @if(!is_null($category->price) && $category->price != 0)
+                                        @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)
+                                        {{\App\Enum\Converter::en2bn($number)}} জন
+                                    @else
+                                        @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
+                                        {{\App\Enum\Converter::en2bn($number)}} জন
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         @if(!empty($category->time_allotted) && !is_null($category->time_allotted))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">সময় লাগবে <br> {{\App\Enum\Converter::en2bn($category->time_allotted)}} ঘন্টা</span>
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/timer.png" alt="timer's photo">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->time_allotted)}} ঘন্টা
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
                         @if(!empty($category->full_solutions) && !is_null($category->full_solutions))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-users-48.png"/>
-                                <span class="marginLeft10">পূর্ণাঙ্গ সমাধান <br> {{\App\Enum\Converter::en2bn($category->full_solutions)}}+</span>
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="completeSolution">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">পূর্ণাঙ্গ সমাধান </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->full_solutions)}} <span style="font-size: 20px;font-weight: 600;">+</span>
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
                         @if(!empty($category->paper_final) && !is_null($category->paper_final))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">পেপার ফাইনাল <br> {{\App\Enum\Converter::en2bn($category->paper_final)}} টি</span>
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="paperFinal">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">পেপার ফাইনাল </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->paper_final)}} টি
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
 
                         @if(!empty($category->subject_final) && !is_null($category->subject_final))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-users-48.png"/>
-                                <span class="marginLeft10">সাবজেক্ট ফাইনাল <br> {{\App\Enum\Converter::en2bn($category->subject_final)}} টি</span>
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/subjectFinal.png" alt="subjectFinal">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">সাবজেক্ট ফাইনাল </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->subject_final)}} টি
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
 
                         @if(!empty($category->final_exam) && !is_null($category->final_exam))
-                            <div class="col-md-6 d-flex mt-3">
-                                <img src="/img/category_details/icons8-time-48.png" alt="">
-                                <span class="marginLeft10">ফাইনাল মডেল টেস্ট <br> {{\App\Enum\Converter::en2bn($category->final_exam)}} টি</span>
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/modelTest.png" alt="FinalModelTest">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">ফাইনাল মডেল টেস্ট </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($category->final_exam)}} টি
+                                    </div>
+                                </div>
                             </div>
                         @endif
 
@@ -227,9 +111,9 @@
                 @if($category->teacher_lists)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষকবৃন্দ</h5>
-                        <div class="d-flex" style="border-radius: 25px; background-color: #eeeeee; padding: 10px">
+                        <div class="d-flex overflow-x-scroll" style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
                             @foreach($category->teacher_lists as $teacher)
-                                <div class="text-center" style="display: inline-grid; padding-right: 10px; padding-left: 10px; align-content: center; border-right: 1px solid lightgrey;">
+                                <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
                                         <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
                                     @else
@@ -245,45 +129,51 @@
 
                 <div class="exam-details mt-5">
                     <nav>
-                        <div class="nav custom-shadow nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                        <div class="nav custom-shadow nav-tabs d-flex justify-content-center align-items-center" id="nav-tab" role="tablist">
                             <a class="nav-link active"
                                data-toggle="tab"
                                href="#examDetails"
                                role="tab"
                                aria-controls="examDetails"
-                               aria-selected="true">এক্সাম বিস্তারিত</a>
+                               aria-selected="true"
+                               style="border-top-right-radius: 0px !important; padding:15px">এক্সাম বিস্তারিত</a>
 
                             <a class="nav-link"
                                data-toggle="tab"
                                href="#examRoutine"
                                role="tab"
                                aria-controls="examRoutine"
-                               aria-selected="false">রুটিন</a>
+                               aria-selected="false"
+                               style="border-top-left-radius: 0px !important; padding: 15px">রুটিন</a>
 
                         </div>
                     </nav>
-                    <div style="border: 25px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
-                        <div style="padding: 10px" class="tab-pane text-center col-md-12 fade active show"
+                    <div style="border: 5px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
+                        <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade active show"
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
                             @if($category->details)
                                 {!! $category->details !!}
                             @else
-                                <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
-                                <span style="color: grey">এক্সামের বিস্তারিত এখানে দেয়া হবে</span>
+                                <div class="text-center">
+                                    <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
+                                    <span style="color: grey">এক্সামের বিস্তারিত এখানে দেয়া হবে</span>
+                                </div>
                             @endif
 
                         </div>
-                        <div style="padding: 10px" class="tab-pane text-center col-md-12 fade"
+                        <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade"
                              id="examRoutine"
                              role="tabpanel"
                              aria-labelledby="examRoutine-tab">
                             @if($category->routine_image)
-                                <img style="width: 100%; height: 100%" src="{{Storage::url('categoryRoutine/'.$category->routine_image)}}" alt="">
+                                <img class="img-fluid" src="{{Storage::url('categoryRoutine/'.$category->routine_image)}}" alt="">
                             @else
-                                <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
-                                <spna style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</spna>
+                                <div class="text-center">
+                                    <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
+                                    <span style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</span>
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -340,7 +230,7 @@
                 </div>
             </div>
 
-            <div class="w-100 ml-md-5 mt-5">
+            <div class="w-100 ml-lg-5 mt-5">
                 <div class="test">
                     <iframe
                         id="iframe"
