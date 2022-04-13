@@ -129,22 +129,121 @@
 
                 {{-- START OF COURSE CATEGORY --}}
                 @can('course')
-                <li class="nav-item {{ request()->is('admin/course-category') ? 'menu-open' : '' }}">
-                    <a href="{{ route('course-category.index') }}"
-                        class="nav-link {{ request()->is('admin/course-category') ? 'active' : '' }} {{ request()->is('admin/course-category/create') ? 'active' : '' }}  {{ request()->is('admin/course-category/*') ? 'active' : '' }}">
-                        <i class="fas fa-list-ol"></i>
-                        <p>&nbsp; Course Category</p>
-                    </a>
-                </li>
-                {{-- END OF COURSE CATEGORY --}}
+                    <li class="nav-item {{ request()->is('admin/course-category') ? 'menu-open' : '' }}">
+                        <a href="{{ route('course-category.index') }}"
+                            class="nav-link {{ request()->is('admin/course-category') ? 'active' : '' }} {{ request()->is('admin/course-category/create') ? 'active' : '' }}  {{ request()->is('admin/course-category/*') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Course Category</p>
+                        </a>
+                    </li>
+                    {{-- END OF COURSE CATEGORY --}}
 
-                {{-- START OF COURSE --}}
-                @include('admin.includes.sidebar_content.course')
-                {{-- END OF COURSE --}}
+                    {{-- START OF PROGRAMS/INTERMEDIARY LEVEL --}}
+                    <li class="nav-item {{ request()->is('admin/intermediary_level') ? 'menu-open': '' }}">
+                        <a href="{{ route('intermediary_level.index') }}"
+                            class="nav-link {{ request()->is('admin/intermediary_level') ? 'active': '' }} {{ request()->is('admin/intermediary_level/create') ? 'active': '' }} {{ request()->is('admin/intermediary_level/*/edit') ? 'active': '' }}">
+                            <i class="nav-icon fas fa-list-ol"></i>
+                            <p>
+                                Program
+                            </p>
+                        </a>
+                    </li>
+                    {{-- END OF PROGRAMS/INTERMEDIARY LEVEL --}}
 
-                {{-- START OF BATCH --}}
-                @include('admin.includes.sidebar_content.batch')
-                {{-- END OF BATCH --}}
+                    {{-- START OF BUNDLE --}}
+                    <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">
+                        <a href="{{ route('bundle.index') }}"
+                            class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }} {{ request()->is('admin/bundle/create') ? 'active' : '' }}  {{ request()->is('admin/bundle/*') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Bundle </p>
+                        </a>
+                    </li>
+                    {{-- END OF BUNDLE --}}
+
+                    {{-- START OF COURSE --}}
+                    <li class="nav-item {{ request()->is('admin/course')? 'menu-open': '' }}">
+                        <a href="{{ route('course.index') }}"
+                            class="nav-link {{ request()->is('admin/course')? 'active': '' }} {{ request()->is('admin/course/*')? 'active': '' }} {{ request()->is('admin/course/*/edit')? 'active': '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Course </p>
+                        </a>
+                    </li>
+                    {{-- END OF COURSE --}}
+
+                    {{-- START OF BATCH --}}
+                    <li class="nav-item {{ request()->is('admin/course-topic')? 'menu-open': '' }}">
+                        <a href="{{ route('batch.index') }}"
+                            class="nav-link {{ request()->is('admin/batch/create') ? 'active' : '' }} {{ request()->is('admin/batch') ? 'active' : '' }} {{ request()->is('admin/batch/*/edit') ? 'active' : '' }} {{ request()->is('admin/batch/*') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Batch </p>
+                        </a>
+                    </li>
+                    {{-- END OF BATCH --}}
+
+                    {{-- START OF COURSE TOPIC --}}
+                    <li class="nav-item {{ request()->is('admin/batch') ? 'menu-open' : '' }}">
+                        <a href="{{ route('course-topic.index') }}"
+                            class="nav-link {{ request()->is('admin/course-topic')? 'active': '' }} {{ request()->is('admin/course-topic/create')? 'active': '' }} {{ request()->is('admin/course-topic/*/edit')? 'active': '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Course Topic </p>
+                        </a>
+                    </li>
+                    {{-- END OF COURSE TOPIC --}}
+
+                    {{-- START OF CONTENT TAG --}}
+                    <li class="nav-item {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}">
+                        <a href="{{ route('content-tag.index') }}"
+                            class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} {{ request()->is('admin/content-tag/create') ? 'active' : '' }} {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Content Tag </p>
+                        </a>
+                    </li>
+                    {{-- END OF CONTENT TAG --}}
+
+                    @can('course_exam')
+                        {{-- START OF EXAM SIDEBAR --}}
+                        @include('admin.includes.sidebar_content.exam')
+                        {{-- END OF EXAM SIDEBAR --}}
+                    @endcan
+
+                    {{-- START OF BATCH EXAM --}}
+                    <li class="nav-item {{ request()->is('admin/batch') ? 'menu-open' : '' }}">
+                        <a href="{{ route('batch-exam.index') }}"
+                            class="nav-link {{ request()->is('admin/batch-exam') ? 'active' : '' }} {{ request()->is('admin/batch-exam/create') ? 'active' : '' }} {{ request()->is('admin/batch-exam/*/edit') ? 'active' : '' }} {{ request()->is('admin/batch-exam/*') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Batch Exam </p>
+                        </a>
+                    </li>
+                    {{-- END OF BATCH EXAM --}}
+
+                    {{-- START OF COURSE LECTURE --}}
+                    <li class="nav-item {{ request()->is('admin/course-lecture')? 'menu-open': '' }}">
+                        <a href="{{ route('course-lecture.index') }}"
+                            class="nav-link {{ request()->is('admin/course-lecture')? 'active': '' }} {{ request()->is('admin/course-lecture/create')? 'active': '' }} {{ request()->is('admin/course-lecture/*/edit')? 'active': '' }} {{ request()->is('admin/course-lecture/*')? 'active': '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Course Lecture </p>
+                        </a>
+                    </li>
+                    {{-- END OF COURSE LECTURE --}}
+
+                    {{-- START OF BATCH LECTURE --}}
+                    <li class="nav-item {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}">
+                        <a href="{{ route('batch-lecture.index') }}"
+                            class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Batch Lecture </p>
+                        </a>
+                    </li>
+                    {{-- END OF BATCH LECTURE --}}
+
+
+                    {{-- START OF COURSE --}}
+                    {{-- @include('admin.includes.sidebar_content.course') --}}
+                    {{-- END OF COURSE --}}
+
+                    {{-- START OF BATCH --}}
+                    @include('admin.includes.sidebar_content.batch')
+                    {{-- END OF BATCH --}}
                 @endcan
 
                 @can('payment')
@@ -182,64 +281,6 @@
                         </ul>
                     </li>
                     {{-- END OF PAYMENTS --}}
-                @endcan
-
-                @can('course')
-                    {{-- START OF CONTENT TAGS --}}
-                    <li
-                        class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}
-                                                    {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}
-                                                    {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}
-                                                    {{ request()->is('admin/question-content-tag') ? 'menu-open' : '' }}
-                                                    {{ request()->is('admin/question-content-tag/create') ? 'menu-open' : '' }}
-                                                    {{ request()->is('admin/question-content-tag/*/edit') ? 'menu-open' : '' }}
-                                                    ">
-                        <a href="#"
-                            class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }}
-                                                    {{ request()->is('admin/content-tag/create') ? 'active' : '' }}
-                                                    {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}
-                                                    {{ request()->is('admin/question-content-tag') ? 'active' : '' }}
-                                                    {{ request()->is('admin/question-content-tag/create') ? 'active' : '' }}
-                                                    {{ request()->is('admin/question-content-tag/*/edit') ? 'active' : '' }}
-                                                    ">
-                            <i class="fas fa-chart-bar"></i>
-                            <p>&nbsp; Tags<i class="right fas fa-angle-left"></i></p>
-                        </a>
-                        <ul class="nav ml-5 nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('content-tag.index') }}"
-                                    class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} {{ request()->is('admin/content-tag/create') ? 'active' : '' }} {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}">
-                                    <i class="fas fa-clipboard-list"></i>
-                                    <p>&nbsp; Content Tag</p>
-                                </a>
-                            </li>
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('question-content-tag.index') }}" class="nav-link {{ request()->is('admin/question-content-tag')? 'active': '' }} {{ request()->is('admin/question-content-tag/create')? 'active': '' }} {{ request()->is('admin/question-content-tag/*/edit')? 'active': '' }}">
-                                    <i class="fas fa-question-circle"></i>
-                                    <p>&nbsp; Ques-Content Tag</p>
-                                </a>
-                            </li> --}}
-                        </ul>
-                    </li>
-                    {{-- END OF CONTENT TAG --}}
-                @endcan
-
-                @can('course')
-                    {{-- START OF COURSE CATEGORY --}}
-                    <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">
-                        <a href="{{ route('bundle.index') }}"
-                            class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }} {{ request()->is('admin/bundle/create') ? 'active' : '' }}  {{ request()->is('admin/bundle/*') ? 'active' : '' }}">
-                            <i class="fas fa-list-ol"></i>
-                            <p>&nbsp; Bundles </p>
-                        </a>
-                    </li>
-                    {{-- END OF COURSE CATEGORY --}}
-                @endcan
-
-                @can('course_exam')
-                    {{-- START OF EXAM SIDEBAR --}}
-                    @include('admin.includes.sidebar_content.exam')
-                    {{-- END OF EXAM SIDEBAR --}}
                 @endcan
                 {{----------------------- START OF MODEL EXAM SIDEBAR ------------------------------------}}
                 @canany([
