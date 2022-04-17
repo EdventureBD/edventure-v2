@@ -49,7 +49,7 @@
     </a>
     <ul class="nav ml-5 nav-treeview">
 
-        <li
+        {{-- <li
             class="nav-item has-treeview {{ request()->is('admin/exam') ? 'menu-open' : '' }}
         {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }}
         {{ request()->is('admin/all-cq') ? 'menu-open' : '' }}
@@ -60,8 +60,9 @@
                 <i class="far fa-dot-circle nav-icon"></i>
                 <p>MCQ</p>
             </a>
-        </li>
-        <li class="nav-item">
+        </li> --}}
+
+        {{-- <li class="nav-item">
             <a href="{{ route('showAllCQ') }}"
                 class="nav-link {{ request()->is('admin/all-cq') ? 'active' : '' }} ">
                 <i class="far fa-dot-circle nav-icon"></i>
@@ -74,11 +75,9 @@
                 <i class="far fa-dot-circle nav-icon"></i>
                 <p>Assignment</p>
             </a>
-        </li>
+        </li> --}}
 
-
-
-        {{-- NEW --}}
+        {{-- ONTIK --}}
         <li class="nav-item">
             <a href="{{ route('showAllAT') }}"
                 class="nav-link {{ request()->is('admin/all-aptitude-test') ? 'active' : '' }} ">
@@ -100,9 +99,7 @@
                 <p>Topic End Exam</p>
             </a>
         </li>
-        {{-- ENDNEW --}}
-
-
+        {{-- END ONTIK --}}
 
         <li class="nav-item">
             <a href="{{ route('exam.index') }}"
