@@ -299,7 +299,7 @@
                if(i===j){
                   if(j%2==0){
                      let div = document.createElement("div");
-                     div.classList.add("px-lg-5","px-sm-0");
+                     div.classList.add("px-lg-3","px-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
                      if(ilandImageDisabled[landCounter])
@@ -375,7 +375,7 @@
                   }
                   else{
                      if(i===j){
-                        div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
+                        div.classList.add("px-lg-3","px-sm-0","mx-sm-0");
                         // Iland image part 
                         let divIland = document.createElement("div");
                         if(ilandImageDisabled[landCounter])
