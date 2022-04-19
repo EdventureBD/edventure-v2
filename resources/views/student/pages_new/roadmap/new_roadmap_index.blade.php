@@ -67,12 +67,12 @@
                               @if (count($exam->course_lectures))
                                  @foreach ($exam->course_lectures as $course_lecture)
                                     <li>
-                                       <a
-                                          @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                          href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                          class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                          {{ Str::limit($course_lecture->title, 22, '...') }}
-                                       </a>
+                                          <a
+                                             @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                             href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
+                                             class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                             <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 25, '...') }} </span>
+                                          </a>
                                        <div class="w-25">
 
                                           @if ($disabled && !$disabled2 && !$course_lecture->completed)
@@ -98,10 +98,12 @@
 
                               <li>
                                  @if($exam->exam_type == "Aptitude Test")
-                                    <a @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                    <a 
+                                       data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
+                                       @if($disabled2) style="pointer-events: none; cursor: default; color: grey; height: 20px;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
                                        class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       {{ Str::limit($exam->title, 22, '...') }}
+                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 25, '...') }} </span>
                                     </a>
                                     <div class="w-25">
 
@@ -119,10 +121,11 @@
                                     </div>
                                  @else
                                     <a
+                                       data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
                                        class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       {{ Str::limit($exam->title, 22, '...') }}
+                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 25, '...') }} </span>
                                     </a>
                                     <div class="w-25">
 
@@ -302,17 +305,12 @@
                      div.classList.add("px-lg-5","px-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
+                     console.log(landCounter)
                      if(ilandImageDisabled[landCounter])
-                        divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                        divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                      else
                         divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
-                     // modal part 
-                     // tooltip for disabled islands
-                     if(ilandImageDisabled[landCounter]){
-                        divIland.setAttribute("data-toggle","tooltip");
-                        divIland.setAttribute("data-placement","bottom");
-                        divIland.setAttribute("title","Please go through the previous content to unlock this island");
-                     }
+                     // modal part
                      divIland.setAttribute("data-toggle","modal");
                      divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                      div.appendChild(divIland);
@@ -379,16 +377,10 @@
                         // Iland image part 
                         let divIland = document.createElement("div");
                         if(ilandImageDisabled[landCounter])
-                           divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid">`;
+                           divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                         else
                            divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
-                        // modal part 
-                        // tooltip for disabled islands
-                        if(ilandImageDisabled[landCounter]){
-                           divIland.setAttribute("data-toggle","tooltip");
-                           divIland.setAttribute("data-placement","bottom");
-                           divIland.setAttribute("title","Please go through the previous content to unlock this island");
-                        }
+                        // modal part
                         divIland.setAttribute("data-toggle","modal");
                         divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                         div.appendChild(divIland);
