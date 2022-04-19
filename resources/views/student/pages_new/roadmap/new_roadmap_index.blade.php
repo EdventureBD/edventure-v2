@@ -336,13 +336,13 @@
                   else{
                      if(j % 3 !== 0) {
                         let div = document.createElement("div");
-                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair">`;
+                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair" style="width:75%">`;
                         div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                         landsParentDiv.appendChild(div);
                      }
                      else{
                         let div = document.createElement("div");
-                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair">`;
+                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair" style="width:75%">`;
                         div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                         landsParentDiv.appendChild(div);
                      }
@@ -411,12 +411,12 @@
                      }
                      else{
                         if(j % 3 !== 0){
-                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" >`;
+                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" style="width:75%">`;
                            div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                            landsParentDiv.appendChild(div);
                         }
                         else{
-                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" >`;
+                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" style="width:75%">`;
                            div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                            landsParentDiv.appendChild(div);
                         }
