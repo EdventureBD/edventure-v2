@@ -591,10 +591,9 @@ class ExamController extends Controller
 
                 return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam', 'next_link', 'next_link_btn_text'));
             }
-
             else{
                 $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
-                Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
+                // Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
         }

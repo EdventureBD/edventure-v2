@@ -158,7 +158,7 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="col-form-label" for="bundleurl">Treailer </label> <br>
+                                    <label class="col-form-label" for="bundleurl">Trailer </label> <br>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">https://youtube.com/watch?v=</span>
