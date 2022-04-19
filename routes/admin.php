@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ModelMcqTagAnalysisController;
 use App\Http\Controllers\SinglePaymentController;
 use App\Http\Controllers\SocialGroupController;
@@ -303,6 +304,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
     Route::delete('/social-group/{id}',[SocialGroupController::class,'destroy'])->name('social.group.delete');
     Route::put('/social-group/{id}',[SocialGroupController::class,'update'])->name('social.group.update');
 
+    /**************************************** Coupons ****************************************/
+
+
+    Route::get('/coupon',[CouponController::class,'index'])->name('coupon.index');
+    Route::post('/coupon',[CouponController::class,'store'])->name('coupon.store');
+    Route::delete('/coupon/{id}',[CouponController::class,'destroy'])->name('coupon.destroy');
+//    Route::post('/social-group',[SocialGroupController::class,'store'])->name('social.group.store');
+//    Route::delete('/social-group/{id}',[SocialGroupController::class,'destroy'])->name('social.group.delete');
+//    Route::put('/social-group/{id}',[SocialGroupController::class,'update'])->name('social.group.update');
 });
 
 require __DIR__ . '/auth.php';

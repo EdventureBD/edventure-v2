@@ -242,12 +242,17 @@
 
 
                     <div class="payment-btn text-center">
-                        <div class="d-flex justify-content-end">
-                            <a style="color: #6400C8;"
-                               class="font-weight-bold"
-                               id="toggle_promo"
-                               href="Javascript:void(0)">Promo Code</a>
-                        </div>
+                        @php($href = auth()->check() ? route('category.single.payment.initialize', $category->id) : 'javascript:void(0)')
+                        @php($loginAlert = auth()->check() ? '' : 'loginAlert')
+                        @php($couponApplyId = auth()->check() ? 'coupon_apply' : '')
+                        @if(is_paid($category->price) && !is_paid($category->offer_price))
+                            <div class="d-flex justify-content-end">
+                                <a style="color: #6400C8;"
+                                   class="font-weight-bold"
+                                   id="toggle_promo"
+                                   href="Javascript:void(0)">Promo Code</a>
+                            </div>
+                        @endif
                         <div id="coupon_section" class="d-none">
                             <div class="d-flex justify-content-start font-weight-bold">
                                 <span style="color: #6400C8;">Put your promo code here</span>
@@ -269,21 +274,22 @@
                                        aria-label="code"
                                        id="promo_code"
                                        aria-describedby="basic-addon2">
+                                <input type="hidden" id="category_uuid" value="{{$category->uuid}}">
                                 <div class="input-group-append">
                                     <a href="Javascript:void(0)"
-                                       class="input-group-text coupon-btn"
+                                       class="{{$loginAlert}} input-group-text coupon-btn"
                                        style="border-top-right-radius: 15px !important;border-bottom-right-radius: 15px; border: 1px solid #fa9632"
-                                       id="basic-addon2">
+                                       id="{{$couponApplyId}}">
                                         Apply
                                     </a>
                                 </div>
                             </div>
+                            <span id="coupon_error" style="color: red; font-weight: bold"></span>
                         </div>
 
-                        @php($href = auth()->check() ? route('category.single.payment.initialize', $category->id) : 'javascript:void(0)')
-                        @php($loginAlert = auth()->check() ? '' : 'loginAlert')
+
                         <div id="payment_section">
-                            @if(!is_null($category->offer_price) && $category->offer_price != 0)
+                            @if(is_paid($category->offer_price))
                                 <div class="d-flex justify-content-around">
                                     <span style="text-decoration: line-through; color: red" class="actual-price">{{$category->price}}</span>
 
@@ -291,9 +297,13 @@
                                 </div>
                                 <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">এক্সামটি কিনুন</a>
 
-                            @elseif(!is_null($category->price) && $category->price != 0)
-                                <span class="actual-price">{{$category->price}}</span><br>
-                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">এক্সামটি কিনুন</a>
+                            @elseif(is_paid($category->price))
+                                <div id="priceCalculation" class="justify-content-center d-flex align-items-center">
+                                    <span class="actual-price">{{$category->price}}</span>
+                                    <span class="discount-amount"></span>
+                                </div>
+
+                                <a id="examPurchase" class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">এক্সামটি কিনুন</a>
 
                             @else
                                 <a class="btn category-details-action-btn" href="{{route('model.exam.category.topics',$category->uuid)}}">পরীক্ষার জন্য যান</a>
@@ -315,6 +325,8 @@
 </x-landing-layout>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    let actualPrice = {{$category->price}};
+    let paymentUrl = window.location.origin+'/single-payment-category/'+{{$category->id}};
     $('#toggle_promo').on('click', function () {
         $('#coupon_section').removeClass('d-none')
         $('#payment_section').addClass('d-none')
@@ -325,6 +337,12 @@
         $('#payment_section').removeClass('d-none')
         $('#toggle_promo').removeClass('d-none')
         $('#promo_code').val(null)
+        $('.actual-price').html(actualPrice)
+        $('.discount-amount').html('')
+        $('#priceCalculation').addClass('justify-content-center')
+        $('#priceCalculation').removeClass('justify-content-between')
+        $('#examPurchase').prop('href',paymentUrl)
+        $('#coupon_error').html('')
     })
     $(window).scroll(function(){
         if($(this).scrollTop() > 300){
@@ -344,6 +362,61 @@
                 popup: 'animate__animated animate__fadeOutUp'
             }
         })
+    })
+    $('#coupon_apply').on('click', function () {
+        let promo_code = $('#promo_code').val();
+        if(!promo_code) {
+            $('#coupon_error').html('Enter a valid code')
+            return;
+        } else {
+            $('#coupon_error').html('')
+        }
+
+        $.ajax({
+            url: "{{route('coupon.check')}}",
+            type: 'GET',
+            data:{
+                'promo_code': promo_code,
+                'category_uuid': $('#category_uuid').val(),
+            },
+            dataType: 'JSON',
+            success: function (res) {
+                if(res.status == 'error') {
+                    $('#coupon_error').html(res.data)
+                } else {
+                    let href = paymentUrl+'?coupon='+$('#promo_code').val()
+                    $('#examPurchase').prop('href',href)
+                    $('#coupon_error').html('')
+                    $('#coupon_section').addClass('d-none')
+                    $('#payment_section').removeClass('d-none')
+                    $('#toggle_promo').removeClass('d-none')
+                    if(res.data.fixed) {
+                        let discountAmount = $('.discount-amount');
+                        let originalPrice = $('.actual-price').text()
+                        let discountPrice = originalPrice - res.data.amount
+                        discountAmount.html('Discounted Amount: '+res.data.amount)
+                        $('.actual-price').html(discountPrice)
+                        if(discountAmount.text()) {
+                            $('#priceCalculation').removeClass('justify-content-center')
+                            $('#priceCalculation').addClass('justify-content-between')
+                        }
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Coupon Applied',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+
     })
 
 

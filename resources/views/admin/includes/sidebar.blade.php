@@ -204,6 +204,7 @@
                                                     request()->is('admin/model-exam/tag/analysis') ||
                                                     request()->is('admin/model-exam/result/list') ||
                                                     request()->is('admin/model-exam/payment/category') ||
+                                                    request()->is('admin/coupon') ||
                                                     request()->is('admin/model-exam/payment/exam') ? 'menu-open' : '' }}">
                     <a href="#"
                        class="nav-link {{ request()->is('admin/exam-category') ||
@@ -213,6 +214,7 @@
                                           request()->is('admin/model-exam/tag/analysis') ||
                                           request()->is('admin/model-exam') ||
                                           request()->is('admin/model-exam/payment/category') ||
+                                          request()->is('admin/coupon') ||
                                           request()->is('admin/model-exam/payment/exam')? 'active' : '' }}">
                         <i class="fas fa-paste"></i>
                         <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
@@ -269,6 +271,15 @@
                                {{ request()->is('admin/model-exam/payment/exam') ? 'active' : '' }}">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Payments</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('coupon.index') }}"
+                               class="nav-link {{ request()->is('admin/coupon') ? 'active' : '' }}
+                               {{ request()->is('admin/coupon') ? 'active' : '' }}">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Coupons</p>
                             </a>
                         </li>
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
+use App\Models\CouponUses;
 use App\Models\ExamCategory;
 use App\Models\ModelExam;
 use App\Models\PaymentOfCategory;
@@ -96,9 +98,10 @@ class SinglePaymentController extends Controller
             return redirect()->route('model.exam.category.topics',$category->uuid);
         }
 
-        $amount = $this->amountToPay($category);
 
-        $this->sendPayment($amount,route('category.single.payment.success', $categoryId));
+        $amount = $this->amountToPay($category,request()->input('coupon'));
+
+        $this->sendPayment($amount,route('category.single.payment.success', [$categoryId,request()->input('coupon') ?? 'none']));
     }
 
     /**
@@ -107,7 +110,7 @@ class SinglePaymentController extends Controller
      * @param $categoryId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function CategoryPaymentSuccess(Request $request, $categoryId)
+    public function CategoryPaymentSuccess(Request $request, $categoryId, $coupon)
     {
         if (request()->status != "Success") {
             return redirect()->route('model.exam')->with(['failed' =>"Payment failed, please try again!"]);
@@ -134,11 +137,22 @@ class SinglePaymentController extends Controller
                 'tnx_id'=> $request->tx_id,
             ];
 
+            if($coupon && $coupon != 'none') {
+                $couponModel = Coupon::query()->where('name',$coupon)->first();
+                $couponInputs = [
+                    'user_id' => auth()->user()->id,
+                    'exam_category_id' => $categoryId,
+                    'coupon_id' => $couponModel->id
+                ];
+
+                CouponUses::query()->create($couponInputs);
+            }
             PaymentOfCategory::query()->create($paymentInputs);
             DB::commit();
             return redirect()->route('model.exam')->with(['success'=>"Payment Successful"]);
         } catch (\Exception $e) {
             DB::rollback();
+            logger('sdsd',[$e]);
             return redirect()->route('model.exam')->with(['failed' =>"Payment failed, please try again!"]);
         }
     }
@@ -226,6 +240,11 @@ class SinglePaymentController extends Controller
     {
         if(!is_null($category->offer_price) && !empty($category->offer_price)) {
             return $category->offer_price;
+        }
+
+        if($coupon) {
+            $couponModel = Coupon::query()->where('name', $coupon)->first();
+            return $category->price - $couponModel->amount;
         }
 
         return $category->price;

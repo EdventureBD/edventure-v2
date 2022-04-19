@@ -37,7 +37,7 @@ class UpdateCategoryRequest extends FormRequest
             'routine_image' => 'nullable|image|mimes:jpg,jpeg,png|max:1000',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:1000',
             'category_video' => 'nullable',
-            'offer_price' => 'nullable|numeric|lt:price',
+            'offer_price' => 'nullable|numeric|lte:price',
         ];
     }
 }
