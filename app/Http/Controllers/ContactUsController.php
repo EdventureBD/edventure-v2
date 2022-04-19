@@ -24,4 +24,10 @@ class ContactUsController extends Controller
         return redirect()->back()->with('success', 'Your Information Successfully Submitted');
 
     }
+
+    public function adminIndex()
+    {
+        $contacted_list = ContactUs::query()->orderByDesc('created_at')->paginate(6);
+        return view('admin.pages.contact_us.index', compact('contacted_list'));
+    }
 }

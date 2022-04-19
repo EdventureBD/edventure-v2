@@ -91,7 +91,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="userType">User Type <span
                                                     style="color: red">*</span></label>
-                                            <select class="form-control" wire:model="user_type">
+                                            <select readonly wire:click="changeEvent($event.target.value)" class="form-control" wire:model="user_type">
                                                 @foreach ($user_types as $user_type)
                                                     <option value="{{ $user_type->id }}">{{ $user_type->name }}
                                                     </option>
@@ -103,6 +103,49 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if($show)
+                                    <div class="row" id="teacher_div">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="education"> Teacher Education <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" wire:model="education"
+                                                       class="form-control @error('education') is-invalid @enderror" id="education"
+                                                       placeholder="Educated from">
+                                            </div>
+                                            @error('education')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="year_of_experience"> Teacher experience in year <span
+                                                        style="color: red">*</span></label>
+                                                <input type="number" wire:model="year_of_experience"
+                                                       class="form-control @error('year_of_experience') is-invalid @enderror" id="year_of_experience"
+                                                       placeholder="Experience in year">
+                                            </div>
+                                            @error('year_of_experience')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="expertise"> Teacher Expertise In <span
+                                                        style="color: red">*</span></label>
+                                                <input type="text" wire:model="expertise"
+                                                       class="form-control @error('expertise') is-invalid @enderror" id="expertise"
+                                                       placeholder="physics, math,">
+                                            </div>
+                                            @error('expertise')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Update</button>

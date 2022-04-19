@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ModelMcqTagAnalysisController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SinglePaymentController;
@@ -351,6 +352,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
         Route::get('/role/assign', [RolePermissionController::class, 'assignRoleIndex'])->name('role.assign.index');
         Route::post('/role/assign', [RolePermissionController::class, 'assignRoleStore'])->name('role.assign.create');
         Route::delete('/role/assign/{user}', [RolePermissionController::class, 'assignRoleDestroy'])->name('role.assign.delete');
+    });
+
+    /**************************************** Role & permission ****************************************/
+
+    /**************************************** Role & permission ****************************************/
+    Route::group(['middleware' => ['permission:contact_us']], function () {
+        Route::get('/contact-us', [ContactUsController::class, 'adminIndex'])->name('contact.us.index');
+    });
+
+    /**************************************** Role & permission ****************************************/
+
+    /**************************************** Free Category Access ****************************************/
+    Route::group(['middleware' => ['permission:free_category_access']], function () {
+        Route::get('/category-access',[ExamCategoryController::class,'categoryAccessIndex'])->name('category.access.index');
+        Route::post('/category-access',[ExamCategoryController::class,'confirmCategoryAccess'])->name('category.access.confirm');
     });
 
     /**************************************** Role & permission ****************************************/

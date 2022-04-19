@@ -120,7 +120,11 @@
                                         <th>Email</th>
                                         <th>User Type</th>
                                         <th>Image</th>
-                                        <th>Class</th>
+                                        @if($users[0]->user_type == 3)
+                                            <th>Class</th>
+                                        @elseif($users[0]->user_type == 2)
+                                            <th>Teacher Details</th>
+                                        @endif
                                         <th>Created</th>
                                         <th>Action</th>
                                     </tr>
@@ -161,7 +165,20 @@
                                                     @endif
                                                 @endif
                                             </td>
-                                            <td>{{$user->studentDetails ? \App\Enum\EducationLevel::Level[$user->studentDetails->class] : 'n/a' }}</td>
+                                            @if($user->user_type == 3)
+                                                <td>{{$user->studentDetails ? \App\Enum\EducationLevel::Level[$user->studentDetails->class] : 'n/a' }}</td>
+                                            @elseif($user->user_type == 2)
+                                                <td>
+                                                    @if($user->teacherDetails)
+                                                        <b>Education:</b> {{$user->teacherDetails->education ?? 'n/a'}}<br>
+                                                        <b>Year of experience:</b> {{$user->teacherDetails->year_of_experience ?? 'n/a'}}<br>
+                                                        <b>Expertise:</b> {{$user->teacherDetails->expertise ?? 'n/a'}}
+                                                    @else
+                                                        n/a
+                                                    @endif
+                                                </td>
+                                            @endif
+
                                             <td>{{ $user->created_at->format('d M y - g:i A') }}</td>
                                             <td>
                                                 <div class="btn-group">
