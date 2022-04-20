@@ -305,7 +305,6 @@
                      div.classList.add("px-lg-5","px-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
-                     console.log(landCounter)
                      if(ilandImageDisabled[landCounter])
                         divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                      else

@@ -38,8 +38,10 @@ class BundleController extends Controller
       return view('student.pages_new.bundle.preview_guest', compact('bundle'));
    }
 
-   public function bundle_enroll(Bundle $bundle)
+   public function bundle_enroll($bundle)
    {
+      $bundle = Bundle::where('slug', $bundle)->with(['courses.Batch'])->first();
+
       if(Auth::check()){
          $enrolled = BundleStudentEnrollment::join('bundle_payments', 'bundle_payments.id', 'bundle_student_enrollments.payment_id')
                ->where('bundle_student_enrollments.bundle_id', $bundle->id)
@@ -57,27 +59,28 @@ class BundleController extends Controller
          // if course is free, enroll and take to course island page
          if($bundle->price <= 0){
 
-            $payment = new BundlePayment();
-            $payment->student_id = $student->id;
-            $payment->bundle_id = $bundle->id;
-            $payment->name = $student->name;
-            $payment->email = $student->email;
-            $payment->contact = $student->phone;
-            $payment->trx_id =  "FREE";
-            $payment->payment_type =  "FREE";
-            $payment->amount =  0;
-            $payment->payment_account_number = 000;
-            $payment->days_for = 365;
-            $payment->accepted = 1;
-            $payment->save();
+            $bundle_payment = new BundlePayment();
+            $bundle_payment->student_id = $student->id;
+            $bundle_payment->bundle_id = $bundle->id;
+            $bundle_payment->name = $student->name;
+            $bundle_payment->email = $student->email;
+            $bundle_payment->contact = $student->phone;
+            $bundle_payment->trx_id =  "FREE";
+            $bundle_payment->payment_type =  "FREE";
+            $bundle_payment->amount =  0;
+            $bundle_payment->payment_account_number = 000;
+            $bundle_payment->days_for = 365;
+            $bundle_payment->accepted = 1;
+            $save = $bundle_payment->save();
 
-            $bundleStudentEnrollment = BundleStudentEnrollment::updateOrCreate(
+            if($save){
+               $bundleStudentEnrollment = BundleStudentEnrollment::updateOrCreate(
                [
                   'bundle_id' => $bundle->id,
                   'student_id' => $student->id
                ],
                [
-                  'payment_id' => $payment->id,
+                  'payment_id' => $bundle_payment->id,
                   'note_list' => "Free enrolment",
                   'student_id' => $student->id,
                   'individual_bundle_days' => 0,
@@ -85,6 +88,23 @@ class BundleController extends Controller
                   'status' => 1,
                ]
             );
+
+               foreach($bundle->courses as $course){
+                  foreach($course->Batch as $batch){
+                     $batch_enrollment = new BatchStudentEnrollment();
+                     $batch_enrollment->batch_id = $batch->id;
+                     $batch_enrollment->payment_id = null;
+                     $batch_enrollment->course_id = $course->id;
+                     $batch_enrollment->student_id = auth()->user()->id;
+                     $batch_enrollment->batch_rank = null;
+                     $batch_enrollment->note_list = 'Enrollment for bundle id '.$bundle->id;
+                     $batch_enrollment->individual_batch_days = 0;
+                     $batch_enrollment->accessed_days = 365;
+                     $batch_enrollment->status = 1;
+                     $batch_enrollment->save();
+                  }
+               }
+            }
 
             return redirect()->route('bundle_courses', $bundle->slug);
          }
