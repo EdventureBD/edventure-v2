@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
@@ -107,6 +108,21 @@ class BatchController extends Controller
         ->where('course_id', $course->id)
         ->get();
 
+        // no_courses exist for one of the bundles
+        if(count($batchTopics) == 0){
+            return redirect($back_url)->withErrors([ 'no_course' => 'No course topics exist for this course. Please Contact System Admin.' ]);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // if no exams exist for any one of the course topics/islands. Dunno if this is needed.
+        // foreach($batchTopics as $batchTopic){
+        //     if(count($batchTopic->courseTopic->exams) == 0){
+        //         // dd($back_url, $batch, $batchTopics, $batchTopic, $course, $course->intermediaryLevel->courseCategory->slug, $course->intermediaryLevel->slug);
+        //         return redirect($back_url)->withErrors([ 'no_exams_exist' => 'Some exams for this course is missing. Please Contact System Admin.' ]);
+        //     }
+        // }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         // dd($batchTopics);
         // dd(CompletedLectures::where('student_id', auth()->user()->id)->orderBy('created_at', 'desc')->first(), $batchTopics);
 
@@ -115,6 +131,7 @@ class BatchController extends Controller
 
         $previous_aptitude_test_passed = true;
         $previous_topic_end_exam_passed = true;
+        
         foreach($batchTopics as $key => $batchTopic){
 
             // nodes can be lectures or courses. Counting how many out of total are completed.
@@ -122,8 +139,12 @@ class BatchController extends Controller
             $number_of_completed_nodes = 0;
 
             // $island_images[] = $batchTopic->courseTopic->island_image;
+            if($key == 0 && count($batchTopic->courseTopic->exams) == 0){
+                return back()->withErrors(['no_exams' => 'The first island doesn\'t have an aptitude test. Please Contact System Admin.']);
+            }
 
-
+            // dd($batchTopic->courseTopic->exams, $aptitude_test_passed, $topic_end_exam_passed);
+            
             foreach($batchTopic->courseTopic->exams as $exam){
                 $aptitude_test_passed = $previous_aptitude_test_passed;
                 $topic_end_exam_passed = $previous_topic_end_exam_passed;
@@ -160,7 +181,7 @@ class BatchController extends Controller
                     $exam->test_passed = true;
                 }
                 else{
-                    if($exam->exam_type === "Aptitude Test" && $aptitude_test_passed ){
+                    if($exam->exam_type === "Aptitude Test" && $aptitude_test_passed){
                         $aptitude_test_passed = false;
                     }
                     if($exam->exam_type === "Topic End Exam" && $topic_end_exam_passed){

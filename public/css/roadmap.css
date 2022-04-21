@@ -76,6 +76,16 @@ ul li a{
 
 /* Styles Implemented on Ontik End */
 
+@media screen and (max-width: 576px){
+   .remove_padding{
+      padding-left: 0px;
+   }
+
+   .reduce_padding{
+      margin-left: 1rem !important;
+   }
+}
+
 /* Tooltip CSS */
 /* (A) BUILD TOOLTIP USING BEFORE PSEUDO-CLASS */
 [data-tooltip]::before {

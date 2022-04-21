@@ -31,7 +31,7 @@ class CourseController extends Controller
         ->get();
 
         if(isset($category_slug) && !empty($category_slug)){
-            $category=CourseCategory::where('status',1)->where('slug',$category_slug)->first();
+            $category = CourseCategory::where('status',1)->where('slug', $category_slug)->first();
             $selected_category_slug = $category->slug;
         }
         else{
@@ -97,7 +97,7 @@ class CourseController extends Controller
                 $enrollment = BundleStudentEnrollment::where('bundle_id', $bundle->id)->where('student_id', auth()->user()->id)->first();
                 // check if this dude is enrolled in this bundle or not
                 if($enrollment == null){
-                return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Access Denied! You are not enrolled in this bundle.']);
+                    return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Access Denied! You are not enrolled in this bundle.']);
                 }
             }
             else{

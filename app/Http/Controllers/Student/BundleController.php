@@ -138,6 +138,11 @@ class BundleController extends Controller
 
          $back_url = route('course') . "/" . $bundle->intermediary_level->courseCategory->slug . "/" . $bundle->intermediary_level->slug;
 
+
+         if(count($bundle->courses) == 0){
+            return redirect($back_url)->withErrors([ 'no_course_exist' => 'No courses have been added to this bundle. Please Contact System Admin.' ]);
+         }
+
       return view('student.pages_new.bundle.bundle_courses', compact('bundle', 'back_url'));
    }
 
