@@ -338,12 +338,6 @@
                     </li>
                     {{-- END OF COURSE CATEGORY --}}
                 @endcan
-
-                @can('course_exam')
-                    {{-- START OF EXAM SIDEBAR --}}
-                    @include('admin.includes.sidebar_content.exam')
-                    {{-- END OF EXAM SIDEBAR --}}
-                @endcan
                 
                 {{----------------------- START OF MODEL EXAM SIDEBAR ------------------------------------}}
                 @canany([

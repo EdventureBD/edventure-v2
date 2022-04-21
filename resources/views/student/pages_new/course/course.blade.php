@@ -5,6 +5,21 @@
             <div class="py-4">
                 <div class=" text-center bradius-10 py-2 w-100 text-gray text-sm fw-700"> Courses Category</div>
             </div>
+
+            <div style="" class="mb-5">
+                <div class="">
+                    @foreach($errors->all() as $error)
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong> Error !</strong> {{ $error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
             <div class="text-center @if($categories->count()>=7) course-category-js @endif @if(empty($intermediary_levels)) mb-5 @endif">
                 @foreach($categories as $category)
                     @if($selected_category_slug)

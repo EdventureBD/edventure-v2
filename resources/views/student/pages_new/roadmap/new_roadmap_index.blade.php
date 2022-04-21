@@ -14,27 +14,26 @@
 
       <div style="" class="mt-5 mx-5">
          <div class="mt-5 mx-3">
-            @error('not_added_to_batch')
-               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong> Error !</strong> {{ $message }}
+            @foreach($errors->all() as $error)
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong> Error !</strong> {{ $error }}
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                      <span aria-hidden="true">×</span>
                   </button>
                </div>
-            @enderror
-   
-            @error('not_enough_questions')
-               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong> Error !</strong> {{ $message }}
+            @endforeach
+
+            @if(session()->get('no_courses'))
+               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong> Error !</strong> {{ session()->get('no_courses') }}
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                      <span aria-hidden="true">×</span>
                   </button>
                </div>
-            @enderror
+            @endif
          </div>
       </div>
-
-      <div class="d-flex justify-content-center container mt-5 pt-4" id="ilandGrandParentContainer">
+      <div class="@if(count($batchTopics) > 1) d-flex @endif justify-content-center container mt-5 pt-4" id="ilandGrandParentContainer">
          <div class="row row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
 
          </div>
@@ -48,9 +47,9 @@
       $disabled2 = false;
       $previous_island_topic_end_exam_passed = true;
    @endphp
-   @forelse ($batchTopics as $batchTopic)
+   @foreach ($batchTopics as $batchTopic)
       @php if ($disabled && !$disabled2) $disabled = false; @endphp
-      @if($previous_island_topic_end_exam_passed)
+      @if($previous_island_topic_end_exam_passed && count($batchTopic->courseTopic->exams) != 0)
          <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
@@ -62,16 +61,17 @@
                   </div> 
                   <div class="modal-body" style="padding-top: 25px; padding-bottom: 25px;">
                      {{-- @if($batchTopic->courseTopic->exams->last()->exam_attempts->count() > 0 && $batchTopic->courseTopic->exams->last()->exam_attempts->last()->attempts < 3) --}}
-                        <ul>
+                        <ul class="remove_padding">
                            @forelse ($batchTopic->courseTopic->exams as $exam)
                               @if (count($exam->course_lectures))
                                  @foreach ($exam->course_lectures as $course_lecture)
                                     <li>
                                           <a
+                                             data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
                                              @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                              href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                             class="fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                             <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 25, '...') }} </span>
+                                             class="reduce_padding fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                             <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
                                           </a>
                                        <div class="w-25">
 
@@ -102,8 +102,8 @@
                                        data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey; height: 20px;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                       class="fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 25, '...') }} </span>
+                                       class="reduce_padding fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 23, '...') }} </span>
                                     </a>
                                     <div class="w-25">
 
@@ -124,8 +124,8 @@
                                        data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
-                                       class="fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 25, '...') }} </span>
+                                       class="reduce_padding fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 23, '...') }} </span>
                                     </a>
                                     <div class="w-25">
 
@@ -180,11 +180,8 @@
             </div>
          </div>
       @endif
-   @empty
-      <div>
-         <h1 class="text-center mx-auto"> No Course Topics(i.e Islands) Added Yet !! Please Contact System Admin. </h1>
-      </div>
-   @endforelse
+
+   @endforeach
 
    {{-- @php
       $disabled = false; // Last Aptitude exam passed
@@ -305,7 +302,6 @@
                      div.classList.add("px-lg-5","px-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
-                     console.log(landCounter)
                      if(ilandImageDisabled[landCounter])
                         divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                      else
@@ -377,6 +373,7 @@
                         // Iland image part 
                         let divIland = document.createElement("div");
                         if(ilandImageDisabled[landCounter])
+                           // divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                            divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                         else
                            divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
