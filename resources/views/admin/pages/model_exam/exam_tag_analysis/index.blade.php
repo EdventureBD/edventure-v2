@@ -34,7 +34,7 @@
 {{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">--}}
     <form action="">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="select2-purple d-flex align-middle py-0 pb-md-5">
                     <select
                         name="query[exam]"
@@ -56,6 +56,10 @@
 
             <div class="col-md-3">
                 <a href="{{route('model.exam.tag.analysis')}}" class="btn btn-outline-secondary">Clear</a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="{{route('model.exam.csv',['tagAnalysis' => request()->input('query.exam')])}}" class="btn btn-outline-danger">Export</a>
             </div>
         </div>
 

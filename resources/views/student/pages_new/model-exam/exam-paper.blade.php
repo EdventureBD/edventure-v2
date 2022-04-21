@@ -1,10 +1,5 @@
 <x-landing-layout headerBg="white">
     <link rel="stylesheet" href="/css/mcq-plus-timer.css">
-    <style>
-        .question table, .question table td, .question table tr, .question span, .question div, .question p {
-            word-break: break-word;
-        }
-    </style>
     <div class="course-info py-5 border-secondary" id="popUpExamPageBanner">
         <div class="container pt-5">
             <div class="row">
@@ -22,26 +17,35 @@
         <div class="container page__container">
             <div class="row">
                 <div class="col-12 mx-0 px-0">
-                    <div id="parent-timer" class="timer d-flex justify-content-center rounded">
-                        <div id="innerParent">
-                            <div id="timer" class="w-100 mx-0 px-0 d-flex justify-content-center">
-                                <p class="text-white d-flex fw-500 m-0 rounded">
+                    <div id="parent-timer" class="timer d-flex justify-content-center flex-column">
+                        <div id="innerParent" class="d-flex container">
+                            <div class="d-flex" >
+                                <p  class="my-auto fw-600" id="question-palette" style="width: max-content">QUESTION PALETTE</p>
+                            </div>
+                            <div id="timer" class="w-100 mx-md-5 px-0 d-flex justify-content-center">
+                                <p class="d-flex fw-500 m-0 rounded">
                                     <span id="countdownHour"></span>:
                                     <span id="countdownMinuits"></span>:
                                     <span id="countdownSecound"></span>
                                 </p>
                             </div>
-                            <div id="dropdownIcon" >
-                                <a href="javascript:void(0)" id="close_collapse_icon" class="d-none">
-                                    <i class="c-point fas fa-angle-up"></i>
-                                </a>
-                                <a href="javascript:void(0)" id="open_collapse_icon" class="d-block">
-                                    <i class="c-point fas fa-angle-down"></i>
-                                </a>
+                            <div id="dropdownIcon-questionMap-parent">
+                                <div id="dropdownIcon" >
+                                    <a href="javascript:void(0)" id="close_collapse_icon" class="d-none px-2 my-auto">
+                                        {{-- <i class="c-point fas fa-angle-up text-white"></i> --}}
+                                        {{-- style="background-color: #FA9632; border: 1px solid #FA9632; border-radius: 20px;" --}}
+                                        <img src="/img/exam-page/drop_down_off.png" alt="" class="img-fluid">
+                                    </a>
+                                    <a href="javascript:void(0)" id="open_collapse_icon" class="d-block px-2 my-auto">
+                                        {{-- <i class="c-point fas fa-angle-down text-white"></i> --}}
+                                        {{-- style="background-color: #FA9632; border: 1px solid #FA9632; border-radius: 20px;" --}}
+                                        <img src="/img/exam-page/drop_down_on.png" alt="" class="img-fluid">
+                                    </a>
+                                </div>
                             </div>
-                            <div id="questionMap" class="row row-cols-3 mx-0 px-0 text-center d-none overflow-auto">
-
-                            </div>
+                        </div>
+                        <div id="questionMap" class="mx-0 px-0 text-center d-none overflow-auto w-100" >
+    
                         </div>
                     </div>
 
@@ -55,7 +59,7 @@
                     <input type="hidden" id="exam_end_time" name="exam_end_time">
                     @foreach($exam->mcqQuestions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light p-2 d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2" style="word-break: initial !important">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2" style="word-break: initial !important">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
 
                             <div class="container my-4">
                                 <div class="question d-flex justify-content-start">
@@ -105,3 +109,12 @@
 
     <script src="/js/mcqExamPlusTimer.js"></script>
 </x-landing-layout>
+ <script>
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 1){
+            $('#parent-timer').addClass('sticky')
+        } else{
+            $('#parent-timer').removeClass('sticky')
+        }
+    });
+</script>

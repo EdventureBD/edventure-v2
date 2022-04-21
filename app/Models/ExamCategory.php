@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use phpDocumentor\Reflection\Types\Integer;
 
 class ExamCategory extends Model
@@ -18,6 +19,9 @@ class ExamCategory extends Model
 
         static::creating(function ($query) {
             $query->price = $query->price ?? 0;
+        });
+        static::created(function () {
+            Cache::forget('categoriesList');
         });
     }
 

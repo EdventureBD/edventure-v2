@@ -40,7 +40,7 @@
                 <span class="px-1 text-sm text-gray-600">Password</span>
                 <div class="relative">
                     <input placeholder="" type="password"
-                        class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"
+                        class="rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full" style="border:1px solid #FA9632"
                         id="password" name="password" required autocomplete="current-password">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 

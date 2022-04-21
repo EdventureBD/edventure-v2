@@ -33,7 +33,7 @@
                                 </div>
 
                                 <a href="#" class="btn btn-dark btn-sm btn-block" id="verifPhNum">Verify Phone No</a>
-                        
+
                         </form>
                     </div>
                 </div>

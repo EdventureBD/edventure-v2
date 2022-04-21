@@ -24,14 +24,14 @@
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
             <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
 
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-between">
                @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
                   <div class="text-right">
-                     <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
+                     <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
                   </div>
                @endif
-               <div class="text-right ml-2">
-                  <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+               <div class="text-right">
+                  <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up"> </i></a>
                </div>
             </div>
 
@@ -57,7 +57,7 @@
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->question !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->answer !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->topicEndExamMCQ->explanation }}</td>
+                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->explanation !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
                            @endforeach

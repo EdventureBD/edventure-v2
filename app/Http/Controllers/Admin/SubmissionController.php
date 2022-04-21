@@ -21,7 +21,7 @@ use App\Models\Admin\QuestionContentTag;
 use App\Models\Admin\StudentExamAttempt;
 use App\Models\Admin\TopicEndExamCreativeQuestion;
 use App\Models\Student\exam\CqExamPaper;
-
+use App\Models\Admin\StudentTopicEndExamAttempt;
 use App\Models\Student\exam\PopQuizCqExamPaper;
 use App\Models\Student\exam\TopicEndExamCqExamPaper;
 
@@ -37,7 +37,6 @@ class SubmissionController extends Controller
             return view('admin.pages.batch_exam.submission.exam_result', compact('exam_results'));
         }
         elseif($exam->exam_type == 'Topic End Exam' || $exam->exam_type == 'Pop Quiz'){
-            $student_exam_attempts = StudentExamAttempt::where('exam_id', $exam->id)->with(['student', 'exam'])->get();
 
             if($exam->exam_type == 'Pop Quiz'){
                 $exam_result_mcq_type = 'Pop Quiz MCQ';
@@ -48,15 +47,23 @@ class SubmissionController extends Controller
                 $exam_result_cq_type = 'Topic End Exam CQ';
             }
 
-            $mcq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', $exam_result_mcq_type)->with(['student', 'batch', 'exam'])->get();
+            // $student_exam_attempts = StudentExamAttempt::where('exam_id', $exam->id)->with(['student', 'exam'])->get();
 
-            $cq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', $exam_result_cq_type)->with(['student', 'batch', 'exam'])->get();
+            $student_exam_attempts = StudentExamAttempt::join('exam_results', [['student_exam_attempts.exam_id', 'exam_results.exam_id'], ['student_exam_attempts.student_id', 'exam_results.student_id']])
+            ->where('student_exam_attempts.exam_id', $exam->id)
+            ->with(['student', 'exam'])->get();
 
-            $exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->with(['student', 'batch', 'exam'])->get();
+            // $mcq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', $exam_result_mcq_type)->with(['student', 'batch', 'exam'])->get();
 
-            // dd($student_exam_attempts, $mcq_exam_results, $cq_exam_results);
+            // $cq_exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->where('exam_type', $exam_result_cq_type)->with(['student', 'batch', 'exam'])->get();
 
-            return view('admin.pages.batch_exam.submission.exam_paper_mcq_and_cq', compact('student_exam_attempts', 'batch', 'mcq_exam_results', 'cq_exam_results'));
+            // $exam_results = ExamResult::where('batch_id', $batch->id)->where('exam_id', $exam->id)->with(['student', 'batch', 'exam'])->get();
+
+            // dd($student_exam_attempts, $mcq_exam_results, $cq_exam_results, $exam_result_mcq_type, $exam_result_cq_type);
+
+            // 'mcq_exam_results', 'cq_exam_results',
+
+            return view('admin.pages.batch_exam.submission.exam_paper_mcq_and_cq', compact('student_exam_attempts', 'batch', 'exam_result_mcq_type', 'exam_result_cq_type'));
         }
         elseif($exam->exam_type == 'CQ' || $exam->exam_type == 'Assignment') {
             $student_exam_attempts = StudentExamAttempt::where('exam_id', $exam->id)->with(['student', 'exam'])->get();
@@ -169,11 +176,6 @@ class SubmissionController extends Controller
         // }
     }
 
-
-
-
-
-
     public function seeDetailsMcqOnly(Batch $batch, Exam $exam, $exam_type, User $student){
 
         if($exam->exam_type == 'Pop Quiz'){
@@ -244,9 +246,6 @@ class SubmissionController extends Controller
         return view('admin.pages.batch_exam.submission.exam_paper_review_and_result', compact('exam_papers', 'batch', 'exam', 'exam_type', 'student', 'exam_results'));
     }
 
-
-
-
     public function giveMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
     {
         if ($exam_type == 'CQ') {
@@ -305,6 +304,7 @@ class SubmissionController extends Controller
             // return $this->giveMarksTo($request, $batch, $exam, $exam_type, $student);
         }
         else if ($exam_type == 'Pop Quiz' || $exam_type == 'Topic End Exam') {
+            // Request $request, Batch $batch, Exam $exam, $exam_type, User $student
             // dd("HIT", $request, sizeof($request->q));
             $total = 0;
             for ($i = 0; $i < sizeof($request->q); $i++) {
@@ -376,6 +376,13 @@ class SubmissionController extends Controller
             $exam_result->checked = 1;
             $exam_result->gain_marks = $total;
             $save = $exam_result->save();
+
+            // Request $request, Batch $batch, Exam $exam, $exam_type, User $student
+            if($exam_type === "Topic End Exam"){
+                $topic_end_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam->id)->where('student_id', $student->id)->first();
+                $topic_end_exam_attempt->attempts += 1;
+                $topic_end_exam_attempt->save();
+            }
 
             if ($save) {
                 return redirect()->back();

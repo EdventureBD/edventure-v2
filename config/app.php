@@ -167,6 +167,7 @@ return [
          */
 
         Sarfraznawaz2005\Loading\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...

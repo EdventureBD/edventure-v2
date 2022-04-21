@@ -24,15 +24,45 @@
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
             <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
 
-            <div class="d-flex justify-content-end">
-               @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
+            <div class="d-flex justify-content-between">
+               <div class="d-flex justify-content-left">
                   <div class="text-right">
-                     <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
+                     <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
                   </div>
-               @endif
-               <div class="text-right ml-2">
-                  <a class="btn text-xxsm text-white bg-purple fw-800 px-2 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}">Go to other exams <i class="fas fa-angle-double-right"> </i></a>
+                  @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
+                     <div class="text-right ml-2">
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
+                     </div>
+                  @endif
                </div>
+
+               {{-- If next exam type is TEE generate a confirmation modal with button --}}
+               @if(isset($next_exam_type_TEE) && $next_exam_type_TEE)
+                  <button type="button" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1" data-toggle="modal" data-target="#exampleModalLong">  {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i> </button>
+                  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title text-center" id="exampleModalLongTitle"> Confirm continue </h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true" style="font-size: 3rem; font-weight:600; color:#8c00ff !important;">&times;</span>
+                           </button>
+                        </div>
+                        <div class="modal-body">
+                           You are about to attempt a Topic End Exam. Are you sure you wish to continue ?
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                           <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
+                        </div>
+                     </div>
+                     </div>
+                  </div>
+               {{-- Else generate a normal btn --}}
+               @else
+                  @if(!empty($next_link)) <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a> @endif
+               @endif
+
             </div>
 
             <div class="result-sheet-table overflow-x-scroll">
@@ -51,13 +81,13 @@
                            </tr>
                         </thead>
                         <tbody>
-                           @foreach ($mcq_details_results as $key => $mcq_details_result)
+                           @foreach ($mcq_details_results as $mcq_details_result)
                               <tr>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $key }}</td>
+                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $loop->iteration }}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->question !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->popQuizMCQ->explanation }}</td>
+                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->explanation !!}</td>
                                  <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
                            @endforeach

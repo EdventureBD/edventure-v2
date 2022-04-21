@@ -1,0 +1,550 @@
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+/*html {*/
+/*    height: 100%*/
+/*}*/
+
+p {
+    color: grey;
+}
+
+#heading {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #FA9632;
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+#right-section {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+}
+.form-card {
+    text-align: left
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
+
+#msform input,
+#msform textarea,
+#msform select {
+    padding: 14px 15px 8px 15px;
+    border: 1.9px solid #FA9632;
+    border-radius: 15.13px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    /*background-color: #ECEFF1;*/
+    font-size: 16px;
+    letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #FA9632;
+    outline-width: 0
+}
+
+#msform .action-button {
+    width: 61px;
+    height: 61px;
+    background: #FA9632;
+    font-weight: bold;
+    color: white;
+    border: 7px solid rgb(248, 213, 177);
+    box-sizing: border-box;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 0px 10px 5px;
+    float: right;
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    background-color: #ffddbb;
+    color: #FA9632;
+    border: 7px solid #FA9632;
+}
+
+#msform .action-button-previous {
+    width: 61px;
+    height: 61px;
+    background: #9b9a99;
+    font-weight: bold;
+    color: white;
+    border: 7px solid rgb(207, 200, 194);
+    box-sizing: border-box;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px 10px 0px;
+    float: right
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    background-color: rgb(207, 200, 194);
+    color: #9b9a99;
+    border: 7px solid #9b9a99;
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    position: relative
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #673AB7;
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: left
+}
+
+.purple-text {
+    color: #673AB7;
+    font-weight: normal
+}
+
+.steps {
+    font-size: 25px;
+    color: gray;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-align: right
+}
+
+.fieldlabels {
+    color: gray;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #FA9632
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400
+}
+
+#progressbar #progress-name:before {
+    font-family: FontAwesome;
+    content: "১"
+}
+
+#progressbar #progress-phone:before {
+    font-family: FontAwesome;
+    content: "২"
+}
+
+#progressbar #progress-class:before {
+    font-family: FontAwesome;
+    content: "৩"
+}
+#progressbar #progress-district:before {
+    font-family: FontAwesome;
+    content: "৪"
+}
+
+#progressbar #progress-email:before {
+    font-family: FontAwesome;
+    content: "৫"
+}
+
+#progressbar #progress-password:before {
+    font-family: FontAwesome;
+    content: "৬"
+}
+
+#progressbar li:before {
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 21px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #FA9632
+}
+
+.progress {
+    height: 20px
+}
+
+.progress-bar {
+    background-color: #673AB7
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+
+/* custom css part strats  */
+
+.select2-purple .select2-container--default span span{
+    height: 2.35rem;
+}
+div .select2 .selection .select2-selection{
+    height: 3.35rem;
+    border-radius: 15.13px;
+}
+.select2-container--default .select2-selection--single {
+    border: 1px solid #FA9632 !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #2C3E50 !important;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #FA9632 !important;
+    color: white;
+    border-bottom-left-radius: 14.29px !important;
+}
+.select2-container--open .select2-dropdown--below {
+    border-top: none;
+    border-bottom-left-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    background: #FA9632;
+    height: 100% !important;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 0px 15.13px 15.13px 0px;
+    color: white !important;
+
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b{
+    border-color: white transparent transparent transparent;
+    width: 10px;
+}
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+border-color: transparent transparent white transparent;
+border-width: 0 4px 5px 4px;
+
+}
+#left-section {
+    background: url('/img/new-signup-page/newRegistrationPageImage.png');
+    background-size: cover;
+    background-position: center center;
+    height: 834px;
+}
+.fixed-btn {
+    position: relative;
+    right: 415px;
+    bottom: -500px;
+}
+.fixed-btn-first-child {
+    position: relative;
+    right: 20px;
+    bottom: 150px;
+}
+.fixed-btn-previous {
+    position: relative;
+    right: 140px;
+    bottom: 150px;
+}
+#progressBar-parent {
+    position: relative;
+    top: 150px;
+    right: 0px;
+    width: 100%;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 50px;
+}
+.terms-input {
+    margin-left: 0px !important;
+}
+@media  screen and (max-width:1920px){
+    #left-section {
+        height: 937px;
+    }
+    .fixed-btn-previous {
+        position:relative;
+        right: 302px;
+        bottom: -69px;
+    }
+    .fixed-btn {
+        position: relative;
+        right: 266px;
+        bottom: -70px;
+    }
+    .fixed-btn-first-child {
+        position: relative;
+        right: 332px;
+        bottom: -40px;
+    }
+}
+@media screen and (max-width: 1366px){
+    .fixed-btn-first-child {
+        position: relative;
+        right: 285px;
+        bottom: 0px;
+    }
+    #left-section {
+        height: 768px !important;
+    }
+    .fixed-btn {
+        position: relative;
+        right: 225px;
+        bottom: 0px;
+    }
+    .fixed-btn-previous{
+        position: relative;
+        right: 255px;
+        bottom: 0px;
+    }
+    #progressBar-parent {
+        width: 100% !important;
+        right: 30px !important;
+        top: 100px !important;
+        position: relative;
+    }
+    #right-section {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+}
+@media screen and (max-width: 1080px) {
+    #progressBar-parent {
+        top: 41px !important;
+    }
+    .fixed-btn-first-child {
+        right: 209px;
+    }
+    .fixed-btn {
+        right: 165px;
+    }
+    .fixed-btn-previous {
+        right: 176px;
+    }
+    #left-section {
+        height: 937px !important;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .fixed-btn-first-child {
+        position: relative;
+        right: 175px;
+        bottom: -80px;
+    }
+    #left-section {
+        height: 1080px !important;
+    }
+    .fixed-btn {
+        position: relative;
+        right: 145px;
+        bottom: -45px;
+    }
+    .fixed-btn-previous{
+        position: relative;
+        right: 160px;
+        bottom: -45px;
+    }
+    #progressBar-parent {
+        width: 100% !important;
+        right: 30px !important;
+        bottom: 0px !important;
+        position: relative;
+    }
+    #right-section {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+}
+@media screen and (max-width:768px) {
+    #heading {
+        font-size: 25px;
+    }
+    #left-section {
+        background: url('/img/new-signup-page/newRegistrationPageImage.png');
+        background-size: cover;
+        height: 1023px;
+    }
+    /* #right-section {
+        margin-right: 2px !important;
+    } */
+    #progressBar-parent {
+        width: 100% !important;
+        right: 30px !important;
+        bottom: 0px !important;
+    }
+    .fixed-btn {
+        position: relative;
+        right: 100px;
+        bottom: 0px;
+    }
+    .fixed-btn-first-child {
+        position: relative;
+        right: 150px;
+        bottom: 0px;
+    }
+
+    .fixed-btn-previous {
+        position: relative;
+        right: 130px;
+        bottom: 0px;
+    }
+    #progressbar li:after{
+        top: 15px;
+    }
+    #progressbar li:before {
+        width: 32px;
+        height: 32px;
+        line-height: 27px;
+        font-size: 14px;
+    }
+    #right-section {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+    p {
+        font-size: .9rem;
+    }
+    .terms-div {
+        font-size: 12px !important;
+        margin-top: 20px !important;
+        line-height: 0px;
+    }
+    .terms-label {
+        width: 200px !important;
+    }
+    #terms_error{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width:576px) {
+     #left-section {
+        display: none;
+    }
+    #heading {
+        font-size: 20px;
+    }
+    #right-section {
+        margin: 0px 0px;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+    #progressbar {
+        padding-left: 0;
+    }
+    #progressBar-parent {
+        width: 100% !important;
+        right: 0px !important;
+        top: 20px !important;
+        position: relative;
+    }
+    .fixed-btn {
+        position: relative;
+        right: 80px;
+        bottom: 0px;
+    }
+    .fixed-btn-first-child {
+        position: relative;
+        right: 145px;
+        bottom: 0px;
+    }
+    .fixed-btn-previous {
+        position: relative;
+        right: 110px;
+        bottom: 0px;
+    }
+    #progressbar li:before {
+        width: 32px;
+        height: 32px;
+        line-height: 27px;
+        font-size: 14px;
+    }
+    #progressbar li:after{
+        top: 15px;
+    }
+    #progressbar li{
+        font-size: 11px;
+    }
+    .alert-danger {
+        position: absolute;
+        z-index: 1;
+        /*background-color: rgba(252,235,237,.8);*/
+        font-size: 0.8rem;
+    }
+    p {
+        font-size: .8rem;
+    }
+    .terms-div {
+        font-size: 12px !important;
+        margin-top: 10px !important;
+        line-height: 0px;
+    }
+    .terms-label {
+        width: 200px !important;
+    }
+    #terms_error{
+        margin-top: 10px;
+    }
+}
+
+
+/* custom css part ends */

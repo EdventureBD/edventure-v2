@@ -16,6 +16,7 @@ class canAccess
         if(is_string($batch)) $batch = Batch::findOrFail($batch);
 
         $course = Course::where('id', $batch->course_id)->first();
+
         $batch_student_enrollment = BatchStudentEnrollment::where('batch_id', $batch->id)
             ->where('student_id', auth()->user()->id)
             ->where('status', 1)

@@ -30,81 +30,123 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Course
-                                                        Icon</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" wire:model="image"
-                                                                class="custom-file-input hidden" id="exampleInputFile">
-                                                            <label class="custom-file-label"
-                                                                for="exampleInputFile">Course icon (240px*240px)</label>
-                                                        </div>
-                                                    </div>
-                                                    @error('image')
-                                                        <p style="color: red;">{{ $message }}</p>
-                                                    @enderror
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile" class="col-form-label">Course
+                                                Icon</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" wire:model="image"
+                                                        class="custom-file-input hidden" id="exampleInputFile">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">Course icon (240px*240px)</label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                @if ($tempImage)
-                                                    <img style="width:100px; border-radius: 50%" class="product-image"
-                                                        src="{{ $tempImage->temporaryUrl() }}" alt="">
-                                                @else
-                                                    <img style="width:100px; border-radius: 50%"
-                                                        src="{{ $image }}" alt="...">
-                                                @endif
-                                                <div wire:loading wire:target="image">
-                                                    <p style="color: indigo">Uploading icon ....</p>
-                                                </div>
-                                            </div>
+                                            @if ($image)
+                                                <img style="width: 200px;" src="{{ $image->temporaryUrl() }}">
+                                            @elseif ($tempImage)
+                                                <img style="width: 200px;" class="img-fluid"
+                                                src="{{ asset($tempImage) }}" alt="...">
+                                            @endif
+                                            @error('image')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
                                         </div>
+                                        {{-- <div class="col-md-4">
+                                            @if ($tempImage)
+                                                <img style="width:100px; border-radius: 50%" class="product-image"
+                                                    src="{{ $tempImage->temporaryUrl() }}" alt="">
+                                            @else
+                                                <img style="width:100px; border-radius: 50%"
+                                                    src="{{ $image }}" alt="...">
+                                            @endif
+                                            <div wire:loading wire:target="image">
+                                                <p style="color: indigo">Uploading icon ....</p>
+                                            </div>
+                                        </div> --}}
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile" class="col-form-label">Course
-                                                        Banner</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" wire:model="banner"
-                                                                class="custom-file-input hidden" id="exampleInputFile">
-                                                            <label class="custom-file-label"
-                                                                for="exampleInputFile">Course Banner
-                                                                (576px*642px)</label>
-                                                        </div>
-                                                    </div>
-                                                    @error('banner')
-                                                        <p style="color: red;">{{ $message }}</p>
-                                                    @enderror
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile" class="col-form-label">Course
+                                                Banner</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" wire:model="banner"
+                                                        class="custom-file-input hidden" id="exampleInputFile">
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">Course Banner
+                                                        (576px*642px)</label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                @if ($tempBanner)
-                                                    <img style="width:100px;" class="img-fluid product-image"
-                                                        src="{{ $tempBanner->temporaryUrl() }}" alt="">
-                                                @else
-                                                    <img style="width:100px;" class="img-fluid"
-                                                        src="{{ $banner }}" alt="...">
+                                            @if ($banner)
+                                                <img style="width: 200px;" src="{{ $banner->temporaryUrl() }}">
+                                            @elseif ($tempBanner)
+                                                <img style="width: 200px;" class="img-fluid"
+                                                src="{{ asset($tempBanner) }}" alt="...">
+                                            @endif
+
+                                            @error('banner')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        {{-- <div class="col-md-4">
+                                            @if ($tempBanner)
+                                                <img style="width:100px;" class="img-fluid product-image"
+                                                    src="{{ $tempBanner->temporaryUrl() }}" alt="">
+                                            @else
+                                                <img style="width:100px;" class="img-fluid"
+                                                    src="{{ $banner }}" alt="...">
+                                            @endif
+                                            <div wire:loading wire:target="banner">
+                                                <p style="color: indigo">Uploading banner ....</p>
+                                            </div>
+                                        </div> --}}
+                                    </div>
+
+									@if($show_island_image)
+										<div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputFile" class="col-form-label">Course
+                                                    Island Image</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                            <input type="file" wire:model="islandImage"
+                                                            class="custom-file-input hidden" id="exampleInputFile">
+                                                            <label class="custom-file-label"
+                                                            for="exampleInputFile">Course Island Image (576px*642px)</label>
+                                                    </div>
+                                                </div>
+                                                @if ($islandImage)
+                                                    <img style="width: 200px;" src="{{ $islandImage->temporaryUrl() }}">
+                                                @elseif ($tempIslandImage)
+                                                    <img style="width: 200px;" class="img-fluid"
+                                                    src="{{ asset($tempIslandImage) }}" alt="...">
                                                 @endif
-                                                <div wire:loading wire:target="banner">
+                                                @error('island_image')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            {{-- <div class="col-md-4">
+                                                    @if ($tempBanner)
+                                                    <img class="product-image" src="{{ $tempBanner->temporaryUrl() }}"
+                                                        alt="">
+                                                    @endif
+                                                    <div wire:loading wire:target="banner">
                                                     <p style="color: indigo">Uploading banner ....</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    </div>
+                                            </div> --}}
+										</div>
+									@endif
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseName">Intermediary Level <span
+                                            <label class="col-form-label" for="courseName">Program <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="intermediaryLevelId">
-                                                <option value="" selected>Select Intermediary Level</option>
+                                            <select class="form-control" wire:model="intermediaryLevelId" disabled>
+                                                <option value="" selected>Select Program</option>
                                                 @foreach ($intermediary_levels as $intermediary)
                                                     <option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
                                                 @endforeach
@@ -118,7 +160,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Bundle <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="bundleId">
+                                            <select class="form-control" wire:model="bundleId" disabled>
                                                 <option value="" selected>Select Bundle</option>
                                                 @foreach ($bundles as $bundle)
                                                     <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
@@ -132,8 +174,27 @@
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    @if($show_teachers)
+                                        <div class="col-md-4" wire:key="teachers">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="teachers">Teacher<span
+                                                        class="must-filled">*</span></label>
+                                                <select class="form-control" wire:model="teacherId">
+                                                    <option value="" selected>Select Teacher</option>
+                                                    @foreach ($teachers as $teacher)
+                                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @error('teacherId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    @endif
+
                                     @if($show_price)
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" wire:key="price">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="coursePrice"> Course Price <span
                                                         class="must-filled">*</span> </label>

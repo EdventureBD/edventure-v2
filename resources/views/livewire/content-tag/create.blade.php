@@ -42,9 +42,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="batch">Intermediary Level <span class="must-filled">*</span></label>
+                                            <label class="col-form-label" for="batch">Program <span class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="intermediaryLevelId">
-                                                <option value="" selected>Select intermediary level</option>
+                                                <option value="" selected>Select Program</option>
                                                 @foreach($intermediaryLevels as $intermediaryLevel)
                                                     <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id.$intermediaryLevel->title }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
                                                 @endforeach

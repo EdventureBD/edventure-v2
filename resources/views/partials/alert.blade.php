@@ -1,4 +1,3 @@
-
 @if(session()->has('success'))
     <div class="col-md-12 mt-7">
         <div class="alert alert-success alert-dismissible fade show" role="alert">

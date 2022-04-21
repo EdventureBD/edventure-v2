@@ -5,7 +5,7 @@
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
       <div class="d-flex fixed-top" id="roadmap-nav">
          <div class="my-auto pl-3">
-            <a href="{{route("home")}}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
+            <a href="{{ $back_url }}"> <img src="/img/road_map/back.png" alt="getting back button" class="img-fluid" id="roadmap-back-btn"></a>
          </div>
          <div class="my-auto pr-5 mx-auto">
             <h1 class="fw-800" id="roadmap-subject-topic-name">{{ $bundle->bundle_name }}</h1>
@@ -28,14 +28,14 @@
       <div class="row row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="ilandsParentContainer">
 
          @forelse ($bundle->courses as $key => $course)
-         <a href="{{ route('batch-lecture', ['batch' => $course->Batch[0]->slug]) }}" style="color: white !important;">
-            <div class="px-lg-5 px-sm-0 pb-5">
-               <div data-toggle="modal" data-target="#courseTopicModal-291"><img src="/img/road_map/landl1.png" alt="Iland image" class="img-fluid"></div>
-               <h6 class="text-center pt-2 font-weight-bold">
-                  {{ $course->title }}
-               </h6>
-            </div>
-         </a>
+            <a href="{{ route('batch-lecture', ['batch' => $course->Batch[0]->slug]) }}" style="color: white !important;">
+               <div class="px-lg-5 px-sm-0 pb-5">
+                  <div data-toggle="modal" data-target="#courseTopicModal-291"><img src="{{ $course->island_image }}" alt="Iland image" class="img-fluid"></div>
+                  <h6 class="text-center pt-2 font-weight-bold">
+                     {{ $course->title }}
+                  </h6>
+               </div>
+            </a>
 
             <div class="invisible">0</div>
 

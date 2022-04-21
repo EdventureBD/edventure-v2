@@ -10,9 +10,9 @@ use Livewire\WithFileUploads;
 // models
 use App\Models\Admin\Course;
 use App\Models\Admin\Bundle;
-use App\Models\Admin\CourseCategory;
 use App\Models\Admin\Batch;
 use App\Models\Admin\IntermediaryLevel;
+use App\Models\User;
 
 class Create extends Component
 {
@@ -22,16 +22,21 @@ class Create extends Component
     public $intermediaryLevelId;
     public $bundles;
     public $bundleId;
+    public $teachers;
+    public $teacherId;
     public $title;
     public $description;
     public $duration;
     public $price;
     public $image;
     public $banner;
+    public $island_image;
     public $tempImage;
     public $tempBanner;
     public $url;
     public $show_price = true;
+    public $show_teachers = false;
+    public $show_island_image = false;
 
     public function updatedTitle()
     {
@@ -75,23 +80,33 @@ class Create extends Component
     {
         if($this->bundleId){
             $this->show_price = false;
-            $this->validate([
-                'bundleId' => 'required|numeric|integer'
-            ]);
+            $this->show_teachers = true;
+            $this->show_island_image = true;
         }
         else{
             $this->show_price = true;
-            $this->validate([
-                'bundleId' => 'nullable|numeric|integer'
-            ]);
+            $this->show_teachers = false;
+            $this->show_island_image = false;
         }
+        $this->validate([
+            'bundleId' => 'nullable|numeric|integer'
+        ]);
+    }
+
+    public function updatedTeacherId()
+    {
+       $this->validate([
+            'teacherId' => 'required|numeric|integer'
+       ]);
     }
 
     public function updatedPrice()
     {
-        $this->validate([
-            'price' => 'nullable|integer|numeric'
-        ]);
+      if($this->bundleId){
+         $this->validate([
+            'price' => 'required|numeric|integer|gt:0'
+         ]);
+      }
     }
 
     public function updatedDescription()
@@ -102,28 +117,39 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => ['required', 'string', 'max:100', 'unique:courses'],
+        'title' => 'required|string|max:100|unique:courses',
         'banner' => 'nullable|image|mimes:jpeg,jpg,png',
-        'image' => 'nullable|mimes:jpeg,jpg,png',
+        'image' => 'nullable|image|mimes:jpeg,jpg,png',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
-        'price' => 'nullable|integer|numeric|gt:-1',
         'duration' => 'required|numeric|between:1,36',
     ];
 
     protected $messages = [
-        'intermediaryLevelId.required' => 'Intermediary level is required.',
-        'intermediaryLevelId.numeric' => 'Intermediary level has to be a numeric value.',
-        'intermediaryLevelId.integer' => 'Intermediary level has to be a integer value.',
+        'intermediaryLevelId.required' => 'Program is required.',
+        'intermediaryLevelId.numeric' => 'Program has to be a numeric value.',
+        'intermediaryLevelId.integer' => 'Program has to be a integer value.',
         'intermediaryLevelId.numeric' => 'Bundle has to be a numeric value.',
         'intermediaryLevelId.integer' => 'Bundle has to be a integer value.',
     ];
 
     public function saveCourse()
-    {
+    { 
+        if($this->bundleId){
+            $this->rules['teacherId'] = 'required|integer|numeric';
+            $this->rules['price'] = 'nullable|integer|numeric';
+            $this->rules['island_image'] = 'required|image';
+        }
+        else{
+            $this->rules['teacherId'] = 'nullable|integer|numeric';
+            $this->rules['price'] = 'required|integer|numeric|gt:-1';
+            $this->rules['island_image'] = 'nullable|image';
+        }
+
         $data = $this->validate();
+
         if ($this->image) {
             $imageUrl = $this->image->store('public/course');
             $this->image = Storage::url($imageUrl);
@@ -133,6 +159,11 @@ class Create extends Component
             $this->banner = Storage::url($imageUrl2);
         }
 
+        if ($this->island_image) {
+            $imageUrl3 = $this->island_image->store('public/course');
+            $this->island_image = Storage::url($imageUrl3);
+        }
+
         $intermediary_level = IntermediaryLevel::where('id', $data['intermediaryLevelId'])->firstOrFail();
 
         $course = new Course();
@@ -140,6 +171,7 @@ class Create extends Component
         $course->slug = Str::slug($data['title']);
         $course->icon = $this->image;
         $course->banner = $this->banner;
+        $course->island_image = $this->island_image;
         $course->course_category_id = $intermediary_level->course_category_id;
         $course->intermediary_level_id = $data['intermediaryLevelId'];
         if(empty($data['bundleId'])){
@@ -164,10 +196,10 @@ class Create extends Component
         if($course->bundle_id !== null){
             $bundle = Bundle::where('id', $course->bundle_id)->first();
             $batch = new Batch();
-            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' id- '.uniqid();
+            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' bundle id - '.$bundle->id. ' unique_id - '. uniqid();
             $batch->slug = uniqid();
             $batch->batch_running_days = 0;
-            $batch->teacher_id = null;
+            $batch->teacher_id = $this->teacherId;
             $batch->student_limit = 10000;
             $batch->course_id = $course->id;
             $batch->status = 1;
@@ -187,6 +219,7 @@ class Create extends Component
     public function mount()
     {
         $this->bundles = Bundle::all();
+        $this->teachers = User::where('user_type', 2)->get();
     }
 
     public function render()

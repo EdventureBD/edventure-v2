@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         Route::get('/profile/model-test/tag-solutions/{tagId}', [ModelMcqTagAnalysisController::class, 'solutions'])->name('tag.solution');
     });
 
-    Route::get('/profile/ajax_get_courses', [AccountDetailsController::class, 'ajax_get_courses'])->name('ajax-get-courses');
+    Route::get('/profile/ajax_get_courses_for_bundle', [AccountDetailsController::class, 'ajax_get_courses_for_bundle'])->name('ajax-get-courses-for-bundle');
     Route::get('/profile/ajax_get_strengths_and_weaknesses', [AccountDetailsController::class, 'ajax_get_strengths_and_weaknesses'])->name('ajax-get-strengths-and-weaknesses');
 
     Route::get('/profile-data', [AccountDetailsController::class, 'profileData'])->name('profile-data');
@@ -72,8 +72,8 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         // Route::get('batch/{batch}/special-exam/{exam}/question', [ExamController::class, 'specialExamQuestion'])->name('specialExamQuestion');
         Route::post('batch/{batch}/{exam}/result', [ExamController::class, 'submit'])->name('submit');
 
-
     });
+    
     Route::get('submission-status', function () {
         return view('student.pages_new.batch.exam.examSubmissionGreeting');
     });
