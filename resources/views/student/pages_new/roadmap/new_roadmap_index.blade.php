@@ -299,7 +299,7 @@
                if(i===j){
                   if(j%2==0){
                      let div = document.createElement("div");
-                     div.classList.add("px-lg-5","px-sm-0");
+                     div.classList.add("px-lg-3","px-sm-0");
                      // Iland image part 
                      let divIland = document.createElement("div");
                      if(ilandImageDisabled[landCounter])
@@ -330,13 +330,13 @@
                   else{
                      if(j % 3 !== 0) {
                         let div = document.createElement("div");
-                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair">`;
+                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid onStreamStair" style="width:75%">`;
                         div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                         landsParentDiv.appendChild(div);
                      }
                      else{
                         let div = document.createElement("div");
-                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair">`;
+                        div.innerHTML  = `<img src="/img/road_map/onStreamStair.png" alt="Stair image" class="img-fluid reverseStreamStair" style="width:75%">`;
                         div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                         landsParentDiv.appendChild(div);
                      }
@@ -369,7 +369,7 @@
                   }
                   else{
                      if(i===j){
-                        div.classList.add("px-lg-5","px-sm-0","mx-sm-0");
+                        div.classList.add("px-lg-3","px-sm-0","mx-sm-0");
                         // Iland image part 
                         let divIland = document.createElement("div");
                         if(ilandImageDisabled[landCounter])
@@ -400,12 +400,12 @@
                      }
                      else{
                         if(j % 3 !== 0){
-                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" >`;
+                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid reverseStreamStair" style="width:75%">`;
                            div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                            landsParentDiv.appendChild(div);
                         }
                         else{
-                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" >`;
+                           div.innerHTML  = `<img src="/img/road_map/reverseStair.png" alt="Stair image" class="img-fluid onStreamStair" style="width:75%">`;
                            div.classList.add("px-lg-5","w-lg-50","px-sm-0","w-sm-100");
                            landsParentDiv.appendChild(div);
                         }
