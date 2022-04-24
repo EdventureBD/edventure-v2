@@ -29,6 +29,7 @@ use App\Models\Student\exam\QuestionContentTagAnalysis;
 
 use App\Models\Admin\PopQuizCQ;
 use App\Models\Admin\TopicEndExamCQ;
+use Illuminate\Support\Facades\Response;
 
 class AccountDetailsController extends Controller
 {
@@ -288,9 +289,10 @@ class AccountDetailsController extends Controller
         return view('student.pages_new.user.model-test',compact('user','categories','exam_attended_count'));
     }
 
-    public function getTopic($categoryId)
+    public function getTopic($categoryUuidOrId)
     {
-        $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$categoryId)->where('multiple_subject',0)->get();
+        $id = is_numeric($categoryUuidOrId) ? $categoryUuidOrId : ExamCategory::query()->where('uuid',$categoryUuidOrId)->first()->id;
+        $topics = ExamTopic::query()->select('id','name')->where('exam_category_id',$id)->where('multiple_subject',0)->get();
 
         return response()->json($topics);
     }

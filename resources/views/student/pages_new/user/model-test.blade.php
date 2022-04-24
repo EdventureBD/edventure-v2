@@ -56,10 +56,9 @@
                         style="width: 100%; margin-top: -8px !important;">
                     @foreach ($categories as $category)
                         <option value=""></option>
-                        <option value="{{ $category->uuid }}">{{ $category->name }}</option>
+                        <option value='{"uuid":"{{$category->uuid}}","visible":"{{$category->visibility}}"}'>{{ $category->name }}</option>
                     @endforeach
                 </select>
-
                 <div id="SelectedCategory" class="d-none mx-auto category-progress text-white">
                     <div class="category-name">
                         <div class="d-flex">
@@ -158,14 +157,19 @@
 
             $('#category_selecting').on("select2:selecting", function (e) {
                 let origin = window.location.origin;
-                query_category_id = e.params.args.data.id
-                let href = origin + '/model-exam?c=' + query_category_id;
+                let query_category_uuid = JSON.parse(e.params.args.data.id).uuid
+                let category_visible = JSON.parse(e.params.args.data.id).visible
+                let href = category_visible == true ? origin + '/model-exam?c=' + query_category_uuid : 'javascript:void(0)';
+                let redirectLinkBgColor = category_visible == true ? '#fa9632' : 'grey';
+                let _blank = category_visible == true ? '_blank' : '';
+                let redirectLink = '<a style="padding: 22px;background-color:' +redirectLinkBgColor+';border-radius: 10px;" target="'+_blank+'" href="'+href+'"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>'
+
                 $('#SelectedCategory').removeClass('d-none')
                 $('#categoryName').html(e.params.args.data.text)
-                $('#categoryLink').html('<a style="padding: 22px;background-color: #fa9632;border-radius: 10px;" target="_blank" href="'+href+'"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>')
+                $('#categoryLink').html(redirectLink)
                 $('#SelectedTopic').addClass('d-none')
 
-                let url = origin + '/model-test/topic/' + query_category_id;
+                let url = origin + '/model-test/topic/' + query_category_uuid;
                 $('#topic_selecting').empty();
                 $.ajax({
                     type: "GET",
