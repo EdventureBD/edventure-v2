@@ -1190,9 +1190,8 @@ class ExamController extends Controller
 
                 // Get Next Pop Quiz for link generation
                 $next_exam = Exam::where(function ($query)use($exam){
-                    $query->where('exam_type', 'Pop Quiz')->orderBy('order')->where('order', '>', $exam->order);
+                    $query->where('exam_type', 'Pop Quiz');
                 })
-                // ->where('order', '>', $exam->order)
                 ->where('course_id', $exam->course_id)
                 ->where('topic_id', $exam->topic_id)
                 ->with([
@@ -1200,8 +1199,12 @@ class ExamController extends Controller
                         return $query->select('id', 'slug', 'course_id', 'topic_id', 'exam_id');
                     },
                 ])
-                ->select('id', 'slug', 'course_id', 'topic_id', 'exam_type')
+                ->select('id', 'slug', 'order', 'course_id', 'topic_id', 'exam_type')
+                ->orderBy('order')->where('order', '>=', $exam->order)
+                ->where('id', '!=', $exam->id)
                 ->first();
+
+                // dd($exam, $next_exam);
 
                 // if next pop quiz is not found, get topic end exam
                 if(empty($next_exam)){
@@ -1221,6 +1224,8 @@ class ExamController extends Controller
                 }
 
                 $next_exam_type_TEE = false;
+
+                // dd($course, $course_topic, $batch, $exam_id, $exam_type, $exam, $next_exam);
 
                 // If next pop quiz has lecture, then generate link for that
                 if(count($next_exam->course_lectures) > 0){

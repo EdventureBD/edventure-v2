@@ -49,10 +49,12 @@
         @auth
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                <div class="nav-item navbar-nav">
+                    <a href="{{ route('logout') }}" class="text-white fw-800 nav-link" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                     LOG OUT
                 </a>
+                </div>
             </form>
         @endauth
 
