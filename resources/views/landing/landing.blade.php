@@ -11,10 +11,10 @@
         </div>
         <div class="mt-0" id="text-in-landing">
             @auth
-            <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4>
-            <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
-            <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
-            <a href="{{route('model.exam')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed px-4" style="border: 1px solid #FA9632">Go For Exam</a>
+            <h4 class="text-white  text-sm">Hey, {{Auth::user()->name}} !</h4>
+            <h4 class="text-white  text-sm">Welcome to the Edventure.</h4>
+            <h2 class="text-sm fw-800 mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
+            <a href="{{route('model.exam')}}" class="text-xsm btn btn-register btn-orange-customed px-4" style="border: 1px solid #FA9632">Go For Exam</a>
             @else
             <div id="landing_greeting_and_register_button">
                 <div>

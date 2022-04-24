@@ -5,7 +5,7 @@
   }
   
   .contact h2 {
-    font-family: "Oswald", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 60px;
     color: #653092;
     font-weight: 400;
@@ -15,7 +15,7 @@
   }
   
   .contact p {
-    font-family: "Zen Kurenaido", sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #B298C9;
     font-size: 26px;
     margin-bottom: 60px;
@@ -84,7 +84,7 @@
     margin-top: 5%;
     transition: all 0.4s;
     margin-bottom: 15%;
-    font-family: "Raleway";
+    font-family: 'Inter', sans-serif;
     line-height: 21px;
   }
   
@@ -109,13 +109,13 @@
     background: black;
   }
   .form-box h3{
-    font-family: Raleway;
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: bold;
   }
   .form-box h3 span {
     color: #996FBC;
-    font-family: Raleway;
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: bold;
   }
@@ -125,7 +125,7 @@
   }
   
   .form-group label {
-    font-family: "Manrope", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 20px;
     color: #7B7B7B;
   }
@@ -158,7 +158,7 @@
   
   .contact-box h3 {
     font-size: 30px;
-    font-family: Raleway;
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: bold;
     color: #996FBC;
@@ -166,7 +166,7 @@
   
   .contact-box h3 span {
     font-size: 30px;
-    font-family: Raleway;
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: bold;
     color: white;
@@ -175,13 +175,13 @@
   .contact-box p {
     color: white;
     font-size: 18px;
-    font-family: "Raleway","Zen Kurenaido", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     margin-top: 25px;
   }
   
   .contact-box h4 {
-    font-family: "Raleway","Oswald", sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #CECECE;
     font-size: 25px;
     font-weight: 400;
