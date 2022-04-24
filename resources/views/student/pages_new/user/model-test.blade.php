@@ -56,7 +56,7 @@
                         style="width: 100%; margin-top: -8px !important;">
                     @foreach ($categories as $category)
                         <option value=""></option>
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->uuid }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
 
