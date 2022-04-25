@@ -47,8 +47,8 @@
     position: absolute;
     display: block;
     width: 225px;
-    padding: 15px 0;
-    background-color: #6400C8;
+    padding: 1px 0;
+    background-color: rgb(42, 126, 11);
     box-shadow: 0 5px 10px rgba(0,0,0,.1);
     color: #fff;
     font: 700 18px/1 'Lato', sans-serif;
@@ -58,8 +58,8 @@
 }
 
 .ribbon-top-left {
-    top: -10px;
-    left: 12px;
+    top: 0px;
+    left: -2px;
 }
 .btn-detail {
     background: #FA9633;
@@ -97,7 +97,7 @@
     left: 0;
 }
 .ribbon-top-left span {
-    right: -25px;
+    right: 0px;
     top: 30px;
     transform: rotate(-45deg);
 }
