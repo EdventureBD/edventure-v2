@@ -21,19 +21,33 @@
                </div>
             @endif
 
+            @error('not_authorized')
+               <div class="alert alert-danger mt-3 text-center">
+                  <h1> {{ $message }} </h1>
+               </div>
+            @enderror
+
             <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
             <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
 
-            <div class="d-flex justify-content-between">
-               @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
-                  <div class="text-right">
-                     <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync"></i></a>
-                  </div>
-               @endif
+            <div class="d-flex justify-content-left">
                <div class="text-right">
-                  <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up"> </i></a>
+                  <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
                </div>
+               @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
+                  @if( $topic_end_exam_attempt && $topic_end_exam_attempt->unlocked )
+                     <div class="text-right ml-2">
+                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync ml-2"></i></a>
+                     </div>
+                  @endif
+               @endif
             </div>
+
+            @if( $topic_end_exam_attempt && !$topic_end_exam_attempt->unlocked )
+               <div class="alert alert-danger text-center">
+                  <h1> Exam locked due to failing 3 attempts. Please contact system admin to unlock. </h1>
+               </div>
+            @endif
 
             <div class="result-sheet-table overflow-x-scroll">
                @if($mcqs_exist)

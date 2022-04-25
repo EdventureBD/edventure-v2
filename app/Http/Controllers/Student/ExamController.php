@@ -279,22 +279,37 @@ class ExamController extends Controller
 
     public function submit(Request $request, Batch $batch, Exam $exam)
     {
-        if ($exam->exam_type == Edvanture::MCQ) {
-            // $result = ExamResult::where(['student_id' => auth()->user()->id, 'exam_id' => $exam->id, 'batch_id' => $batch->id])->first();
-            $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
-            if ($result && $result->status == 1) {
-                return $this->sendResponse([]);
-            }
-            $questions = $request->q;
-            $answers = $request->a;
-            $save = $this->processMCQ($questions, $answers, $batch, $exam, 1, $result);
-            if ($save) {
-                if ($request->ajax()) {
-                    return $this->sendResponse([]);
-                }
-                return view('student.pages_new.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
-            }
+        $course_topic = CourseTopic::find($exam->topic_id);
+        $student_exam_attempt = StudentExamAttempt::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->first();
+            
+        // redirect if exam result already exists
+        if($student_exam_attempt){
+            return redirect()->route('batch-test', [$course_topic, $batch, $exam->id, $exam->exam_type]);
         }
+
+        $student_exam_attempt = new StudentExamAttempt();
+        $student_exam_attempt->student_id = auth()->user()->id;
+        $student_exam_attempt->exam_id = $exam->id;
+        $student_exam_attempt->is_completed = 1;
+        $student_exam_attempt->attended_at = now();
+        $student_exam_attempt->save();
+
+        // if ($exam->exam_type == Edvanture::MCQ) {
+        //     // $result = ExamResult::where(['student_id' => auth()->user()->id, 'exam_id' => $exam->id, 'batch_id' => $batch->id])->first();
+        //     $result = (new ExamResult())->getExamResult($exam->id, $batch->id, auth()->user()->id);
+        //     if ($result && $result->status == 1) {
+        //         return $this->sendResponse([]);
+        //     }
+        //     $questions = $request->q;
+        //     $answers = $request->a;
+        //     $save = $this->processMCQ($questions, $answers, $batch, $exam, 1, $result);
+        //     if ($save) {
+        //         if ($request->ajax()) {
+        //             return $this->sendResponse([]);
+        //         }
+        //         return view('student.pages_new.batch.exam.mcq_result', compact('questions', 'exam', 'batch', 'answers', 'total', 'gain_marks'));
+        //     }
+        // }
 
         if ($exam->exam_type == Edvanture::APTITUDETEST) {
 
@@ -351,57 +366,58 @@ class ExamController extends Controller
             }
         }
 
-        if ($exam->exam_type == Edvanture::CQ) {
-            // dd($request->all());
-            // return $this->examPaper($request, $batch, $exam);
-            $validateData = $request->validate([
-                'submitted_text' => 'nullable|string',
-                'file' => 'nullable|mimes:pdf|max:10000',
-                'ques' => 'required'
-            ]);
-            // dd($request);
-            $path = '';
+        // if ($exam->exam_type == Edvanture::CQ) {
+        //     // dd($request->all());
+        //     // return $this->examPaper($request, $batch, $exam);
+        //     $validateData = $request->validate([
+        //         'submitted_text' => 'nullable|string',
+        //         'file' => 'nullable|mimes:pdf|max:10000',
+        //         'ques' => 'required'
+        //     ]);
+        //     // dd($request);
+        //     $path = '';
 
-            if ($request->file('file')) {
-                $name = time() . "_" . $request->file('file')->getClientOriginalName();
-                $path = $request->file('file')->storeAs('public/student/exam/answer/CQ', $name);
-            }
+        //     if ($request->file('file')) {
+        //         $name = time() . "_" . $request->file('file')->getClientOriginalName();
+        //         $path = $request->file('file')->storeAs('public/student/exam/answer/CQ', $name);
+        //     }
 
-            for ($i = 1; $i <= sizeof($request->ques); $i++) {
-                $exam_paper = new CqExamPaper();
-                $exam_paper->creative_question_id = $request->ques[$i];
-                $exam_paper->exam_id = $exam->id;
-                $exam_paper->exam_type = $exam->exam_type;
-                $exam_paper->batch_id = $batch->id;
-                $exam_paper->student_id = auth()->user()->id;
-                $exam_paper->submitted_text = $request->submitted_text;
-                $exam_paper->submitted_pdf = $path;
-                $exam_paper->status = 1;
-                $save = $exam_paper->save();
-            }
+        //     for ($i = 1; $i <= sizeof($request->ques); $i++) {
+        //         $exam_paper = new CqExamPaper();
+        //         $exam_paper->creative_question_id = $request->ques[$i];
+        //         $exam_paper->exam_id = $exam->id;
+        //         $exam_paper->exam_type = $exam->exam_type;
+        //         $exam_paper->batch_id = $batch->id;
+        //         $exam_paper->student_id = auth()->user()->id;
+        //         $exam_paper->submitted_text = $request->submitted_text;
+        //         $exam_paper->submitted_pdf = $path;
+        //         $exam_paper->status = 1;
+        //         $save = $exam_paper->save();
+        //     }
 
-            $student_exam_attempt = new StudentExamAttempt();
-            $student_exam_attempt->student_id = auth()->user()->id;
-            $student_exam_attempt->exam_id = $exam->id;
-            $student_exam_attempt->is_completed = 1;
-            $student_exam_attempt->attended_at = now();
-            $student_exam_attempt->save();
+        //     $student_exam_attempt = new StudentExamAttempt();
+        //     $student_exam_attempt->student_id = auth()->user()->id;
+        //     $student_exam_attempt->exam_id = $exam->id;
+        //     $student_exam_attempt->is_completed = 1;
+        //     $student_exam_attempt->attended_at = now();
+        //     $student_exam_attempt->save();
 
-            if ($save) {
-                // return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully submitted the CQ exam paper.");
-                $show = false;
-                // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
-                return view('student.pages_new.batch.exam.canAttemp', compact(
-                    // 'canAttempt',
-                    'exam',
-                    'batch',
-                    'show',
-                    // 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'
-                ));
-            }
-        }
+        //     if ($save) {
+        //         // return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully submitted the CQ exam paper.");
+        //         $show = false;
+        //         // return view('student.pages.batch.exam.canAttemp', compact('canAttempt', 'courseLecture', 'exam', 'batch', 'show', 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'));
+        //         return view('student.pages_new.batch.exam.canAttemp', compact(
+        //             // 'canAttempt',
+        //             'exam',
+        //             'batch',
+        //             'show',
+        //             // 'detailsResult', 'analysis', 'weakAnalysis', 'max', 'min', 'totalNumber'
+        //         ));
+        //     }
+        // }
         
         if ($exam->exam_type == Edvanture::TOPICENDEXAM || $exam->exam_type == Edvanture::POPQUIZ) {
+
             if ($exam->exam_type == Edvanture::TOPICENDEXAM){
                 $exam_type_cq = "Topic End Exam CQ";
                 $exam_type_mcq = "Topic End Exam MCQ";
@@ -514,13 +530,6 @@ class ExamController extends Controller
                     $exam_paper->status = 1;
                     $exam_paper->save();
                 }
-
-                $student_exam_attempt = new StudentExamAttempt();
-                $student_exam_attempt->student_id = auth()->user()->id;
-                $student_exam_attempt->exam_id = $exam->id;
-                $student_exam_attempt->is_completed = 1;
-                $student_exam_attempt->attended_at = now();
-                $student_exam_attempt->save();
 
                 // Store exam results for cq
                 $exam_result = new ExamResult();
@@ -653,92 +662,98 @@ class ExamController extends Controller
         return $for_ans;
     }
 
-    private function processMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
-    {
-        // $questions = $request->q;
-        $total = 0;
-        // $answers = $request->a;
-        $input = [];
-        $input['exam_id'] = $exam->id;
-        $input['batch_id'] = $batch->id;
-        $input['student_id'] = auth()->user()->id;
-        $input['status'] = $status;
-        $fAns = $this->formatMcqAnswers($answers);
-        foreach ($questions as $question) {
-            $qus_input = [];
-            $qus_input['number_of_attempt'] = $question['number_of_attempt'] + 1;
-            $qus_input['gain_marks'] = $question['gain_marks'];
-            if (!empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer']) {
-                $total = $total + 1;
-                $qus_input['gain_marks'] = $question['gain_marks'] + 1;
-            }
-            $qus_input['success_rate'] = ($qus_input['gain_marks'] * 100) / $qus_input['number_of_attempt'];
-            (new MCQ())->saveData($qus_input, $question['id']); //updating question
+    // private function processMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
+    // {
+    //     // $questions = $request->q;
+    //     $total = 0;
+    //     // $answers = $request->a;
+    //     $input = [];
+    //     $input['exam_id'] = $exam->id;
+    //     $input['batch_id'] = $batch->id;
+    //     $input['student_id'] = auth()->user()->id;
+    //     $input['status'] = $status;
+    //     $fAns = $this->formatMcqAnswers($answers);
+    //     foreach ($questions as $question) {
+    //         $qus_input = [];
+    //         $qus_input['number_of_attempt'] = $question['number_of_attempt'] + 1;
+    //         $qus_input['gain_marks'] = $question['gain_marks'];
+    //         if (!empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer']) {
+    //             $total = $total + 1;
+    //             $qus_input['gain_marks'] = $question['gain_marks'] + 1;
+    //         }
+    //         $qus_input['success_rate'] = ($qus_input['gain_marks'] * 100) / $qus_input['number_of_attempt'];
+    //         (new MCQ())->saveData($qus_input, $question['id']); //updating question
 
-            //saving in the DetailsResuls
-            $input['exam_type'] = Edvanture::MCQ;
-            $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
-            $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
-            $input['question_id'] = $question['id'];
-            (new DetailsResult())->saveData($input);
+    //         //saving in the DetailsResuls
+    //         $input['exam_type'] = Edvanture::MCQ;
+    //         $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
+    //         $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
+    //         $input['question_id'] = $question['id'];
+    //         (new DetailsResult())->saveData($input);
 
-            //saving in the QuestionContentTagAnalysis
-            (new QuestionContentTagAnalysis())->saveQuesConTagAnalysis($input);
-        }
-        //saving in the ExamResults
-        $input['gain_marks'] = $total;
-        if ($result) {
-            $save = (new ExamResult())->saveData($input, $result->id);
-        } else {
-            $save = (new ExamResult())->saveData($input);
-        }
-        return $save;
-    }
+    //         //saving in the QuestionContentTagAnalysis
+    //         (new QuestionContentTagAnalysis())->saveQuesConTagAnalysis($input);
+    //     }
+    //     //saving in the ExamResults
+    //     $input['gain_marks'] = $total;
+    //     if ($result) {
+    //         $save = (new ExamResult())->saveData($input, $result->id);
+    //     } else {
+    //         $save = (new ExamResult())->saveData($input);
+    //     }
+    //     return $save;
+    // }
 
-    private function processAptitudeTestMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
-    {
-        // $questions = $request->q;
-        $total = 0;
-        // $answers = $request->a;
-        $input = [];
-        $input['exam_id'] = $exam->id;
-        $input['batch_id'] = $batch->id;
-        $input['student_id'] = auth()->user()->id;
-        $input['status'] = $status;
-        $fAns = $this->formatMcqAnswers($answers);
-        foreach ($questions as $question) {
-            $qus_input = [];
-            $qus_input['number_of_attempt'] = $question['number_of_attempt'] + 1;
-            $qus_input['gain_marks'] = $question['gain_marks'];
-            if (!empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer']) {
-                $total = $total + 1;
-                $qus_input['gain_marks'] = $question['gain_marks'] + 1;
-            }
-            $qus_input['success_rate'] = ($qus_input['gain_marks'] * 100) / $qus_input['number_of_attempt'];
-            (new AptitudeTestMCQ())->saveData($qus_input, $question['id']); //updating question
+    // private function processAptitudeTestMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
+    // {
+    //     // $questions = $request->q;
+    //     $total = 0;
+    //     // $answers = $request->a;
+    //     $input = [];
+    //     $input['exam_id'] = $exam->id;
+    //     $input['batch_id'] = $batch->id;
+    //     $input['student_id'] = auth()->user()->id;
+    //     $input['status'] = $status;
+    //     $fAns = $this->formatMcqAnswers($answers);
+    //     foreach ($questions as $question) {
+    //         $qus_input = [];
+    //         $qus_input['number_of_attempt'] = $question['number_of_attempt'] + 1;
+    //         $qus_input['gain_marks'] = $question['gain_marks'];
+    //         if (!empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer']) {
+    //             $total = $total + 1;
+    //             $qus_input['gain_marks'] = $question['gain_marks'] + 1;
+    //         }
+    //         $qus_input['success_rate'] = ($qus_input['gain_marks'] * 100) / $qus_input['number_of_attempt'];
+    //         (new AptitudeTestMCQ())->saveData($qus_input, $question['id']); //updating question
 
-            //saving in the DetailsResuls Store for each iteration
-            $input['exam_type'] = Edvanture::APTITUDETEST;
-            $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
-            $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
-            $input['question_id'] = $question['id'];
-            (new DetailsResult())->saveData($input);
+    //         //saving in the DetailsResuls Store for each iteration
+    //         $input['exam_type'] = Edvanture::APTITUDETEST;
+    //         $input['gain_marks'] = !empty($fAns[$question['id']]) && $fAns[$question['id']] == $question['answer'] ? 1 : 0;
+    //         $input['mcq_ans'] = !empty($fAns[$question['id']]) ? $fAns[$question['id']] : 0;
+    //         $input['question_id'] = $question['id'];
+    //         (new DetailsResult())->saveData($input);
 
-            //saving in the QuestionContentTagAnalysis
-            (new QuestionContentTagAnalysis())->saveQuesConTagAnalysis($input);
-        }
-        //saving in the ExamResults
-        $input['gain_marks'] = $total;
-        if ($result) {
-            $save = (new ExamResult())->saveData($input, $result->id);
-        } else {
-            $save = (new ExamResult())->saveData($input);
-        }
+    //         //saving in the QuestionContentTagAnalysis
+    //         (new QuestionContentTagAnalysis())->saveQuesConTagAnalysis($input);
+    //     }
+    //     //saving in the ExamResults
+    //     $input['gain_marks'] = $total;
+    //     if ($result) {
+    //         $save = (new ExamResult())->saveData($input, $result->id);
+    //     } else {
+    //         $save = (new ExamResult())->saveData($input);
+    //     }
 
-        return $save;
-    }
+    //     return $save;
+    // }
 
     public function reattemptBatchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
+
+        $student_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam_id)->where('student_id', auth()->user()->id)->first();
+
+        if($student_exam_attempt->attempts == 3){
+            return back()->withErrors(['not_authorized' => 'You are not authorized to access this url !']);
+        }
 
         if($exam_type == Edvanture::APTITUDETEST){
             $details_results = DetailsResult::where('exam_id', $exam_id)
@@ -935,6 +950,8 @@ class ExamController extends Controller
 
             // dd($exam);
 
+            $topic_end_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam->id)->where('student_id', auth()->user()->id)->first();
+
             // if CQ exam result exists and is checked, then the user has attended exam and is checked. Then paper+marks+analytics is shown
             $cq_exam_result = ExamResult::where('exam_id', $exam->id)
             ->where('batch_id', $batch->id)
@@ -1106,6 +1123,7 @@ class ExamController extends Controller
                     'cqs_exist',
                     'cq_total_marks',
                     'cq_marks_scored',
+                    'topic_end_exam_attempt'
                 ));
             }
 
@@ -1118,13 +1136,12 @@ class ExamController extends Controller
                 }
 
                 // for topic end exams only, make a "topic_end_exam_attempt" if none exist.
-                $topic_end_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam->id)->where('student_id', auth()->user()->id)->first();
-
                 if(!$topic_end_exam_attempt){
                     $topic_end_exam_attempt = new StudentTopicEndExamAttempt();
                     $topic_end_exam_attempt->topic_end_exam_id = $exam->id;
                     $topic_end_exam_attempt->student_id = auth()->user()->id;
                     $topic_end_exam_attempt->attempts = 0;
+                    $topic_end_exam_attempt->unlocked = true;
                     $topic_end_exam_attempt->save();
                 }
 

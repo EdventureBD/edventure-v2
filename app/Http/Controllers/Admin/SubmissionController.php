@@ -381,6 +381,10 @@ class SubmissionController extends Controller
             if($exam_type === "Topic End Exam"){
                 $topic_end_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam->id)->where('student_id', $student->id)->first();
                 $topic_end_exam_attempt->attempts += 1;
+                if($topic_end_exam_attempt->attempts == 3)
+                    $topic_end_exam_attempt->unlocked = false;
+                else
+                    $topic_end_exam_attempt->unlocked = true;
                 $topic_end_exam_attempt->save();
             }
 
