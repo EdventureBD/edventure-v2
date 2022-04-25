@@ -11617,15 +11617,16 @@ a:hover {
 }
 .single-blog .blog-info {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 30%;
+  left: 0%;
   z-index: 1;
 }
 .single-blog.overlay:after {
   border-radius: 10px;
 }
 .single-blog:hover.overlay:after {
-  background: rgba(0, 0, 0, 0.056545);
+  background: rgba(0, 0, 0, 1);
+  opacity: .75;
   transition: 1s;
 }
 
@@ -11638,6 +11639,9 @@ a:hover {
 .blog-author img {
   -o-object-fit: cover;
      object-fit: cover;
+     height: 100%;
+     width: 100%;
+     border-radius: 50%;
 }
 
 .course-category {
@@ -12067,6 +12071,12 @@ svg.eye-icon {
     top: 450px;
     margin-bottom: 450px;
   }
+  .single-blog .blog-info {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    z-index: 1;
+  }
 }
 @media screen and (max-width:576px) {
   .our-package-section {
@@ -12078,6 +12088,12 @@ svg.eye-icon {
   }
   #login-signup-btn-parent-div {
     padding-left: 60px !important;
+  }
+  .single-blog .blog-info {
+    position: absolute;
+    top: 5%;
+    left: 0%;
+    z-index: 1;
   }
 }
 
