@@ -80,7 +80,7 @@
 }
 @media(max-width:576px) {
     .ribbon-top-left {
-        left: 53px;
+        left: 0px;
     }
 }
 .ribbon-top-left::before,
