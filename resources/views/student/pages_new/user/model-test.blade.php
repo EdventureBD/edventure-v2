@@ -160,7 +160,7 @@
                 let query_category_uuid = JSON.parse(e.params.args.data.id).uuid
                 let category_visible = JSON.parse(e.params.args.data.id).visible
                 let href = category_visible == true ? origin + '/model-exam?c=' + query_category_uuid : 'javascript:void(0)';
-                let redirectLinkBgColor = category_visible == true ? '#fa9632' : 'grey';
+                let redirectLinkBgColor = category_visible == true ? '#fa9632' : '#cbced4';
                 let _blank = category_visible == true ? '_blank' : '';
                 let redirectLink = '<a style="padding: 22px;background-color:' +redirectLinkBgColor+';border-radius: 10px;" target="'+_blank+'" href="'+href+'"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>'
 
