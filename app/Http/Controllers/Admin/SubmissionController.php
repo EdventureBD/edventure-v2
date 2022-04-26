@@ -248,62 +248,62 @@ class SubmissionController extends Controller
 
     public function giveMarks(Request $request, Batch $batch, Exam $exam, $exam_type, User $student)
     {
-        if ($exam_type == 'CQ') {
-            // dd($request, sizeof($request->q));
-            $total = 0;
-            for ($i = 0; $i < sizeof($request->q); $i++) {
-                $value = $request->q[$i];
-                $gain_marks = $request->m[$value];
-                $details_result = new DetailsResult();
-                $details_result->exam_id = $exam->id;
-                $details_result->exam_type = $exam_type;
-                $details_result->question_id = $request->q[$i];
-                $details_result->batch_id = $batch->id;
-                $details_result->student_id = $student->id;
-                $details_result->gain_marks = $gain_marks;
-                $details_result->status = 1;
-                $total = $total + $details_result->gain_marks;
-                $details_result->save();
+        // if ($exam_type == 'CQ') {
+        //     // dd($request, sizeof($request->q));
+        //     $total = 0;
+        //     for ($i = 0; $i < sizeof($request->q); $i++) {
+        //         $value = $request->q[$i];
+        //         $gain_marks = $request->m[$value];
+        //         $details_result = new DetailsResult();
+        //         $details_result->exam_id = $exam->id;
+        //         $details_result->exam_type = $exam_type;
+        //         $details_result->question_id = $request->q[$i];
+        //         $details_result->batch_id = $batch->id;
+        //         $details_result->student_id = $student->id;
+        //         $details_result->gain_marks = $gain_marks;
+        //         $details_result->status = 1;
+        //         $total = $total + $details_result->gain_marks;
+        //         $details_result->save();
 
-                $cq = CQ::find($request->q[$i]);
-                $numberOfAttempt = $cq->number_of_attempt + 1;
-                $totalCQMarks = $cq->marks * $numberOfAttempt;
-                $cqGainMarks = $cq->gain_marks + $gain_marks;
-                $successRate = ($cqGainMarks * 100) / $totalCQMarks;
+        //         $cq = CQ::find($request->q[$i]);
+        //         $numberOfAttempt = $cq->number_of_attempt + 1;
+        //         $totalCQMarks = $cq->marks * $numberOfAttempt;
+        //         $cqGainMarks = $cq->gain_marks + $gain_marks;
+        //         $successRate = ($cqGainMarks * 100) / $totalCQMarks;
 
-                $cq->number_of_attempt = $numberOfAttempt;
-                $cq->gain_marks = $cqGainMarks;
-                $cq->success_rate = $successRate;
-                $cq->save();
+        //         $cq->number_of_attempt = $numberOfAttempt;
+        //         $cq->gain_marks = $cqGainMarks;
+        //         $cq->success_rate = $successRate;
+        //         $cq->save();
 
-                $questionContentTags = QuestionContentTag::where('question_id', $request->q[$i])->get();
-                if ($questionContentTags->count() > 0) {
-                    foreach ($questionContentTags as $questionContentTag) {
-                        $questionContentTagAnalysis = new QuestionContentTagAnalysis();
-                        $questionContentTagAnalysis->content_tag_id = $questionContentTag->content_tag_id;
-                        $questionContentTagAnalysis->student_id = $student->id;
-                        $questionContentTagAnalysis->exam_type = 'CQ';
-                        $questionContentTagAnalysis->question_id = $request->q[$i];
-                        $questionContentTagAnalysis->number_of_attempt = 1;
-                        $questionContentTagAnalysis->gain_marks = $gain_marks;
-                        $questionContentTagAnalysis->status = 1;
-                        $questionContentTagAnalysis->save();
-                    }
-                }
-            }
-            $exam_result = new ExamResult();
-            $exam_result->exam_id = $exam->id;
-            $exam_result->batch_id = $batch->id;
-            $exam_result->student_id = $student->id;
-            $exam_result->gain_marks = $total;
-            $exam_result->status = 1;
-            $save = $exam_result->save();
-            if ($save) {
-                return redirect()->back();
-            }
-            // return $this->giveMarksTo($request, $batch, $exam, $exam_type, $student);
-        }
-        else if ($exam_type == 'Pop Quiz' || $exam_type == 'Topic End Exam') {
+        //         $questionContentTags = QuestionContentTag::where('question_id', $request->q[$i])->get();
+        //         if ($questionContentTags->count() > 0) {
+        //             foreach ($questionContentTags as $questionContentTag) {
+        //                 $questionContentTagAnalysis = new QuestionContentTagAnalysis();
+        //                 $questionContentTagAnalysis->content_tag_id = $questionContentTag->content_tag_id;
+        //                 $questionContentTagAnalysis->student_id = $student->id;
+        //                 $questionContentTagAnalysis->exam_type = 'CQ';
+        //                 $questionContentTagAnalysis->question_id = $request->q[$i];
+        //                 $questionContentTagAnalysis->number_of_attempt = 1;
+        //                 $questionContentTagAnalysis->gain_marks = $gain_marks;
+        //                 $questionContentTagAnalysis->status = 1;
+        //                 $questionContentTagAnalysis->save();
+        //             }
+        //         }
+        //     }
+        //     $exam_result = new ExamResult();
+        //     $exam_result->exam_id = $exam->id;
+        //     $exam_result->batch_id = $batch->id;
+        //     $exam_result->student_id = $student->id;
+        //     $exam_result->gain_marks = $total;
+        //     $exam_result->status = 1;
+        //     $save = $exam_result->save();
+        //     if ($save) {
+        //         return redirect()->back();
+        //     }
+        //     // return $this->giveMarksTo($request, $batch, $exam, $exam_type, $student);
+        // }
+        if ($exam_type == 'Pop Quiz' || $exam_type == 'Topic End Exam') {
             // Request $request, Batch $batch, Exam $exam, $exam_type, User $student
             // dd("HIT", $request, sizeof($request->q));
             $total = 0;
@@ -381,10 +381,6 @@ class SubmissionController extends Controller
             if($exam_type === "Topic End Exam"){
                 $topic_end_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam->id)->where('student_id', $student->id)->first();
                 $topic_end_exam_attempt->attempts += 1;
-                if($topic_end_exam_attempt->attempts == 3)
-                    $topic_end_exam_attempt->unlocked = false;
-                else
-                    $topic_end_exam_attempt->unlocked = true;
                 $topic_end_exam_attempt->save();
             }
 

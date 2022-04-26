@@ -49,7 +49,7 @@
    @endphp
    @foreach ($batchTopics as $batchTopic)
       @php if ($disabled && !$disabled2) $disabled = false; @endphp
-      @if($previous_island_topic_end_exam_passed && count($batchTopic->courseTopic->exams) != 0)
+      @if(($previous_island_topic_end_exam_passed || $batchTopic->previous_topic_end_exam_attempts_unlocked) && count($batchTopic->courseTopic->exams) != 0)
          <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
@@ -146,7 +146,8 @@
                                  @endif
                                  @php
                                     // set previous island TEE passed to false if not passed. WIll generate modal based on that.
-                                    if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false){
+
+                                    if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false && !$batchTopic->previous_topic_end_exam_attempts_unlocked){
                                        $previous_island_topic_end_exam_passed = false;
                                     }
 
@@ -159,8 +160,8 @@
                                        $disabled = true;
                                        $disabled2 = true;
                                     } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
-                                    elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
-                                    elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
+                                    elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && (!$exam->test_passed && (count($exam->exam_attempts) == 0 || $exam->exam_attempts[0]->unlocked == false))) $disabled2 = true;
+                                    elseif ($disabled && !$disabled2 && (($exam->exam_type == 'Aptitude Test' && !$exam->test_passed) || ($exam->exam_type == 'Topic End Exam' && (!$exam->test_passed && (count($exam->exam_attempts) == 0 || $exam->exam_attempts[0]->unlocked == false))) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                                  @endphp
                               </li>
 
@@ -280,7 +281,8 @@
 
    {{-- <script src="{{ asset('/js/roadmap.js') }}"></script> --}}
    <script>
-      let allLands = JSON.parse(atob('{{ base64_encode(json_encode($batchTopics)) }}'));
+
+      let allLands = @json($batchTopics);
 
       let landCounter = 0;
 
@@ -288,9 +290,9 @@
 
       let landsParentDiv = document.getElementById("ilandsParentContainer");
 
-      let ilandImages = JSON.parse(atob('{{ base64_encode(json_encode($island_images)) }}'));
+      let ilandImages = @json($island_images);
 
-      let ilandImageDisabled = JSON.parse(atob('{{ base64_encode(json_encode($island_images_disabled)) }}'));
+      let ilandImageDisabled = @json($island_images_disabled);
 
       while(totalLands){
          // onStream design

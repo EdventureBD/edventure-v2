@@ -15,11 +15,11 @@
          </div>
 
          <div class="container">
-            @if(session('exam_exists_message'))
+            {{-- @if(session('exam_exists_message'))
                <div class="alert alert-danger mt-3 text-center">
                   <h1> {{ session('exam_exists_message') }} </h1>
                </div>
-            @endif
+            @endif --}}
 
             @error('not_authorized')
                <div class="alert alert-danger mt-3 text-center">
@@ -35,7 +35,7 @@
                   <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
                </div>
                @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
-                  @if( $topic_end_exam_attempt && $topic_end_exam_attempt->unlocked )
+                  @if( $topic_end_exam_attempt && $topic_end_exam_attempt->attempts < 3 )
                      <div class="text-right ml-2">
                         <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync ml-2"></i></a>
                      </div>
@@ -43,7 +43,7 @@
                @endif
             </div>
 
-            @if( $topic_end_exam_attempt && !$topic_end_exam_attempt->unlocked )
+            @if( $topic_end_exam_attempt && $topic_end_exam_attempt->attempts >= 3 && $topic_end_exam_attempt->unlocked == false)
                <div class="alert alert-danger text-center">
                   <h1> Exam locked due to failing 3 attempts. Please contact system admin to unlock. </h1>
                </div>

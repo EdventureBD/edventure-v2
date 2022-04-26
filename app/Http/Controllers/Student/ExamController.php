@@ -280,6 +280,7 @@ class ExamController extends Controller
     public function submit(Request $request, Batch $batch, Exam $exam)
     {
         $course_topic = CourseTopic::find($exam->topic_id);
+
         $student_exam_attempt = StudentExamAttempt::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->first();
             
         // redirect if exam result already exists
@@ -354,14 +355,10 @@ class ExamController extends Controller
                 $exam_result->status = 1;
                 $exam_result->checked = 1;
                 $exam_result->save();
-
-                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
     
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
             else{
-                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
-
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
         }
@@ -601,66 +598,65 @@ class ExamController extends Controller
                 return view('student.pages_new.batch.exam.batch_exam_not_checked', compact('batch', 'exam', 'next_link', 'next_link_btn_text'));
             }
             else{
-                $course_topic = CourseTopic::where('id', $exam->topic_id)->first();
                 // Session::flash('exam_exists_message', 'You already attempted this exam! Here are your results.');
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
         }
 
-        if ($exam->exam_type == 'Assignment') {
-            return $this->examPaper($request, $batch, $exam);
-        }
+        // if ($exam->exam_type == 'Assignment') {
+        //     return $this->examPaper($request, $batch, $exam);
+        // }
     }
 
-    private function examPaper($request, $batch, $exam)
-    {
-        $validateData = $request->validate([
-            'submitted_text' => 'nullable|string',
-            'file' => 'nullable|mimes:pdf|max:10000',
-        ]);
-        $path = '';
+    // private function examPaper($request, $batch, $exam)
+    // {
+    //     $validateData = $request->validate([
+    //         'submitted_text' => 'nullable|string',
+    //         'file' => 'nullable|mimes:pdf|max:10000',
+    //     ]);
+    //     $path = '';
 
-        if ($request->file('file')) {
-            $name = time() . "_" . $request->file('file')->getClientOriginalName();
-            $path = $request->file('file')->storeAs('public/student/exam/answer/CQ', $name);
-        }
+    //     if ($request->file('file')) {
+    //         $name = time() . "_" . $request->file('file')->getClientOriginalName();
+    //         $path = $request->file('file')->storeAs('public/student/exam/answer/CQ', $name);
+    //     }
 
-        for ($i = 1; $i <= sizeof($request->ques); $i++) {
-            $exam_paper = new ExamPaper();
-            $exam_paper->question_id = $request->ques[$i];
-            $exam_paper->exam_id = $exam->id;
-            $exam_paper->exam_type = $exam->exam_type;
-            $exam_paper->batch_id = $batch->id;
-            $exam_paper->student_id = auth()->user()->id;
-            $exam_paper->submitted_text = $request->submitted_text;
-            $exam_paper->submitted_pdf = $path;
-            $exam_paper->status = 1;
-            $save = $exam_paper->save();
-        }
+    //     for ($i = 1; $i <= sizeof($request->ques); $i++) {
+    //         $exam_paper = new ExamPaper();
+    //         $exam_paper->question_id = $request->ques[$i];
+    //         $exam_paper->exam_id = $exam->id;
+    //         $exam_paper->exam_type = $exam->exam_type;
+    //         $exam_paper->batch_id = $batch->id;
+    //         $exam_paper->student_id = auth()->user()->id;
+    //         $exam_paper->submitted_text = $request->submitted_text;
+    //         $exam_paper->submitted_pdf = $path;
+    //         $exam_paper->status = 1;
+    //         $save = $exam_paper->save();
+    //     }
 
-        $student_exam_attempt = new StudentExamAttempt();
-        $student_exam_attempt->student_id = auth()->user()->id;
-        $student_exam_attempt->exam_id = $exam->id;
-        $student_exam_attempt->is_completed = 1;
-        $student_exam_attempt->attended_at = now();
-        $student_exam_attempt->save();
+    //     $student_exam_attempt = new StudentExamAttempt();
+    //     $student_exam_attempt->student_id = auth()->user()->id;
+    //     $student_exam_attempt->exam_id = $exam->id;
+    //     $student_exam_attempt->is_completed = 1;
+    //     $student_exam_attempt->attended_at = now();
+    //     $student_exam_attempt->save();
 
-        if ($save) {
-            return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully complted the CQ exam");
-        }
-    }
+    //     if ($save) {
+    //         return redirect()->route('batch-lecture', $batch)->with('status', "You have successfully complted the CQ exam");
+    //     }
+    // }
 
-    protected function formatMcqAnswers($answers)
-    {
-        $for_ans = [];
-        if (!empty($answers)) {
-            foreach ($answers as $answer) {
-                $ans_arr = explode('_', $answer);
-                $for_ans[$ans_arr[0]] = $ans_arr[1];
-            }
-        }
-        return $for_ans;
-    }
+    // protected function formatMcqAnswers($answers)
+    // {
+    //     $for_ans = [];
+    //     if (!empty($answers)) {
+    //         foreach ($answers as $answer) {
+    //             $ans_arr = explode('_', $answer);
+    //             $for_ans[$ans_arr[0]] = $ans_arr[1];
+    //         }
+    //     }
+    //     return $for_ans;
+    // }
 
     // private function processMCQ($questions, $answers, $batch, $exam, $status = 0, $result = null)
     // {
@@ -749,10 +745,12 @@ class ExamController extends Controller
 
     public function reattemptBatchTest(CourseTopic $course_topic, Batch $batch, $exam_id, $exam_type){
 
-        $student_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam_id)->where('student_id', auth()->user()->id)->first();
-
-        if($student_exam_attempt->attempts == 3){
-            return back()->withErrors(['not_authorized' => 'You are not authorized to access this url !']);
+        if($exam_type == "Topic End Exam"){
+            $student_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam_id)->where('student_id', auth()->user()->id)->first();
+    
+            if($student_exam_attempt->attempts >= 3){
+                return back()->withErrors(['not_authorized' => 'No more reattempts allowed !']);
+            }
         }
 
         if($exam_type == Edvanture::APTITUDETEST){
@@ -835,9 +833,13 @@ class ExamController extends Controller
             }
 
             $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', $exam_type.' MCQ')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
-            $exam_result->delete();
+            if($exam_result){
+                $exam_result->delete();
+            }
             $exam_result = ExamResult::where('exam_id', $exam_id)->where('exam_type', $exam_type.' CQ')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
-            $exam_result->delete();
+            if($exam_result){
+                $exam_result->delete();
+            }
 
             $student_exam_attempt = StudentExamAttempt::where('exam_id', $exam_id)->where('student_id', auth()->user()->id)->first();
             $student_exam_attempt->delete();
@@ -1141,7 +1143,7 @@ class ExamController extends Controller
                     $topic_end_exam_attempt->topic_end_exam_id = $exam->id;
                     $topic_end_exam_attempt->student_id = auth()->user()->id;
                     $topic_end_exam_attempt->attempts = 0;
-                    $topic_end_exam_attempt->unlocked = true;
+                    $topic_end_exam_attempt->unlocked = false;
                     $topic_end_exam_attempt->save();
                 }
 
