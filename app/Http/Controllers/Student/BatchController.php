@@ -180,7 +180,7 @@ class BatchController extends Controller
 
                 $exam->previous_aptitude_test_passed = $previous_aptitude_test_passed;
                 $exam->previous_topic_end_exam_passed = $previous_topic_end_exam_passed;
-                $batchTopic->previous_topic_end_exam_attempts_unlocked = $previous_topic_end_exam_attempts_unlocked;
+                $batchTopic->previous_topic_end_exam_attempts_unlocked = $topic_end_exam_attempts_unlocked;
 
                 foreach($exam->exam_results as $exam_result){
                     $scored_marks = $scored_marks + $exam_result->gain_marks;
@@ -303,7 +303,7 @@ class BatchController extends Controller
             if($key == 0 || ($previous_topic_end_exam_passed || $previous_topic_end_exam_attempts_unlocked)){
 
                 // dump(1, $previous_topic_end_exam_passed, $previous_topic_end_exam_attempts_unlocked);
-                
+
                 if($batchTopic->percentage_completion >= 100){
                     $island_images[] = $batchTopic->courseTopic->three_star_island_image;
                     $island_images_disabled[] = 0;
