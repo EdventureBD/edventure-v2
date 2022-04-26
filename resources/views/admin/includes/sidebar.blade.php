@@ -47,6 +47,7 @@
                         {{ request()->is('admin/allAdmin') ? 'menu-open' : '' }}
                         {{ request()->is('admin/allTeacher') ? 'menu-open' : '' }}
                         {{ request()->is('admin/allStudent') ? 'menu-open' : '' }}
+                        {{ request()->is('admin/locked_students') ? 'menu-open' : '' }}
                             ">
                         <a href="#"
                            class="nav-link {{ request()->is('admin/user') ? 'active' : '' }}
@@ -55,6 +56,7 @@
                            {{ request()->is('admin/allAdmin') ? 'active' : '' }}
                            {{ request()->is('admin/allTeacher') ? 'active' : '' }}
                            {{ request()->is('admin/allStudent') ? 'active' : '' }}
+                           {{ request()->is('admin/locked_students') ? 'menu-open' : '' }}
                                ">
                             <i class="fas fa-user-friends"></i>
                             <p>&nbsp; User <i class="right fas fa-angle-left"></i></p>
@@ -88,6 +90,17 @@
                                     <p>&nbsp; All User</p>
                                 </a>
                             </li>
+
+
+                            <li class="nav-item">
+                                <a href="{{ route('locked_students') }}"
+                                   class="nav-link {{ request()->is('admin/user/locked_students') ? 'active' : '' }}">
+                                    <i class="fas fa-user-lock"></i>
+                                    <p>&nbsp; Locked Students </p>
+                                </a>
+                            </li>
+
+
                         </ul>
                     </li>
                 @endcan

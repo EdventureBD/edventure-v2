@@ -58,8 +58,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
         Route::get('/allAdmin', [UserController::class, 'allAdmin'])->name('allAdmin');
         Route::get('/allTeacher', [UserController::class, 'allTeacher'])->name('allTeacher');
         Route::get('/allStudent', [UserController::class, 'allStudent'])->name('allStudent');
+        Route::get('/lockedStudents', [UserController::class, 'locked_students'])->name('locked_students');
+        Route::get('/unlockStudent/{student_tee_attempt_id}', [UserController::class, 'unlock_student'])->name('unlock_student');
     });
-
 
     // START OF USER SETTINGS
     Route::get('/settings', [SettingsController::class, 'settings'])->name('admin.settings');
