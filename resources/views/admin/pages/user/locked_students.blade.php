@@ -142,10 +142,40 @@
 
                                           <td>
                                              <div class="btn-group">
-                                                <a class="mr-1" href="{{ route('unlock_student', $student->id) }}"
-                                                   title="Unlock {{ $student->user->title }}">
-                                                   <button class="btn btn-info"><i class="fas fa-unlock"></i></button>
-                                                </a>
+                                                   <a class="mr-1" href="#unlockStudent{{ $student->id }}"
+                                                         data-toggle="modal" title="Unlock {{ $student->title }}">
+                                                         <button class="btn btn-info"><i class="fas fa-unlock"></i></button>
+                                                   </a>
+                                                   <div class="modal fade" id="unlockStudent{{ $student->id }}">
+                                                         <div class="modal-dialog">
+                                                            <div class="modal-content bg-danger">
+                                                               <div class="modal-header">
+                                                                     <h4 class="modal-title">
+                                                                        Unlock Student
+                                                                     </h4>
+                                                                     <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                     </button>
+                                                               </div>
+                                                               <div class="modal-body">
+                                                                     <p>Are you sure??</p>
+                                                               </div>
+                                                               <div class="modal-footer justify-content-between">
+                                                                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                                     <form
+                                                                        action="{{ route('unlock_student', $student->id) }}"
+                                                                        method="GET">
+                                                                        <button type="submit"
+                                                                           class="btn btn-outline-light">Unlock</button>
+                                                                     </form>
+                                                               </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                         </div>
+                                                         <!-- /.modal-dialog -->
+                                                   </div>
+                                                   <!-- /.modal -->
                                              </div>
                                           </td>
                                        </tr>
