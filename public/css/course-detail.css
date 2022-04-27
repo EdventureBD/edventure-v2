@@ -90,6 +90,15 @@
 .detail-parts-font {
     font-size: 12.1525px;
 }
+.course-detail-single-unit {
+    background: #FFFFFF;
+    box-shadow: 0px -7.84502px 30.2594px rgba(0, 0, 0, 0.045),
+                0px -0.982319px 3.78894px rgba(0, 0, 0, 0.09);
+    border-radius: 15.69px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    max-height:150px;
+}
 @media screen and (width: 1366px){
     .sticky {
         top: 12% !important;
@@ -209,20 +218,24 @@
     width: 1px;
     height: 10px;
 }
+div.course-detail-single-unit::-webkit-scrollbar {
+    width: 1px;
+    
+}
 
 /* Track */
-div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track,div.teachers div::-webkit-scrollbar-track {
+div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track,div.teachers div::-webkit-scrollbar-track,div.course-detail-single-unit::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
 /* Handle */
-div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb,div.teachers div::-webkit-scrollbar-thumb {
+div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb,div.teachers div::-webkit-scrollbar-thumb,div.course-detail-single-unit::-webkit-scrollbar-thumb {
     background: #6400C8;
     border-radius: 15pt;
 }
 
 /* Handle on hover */
-div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover,div.teachers div::-webkit-scrollbar-thumb:hover {
+div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover,div.teachers div::-webkit-scrollbar-thumb:hover,div.course-detail-single-unit::-webkit-scrollbar-thumb:hover {
     background: #8315f1;
 }
 /* customised slim scroll bar part  */

@@ -144,7 +144,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/timer.png" alt="timer's photo">
+                                    <img class="img-fluid" src="/img/category_details/timer.png" alt="timers">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
@@ -158,7 +158,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="completeSolution">
+                                    <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="video lectures">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">ভিডিও লেকচার </div>
@@ -172,7 +172,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="paperFinal">
+                                    <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="notes">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">নোটস</div>
@@ -187,7 +187,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/subjectFinal.png" alt="subjectFinal">
+                                    <img class="img-fluid" src="/img/category_details/subjectFinal.png" alt="quiz">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">কুইজ</div>
@@ -202,7 +202,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/modelTest.png" alt="FinalModelTest">
+                                    <img class="img-fluid" src="/img/category_details/modelTest.png" alt="mindmap">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
@@ -245,7 +245,7 @@
                                role="tab"
                                aria-controls="examDetails"
                                aria-selected="true"
-                               style="border-top-right-radius: 0px !important; padding:15px">এক্সাম বিস্তারিত</a>
+                               style="border-top-right-radius: 0px !important; padding:15px">কোর্সের বিস্তারিত</a>
 
                             <a class="nav-link"
                                data-toggle="tab"
@@ -253,18 +253,45 @@
                                role="tab"
                                aria-controls="examRoutine"
                                aria-selected="false"
-                               style="border-top-left-radius: 0px !important; padding: 15px">রুটিন</a>
+                               style="border-top-left-radius: 0px !important; padding: 15px">সিলেবাস</a>
 
                         </div>
                     </nav>
-                    <div style="border: 5px solid #eeeeee; border-radius: 15px" class="tab-content mt-5" id="nav-tabContent">
+                    <div style="border: 5px solid #eeeeee; border-radius: 15px; background-color: #eeeeee" class="tab-content mt-5" id="nav-tabContent">
                         <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade active show"
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
                             @if(true)
                                 {{-- {!! $category->details !!} --}}
-                                detail part
+                               
+                                <div class="my-3">
+                                    <h5 class="bold-header">কোর্স সম্পর্কে</h5>
+                                    <div class="p-3 course-detail-single-unit">
+                                        বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি
+                                        বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের 
+                                        বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা
+                                    </div>
+                                </div>
+                                <div class="my-3">
+                                    <h5 class="bold-header">কোর্সটি কাদের জন্য?</h5>
+                                    <div class="p-3 course-detail-single-unit">
+                                        বিশ্ববিদ্যালয়ে ভর্তি হতে চাও এবং পরীক্ষায় English আছে- এমন হলেই কোর্সটি তোমাদের জন্য। One course for all varsity admissions!
+
+                                    </div>
+                                </div>
+                                <div class="my-3">
+                                    <h5 class="bold-header">কোর্সের জন্য কী কী লাগবে?</h5>
+                                    <div class="p-3 course-detail-single-unit">
+                                        শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
+                                    </div>
+                                </div>
+                                <div class="my-3">
+                                    <h5 class="bold-header">কোর্সের জন্য কী কী লাগবে?</h5>
+                                    <div class="p-3 course-detail-single-unit">
+                                        শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
+                                    </div>
+                                </div>
                             @else
                                 <div class="text-center">
                                     <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
@@ -279,6 +306,7 @@
                              aria-labelledby="examRoutine-tab">
                             @if(true)
                                 <img class="img-fluid" src="" alt="">
+                                syllabus
                             @else
                                 <div class="text-center">
                                     <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
