@@ -1166,6 +1166,7 @@ class ExamController extends Controller
 
                 //Giving access to student if they miss for first time or reload page
                 if (!$canAttempt) {
+
                     // get the specified number of questions before serving them as exam
                     $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                     $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();

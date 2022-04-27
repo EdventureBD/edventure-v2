@@ -30,9 +30,6 @@ class ProceedGuard
         //                 ->where('course_id', $course->id)
         //                 ->get();
 
-
-
-
         $batchTopics = BatchLecture::select('id', 'topic_id')
                         ->with([
                         'courseTopic' => function($query){
@@ -60,10 +57,6 @@ class ProceedGuard
                         ->where('batch_id', $batch->id)
                         ->where('course_id', $course->id)
                         ->get();
-
-
-
-
 
         // $topics = [];
         foreach($batchTopics as $batchTopic){

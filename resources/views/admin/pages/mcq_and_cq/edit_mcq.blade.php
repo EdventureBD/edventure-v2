@@ -183,6 +183,21 @@
                                        </div>
                                  </div>
                               </div>
+
+                              @if($exam->exam_type == "Topic End Exam")
+                                 <div class="form-group">
+                                    <label class="col-form-label" for="question_set"> Question Set <span class="must-filled">*</span></label>
+                                       <select class="form-control" name="question_set"  value="{{ $mcq->question_set }}">
+                                             <option value="1" @if ($mcq->question_set == 1) selected @endif> Set 1 </option>
+                                             <option value="2" @if ($mcq->question_set == 2) selected @endif> Set 2 </option>
+                                             <option value="3" @if ($mcq->question_set == 3) selected @endif> Set 3 </option>
+                                       </select>
+                                    @error('question_set')
+                                       <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                 </div>
+                              @endif
+
                               <div>
                                  <div class="form-group">
                                        <label class="col-form-label" for="examId">Content Tag <span
