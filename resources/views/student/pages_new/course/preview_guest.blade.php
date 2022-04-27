@@ -187,7 +187,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/subjectFinal.png" alt="quiz">
+                                    <img class="img-fluid" src="/img/course-detail/quiz.png" alt="quiz">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">কুইজ</div>
@@ -202,7 +202,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/category_details/modelTest.png" alt="mindmap">
+                                    <img class="img-fluid" src="/img/course-detail/mindMap.png" alt="mindmap">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
@@ -266,28 +266,28 @@
                                 {{-- {!! $category->details !!} --}}
                                
                                 <div class="my-3">
-                                    <h5 class="bold-header">কোর্স সম্পর্কে</h5>
+                                    <h5 class="bold-header my-3">কোর্স সম্পর্কে</h5>
                                     <div class="p-3 course-detail-single-unit">
                                         বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি
                                         বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের 
-                                        বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা
+                                        বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি  my-2বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা
                                     </div>
                                 </div>
                                 <div class="my-3">
-                                    <h5 class="bold-header">কোর্সটি কাদের জন্য?</h5>
+                                    <h5 class="bold-header my-3">কোর্সটি কাদের জন্য?</h5>
                                     <div class="p-3 course-detail-single-unit">
                                         বিশ্ববিদ্যালয়ে ভর্তি হতে চাও এবং পরীক্ষায় English আছে- এমন হলেই কোর্সটি তোমাদের জন্য। One course for all varsity admissions!
 
                                     </div>
                                 </div>
                                 <div class="my-3">
-                                    <h5 class="bold-header">কোর্সের জন্য কী কী লাগবে?</h5>
+                                    <h5 class="bold-header my-3">কোর্সের জন্য কী কী লাগবে?</h5>
                                     <div class="p-3 course-detail-single-unit">
                                         শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
                                     </div>
                                 </div>
                                 <div class="my-3">
-                                    <h5 class="bold-header">কোর্সের জন্য কী কী লাগবে?</h5>
+                                    <h5 class="bold-header my-3">কোর্সের জন্য কী কী লাগবে?</h5>
                                     <div class="p-3 course-detail-single-unit">
                                         শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
                                     </div>
@@ -305,8 +305,98 @@
                              role="tabpanel"
                              aria-labelledby="examRoutine-tab">
                             @if(true)
-                                <img class="img-fluid" src="" alt="">
-                                syllabus
+                                <div class="faq my-3">
+                                    <h5 class="bold-header">কোর্সে কী কী লার্নিং ম্যাটেরিয়াল পাচ্ছেন?</h5>
+                                    <div class="d-flex justify-content-between align-items-center my-4">
+                                        <div class="bold-header">
+                                            Course Content
+                                        </div>
+                                        <div style="background: #FFFFFF;
+                                        border-radius: 27.5765px;">
+                                            <h2 class="mb-0">
+                                                <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
+                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                        type="button"
+                                                        data-toggle="collapse"
+                                                        data-target=".collapse-all"
+                                                        aria-expanded="true"
+                                                        id="headingOne"
+                                                        aria-controls="itemOne">
+                                                        Collapse All
+                                                </button>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="accordion mt-5" id="accordionExample">
+                                        <div class="tabtab">
+                                            <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                                <h2 class="mb-0">
+                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
+                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                            type="button"
+                                                            data-toggle="collapse"
+                                                            data-target="#courseMaterialOne"
+                                                            aria-expanded="true"
+                                                            id="headingOne"
+                                                            aria-controls="itemOne">
+                                                            Sentence Structure
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="courseMaterialOne"
+                                                class="panel-collapse collapse mt-2 one collapse-all"
+                                                aria-labelledby="headingOne">
+                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                            </div>
+                                        </div>
+                
+                                        <div class="tabtab">
+                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                                <h2 class="mb-0">
+                                                    <button
+                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
+                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                        type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#courseMaterialTwo"
+                                                        aria-expanded="true"
+                                                        id="headingTwo"
+                                                        aria-controls="itemTwo">
+                                                        Other things in sentence
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="courseMaterialTwo"
+                                                class="panel-collapse collapse mt-2 two collapse-all"
+                                                aria-labelledby="headingTwo">
+                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                            </div>
+                                        </div>
+
+                                        <div class="tabtab">
+                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                                <h2 class="mb-0">
+                                                    <button
+                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
+                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                        type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#courseMaterialThree"
+                                                        aria-expanded="true"
+                                                        id="headingTwo"
+                                                        aria-controls="itemTwo">
+                                                        Different kinds of sentences
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="courseMaterialThree"
+                                                class="panel-collapse collapse mt-2 two collapse-all"
+                                                aria-labelledby="headingTwo">
+                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @else
                                 <div class="text-center">
                                     <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
@@ -324,7 +414,7 @@
                             <div style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                 <h2 class="mb-0">
                                     <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
-                                            class="btn btn-block text-left panel-heading"
+                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"
                                             type="button"
                                             data-toggle="collapse"
                                             data-target="#itemOne"
@@ -347,7 +437,7 @@
                                 <h2 class="mb-0">
                                     <button
                                         style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
-                                        class="btn btn-block text-left panel-heading"
+                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
                                         type="button"
                                         data-toggle="collapse"
                                         data-target="#itemTwo"
