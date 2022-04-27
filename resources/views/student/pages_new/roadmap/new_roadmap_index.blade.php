@@ -66,7 +66,6 @@
                               @if (count($exam->course_lectures))
                                  @foreach ($exam->course_lectures as $course_lecture)
                                     <li>
-                                          @dump($disabled && !$disabled2, !$course_lecture->completed)
                                           <a
                                              data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
                                              @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
