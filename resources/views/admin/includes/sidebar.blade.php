@@ -287,9 +287,9 @@
                     {{-- END OF PAYMENTS --}}
                 @endcan
 
-                @can('course')
+                {{-- @can('course') --}}
                     {{-- START OF CONTENT TAGS --}}
-                    <li
+                    {{-- <li
                         class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}
                         {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}
                         {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}
@@ -315,17 +315,17 @@
                                     <i class="fas fa-clipboard-list"></i>
                                     <p>&nbsp; Content Tag</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             {{-- <li class="nav-item">
                                 <a href="{{ route('question-content-tag.index') }}" class="nav-link {{ request()->is('admin/question-content-tag')? 'active': '' }} {{ request()->is('admin/question-content-tag/create')? 'active': '' }} {{ request()->is('admin/question-content-tag/*/edit')? 'active': '' }}">
                                     <i class="fas fa-question-circle"></i>
                                     <p>&nbsp; Ques-Content Tag</p>
                                 </a>
                             </li> --}}
-                        </ul>
-                    </li>
+                        {{-- </ul>
+                    </li> --}}
                     {{-- END OF CONTENT TAG --}}
-                @endcan
+                {{-- @endcan --}}
 
                 @can('course')
                     {{-- START OF COURSE CATEGORY --}}
