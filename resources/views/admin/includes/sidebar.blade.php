@@ -193,6 +193,16 @@
                     </li>
                     {{-- END OF COURSE TOPIC --}}
 
+                    {{-- START OF BATCH LECTURE --}}
+                    <li class="nav-item {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}">
+                        <a href="{{ route('batch-lecture.index') }}"
+                            class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            <p>&nbsp; Batch Lecture </p>
+                        </a>
+                    </li>
+                    {{-- END OF BATCH LECTURE --}}
+
                     {{-- START OF CONTENT TAG --}}
                     <li class="nav-item {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}">
                         <a href="{{ route('content-tag.index') }}"
@@ -228,17 +238,6 @@
                         </a>
                     </li>
                     {{-- END OF COURSE LECTURE --}}
-
-                    {{-- START OF BATCH LECTURE --}}
-                    <li class="nav-item {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}">
-                        <a href="{{ route('batch-lecture.index') }}"
-                            class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
-                            <i class="fas fa-list-ol"></i>
-                            <p>&nbsp; Batch Lecture </p>
-                        </a>
-                    </li>
-                    {{-- END OF BATCH LECTURE --}}
-
 
                     {{-- START OF COURSE --}}
                     {{-- @include('admin.includes.sidebar_content.course') --}}
