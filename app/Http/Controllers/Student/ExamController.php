@@ -864,7 +864,7 @@ class ExamController extends Controller
                     $mcq_questions = AptitudeTestMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
 
                     if($mcq_questions->count() < $exam->question_limit){
-                        return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
+                        return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                     }
 
                     return view('student.pages_new.batch.exam.batch_exam_aptitude_test', compact('mcq_questions', 'exam', 'batch'));
@@ -1134,7 +1134,7 @@ class ExamController extends Controller
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
                 if($exam == null){
-                    return redirect()->back()->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
+                    return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
                 }
 
                 // for topic end exams only, make a "topic_end_exam_attempt" if none exist.
@@ -1168,11 +1168,11 @@ class ExamController extends Controller
                 if (!$canAttempt) {
 
                     // get the specified number of questions before serving them as exam
-                    $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
-                    $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();
+                    $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->where('question_set', $topic_end_exam_attempt->attempts + 1)->inRandomOrder()->take($exam->question_limit)->get();
+                    $cq_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->where('question_set', $topic_end_exam_attempt->attempts + 1)->inRandomOrder()->take($exam->question_limit_2)->get();
 
                     if($mcq_questions->count() < $exam->question_limit || $cq_questions->count() < $exam->question_limit_2){
-                        return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
+                        return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                     }
 
                     return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
@@ -1429,7 +1429,7 @@ class ExamController extends Controller
                     $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->has('batchExam')->first();
 
                     if($exam == null){
-                        return redirect()->back()->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
+                        return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_added_to_batch' => 'This Quiz has not been added to this batch. Please contact admin and notify.' ]);
                     }
 
                     $canAttempt = PopQuizCqExamPaper::where('exam_id', $exam->id)
@@ -1455,7 +1455,7 @@ class ExamController extends Controller
                         $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();
                         
                         if($mcq_questions->count() < $exam->question_limit || $cq_questions->count() < $exam->question_limit_2){
-                            return redirect()->back()->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
+                            return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                         }
                         
                         return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));

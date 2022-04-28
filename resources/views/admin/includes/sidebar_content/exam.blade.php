@@ -19,6 +19,7 @@
                                 {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
                                 {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
                                 {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/lockedStudents') ? 'menu-open' : '' }}
                                 {{-- END NEW --}}
 ">
     <a href="#"
@@ -42,6 +43,7 @@
 {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
 {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
 {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
+{{ request()->is('admin/lockedStudents') ? 'menu-open' : '' }}
 {{-- END NEW --}}
 ">
         <i class="fas fa-paste"></i>
@@ -115,5 +117,14 @@
                 <p>Student Exam Attempt</p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('locked_students') }}"
+                class="nav-link {{ request()->is('admin/lockedStudents') ? 'active' : '' }}">
+                <i class="fas fa-user-lock"></i>
+                <p>&nbsp; Locked Students </p>
+            </a>
+        </li>
+
     </ul>
 </li>
