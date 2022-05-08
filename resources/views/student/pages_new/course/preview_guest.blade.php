@@ -22,15 +22,15 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
-                                    
+
                                     <iframe  src="https://www.youtube.com/embed/{{$course->trailer ? $course->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" width="100%" height="420px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        
+
                                 </div>
                             </div>
                             </div>
                         </div>
                             <a href="{{ route('enroll', $course->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($course->price > 0) Enroll Now @else Enroll Now (free) @endif</a>
-                            
+
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     <p class="text-gray text-xxsm fw-200  lh-5">Solution videos and PDFs will appear here after everyone has completed all the exams</p>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
@@ -85,9 +85,9 @@
                                     <div class="col-11 title text-md-left text-center">
                                         <span class="pl-4">{{ $batchTopic->title }} </span>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                         @empty
                             No Topics found
@@ -115,10 +115,19 @@
     {{-- custom css link ends  --}}
 <div class="page-section">
     <div class="container">
+        @if ($errors->any())
+            <div class="alert mt-5 alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="d-flex mb-3" id="parent-div">
             <div class="w-100  mt-5">
                 <h1 class="bold-header">
-                    {{-- {{$category->name}} --}}
+                    {{ $course->title }}
                 </h1>
 
                 <div class="includes">
@@ -219,8 +228,9 @@
 
                 @if(true)
                     <div class="teachers mt-5">
-                        <h5 class="bold-header">শিক্ষকবৃন্দ</h5>
-                        <div class="d-flex overflow-x-scroll" style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
+                        <h5 class="bold-header">শিক্ষক</h5>
+                        <div class="d-flex"
+                             style="border-radius: 25px; background-color: #eeeeee; padding: 10px">
                             {{-- @foreach($category->teacher_lists as $teacher)
                                 <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
@@ -231,7 +241,17 @@
                                     <span><b>{{$teacher->name}}</b></span>
                                         <span>A great teacher of all</span>
                                 </div>
-                            @endforeach --}} 
+                            @endforeach --}}
+                            <div class="text-center col-12 d-flex flex-column justify-content-center align-items-center"
+                                 style="padding: 0 10px; align-content: center; height: 175px">
+                                @if(true)
+                                    <img style="border-radius: 50%" height="80" width="80" src="/" alt="">
+                                @else
+                                    <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
+                                @endif
+                                <span><b>My name</b></span>
+                                <span>A great teacher of all</span>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -264,12 +284,12 @@
                              aria-labelledby="video-tab">
                             @if(true)
                                 {{-- {!! $category->details !!} --}}
-                               
+
                                 <div class="my-3">
                                     <h5 class="bold-header my-3">কোর্স সম্পর্কে</h5>
                                     <div class="p-3 course-detail-single-unit">
                                         বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি
-                                        বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের 
+                                        বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের
                                         বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি  my-2বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা
                                     </div>
                                 </div>
@@ -349,7 +369,7 @@
                                                 পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
                                             </div>
                                         </div>
-                
+
                                         <div class="tabtab">
                                             <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                                 <h2 class="mb-0">
@@ -470,29 +490,14 @@
 
 
                     <div class="payment-btn text-center">
-                        @php($href = auth()->check() ? '/' : 'javascript:void(0)')
+                        @php($href = auth()->check() ? route('enroll', $course->slug)  : 'javascript:void(0)')
                         @php($loginAlert = auth()->check() ? '' : 'loginAlert')
-                        
-                        <div id="payment_section">
-                            @if(true)
-                                <div class="d-flex justify-content-around">
-                                    <span style="text-decoration: line-through; color: red" class="actual-price">250</span>
 
-                                    <span style="" class="offer-price">20</span>
+                        <div id="payment_section">
+                                <div class="d-flex justify-content-around">
+                                    <span class="actual-price">{{$course->price}}</span>
                                 </div>
                                 <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">কোর্সটি কিনুন</a>
-
-                            @elseif(true)
-                                <div id="priceCalculation" class="justify-content-center d-flex align-items-center">
-                                    <span class="actual-price">category price</span>
-                                    <span class="discount-amount"></span>
-                                </div>
-
-                                <a id="examPurchase" class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">এক্সামটি কিনুন</a>
-
-                            @else
-                                <a class="btn category-details-action-btn" href="/">পরীক্ষার জন্য যান</a>
-                            @endif
                         </div>
 
                     </div>
@@ -510,7 +515,7 @@
 </x-landing-layout>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-   
+
     $(window).scroll(function(){
         if($(this).scrollTop() > 300){
             $('.payment-btn').addClass('sticky')
@@ -530,7 +535,7 @@
             }
         })
     })
-   
+
 
 
     $('.one').on('show.bs.collapse', function () {

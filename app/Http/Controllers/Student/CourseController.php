@@ -57,7 +57,7 @@ class CourseController extends Controller
         }
         else{
             $selected_intermediary_level = null;
-        } 
+        }
 
         if($selected_intermediary_level){
             $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)
@@ -161,12 +161,14 @@ class CourseController extends Controller
 
     public function enroll(Course $course)
     {
+
         $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
             ->where('batch_student_enrollments.course_id', $course->id)
             ->where('batch_student_enrollments.student_id', auth()->user()->id)
             ->where('payments.student_id', auth()->user()->id)
             ->first();
-        
+
+
         // if a student is enrolled and status is 0
         if ($enrolled && $enrolled->status == 0) {
             return redirect()->route('course-preview', $course->slug);
@@ -216,16 +218,21 @@ class CourseController extends Controller
         }
         // if course is NOT free
         else {
+
             if ($enrolled) {
+
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-                
+
                 if (($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) || $enrolled->status == 0) {
                     return redirect()->route('course-preview', $course->slug);
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
             }
+
             else {
+
                 $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
+
                 if (!$batch) {
                     return back()->withErrors([ 'No batch is available now, please try again later!']);
                 }
@@ -253,16 +260,16 @@ class CourseController extends Controller
 
             $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
         }
-        
+
         request()->validate([
             'months'=>'numeric|min:'.$enroll_months
         ]);
-        
+
         $price = $course->price * request()->months;
         // dd($price);
         $days = request()->months * 30;
         $shurjopay_service = new ShurjopayService();
-        $trx_id = $shurjopay_service->generateTxId(); 
+        $trx_id = $shurjopay_service->generateTxId();
 
         //Creating payment with accepted =0 ;
         $payOpt = ['batch_id'=>$batch->id, 'accepted'=> 0, "trx"=>$trx_id, "payment_type"=>Payment::SHURJO_PAY, "days"=>$days, 'price'=>$price];
