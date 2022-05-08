@@ -66,18 +66,18 @@
                               @if (count($exam->course_lectures))
                                  @foreach ($exam->course_lectures as $course_lecture)
                                     <li>
-                                          <a
-                                             data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
-                                             @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                             href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                             class="reduce_padding fw-800 @if($disabled2) modal-items-disabled @elseif (($disabled && !$disabled2) || !$course_lecture->completed) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                             <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
-                                          </a>
+                                       <a
+                                          data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
+                                          @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                          href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
+                                          class="reduce_padding fw-800 @if($disabled2) modal-items-disabled @elseif (!$course_lecture->completed) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                          <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
+                                       </a>
                                        <div class="w-25">
 
                                           @if($disabled2)
                                              <div style="height:50px;"></div>
-                                          @elseif (($disabled && !$disabled2) || !$course_lecture->completed)
+                                          @elseif (!$course_lecture->completed)
                                              <div style="height:50px;"></div>
                                           @else
                                              <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">

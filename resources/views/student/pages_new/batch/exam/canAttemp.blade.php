@@ -48,6 +48,7 @@
                                 <td class="{{$cellcolor}}">{!! $result->atQuestion->$field !!}</td>
                                 <td class="{{$cellcolor}}">{!! $result->atQuestion->$cfield !!}</td>
                                 <td class="{{$cellcolor}}">{!! $result->atQuestion->explanation !!}</td>
+                                {{-- @dd($result, $result->atQuestion->gain_marks, $result->atQuestion->number_of_attempt) --}}
                                 <td class="{{$cellcolor}}">{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
                             </tr>
                             @php $n++; @endphp

@@ -325,8 +325,25 @@ class ExamController extends Controller
                 $scored_marks = 0;
                 
                 foreach($request->mcq_ques as $key => $mcq){
-                    $mcq_question = AptitudeTestMCQ::where('id', $key)->select('id', 'answer', 'exam_id')->first();
-    
+                    $mcq_question = AptitudeTestMCQ::where('id', $key)->select('id', 'answer', 'number_of_attempt', 'gain_marks', 'exam_id')->first();
+                    $mcq_question->number_of_attempt += 1;
+
+                    $question_content_tag = QuestionContentTag::where('exam_type', 'Aptitude Test')->where('question_id', $key)->first();
+                    $content_tag_analysis = new QuestionContentTagAnalysis();
+                    $content_tag_analysis->content_tag_id = $question_content_tag->content_tag_id;
+                    $content_tag_analysis->student_id = auth()->user()->id;
+                    $content_tag_analysis->exam_type = 'Aptitude Test';
+                    $content_tag_analysis->question_id = $question_content_tag->question_id;
+                    $content_tag_analysis->number_of_attempt = 1;
+                    if($mcq == $mcq_question->answer){
+                        $content_tag_analysis->gain_marks = 1;
+                    }
+                    else{
+                        $content_tag_analysis->gain_marks = 0;
+                    }
+                    $content_tag_analysis->status = 1;
+                    $content_tag_analysis->save();
+
                     $details_result = new DetailsResult();
                     $details_result->exam_id = $exam->id;
                     $details_result->exam_type = "Aptitude Test";
@@ -336,6 +353,7 @@ class ExamController extends Controller
                     if($mcq_question->answer == $mcq){
                         $details_result->gain_marks = 1;
                         $scored_marks += 1;
+                        $mcq_question->gain_marks += 1;
                     }
                     else{
                         $details_result->gain_marks = 0;
@@ -344,6 +362,8 @@ class ExamController extends Controller
                     $details_result->mcq_ans = $mcq;
                     $details_result->status = 1;
                     $details_result->save();
+
+                    $mcq_question->save();
                 }
 
                 $exam_result = new ExamResult();
@@ -443,24 +463,24 @@ class ExamController extends Controller
                     }
                     elseif($exam->exam_type == Edvanture::POPQUIZ){
                         $mcq_question = PopQuizMCQ::find($key);
-
-                        $question_content_tag = QuestionContentTag::where('exam_type', $exam_type_mcq)->where('question_id', $key)->first();
-
-                        $content_tag_analysis = new QuestionContentTagAnalysis();
-                        $content_tag_analysis->content_tag_id = $question_content_tag->content_tag_id;
-                        $content_tag_analysis->student_id = auth()->user()->id;
-                        $content_tag_analysis->exam_type = $exam_type_mcq;
-                        $content_tag_analysis->question_id = $question_content_tag->question_id;
-                        $content_tag_analysis->number_of_attempt = 1;
-                        if($mcq == $mcq_question->answer){
-                            $content_tag_analysis->gain_marks = 1;
-                        }
-                        else{
-                            $content_tag_analysis->gain_marks = 0;
-                        }
-                        $content_tag_analysis->status = 1;
-                        $content_tag_analysis->save();
                     }
+
+                    $question_content_tag = QuestionContentTag::where('exam_type', $exam_type_mcq)->where('question_id', $key)->first();
+                    $content_tag_analysis = new QuestionContentTagAnalysis();
+                    $content_tag_analysis->content_tag_id = $question_content_tag->content_tag_id;
+                    $content_tag_analysis->student_id = auth()->user()->id;
+                    $content_tag_analysis->exam_type = $exam_type_mcq;
+                    $content_tag_analysis->question_id = $question_content_tag->question_id;
+                    $content_tag_analysis->number_of_attempt = 1;
+                    if($mcq == $mcq_question->answer){
+                        $content_tag_analysis->gain_marks = 1;
+                    }
+                    else{
+                        $content_tag_analysis->gain_marks = 0;
+                    }
+                    $content_tag_analysis->status = 1;
+                    $content_tag_analysis->save();
+
                     
                     $details_result = new DetailsResult();
                     $details_result->exam_id = $exam->id;
