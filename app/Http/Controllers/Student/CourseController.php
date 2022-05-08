@@ -137,7 +137,6 @@ class CourseController extends Controller
                 if ($enrolled && $enrolled->status == 0 ) {
                     Session::flash('message', 'Please contact admin to access your course!');
                 }
-
                 return view('student.pages_new.course.preview_guest', compact(
                     'course',
                     'course_topics',
@@ -161,13 +160,11 @@ class CourseController extends Controller
 
     public function enroll(Course $course)
     {
-
         $enrolled = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
             ->where('batch_student_enrollments.course_id', $course->id)
             ->where('batch_student_enrollments.student_id', auth()->user()->id)
             ->where('payments.student_id', auth()->user()->id)
             ->first();
-
 
         // if a student is enrolled and status is 0
         if ($enrolled && $enrolled->status == 0) {
@@ -218,9 +215,7 @@ class CourseController extends Controller
         }
         // if course is NOT free
         else {
-
             if ($enrolled) {
-
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
 
                 if (($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) || $enrolled->status == 0) {
@@ -228,11 +223,8 @@ class CourseController extends Controller
                 }
                 $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days - $enrolled->accessed_days);
             }
-
             else {
-
                 $batch = Batch::where('course_id', $course->id)->where('status', 1)->orderBy('updated_at', 'desc')->first();
-
                 if (!$batch) {
                     return back()->withErrors([ 'No batch is available now, please try again later!']);
                 }

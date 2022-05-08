@@ -115,8 +115,11 @@
     {{-- custom css link ends  --}}
 <div class="page-section">
     <div class="container">
+        @if(Session::has('message'))
+            <div style="border-radius: 25px" class="alert alert-warning">{{ Session::get('message') }}</div>
+        @endif
         @if ($errors->any())
-            <div class="alert mt-5 alert-danger">
+            <div class="alert alert-danger" style="border-radius: 25px">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -146,6 +149,7 @@
                                         @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
                                         {{\App\Enum\Converter::en2bn($number)}} জন
                                     @endif --}}
+                                    {{$course->totalCourseEnrolled()}}
                                 </div>
                             </div>
                         </div>
@@ -158,7 +162,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{-- {{\App\Enum\Converter::en2bn($category->time_allotted)}} --}}1 ঘন্টা
+                                        {{-- {{\App\Enum\Converter::en2bn($category->time_allotted)}} --}}{{$course->time_allotted ?? '0'}} ঘন্টা
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +176,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">ভিডিও লেকচার </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        250 <span style="font-size: 20px;font-weight: 600;">+</span>
+                                        {{$course->video_lecture ?? 0}}
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +190,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">নোটস</div>
                                     <div class="text-nowrap detail-parts-font">
-                                        10 <span style="font-size: 20px;font-weight: 600;">+</span>
+                                        {{$course->given_notes ?? 0}}
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +205,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">কুইজ</div>
                                     <div class="text-nowrap detail-parts-font">
-                                        50 টি
+                                        {{$course->quiz ?? 0}} টি
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +220,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        250 <span style="font-size: 20px;font-weight: 600;">+</span>
+                                        {{$course->mind_map ?? 0}}
                                     </div>
                                 </div>
                             </div>
@@ -229,9 +233,9 @@
                 @if(true)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষক</h5>
-                        <div class="d-flex"
-                             style="border-radius: 25px; background-color: #eeeeee; padding: 10px">
-                            {{-- @foreach($category->teacher_lists as $teacher)
+                        <div class="d-flex overflow-x-scroll"
+                             style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
+                             @foreach($course->teacher_lists as $teacher)
                                 <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
                                         <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
@@ -239,19 +243,23 @@
                                         <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
                                     @endif
                                     <span><b>{{$teacher->name}}</b></span>
-                                        <span>A great teacher of all</span>
+                                        @if($teacher->teacherDetails && $teacher->teacherDetails->expertise &&
+                                             $teacher->teacherDetails->year_of_experience &&
+                                             $teacher->teacherDetails->education)
+                                            <span>From {{$teacher->teacherDetails->education}} background,
+                                                {{$teacher->teacherDetails->year_of_experience}} years of experience in {{$teacher->teacherDetails->expertise}}</span>
+                                        @endif
                                 </div>
-                            @endforeach --}}
-                            <div class="text-center col-12 d-flex flex-column justify-content-center align-items-center"
-                                 style="padding: 0 10px; align-content: center; height: 175px">
-                                @if(true)
-                                    <img style="border-radius: 50%" height="80" width="80" src="/" alt="">
-                                @else
-                                    <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
-                                @endif
-                                <span><b>My name</b></span>
-                                <span>A great teacher of all</span>
-                            </div>
+                            @endforeach
+{{--                            <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">--}}
+{{--                                @if(true)--}}
+{{--                                    <img style="border-radius: 50%" height="80" width="80" src="/" alt="">--}}
+{{--                                @else--}}
+{{--                                    <img height="80" width="80" src="/img/category_details/teacher.png" alt="">--}}
+{{--                                @endif--}}
+{{--                                <span><b>My name</b></span>--}}
+{{--                                <span>A great teacher of all</span>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 @endif
@@ -282,42 +290,29 @@
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
-                            @if(true)
-                                {{-- {!! $category->details !!} --}}
-
+                            @if($course->description)
                                 <div class="my-3">
                                     <h5 class="bold-header my-3">কোর্স সম্পর্কে</h5>
                                     <div class="p-3 course-detail-single-unit">
-                                        বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি
-                                        বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা বিশ্ববিদ্যালয় ভর্তি পরীক্ষার্থীদের কাছে English যেন এক আতংকের নাম। ঢাকা বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষায় শতকরা ৯০ ভাগ মানুষ English এ ফেইল করে। আমাদের স্বপ্নের
-                                        বিশ্ববিদ্যালয়ে পড়াশুনার পথে বাধা হয়ে দাঁড়ায় এই একটি  my-2বিষয়।৬ বছর বিশ্ববিদ্যালয় মেন্টরিং এর অভিজ্ঞতা
+                                        {{$course->description}}
                                     </div>
                                 </div>
+                            @endif
+
+                            @if($course->course_for_whom)
                                 <div class="my-3">
                                     <h5 class="bold-header my-3">কোর্সটি কাদের জন্য?</h5>
                                     <div class="p-3 course-detail-single-unit">
-                                        বিশ্ববিদ্যালয়ে ভর্তি হতে চাও এবং পরীক্ষায় English আছে- এমন হলেই কোর্সটি তোমাদের জন্য। One course for all varsity admissions!
-
+                                        {{$course->course_for_whom}}
                                     </div>
-                                </div>
-                                <div class="my-3">
-                                    <h5 class="bold-header my-3">কোর্সের জন্য কী কী লাগবে?</h5>
-                                    <div class="p-3 course-detail-single-unit">
-                                        শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
-                                    </div>
-                                </div>
-                                <div class="my-3">
-                                    <h5 class="bold-header my-3">কোর্সের জন্য কী কী লাগবে?</h5>
-                                    <div class="p-3 course-detail-single-unit">
-                                        শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
-                                    </div>
-                                </div>
-                            @else
-                                <div class="text-center">
-                                    <img style="width: 100%; height: 100%" src="/img/category_details/exam_details.svg"/>
-                                    <span style="color: grey">এক্সামের বিস্তারিত এখানে দেয়া হবে</span>
                                 </div>
                             @endif
+                            <div class="my-3">
+                                <h5 class="bold-header my-3">কোর্সের জন্য কী কী লাগবে?</h5>
+                                <div class="p-3 course-detail-single-unit">
+                                    শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
+                                </div>
+                            </div>
 
                         </div>
                         <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade"
@@ -326,95 +321,116 @@
                              aria-labelledby="examRoutine-tab">
                             @if(true)
                                 <div class="faq my-3">
-                                    <h5 class="bold-header">কোর্সে কী কী লার্নিং ম্যাটেরিয়াল পাচ্ছেন?</h5>
-                                    <div class="d-flex justify-content-between align-items-center my-4">
-                                        <div class="bold-header">
-                                            Course Content
+                                    @if(count($course_topics) > 0)
+                                        <h5 class="bold-header">কোর্সে কী কী লার্নিং ম্যাটেরিয়াল পাচ্ছেন?</h5>
+                                        <div class="d-flex justify-content-between align-items-center my-4">
+                                            <div class="bold-header">
+                                                Course Content
+                                            </div>
+{{--                                            <div style="background: #FFFFFF;--}}
+{{--                                            border-radius: 27.5765px;">--}}
+{{--                                                <h2 class="mb-0">--}}
+{{--                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"--}}
+{{--                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
+{{--                                                            type="button"--}}
+{{--                                                            data-toggle="collapse"--}}
+{{--                                                            data-target=".collapse-all"--}}
+{{--                                                            aria-expanded="true"--}}
+{{--                                                            id=""--}}
+{{--                                                            aria-controls="itemOne">--}}
+{{--                                                            Collapse All--}}
+{{--                                                    </button>--}}
+{{--                                                </h2>--}}
+{{--                                            </div>--}}
                                         </div>
-                                        <div style="background: #FFFFFF;
-                                        border-radius: 27.5765px;">
-                                            <h2 class="mb-0">
-                                                <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
-                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
-                                                        type="button"
-                                                        data-toggle="collapse"
-                                                        data-target=".collapse-all"
-                                                        aria-expanded="true"
-                                                        id="headingOne"
-                                                        aria-controls="itemOne">
-                                                        Collapse All
-                                                </button>
-                                            </h2>
-                                        </div>
-                                    </div>
+                                    @endif
                                     <div class="accordion mt-5" id="accordionExample">
-                                        <div class="tabtab">
-                                            <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                                                <h2 class="mb-0">
-                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
-                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"
-                                                            type="button"
-                                                            data-toggle="collapse"
-                                                            data-target="#courseMaterialOne"
-                                                            aria-expanded="true"
-                                                            id="headingOne"
-                                                            aria-controls="itemOne">
-                                                            Sentence Structure
-                                                    </button>
-                                                </h2>
+                                        @forelse ($course_topics as $batchTopic)
+                                            <div class="tabtab" style="margin-bottom: 20px">
+                                                <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                                    <h2 class="mb-0">
+                                                        <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
+                                                                class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                                type="button"
+                                                                data-target="#batchTab{{$loop->iteration}}">
+                                                            {{ $batchTopic->title }}
+                                                        </button>
+                                                    </h2>
+                                                </div>
                                             </div>
-                                            <div id="courseMaterialOne"
-                                                class="panel-collapse collapse mt-2 one collapse-all"
-                                                aria-labelledby="headingOne">
-                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                        @empty
+                                            <div class="d-flex justify-content-center">
+                                                <h5 style="color: #6400C8" class="font-weight-bold">No Topics uploaded yet</h5>
                                             </div>
-                                        </div>
 
-                                        <div class="tabtab">
-                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                                                <h2 class="mb-0">
-                                                    <button
-                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
-                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
-                                                        type="button"
-                                                        data-toggle="collapse"
-                                                        data-target="#courseMaterialTwo"
-                                                        aria-expanded="true"
-                                                        id="headingTwo"
-                                                        aria-controls="itemTwo">
-                                                        Other things in sentence
-                                                    </button>
-                                                </h2>
-                                            </div>
-                                            <div id="courseMaterialTwo"
-                                                class="panel-collapse collapse mt-2 two collapse-all"
-                                                aria-labelledby="headingTwo">
-                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
-                                            </div>
-                                        </div>
+                                        @endforelse
+{{--                                        <div class="tabtab">--}}
+{{--                                            <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">--}}
+{{--                                                <h2 class="mb-0">--}}
+{{--                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"--}}
+{{--                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
+{{--                                                            type="button"--}}
+{{--                                                            data-toggle="collapse"--}}
+{{--                                                            data-target="#courseMaterialOne"--}}
+{{--                                                            aria-expanded="true"--}}
+{{--                                                            id="headingOne"--}}
+{{--                                                            aria-controls="itemOne">--}}
+{{--                                                            Sentence Structure--}}
+{{--                                                    </button>--}}
+{{--                                                </h2>--}}
+{{--                                            </div>--}}
+{{--                                            <div id="courseMaterialOne"--}}
+{{--                                                class="panel-collapse collapse mt-2 one collapse-all"--}}
+{{--                                                aria-labelledby="headingOne">--}}
+{{--                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
 
-                                        <div class="tabtab">
-                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                                                <h2 class="mb-0">
-                                                    <button
-                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
-                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
-                                                        type="button"
-                                                        data-toggle="collapse"
-                                                        data-target="#courseMaterialThree"
-                                                        aria-expanded="true"
-                                                        id="headingTwo"
-                                                        aria-controls="itemTwo">
-                                                        Different kinds of sentences
-                                                    </button>
-                                                </h2>
-                                            </div>
-                                            <div id="courseMaterialThree"
-                                                class="panel-collapse collapse mt-2 two collapse-all"
-                                                aria-labelledby="headingTwo">
-                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
-                                            </div>
-                                        </div>
+{{--                                        <div class="tabtab">--}}
+{{--                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">--}}
+{{--                                                <h2 class="mb-0">--}}
+{{--                                                    <button--}}
+{{--                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"--}}
+{{--                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
+{{--                                                        type="button"--}}
+{{--                                                        data-toggle="collapse"--}}
+{{--                                                        data-target="#courseMaterialTwo"--}}
+{{--                                                        aria-expanded="true"--}}
+{{--                                                        id="headingTwo"--}}
+{{--                                                        aria-controls="itemTwo">--}}
+{{--                                                        Other things in sentence--}}
+{{--                                                    </button>--}}
+{{--                                                </h2>--}}
+{{--                                            </div>--}}
+{{--                                            <div id="courseMaterialTwo"--}}
+{{--                                                class="panel-collapse collapse mt-2 two collapse-all"--}}
+{{--                                                aria-labelledby="headingTwo">--}}
+{{--                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+
+{{--                                        <div class="tabtab">--}}
+{{--                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">--}}
+{{--                                                <h2 class="mb-0">--}}
+{{--                                                    <button--}}
+{{--                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"--}}
+{{--                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
+{{--                                                        type="button"--}}
+{{--                                                        data-toggle="collapse"--}}
+{{--                                                        data-target="#courseMaterialThree"--}}
+{{--                                                        aria-expanded="true"--}}
+{{--                                                        id="headingTwo"--}}
+{{--                                                        aria-controls="itemTwo">--}}
+{{--                                                        Different kinds of sentences--}}
+{{--                                                    </button>--}}
+{{--                                                </h2>--}}
+{{--                                            </div>--}}
+{{--                                            <div id="courseMaterialThree"--}}
+{{--                                                class="panel-collapse collapse mt-2 two collapse-all"--}}
+{{--                                                aria-labelledby="headingTwo">--}}
+{{--                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             @else
@@ -482,7 +498,7 @@
                 <div class="test">
                     <iframe
                         id="iframe"
-                        src=""
+                        src="https://www.youtube.com/embed/{{$course->trailer ? $course->trailer : '2K4xUL5tsaM'}}"
                         title="YouTube video player"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
