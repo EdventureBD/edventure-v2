@@ -187,7 +187,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/course-detail/quiz.png" alt="quiz">
+                                    <img class="img-fluid" src="/img/quiz-mindmap-img/Quiz.png" alt="quiz">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">কুইজ</div>
@@ -202,7 +202,7 @@
                         @if(true)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
-                                    <img class="img-fluid" src="/img/course-detail/mindMap.png" alt="mindmap">
+                                    <img class="img-fluid" src="/img/quiz-mindmap-img/Mindmap.png" alt="mindmap">
                                 </div>
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
