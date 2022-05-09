@@ -113,7 +113,7 @@
 
                                     <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
                                       <h6 class="card-title">{{$group->title}}</h6>
-                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Click To Join</a>
+                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Join</a>
                                     </div>
                                   </div>
                             </div>
