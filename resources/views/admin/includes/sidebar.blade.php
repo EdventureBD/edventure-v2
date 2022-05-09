@@ -131,7 +131,7 @@
                 @can('course')
                     <li class="nav-item {{ request()->is('admin/course-category') ? 'menu-open' : '' }}">
                         <a href="{{ route('course-category.index') }}"
-                        
+
                             class="nav-link {{ request()->is('admin/course-category') ? 'active' : '' }} {{ request()->is('admin/course-category/create') ? 'active' : '' }}  {{ request()->is('admin/course-category/*') ? 'active' : '' }}">
 
                             <i class="fas fa-list-ol"></i>
@@ -338,7 +338,7 @@
                     </li>
                     {{-- END OF COURSE CATEGORY --}}
                 @endcan
-                
+
                 {{----------------------- START OF MODEL EXAM SIDEBAR ------------------------------------}}
                 @canany([
                         'model_exam_category',
@@ -357,6 +357,8 @@
                                                     request()->is('admin/model-exam/tag/analysis') ||
                                                     request()->is('admin/model-exam/result/list') ||
                                                     request()->is('admin/model-exam/payment/category') ||
+                                                    request()->is('admin/coupon') ||
+                                                    request()->is('admin/category-access') ||
                                                     request()->is('admin/model-exam/payment/exam') ? 'menu-open' : '' }}">
                         <a href="#"
                            class="nav-link {{ request()->is('admin/exam-category') ||
@@ -366,6 +368,8 @@
                                           request()->is('admin/model-exam/tag/analysis') ||
                                           request()->is('admin/model-exam') ||
                                           request()->is('admin/model-exam/payment/category') ||
+                                          request()->is('admin/coupon') ||
+                                          request()->is('admin/category-access') ||
                                           request()->is('admin/model-exam/payment/exam')? 'active' : '' }}">
                             <i class="fas fa-paste"></i>
                             <p>&nbsp;&nbsp;Model Exam <i class="right fas fa-angle-left"></i></p>
@@ -410,7 +414,14 @@
                                     </a>
                                 </li>
                             @endcan
-
+                            <li>
+                                <a href="{{ route('coupon.index') }}"
+                                   class="nav-link {{ request()->is('admin/coupon') ? 'active' : '' }}
+                                   {{ request()->is('admin/coupon') ? 'active' : '' }}">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>Coupons</p>
+                                </a>
+                            </li>
                             @can('model_exam_result')
                                 <li>
                                     <a href="{{ route('model.exam.result') }}"
@@ -429,7 +440,6 @@
                                         <p>Exam Tag Analysis</p>
                                     </a>
                                 </li>
-
                             @endcan
 
                             @can('model_exam_payment')
@@ -539,18 +549,7 @@
                             <p>&nbsp;&nbsp;Social Group</p>
                         </a>
                     </li>
-                    {{-- END OF SETTINGS --}}
                 @endcan
-
-                {{-- START OF ACTIVITY --}}
-                {{-- <li class="nav-item {{ request()->is('admin/activity') ? 'menu-open' : '' }}">
-                    <a href="{{ route('admin.activity') }}"
-                        class="nav-link {{ request()->is('admin/activity') ? 'active' : '' }}">
-                        <i class="fas fa-hiking"></i>
-                        <p>&nbsp; Activity</p>
-                    </a>
-                </li> --}}
-                {{-- END OF ACTIVITY --}}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

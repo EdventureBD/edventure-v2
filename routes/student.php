@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ModelMcqTagAnalysisController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\PdfController;
@@ -73,7 +74,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         Route::post('batch/{batch}/{exam}/result', [ExamController::class, 'submit'])->name('submit');
 
     });
-    
+
     Route::get('submission-status', function () {
         return view('student.pages_new.batch.exam.examSubmissionGreeting');
     });
@@ -92,6 +93,9 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::post('/process-payment/{course}', [CourseController::class, 'processPayment'])->name('payment.process');
     //Payment success
     Route::get('/payment-success/{course}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+
+    //check coupon validity
+    Route::get('/check-coupon-validity',[CouponController::class,'checkCouponValidity'])->name('coupon.check');
 });
 
 require __DIR__ . '/auth.php';
