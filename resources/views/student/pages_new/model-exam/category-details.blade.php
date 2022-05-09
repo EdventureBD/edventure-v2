@@ -120,9 +120,9 @@
                                         <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
                                     @endif
                                     <span><b>{{$teacher->name}}</b></span>
-                                        <small>{{data_get($teacher->teacherDetails->education,'')}}</small>
+                                        <small>{{$teacher->teacherDetails->education ?? ''}}</small>
                                         <small>
-                                            @if($teacher->teacherDetails->year_of_experience && $teacher->teacherDetails->expertise)
+                                            @if($teacher->teacherDetails && $teacher->teacherDetails->year_of_experience && $teacher->teacherDetails->expertise)
                                             {{$teacher->teacherDetails->year_of_experience}} years of teaching experience in {{$teacher->teacherDetails->expertise}}
                                             @endif
                                         </small>
