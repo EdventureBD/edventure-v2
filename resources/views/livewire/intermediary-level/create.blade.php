@@ -9,7 +9,7 @@
                         <!-- general form elements disabled -->
                         <div class="card card-warning">
                             <div class="card-header">
-                                <h3 class="card-title">Create Intermediary Level</h3>
+                                <h3 class="card-title">Create Program</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -17,7 +17,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseTitle"> Intermediary Level Title <span
+                                                <label class="col-form-label" for="courseTitle"> Program Title <span
                                                         class="must-filled">*</span> </label>
                                                 <input type="text" wire:model="title"
                                                     class="form-control @error('title') is-invalid @enderror"

@@ -15,6 +15,8 @@ use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\BundleController;
 use App\Utils\Payment;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,17 +37,8 @@ Route::get('/medical-olympiad/medical-olympiad', function() {
 // Medical olympiad 2022 route ends
 
 Route::get('/', function () {
-//    $categories=CourseCategory::where('status',1)->select('title','id','slug')->orderBy('id', "ASC")->get();
-//    $selected_category_id=$categories[0]->id;
-//    $selected_category_slug=$categories[0]->slug;
-//    $courses = Course::where('status', 1)
-//                    ->where('course_category_id',$selected_category_id)
-//                    ->orderBy('order')
-//                    ->select('title','slug','icon','banner','course_category_id','price')
-//                    ->take(8)
-//                    ->get();
-//    return view('landing.landing', compact('courses','categories','selected_category_slug'));
-    return view('landing.landing');
+    $social_group = \App\Models\SocialGroup::query()->get();
+    return view('landing.landing',compact('social_group'));
 })->name('home');
 
 Route::get('/ajax-course-request/{category}', [CourseController::class, 'courseByCategory']);
@@ -114,6 +107,9 @@ Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');
 
 
 
-Route::get('/test-otp', function() {
-    return view('test_otp');
-})->name('send_otp');
+Route::get('/test', function() {
+
+    return view('slider');
+});
+
+

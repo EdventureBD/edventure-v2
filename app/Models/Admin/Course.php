@@ -23,7 +23,7 @@ class Course extends Model
 
     public function intermediaryLevel()
     {
-        return $this->belongsTo(IntermediaryLevel::class, 'id', 'intermediary_level_id');
+        return $this->belongsTo(IntermediaryLevel::class, 'intermediary_level_id', 'id');
     }
 
     public function bundle()

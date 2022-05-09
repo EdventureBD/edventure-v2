@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\ExamCategory;
-use App\Models\ExamTag;
+// use App\Models\ExamTag;
 use App\Models\ExamTopic;
-use App\Models\McqMarkingDetail;
+// use App\Models\McqMarkingDetail;
 use App\Models\McqTotalResult;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,11 +20,12 @@ use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Student\StudentDetails;
-
-use App\Models\Student\exam\DetailsResult;
+use App\Models\Admin\Bundle;
+use App\Models\BundleStudentEnrollment;
+// use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\ContentTag;
-use App\Models\Admin\QuestionContentTag;
+// use App\Models\Admin\QuestionContentTag;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
 
 use App\Models\Admin\PopQuizCQ;
@@ -38,12 +39,27 @@ class AccountDetailsController extends Controller
 
         $enrolled_courses = collect();
 
-        $student_enrollments = BatchStudentEnrollment::where( 'student_id', auth()->user()->id )->get();
+        // get enrollments that the student is enrolled to
+        $student_enrollments = BatchStudentEnrollment::where( 'student_id', auth()->user()->id )
+                                ->with([
+                                    'course' => function($query){
+                                        $query->select('id', 'title', 'slug', 'course_category_id', 'intermediary_level_id', 'bundle_id');
+                                    },
+                                ])
+                                ->get();
 
+        // push courses that doesn't have a bundle to $enrolled_courses array
         foreach($student_enrollments as $student_enrollment){
-            $course = Course::where('id', $student_enrollment->course_id)->first();
-            $enrolled_courses->push($course);
+            if($student_enrollment->course->bundle_id == null)
+                $enrolled_courses->push($student_enrollment->course);
         }
+
+        // get bundle enrollments
+        $enrolled_bundles = BundleStudentEnrollment::where('student_id', auth()->user()->id)
+                            ->with(['bundle' => function($query){
+                                $query->select("id", "intermediary_level_id", "bundle_name", "slug");
+                            }])
+                            ->get();
 
         // Get the courses via. batch_student_enrollments and all topic end exams associated to those courses
         $batch_student_enrollment = BatchStudentEnrollment::join('payments', 'payments.id', 'batch_student_enrollments.payment_id')
@@ -55,8 +71,6 @@ class AccountDetailsController extends Controller
             return $query->where('exam_type', 'Topic End Exam');
         }])
         ->get();
-
-        // dd($batch_student_enrollment);
 
         // Start counting how many courses the user completed
         $enrolled_course_count = 0;
@@ -85,7 +99,7 @@ class AccountDetailsController extends Controller
         }
         // End counting how many courses the user completed
 
-        return view('student.pages_new.user.course', compact('user', 'enrolled_course_count', 'completed_course_count', 'enrolled_courses'));
+        return view('student.pages_new.user.course', compact('user', 'enrolled_course_count', 'completed_course_count', 'enrolled_courses', 'enrolled_bundles'));
     }
 
     public function course_tag_pdf_and_video($tag_id){
@@ -95,17 +109,30 @@ class AccountDetailsController extends Controller
         return view('student.pages_new.user.exam-tag-solution', compact('tag'));
     }
 
-    public function ajax_get_courses(){
-        $enrolled_courses = collect();
+    public function ajax_get_courses_for_bundle(Request $request){
 
-        $student_enrollments = BatchStudentEnrollment::where( 'student_id', auth()->user()->id )->get();
+        if((int)$request->bundle_id !== 0){
+            $courses = Course::where('bundle_id', $request->bundle_id)->get();
+        }
+        elseif((int)$request->bundle_id == 0){
+            $courses = collect();
+            // get enrollments that the student is enrolled to
+            $student_enrollments = BatchStudentEnrollment::where( 'student_id', auth()->user()->id )
+            ->with([
+                'course' => function($query){
+                    $query->select('id', 'title', 'slug', 'course_category_id', 'intermediary_level_id', 'bundle_id');
+                },
+            ])
+            ->get();
 
-        foreach($student_enrollments as $student_enrollment){
-            $course = Course::where('id', $student_enrollment->course_id)->first();
-            $enrolled_courses->push($course);
+            // push courses that doesn't have a bundle to $enrolled_courses array
+            foreach($student_enrollments as $student_enrollment){
+                if($student_enrollment->course->bundle_id == null)
+                $courses->push($student_enrollment->course);
+            }
         }
 
-        return $enrolled_courses;
+        return $courses;
     }
 
     public function ajax_get_strengths_and_weaknesses(Request $request){

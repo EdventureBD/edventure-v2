@@ -198,9 +198,9 @@
                                 </h2>
                             </div>
                             <div id="itemOne"
-                                 class="panel-collapse collapse mt-2 one"
+                                 class="panel-collapse collapse mt-2 one text-justify py-2"
                                  aria-labelledby="headingOne">
-                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                আমাদের ওয়েবসাইট পরিচালনায় অথবা আমাদের কোর্স সম্পর্কে কোন জিজ্ঞাসা থাকলে সরাসরি ক্লিক করো ফেইসবুক মেসেঞ্জার আইকনে (স্ক্রীনের নিচে ডানদিকে) আর লগ ইন করে আমাদের কাছে লিখে পাঠাও তোমার সম্মুখীন হওয়া সমস্যাগুলো। দ্রুততম সময়ে সমস্যা সমাধানে আমরা আছি তোমাদের সাথে।
                             </div>
                         </div>
 
@@ -221,9 +221,9 @@
                                 </h2>
                             </div>
                             <div id="itemTwo"
-                                 class="panel-collapse collapse mt-2 two"
+                                 class="panel-collapse collapse mt-2 two text-justify py-2"
                                  aria-labelledby="headingTwo">
-                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                কোর্সটি কিনতে প্রথমেই লগ ইন করো আমাদের Edventure প্ল্যাটফর্মে, প্রোমো কোড থাকলে তা অ্যাপ্লাই করে তারপর “এক্সামটি কিনুন” বাটনটিতে ক্লিক করো। SurjoPay দিয়ে বিকাশ, নগদ, রকেট সহ অন্যান্য ব্যাংক একাউন্টের মাধ্যমে তোমার সুবিধামতো পেমেন্ট করে সহজেই এনরোল করো  আমাদের কোর্সে।
                             </div>
                         </div>
                     </div>
@@ -312,10 +312,10 @@
 
                     </div>
 
-                    <div class="payment-info text-center mt-2">
-                        <span style="font-size: 13px; color: grey">এক্সামটি কিনুন, বাটনটিতে ক্লিক করলে আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। </span><br>
-                        <span style="font-size: 13px; color: grey">পেমেন্ট প্রক্রিয়া বিস্তারিত জানতে এই </span> <a style="text-decoration: none; font-size: 13px; margin-left: 2px" href="/">ভিডিও দেখুন </a>
-                    </div>
+{{--                    <div class="payment-info text-center mt-2">--}}
+{{--                        <span style="font-size: 13px; color: grey">এক্সামটি কিনুন, বাটনটিতে ক্লিক করলে আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। </span><br>--}}
+{{--                        <span style="font-size: 13px; color: grey">পেমেন্ট প্রক্রিয়া বিস্তারিত জানতে এই </span> <a style="text-decoration: none; font-size: 13px; margin-left: 2px" href="/">ভিডিও দেখুন </a>--}}
+{{--                    </div>--}}
                 </div>
 
             </div>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-K3RWXJG');
+        </script>
+        <!-- End Google Tag Manager -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,12 +34,92 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('landing/landing.css') }}"> --}}
 {{--        @include('partials.facebook_pixel')--}}
+        <style>
+
+            @media (max-width: 992px) {
+                .navbar-collapse {
+                    position: fixed;
+                    top: 50px;
+                    left: 0;
+                    padding-left: 24px;
+                    padding-right: 15px;
+                    padding-bottom: 15px;
+                    width: 75%;
+                    height: 100%;
+                }
+                .navbar-collapse.collapsing {
+                    left: -75%;
+                    transition: height 0s ease;
+                }
+                .navbar-collapse.show {
+                    left: 0;
+                    transition: left 300ms ease-in-out;
+                }
+                .navbar-toggler.collapsed ~ .navbar-collapse {
+                    transition: left 700ms ease-in-out;
+                }
+            }
+            .glass {
+                /*background-color: rgba(255, 255, 255, .15);*/
+                /*backdrop-filter: blur(5px);*/
+                filter: blur(5px);
+            }
+            .navbar-toggler-icon {
+                background-image: none;
+            }
+            .test::before {
+                font-family: "Font Awesome 5 Free";
+                content: "\f805"; /* fa-bars, fa-navicon */
+            }
+            .bg-purple-customed {
+                background-color: #6400C8 !important;
+            }
+            .bg-dark {
+                background-color: #953dd2!important;
+            }
+        </style>
     </head>
     <body>
+    <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3RWXJG"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=842032013135226&autoLogAppEvents=1"
-        nonce="2W2mmhKE"></script>
+    <!-- Your Chat plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "104157968710619");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml            : true,
+                version          : 'v13.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_GB/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+{{--        <div id="fb-root"></div>--}}
+{{--        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=842032013135226&autoLogAppEvents=1"--}}
+{{--        nonce="2W2mmhKE"></script>--}}
 
 
         <script>
@@ -44,9 +133,14 @@
                 @if(!request()->is("batch/*") && !request()->is("bundle/*"))
                     @include('landing.header', ['headerBg'=>$headerBg])
                 @endif
-                {{ $slot }}
-                {{-- @yield('content') --}}
-                @include('landing.footer')
+                <div class="wholeBody">
+                    {{ $slot }}
+                    {{-- @yield('content') --}}
+                @if(!request()->is("model-exam/submit/*"))
+                    @include('landing.footer')
+                @endif
+                </div>
+
             </div>
         </div>
         <!-- Scripts -->
@@ -55,5 +149,21 @@
         @yield('js')
         @include('partials.custom_sctipt')
         @include('partials.after_body_analytics')
+        {{-- new navbar collapse code  --}}
+        <script>
+            $('.navbar-collapse').on('show.bs.collapse', function () {
+                $('.wholeBody').addClass('glass');
+                $('.wholeBody').css('pointer-events','none');
+            });
+            $('.navbar-collapse').on('hide.bs.collapse', function () {
+                $('.wholeBody').removeClass('glass');
+                $('.wholeBody').css('pointer-events','auto');
+            });
+            /* $('.hey').on('click', function () {
+                $('.navbar-collapse').removeClass('show');
+                $('.hey').removeClass('glass');
+            }); */
+        </script>
+        {{-- new navbar collapse code ends  --}}
     </body>
 </html>

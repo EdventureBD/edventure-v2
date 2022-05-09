@@ -342,6 +342,7 @@ class ModelExamController extends Controller
     public function submitMcq(Request $request, $examId)
     {
 
+//        return view('student.pages_new.batch.exam.examSubmissionGreeting', ['topics' => []]);
         $inputs = $request->validate([
             'mcq' => 'required',
             'exam_end_time' => 'required'

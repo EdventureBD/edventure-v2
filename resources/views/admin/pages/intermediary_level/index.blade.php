@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-'title'=>'Intermediary Levels',
-'pageName'=>'Intermediary Levels',
-'secondPageName'=>'Intermediary Levels'
+'title'=>'Programs',
+'pageName'=>'Programs',
+'secondPageName'=>'Programs'
 ])
 
 @section('css1')
@@ -17,14 +17,14 @@
                <div class="col-12">
                   <div class="card">
                      <div class="card-header">
-                           <h3 class="card-title">Intermedairy Levels</h3>
+                           <h3 class="card-title">Programs</h3>
 
                            <div class="card-tools">
                               <div class="input-group input-group-sm">
                                  <div>
                                        <a href="{{ route('intermediary_level.create') }}">
                                           <button class="btn btn-info"><i
-                                                   class="fas fa-plus-square"></i>&nbsp;&nbsp;Intermediary Level </button>
+                                                   class="fas fa-plus-square"></i>&nbsp;&nbsp;Program </button>
                                        </a>
                                  </div>
                               </div>

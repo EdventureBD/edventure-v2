@@ -68,7 +68,7 @@ if (mcqQuestions.length > 0) {
     mcqQuestions.forEach(mcqQuestion => {
         questionCount++;
         let a = document.createElement("a");
-        a.className = ("border rounded bg-secondary");
+        a.className = ("border rounded bg-question-map-unselected");
         let span = document.createElement("span");
         span.innerText = questionCount;
         a.setAttribute("id", `map_${mcqQuestion.id}`);
@@ -78,8 +78,8 @@ if (mcqQuestions.length > 0) {
         let optionFiledID = document.getElementById("options_" + mcqQuestion.id);
         optionFiledID.addEventListener("click", () => {
             let optionIdInMap = document.getElementById(`map_${mcqQuestion.id}`);
-            optionIdInMap.classList.remove("bg-secondary");
-            optionIdInMap.classList.add("bg-success");
+            optionIdInMap.classList.remove("bg-question-map-unselected");
+            optionIdInMap.classList.add("bg-question-map-selected");
         });
 
         /* mcq option selection and on click color changing part  */

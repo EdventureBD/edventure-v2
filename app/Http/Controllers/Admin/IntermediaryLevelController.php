@@ -32,9 +32,9 @@ class IntermediaryLevelController extends Controller
     public function destroy(IntermediaryLevel $intermediaryLevel){
         $delete = $intermediaryLevel->delete();
         if ($delete) {
-            return redirect()->back()->with('status', 'Intermediary Level successfully deleted!');
+            return redirect()->back()->with('status', 'Program successfully deleted!');
         } else {
-            return redirect()->back()->with('failed', 'Intermediary Level deletion failed!');
+            return redirect()->back()->with('failed', 'Program deletion failed!');
         }
     }
 

@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Intermediary Level', 
-                                    'pageName'=>'Edit Intermediary Level', 
-                                    'secondPageName'=>'Edit Intermediary Level'
+                                    'title'=>'Programs', 
+                                    'pageName'=>'Edit Program', 
+                                    'secondPageName'=>'Edit Program'
                                  ])
 
 @section('content')

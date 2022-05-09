@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enum\District;
+use App\Enum\EducationLevel;
 use App\Http\Controllers\Controller;
 use App\Models\Student\StudentDetails;
 use App\Models\User;
@@ -23,7 +25,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        // return view('auth.register');
+        $districts = District::List;
+        $levels = EducationLevel::Level;
+        return view('auth.new.register', compact('districts','levels'));
     }
 
     /**
@@ -70,13 +75,15 @@ class RegisteredUserController extends Controller
     //********************** OTP code ends here ******************************************//
 
 
-        $input = $request->validate(
+
+         $input = $request->validate(
             [
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'phone' => 'required|numeric|digits:11|unique:users',
                 'password' => 'required|string|confirmed|min:8',
-                'class' => 'required'
+                'class' => 'required',
+                'district' => 'required'
             ]
         );
          Auth::login($user = User::create([
@@ -95,7 +102,8 @@ class RegisteredUserController extends Controller
              'contact' => $input['phone'],
              'class' => $input['class'],
              'institution' => 'n/a',
-             'address' => 'n/a'
+             'address' => 'n/a',
+             'district' => $input['district']
 
          ]);
 

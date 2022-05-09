@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use phpDocumentor\Reflection\Types\Integer;
 
 class ExamCategory extends Model
@@ -32,6 +33,9 @@ class ExamCategory extends Model
             $query->subject_final = $query->subject_final ?? 0;
             $query->final_exam = $query->final_exam ?? 0;
             $query->offer_price = $query->offer_price ?? 0;
+        });
+        static::created(function () {
+            Cache::forget('categoriesList');
         });
     }
 

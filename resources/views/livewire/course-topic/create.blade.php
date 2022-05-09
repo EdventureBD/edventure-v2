@@ -43,9 +43,9 @@
 
                                        <div class="col-md-4">
                                           <div class="form-group">
-                                             <label class="col-form-label" for="intermediaryLevel"> Intermediary Levels <span class="must-filled">*</span></label>
+                                             <label class="col-form-label" for="intermediaryLevel"> Programs <span class="must-filled">*</span></label>
                                              <select class="form-control" wire:model="intermediaryLevelId" id="intermediaryLevel">
-                                                   <option value="" selected>Select Intermediary Level</option>
+                                                   <option value="" selected>Select Program</option>
                                                       @foreach($intermediaryLevels as $intermediaryLevel)
                                                          <option wire:key="{{ $loop->index.$intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $intermediaryLevel->id }}">{{ $intermediaryLevel->title }}</option>
                                                       @endforeach
@@ -115,8 +115,7 @@
                                     </div>
                                     <div>
                                           @if ($zeroStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $zeroStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $zeroStarIslandImage->temporaryUrl() }}">
                                           @endif
                                           @error('zeroStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -134,8 +133,7 @@
                                     </div>
                                     <div>
                                           @if ($oneStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $oneStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $oneStarIslandImage->temporaryUrl() }}">
                                           @endif
                                           @error('oneStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -153,8 +151,7 @@
                                     </div>
                                     <div>
                                           @if ($twoStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $twoStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $twoStarIslandImage->temporaryUrl() }}">
                                           @endif
                                           @error('twoStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -172,8 +169,7 @@
                                     </div>
                                     <div>
                                           @if ($threeStarIslandImage)
-                                             Preview:
-                                             <img src="{{ $threeStarIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $threeStarIslandImage->temporaryUrl() }}">
                                           @endif
                                           @error('threeStarIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
@@ -191,8 +187,7 @@
                                     </div>
                                     <div>
                                           @if ($disabledIslandImage)
-                                             Preview:
-                                             <img src="{{ $disabledIslandImage->temporaryUrl() }}">
+                                             <img style="width:200px;" src="{{ $disabledIslandImage->temporaryUrl() }}">
                                           @endif
                                           @error('disabledIslandImage')
                                              <p style="color: red;">{{ $message }}</p>
