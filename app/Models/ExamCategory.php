@@ -65,7 +65,7 @@ class ExamCategory extends Model
 
         if($ids) {
             $userId = array_values($ids);
-            $teachers = User::query()->whereIn('id',$userId)->get();
+            $teachers = User::query()->whereIn('id',$userId)->with('teacherDetails')->get();
         }
 
         return $teachers;
