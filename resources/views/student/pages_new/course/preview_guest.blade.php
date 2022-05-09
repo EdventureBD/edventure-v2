@@ -230,7 +230,7 @@
 
                 </div>
 
-                @if(true)
+                @if($course->teacher_lists)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষক</h5>
                         <div class="d-flex overflow-x-scroll"
@@ -251,15 +251,6 @@
                                         @endif
                                 </div>
                             @endforeach
-{{--                            <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">--}}
-{{--                                @if(true)--}}
-{{--                                    <img style="border-radius: 50%" height="80" width="80" src="/" alt="">--}}
-{{--                                @else--}}
-{{--                                    <img height="80" width="80" src="/img/category_details/teacher.png" alt="">--}}
-{{--                                @endif--}}
-{{--                                <span><b>My name</b></span>--}}
-{{--                                <span>A great teacher of all</span>--}}
-{{--                            </div>--}}
                         </div>
                     </div>
                 @endif
@@ -362,75 +353,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <h5 style="color: #6400C8" class="font-weight-bold">No Topics uploaded yet</h5>
                                             </div>
-
                                         @endforelse
-{{--                                        <div class="tabtab">--}}
-{{--                                            <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">--}}
-{{--                                                <h2 class="mb-0">--}}
-{{--                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"--}}
-{{--                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
-{{--                                                            type="button"--}}
-{{--                                                            data-toggle="collapse"--}}
-{{--                                                            data-target="#courseMaterialOne"--}}
-{{--                                                            aria-expanded="true"--}}
-{{--                                                            id="headingOne"--}}
-{{--                                                            aria-controls="itemOne">--}}
-{{--                                                            Sentence Structure--}}
-{{--                                                    </button>--}}
-{{--                                                </h2>--}}
-{{--                                            </div>--}}
-{{--                                            <div id="courseMaterialOne"--}}
-{{--                                                class="panel-collapse collapse mt-2 one collapse-all"--}}
-{{--                                                aria-labelledby="headingOne">--}}
-{{--                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="tabtab">--}}
-{{--                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">--}}
-{{--                                                <h2 class="mb-0">--}}
-{{--                                                    <button--}}
-{{--                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"--}}
-{{--                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
-{{--                                                        type="button"--}}
-{{--                                                        data-toggle="collapse"--}}
-{{--                                                        data-target="#courseMaterialTwo"--}}
-{{--                                                        aria-expanded="true"--}}
-{{--                                                        id="headingTwo"--}}
-{{--                                                        aria-controls="itemTwo">--}}
-{{--                                                        Other things in sentence--}}
-{{--                                                    </button>--}}
-{{--                                                </h2>--}}
-{{--                                            </div>--}}
-{{--                                            <div id="courseMaterialTwo"--}}
-{{--                                                class="panel-collapse collapse mt-2 two collapse-all"--}}
-{{--                                                aria-labelledby="headingTwo">--}}
-{{--                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="tabtab">--}}
-{{--                                            <div class="mt-4" style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">--}}
-{{--                                                <h2 class="mb-0">--}}
-{{--                                                    <button--}}
-{{--                                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"--}}
-{{--                                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
-{{--                                                        type="button"--}}
-{{--                                                        data-toggle="collapse"--}}
-{{--                                                        data-target="#courseMaterialThree"--}}
-{{--                                                        aria-expanded="true"--}}
-{{--                                                        id="headingTwo"--}}
-{{--                                                        aria-controls="itemTwo">--}}
-{{--                                                        Different kinds of sentences--}}
-{{--                                                    </button>--}}
-{{--                                                </h2>--}}
-{{--                                            </div>--}}
-{{--                                            <div id="courseMaterialThree"--}}
-{{--                                                class="panel-collapse collapse mt-2 two collapse-all"--}}
-{{--                                                aria-labelledby="headingTwo">--}}
-{{--                                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
                                     </div>
                                 </div>
                             @else
@@ -462,9 +385,9 @@
                                 </h2>
                             </div>
                             <div id="itemOne"
-                                 class="panel-collapse collapse mt-2 one"
+                                 class="panel-collapse collapse mt-2 one text-justify py-2"
                                  aria-labelledby="headingOne">
-                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                আমাদের ওয়েবসাইট পরিচালনায় অথবা আমাদের কোর্স সম্পর্কে কোন জিজ্ঞাসা থাকলে সরাসরি ক্লিক করো ফেইসবুক মেসেঞ্জার আইকনে (স্ক্রীনের নিচে ডানদিকে) আর লগ ইন করে আমাদের কাছে লিখে পাঠাও তোমার সম্মুখীন হওয়া সমস্যাগুলো। দ্রুততম সময়ে সমস্যা সমাধানে আমরা আছি তোমাদের সাথে।
                             </div>
                         </div>
 
@@ -485,9 +408,9 @@
                                 </h2>
                             </div>
                             <div id="itemTwo"
-                                 class="panel-collapse collapse mt-2 two"
+                                 class="panel-collapse collapse mt-2 two text-justify py-2"
                                  aria-labelledby="headingTwo">
-                                পাখিরাই সাধারণত কীট-পতঙ্গের প্রধান শত্রু। পাখি এবং অন্যান্য শত্রুদের আক্রমণ এড়াবার জন্যে কীট-পতঙ্গ জাতীয় প্রাণীদের মধ্যে  অপেক্ষাকৃত উন্নত শ্রেণীর প্রাণী অপেক্ষা বহুল পরিমাণে অনুকরণপ্রিয়তা পরিলক্ষিত হয়।
+                                কোর্সটি কিনতে প্রথমেই লগ ইন করো আমাদের Edventure প্ল্যাটফর্মে, প্রোমো কোড থাকলে তা অ্যাপ্লাই করে তারপর “এক্সামটি কিনুন” বাটনটিতে ক্লিক করো। SurjoPay দিয়ে বিকাশ, নগদ, রকেট সহ অন্যান্য ব্যাংক একাউন্টের মাধ্যমে তোমার সুবিধামতো পেমেন্ট করে সহজেই এনরোল করো  আমাদের কোর্সে।
                             </div>
                         </div>
                     </div>
