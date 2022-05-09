@@ -35,13 +35,13 @@
 {{ request()->is('admin/all-assignment') ? 'active' : '' }}
 
 {{-- NEW --}}
-{{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
+{{ request()->is('admin/all-aptitude-test/*') ? 'active' : '' }}
+{{ request()->is('admin/all-pop-quiz/*') ? 'active' : '' }}
+{{ request()->is('admin/all-topic-end-exam/*') ? 'active' : '' }}
 
-{{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
+{{ request()->is('admin/all-aptitude-test') ? 'active' : '' }}
+{{ request()->is('admin/all-pop-quiz') ? 'active' : '' }}
+{{ request()->is('admin/all-topic-end-exam') ? 'active' : '' }}
 {{-- END NEW --}}
 ">
         <i class="fas fa-paste"></i>
