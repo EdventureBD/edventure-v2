@@ -161,6 +161,7 @@
                     centeredSlides: true,
                     grabCursor: true,
                     loop: true,
+                    speed: 3000,
                     // effect: "cube",
                     // grabCursor: true,
                     // cubeEffect: {
@@ -170,7 +171,7 @@
                     //     shadowScale: 0.94,
                     // },
                     autoplay: {
-                        delay: 5500,
+                        delay: 5000,
                         disableOnInteraction: false,
                     },
                     pagination: {
