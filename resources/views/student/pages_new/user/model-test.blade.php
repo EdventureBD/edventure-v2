@@ -162,7 +162,11 @@
                 let href = category_visible == true ? origin + '/model-exam?c=' + query_category_uuid : 'javascript:void(0)';
                 let redirectLinkBgColor = category_visible == true ? '#fa9632' : '#cbced4';
                 let _blank = category_visible == true ? '_blank' : '';
-                let redirectLink = '<a style="padding: 22px;background-color:' +redirectLinkBgColor+';border-radius: 10px;" target="'+_blank+'" href="'+href+'"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>'
+                let redirectLink = '<a style="margin-right:1px; padding: 22px;background-color:' +redirectLinkBgColor+';border-radius: 10px;" ' +
+                                        'target="'+_blank+'" href="'+href+'">' +
+                                        '<span class="iconify" data-icon="bi:arrow-down-right-square-fill" ' +
+                                        'style="color: white;" data-flip="vertical"></span>' +
+                                    '</a>'
 
                 $('#SelectedCategory').removeClass('d-none')
                 $('#categoryName').html(e.params.args.data.text)
