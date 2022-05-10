@@ -220,7 +220,7 @@
                             let weaknessCount = 0;
                             response.forEach((item, index)=>{
                                 url = window.location.origin+'/profile/model-test/tag-solutions/'+item.id
-                                if(item.percentage_scored <= 60) {
+                                if(item.percentage_scored < 80) {
                                     weaknessCount++;
                                     if(weaknessCount <= 6) {
                                         $('#weaknessMessage').html('')
@@ -231,7 +231,7 @@
                                             '</p>')
                                     }
 
-                                } else if(item.percentage_scored >= 90) {
+                                } else if(item.percentage_scored >= 80) {
                                     strengthCount++;
                                     if(strengthCount <= 6) {
                                         $('#strengthMessage').html('')
