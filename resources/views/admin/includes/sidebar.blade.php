@@ -493,7 +493,8 @@
                         'model_exam',
                         'model_exam_result',
                         'model_exam_tag_analysis',
-                        'model_exam_payment'
+                        'model_exam_payment',
+                        'coupon'
                         ])
 
                     <li class="nav-item has-treeview {{ request()->is('admin/exam-category') ||
@@ -560,14 +561,17 @@
                                     </a>
                                 </li>
                             @endcan
-                            <li>
-                                <a href="{{ route('coupon.index') }}"
-                                   class="nav-link {{ request()->is('admin/coupon') ? 'active' : '' }}
-                                   {{ request()->is('admin/coupon') ? 'active' : '' }}">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>Coupons</p>
-                                </a>
-                            </li>
+
+                            @can('coupon')
+                                <li>
+                                    <a href="{{ route('coupon.index') }}"
+                                       class="nav-link {{ request()->is('admin/coupon') ? 'active' : '' }}
+                                       {{ request()->is('admin/coupon') ? 'active' : '' }}">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Coupons</p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('model_exam_result')
                                 <li>
                                     <a href="{{ route('model.exam.result') }}"
