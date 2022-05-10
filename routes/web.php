@@ -91,6 +91,7 @@ Route::post('/contact-us', [ContactUsController::class,'store'])->name('store.co
 
 //Model Exam landing page
 Route::get('/model-exam', [ModelExamController::class,'getModelExams'])->name('model.exam');
+Route::get('/model-exam/category/{uuid}', [ModelExamController::class,'getModelExamsTopics'])->name('model.exam.category.topics');
 Route::get('/model-exam/{id}', [ModelExamController::class,'getMcqExamPaper'])->name('model.exam.paper.mcq')->middleware('auth');
 Route::post('/model-exam/submit/{id}', [ModelExamController::class,'submitMcq'])->name('model.exam.mcq.submit')->middleware('auth');
 
@@ -98,7 +99,7 @@ Route::post('/model-exam/submit/{id}', [ModelExamController::class,'submitMcq'])
 Route::get('/single-payment/{examId}', [SinglePaymentController::class,'initialize'])->name('single.payment.initialize')->middleware('auth');
 Route::get('/single-payment-success/{examId}', [SinglePaymentController::class,'paymentSuccess'])->name('single.payment.success')->middleware('auth');
 Route::get('/single-payment-category/{categoryId}', [SinglePaymentController::class,'initializeCategoryPayment'])->name('category.single.payment.initialize')->middleware('auth');
-Route::get('/single-payment-category-success/{categoryId}', [SinglePaymentController::class,'CategoryPaymentSuccess'])->name('category.single.payment.success')->middleware('auth');
+Route::get('/single-payment-category-success/{categoryId}/{coupon}', [SinglePaymentController::class,'CategoryPaymentSuccess'])->name('category.single.payment.success')->middleware('auth');
 
 
 Route::get('/blog/single/{blog}', [BlogController::class,'readBlog'])->name('read-blog');
