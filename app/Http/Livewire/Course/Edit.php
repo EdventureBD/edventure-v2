@@ -266,7 +266,7 @@ class Edit extends Component
         $this->bundleId = $this->course->bundle_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
-        $this->tempImage = $this->course->logo;
+        $this->tempImage = $this->course->icon;
         $this->tempBanner = $this->course->banner;
         $this->tempIslandImage = $this->course->island_image;
         $this->deleteImage = $this->course->icon;
