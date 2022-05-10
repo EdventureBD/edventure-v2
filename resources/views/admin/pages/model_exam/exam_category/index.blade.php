@@ -59,7 +59,29 @@
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->price ?? 0}}</td>
                 <td>{{ $category->offer_price ?? 0 }}</td>
-                <td>{!! $category->details ?? 'N/a'  !!} </td>
+                <td>
+                    <a href="#viewDetails{{$category->id}}"
+                       data-toggle="modal"
+                       title="Create new group">
+                        <button class="btn btn-sm btn-outline-primary">view</button>
+                    </a>
+                    <div class="modal fade" id="viewDetails{{$category->id}}">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content bg-light">
+                                <div class="modal-body">
+                                    {!! $category->details ?? 'N/a'  !!}
+                                </div>
+
+                                <div class="modal-footer justify-content-end">
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
                 <td>
                     @if($category->image)
                         <img height="100" width="100" src="{{Storage::url('categoryImage/'.$category->image)}}" alt="">
@@ -74,9 +96,29 @@
                 <td>{{ $category->time_allotted ?? 0 }}</td>
                 <td>{{ $category->full_solutions ?? 0 }}</td>
                 <td>
-                    Paper final : {{$category->paper_final ?? 0}}<br>
-                    Subject final : {{$category->subject_final ?? 0}}<br>
-                    Final exam : {{$category->final_exam ?? 0}}<br>
+                    <a href="#viewIncludes{{$category->id}}"
+                       data-toggle="modal"
+                       title="Create new group">
+                        <button class="btn btn-sm btn-outline-primary">view</button>
+                    </a>
+                    <div class="modal fade" id="viewIncludes{{$category->id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-light">
+                                <div class="modal-body">
+                                    Paper final : {{$category->paper_final ?? 0}}<br>
+                                    Subject final : {{$category->subject_final ?? 0}}<br>
+                                    Final exam : {{$category->final_exam ?? 0}}<br>
+                                </div>
+
+                                <div class="modal-footer justify-content-end">
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     @if($category->teacher_lists)
