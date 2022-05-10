@@ -41,7 +41,7 @@
                     <tbody>
                     @if($tag_type == 'weakness')
                         @foreach($tags as $tag)
-                            @if($tag->percentage_scored <= 60)
+                            @if($tag->percentage_scored < 80)
                                 <tr>
                                     <td><a href="{{route('tag.solution', $tag->id)}}">{{$tag->name}}</a></td>
                                     <td>{{$tag->tag_scored_marks}} correct out of {{$tag->tag_total_marks}} answers</td>
@@ -51,7 +51,7 @@
                         @endforeach
                     @else
                         @foreach($tags as $tag)
-                            @if($tag->percentage_scored >= 90)
+                            @if($tag->percentage_scored >= 80)
                                 <tr>
                                     <td><a href="{{route('tag.solution', $tag->id)}}">{{$tag->name}}</a></td>
                                     <td>{{$tag->tag_scored_marks}} correct out of {{$tag->tag_total_marks}} answers</td>
