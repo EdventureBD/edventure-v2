@@ -79,7 +79,7 @@
                         @endforeach
                     @endif
 
-                    @forelse($cq_questions as $key => $question)
+                    @foreach($cq_questions as $key => $question)
                         <div class="page-separator pt-4">
                             <div class="bg-purple-light rounded p-3 popUpExamCqTitle">
                                 <span class="badge badge-primary">
@@ -109,15 +109,7 @@
                                 @endif
                             </div>
                         @endforeach
-                    @empty
-                        <div class="page-separator">
-                            <div class="page-separator__text" style="font-family: 'SiyamRupali', sans-serif;">
-                                <span class="badge badge-secondary">
-                                    No question
-                                </span>
-                            </div>
-                        </div>
-                    @endforelse
+                    @endforeach
 
                     @if($cq_questions->count() > 0)
                         <p class="h3 text-center pt-5 pb-3 text-dark fw-800">উত্তরঃ-</p>

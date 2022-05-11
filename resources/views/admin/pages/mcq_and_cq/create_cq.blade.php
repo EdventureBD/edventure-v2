@@ -338,70 +338,88 @@
                                  </div>
 
                                  <div class="row">
-                                       <div class="col-md-4">
-                                          <div class="form-group">
-                                             <label class="col-form-label" for="marks">Marks <span
-                                                      class="must-filled">*</span></label>
-                                             <input type="text" id="marks" class="form-control" name="ucchotormarks"
-                                                   value="4" placeholder="Enter marks" readonly required>
-                                             @error('ucchotormarks')
-                                                   <p style="color: red;">{{ $message }}</p>
-                                             @enderror
-                                          </div>
-                                       </div>
-                                       <div class="col-md-8">
-                                          <label class="col-form-label" for="examId">Content Tag <span
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                          <label class="col-form-label" for="marks">Marks <span
                                                    class="must-filled">*</span></label>
-                                          <div class="select2-purple">
-                                             <select class="select2" multiple name="ucchotorcontentTagIds[]"
-                                                   data-placeholder="Select a Content Tag"
-                                                   data-dropdown-css-class="select2-purple" style="width: 100%;" required>
-                                                   @foreach ($contentTags as $contentTag)
-                                                      <option value="{{ $contentTag->id }}">{{ $contentTag->title }}
-                                                      </option>
-                                                   @endforeach
-                                             </select>
-                                          </div>
-                                          @error('ucchotorcontentTagIds')
-                                             <p style="color: red;">{{ $message }}</p>
+                                          <input type="text" id="marks" class="form-control" name="ucchotormarks"
+                                                value="4" placeholder="Enter marks" readonly required>
+                                          @error('ucchotormarks')
+                                                <p style="color: red;">{{ $message }}</p>
                                           @enderror
                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                       <label class="col-form-label" for="examId">Content Tag <span
+                                                class="must-filled">*</span></label>
+                                       <div class="select2-purple">
+                                          <select class="select2" multiple name="ucchotorcontentTagIds[]"
+                                                data-placeholder="Select a Content Tag"
+                                                data-dropdown-css-class="select2-purple" style="width: 100%;" required>
+                                                @foreach ($contentTags as $contentTag)
+                                                   <option value="{{ $contentTag->id }}">{{ $contentTag->title }}
+                                                   </option>
+                                                @endforeach
+                                          </select>
+                                       </div>
+                                       @error('ucchotorcontentTagIds')
+                                          <p style="color: red;">{{ $message }}</p>
+                                       @enderror
+                                    </div>
                                  </div>
                               </fieldset>
 
                               <fieldset class="border p-2 mt-4">
                                  <div class="row">
-                                       <div class="col-md-6">
+
+                                    @if($exam->exam_type == "Topic End Exam")
+                                       <div class="col-md-12">
                                           <div class="form-group">
-                                             <label for="exampleInputFile" class="col-form-label">Choose anser pdf file
-                                                   <span class="must-filled">*</span></label>
-                                             <div class="input-group">
-                                                   <div class="custom-file">
-                                                      <input type="file" name="answer" class="custom-file-input hidden"
-                                                         id="exampleInputFile" required>
-                                                      <label class="custom-file-label" for="exampleInputFile">Choose
-                                                         answer
-                                                         pdf</label>
-                                                   </div>
-                                             </div>
-                                             @error('answer')
-                                                   <p style="color: red;">{{ $message }}</p>
+                                             <label class="col-form-label" for="question_set"> Question Set <span class="must-filled">*</span></label>
+                                                <select class="form-control" name="question_set"  value="{{ old('question_set') }}">
+                                                      <option value="" disabled> Select Set </option>
+                                                      <option value="1"> Set 1 </option>
+                                                      <option value="2"> Set 2 </option>
+                                                      <option value="3"> Set 3 </option>
+                                                </select>
+                                             @error('question_set')
+                                                <p style="color: red;">{{ $message }}</p>
                                              @enderror
                                           </div>
                                        </div>
-                                       <div class="col-md-6">
-                                          <div class="form-group">
-                                             <label class="col-form-label" for="examId">Exam <span
-                                                      class="must-filled">*</span></label>
-                                             <select class="form-control" name="examId" disabled>
-                                                   <option value="{{ $exam->id }}" selected>{{ $exam->title }} -> 
-                                                      {{ $exam->id }}</option>
-                                             </select>
-                                             @error('examId')
-                                                   <p style="color: red;">{{ $message }}</p>
-                                             @enderror
+                                    @endif
+
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label for="exampleInputFile" class="col-form-label">Choose anser pdf file
+                                                <span class="must-filled">*</span></label>
+                                          <div class="input-group">
+                                                <div class="custom-file">
+                                                   <input type="file" name="answer" class="custom-file-input hidden"
+                                                      id="exampleInputFile" required>
+                                                   <label class="custom-file-label" for="exampleInputFile">Choose
+                                                      answer
+                                                      pdf</label>
+                                                </div>
                                           </div>
+                                          @error('answer')
+                                                <p style="color: red;">{{ $message }}</p>
+                                          @enderror
                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label class="col-form-label" for="examId">Exam <span
+                                                   class="must-filled">*</span></label>
+                                          <select class="form-control" name="examId" disabled>
+                                                <option value="{{ $exam->id }}" selected>{{ $exam->title }} -> 
+                                                   {{ $exam->id }}</option>
+                                          </select>
+                                          @error('examId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                       </div>
+                                    </div>
                                  </div>
                               </fieldset>
 

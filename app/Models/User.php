@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\StudentTopicEndExamAttempt;
 use App\Models\Student\StudentDetails;
 use Illuminate\Notifications\Notifiable;
 
@@ -67,5 +68,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function teacherDetails()
     {
         return $this->hasOne(TeacherDetail::class, 'user_id', 'id');
+    }
+
+    public function student_topic_end_exam_attempts()
+    {
+        return $this->hasMany(StudentTopicEndExamAttempt::class, 'student_id');
     }
 }

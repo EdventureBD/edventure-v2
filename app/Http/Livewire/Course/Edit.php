@@ -212,7 +212,7 @@ class Edit extends Component
             $course->banner = $this->banner;
         }
 
-        if($this->tempIslandImage){
+        if($this->islandImage){
             // if ($this->tempIslandImage){
                 $imageUrl3 = $this->islandImage->store('public/course');
                 $this->islandImage = Storage::url($imageUrl3);
@@ -258,6 +258,7 @@ class Edit extends Component
 
     public function mount()
     {
+
         $this->title = $this->course->title;
         $this->description = $this->course->description;
         $this->price = $this->course->price;
@@ -265,7 +266,7 @@ class Edit extends Component
         $this->bundleId = $this->course->bundle_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
-        $this->tempImage = $this->course->logo;
+        $this->tempImage = $this->course->icon;
         $this->tempBanner = $this->course->banner;
         $this->tempIslandImage = $this->course->island_image;
         $this->deleteImage = $this->course->icon;

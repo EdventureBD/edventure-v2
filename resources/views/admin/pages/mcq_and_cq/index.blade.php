@@ -98,6 +98,7 @@
                                        <th>Field 3</th>
                                        <th>Field 4</th>
                                        <th>Answer</th>
+                                       @if($exam->exam_type == "Topic End Exam") <th>Question Set</th> @endif
                                        <th>Action</th>
                                  </tr>
                               </thead>
@@ -125,6 +126,7 @@
                                                    {!! $mcq->field4 !!}
                                              @endif
                                           </td>
+                                          @if($exam->exam_type == "Topic End Exam") <td> {{ $mcq->question_set }} </td> @endif
                                           <td>
                                              <div class="btn-group">
                                                    <a class="mr-1"
@@ -190,7 +192,8 @@
                                        <th>Field 2</th>
                                        <th>Field 3</th>
                                        <th>Field 4</th>
-                                       <th>Ansewer</th>
+                                       <th>Answer</th>
+                                       @if($exam->exam_type == "Topic End Exam") <th>Question Set</th> @endif
                                        <th>Action</th>
                                  </tr>
                               </tfoot>
@@ -237,7 +240,7 @@
                                                       <span aria-hidden="true">&times;</span>
                                                    </button>
                                                 </div>
-                                                <di class="row">
+                                                <div class="row">
                                                    <div class="modal-body">
                                                       <form action="{{ route('slugExport') }}">
                                                             {{ csrf_field() }}
@@ -254,7 +257,7 @@
                                                                Export</button>
                                                       </form>
                                                    </div>
-                                                </di>
+                                                </div>
                                           </div>
                                           <!-- /.modal-content -->
                                        </div>
@@ -327,6 +330,7 @@
                                     <th>SL. No</th>
                                     <th>উদ্দীপক</th>
                                     <th>Image</th>
+                                    @if($exam->exam_type == "Topic End Exam") <th>Question Set</th> @endif
                                     <th>Action</th>
                               </tr>
                            </thead>
@@ -341,6 +345,7 @@
                                           <img class="product-image-thumb" src="{{ Storage::url($cq->image) }}"
                                                 alt="">
                                        </td>
+                                       @if($exam->exam_type == "Topic End Exam") <td> {{ $cq->question_set }} </td> @endif
                                        <td>
                                           <div class="btn-group">
                                                 <a class="mr-1"
@@ -406,6 +411,7 @@
                                     <th>SL. No</th>
                                     <th>Question</th>
                                     <th>Image</th>
+                                    @if($exam->exam_type == "Topic End Exam") <th>Question Set</th> @endif
                                     <th>Action</th>
                               </tr>
                            </tfoot>

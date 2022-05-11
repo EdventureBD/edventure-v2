@@ -37,11 +37,11 @@ class TopicEndExamCQController extends Controller
             'proyugcontentTagIds' => 'required',
             'ucchotorquestion' => 'required|min:4',
             'ucchotormarks' => 'required|numeric',
-            'ucchotorcontentTagIds' => 'required'
+            'ucchotorcontentTagIds' => 'required',
+            'question_set' => 'required'
         ]);
 
         $creative_question = new TopicEndExamCreativeQuestion();
-
         $creative_question->creative_question = $request->creative_question;
         $creative_question->slug = (string) Str::uuid();
         $creative_question->exam_id = $request->examId;
@@ -51,6 +51,7 @@ class TopicEndExamCQController extends Controller
         if ($request->hasFile('answer')) {
             $creative_question->standard_ans_pdf = $request->answer->store('public/question/topic_end_exam_cq/answer');
         }
+        $creative_question->question_set = $request->question_set;
         $creative_question->save();
 
         // জ্ঞানমূলক
@@ -201,7 +202,7 @@ class TopicEndExamCQController extends Controller
 
     public function edit(Exam $exam, $topic_end_exam_slug)
     {
-        $cq = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
+        $cq = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->with('question')->firstOrFail();
 
         $cquestion1 = $cq->question()->where('marks', 1)->first(); // জ্ঞানমূলক
         $cquestion2 = $cq->question()->where('marks', 2)->first(); // অনুধাবন
@@ -326,11 +327,11 @@ class TopicEndExamCQController extends Controller
             'proyugcontentTagIds' => 'required',
             'ucchotorquestion' => 'required|min:4',
             'ucchotormarks' => 'required|numeric',
-            'ucchotorcontentTagIds' => 'required'
+            'ucchotorcontentTagIds' => 'required',
+            'question_set' => 'required'
         ]);
 
         $creative_question = TopicEndExamCreativeQuestion::where('slug', $topic_end_exam_slug)->firstOrFail();
-
         $creative_question->creative_question = $request->creative_question;
         $creative_question->exam_id = $request->examId;
         if ($request->hasFile('uddipokimage')) {
@@ -341,6 +342,7 @@ class TopicEndExamCQController extends Controller
             Storage::delete('public/question/topic_end_exam_cq/answer' . $creative_question->standard_ans_pdf);
             $creative_question->standard_ans_pdf = $request->answer->store('public/question/topic_end_exam_cq/answer');
         }
+        $creative_question->question_set = $request->question_set;
         $creative_question->save();
 
         // জ্ঞানমূলক
