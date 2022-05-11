@@ -1,5 +1,5 @@
 <li
-    class="nav-item has-treeview 
+    class="nav-item has-treeview
                                 {{-- {{ request()->is('admin/batch') ? 'menu-open' : '' }}
                                 {{ request()->is('admin/batch/create') ? 'menu-open' : '' }}
                                 {{ request()->is('admin/batch/*/edit') ? 'menu-open' : '' }}
@@ -17,7 +17,7 @@
                                 {{ request()->is('admin/batch-student') ? 'menu-open' : '' }}
                                 ">
     <a href="#"
-        class="nav-link 
+        class="nav-link
                         {{-- {{ request()->is('admin/batch') ? 'active' : '' }}
                         {{ request()->is('admin/batch/create') ? 'active' : '' }}
                         {{ request()->is('admin/batch/*/edit') ? 'active' : '' }}
@@ -82,3 +82,6 @@
         </li>
     </ul>
 </li>
+
+education
+___ years of teaching experience in Expertise

@@ -19,10 +19,10 @@
         </div>
         <div class="mt-0" id="text-in-landing">
             @auth
-            <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4>
-            <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
-            <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
-            <a href="{{route('model.exam')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed px-4">Go For Exam</a>
+            <h4 class="text-white  text-sm">Hey, {{Auth::user()->name}} !</h4>
+            <h4 class="text-white  text-sm">Welcome to the Edventure.</h4>
+            <h2 class="text-sm fw-800 mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
+            <a href="{{route('model.exam')}}" class="text-xsm btn btn-register btn-orange-customed px-4" style="border: 1px solid #FA9632">Go For Exam</a>
             @else
             <div id="landing_greeting_and_register_button">
                 <div>
@@ -47,8 +47,8 @@
             {{-- inner contents starts --}}
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="syllabus-mapping">
                 <div class="d-flex justify-content-sm-center justify-content-md-start card-main-image" style="width: 65%">
-                    <div class="w-100 d-flex justify-content-start">
-                        <img src="/img/landing/newLanding/roadMap.webp" alt="roadmap" class="img-fluid">
+                    <div class="w-100 d-flex justify-content-start m-5">
+                        <img src="/img/landing/newLanding/roadMap.png" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-1">
@@ -63,8 +63,8 @@
             </div>
             <div class="d-flex align-items-center flex-sm-column flex-md-row-reverse my-0 py-0" id="weakness-detection">
                 <div class="d-flex justify-content-end card-main-image" style="width: 65%">
-                    <div class="w-100 d-flex justify-content-end">
-                        <img src="/img/landing/newLanding/mobileDashboard.webp" alt="roadmap" class="img-fluid">
+                    <div class="w-100 d-flex justify-content-end m-5">
+                        <img src="/img/landing/newLanding/mobileDashboard.png" alt="roadmap" class="img-fluid">
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-2">
@@ -79,8 +79,8 @@
             </div>
             <div class="d-flex align-items-center flex-sm-column flex-md-row my-0 py-0" id="personal-session">
                 <div class="d-flex justify-content-start card-main-image" style="width: 65%">
-                    <div class="w-100 d-flex justify-content-start">
-                        <img src="/img/landing/newLanding/socialGroup.webp" alt="discussion banner image" class="img-fluid">
+                    <div class="w-100 d-flex justify-content-start m-5">
+                        <img src="/img/landing/newLanding/socialGroup.png" alt="discussion banner image" class="img-fluid">
                     </div>
                 </div>
                 <div class="d-flex flex-column card-main-info" style="width: 35%" id="card-main-info-3">
@@ -113,7 +113,7 @@
 
                                     <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
                                       <h6 class="card-title">{{$group->title}}</h6>
-                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Click To Join</a>
+                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Join</a>
                                     </div>
                                   </div>
                             </div>
@@ -161,6 +161,7 @@
                     centeredSlides: true,
                     grabCursor: true,
                     loop: true,
+                    speed: 3000,
                     // effect: "cube",
                     // grabCursor: true,
                     // cubeEffect: {
@@ -170,7 +171,7 @@
                     //     shadowScale: 0.94,
                     // },
                     autoplay: {
-                        delay: 5500,
+                        delay: 5000,
                         disableOnInteraction: false,
                     },
                     pagination: {

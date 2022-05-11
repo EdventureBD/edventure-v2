@@ -86,7 +86,7 @@
                             @foreach($topics as $topic)
 
                             <div class="ml-4">
-                                <a href="{{route('model.exam',['t' => $topic->id])}}"
+                                <a href="{{route('model.exam',['c' => $topic->examCategory->uuid])}}"
                                    class="examBtn btn btn-sm btn-outline-primary">
                                     {{$topic->name}}
                                 </a>
