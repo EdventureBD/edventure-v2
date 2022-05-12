@@ -11013,11 +11013,11 @@ a:hover {
   font-size: 1.5rem;
   color: white;
 }
-#text-in-landing a:hover{
-  background: wheat;
-  color: #FA9632;
-  border: 1px solid #FA9632;
-}
+/*#text-in-landing a:hover{*/
+/*  background: wheat;*/
+/*  color: #FA9632;*/
+/*  border: 1px solid #FA9632;*/
+/*}*/
 @media screen and (max-width: 576px) {
   #text-in-landing {
     top: 90px;
@@ -12123,3 +12123,21 @@ svg.eye-icon {
   }
 }
 /* footer parts custom css  */
+
+.custom-submit-btn {
+    background: #FA9633;
+    border: 2px solid #FA9633;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgb(0 0 0 / 10%);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.custom-submit-btn:hover {
+    /*background-color: #ffb300;*/
+    background-color: #f2a44b;
+    box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}

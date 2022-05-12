@@ -34,13 +34,13 @@
             </div>
             <div class="col-md-3">
                 <div class="single-footer-column">
-                    <p class="text-xxsm bottom-border">SUBSCRIBE NOW</p>
+                    <p class="text-xxsm  bottom-border">SUBSCRIBE NOW</p>
                     <form action="" class="subscribe-form mt-5">
                         <div class="d-flex single-input-group justify-content-between">
                             <input type="text" name="email" placeholder="Enter your email address" style="color: white; font-size: 14px;"/>
                             <img src="/img/landing/subscribe_user.png" alt="">
                         </div>
-                        <button type="submit" class="btn text-xxsm text-white btn-orange-customed fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
+                        <button type="submit" class="btn text-xxsm text-white custom-submit-btn fw-800 px-4 py-2 w-100 mt-3">SUBSCRIBE NOW</button>
                     </form>
                 </div>
                 <div class="d-flex justify-content-between social-icons mt-3">

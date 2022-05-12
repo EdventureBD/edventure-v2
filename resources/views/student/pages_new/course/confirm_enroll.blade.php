@@ -37,11 +37,11 @@
                         <label for="coursePrice">Payable Amount</label>
                         <input type="number" name="course_price" id="coursePrice" min="{{$enroll_months*$course->price}}" class="form-control" value="{{$enroll_months*$course->price}}" readonly />
                     </div>
-                    <button class="btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4" type="submit">Submit</button>
+                    <button class="btn custom-submit-btn d-inline-block mt-4 fw-800 text-xxsm text-white mb-3 px-4" type="submit">Confirm</button>
                 </form>
             </div>
         </div>
-        
+
     </div>
     {{-- <script>
         function calculatePrice(e)
