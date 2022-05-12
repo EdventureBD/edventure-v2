@@ -10,6 +10,16 @@
         .card-footer:hover {
             background: #6400c8 !important;
         }
+        @media screen and (max-width:768px){
+            #cards-parent {
+                justify-content: space-around !important;
+            }
+        }
+        @media screen and (max-width:576px){
+            #cards-parent {
+                justify-content: center !important;
+            }
+        }
     </style>
     <div class="page-section ">
         <div class="container ">
@@ -79,7 +89,7 @@
                     <div class="py-1 text-center d-flex justify-content-center">
                         <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>
                     </div>
-                    <div class="row row-cols-md-3 justify-content-center py-5">
+                    <div class="row {{count($courses) + count($bundles) == 1 ? 'justify-content-center' : 'justify-content-around'}} py-5" id="cards-parent">
                         {{-- course part ends  --}}
                         @foreach ($courses as $course)
                             <div class="mb-4">

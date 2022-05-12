@@ -25,10 +25,10 @@
          </div>
       </div>
 
-      <div class="row justify-content-center row-cols-md-5 row-cols-sm-1 mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="bundleParentContainer">
+      <div class="row {{count($bundle->courses) == 1 ? 'justify-content-center' : 'justify-content-around' }} mx-md-0 mt-lg-0 pt-lg-0 pt-sm-3 mt-sm-3" id="bundleParentContainer">
 
          @foreach ($bundle->courses as $key => $course)
-            <a href="{{ route('batch-lecture', ['batch' => $course->Batch[0]->slug]) }}" style="color: white !important;">
+            <a href="{{ route('batch-lecture', ['batch' => $course->Batch[0]->slug]) }}" style="color: white !important;" class="col-lg-2 col-md-3 col-sm-12">
                <div class="px-lg-5 px-sm-0 pb-5">
                   <div data-toggle="modal" data-target="#courseTopicModal-291">
                      <img src="{{ $course->island_image }}" alt="Iland image" class="img-fluid">
