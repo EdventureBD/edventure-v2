@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-                                    'title' => 'Batch Lecture',
-                                    'pageName'=>'Batch Lectures', 
-                                    'secondPageName'=>'Batch lectures'
+                                    'title' => 'Add Batch to Island',
+                                    'pageName'=>'Add Batch to Islands', 
+                                    'secondPageName'=>'Add Batch to Islands'
                                 ])
 
 @section('css1')
@@ -17,13 +17,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Batch Lecture List</h3>
+                            <h3 class="card-title">List of Associations</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
                                         <a href="{{ route('batch-lecture.create') }}">
-                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Batch Lecture</button>
+                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Add Batch to Island</button>
                                         </a>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                         <th>SL. No</th>
                                         <th>Batch</th>
                                         <th>Course</th>
-                                        <th>Topic</th>
+                                        <th>Island</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -64,7 +64,7 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Delete {{ $batchlecture->batchName }} batch lecture</h4>
+                                                                    <h4 class="modal-title">Delete {{ $batchlecture->batchName }} Add Batch to Island</h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -96,7 +96,7 @@
                                         <th>SL. No</th>
                                         <th>batch</th>
                                         <th>Course</th>
-                                        <th>Topic</th>
+                                        <th>Island</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>

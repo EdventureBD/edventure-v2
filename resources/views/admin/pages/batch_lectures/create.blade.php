@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Batch Lectures', 
-                                    'pageName'=>'Add Batch Lectures', 
-                                    'secondPageName'=>'Add Batch Lectures'
+                                    'title'=>'Add Batch to Islands', 
+                                    'pageName'=>'Add Batch to Islands', 
+                                    'secondPageName'=>'Add Batch to Islands'
                                 ])
 
 @section('content')

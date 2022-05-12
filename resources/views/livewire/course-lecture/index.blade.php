@@ -48,9 +48,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="topic">Topics</label>
+                                        <label class="col-form-label" for="topic">Island</label>
                                         <select class="form-control" id="topic" wire:model="topicId">
-                                            <option value="" selected>Select Topic</option>
+                                            <option value="" selected>Select Island</option>
                                             @foreach($topics as $topic)
                                                 <option wire:key="{{ $topic->slug.$topic->id }}" value="{{ $topic->id }}">{{ $topic->title }}</option>
                                             @endforeach
@@ -66,7 +66,7 @@
                                                 <th>SL. No</th>
                                                 <th>Title</th>
                                                 <th>Course</th>
-                                                <th>Topic</th>
+                                                <th>Island</th>
                                                 <th>Exam</th>
                                                 <th>video</th>
                                                 <th>Status</th>
@@ -137,7 +137,7 @@
                                                 <th>SL. No</th>
                                                 <th>Title</th>
                                                 <th>Course</th>
-                                                <th>Topic</th>
+                                                <th>Island</th>
                                                 <th>Exam</th>
                                                 <th>video</th>
                                                 <th>Status</th>

@@ -232,7 +232,7 @@
                                 <a href="{{ route('course-topic.index') }}"
                                     class="nav-link {{ request()->is('admin/course-topic')? 'active': '' }} {{ request()->is('admin/course-topic/create')? 'active': '' }} {{ request()->is('admin/course-topic/*/edit')? 'active': '' }}">
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Course Topic </p>
+                                    <p>&nbsp; Island </p>
                                 </a>
                             </li>
                             {{-- END OF COURSE TOPIC --}}
@@ -242,7 +242,7 @@
                                 <a href="{{ route('batch-lecture.index') }}"
                                     class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Batch Lecture </p>
+                                    <p>&nbsp; Add Batch to Island </p>
                                 </a>
                             </li>
                             {{-- END OF BATCH LECTURE --}}

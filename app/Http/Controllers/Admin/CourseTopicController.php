@@ -49,9 +49,9 @@ class CourseTopicController extends Controller
         $delete = $course_topic->delete();
 
         if ($delete) {
-            return redirect()->route('course-topic.index')->with('status', 'Course topic successfully deleted!');
+            return redirect()->route('course-topic.index')->with('status', 'Island Successfully Deleted!');
         } else {
-            return redirect()->route('course-topic.index')->with('failed', 'Course topic deletion failed!');
+            return redirect()->route('course-topic.index')->with('failed', 'Island Deletion Failed!');
         }
     }
 

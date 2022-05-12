@@ -82,10 +82,10 @@
                                     </div>
                                     <div class="col-md-3 {{ $showAssignment ? '' : 'd-none' }}">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="topicName">Topic <span
+                                            <label class="col-form-label" for="topicName"> Island <span
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="topicId">
-                                                <option value="" selected>Select Topic</option>
+                                                <option value="" selected>Select Island</option>
                                                 @foreach ($topics as $topic)
                                                     <option wire:key="{{ $topic->slug.$topic->id }}" value="{{ $topic->id }}">{{ $topic->title }}</option>
                                                 @endforeach

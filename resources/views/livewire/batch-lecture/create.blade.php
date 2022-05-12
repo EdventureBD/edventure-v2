@@ -8,7 +8,7 @@
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Add Batch Lectures</h3>
+                            <h3 class="card-title">Add Batch to Islands</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -17,7 +17,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="batch">Batch <span class="must-filled">*</span></label>
+                                                <label class="col-form-label" for="batch"> Batch <span class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="batchId" disabled>
                                                     <option value="{{ $batches->id }}">{{ $batches->title }}</option>
                                                 </select>
@@ -41,9 +41,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseName">Topic <span class="must-filled">*</span></label>
+                                                <label class="col-form-label" for="courseName"> Island <span class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="topicId">
-                                                    <option value="" selected>Select Topic</option>
+                                                    <option value="" selected>Select Island</option>
                                                     @foreach($topics as $topic)
                                                         <option value="{{ $topic->id }}">{{ $topic->title }}
                                                         </option>
@@ -76,7 +76,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseName">Course <span class="must-filled">*</span></label>
+                                                <label class="col-form-label" for="courseName"> Course <span class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="courseId" disabled>
                                                     <option>Courses</option>
                                                     @if ($batchId)
@@ -90,11 +90,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="courseName">Topic <span class="must-filled">*</span></label>
+                                                <label class="col-form-label" for="courseName"> Island <span class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="topicId" @if (!$courseId)
                                                     disabled
                                                 @endif>
-                                                    <option value="" selected>Select Topic</option>
+                                                    <option value="" selected>Select Island</option>
                                                     @if ($courseId)
                                                         @foreach($topics as $topic)
                                                             <option value="{{ $topic->id }}">{{ $topic->title }}
