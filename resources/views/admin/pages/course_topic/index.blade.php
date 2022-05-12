@@ -1,7 +1,7 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Course Topic', 
-                                    'pageName'=>'Course Topic', 
-                                    'secondPageName'=>'Course Topic'
+                                    'title'=>'Island', 
+                                    'pageName'=>'Island', 
+                                    'secondPageName'=>'Island'
                                 ])
 
 @section('css1')
@@ -17,12 +17,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Course Topics</h3>
+                        <h3 class="card-title">Islands</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
                                 <a href="{{ route('course-topic.create') }}">
-                                    <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Course Topic</button>
+                                    <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;Island</button>
                                 </a>
                             </div>
                         </div>
@@ -59,10 +59,10 @@
                     });
                 } else {
                     if($("#single-col-"+$(this).data('id')).prop("checked") == true){
-                         $("#single-col-"+$(this).data('id')).prop('checked', false);
+                        $("#single-col-"+$(this).data('id')).prop('checked', false);
                     }
                     else if($("#single-col-"+$(this).data('id')).prop("checked") == false){
-                         $("#single-col-"+$(this).data('id')).prop('checked', true);
+                        $("#single-col-"+$(this).data('id')).prop('checked', true);
                     }
                 }
             })

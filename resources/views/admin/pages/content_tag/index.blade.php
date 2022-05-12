@@ -94,7 +94,7 @@
                                         <th>DB_ID</th>
                                         <th>Title</th>
                                         <th>Course</th>
-                                        <th>Topic</th>
+                                        <th>Island</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -172,7 +172,7 @@
                                         <th>DB_ID</th>
                                         <th>Title</th>
                                         <th>Course</th>
-                                        <th>Topic</th>
+                                        <th>Island</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>

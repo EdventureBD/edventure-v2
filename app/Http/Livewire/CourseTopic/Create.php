@@ -142,7 +142,7 @@ class Create extends Component
             $batchLecture->save();
          }
 
-         session()->flash('status', 'Course topic created successfully!');
+         session()->flash('status', 'Island created successfully!');
          if ($route == "course.show") {
             return redirect()->route('course.show', $slug);
          }
@@ -150,7 +150,7 @@ class Create extends Component
             return redirect()->route('course-topic.index');
          }
       } else {
-         session()->flash('failed', 'Course topic created failed!');
+         session()->flash('failed', 'Island created failed!');
          return redirect()->route('course-topic.create');
       }
    }

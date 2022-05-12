@@ -38,10 +38,10 @@ class BatchLectureController extends Controller
         $batchLecture->status = 1;
         $save = $batchLecture->save();
         if ($save) {
-            session()->flash('status', 'Batch Lecture successfully added!');
+            session()->flash('status', 'Batch Successfully Added to Island!');
             return back();
         } else {
-            session()->flash('failed', 'Batch Lecture created failed!');
+            session()->flash('failed', 'Failed to Add Batch to Island !');
             return back();
         }
     }
@@ -50,9 +50,9 @@ class BatchLectureController extends Controller
     {
         $delete = $batchLecture->delete();
         if ($delete) {
-            return back()->with('status', 'Batch Lecture successfully deleted!');
+            return back()->with('status', 'Batch Successfully Removed from Island !');
         } else {
-            return back()->with('failed', 'Batch Lecture deletion failed!');
+            return back()->with('failed', 'Failed to Remove Batch from Island!');
         }
     }
 

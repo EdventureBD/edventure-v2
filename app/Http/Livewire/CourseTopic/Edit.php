@@ -152,10 +152,10 @@ class Edit extends Component
         $save = $course_topic->save();
 
         if ($save) {
-            session()->flash('status', 'Course topic successfully updated!');
+            session()->flash('status', 'Island successfully updated!');
             return redirect()->route('course-topic.index');
         } else {
-            session()->flash('failed', 'Course topic update failed!');
+            session()->flash('failed', 'Island update failed!');
             return redirect()->route('course-topic.edit', $this->course_topic->slug);
         }
     }

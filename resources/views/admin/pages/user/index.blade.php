@@ -26,12 +26,12 @@
                                 <form action="">
                                 <div class="input-group mb-3">
                                     <input type="text"
-                                           name="query[user]"
-                                           class="form-control"
-                                           placeholder="User name/email/phone"
-                                           aria-label="Recipient's username"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
+                                            name="query[user]"
+                                            class="form-control"
+                                            placeholder="User name/email/phone"
+                                            aria-label="Recipient's username"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
                                         <button class="input-group-text btn btn-outline-primary" id="basic-addon2">search</button>
                                     </div>
                                 </div>
