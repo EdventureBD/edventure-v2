@@ -49,7 +49,7 @@
    @endphp
    @foreach ($batchTopics as $batchTopic)
       @php if ($disabled && !$disabled2) $disabled = false; @endphp
-      @if($previous_island_topic_end_exam_passed && count($batchTopic->courseTopic->exams) != 0)
+      @if(($previous_island_topic_end_exam_passed || $batchTopic->previous_topic_end_exam_attempts_unlocked) && count($batchTopic->courseTopic->exams) != 0)
          <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
@@ -66,18 +66,18 @@
                               @if (count($exam->course_lectures))
                                  @foreach ($exam->course_lectures as $course_lecture)
                                     <li>
-                                          <a
-                                             data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
-                                             @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
-                                             href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
-                                             class="reduce_padding fw-800 @if ($disabled && !$disabled2 && !$course_lecture->completed) modal-items-next @elseif($disabled2) modal-items-disabled @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                             <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
-                                          </a>
+                                       <a
+                                          data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
+                                          @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
+                                          href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
+                                          class="reduce_padding fw-800 @if($disabled2) modal-items-disabled @elseif (!$course_lecture->completed) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
+                                          <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
+                                       </a>
                                        <div class="w-25">
 
-                                          @if ($disabled && !$disabled2 && !$course_lecture->completed)
+                                          @if($disabled2)
                                              <div style="height:50px;"></div>
-                                          @elseif($disabled2)
+                                          @elseif (!$course_lecture->completed)
                                              <div style="height:50px;"></div>
                                           @else
                                              <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid">
@@ -146,7 +146,8 @@
                                  @endif
                                  @php
                                     // set previous island TEE passed to false if not passed. WIll generate modal based on that.
-                                    if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false){
+
+                                    if($exam->exam_type == "Topic End Exam" && $exam->test_passed == false && !$batchTopic->previous_topic_end_exam_attempts_unlocked){
                                        $previous_island_topic_end_exam_passed = false;
                                     }
 
@@ -159,8 +160,8 @@
                                        $disabled = true;
                                        $disabled2 = true;
                                     } elseif ($exam->exam_type == "Aptitude Test" && !$disabled && !$exam->test_passed) $disabled = true;
-                                    elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->test_passed) $disabled2 = true;
-                                    elseif ($disabled && !$disabled2 && (($exam->exam_type != 'Pop Quiz' && !$exam->test_passed) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
+                                    elseif (!$disabled2 && $exam->exam_type == "Topic End Exam" && (!$exam->test_passed && (count($exam->exam_attempts) == 0 || $exam->exam_attempts[0]->unlocked == false))) $disabled2 = true;
+                                    elseif ($disabled && !$disabled2 && (($exam->exam_type == 'Aptitude Test' && !$exam->test_passed) || ($exam->exam_type == 'Topic End Exam' && (!$exam->test_passed && (count($exam->exam_attempts) == 0 || $exam->exam_attempts[0]->unlocked == false))) || ($exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted))) $disabled2 = true;
                                  @endphp
                               </li>
 
@@ -186,8 +187,8 @@
    {{-- @php
       $disabled = false; // Last Aptitude exam passed
       $disabled2 = true; // last Aptitude exam attempted
-      $disabled3 = true; // Last Lecture/Other Exam Completed
-      $disabled4 = true; // Last TEE Completed
+      $disabled3 = true; // Last Lecture/Other Exam completed
+      $disabled4 = true; // Last TEE completed
    @endphp
    @forelse ($batchTopics as $batchTopic)
       <div class="modal fade" id="courseTopicModal-{{ $batchTopic->courseTopic->id }}" tabindex="-1" role="dialog" aria-labelledby="courseTopicModalLabel" aria-hidden="true">
@@ -280,7 +281,8 @@
 
    {{-- <script src="{{ asset('/js/roadmap.js') }}"></script> --}}
    <script>
-      let allLands = JSON.parse(atob('{{ base64_encode(json_encode($batchTopics)) }}'));
+
+      let allLands = @json($batchTopics);
 
       let landCounter = 0;
 
@@ -288,9 +290,9 @@
 
       let landsParentDiv = document.getElementById("ilandsParentContainer");
 
-      let ilandImages = JSON.parse(atob('{{ base64_encode(json_encode($island_images)) }}'));
+      let ilandImages = @json($island_images);
 
-      let ilandImageDisabled = JSON.parse(atob('{{ base64_encode(json_encode($island_images_disabled)) }}'));
+      let ilandImageDisabled = @json($island_images_disabled);
 
       while(totalLands){
          // onStream design

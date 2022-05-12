@@ -8,11 +8,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
  //models
- use App\Models\Admin\TopicEndExamMCQ;
- use App\Models\Admin\TopicEndExamCreativeQuestion;
- use App\Models\Admin\QuestionContentTag;
- use App\Models\Admin\Exam;
- use App\Models\Admin\ContentTag;
+use App\Models\Admin\TopicEndExamMCQ;
+use App\Models\Admin\TopicEndExamCreativeQuestion;
+use App\Models\Admin\QuestionContentTag;
+use App\Models\Admin\Exam;
+use App\Models\Admin\ContentTag;
 
 class TopicEndExamMCQController extends Controller
 {
@@ -64,6 +64,7 @@ class TopicEndExamMCQController extends Controller
             'examId' => 'required',
             'slug' => 'required',
             'contentTagIds' => 'required',
+            'question_set' => 'required',
         ]);
 
         $mcq = new TopicEndExamMCQ();
@@ -83,6 +84,7 @@ class TopicEndExamMCQController extends Controller
         $mcq->number_of_attempt = 0;
         $mcq->gain_marks = 0;
         $mcq->success_rate = 0;
+        $mcq->question_set = $request['question_set'];
 
         $save = $mcq->save();
 
@@ -153,6 +155,7 @@ class TopicEndExamMCQController extends Controller
             'examId' => 'required',
             'slug' => 'required',
             'contentTagIds' => 'required',
+            'question_set' => 'required',
         ]);
 
         $mcq = TopicEndExamMCQ::where('slug', $topic_end_exam_mcq_slug)->firstOrFail();
@@ -172,7 +175,8 @@ class TopicEndExamMCQController extends Controller
         $mcq->field4 = $request['field4'];
         $mcq->answer = $request['answer'];
         $mcq->explanation = $request['explanation'];
-        $mcq->exam_id = $request['examId'];        
+        $mcq->exam_id = $request['examId'];
+        $mcq->question_set = $request['question_set'];
 
         $save = $mcq->save();
 

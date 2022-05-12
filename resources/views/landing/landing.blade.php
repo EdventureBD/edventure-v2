@@ -19,10 +19,10 @@
         </div>
         <div class="mt-0" id="text-in-landing">
             @auth
-            <h4 class="text-white  text-sm font-roboto">Hey, {{Auth::user()->name}} !</h4>
-            <h4 class="text-white  text-sm font-roboto">Welcome to the Edventure.</h4>
-            <h2 class="text-sm fw-800 font-roboto mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
-            <a href="{{route('model.exam')}}" class="font-roboto text-xsm btn btn-register btn-orange-customed px-4">Go For Exam</a>
+            <h4 class="text-white  text-sm">Hey, {{Auth::user()->name}} !</h4>
+            <h4 class="text-white  text-sm">Welcome to the Edventure.</h4>
+            <h2 class="text-sm fw-800 mb-2 text-white">প্রস্তুতি হোক <br> নিজের মতো<h2>
+            <a href="{{route('model.exam')}}" class="text-xsm btn btn-register btn-orange-customed px-4" style="border: 1px solid #FA9632">Go For Exam</a>
             @else
             <div id="landing_greeting_and_register_button">
                 <div>
@@ -113,7 +113,7 @@
 
                                     <div style="background-color:#6400C8" class="card-body d-flex justify-content-between text-white">
                                       <h6 class="card-title">{{$group->title}}</h6>
-                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Click To Join</a>
+                                      <a target="_blank" style="border-radius: 15px;" href="{{$group->link}}" class="btn btn-orange-customed">Join</a>
                                     </div>
                                   </div>
                             </div>
@@ -161,6 +161,7 @@
                     centeredSlides: true,
                     grabCursor: true,
                     loop: true,
+                    speed: 3000,
                     // effect: "cube",
                     // grabCursor: true,
                     // cubeEffect: {
@@ -170,7 +171,7 @@
                     //     shadowScale: 0.94,
                     // },
                     autoplay: {
-                        delay: 5500,
+                        delay: 5000,
                         disableOnInteraction: false,
                     },
                     pagination: {

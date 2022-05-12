@@ -19,34 +19,38 @@
                                 {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
                                 {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
                                 {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
+                                {{ request()->is('admin/lockedStudents') ? 'menu-open' : '' }}
                                 {{-- END NEW --}}
 ">
     <a href="#"
         class="nav-link {{ request()->is('admin/exam') ? 'active' : '' }}
-{{ request()->is('admin/exam/create') ? 'active' : '' }}
-{{ request()->is('admin/exam/*/edit') ? 'active' : '' }}
-{{ request()->is('admin/exam/*') ? 'active' : '' }}
-{{ request()->is('admin/add-mcq/*') ? 'active' : '' }}
-{{ request()->is('admin/student-exam-attempt') ? 'active' : '' }}
-{{ request()->is('admin/cq/*') ? 'active' : '' }}
-{{ request()->is('admin/mcq/*') ? 'active' : '' }}
-{{ request()->is('admin/all-mcq') ? 'active' : '' }}
-{{ request()->is('admin/all-cq') ? 'active' : '' }}
-{{ request()->is('admin/all-assignment') ? 'active' : '' }}
+        {{ request()->is('admin/exam/create') ? 'active' : '' }}
+        {{ request()->is('admin/exam/*/edit') ? 'active' : '' }}
+        {{ request()->is('admin/exam/*') ? 'active' : '' }}
+        {{ request()->is('admin/add-mcq/*') ? 'active' : '' }}
+        {{ request()->is('admin/student-exam-attempt') ? 'active' : '' }}
+        {{ request()->is('admin/cq/*') ? 'active' : '' }}
+        {{ request()->is('admin/mcq/*') ? 'active' : '' }}
+        {{ request()->is('admin/all-mcq') ? 'active' : '' }}
+        {{ request()->is('admin/all-cq') ? 'active' : '' }}
+        {{ request()->is('admin/all-assignment') ? 'active' : '' }}
 
-{{-- NEW --}}
-{{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
+        {{-- NEW --}}
+        {{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
 
-{{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
-{{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
-{{-- END NEW --}}
-">
+        {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
+        {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
+        {{ request()->is('admin/lockedStudents') ? 'menu-open' : '' }}
+        {{-- END NEW --}}
+        ">
         <i class="fas fa-paste"></i>
         <p>&nbsp; Exam<i class="right fas fa-angle-left"></i></p>
     </a>
+
+
     <ul class="nav ml-5 nav-treeview">
 
         {{-- <li
@@ -80,7 +84,7 @@
         {{-- ONTIK --}}
         <li class="nav-item">
             <a href="{{ route('showAllAT') }}"
-                class="nav-link {{ request()->is('admin/all-aptitude-test') ? 'active' : '' }} ">
+                class="nav-link {{ request()->is('admin/all-aptitude-test') ? 'active' : '' }}">
                 <i class="far fa-dot-circle nav-icon"></i>
                 <p>Aptitude Test</p>
             </a>
@@ -115,5 +119,14 @@
                 <p>Student Exam Attempt</p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('locked_students') }}"
+                class="nav-link {{ request()->is('admin/lockedStudents') ? 'active' : '' }}">
+                <i class="fas fa-user-lock"></i>
+                <p>&nbsp; Locked Students </p>
+            </a>
+        </li>
+
     </ul>
 </li>

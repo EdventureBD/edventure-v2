@@ -55,18 +55,28 @@
                               {{ csrf_field() }}
                               <input name="examId" type="hidden" value="{{ $exam->id }}">
                               <input name="slug" type="hidden" value="{{ $exam->slug }}">
-                              <div class="form-group">
-                                    <label for="question" class="col-form-label">Question <span
-                                          class="must-filled">*</span></label>
-                                    {{-- <input type="text" class="form-control" name="question" placeholder="Enter question" value="{{ old('question') }}"> --}}
-                                    <textarea input="question" id="question" name="question" placeholder="Enter question"
-                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                       required>{{ old('question') }}</textarea>
-                                    @error('question')
-                                       <p style="color: red;">{{ $message }}</p>
-                                    @enderror
+                           
+                              <div class="row">
+                                 <div class="col-md-12">
+                                 <div class="form-group">
+                                       <label for="question" class="col-form-label">Question <span
+                                             class="must-filled">*</span></label>
+                                       {{-- <input type="text" class="form-control" name="question" placeholder="Enter question" value="{{ old('question') }}"> --}}
+                                       <textarea input="question" id="question" name="question" placeholder="Enter question"
+                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                          required>{{ old('question') }}</textarea>
+                                       @error('question')
+                                          <p style="color: red;">{{ $message }}</p>
+                                       @enderror
+                                 </div>
+                                 </div>
                               </div>
-                              <div class="col-md-6">
+
+
+
+
+                              <div class="row">
+                                 <div class="col-md-6">
                                     <div class="row">
                                        <div class="col-md-8">
                                           <div class="form-group">
@@ -86,7 +96,12 @@
                                           </div>
                                        </div>
                                     </div>
+                                 </div>
                               </div>
+
+
+
+
                               <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
@@ -146,35 +161,50 @@
                                     </div>
                               </div>
                               <div class="row">
-                                    <div class="col-md-6">
-                                       <div class="form-group">
-                                          <label class="col-form-label" for="examId">Answer <span
-                                                   class="must-filled">*</span></label>
-                                          <select class="form-control" name="answer" value="{{ old('answer') }}">
-                                                <option value="" selected>Select Answer</option>
-                                                <option value="1">Option 1</option>
-                                                <option value="2">Option 2</option>
-                                                <option value="3">Option 3</option>
-                                                <option value="4">Option 4</option>
-                                          </select>
-                                          @error('answer')
-                                                <p style="color: red;">{{ $message }}</p>
-                                          @enderror
-                                       </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label class="col-form-label" for="examId">Answer <span
+                                                class="must-filled">*</span></label>
+                                       <select class="form-control" name="answer" value="{{ old('answer') }}">
+                                             <option value="" selected>Select Answer</option>
+                                             <option value="1">Option 1</option>
+                                             <option value="2">Option 2</option>
+                                             <option value="3">Option 3</option>
+                                             <option value="4">Option 4</option>
+                                       </select>
+                                       @error('answer')
+                                             <p style="color: red;">{{ $message }}</p>
+                                       @enderror
                                     </div>
-                                    <div class="col-md-6">
-                                       <div class="form-group">
-                                          <label class="col-form-label" for="examId">Exam <span
-                                                   class="must-filled">*</span></label>
-                                          <select class="form-control" name="examId" disabled>
-                                                <option value="{{ $exam->id }}">{{ $exam->title }}</option>
-                                          </select>
-                                          @error('examId')
-                                                <p style="color: red;">{{ $message }}</p>
-                                          @enderror
-                                       </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label class="col-form-label" for="examId">Exam <span
+                                                class="must-filled">*</span></label>
+                                       <select class="form-control" name="examId" disabled>
+                                             <option value="{{ $exam->id }}">{{ $exam->title }}</option>
+                                       </select>
+                                       @error('examId')
+                                             <p style="color: red;">{{ $message }}</p>
+                                       @enderror
                                     </div>
+                                 </div>
                               </div>
+
+                              @if($exam->exam_type == "Topic End Exam")
+                                 <div class="form-group">
+                                    <label class="col-form-label" for="question_set"> Question Set <span class="must-filled">*</span></label>
+                                       <select class="form-control" name="question_set"  value="{{ old('question_set') }}">
+                                             <option value="1"> Set 1 </option>
+                                             <option value="2"> Set 2 </option>
+                                             <option value="3"> Set 3 </option>
+                                       </select>
+                                    @error('question_set')
+                                       <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                 </div>
+                              @endif
+
                               <div class="form-group">
                                     <label class="col-form-label" for="examId">Content Tag <span
                                           class="must-filled">*</span></label>

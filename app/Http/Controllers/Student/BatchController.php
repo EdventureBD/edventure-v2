@@ -101,12 +101,14 @@ class BatchController extends Controller
             ->select('id', 'lecture_id');
         },
         'courseTopic.exams.exam_attempts' => function($query){
-            return $query->where('student_id', auth()->user()->id)->select('id', 'topic_end_exam_id', 'student_id', 'attempts');
+            return $query->where('student_id', auth()->user()->id)->select('id', 'topic_end_exam_id', 'student_id', 'attempts', 'unlocked');
         },
         ])
         ->where('batch_id', $batch->id)
         ->where('course_id', $course->id)
         ->get();
+
+        // dd($batchTopics);
 
         // no_courses exist for one of the bundles
         if(count($batchTopics) == 0){
@@ -131,6 +133,7 @@ class BatchController extends Controller
 
         $previous_aptitude_test_passed = true;
         $previous_topic_end_exam_passed = true;
+        $previous_topic_end_exam_attempts_unlocked = true;
         
         foreach($batchTopics as $key => $batchTopic){
 
@@ -148,6 +151,7 @@ class BatchController extends Controller
             foreach($batchTopic->courseTopic->exams as $exam){
                 $aptitude_test_passed = $previous_aptitude_test_passed;
                 $topic_end_exam_passed = $previous_topic_end_exam_passed;
+                $topic_end_exam_attempts_unlocked = $previous_topic_end_exam_attempts_unlocked;
 
                 $number_of_nodes++;
                 $scored_marks = 0;
@@ -166,9 +170,17 @@ class BatchController extends Controller
                         $exam->has_been_attempted = false;
                     }
                 // }
-                
+
+                if($exam->exam_type == "Topic End Exam" && count($exam->exam_attempts) > 0 && $exam->exam_attempts[0]->unlocked == true){
+                    $topic_end_exam_attempts_unlocked = true;
+                }
+                else{
+                    $topic_end_exam_attempts_unlocked = false;
+                }
+
                 $exam->previous_aptitude_test_passed = $previous_aptitude_test_passed;
                 $exam->previous_topic_end_exam_passed = $previous_topic_end_exam_passed;
+                $batchTopic->previous_topic_end_exam_attempts_unlocked = $topic_end_exam_attempts_unlocked;
 
                 foreach($exam->exam_results as $exam_result){
                     $scored_marks = $scored_marks + $exam_result->gain_marks;
@@ -179,12 +191,15 @@ class BatchController extends Controller
                         $number_of_completed_nodes++;
                     }
                     $exam->test_passed = true;
+                    if($exam->exam_type === "Topic End Exam"){
+                        $topic_end_exam_passed = true;
+                    }
                 }
                 else{
-                    if($exam->exam_type === "Aptitude Test" && $aptitude_test_passed){
+                    if($exam->exam_type === "Aptitude Test"){
                         $aptitude_test_passed = false;
                     }
-                    if($exam->exam_type === "Topic End Exam" && $topic_end_exam_passed){
+                    if($exam->exam_type === "Topic End Exam"){
                         $topic_end_exam_passed = false;
                     }
                     $exam->test_passed = false;
@@ -207,8 +222,6 @@ class BatchController extends Controller
                 $exam->completed_lecture_count = $completed_lecture_count;
                 $exam->scored_marks = $scored_marks;
             }
-
-
 
             // foreach($batchTopic->courseTopic->exams as $exam){
             //     $aptitude_test_passed = $previous_aptitude_test_passed;
@@ -283,7 +296,14 @@ class BatchController extends Controller
                 $batchTopic->percentage_completion = ($number_of_completed_nodes/$number_of_nodes)*100;
             }
 
-            if($key == 0 || ($previous_topic_end_exam_passed)){
+            // if($key == 1){
+            //     dd($previous_topic_end_exam_attempts_unlocked, $exam);
+            // }
+
+            if($key == 0 || ($previous_topic_end_exam_passed || $previous_topic_end_exam_attempts_unlocked)){
+
+                // dump(1, $previous_topic_end_exam_passed, $previous_topic_end_exam_attempts_unlocked);
+
                 if($batchTopic->percentage_completion >= 100){
                     $island_images[] = $batchTopic->courseTopic->three_star_island_image;
                     $island_images_disabled[] = 0;
@@ -301,12 +321,16 @@ class BatchController extends Controller
                     $island_images_disabled[] = 0;
                 }
             } else {
+
+                // dump(2, $previous_topic_end_exam_passed, $previous_topic_end_exam_attempts_unlocked);
+
                 $island_images[] = $batchTopic->courseTopic->disabled_island_image;
                 $island_images_disabled[] = 1;
             }
 
             $previous_aptitude_test_passed = $aptitude_test_passed;
             $previous_topic_end_exam_passed = $topic_end_exam_passed;
+            $previous_topic_end_exam_attempts_unlocked = $topic_end_exam_attempts_unlocked;
         }
 
         $accessedDays = BatchStudentEnrollment::where('student_id', auth()->user()->id)

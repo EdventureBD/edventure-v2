@@ -1,124 +1,221 @@
-        /* paid exam's modal part's css in overflow starts*/
-        /* width */
-        .modal-body::-webkit-scrollbar {
-            width: 5px;
-        }
-    
-        /* Track */
-        .modal-body::-webkit-scrollbar-track {
-            background: rgb(199, 196, 196); 
-             
-        }
-        
-        /* Handle */
-        .modal-body::-webkit-scrollbar-thumb {
-            background: #6400c8; 
-             
-        }
-        
-        /* Handle on hover */
-        .modal-body::-webkit-scrollbar-thumb:hover {
-            background: #555; 
-        }
-        /* paid exam's modal part's css in overflow ends */
-        .card{
-            border-radius: 4px;
-            background: #fff;
-            box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-            padding: 14px 80px 18px 36px;
-            cursor: pointer;
-        }
-        .ribbon {
-            width: 150px;
-            height: 150px;
-            overflow: hidden;
-            position: absolute;
-        }
-        .ribbon::before,
-        .ribbon::after {
-            position: absolute;
-            z-index: -1;
-            content: '';
-            display: block;
-            border: 5px solid #6400C8;
-        }
-        .ribbon span {
-            position: absolute;
-            display: block;
-            width: 225px;
-            padding: 15px 0;
-            background-color: #6400C8;
-            box-shadow: 0 5px 10px rgba(0,0,0,.1);
-            color: #fff;
-            font: 700 18px/1 'Lato', sans-serif;
-            text-shadow: 0 1px 1px rgba(0,0,0,.2);
-            text-transform: uppercase;
-            text-align: center;
-        }
+/* paid exam's modal part's css in overflow starts*/
+/* width */
+.modal-body::-webkit-scrollbar {
+    width: 5px;
+}
 
-        .ribbon-top-left {
-            top: -10px;
-            left: 12px;
-        }
-        @media(max-width:576px) {
-            .ribbon-top-left {
-                left: 53px;
-            }
-        }
-        .ribbon-top-left::before,
-        .ribbon-top-left::after {
-            border-top-color: transparent;
-            border-left-color: transparent;
-        }
-        .ribbon-top-left::before {
-            top: 0;
-            right: 0;
-        }
-        .ribbon-top-left::after {
-            bottom: 0;
-            left: 0;
-        }
-        .ribbon-top-left span {
-            right: -25px;
-            top: 30px;
-            transform: rotate(-45deg);
-        }
+/* Track */
+.modal-body::-webkit-scrollbar-track {
+    background: rgb(199, 196, 196);
 
-        .card:hover{
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-        }
+}
 
-        .card h3{
-            font-weight: 600;
-        }
+/* Handle */
+.modal-body::-webkit-scrollbar-thumb {
+    background: #6400c8;
 
-        .card img{
-            position: absolute;
-            top: 20px;
-            right: 15px;
-            max-height: 120px;
-        }
+}
 
-        .card-1{
-            background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
-            background-repeat: no-repeat;
-            background-position: right;
-            background-size: 80px;
-        }
+/* Handle on hover */
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+/* paid exam's modal part's css in overflow ends */
+.card{
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 14px 40px 18px 36px;
+    /* cursor: pointer; */
+}
+.ribbon {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+    border: 5px solid #6400C8;
+}
+.ribbon span {
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 1px 0;
+    background-color: rgb(42, 126, 11);
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    color: #fff;
+    font: 700 18px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    text-align: center;
+}
 
-        @media(max-width: 990px){
-            .card{
-                margin: 20px;
-            }
-        }
-        .modal-body {
-            max-height: 375px;
-            overflow-y:scroll
-        }
-        @media screen and (max-height: 576px) {
-            .modal-body {
-                max-height: 150px;
-            }
-        }
+.ribbon-top-left {
+    top: 0px;
+    left: -2px;
+}
+.btn-detail {
+    background: #FA9633;
+    border: 2px solid #FA9633;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgb(0 0 0 / 10%);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.btn-detail:hover {
+    /*background-color: #ffb300;*/
+    background-color: #f2a44b;
+    box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+@media(max-width:576px) {
+    .ribbon-top-left {
+        left: 0px;
+    }
+}
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+.ribbon-top-left::before {
+    top: 0;
+    right: 0;
+}
+.ribbon-top-left::after {
+    bottom: 0;
+    left: 0;
+}
+.ribbon-top-left span {
+    right: 0px;
+    top: 30px;
+    transform: rotate(-45deg);
+}
+
+/* .card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+} */
+
+.card h3{
+    font-weight: 600;
+}
+
+/* .card img{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    max-height: 120px;
+} */
+
+.card-1{
+    background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+@media(max-width: 990px){
+    .card{
+        margin: 20px;
+    }
+}
+.modal-body {
+    max-height: 375px;
+    overflow-y:scroll
+}
+@media screen and (max-height: 576px) {
+    .modal-body {
+        max-height: 150px;
+    }
+}
+.custom-shadow {
+    filter: drop-shadow(0px 103.559px 168.131px rgba(0, 0, 0, 0.100973)) drop-shadow(0px 23.1312px 37.5543px rgba(0, 0, 0, 0.149027)) drop-shadow(0px 6.88678px 11.1809px rgba(0, 0, 0, 0.25));
+}
+#select-category {
+    margin-top: 10px;
+    margin-bottom: 33px;
+    font-weight: 500;
+    font-size: 22px;
+}
+@media screen and (max-width:768px) and (min-width: 577px) {
+    .category-cards-parent {
+        margin-left: 25px !important;
+    }
+}
+@media screen and (max-width:576px) {
+    .category-cards-parent {
+        margin-left: 33px !important;
+    }
+    .card {
+        margin: 13px;
+    }
+}
+.card-parent-div {
+    background: #FFFFFF;
+    box-shadow: 0px 15.1668px 55.1519px rgba(0, 0, 0, 0.12), 0px 3.3877px 12.3189px rgba(0, 0, 0, 0.0715329), 0px 1.00861px 3.66766px rgba(0, 0, 0, 0.0484671);
+    border-radius: 26px;
+    height: 250px
+}
+.card-title-customed {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #6400C8;
+    width: 100%;
+}
+.vertical-line {
+    width: 1px;
+    height:70%;
+    background:#DDDDDD;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.card-text-customed {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11.1928px;
+    line-height: 21px;
+    color: #6C686E;
+    margin-left: 5px;
+}
+#categories-section {
+    gap: 45px;
+}
+@media screen and (max-width: 768px){
+    #categories-section {
+        gap: 10px;
+    }
+    .card-text-customed {
+        font-size: 15.1928px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .card-text-customed {
+        font-size: 8.5px;
+        /* font-size: .65rem; */
+    }
+    #categories-section {
+        gap: 10px;
+    }
+    .card-body {
+        padding : 1.15rem !important;
+    }
+}

@@ -215,7 +215,7 @@ class Create extends Component
         if($course->bundle_id !== null){
             $bundle = Bundle::where('id', $course->bundle_id)->first();
             $batch = new Batch();
-            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' bundle id - '.$bundle->id. ' unique_id - '. uniqid();
+            $batch->title = 'batch for bundle name- '.$bundle->bundle_name.' bundle id - '.$bundle->id. ' | unique_id - '. uniqid();
             $batch->slug = uniqid();
             $batch->batch_running_days = 0;
             $batch->teacher_id = $this->teacherId;

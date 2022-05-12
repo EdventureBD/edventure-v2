@@ -40,7 +40,7 @@ class Create extends Component
 
     public function updatedIntermediaryLevelId()
     {
-        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->get();
+        $this->courses = Course::where('intermediary_level_id', $this->intermediaryLevelId)->where('bundle_id', null)->get();
     }
 
     public function updatedStudent_limit()
