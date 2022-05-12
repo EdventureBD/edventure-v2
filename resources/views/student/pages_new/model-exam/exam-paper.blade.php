@@ -1,4 +1,23 @@
 <x-landing-layout headerBg="white">
+    <style>
+        .custom-submit-btn {
+            background: #FA9633;
+            border: 2px solid #FA9633;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgb(0 0 0 / 10%);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+        }
+
+        .custom-submit-btn:hover {
+            /*background-color: #ffb300;*/
+            background-color: #f2a44b;
+            box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+    </style>
     <link rel="stylesheet" href="/css/mcq-plus-timer.css">
     <div class="course-info py-5 border-secondary" id="popUpExamPageBanner">
         <div class="container pt-5">
@@ -45,7 +64,7 @@
                             </div>
                         </div>
                         <div id="questionMap" class="mx-0 px-0 text-center d-none overflow-auto w-100" >
-    
+
                         </div>
                     </div>
 
@@ -88,7 +107,8 @@
                     @endforeach
 
                     <div class="d-flex justify-content-center px-5">
-                        <button type="submit" class="btn text-xxsm fw-600 text-white btn-orange-customed px-4 py-2 my-4">Submit</button>
+                        <button type="submit"
+                                class="btn text-xxsm fw-600 text-white custom-submit-btn px-4 py-2 my-4">Submit</button>
                     </div>
                 </form>
             </div>

@@ -46,7 +46,7 @@
                         <label for="coursePrice">Payable Amount</label>
                         <input type="number" name="bundle_price" id="bundlePrice" min="{{ $bundle->price }}" class="form-control" value="{{ $bundle->price }}" readonly />
                     </div>
-                    <button class="btn custom-submit-btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4" type="submit">Confirm</button>
+                    <button class="btn custom-submit-btn d-inline-block mt-4 fw-800 text-xxsm text-white mb-3 px-4" type="submit">Confirm</button>
                 </form>
             </div>
         </div>
