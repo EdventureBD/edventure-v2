@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        @if(true)
+                        @if($course->time_allotted)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/category_details/timer.png" alt="timers">
@@ -59,7 +59,7 @@
                             </div>
                         @endif
 
-                        @if(true)
+                        @if($course->video_lecture)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="video lectures">
@@ -73,7 +73,7 @@
                             </div>
                         @endif
 
-                        @if(true)
+                        @if($course->given_notes)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="notes">
@@ -88,7 +88,7 @@
                         @endif
 
 
-                        @if(true)
+                        @if($course->quiz)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/quiz-mindmap-img/Quiz.png" alt="quiz">
@@ -103,7 +103,7 @@
                         @endif
 
 
-                        @if(true)
+                        @if($course->mind_map)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/quiz-mindmap-img/Mindmap.png" alt="mindmap">

@@ -147,7 +147,7 @@ class BundleController extends Controller
             ->select('id', 'intermediary_level_id', 'bundle_name', 'slug')
             ->with([
             'courses' => function($query){
-               $query->select('id', 'slug', 'island_image', 'course_category_id', 'intermediary_level_id', 'bundle_id');
+               $query->select('id','title', 'slug', 'island_image', 'course_category_id', 'intermediary_level_id', 'bundle_id')->where('status', 1);
             },
             'courses.Batch' => function($query){
                $query->select('id', 'slug', 'course_id');

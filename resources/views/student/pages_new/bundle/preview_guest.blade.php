@@ -274,7 +274,7 @@
 
                 </div>
                 @php($teachers = $bundle->teacher_lists)
-                @if(count($teachers) > 0)
+                @if($teachers)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষক</h5>
                         <div class="d-flex overflow-x-scroll"
