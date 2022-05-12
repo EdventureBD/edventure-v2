@@ -223,7 +223,7 @@
 }
 div.course-detail-single-unit::-webkit-scrollbar {
     width: 1px;
-    
+
 }
 
 /* Track */
@@ -267,4 +267,17 @@ div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollba
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: 11px 2px 14px rgba(231, 128, 108, 0.4);
+}
+
+
+.course-tab:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f107";
+    float: right;
+    transition: all 0.5s;
+}
+.course-tab.active:before{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
 }

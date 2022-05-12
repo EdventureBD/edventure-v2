@@ -17,9 +17,9 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $appends = [
-        'teacher_lists'
-    ];
+//    protected $appends = [
+//        'teacher_lists'
+//    ];
 
     public function getRouteKeyName()
     {
@@ -82,8 +82,9 @@ class Course extends Model
     public function getTeacherListsAttribute()
     {
         $teachers = null;
-        if($this->Batch()->count() > 0) {
-            foreach ($this->Batch()->get() as $batch) {
+        $batches = $this->Batch()->get();
+        if(count($batches) > 0) {
+            foreach ($batches as $batch) {
                 $ids[] = $batch->teacher_id;
             }
             $userId = array_values($ids);
@@ -100,6 +101,8 @@ class Course extends Model
 
     public function totalCourseEnrolled()
     {
-        return $this->payment()->count();
+        $count  = $this->payment()->count();
+        return $count < 93 ?  93 : $count;
     }
+
 }

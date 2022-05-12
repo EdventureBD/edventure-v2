@@ -22,9 +22,9 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
-                                    
+
                                     <iframe  src="https://www.youtube.com/embed/{{$bundle->trailer ? $bundle->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" width="100%" height="420px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        
+
                                 </div>
                             </div>
                             </div>
@@ -74,7 +74,7 @@
                     <p class="text-gray text-xxsm fw-200  lh-5">Solution videos and PDFs will appear here after everyone has completed all the exams</p>
                 </div>
             </div>
-            
+
             <h1 class="text-center mt-3" style="font-weight: 600;"> Courses </h1>
             <div class="row">
                 <div class="col-lg-12">
@@ -193,12 +193,12 @@
                                         @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
                                         {{\App\Enum\Converter::en2bn($number)}} জন
                                     @endif --}}
-                                    0
+                                    {{$bundle->totalBundleEnrolled().' জন'}}
                                 </div>
                             </div>
                         </div>
 
-                        @if(true)
+                        @if($bundle->time_allotted)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/category_details/timer.png" alt="timers">
@@ -206,13 +206,13 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{-- {{\App\Enum\Converter::en2bn($category->time_allotted)}} --}}{{$course->time_allotted ?? '0'}} ঘন্টা
+                                        {{-- {{\App\Enum\Converter::en2bn($category->time_allotted)}} --}}{{$bundle->time_allotted ?? '0'}} ঘন্টা
                                     </div>
                                 </div>
                             </div>
                         @endif
 
-                        @if(true)
+                        @if($bundle->video_lecture)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="video lectures">
@@ -220,13 +220,13 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">ভিডিও লেকচার </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->video_lecture ?? 0}}
+                                        {{$bundle->video_lecture ?? 0}}
                                     </div>
                                 </div>
                             </div>
                         @endif
 
-                        @if(true)
+                        @if($bundle->given_notes)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="notes">
@@ -234,14 +234,14 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">নোটস</div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->given_notes ?? 0}}
+                                        {{$bundle->given_notes ?? 0}}
                                     </div>
                                 </div>
                             </div>
                         @endif
 
 
-                        @if(true)
+                        @if($bundle->quiz)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/quiz-mindmap-img/Quiz.png" alt="quiz">
@@ -249,14 +249,14 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">কুইজ</div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->quiz ?? 0}} টি
+                                        {{$bundle->quiz ?? 0}} টি
                                     </div>
                                 </div>
                             </div>
                         @endif
 
 
-                        @if(true)
+                        @if($bundle->mind_map)
                             <div class="col-md-6 d-flex my-2">
                                 <div class="col-4 p-0 my-auto">
                                     <img class="img-fluid" src="/img/quiz-mindmap-img/Mindmap.png" alt="mindmap">
@@ -264,7 +264,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->mind_map ?? 0}}
+                                        {{$bundle->mind_map ?? 0}}
                                     </div>
                                 </div>
                             </div>
@@ -273,28 +273,28 @@
                     </div>
 
                 </div>
-
-                @if(true)
+                @php($teachers = $bundle->teacher_lists)
+                @if(count($teachers) > 0)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষক</h5>
                         <div class="d-flex overflow-x-scroll"
                              style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
-                             {{-- @foreach($course->teacher_lists as $teacher)
-                                <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
+                             @foreach($teachers as $teacher)
+                                <div class="text-center {{count($teachers) == 1 ? 'col-12' : 'col-6'}} d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
                                         <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
                                     @else
                                         <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
                                     @endif
                                     <span><b>{{$teacher->name}}</b></span>
-                                        @if($teacher->teacherDetails && $teacher->teacherDetails->expertise &&
-                                             $teacher->teacherDetails->year_of_experience &&
-                                             $teacher->teacherDetails->education)
-                                            <span>From {{$teacher->teacherDetails->education}} background,
-                                                {{$teacher->teacherDetails->year_of_experience}} years of experience in {{$teacher->teacherDetails->expertise}}</span>
-                                        @endif
+                                        <small>{{$teacher->teacherDetails->education ?? ''}}</small>
+                                        <small>
+                                            @if($teacher->teacherDetails && $teacher->teacherDetails->year_of_experience && $teacher->teacherDetails->expertise)
+                                                {{$teacher->teacherDetails->year_of_experience}} years of teaching experience in {{$teacher->teacherDetails->expertise}}
+                                            @endif
+                                        </small>
                                 </div>
-                            @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
                 @endif
@@ -325,20 +325,20 @@
                              id="examDetails"
                              role="tabpanel"
                              aria-labelledby="video-tab">
-                            @if(true)
+                            @if($bundle->description)
                                 <div class="my-3">
                                     <h5 class="bold-header my-3">কোর্স সম্পর্কে</h5>
                                     <div class="p-3 course-detail-single-unit">
-                                        habijabi
+                                        {{$bundle->description}}
                                     </div>
                                 </div>
                             @endif
 
-                            @if(true)
+                            @if($bundle->bundle_for_whom)
                                 <div class="my-3">
                                     <h5 class="bold-header my-3">কোর্সটি কাদের জন্য?</h5>
                                     <div class="p-3 course-detail-single-unit">
-                                        habijabi2
+                                        {{$bundle->bundle_for_whom}}
                                     </div>
                                 </div>
                             @endif
@@ -356,48 +356,49 @@
                              aria-labelledby="examRoutine-tab">
                             @if(true)
                                 <div class="faq my-3">
-                                    @if(true)
+                                    @if(count($bundle->courses) > 0)
                                         <h5 class="bold-header">কোর্সে কী কী লার্নিং ম্যাটেরিয়াল পাচ্ছেন?</h5>
                                         <div class="d-flex justify-content-between align-items-center my-4">
                                             <div class="bold-header">
                                                 Course Content
                                             </div>
-{{--                                            <div style="background: #FFFFFF;--}}
-{{--                                            border-radius: 27.5765px;">--}}
-{{--                                                <h2 class="mb-0">--}}
-{{--                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"--}}
-{{--                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
-{{--                                                            type="button"--}}
-{{--                                                            data-toggle="collapse"--}}
-{{--                                                            data-target=".collapse-all"--}}
-{{--                                                            aria-expanded="true"--}}
-{{--                                                            id=""--}}
-{{--                                                            aria-controls="itemOne">--}}
-{{--                                                            Collapse All--}}
-{{--                                                    </button>--}}
-{{--                                                </h2>--}}
-{{--                                            </div>--}}
                                         </div>
                                     @endif
                                     <div class="accordion mt-5" id="accordionExample">
-                                        {{-- @forelse ($course_topics as $batchTopic)
+                                         @forelse ($bundle->courses as $course)
                                             <div class="tabtab" style="margin-bottom: 20px">
                                                 <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                                     <h2 class="mb-0">
                                                         <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
-                                                                class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                                class="course-tab btn btn-block text-left panel-heading focus-boxShadow-none"
                                                                 type="button"
-                                                                data-target="#batchTab{{$loop->iteration}}">
-                                                            {{ $batchTopic->title }}
+                                                                data-toggle="collapse"
+                                                                aria-expanded="true"
+                                                                aria-controls="courseTab{{$course->id}}"
+                                                                data-target="#courseTab{{$course->id}}">
+                                                            {{ $course->title }}
                                                         </button>
                                                     </h2>
+                                                </div>
+                                                <div id="courseTab{{$course->id}}"
+                                                     class="panel-collapse collapse mt-2 one text-justify py-2"
+                                                     aria-labelledby="headingOne">
+                                                    <ul style="color: #6400C8">
+                                                        @forelse($course->courseTopic as $courseTopic)
+                                                            <li class="fw-600">{{$courseTopic->title}}</li>
+                                                        @empty
+                                                            <div class="text-center">
+                                                               <h5 class="font-weight-bold">No Topics uploaded yet</h5>
+                                                            </div>
+                                                        @endforelse
+                                                    </ul>
                                                 </div>
                                             </div>
                                         @empty
                                             <div class="d-flex justify-content-center">
-                                                <h5 style="color: #6400C8" class="font-weight-bold">No Topics uploaded yet</h5>
+                                                <h5 style="color: #6400C8" class="font-weight-bold">No Course uploaded yet</h5>
                                             </div>
-                                        @endforelse --}}
+                                        @endforelse
                                     </div>
                                 </div>
                             @else
@@ -465,7 +466,7 @@
                 <div class="test">
                     <iframe
                         id="iframe"
-                        src=""
+                        src="https://www.youtube.com/embed/{{$bundle->trailer ? $bundle->trailer : 'xcJtL7QggTI'}}"
                         title="YouTube video player"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
@@ -473,14 +474,20 @@
 
 
                     <div class="payment-btn text-center">
-                        @php($href = auth()->check() ? "/"  : 'javascript:void(0)')
+                        @php($href = auth()->check() ? route('bundle_enroll', $bundle->slug)   : 'javascript:void(0)')
                         @php($loginAlert = auth()->check() ? '' : 'loginAlert')
+                        @php($paidCourse = !empty($bundle->price) && !is_null($bundle->price))
 
                         <div id="payment_section">
                                 <div class="d-flex justify-content-around">
-                                    <span class="actual-price">10</span>
+                                    @if($paidCourse)
+                                        <span class="actual-price">{{$bundle->price}}</span>
+                                    @endif
+
                                 </div>
-                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">কোর্সটি কিনুন</a>
+                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">
+                                    {{$paidCourse ? 'কোর্সটি কিনুন' : 'কোর্সটি এনরোল করুন'}}
+                                </a>
                         </div>
 
                     </div>
@@ -536,6 +543,26 @@
     $('.two').on('hide.bs.collapse', function () {
         $('#headingTwo').removeClass('active');
     });
+
+    $('.course-tab').on('show.bs.collapse',function() {
+        $('.course-tab').addClass('active');
+    });
+</script>
+
+<script>
+    var tab = $('.course-tab');
+
+    for(var i = 0; i < tab.length; i++) {
+        (function(index) {
+            tab[index].addEventListener("click", function() {
+                if(!tab[index].classList.contains("active")) {
+                    tab[index].classList.add('active')
+                } else {
+                    tab[index].classList.remove('active')
+                }
+            })
+        })(i);
+    }
 </script>
 
 

@@ -40,7 +40,7 @@
                                         @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
                                         {{\App\Enum\Converter::en2bn($number)}} জন
                                     @endif --}}
-                                    {{$course->totalCourseEnrolled()}}
+                                    {{$course->totalCourseEnrolled().' জন'}}
                                 </div>
                             </div>
                         </div>
@@ -120,26 +120,27 @@
                     </div>
 
                 </div>
-
-                @if($course->teacher_lists)
+                @php($teachers = $course->teacher_lists)
+                @if($teachers)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষক</h5>
                         <div class="d-flex overflow-x-scroll"
                              style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
-                             @foreach($course->teacher_lists as $teacher)
-                                <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
+                             @foreach($teachers as $teacher)
+                                <div class="text-center {{ count($teachers) == 1 ? 'col-12' : 'col-6'}} d-flex flex-column justify-content-center align-items-center"
+                                     style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
                                         <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
                                     @else
                                         <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
                                     @endif
                                     <span><b>{{$teacher->name}}</b></span>
-                                        @if($teacher->teacherDetails && $teacher->teacherDetails->expertise &&
-                                             $teacher->teacherDetails->year_of_experience &&
-                                             $teacher->teacherDetails->education)
-                                            <span>From {{$teacher->teacherDetails->education}} background,
-                                                {{$teacher->teacherDetails->year_of_experience}} years of experience in {{$teacher->teacherDetails->expertise}}</span>
-                                        @endif
+                                        <small>{{$teacher->teacherDetails->education ?? ''}}</small>
+                                        <small>
+                                            @if($teacher->teacherDetails && $teacher->teacherDetails->year_of_experience && $teacher->teacherDetails->expertise)
+                                                {{$teacher->teacherDetails->year_of_experience}} years of teaching experience in {{$teacher->teacherDetails->expertise}}
+                                            @endif
+                                        </small>
                                 </div>
                             @endforeach
                         </div>
@@ -203,31 +204,16 @@
                              aria-labelledby="examRoutine-tab">
                             @if(true)
                                 <div class="faq my-3">
-                                    @if(count($course_topics) > 0)
+                                    @if(count($course->CourseTopic) > 0)
                                         <h5 class="bold-header">কোর্সে কী কী লার্নিং ম্যাটেরিয়াল পাচ্ছেন?</h5>
                                         <div class="d-flex justify-content-between align-items-center my-4">
                                             <div class="bold-header">
                                                 Course Content
                                             </div>
-{{--                                            <div style="background: #FFFFFF;--}}
-{{--                                            border-radius: 27.5765px;">--}}
-{{--                                                <h2 class="mb-0">--}}
-{{--                                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"--}}
-{{--                                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"--}}
-{{--                                                            type="button"--}}
-{{--                                                            data-toggle="collapse"--}}
-{{--                                                            data-target=".collapse-all"--}}
-{{--                                                            aria-expanded="true"--}}
-{{--                                                            id=""--}}
-{{--                                                            aria-controls="itemOne">--}}
-{{--                                                            Collapse All--}}
-{{--                                                    </button>--}}
-{{--                                                </h2>--}}
-{{--                                            </div>--}}
                                         </div>
                                     @endif
                                     <div class="accordion mt-5" id="accordionExample">
-                                        @forelse ($course_topics as $batchTopic)
+                                        @forelse ($course->CourseTopic as $batchTopic)
                                             <div class="tabtab" style="margin-bottom: 20px">
                                                 <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
                                                     <h2 class="mb-0">
@@ -322,12 +308,17 @@
                     <div class="payment-btn text-center">
                         @php($href = auth()->check() ? route('enroll', $course->slug)  : 'javascript:void(0)')
                         @php($loginAlert = auth()->check() ? '' : 'loginAlert')
-
+                        @php($paidCourse = !empty($course->price) && !is_null($course->price))
                         <div id="payment_section">
                                 <div class="d-flex justify-content-around">
+                                    @if($paidCourse)
                                     <span class="actual-price">{{$course->price}}</span>
+                                    @endif
                                 </div>
-                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">কোর্সটি কিনুন</a>
+                                <a class="{{$loginAlert}} btn category-details-action-btn"
+                                   href="{{$href}}">
+                                    {{$paidCourse ? 'কোর্সটি কিনুন' : 'কোর্সটি এনরোল করুন'}}
+                                </a>
                         </div>
 
                     </div>

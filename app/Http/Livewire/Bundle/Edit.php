@@ -28,6 +28,7 @@ class Edit extends Component
     public $tempBanner;
     public $deleteImage;
     public $deleteBanner;
+    public $bundle_for_whom;
 
     public function updatedBundle_name()
     {
@@ -88,6 +89,7 @@ class Edit extends Component
         'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
+        'bundle_for_whom' => 'required'
     ];
 
     public function updateBundle()
@@ -122,6 +124,7 @@ class Edit extends Component
         $bundle->duration = $data['duration'];
         $bundle->trailer = $data['url'];
         $bundle->price = $data['price'];
+        $bundle->bundle_for_whom = $data['bundle_for_whom'];
         $save = $bundle->save();
 
         if ($save) {
@@ -145,6 +148,7 @@ class Edit extends Component
         $this->banner = $this->bundle->banner;
         $this->deleteImage = $this->bundle->icon;
         $this->deleteBanner = $this->bundle->banner;
+        $this->bundle_for_whom = $this->bundle->bundle_for_whom;
         $this->intermediary_levels = IntermediaryLevel::all();
     }
 

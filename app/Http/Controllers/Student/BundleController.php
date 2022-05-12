@@ -18,8 +18,14 @@ class BundleController extends Controller
    public function bundlePreview($bundle_slug){
 
       $bundle = Bundle::where('slug', $bundle_slug)
-      ->with('courses.courseTopic.CourseLecture')
+      ->with('courses.courseTopic')
       ->firstOrFail();
+      $bundle['teacher_lists'] = null;
+      $bundle['video_lecture'] = 0;
+      $bundle['given_notes'] = 0;
+      $bundle['quiz'] = 0;
+      $bundle['time_allotted'] = 0;
+      $bundle['mind_map'] = 0;
 
       if(Auth::check()){
          $enrolled = BundleStudentEnrollment::join('bundle_payments', 'bundle_payments.id', 'bundle_student_enrollments.payment_id')
@@ -34,7 +40,25 @@ class BundleController extends Controller
          }
       }
 
+      if(count($bundle->courses) > 0) {
+          foreach ($bundle->courses as $course) {
+//              $teachers = $course->teacher_lists;
+//              foreach ($teachers as $teacher) {
+//                  $teacher_list[] = $teacher;
+//              }
+
+              $bundle['video_lecture'] += $course->video_lecture;
+              $bundle['given_notes'] += $course->given_notes;
+              $bundle['quiz'] += $course->quiz;
+              $bundle['time_allotted'] += $course->time_allotted;
+              $bundle['mind_map'] += $course->mind_map;
+          }
+
+          $bundle['teacher_lists'] = $bundle->teachersList() ?? [];
+      }
+
       // else, go to preview page
+//       return $bundle;
       return view('student.pages_new.bundle.preview_guest', compact('bundle'));
    }
 
@@ -48,7 +72,7 @@ class BundleController extends Controller
                ->where('bundle_student_enrollments.student_id', auth()->user()->id)
                ->where('bundle_payments.student_id', auth()->user()->id)
                ->first();
-         
+
          // if a student is enrolled and status is 0
          if ($enrolled && $enrolled->status == 0) {
             return redirect()->route('bundle-preview', $bundle->slug)->withErrors(['enrollment_incomplete' => 'Your enrollment is pending. Please wait or contact system admin.']);
@@ -154,7 +178,7 @@ class BundleController extends Controller
             'courses.Batch' => function($query){
                return $query->select('id', 'title', 'slug', 'course_id');
             }])->first();
-      
+
       $price = $request->bundle_price;
       $shurjopay_service = new ShurjopayService();
       $trx_id = $shurjopay_service->generateTxId();

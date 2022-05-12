@@ -1,4 +1,23 @@
 <x-landing-layout headerBg="white">
+    <style>
+        .custom-submit-btn {
+            background: #FA9633;
+            border: 2px solid #FA9633;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgb(0 0 0 / 10%);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+        }
+
+        .custom-submit-btn:hover {
+            /*background-color: #ffb300;*/
+            background-color: #f2a44b;
+            box-shadow: 0 15px 20px rgba(231, 128, 108, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+    </style>
     <!-- Header Layout Content -->
     <div class="page-section container py-6">
         <div class="row justify-content-center">
@@ -27,10 +46,10 @@
                         <label for="coursePrice">Payable Amount</label>
                         <input type="number" name="bundle_price" id="bundlePrice" min="{{ $bundle->price }}" class="form-control" value="{{ $bundle->price }}" readonly />
                     </div>
-                    <button class="btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4" type="submit">Submit</button>
+                    <button class="btn custom-submit-btn d-inline-block mt-4 fw-800 text-xxsm text-white bg-purple mb-3 px-4" type="submit">Confirm</button>
                 </form>
             </div>
         </div>
-        
+
     </div>
 </x-landing-layout>
