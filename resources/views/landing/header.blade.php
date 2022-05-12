@@ -12,12 +12,12 @@
             <li class="nav-item has-dot">
             </li>
 
-            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}
-                                            {{ request()->is('course/course-preview/*') ? 'active' : '' }}
-                                            {{ request()->is('batch/*') ? 'active' : '' }}"
-            >
-            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>
-            </li>
+{{--            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}--}}
+{{--                                            {{ request()->is('course/course-preview/*') ? 'active' : '' }}--}}
+{{--                                            {{ request()->is('batch/*') ? 'active' : '' }}"--}}
+{{--            >--}}
+{{--            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>--}}
+{{--            </li>--}}
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
                 <a class="nav-link text-white"
@@ -49,10 +49,12 @@
         @auth
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                <div class="nav-item navbar-nav">
+                    <a href="{{ route('logout') }}" class="text-white fw-800 nav-link" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                     LOG OUT
                 </a>
+                </div>
             </form>
         @endauth
 
@@ -70,5 +72,5 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    
+
 </nav> --}}

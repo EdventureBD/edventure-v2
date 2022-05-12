@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ModelMcqTagAnalysisController;
 use App\Http\Controllers\RolePermissionController;
@@ -265,6 +266,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
         Route::post('/exam-category',[ExamCategoryController::class,'store'])->name('exam.category.store');
         Route::put('/exam-category/{id}',[ExamCategoryController::class,'update'])->name('exam.category.update');
         Route::delete('/exam-category/{id}',[ExamCategoryController::class,'destroy'])->name('exam.category.destroy');
+        Route::get('/exam-category/visibility/{id}',[ExamCategoryController::class,'updateCategoryVisibility'])->name('exam.category.visibility');
     });
 
     //Exam Topic
@@ -372,6 +374,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
 
     /**************************************** Role & permission ****************************************/
 
+    /**************************************** Coupons ****************************************/
+
+    Route::group(['middleware' => ['permission:coupon']], function () {
+        Route::get('/coupon',[CouponController::class,'index'])->name('coupon.index');
+        Route::post('/coupon',[CouponController::class,'store'])->name('coupon.store');
+        Route::delete('/coupon/{id}',[CouponController::class,'destroy'])->name('coupon.destroy');
+    });
 });
 
 require __DIR__ . '/auth.php';
