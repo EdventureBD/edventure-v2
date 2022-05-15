@@ -59,19 +59,19 @@
 									</div>
 									<div class="col-md-4">
 											<div class="form-group">
-											<label for="exampleInputFile" class="col-form-label">Course
-												Banner</label>
-											<div class="input-group">
-												<div class="custom-file">
-														<input type="file" wire:model="banner"
-														class="custom-file-input hidden" id="exampleInputFile">
-														<label class="custom-file-label"
-														for="exampleInputFile">Course Banner (576px*642px)</label>
+												<label for="exampleInputFile" class="col-form-label">Course
+													Banner</label>
+												<div class="input-group">
+													<div class="custom-file">
+															<input type="file" wire:model="banner"
+															class="custom-file-input hidden" id="exampleInputFile">
+															<label class="custom-file-label"
+															for="exampleInputFile">Course Banner (576px*642px)</label>
+													</div>
 												</div>
-											</div>
-											@error('banner')
-												<p style="color: red;">{{ $message }}</p>
-											@enderror
+												@error('banner')
+													<p style="color: red;">{{ $message }}</p>
+												@enderror
 											</div>
 											@if ($banner)
 												<img style="width: 200px;" src="{{ $banner->temporaryUrl() }}">
@@ -85,6 +85,20 @@
 													<p style="color: indigo">Uploading banner ....</p>
 													</div>
 											</div> --}}
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="col-form-label" for="status"> Status <span class="must-filled">*</span></label>
+											<select class="form-control @error('status') is-invalid @enderror" wire:model="status">
+												<option value="" selected disabled>Select Status</option>
+												<option value="1">Active</option>
+												<option value="0">Inactive</option>
+											</select>
+											@error('status')
+												<p style="color: red;">{{ $message }}</p>
+											@enderror
+										</div>
 									</div>
 
 									@if($show_island_image)

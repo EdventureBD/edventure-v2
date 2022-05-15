@@ -28,6 +28,8 @@ class Edit extends Component
     public $tempBanner;
     public $deleteImage;
     public $deleteBanner;
+    // initializing with empty string so disabled selected option works properly
+    public $status = "";
 
     public function updatedBundle_name()
     {
@@ -81,6 +83,13 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer||between:0,1'
+        ]);
+    }
+
     protected $rules = [
         'bundle_name' => ['required', 'string', 'max:100'],
         'description' => 'required|string|max:500',
@@ -88,6 +97,7 @@ class Edit extends Component
         'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
+        'status' => 'required|numeric|integer||between:0,1'
     ];
 
     public function updateBundle()
@@ -122,6 +132,7 @@ class Edit extends Component
         $bundle->duration = $data['duration'];
         $bundle->trailer = $data['url'];
         $bundle->price = $data['price'];
+        $bundle->status = $data['status'];
         $save = $bundle->save();
 
         if ($save) {
@@ -145,6 +156,7 @@ class Edit extends Component
         $this->banner = $this->bundle->banner;
         $this->deleteImage = $this->bundle->icon;
         $this->deleteBanner = $this->bundle->banner;
+        $this->status = $this->bundle->status;
         $this->intermediary_levels = IntermediaryLevel::all();
     }
 

@@ -39,6 +39,7 @@ class IntermediaryLevelController extends Controller
     }
 
     public function changeIntermediaryLevelStatus(Request $request){
+
         $intermediary_level = IntermediaryLevel::find($request->id);
         $intermediary_level->status = $request->status;
         $intermediary_level->save();

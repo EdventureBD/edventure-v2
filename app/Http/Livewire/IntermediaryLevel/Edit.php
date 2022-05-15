@@ -15,14 +15,16 @@ class Edit extends Component
     public $intermediary_level_id;
 
     public $title;
+    public $status = '';
     public $categoryId = '';
 
     public function mount()
     {
         $intermediary_level = IntermediaryLevel::where('slug', $this->intermediary_level_slug)->firstOrFail();
-        $this->title = $intermediary_level->title;
         $this->categoryId = $intermediary_level->course_category_id;
         $this->intermediary_level_id = $intermediary_level->id;
+        $this->title = $intermediary_level->title;
+        $this->status = $intermediary_level->status;
 
         $this->rules = $this->rules();
     }
@@ -34,6 +36,7 @@ class Edit extends Component
     {
         return [
             'title' => 'required|unique:intermediary_levels,slug,'.$this->intermediary_level_slug,
+            'status' => 'required|numeric|integer|gte:0',
             'categoryId' => 'required',
         ];
     }
@@ -49,6 +52,7 @@ class Edit extends Component
         
         $intermediary_level_edited = IntermediaryLevel::findorFail($this->intermediary_level_id);
         $intermediary_level_edited->title = $this->title;
+        $intermediary_level_edited->status = $this->status;
         $intermediary_level_edited->course_category_id = $this->categoryId;
         $intermediary_level_edited->slug = Str::slug($this->title);
         $created = $intermediary_level_edited->save();

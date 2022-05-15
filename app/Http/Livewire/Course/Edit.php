@@ -44,6 +44,7 @@ class Edit extends Component
     public $show_price;
     public $show_teachers;
     public $show_island_image = false;
+    public $status;
 
     public function updatedTitle()
     {
@@ -60,6 +61,13 @@ class Edit extends Component
     public function updatedBanner()
     {
         $this->tempBanner = $this->banner;
+    }
+
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer|between:0,1',
+        ]);
     }
 
     public function updatedIslandImage()
@@ -133,6 +141,7 @@ class Edit extends Component
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
         'duration' => 'required|numeric|between:1,36',
+        'status' => 'required|numeric|integer|between:0,1',
     ];
 
     protected $messages = [
@@ -232,6 +241,7 @@ class Edit extends Component
       //   }
         $course->description = $data['description'];
         $course->duration = $data['duration'];
+        $course->status = $data['status'];
         $course->trailer = $data['url'];
         if($this->bundleId){
            // set price to free
@@ -272,6 +282,7 @@ class Edit extends Component
         $this->deleteImage = $this->course->icon;
         $this->deleteBanner = $this->course->banner;
         $this->deleteIslandImage = $this->course->island_image;
+        $this->status = $this->course->status;
 
         $this->teachers = User::where('user_type', 2)->get();
         $batch = Batch::where('course_id', $this->course->id)->first();

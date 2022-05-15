@@ -15,7 +15,7 @@
                             <div class="card-body">
                                 <form role="form" wire:submit.prevent="storeIntermediaryLevel">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="courseTitle"> Program Title <span
                                                         class="must-filled">*</span> </label>
@@ -28,16 +28,30 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="courseName"> Course Category <span class="must-filled">*</span></label>
-                                                <select class="form-control" wire:model="categoryId">
+                                                <select class="form-control @error('status') is-invalid @enderror" wire:model="categoryId">
                                                     <option value="" selected disabled>Select Course Category</option>
                                                     @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }} </option>
                                                     @endforeach
                                                 </select>
                                                 @error('categoryId')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="status"> Status <span class="must-filled">*</span></label>
+                                                <select class="form-control @error('status') is-invalid @enderror" wire:model="status">
+                                                    <option value="" selected disabled>Select Status</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
+                                                </select>
+                                                @error('status')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
                                             </div>
