@@ -65,9 +65,9 @@
 
             @if($selected_intermediary_level)
                 @if ( count($courses) > 0 || count($bundles) > 0 )
-                    <div class="py-5 py-md-1 text-center d-flex justify-content-center">
+                    {{-- <div class="py-5 py-md-1 text-center d-flex justify-content-center">
                         <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>
-                    </div>
+                    </div> --}}
                     <div class="row justify-content-center py-3 card-group-row mb-lg-8pt">
                         @foreach ($courses as $course)
                             <div class="col-md-3 mb-4">                        

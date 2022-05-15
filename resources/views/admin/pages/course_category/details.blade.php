@@ -23,7 +23,7 @@
                                 <div class="input-group input-group-sm">
                                     <div>
                                         <a href="{{ route('intermediary_level.create') }}">
-                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i> Add Program </button>
+                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i>&nbsp;&nbsp; Add Program </button>
                                         </a>
                                     </div>
                                 </div>
@@ -59,20 +59,19 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('course.show', $intermediary_level->slug) }}" title="See Details">
-                                                        <button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
+                                                    <a class="mr-1"
+                                                        href="{{ route('intermediary_level.edit', $intermediary_level->slug) }}"
+                                                        title="Edit {{ $intermediary_level->title }}">
+                                                        <button class="btn btn-info"><i class="far fa-edit"></i></button>
                                                     </a>
-                                                    <a class="mr-1" href="{{ route('course.edit', $intermediary_level->slug) }}" title="Edit {{ $intermediary_level->title }}">
-                                                        <button type="button" class="btn btn-info"><i class="far fa-edit"></i></button>
-                                                    </a>
-                                                    <a  class="mr-1" href="#deleteCourse{{ $intermediary_level->id }}" data-toggle="modal" title="Delete {{ $intermediary_level->title }}">
+                                                    <a  class="mr-1" href="#deleteIntermediaryLevel{{ $intermediary_level->id }}" data-toggle="modal" title="Delete {{ $intermediary_level->title }}">
                                                         <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </a>
-                                                    <div class="modal fade" id="deleteCourse{{ $intermediary_level->id }}">
+                                                    <div class="modal fade" id="deleteIntermediaryLevel{{ $intermediary_level->id }}">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Delete {{ $intermediary_level->title }} Course</h4>
+                                                                    <h4 class="modal-title">Delete {{ $intermediary_level->title }} Course </h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -82,7 +81,7 @@
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                    <form action="{{ route('course.destroy', $intermediary_level->slug) }}" method="POST">
+                                                                    <form action="{{ route('intermediary_level.destroy', $intermediary_level->slug) }}" method="POST">
                                                                         @csrf
                                                                         @method('delete')
                                                                             <button type="submit" class="btn btn-outline-light">Delete</button>
