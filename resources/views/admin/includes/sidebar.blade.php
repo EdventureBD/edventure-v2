@@ -430,10 +430,10 @@
 
 
                             {{-- START OF BATCH --}}
-                            @include('admin.includes.sidebar_content.batch')
+                            {{-- @include('admin.includes.sidebar_content.batch') --}}
                             {{-- END OF BATCH --}}
-                        </ul>
-                    </li>
+                        {{-- </ul>
+                    </li> --}}
 
 
                     {{-- START OF BATCH --}}
