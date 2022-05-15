@@ -22,8 +22,8 @@
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <div>
-                                        <a href="{{ route('course.create') }}">
-                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i> Add Course</button>
+                                        <a href="{{ route('intermediary_level.create') }}">
+                                            <button class="btn btn-info"><i class="fas fa-plus-square"></i> Add Program </button>
                                         </a>
                                     </div>
                                 </div>
@@ -36,46 +36,43 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Logo</th>
-                                        <th>Price</th>
-                                        <th>Duration</th>
+                                        <th>Slug</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($courses as $course)
+                                    @foreach($intermediary_levels as $intermediary_level)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <a href="{{ route('course.show', $course->slug) }}" title="See Details">
-                                                    {{ $course->title }}
+                                                <a href="{{ route('course-category.show', $intermediary_level->slug) }}" title="See Details">
+                                                    {{ $intermediary_level->title }}
                                                 </a>
                                             </td>
+                                            <td>{{ $intermediary_level->slug }}</td>
                                             <td>
-                                                <img class="product-image" src="{{ Storage::url($course->logo) }}" alt="" srcset="">
-                                            </td>
-                                            <td>{{ $course->price }} taka</td>
-                                            <td>{{ $course->duration }} month</td>
-                                            <td>
-                                                <input type="checkbox" class="customControlInput" id="single-col-{{ $course->id }}" data-id="{{ $course->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $course->status ? 'checked' : '' }} >
+                                                <input type="checkbox" class="customControlInput"
+                                                id="single-col-{{ $intermediary_level->id }}" data-id="{{ $intermediary_level->id }}"
+                                                data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active"
+                                                data-off="InActive" {{ $intermediary_level->status ? 'checked' : '' }} >
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="mr-1" href="{{ route('course.show', $course->slug) }}" title="See Details">
+                                                    <a class="mr-1" href="{{ route('course.show', $intermediary_level->slug) }}" title="See Details">
                                                         <button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
                                                     </a>
-                                                    <a class="mr-1" href="{{ route('course.edit', $course->slug) }}" title="Edit {{ $course->title }}">
+                                                    <a class="mr-1" href="{{ route('course.edit', $intermediary_level->slug) }}" title="Edit {{ $intermediary_level->title }}">
                                                         <button type="button" class="btn btn-info"><i class="far fa-edit"></i></button>
                                                     </a>
-                                                    <a  class="mr-1" href="#deleteCourse{{ $course->id }}" data-toggle="modal" title="Delete {{ $course->title }}">
+                                                    <a  class="mr-1" href="#deleteCourse{{ $intermediary_level->id }}" data-toggle="modal" title="Delete {{ $intermediary_level->title }}">
                                                         <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                     </a>
-                                                    <div class="modal fade" id="deleteCourse{{ $course->id }}">
+                                                    <div class="modal fade" id="deleteCourse{{ $intermediary_level->id }}">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content bg-danger">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">Delete {{ $course->title }} Course</h4>
+                                                                    <h4 class="modal-title">Delete {{ $intermediary_level->title }} Course</h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -85,7 +82,7 @@
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
                                                                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                                    <form action="{{ route('course.destroy', $course->slug) }}" method="POST">
+                                                                    <form action="{{ route('course.destroy', $intermediary_level->slug) }}" method="POST">
                                                                         @csrf
                                                                         @method('delete')
                                                                             <button type="submit" class="btn btn-outline-light">Delete</button>
@@ -106,8 +103,7 @@
                                     <tr>
                                         <th>SL. No</th>
                                         <th>Name</th>
-                                        <th>Logo</th>
-                                        <th>Price</th>
+                                        <th>Slug</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -131,23 +127,23 @@
         $(function() {
             $('.customControlInput').change(function() {
                 if(confirm("Do you want to change the status?")){
-                    var status = $(this).prop('checked') == true ? 1 : 0; 
-                    var id = $(this).data('id');     
+                    var status = $(this).prop('checked') == true ? 1 : 0;
+                    var id = $(this).data('id');
                     $.ajax({
                         type: "GET",
                         dataType: "json",
-                        url: "changeCourseStatus",
+                        url: "{{ route('changeIntermediaryLevelStatus')}}",
                         data: {'status': status, 'id': id},
                         success: function(data){
-                            console.log(data.success);
+                            console.log(data.success, status, id);
                         }
                     });
                 } else {
                     if($("#single-col-"+$(this).data('id')).prop("checked") == true){
-                         $("#single-col-"+$(this).data('id')).prop('checked', false);
+                        $("#single-col-"+$(this).data('id')).prop('checked', false);
                     }
                     else if($("#single-col-"+$(this).data('id')).prop("checked") == false){
-                         $("#single-col-"+$(this).data('id')).prop('checked', true);
+                        $("#single-col-"+$(this).data('id')).prop('checked', true);
                     }
                 }
             })

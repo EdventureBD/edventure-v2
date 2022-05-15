@@ -179,7 +179,7 @@
                                 <a href="{{ route('course-category.index') }}"
                                     class="nav-link {{ request()->is('admin/course-category') ? 'active' : '' }} {{ request()->is('admin/course-category/create') ? 'active' : '' }}  {{ request()->is('admin/course-category/*') ? 'active' : '' }}">
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Course Category</p>
+                                    <p> Course Category </p>
                                 </a>
                             </li>
                             {{-- END OF COURSE CATEGORY --}}

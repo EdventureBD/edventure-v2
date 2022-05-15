@@ -9,7 +9,8 @@ use App\Models\Admin\CourseCategory;
 class Create extends Component
 {
     public $title;
-    public $saved;
+    // initialized with empty string or the select disabled doesn't work
+    public $status = '';
     public $message;
 
     public function updatedTitle()
@@ -19,15 +20,24 @@ class Create extends Component
         ]);
     }
 
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer|gte:0'
+        ]);
+    }
+
     public function saveCategory()
     {
         $data = $this->validate([
-            'title' => 'required|string|max:325'
+            'title' => 'required|string|max:325',
+            'status' => 'required|numeric|integer|gte:0'
         ]);
+
         $courseCategory = new CourseCategory;
         $courseCategory->title = $data['title'];
         $courseCategory->slug = Str::slug($data['title']);
-        $courseCategory->status = 1;
+        $courseCategory->status = $data['status'];
         $courseCategory->order = 0;
         $save = $courseCategory->save();
 

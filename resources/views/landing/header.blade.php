@@ -12,12 +12,12 @@
             <li class="nav-item has-dot">
             </li>
 
-{{--            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}--}}
-{{--                                            {{ request()->is('course/course-preview/*') ? 'active' : '' }}--}}
-{{--                                            {{ request()->is('batch/*') ? 'active' : '' }}"--}}
-{{--            >--}}
-{{--            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>--}}
-{{--            </li>--}}
+            <li class="nav-item has-dot {{ request()->is('course') ? 'active' : '' }}--}}
+                                        {{ request()->is('course/course-preview/*') ? 'active' : '' }}
+                                        {{ request()->is('batch/*') ? 'active' : '' }}"
+            >
+            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>
+            </li>
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
                 <a class="nav-link text-white"

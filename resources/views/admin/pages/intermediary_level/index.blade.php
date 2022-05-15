@@ -141,13 +141,13 @@
                   $.ajax({
                      type: "GET",
                      dataType: "json",
-                     url: "changeIntermediaryLevelStatus",
+                     url: "{{ route('changeIntermediaryLevelStatus')}}",
                      data: {
                            'status': status,
                            'id': id
                      },
                      success: function(data) {
-                           console.log(data.success);
+                        console.log(data.success, status, id);
                      }
                   });
                } else {

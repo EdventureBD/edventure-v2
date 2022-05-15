@@ -8,7 +8,7 @@ use Livewire\Component;
 class Edit extends Component
 {
     public $category;
-
+    public $status;
     public $title;
 
     public function updatedTitle()
@@ -18,8 +18,16 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => ['required', 'numeric', 'integer', 'gte:0'],
+        ]);
+    }
+
     protected $rules = [
         'title' => ['required', 'string', 'max:325'],
+        'status' => ['required', 'numeric', 'integer', 'gte:0']
     ];
 
     public function updateCourseCategory()
@@ -27,6 +35,7 @@ class Edit extends Component
         $data = $this->validate();
         $category = CourseCategory::find($this->category->id);
         $category->title = $data['title'];
+        $category->status = $data['status'];
         $save = $category->save();
 
         if ($save) {
@@ -41,6 +50,7 @@ class Edit extends Component
     public function mount()
     {
         $this->title = $this->category->title;
+        $this->status = $this->category->status;
     }
 
     public function render()
