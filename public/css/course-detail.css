@@ -268,3 +268,25 @@ div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollba
     -webkit-box-shadow: none;
     box-shadow: 11px 2px 14px rgba(231, 128, 108, 0.4);
 }
+.teachers-parent {
+    padding: 0 10px;
+    align-content: center;
+    border-right: 1px solid lightgrey;
+    height: 175px;
+}
+@media  screen and (max-width:576px) {
+    .teachers-image {
+        width: 45px;
+        height: 45px;
+    }
+    .teachers-parent {
+        grid-template-columns: 1fr !important;
+    }
+    .teachers-name,.teachers-detail,.teachers-education {
+        font-size: .75em;
+    }
+    #course-title {
+        font-size: 25px;
+        text-align: center;
+    }
+}
