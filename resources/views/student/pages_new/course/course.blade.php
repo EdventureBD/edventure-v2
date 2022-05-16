@@ -86,14 +86,13 @@
 
             @if($selected_intermediary_level)
                 @if ( count($courses) > 0 || count($bundles) > 0 )
-{{--                    <div class="py-1 text-center d-flex justify-content-center">--}}
-{{--                        <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>--}}
-{{--                    </div>--}}
-                    <div class="row {{count($courses) + count($bundles) == 1 ? 'justify-content-center' : 'justify-content-around'}} py-5" id="cards-parent">
+                   {{-- <div class="py-1 text-center d-flex justify-content-center">
+                       <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>
+                   </div> --}}
 
-                    <div class="row justify-content-center py-3 card-group-row mb-lg-8pt">
+                    <div class="row justify-content-center py-3 card-group-row mb-lg-8pt" id="cards-parent">
                         @foreach ($courses as $course)
-                            <div class="mb-4">
+                            <div class="mb-4 col-md-4 col-lg-3 d-flex justify-content-center">
                                 <div class="card text-center"
                                     style="border-radius: 26px;width: 248px;height: 301px;padding:0px !important">
                                     <div class="card-header fw-800"
@@ -126,7 +125,7 @@
 
                         {{-- bundle part  --}}
                         @foreach ($bundles as $bundle)
-                            <div class="mb-4">
+                            <div class="mb-4 col-md-4 col-lg-3 d-flex justify-content-center">
                                 <div class="card text-center"
                                     style="border-radius: 26px;width: 248px;height: 301px;padding:0px !important">
                                     <div class="card-header fw-800"
@@ -163,7 +162,7 @@
                     </div>
                 @endif
             @endif
-        </div>
+            
     </div>
 </x-landing-layout>
 <script>
