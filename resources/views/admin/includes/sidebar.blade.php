@@ -378,18 +378,6 @@
                             </li>
                             {{-- END OF COURSE LECTURE --}}
 
-                            {{-- START OF BATCH LECTURE --}}
-                            <li class="nav-item {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}">
-                                <a href="{{ route('batch-lecture.index') }}"
-                                   class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }}
-                                   {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }}
-                                   {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Batch Lecture </p>
-                                </a>
-                            </li>
-                            {{-- END OF BATCH LECTURE --}}
-
 
                             {{-- START OF COURSE --}}
                             {{-- @include('admin.includes.sidebar_content.course') --}}

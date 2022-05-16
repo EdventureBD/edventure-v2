@@ -49,7 +49,7 @@
                                           <td>{{ $loop->iteration }}</td>
                                           <td>{{ $intermediary_level->title }}</td>
                                           <td>{{ $intermediary_level->slug }}</td>
-                                          <td>{{ $intermediary_level->courseCategory->title }}</td>
+                                          <td>{{ $intermediary_level->courseCategory->title ?? 'n/a' }}</td>
                                           <td>
                                              <input type="checkbox" class="customControlInput"
                                                    id="single-col-{{ $intermediary_level->id }}" data-id="{{ $intermediary_level->id }}"
