@@ -281,3 +281,25 @@ div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollba
     -moz-transform: rotate(180deg);
     transform: rotate(180deg);
 }
+.teachers-parent {
+    padding: 0 10px;
+    align-content: center;
+    border-right: 1px solid lightgrey;
+    height: 175px;
+}
+@media  screen and (max-width:576px) {
+    .teachers-image {
+        width: 45px;
+        height: 45px;
+    }
+    .teachers-parent {
+        grid-template-columns: 1fr !important;
+    }
+    .teachers-name,.teachers-detail,.teachers-education {
+        font-size: .75em;
+    }
+    #bundle-title {
+        font-size: 25px;
+        text-align: center;
+    }
+}
