@@ -24,7 +24,7 @@
                                  <div>
                                        <a href="{{ route('intermediary_level.create') }}">
                                           <button class="btn btn-info"><i
-                                                   class="fas fa-plus-square"></i>&nbsp;&nbsp;Program </button>
+                                                   class="fas fa-plus-square"></i>&nbsp;&nbsp; Add Program </button>
                                        </a>
                                  </div>
                               </div>
@@ -141,13 +141,13 @@
                   $.ajax({
                      type: "GET",
                      dataType: "json",
-                     url: "changeIntermediaryLevelStatus",
+                     url: "{{route('changeIntermediaryLevelStatus')}}",
                      data: {
                            'status': status,
                            'id': id
                      },
                      success: function(data) {
-                           console.log(data.success);
+                        console.log(data.success, status, id);
                      }
                   });
                } else {

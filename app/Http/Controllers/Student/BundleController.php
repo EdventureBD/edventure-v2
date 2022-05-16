@@ -27,6 +27,10 @@ class BundleController extends Controller
       $bundle['time_allotted'] = 0;
       $bundle['mind_map'] = 0;
 
+      if($bundle->status == 0){
+         return redirect()->route('course')->withErrors(['status_false' => 'This bundle is unavailable right now. Please check later.']);
+      }
+
       if(Auth::check()){
          $enrolled = BundleStudentEnrollment::join('bundle_payments', 'bundle_payments.id', 'bundle_student_enrollments.payment_id')
          ->where('bundle_student_enrollments.bundle_id', $bundle->id)

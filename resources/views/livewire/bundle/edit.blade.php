@@ -143,6 +143,19 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+										<div class="form-group">
+											<label class="col-form-label" for="status"> Status <span class="must-filled">*</span></label>
+											<select class="form-control @error('status') is-invalid @enderror" wire:model="status">
+												<option value="" selected disabled>Select Status</option>
+												<option value="1">Active</option>
+												<option value="0">Inactive</option>
+											</select>
+											@error('status')
+												<p style="color: red;">{{ $message }}</p>
+											@enderror
+										</div>
+									</div>
                                 </div>
 
                                 <div class="form-group">

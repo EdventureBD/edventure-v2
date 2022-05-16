@@ -259,7 +259,7 @@
                                    {{ request()->is('admin/course-category/*') ? 'active' : '' }}">
 
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Course Category</p>
+                                    <p> Course Category </p>
                                 </a>
                             </li>
                             {{-- END OF COURSE CATEGORY --}}
@@ -321,11 +321,19 @@
                                    {{ request()->is('admin/course-topic/create')? 'active': '' }}
                                    {{ request()->is('admin/course-topic/*/edit')? 'active': '' }}">
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Course Topic </p>
+                                    <p>&nbsp; Island </p>
                                 </a>
                             </li>
                             {{-- END OF COURSE TOPIC --}}
-
+                            {{-- START OF BATCH LECTURE --}}
+                            <li class="nav-item">
+                                <a href="{{ route('batch-lecture.index') }}"
+                                    class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>&nbsp; Add Batch to Island </p>
+                                </a>
+                            </li>
+                            {{-- END OF BATCH LECTURE --}}
                             {{-- START OF CONTENT TAG --}}
                             <li class="nav-item {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}">
                                 <a href="{{ route('content-tag.index') }}"
@@ -389,10 +397,10 @@
 
 
                             {{-- START OF BATCH --}}
-                            @include('admin.includes.sidebar_content.batch')
+                            {{-- @include('admin.includes.sidebar_content.batch') --}}
                             {{-- END OF BATCH --}}
-                        </ul>
-                    </li>
+                        {{-- </ul>
+                    </li> --}}
 
                 @endcan
 

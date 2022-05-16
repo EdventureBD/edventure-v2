@@ -29,6 +29,7 @@ class Edit extends Component
     public $deleteImage;
     public $deleteBanner;
     public $bundle_for_whom;
+    public $status = "";// initializing with empty string so disabled selected option works properly
 
     public function updatedBundle_name()
     {
@@ -82,6 +83,13 @@ class Edit extends Component
         ]);
     }
 
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer||between:0,1'
+        ]);
+    }
+
     protected $rules = [
         'bundle_name' => ['required', 'string', 'max:100'],
         'description' => 'required|string|max:500',
@@ -89,7 +97,8 @@ class Edit extends Component
         'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
-        'bundle_for_whom' => 'required'
+        'bundle_for_whom' => 'required',
+        'status' => 'required|numeric|integer||between:0,1'
     ];
 
     public function updateBundle()
@@ -125,6 +134,7 @@ class Edit extends Component
         $bundle->trailer = $data['url'];
         $bundle->price = $data['price'];
         $bundle->bundle_for_whom = $data['bundle_for_whom'];
+        $bundle->status = $data['status'];
         $save = $bundle->save();
 
         if ($save) {
@@ -149,6 +159,7 @@ class Edit extends Component
         $this->deleteImage = $this->bundle->icon;
         $this->deleteBanner = $this->bundle->banner;
         $this->bundle_for_whom = $this->bundle->bundle_for_whom;
+        $this->status = $this->bundle->status;
         $this->intermediary_levels = IntermediaryLevel::all();
     }
 

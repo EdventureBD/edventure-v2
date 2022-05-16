@@ -70,9 +70,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="topicName">Topic <span class="must-filled">*</span></label>
+                                            <label class="col-form-label" for="topicName"> Island <span class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="topicId">
-                                                <option value="" selected>Select Topic</option>
+                                                <option value="" selected>Select Island</option>
                                                 @foreach($topics as $topic)
                                                     <option wire:key="{{ $intermediaryLevel->slug.$intermediaryLevel->id }}" value="{{ $topic->id }}">{{ $topic->title }}</option>
                                                 @endforeach

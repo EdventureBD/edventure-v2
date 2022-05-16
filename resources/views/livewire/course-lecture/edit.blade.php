@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="courseTopic">Course Topic</label>
+                                            <label class="col-form-label" for="courseTopic">Island</label>
                                             <select class="form-control" wire:model="topicId" disabled>
                                                 @foreach ($topics as $topic)
                                                     <option value="{{ $topic->id }}">{{ $topic->title }}

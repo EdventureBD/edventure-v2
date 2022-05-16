@@ -15,7 +15,7 @@
                             <div class="card-body">
                                 <form role="form" wire:submit.prevent="updateIntermediaryLevel">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="courseTitle"> Course Title <span
                                                         class="must-filled">*</span> </label>
@@ -28,7 +28,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-form-label" for="courseName"> Course Category <span class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="categoryId">
@@ -38,6 +38,19 @@
                                                     @endforeach
                                                 </select>
                                                 @error('categoryId')
+                                                    <p style="color: red;">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="status"> Status <span class="must-filled">*</span></label>
+                                                <select class="form-control @error('status') is-invalid @enderror" wire:model="status">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
+                                                </select>
+                                                @error('status')
                                                     <p style="color: red;">{{ $message }}</p>
                                                 @enderror
                                             </div>

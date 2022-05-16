@@ -50,6 +50,7 @@ class Edit extends Component
     public $video_lecture;
     public $course_for_whom;
     public $mind_map;
+    public $status;
 
     public function updatedTitle()
     {
@@ -66,6 +67,13 @@ class Edit extends Component
     public function updatedBanner()
     {
         $this->tempBanner = $this->banner;
+    }
+
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer|between:0,1',
+        ]);
     }
 
     public function updatedIslandImage()
@@ -145,6 +153,7 @@ class Edit extends Component
         'quiz' => 'nullable',
         'mind_map' => 'nullable',
         'course_for_whom' => 'required',
+        'status' => 'required|numeric|integer|between:0,1',
     ];
 
     protected $messages = [
@@ -244,6 +253,7 @@ class Edit extends Component
       //   }
         $course->description = $data['description'];
         $course->duration = $data['duration'];
+        $course->status = $data['status'];
         $course->trailer = $data['url'];
         $course->video_lecture = $data['video_lecture'];
         $course->time_allotted = $data['time_allotted'];
@@ -296,6 +306,7 @@ class Edit extends Component
         $this->mind_map = $this->course->mind_map;
         $this->course_for_whom = $this->course->course_for_whom;
         $this->video_lecture = $this->course->video_lecture;
+        $this->status = $this->course->status;
 
         $this->teachers = User::where('user_type', 2)->get();
         $batch = Batch::where('course_id', $this->course->id)->first();

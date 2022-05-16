@@ -14,10 +14,10 @@
                      <div class="card-body">
                            <form role="form" wire:submit.prevent="updateCourseTopic">
                               <div class="form-group">
-                                 <label class="col-form-label" for="Title"> Course Topic Title  <span class="must-filled">*</span></label>
+                                 <label class="col-form-label" for="Title"> Island Title  <span class="must-filled">*</span></label>
                                  <input type="text" wire:model="title"
                                        class="form-control @error('title') is-invalid @enderror"
-                                       id="Title" placeholder="Enter your course topic title">
+                                       id="Title" placeholder="Enter your island title">
                                  @error('title')
                                        <p style="color: red;">{{ $message }}</p>
                                  @enderror

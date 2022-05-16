@@ -1,6 +1,6 @@
 {{--previous student/pages/course/course.blade.php--}}
 <x-landing-layout headerBg="white">
-    
+
     <link rel="stylesheet" href="/css/tooltip.css">
     <style>
         .bold-header {
@@ -86,19 +86,20 @@
 
             @if($selected_intermediary_level)
                 @if ( count($courses) > 0 || count($bundles) > 0 )
-                    <div class="py-1 text-center d-flex justify-content-center">
-                        <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>
-                    </div>
+{{--                    <div class="py-1 text-center d-flex justify-content-center">--}}
+{{--                        <p class="text-center">{{ $courses->links('vendor.pagination.custom') }}</p>--}}
+{{--                    </div>--}}
                     <div class="row {{count($courses) + count($bundles) == 1 ? 'justify-content-center' : 'justify-content-around'}} py-5" id="cards-parent">
-                        {{-- course part ends  --}}
+
+                    <div class="row justify-content-center py-3 card-group-row mb-lg-8pt">
                         @foreach ($courses as $course)
                             <div class="mb-4">
                                 <div class="card text-center"
                                     style="border-radius: 26px;width: 248px;height: 301px;padding:0px !important">
                                     <div class="card-header fw-800"
                                         style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border-radius: 26px 26px 0 0"
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
+                                        data-toggle="tooltip"
+                                        data-placement="top"
                                         title="{{ $course->title }}">
                                         {{ $course->title }}
                                     </div>
@@ -129,8 +130,8 @@
                                     style="border-radius: 26px;width: 248px;height: 301px;padding:0px !important">
                                     <div class="card-header fw-800"
                                         style="color: #6400C8;font-size: 16px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;border-radius: 26px 26px 0 0"
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
+                                        data-toggle="tooltip"
+                                        data-placement="top"
                                         title="{{$bundle->bundle_name }}">
                                         {{ $bundle->bundle_name }}
                                     </div>

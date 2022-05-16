@@ -43,6 +43,7 @@ class Create extends Component
     public $video_lecture = 0;
     public $course_for_whom;
     public $mind_map = 0;
+    public $status = "";
 
     public function updatedTitle()
     {
@@ -55,6 +56,13 @@ class Create extends Component
     {
         $this->validate([
             'duration' => 'required|numeric|between:1,36',
+        ]);
+    }
+
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer|between:0,1',
         ]);
     }
 
@@ -126,6 +134,7 @@ class Create extends Component
         'title' => 'required|string|max:100|unique:courses',
         'banner' => 'nullable|image|mimes:jpeg,jpg,png',
         'image' => 'nullable|image|mimes:jpeg,jpg,png',
+        'status' => 'required|numeric|integer|between:0,1',
         'description' => 'required|string|max:1000',
         'url' => ['nullable', 'string', 'min:3'],
         'intermediaryLevelId' => 'required|numeric|integer',
@@ -142,10 +151,10 @@ class Create extends Component
 
     protected $messages = [
         'intermediaryLevelId.required' => 'Program is required.',
-        'intermediaryLevelId.numeric' => 'Program has to be a numeric value.',
-        'intermediaryLevelId.integer' => 'Program has to be a integer value.',
-        'intermediaryLevelId.numeric' => 'Bundle has to be a numeric value.',
-        'intermediaryLevelId.integer' => 'Bundle has to be a integer value.',
+        'intermediaryLevelId.numeric'  => 'Program has to be a numeric value.',
+        'intermediaryLevelId.integer'  => 'Program has to be a integer value.',
+        'intermediaryLevelId.numeric'  => 'Bundle has to be a numeric value.',
+        'intermediaryLevelId.integer'  => 'Bundle has to be a integer value.',
     ];
 
     public function saveCourse()
@@ -202,7 +211,7 @@ class Create extends Component
         else{
             $course->price = $data['price'];
         }
-        $course->status = 1;
+        $course->status = $data["status"];
         $course->order = 0;
         $course->time_allotted = $data['time_allotted'];
         $course->video_lecture = $data['video_lecture'] ?? 0;

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\CourseCategory;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Course;
+use App\Models\Admin\IntermediaryLevel;
 
 class CourseCategoryController extends Controller
 {
@@ -23,9 +24,9 @@ class CourseCategoryController extends Controller
 
     public function show(CourseCategory $courseCategory)
     {
-        $courses = Course::where('course_category_id', $courseCategory->id)->get();
-        $total = Course::where('course_category_id', $courseCategory->id)->count();
-        return view('admin.pages.course_category.details', compact('courseCategory', 'courses', 'total'));
+        $intermediary_levels = IntermediaryLevel::where('course_category_id', $courseCategory->id)->get();
+        $total = $intermediary_levels->count();
+        return view('admin.pages.course_category.details', compact('courseCategory', 'intermediary_levels', 'total'));
     }
 
     public function edit(CourseCategory $courseCategory)

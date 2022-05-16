@@ -32,6 +32,15 @@ class CourseController extends Controller
 
         if(isset($category_slug) && !empty($category_slug)){
             $category = CourseCategory::where('status',1)->where('slug', $category_slug)->first();
+            if(!$category){
+                $category = CourseCategory::where('slug', $category_slug)->first();
+                if($category && $category->status == 0){
+                    return redirect()->route('course')->withErrors(['status_false' => 'This course category is unavailable right now. Please check later.']);
+                }
+                else{
+                    return redirect()->route('course')->withErrors(['not_found' => 'This course category doesn\'t exist.']);
+                }
+            }
             $selected_category_slug = $category->slug;
         }
         else{
@@ -51,9 +60,17 @@ class CourseController extends Controller
         }
 
         if(isset($intermediary_level_slug) && !empty($intermediary_level_slug)){
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)
-                                            ->where('slug', $intermediary_level_slug)
-                                            ->first();
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('slug', $intermediary_level_slug)->first();
+
+            if(!$selected_intermediary_level){
+                $selected_intermediary_level = IntermediaryLevel::where('slug', $intermediary_level_slug)->first();
+                if($selected_intermediary_level && $selected_intermediary_level->status == 0){
+                    return redirect()->route('course')->withErrors(['status_false' => 'This program is unavailable right now. Please check later.']);
+                }
+                else{
+                    return redirect()->route('course')->withErrors(['not_found' => 'This program doesn\'t exist.']);
+                }
+            }
         }
         else{
             $selected_intermediary_level = null;
@@ -63,10 +80,10 @@ class CourseController extends Controller
             $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)
                                 ->where('status', 1)
                                 ->where('bundle_id', null)
-                                ->paginate(8)
-                                ->fragment('intermediary_levels');
+                                ->get();
 
             $bundles = Bundle::where('intermediary_level_id', $selected_intermediary_level->id)
+                                ->where('status', 1)
                                 ->get();
         }
         else{
@@ -90,6 +107,10 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
+        if($course->status == 0){
+            return redirect()->route('course')->withErrors(['status_false' => 'This course category is unavailable right now. Please check later.']);
+        }
+
         if($course->bundle_id != null){
             // checks if bundle exists. Else, will throw not found error
             $bundle = Bundle::where('id', $course->bundle_id)->firstOrFail();

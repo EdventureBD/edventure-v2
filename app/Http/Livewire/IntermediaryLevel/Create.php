@@ -10,14 +10,16 @@ use App\Models\Admin\IntermediaryLevel;
 
 class Create extends Component
 {
-
     public $categories;
     public $title;
+    // initializing with an empty string so that disabled field is selected by default. Else, it doesn't work.
+    public $status = '';
     public $categoryId = '';
 
     protected $rules = [
         'title' => ['required', 'unique:intermediary_levels,title'],
-        'categoryId' => 'required',
+        'status' => ['required', 'numeric', 'integer', 'gte:0'],
+        'categoryId' => ['required'],
     ];
 
     public function updated($propertyName)
@@ -33,16 +35,18 @@ class Create extends Component
             'course_category_id' => $this->categoryId,
             'title' => $this->title,
             'slug' => Str::slug($this->title),
-            'status' => 1,
+            'status' => $this->status,
         ]);
 
         if ($created) {
             $this->title = '';
+            $this->status = '';
             $this->categoryId = '';
             session()->flash('status', 'Program successfully added!');
             return redirect()->route('intermediary_level.index');
         } else {
             $this->title = '';
+            $this->status = '';
             $this->categoryId = '';
             session()->flash('failed', 'Program added failed!');
             return redirect()->route('intermediary_level.create');
