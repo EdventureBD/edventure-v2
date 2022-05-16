@@ -107,13 +107,13 @@
                     </div>
 
                 </div>
-
-                @if($category->teacher_lists)
+                @php($teachers = $category->teacher_lists)
+                @if($teachers)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষকবৃন্দ</h5>
                         <div class="d-flex overflow-x-scroll" style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
-                            @foreach($category->teacher_lists as $teacher)
-                                <div class="text-center col-6 d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
+                            @foreach($teachers as $teacher)
+                                <div class="text-center {{count($teachers) == 1 ? 'col-12' : 'col-6'}} d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
                                         <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
                                     @else
