@@ -101,7 +101,6 @@
         <section>
             <div class="social-media-parent-container">
                 <h2 id="social-media-heading">Join us on Facebook Group</h2>
-                <p id="social-media-description">- স্বয়ংক্রিয় ড্যাশবোর্ডের সাহায্যে নিজের Strength এবং Weakness মূল্যায়ন করার উপায়</p>
             </div>
             <div class="main">
                 <div class="swiper swiper-container">

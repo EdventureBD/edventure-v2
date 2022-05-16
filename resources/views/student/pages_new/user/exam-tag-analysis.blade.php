@@ -34,7 +34,13 @@
                         <td class="fit col">Topic</td>
                         <td class="fit col">Performance Review</td>
                         <td class="fit col">Accuracy
-                            <span style="color: #fa9632" class="test" data-toggle="tooltip" data-placement="right" title="Percentage value of the Performance Review"><i class="fa fa-info-circle"></i></span>
+                            <span style="color: #fa9632"
+                                  class=""
+                                  data-toggle="tooltip"
+                                  data-placement="right"
+                                  title="Percentage value of the Performance Review">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
                         </td>
                     </tr>
                     </thead>
