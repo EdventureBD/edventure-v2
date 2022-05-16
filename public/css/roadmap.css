@@ -53,13 +53,26 @@ ul li{
 ul li a{
    width: 70%;
 }
+@media screen and (max-width: 768px) {
+   #bundle-page-title {
+      font-size: 20px;
+   }
+}
 @media screen and (max-width: 576px){
    #roadmap-subject-topic-name {
       font-size: 25px;
    }
+   #bundle-page-title {
+      font-size: 18px;
+   }
    #ilandsParentContainer {
       margin-right: 15px;
       margin-left: 15px;
+      width: 50%;
+   }
+   #bundleParentContainer {
+      margin-left: auto;
+      margin-right: auto;
       width: 50%;
    }
    ul li {

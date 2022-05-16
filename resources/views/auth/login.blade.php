@@ -64,7 +64,7 @@
             <!-- Remember Me -->
             <div class="block mt-4">
                 {{-- <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" 
+                    <input id="remember_me" type="checkbox"
                         class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         name="remember">
                     <span class="ml-2 text-sm text-gray-600" >{{ __('Remember me') }}</span>
@@ -79,12 +79,12 @@
 
             <div class="my-5" style="display: flex;
             justify-content: center;">
-                
+
 
                 <x-button class="" style="background:#FA9632">
                     {{ __('Login') }}
                 </x-button>
-               
+
             </div>
             {{-- <a href="{{route('login.facebook')}}" class="block bg-gray-200 text-center p-4 font-bold rounded my-5 text-black"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 width="35" height="35"
@@ -112,5 +112,5 @@
             }
         </script>
     </x-auth-card>
-    
+
 </x-guest-layout>

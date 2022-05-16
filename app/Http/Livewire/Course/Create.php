@@ -37,6 +37,12 @@ class Create extends Component
     public $show_price = true;
     public $show_teachers = false;
     public $show_island_image = false;
+    public $time_allotted = 0;
+    public $quiz = 0;
+    public $given_notes = 0;
+    public $video_lecture = 0;
+    public $course_for_whom;
+    public $mind_map = 0;
     public $status = "";
 
     public function updatedTitle()
@@ -134,6 +140,13 @@ class Create extends Component
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
         'duration' => 'required|numeric|between:1,36',
+        'time_allotted' => 'required',
+        'video_lecture' => 'nullable',
+        'given_notes' => 'nullable',
+        'quiz' => 'nullable',
+        'mind_map' => 'nullable',
+        'course_for_whom' => 'required',
+
     ];
 
     protected $messages = [
@@ -145,7 +158,7 @@ class Create extends Component
     ];
 
     public function saveCourse()
-    { 
+    {
         if($this->bundleId){
             $this->rules['teacherId'] = 'required|integer|numeric';
             $this->rules['price'] = 'nullable|integer|numeric';
@@ -200,6 +213,12 @@ class Create extends Component
         }
         $course->status = $data["status"];
         $course->order = 0;
+        $course->time_allotted = $data['time_allotted'];
+        $course->video_lecture = $data['video_lecture'] ?? 0;
+        $course->given_notes = $data['given_notes'] ?? 0;
+        $course->quiz = $data['quiz'] ?? 0;
+        $course->mind_map = $data['mind_map'] ?? 0;
+        $course->course_for_whom = $data['course_for_whom'];
         $save = $course->save();
 
         if($course->bundle_id !== null){

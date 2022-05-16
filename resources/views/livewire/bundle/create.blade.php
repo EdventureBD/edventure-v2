@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -171,6 +171,21 @@
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label" for="bundleDescription"> For whom Bundle <span
+                                            class="must-filled">*</span>
+                                    </label>
+                                    <textarea rows="5" type="text" wire:model="bundle_for_whom"
+                                              class="form-control @error('bundle_for_whom') is-invalid @enderror"
+                                              id="bundleDescription" placeholder="Enter details for whom this bundle is"></textarea>
+                                    <small id="passwordHelpBlock" class="form-text text-secondary">
+                                        Enter some details about whom this bundle will be needed.
+                                    </small>
+                                    @error('bundle_for_whom')
+                                    <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
                                 <div>
                                     <label class="col-form-label" for="bundleurl">Trailer </label> <br>
                                     <div class="input-group">
@@ -188,7 +203,7 @@
                                 <div class="input-group">
                                     @if ($url)
                                         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ $url }}"
-                                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
                                         clipboard-write; encrypted-media; gyroscope;
                                         picture-in-picture" allowfullscreen></iframe>
                                         {{-- vimeo player

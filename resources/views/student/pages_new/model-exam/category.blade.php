@@ -8,7 +8,7 @@
 
             @if (count($exam_categories) > 0)
                 <div class="py-4">
-                    <div class="text-center bradius-10 py-2 w-100 text-sm " style="font-weight: 900; color: #76777A">
+                    <div class="text-center bradius-10 py-4 w-100 text-sm " style="font-weight: 900; color: #76777A">
                         Exams Category</div>
                     <div class="row justify-content-center" id="categories-section">
                         @foreach ($exam_categories as $category)

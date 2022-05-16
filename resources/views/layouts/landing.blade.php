@@ -130,7 +130,7 @@
 
         <div class="font-sans text-gray-900 antialiased" id="app">
             <div class="landing-page">
-                @if(!request()->is("batch/*") && !request()->is("bundle/*"))
+                @if(!request()->is("batch/*") && Route::currentRouteName() !== 'bundle_courses')
                     @include('landing.header', ['headerBg'=>$headerBg])
                 @endif
                 <div class="wholeBody">

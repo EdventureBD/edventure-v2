@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div id="questionMap" class="mx-0 px-0 text-center d-none overflow-auto w-100" >
-    
+
                         </div>
                     </div>
 
@@ -88,7 +88,8 @@
                     @endforeach
 
                     <div class="d-flex justify-content-center px-5">
-                        <button type="submit" class="btn text-xxsm fw-600 text-white btn-orange-customed px-4 py-2 my-4">Submit</button>
+                        <button type="submit"
+                                class="btn text-xxsm fw-600 text-white custom-submit-btn px-4 py-2 my-4">Submit</button>
                     </div>
                 </form>
             </div>
