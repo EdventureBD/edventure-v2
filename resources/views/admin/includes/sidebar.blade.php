@@ -401,6 +401,7 @@
                             {{-- END OF BATCH --}}
                         {{-- </ul>
                     </li> --}}
+                        </ul>
 
                 @endcan
 
@@ -440,58 +441,6 @@
                     </li>
                     {{-- END OF PAYMENTS --}}
                 @endcan
-
-                {{--                @can('course')--}}
-                {{--                    --}}{{-- START OF CONTENT TAGS --}}
-                {{--                    <li--}}
-                {{--                        class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}--}}
-                {{--                        {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}--}}
-                {{--                        {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}--}}
-                {{--                        {{ request()->is('admin/question-content-tag') ? 'menu-open' : '' }}--}}
-                {{--                        {{ request()->is('admin/question-content-tag/create') ? 'menu-open' : '' }}--}}
-                {{--                        {{ request()->is('admin/question-content-tag/*/edit') ? 'menu-open' : '' }}--}}
-                {{--                            ">--}}
-                {{--                        <a href="#"--}}
-                {{--                           class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }}--}}
-                {{--                           {{ request()->is('admin/content-tag/create') ? 'active' : '' }}--}}
-                {{--                           {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}--}}
-                {{--                           {{ request()->is('admin/question-content-tag') ? 'active' : '' }}--}}
-                {{--                           {{ request()->is('admin/question-content-tag/create') ? 'active' : '' }}--}}
-                {{--                           {{ request()->is('admin/question-content-tag/*/edit') ? 'active' : '' }}--}}
-                {{--                               ">--}}
-                {{--                            <i class="fas fa-chart-bar"></i>--}}
-                {{--                            <p>&nbsp; Tags<i class="right fas fa-angle-left"></i></p>--}}
-                {{--                        </a>--}}
-                {{--                        <ul style="margin-left: 10px;" class="nav nav-treeview">--}}
-                {{--                            <li class="nav-item">--}}
-                {{--                                <a href="{{ route('content-tag.index') }}"--}}
-                {{--                                   class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} {{ request()->is('admin/content-tag/create') ? 'active' : '' }} {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}">--}}
-                {{--                                    <i class="fas fa-clipboard-list"></i>--}}
-                {{--                                    <p>&nbsp; Content Tag</p>--}}
-                {{--                                </a>--}}
-                {{--                            </li>--}}
-                {{--                            --}}{{-- <li class="nav-item">--}}
-                {{--                                <a href="{{ route('question-content-tag.index') }}" class="nav-link {{ request()->is('admin/question-content-tag')? 'active': '' }} {{ request()->is('admin/question-content-tag/create')? 'active': '' }} {{ request()->is('admin/question-content-tag/*/edit')? 'active': '' }}">--}}
-                {{--                                    <i class="fas fa-question-circle"></i>--}}
-                {{--                                    <p>&nbsp; Ques-Content Tag</p>--}}
-                {{--                                </a>--}}
-                {{--                            </li> --}}
-                {{--                        </ul>--}}
-                {{--                    </li>--}}
-                {{--                    --}}{{-- END OF CONTENT TAG --}}
-                {{--                @endcan--}}
-
-                {{--                @can('course')--}}
-                {{--                    --}}{{-- START OF COURSE CATEGORY --}}
-                {{--                    <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">--}}
-                {{--                        <a href="{{ route('bundle.index') }}"--}}
-                {{--                           class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }} {{ request()->is('admin/bundle/create') ? 'active' : '' }}  {{ request()->is('admin/bundle/*') ? 'active' : '' }}">--}}
-                {{--                            <i class="fas fa-list-ol"></i>--}}
-                {{--                            <p>&nbsp; Bundles </p>--}}
-                {{--                        </a>--}}
-                {{--                    </li>--}}
-                {{--                    --}}{{-- END OF COURSE CATEGORY --}}
-                {{--                @endcan--}}
 
                 {{----------------------- START OF MODEL EXAM SIDEBAR ------------------------------------}}
                 @canany([
