@@ -42,7 +42,7 @@
                           </div>
                       </div>
                       <div id="questionMap" class="mx-0 px-0 text-center d-none overflow-auto w-100" >
-  
+
                       </div>
                   </div>
 
@@ -63,7 +63,7 @@
                                  <img class="img-fluid bradius-15 mb-2" src="{{ $mcq->image }}" alt="" />
                               </div>
                            @endif
-                           
+
                            <div class="container my-4">
                                  <div class="question d-flex justify-content-start">
                                     <div class="row row-cols-1 pt-sm-0 pt-3 form-group mx-0 px-0 popUpMcqOptions" id="options_{{$mcq->id}}">
@@ -92,7 +92,7 @@
                   @endif
 
                   <div class="d-flex justify-content-center px-5">
-                      <button type="submit" class="btn text-xxsm fw-600 text-white btn-orange-customed px-4 py-2 my-4">Submit</button>
+                      <button type="submit" class="btn text-xxsm fw-600 text-white custom-submit-btn px-4 py-2 my-4">Submit</button>
                   </div>
               </form>
           </div>
