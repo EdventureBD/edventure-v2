@@ -17,9 +17,9 @@ class ExamCategory extends Model
         'teachers' => 'array',
     ];
 
-    protected $appends = [
-        'teacher_lists'
-    ];
+//    protected $appends = [
+//        'teacher_lists'
+//    ];
     protected static function boot()
     {
         parent::boot();
