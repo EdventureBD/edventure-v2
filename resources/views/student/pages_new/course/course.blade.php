@@ -114,8 +114,9 @@
                                         @endif
                                     </div>
                                     <a href="{{ route('course-preview', $course->slug ) }}">
-                                        <div class="card-footer fw-700 text-white d-flex justify-content-center" style="border-radius: 0 0 26px 26px;background:#FA9632">
+                                        <div class="card-footer fw-700 text-white d-flex justify-content-between" style="border-radius: 0 0 26px 26px;background:#FA9632">
                                           <span style="font-size: .9rem">Course Details</span>
+                                          <span style="font-size: .9rem">{{!empty($course->price) && !is_null($course->price) ? 'PAID': 'FREE'}}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -146,8 +147,9 @@
                                         @endif
                                     </div>
                                     <a href="{{ route('bundle-preview', $bundle->slug ) }}">
-                                        <div class="card-footer fw-700 text-white d-flex justify-content-center" style="border-radius: 0 0 26px 26px;background:#FA9632">
+                                        <div class="card-footer fw-700 text-white d-flex justify-content-between" style="border-radius: 0 0 26px 26px;background:#FA9632">
                                           <span style="font-size: .9rem">Bundle Details</span>
+                                          <span style="font-size: .9rem">{{!empty($bundle->price) && !is_null($bundle->price) ? 'PAID': 'FREE'}}</span>
                                         </div>
                                     </a>
                                 </div>
