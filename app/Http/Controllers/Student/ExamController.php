@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Middleware\canAccess;
 use App\Utils\Edvanture;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -33,7 +33,6 @@ use App\Models\Student\exam\TopicEndExamCqExamPaper;
 use App\Models\Student\exam\PopQuizCqExamPaper;
 use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
-
 
 class ExamController extends Controller
 {
@@ -321,6 +320,7 @@ class ExamController extends Controller
             $exam_result = ExamResult::where('exam_id', $exam->id)->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->where('exam_type', "Aptitude Test")->first();
 
             if(!$exam_result){
+
                 $total_marks = count($request->mcq_ques);
                 $scored_marks = 0;
                 

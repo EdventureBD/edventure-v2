@@ -34,8 +34,12 @@ class CourseCategoryController extends Controller
         return view('admin.pages.course_category.edit', compact('courseCategory'));
     }
 
-    public function destroy(CourseCategory $courseCategory)
+    public function destroy($courseCategory)
     {
+        $courseCategory = CourseCategory::where('slug', $courseCategory)->with(['intermediary_level'])->firstOrFail();
+        if(count($courseCategory->intermediary_level) > 0){
+            return redirect()->route('course-category.index')->with('failed', 'Course category cannot be deleted. It has programs associated to it.');
+        }
         $delete = $courseCategory->delete();
         if ($delete) {
             return redirect()->route('course-category.index')->with('status', 'Course category successfully deleted!');
