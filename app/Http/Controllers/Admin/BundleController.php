@@ -31,7 +31,11 @@ class BundleController extends Controller
 
     public function destroy($bundle_slug){
 
-        $bundle = Bundle::where('slug', $bundle_slug)->firstOrFail();
+        $bundle = Bundle::where('slug', $bundle_slug)->with('courses')->firstOrFail();
+
+        if(count($bundle->courses) > 0){
+            return redirect()->route('course.index')->with('failed', 'Bundle cannot be deleted. It has courses associated to it.');
+        }
 
         if(!empty($bundle->icon)) {
             $fileName = "public/bundle/icon/" . str_replace('/storage/bundle/icon/', '', $bundle->icon);

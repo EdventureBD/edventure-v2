@@ -11,6 +11,15 @@ use App\Models\Admin\Assignment;
 use App\Models\Admin\ContentTag;
 use App\Imports\CQQuestionImport;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\AptitudeTestMCQ;
+use App\Models\Admin\PopQuizCQ;
+use App\Models\Admin\PopQuizCreativeQuestion;
+use App\Models\Admin\PopQuizMCQ;
+use App\Models\Admin\QuestionContentTag;
+use App\Models\Admin\TopicEndExamCQ;
+use App\Models\Admin\TopicEndExamCreativeQuestion;
+use App\Models\Admin\TopicEndExamMCQ;
+use App\Models\Student\exam\QuestionContentTagAnalysis;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExamController extends Controller
@@ -43,7 +52,85 @@ class ExamController extends Controller
 
     public function destroy(Exam $exam)
     {
+        if($exam->exam_type == "Aptitude Test"){
+            $mcq_questions = AptitudeTestMCQ::where('exam_id', $exam->id)->get();
+            foreach($mcq_questions as $mcq){
+                $question_content_tags = QuestionContentTag::where('question_id', $mcq->id)->where('exam_type', $exam->exam_type)->get();
+                foreach($question_content_tags as $tag){
+                    $question_content_tag_analysis = QuestionContentTagAnalysis::where('question_id', $mcq->id)->where('exam_type', $exam->exam_type)->get();
+                    foreach($question_content_tag_analysis as $tag_analysis){
+                        $tag_analysis->delete();
+                    }
+                    $tag->delete();
+                }
+                $mcq->delete();
+            }
+        }
+        elseif($exam->exam_type == "Pop Quiz"){
+            $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->get();
+            foreach($mcq_questions as $mcq){
+                $mcq_question_content_tags = QuestionContentTag::where('question_id', $mcq->id)->where('exam_type', 'LIKE', $exam->exam_type.' MCQ')->get();
+                foreach($mcq_question_content_tags as $tag){
+                    $mcq_question_content_tag_analysis = QuestionContentTagAnalysis::where('question_id', $mcq->id)->where('exam_type', 'LIKE', $exam->exam_type.' MCQ')->get();
+                    foreach($mcq_question_content_tag_analysis as $tag_analysis){
+                        $tag_analysis->delete();
+                    }
+                    $tag->delete();
+                }
+                $mcq->delete();
+            }
+
+            $creative_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->get();
+            foreach($creative_questions as $creative_question){
+                $cqs = PopQuizCQ::where('creative_question_id', $creative_question->id)->get();
+                foreach($cqs as $cq){
+                    $cq_question_content_tags = QuestionContentTag::where('question_id', $cq->id)->where('exam_type', 'LIKE', $exam->exam_type.' CQ')->get();
+                    foreach($cq_question_content_tags as $tag){
+                        $cq_question_content_tag_analysis = QuestionContentTagAnalysis::where('question_id', $cq->id)->where('exam_type', 'LIKE', $exam->exam_type.' CQ')->get();
+                        foreach($cq_question_content_tag_analysis as $tag_analysis){
+                            $tag_analysis->delete();
+                        }
+                        $tag->delete();
+                    }
+                    $cq->delete();
+                }
+                $creative_question->delete();
+            }
+        }
+        elseif($exam->exam_type == "Topic End Exam"){
+            $mcq_questions = TopicEndExamMCQ::where('exam_id', $exam->id)->get();
+            foreach($mcq_questions as $mcq){
+                $question_content_tags = QuestionContentTag::where('question_id', $mcq->id)->where('exam_type', 'LIKE', $exam->exam_type.' MCQ')->get();
+                foreach($question_content_tags as $tag){
+                    $question_content_tag_analysis = QuestionContentTagAnalysis::where('question_id', $mcq->id)->where('exam_type', 'LIKE', $exam->exam_type.' MCQ')->get();
+                    foreach($question_content_tag_analysis as $tag_analysis){
+                        $tag_analysis->delete();
+                    }
+                    $tag->delete();
+                }
+                $mcq->delete();
+            }
+
+            $creative_questions = TopicEndExamCreativeQuestion::where('exam_id', $exam->id)->get();
+            foreach($creative_questions as $creative_question){
+                $cqs = TopicEndExamCQ::where('creative_question_id', $creative_question->id)->get();
+                foreach($cqs as $cq){
+                    $cq_question_content_tags = QuestionContentTag::where('question_id', $cq->id)->where('exam_type', 'LIKE', $exam->exam_type.' CQ')->get();
+                    foreach($cq_question_content_tags as $tag){
+                        $cq_question_content_tag_analysis = QuestionContentTagAnalysis::where('question_id', $cq->id)->where('exam_type', 'LIKE', $exam->exam_type.' CQ')->get();
+                        foreach($cq_question_content_tag_analysis as $tag_analysis){
+                            $tag_analysis->delete();
+                        }
+                        $tag->delete();
+                    }
+                    $cq->delete();
+                }
+                $creative_question->delete();
+            }
+        }
+
         $delete = $exam->delete();
+
         if ($delete) {
             return redirect()->route('exam.index')->with('status', 'Exam successfully deleted!');
         } else {
