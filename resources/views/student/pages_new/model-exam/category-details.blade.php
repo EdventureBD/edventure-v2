@@ -8,9 +8,9 @@
     <div class="container">
         <div class="d-flex mb-3" id="parent-div">
             <div class="w-100  mt-5">
-                <h1 class="bold-header">
+                <h3 class="bold-header text-center" id="category-title-1">
                     {{$category->name}}
-                </h1>
+                </h3>
 
                 <div class="includes">
                     <div class="row">
@@ -236,6 +236,9 @@
             </div>
 
             <div class="w-100 ml-lg-5 mt-5">
+                <h3 class="bold-header text-center d-none" id="category-title-2">
+                    {{$category->name}}
+                </h3>
                 <div class="test">
                     <iframe
                         id="iframe"
