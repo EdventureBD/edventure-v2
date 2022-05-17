@@ -20,9 +20,9 @@
         @endif
         <div class="d-flex mb-3" id="parent-div">
             <div class="w-100  mt-5">
-                <h1 class="bold-header" id="bundle-title">
+                <h2 class="bold-header" id="bundle-title-1">
                     {{ $bundle->bundle_name }}
-                </h1>
+                </h2>
 
                 <div class="includes">
                     <div class="row">
@@ -310,6 +310,9 @@
             </div>
 
             <div class="w-100 ml-lg-5 mt-5">
+                <h2 class="bold-header d-none" id="bundle-title-2">
+                    {{ $bundle->bundle_name }}
+                </h2>
                 <div class="test">
                     <iframe
                         id="iframe"
