@@ -21,6 +21,11 @@ class IntermediaryLevel extends Model
         return $this->hasMany(Course::class);
     }
 
+    public function bundles()
+    {
+        return $this->hasMany(Bundle::class);
+    }
+
     public function courseCategory()
     {
         return $this->belongsTo(CourseCategory::class);

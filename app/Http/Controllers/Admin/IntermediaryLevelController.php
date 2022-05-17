@@ -29,7 +29,17 @@ class IntermediaryLevelController extends Controller
         return view('admin.pages.intermediary_level.edit', compact('categories', 'intermediary_level_slug'));
     }
 
-    public function destroy(IntermediaryLevel $intermediaryLevel){
+    public function destroy($intermediaryLevel){
+
+        $intermediary_level = IntermediaryLevel::where('slug', $intermediaryLevel)->with(['course', 'bundles'])->firstOrFail();
+        if(count($intermediary_level->course) > 0){
+            return redirect()->route('intermediary_level.index')->with('failed', 'Program cannot be deleted. It has courses associated to it.');
+        }
+
+        if(count($intermediary_level->bundles) > 0){
+            return redirect()->route('intermediary_level.index')->with('failed', 'Program cannot be deleted. It has bundles associated to it.');
+        }
+
         $delete = $intermediaryLevel->delete();
         if ($delete) {
             return redirect()->back()->with('status', 'Program successfully deleted!');

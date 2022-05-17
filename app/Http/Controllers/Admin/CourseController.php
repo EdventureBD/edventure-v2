@@ -49,8 +49,22 @@ class CourseController extends Controller
         return view('admin.pages.course.edit', compact('course'));
     }
 
-    public function destroy(Course $course)
+    public function destroy($course)
     {
+        $course = Course::where('slug', $course)->with(['CourseTopic', 'Batch', 'Exam'])->firstOrFail();
+
+        if(count($course->CourseTopic) > 0){
+            return redirect()->route('course.index')->with('failed', 'Course cannot be deleted. It has islands associated to it.');
+        }
+
+        if(count($course->Batch) > 0){
+            return redirect()->route('course.index')->with('failed', 'Course cannot be deleted. It has batches associated to it.');
+        }
+
+        if(count($course->Exam) > 0){
+            return redirect()->route('course.index')->with('failed', 'Course cannot be deleted. It has exams associated to it.');
+        }
+
         $delete = $course->delete();
         if ($delete) {
             return redirect()->route('course.index')->with('status', 'Course successfully deleted!');

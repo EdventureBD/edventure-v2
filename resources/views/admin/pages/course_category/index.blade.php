@@ -50,7 +50,7 @@
                                             </a>
                                         </td>                                    
                                         <td>
-                                              <input type="checkbox" class="customControlInput" id="single-col-{{ $category->id }}" data-id="{{ $category->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $category->status ? 'checked' : '' }} >
+                                            <input type="checkbox" class="customControlInput" id="single-col-{{ $category->id }}" data-id="{{ $category->id }}" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $category->status ? 'checked' : '' }} >
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group ">
