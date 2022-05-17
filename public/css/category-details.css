@@ -252,3 +252,16 @@ div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollba
     -webkit-box-shadow: none;
     box-shadow: 11px 2px 14px rgba(231, 128, 108, 0.4);
 }
+@media screen and (max-width:768px) {
+    #category-title-2 {
+        display: block !important;
+    }
+    #category-title-1 {
+        display: none !important;
+    }
+}
+@media screen and (max-width:576px) {
+    #category-title-2 {
+        font-size: 20px;
+    }
+}
