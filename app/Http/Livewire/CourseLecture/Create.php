@@ -33,10 +33,18 @@ class Create extends Component
     public $exams;
     public $examId;
 
+    public $slug;
+
     public function updatedTitle()
     {
         $this->validate([
-            'title' => ['required', 'string', 'max:325'],
+            'title' => ['required', 'string', 'max:325', 'unique:course_lectures,title,'],
+        ]);
+
+        $this->slug = ['slug' => Str::slug($this->title)];
+
+        $this->validate([
+            'slug' => ['unique:course_lectures,slug'],
         ]);
     }
 
@@ -92,7 +100,8 @@ class Create extends Component
     }
 
     protected $rules = [
-        'title' => ['required', 'string', 'max:325'],
+        'title' => ['required', 'string', 'max:325', 'unique:course_lectures,title'],
+        'slug' => ['unique:course_lectures,slug'],
         'url' => ['required', 'string', 'min:3'],
         'courseId' => 'required',
         'topicId' => 'required',
@@ -101,8 +110,14 @@ class Create extends Component
         'pdf' => 'nullable|mimes:pdf|max:50000',
     ];
 
+    protected $messages = [
+        'slug.unique' => 'Slug generated from this title is already in use. Try another title.',
+    ];
+
     public function saveCourseLecture()
     {
+        $this->slug = Str::slug($this->title);
+        
         $data = $this->validate();
         $lecture = new CourseLecture;
         $lecture->title = $data['title'];

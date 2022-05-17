@@ -31,10 +31,18 @@ class Edit extends Component
     public $pdf;
     public $prevpdf;
 
+    public $slug;
+
     public function updatedTitle()
     {
         $this->validate([
-            'title' => ['required', 'string', 'max:325'],
+            'title' => ['required', 'string', 'max:325', 'unique:course_lectures,title,'.$this->courseLecture->id ],
+        ]);
+
+        $this->slug = ['slug' => Str::slug($this->title)];
+
+        $this->validate([
+            'slug' => ['unique:course_lectures,slug,'.$this->courseLecture->id],
         ]);
     }
 
@@ -89,21 +97,28 @@ class Edit extends Component
         ]);
     }
 
-    protected $rules = [
-        'title' => ['required', 'string', 'max:325'],
-        'url' => ['required', 'string'],
-        'courseId' => 'required',
-        'topicId' => 'required',
-        'examId' => 'required',
-        'markdownText' => 'nullable',
-        'pdf' => 'nullable|max:10000',
+    protected $messages = [
+        'slug.unique' => 'Slug generated from this title is already in use. Try another title.',
     ];
 
     public function updateCourseLecture()
     {
-        $data = $this->validate();
+        $this->slug = Str::slug($this->title);
+
+        $data = $this->validate([
+            'title' => 'required|string|max:325|unique:course_lectures,title,'.$this->courseLecture->id,
+            'slug' => 'unique:course_lectures,slug,'.$this->courseLecture->id,
+            'url' => 'required|string',
+            'courseId' => 'required',
+            'topicId' => 'required',
+            'examId' => 'required',
+            'markdownText' => 'nullable',
+            'pdf' => 'nullable|max:10000',
+        ]);
+
         $lecture = CourseLecture::find($this->courseLecture->id);
         $lecture->title = $data['title'];
+        $lecture->slug = $data['slug'];
         $lecture->course_id = $data['courseId'];
         $lecture->topic_id = $data['topicId'];
         $lecture->exam_id = $data['examId'];

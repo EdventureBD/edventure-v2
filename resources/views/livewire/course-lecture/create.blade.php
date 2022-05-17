@@ -27,6 +27,9 @@
                                             @error('title')
                                                 <p style="color: red;">{{ $message }}</p>
                                             @enderror
+                                            @error('slug')
+                                                <p style="color: red;">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                 </div>
                                 <div class="row">
