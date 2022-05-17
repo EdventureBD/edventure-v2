@@ -33,14 +33,7 @@
                             <div class="col-8 d-flex flex-column p-0 my-auto">
                                 <div class="text-nowrap detail-parts-font">কোর্সটি করছেন </div>
                                 <div class="text-nowrap detail-parts-font">
-                                    {{-- @if(!is_null($category->price) && $category->price != 0)
-                                        @php($number = $category->payment_of_categories_count <= 83 ? 83 : $category->payment_of_categories_count)
-                                        {{\App\Enum\Converter::en2bn($number)}} জন
-                                    @else
-                                        @php($number = $category->total_participation_count <= 83 ? 83 : $category->total_participation_count)
-                                        {{\App\Enum\Converter::en2bn($number)}} জন
-                                    @endif --}}
-                                    {{$course->totalCourseEnrolled().' জন'}}
+                                    {{\App\Enum\Converter::en2bn($course->totalCourseEnrolled()).' জন'}}
                                 </div>
                             </div>
                         </div>
@@ -53,7 +46,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{-- {{\App\Enum\Converter::en2bn($category->time_allotted)}} --}}{{$course->time_allotted ?? '0'}} ঘন্টা
+                                        {{\App\Enum\Converter::en2bn($course->time_allotted) ?? 0}} ঘন্টা
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +60,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">ভিডিও লেকচার </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->video_lecture ?? 0}}
+                                        {{\App\Enum\Converter::en2bn($course->video_lecture) ?? 0}}
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +74,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">নোটস</div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->given_notes ?? 0}}
+                                        {{\App\Enum\Converter::en2bn($course->given_notes) ?? 0}}
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +89,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">কুইজ</div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->quiz ?? 0}} টি
+                                        {{\App\Enum\Converter::en2bn($course->quiz) ?? 0}} টি
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +104,7 @@
                                 <div class="col-8 d-flex flex-column p-0 my-auto">
                                     <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
                                     <div class="text-nowrap detail-parts-font">
-                                        {{$course->mind_map ?? 0}}
+                                        {{\App\Enum\Converter::en2bn($course->mind_map) ?? 0}}
                                     </div>
                                 </div>
                             </div>
