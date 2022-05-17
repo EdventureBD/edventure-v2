@@ -1,6 +1,6 @@
 @extends('admin.layouts.default', [
-                                    'title'=>'Course Details', 
-                                    'pageName'=>'Course Details', 
+                                    'title'=>'Course Details',
+                                    'pageName'=>'Course Details',
                                     'secondPageName'=>'Course Details'
                                 ])
 
@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="row">
-                           <div class="col-md-12">                                
+                            <div class="col-md-12">
                                     <a href="{{ URL::previous() }}"><button type="button"
                                         class="ml-2 mt-2 btn btn-danger">Back</button></a>
 
@@ -51,7 +51,7 @@
                                     <!-- /.modal-dialog -->
                                 </div>
                                 <!-- /.modal -->
-                           </div>
+                            </div>
                         </div>
                         <div class="card-body table-responsive p-0" style="height: auto;" >
                             <table class="table table-bordered table-striped example1">
@@ -63,11 +63,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($course_topics as $course_topic)
+                                    @foreach($batch_lectures as $batch_lecture)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                               {{ $course_topic->title }}
+                                                {{ $batch_lecture->courseTopic->title }}
                                             </td>
                                             <td>{{ $course->title }}</td>
                                         </tr>
@@ -101,20 +101,20 @@
                             <h1 class="card-title">Lectures</h1>
 
                             <div class="card-tools">
-                               <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                  <i class="fas fa-minus"></i>
-                               </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="row">
-                           <div class="col-md-12">
+                            <div class="col-md-12">
                                 <a href="{{ route('addCourseLecture', $course) }}">
                                     <button class="btn btn-info float-right mt-2 mb-2 mr-2">
                                         <i class="fas fa-plus-square"></i>
                                         Add Course Lecture
                                     </button>
                                 </a>
-                           </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0" style="height: auto;" >
@@ -128,22 +128,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($lectures as $lecture)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $lecture->lectureTitle }}</td>
-                                            <td>
-                                               {{ $lecture->title }}
-                                            </td>
-                                            <td class="text-center">
-                                                <iframe width="224" height="126" src="https://www.youtube-nocookie.com/embed/{{$lecture->url }}"
-                                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
-                                                    clipboard-write; encrypted-media; gyroscope;
-                                                    picture-in-picture" allowfullscreen></iframe>
-                                                {{-- <iframe src="https://player.vimeo.com/video/{{ $lecture->url}}" width="100" frameborder="0" 
-                                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}
-                                            </td>
-                                        </tr>
+                                    @foreach($batch_lectures as $batch_lecture)
+                                        @foreach ($batch_lecture->courseTopic->CourseLecture as $course_lecture)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $course_lecture->title }}</td>
+                                                <td>
+                                                    {{ $batch_lecture->courseTopic->title }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <iframe width="224" height="126" src="https://www.youtube-nocookie.com/embed/{{ $course_lecture->url }}"
+                                                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+                                                        clipboard-write; encrypted-media; gyroscope;
+                                                        picture-in-picture" allowfullscreen></iframe>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     @endforeach
                                 </tbody>
                                 <tfoot>

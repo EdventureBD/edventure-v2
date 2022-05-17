@@ -312,7 +312,7 @@ class ExamController extends Controller
         // }
 
         if ($exam->exam_type == Edvanture::APTITUDETEST) {
-
+            
             $validateData = $request->validate([
                 'mcq_ques' => 'required',
             ]);
