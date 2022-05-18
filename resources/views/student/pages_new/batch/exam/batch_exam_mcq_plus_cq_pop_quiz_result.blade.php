@@ -1,4 +1,15 @@
 <x-landing-layout headerBg="white">
+   <style>
+      .table td.fit,
+      .table th.fit {
+          white-space: nowrap;
+          width: 1%;
+          background-color: #6400c8
+      }
+      thead tr td {
+          font-weight: 800;
+      }
+  </style>
 <div class="page-section ">
          <div>
             <div class="course-info bg-gradient-purple py-5">
@@ -14,7 +25,7 @@
             </div>
          </div>
 
-         <div class="container">
+         <div class="mx-md-5">
             @if(session('exam_exists_message'))
                <div class="alert alert-danger mt-3 text-center">
                   <h1> {{ session('exam_exists_message') }} </h1>
@@ -27,18 +38,18 @@
             <div class="d-flex justify-content-between">
                <div class="d-flex justify-content-left">
                   <div class="text-right">
-                     <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
+                     <a style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back <i class="fas fa-arrow-up ml-2"> </i></a>
                   </div>
                   @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
                      <div class="text-right ml-2">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync ml-2"></i></a>
+                        <a style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync ml-2"></i></a>
                      </div>
                   @endif
                </div>
 
                {{-- If next exam type is TEE generate a confirmation modal with button --}}
                @if(isset($next_exam_type_TEE) && $next_exam_type_TEE)
-                  <button type="button" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1" data-toggle="modal" data-target="#exampleModalLong">  {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i> </button>
+                  <button type="button" style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1" data-toggle="modal" data-target="#exampleModalLong">  {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i> </button>
                   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                      <div class="modal-dialog" role="document">
                      <div class="modal-content">
@@ -53,14 +64,14 @@
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                           <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
+                           <a href="{{ $next_link }}" style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
                         </div>
                      </div>
                      </div>
                   </div>
                {{-- Else generate a normal btn --}}
                @else
-                  @if(!empty($next_link)) <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mx-1"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a> @endif
+                  @if(!empty($next_link)) <a href="{{ $next_link }}" style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mx-1"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a> @endif
                @endif
 
             </div>
@@ -69,26 +80,26 @@
                @if($mcqs_exist)
                   <div class="">
                      <p class="text-center text-sm">MCQ Marks : <b>{{$mcq_marks_scored." out of ".$mcq_total_marks}}</b></p>
-                     <table class="table table-bordered">
+                     <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
-                           <tr>
-                                 <th class="bg-purple text-white">Sl</th>
-                                 <th class="bg-purple text-white">Question</th>
-                                 <th class="bg-purple text-white">Your Answer</th>
-                                 <th class="bg-purple text-white">Correct Answer</th>
-                                 <th class="bg-purple text-white">Explanation</th>
-                                 <th class="bg-purple text-white">% got it right</th>
+                           <tr class="bg-purple text-white text-center">
+                                 <th class="fit">Sl</th>
+                                 <th class="fit">Question</th>
+                                 <th class="fit">Correct Answer</th>
+                                 <th class="fit">Your Answer</th>
+                                 <th class="fit">Explanation</th>
+                                 <th class="fit">Success Rate</th>
                            </tr>
                         </thead>
                         <tbody>
                            @foreach ($mcq_details_results as $mcq_details_result)
-                              <tr>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $loop->iteration }}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->question !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->popQuizMCQ->explanation !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
+                              <tr class="text-center">
+                                 <td>{{ $loop->iteration }}</td>
+                                 <td>{!! $mcq_details_result->popQuizMCQ->question !!}</td>
+                                 <td>{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
+                                 <td style="@if($mcq_details_result->gain_marks) background-color: #9DCA7B @else background-color : #DD7575 @endif; color: black; font-weight: 600">{{ $mcq_details_result->mcq_ans }}</td>
+                                 <td>{!! $mcq_details_result->popQuizMCQ->explanation !!}</td>
+                                 <td>{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
                            @endforeach
                         </tbody>
@@ -101,13 +112,13 @@
                      <p class="text-center text-sm mt-3">CQ Marks : <b>{{$cq_marks_scored." out of ".$cq_total_marks}}</b></p>
                      <table class="table table-bordered">
                         <thead>
-                           <tr>
-                                 <th class="bg-purple text-white text-center">Stem</th>
-                                 <th class="bg-purple text-white text-center">Question</th>
-                                 <th class="bg-purple text-white text-center">Your<br/> Score</th>
-                                 <th class="bg-purple text-white text-center">Ave<br/> Score</th>
-                                 <th class="bg-purple text-white text-center">Your Answer</th>
-                                 <th class="bg-purple text-white text-center">Correct Answer</th>
+                           <tr class="bg-purple text-white text-center">
+                                 <th>Stem</th>
+                                 <th>Question</th>
+                                 <th>Your<br/> Score</th>
+                                 <th>Ave<br/> Score</th>
+                                 <th>Your Answer</th>
+                                 <th>Correct Answer</th>
                            </tr>
                         </thead>
                         <tbody>
