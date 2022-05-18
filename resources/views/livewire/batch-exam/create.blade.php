@@ -38,7 +38,8 @@
                                                 <option value="" selected>Select Exam</option>
                                                 @foreach ($exams as $exam)
                                                     <option value="{{ $exam->id }}">
-                                                        {{ $exam->title }} ({{ $exam->exam_type }})
+{{--                                                        {{ $exam->title }} ({{ $exam->exam_type }})--}}
+                                                        {{ $exam->title }} ({{ $exam->topic->title }})
                                                         @if ($exam->special)
                                                             Special
                                                         @endif

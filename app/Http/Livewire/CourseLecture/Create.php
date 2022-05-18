@@ -102,7 +102,7 @@ class Create extends Component
     protected $rules = [
         'title' => ['required', 'string', 'max:325', 'unique:course_lectures,title'],
         'slug' => ['unique:course_lectures,slug'],
-        'url' => ['required', 'string', 'min:3'],
+        'url' => ['nullable', 'string', 'min:3'],
         'courseId' => 'required',
         'topicId' => 'required',
         'examId' => 'required',
@@ -117,7 +117,7 @@ class Create extends Component
     public function saveCourseLecture()
     {
         $this->slug = Str::slug($this->title);
-        
+
         $data = $this->validate();
         $lecture = new CourseLecture;
         $lecture->title = $data['title'];
