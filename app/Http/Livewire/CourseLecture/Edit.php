@@ -22,7 +22,7 @@ class Edit extends Component
     public $topics;
     public $exams;
     public $title;
-    
+
     public $examId;
     public $courseId;
     public $topicId;
@@ -108,7 +108,7 @@ class Edit extends Component
         $data = $this->validate([
             'title' => 'required|string|max:325|unique:course_lectures,title,'.$this->courseLecture->id,
             'slug' => 'unique:course_lectures,slug,'.$this->courseLecture->id,
-            'url' => 'required|string',
+            'url' => 'nullable|string',
             'courseId' => 'required',
             'topicId' => 'required',
             'examId' => 'required',
