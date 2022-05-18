@@ -52,14 +52,14 @@
                                 $cfield = 'field'.$result->atQuestion->answer;
                                 $cellcolor = $result->mcq_ans == $result->atQuestion->answer ? '#9DCA7B' : '#DD7575';
                             @endphp
-                            <tr style="color: black">
-                                <td class="text-center">{{$n}}</td>
-                                <td class="text-center">{!! $result->atQuestion->question !!}</td>
-                                <td class="text-center">{!! $result->atQuestion->$cfield !!}</td>
-                                <td class="text-center" style="background: {{$cellcolor}}; color: black; font-weight: 600">{!! $result->atQuestion->$field !!}</td>
-                                <td class="text-center">{!! $result->atQuestion->explanation !!}</td>
+                            <tr style="color: black" class="text-center">
+                                <td>{{$n}}</td>
+                                <td>{!! $result->atQuestion->question !!}</td>
+                                <td>{!! $result->atQuestion->$cfield !!}</td>
+                                <td style="background: {{$cellcolor}}; color: black; font-weight: 600">{!! $result->atQuestion->$field !!}</td>
+                                <td>{!! $result->atQuestion->explanation !!}</td>
                                 {{-- @dd($result, $result->atQuestion->gain_marks, $result->atQuestion->number_of_attempt) --}}
-                                <td class="text-center">{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
+                                <td>{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
                             </tr>
                             @php $n++; @endphp
                             @endforeach
