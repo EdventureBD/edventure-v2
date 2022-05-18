@@ -128,7 +128,19 @@
                 {{-- End Role Section--}}
 
                 {{-- START OF COURSE CATEGORY --}}
-                @can('course')
+                @canany([
+                        'course_category',
+                        'course_program',
+                        'course_bundle',
+                        'course',
+                        'course_batch',
+                        'course_island',
+                        'course_add_batch_to_island',
+                        'course_content_tag',
+                        'course_exam',
+                        'course_batch_exam',
+                        'course_lecture',
+                        ])
                     <li class="nav-item has-treeview
                             {{ request()->is('admin/course-category') ? 'menu-open' : '' }}
                     {{ request()->is('admin/course-category/create') ? 'menu-open' : '' }}
@@ -251,6 +263,7 @@
                         </a>
 
                         <ul style="margin-left: 10px;" class="nav nav-treeview">
+                            @can('course_category')
                             <li class="nav-item {{ request()->is('admin/course-category') ? 'menu-open' : '' }}">
                                 <a href="{{ route('course-category.index') }}"
 
@@ -262,10 +275,12 @@
                                     <p> Course Category </p>
                                 </a>
                             </li>
+                            @endcan
                             {{-- END OF COURSE CATEGORY --}}
 
 
                             {{-- START OF PROGRAMS/INTERMEDIARY LEVEL --}}
+                                @can('course_program')
                             <li class="nav-item {{ request()->is('admin/intermediary_level') ? 'menu-open': '' }}">
                                 <a href="{{ route('intermediary_level.index') }}"
                                    class="nav-link {{ request()->is('admin/intermediary_level') ? 'active': '' }}
@@ -275,9 +290,11 @@
                                     <p>Program</p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF PROGRAMS/INTERMEDIARY LEVEL --}}
 
                             {{-- START OF BUNDLE --}}
+                                @can('course_bundle')
                             <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">
                                 <a href="{{ route('bundle.index') }}"
                                    class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }}
@@ -287,9 +304,11 @@
                                     <p>&nbsp; Bundle </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BUNDLE --}}
 
                             {{-- START OF COURSE --}}
+                                @can('course')
                             <li class="nav-item {{ request()->is('admin/course')? 'menu-open': '' }}">
                                 <a href="{{ route('course.index') }}"
                                    class="nav-link {{ request()->is('admin/course')? 'active': '' }}
@@ -299,9 +318,11 @@
                                     <p>&nbsp; Course </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF COURSE --}}
 
                             {{-- START OF BATCH --}}
+                                @can('course_batch')
                             <li class="nav-item {{ request()->is('admin/batch')? 'menu-open': '' }}">
                                 <a href="{{ route('batch.index') }}"
                                    class="nav-link {{ request()->is('admin/batch/create') ? 'active' : '' }}
@@ -312,9 +333,11 @@
                                     <p>&nbsp; Batch </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BATCH --}}
 
                             {{-- START OF COURSE TOPIC --}}
+                                @can('course_island')
                             <li class="nav-item {{ request()->is('admin/course-topic') ? 'menu-open' : '' }}">
                                 <a href="{{ route('course-topic.index') }}"
                                    class="nav-link {{ request()->is('admin/course-topic')? 'active': '' }}
@@ -324,8 +347,10 @@
                                     <p>&nbsp; Island </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF COURSE TOPIC --}}
                             {{-- START OF BATCH LECTURE --}}
+                                @can('course_add_batch_to_island')
                             <li class="nav-item">
                                 <a href="{{ route('batch-lecture.index') }}"
                                     class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
@@ -333,8 +358,10 @@
                                     <p>&nbsp; Add Batch to Island </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BATCH LECTURE --}}
                             {{-- START OF CONTENT TAG --}}
+                                @can('course_content_tag')
                             <li class="nav-item {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}">
                                 <a href="{{ route('content-tag.index') }}"
                                    class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }}
@@ -344,6 +371,7 @@
                                     <p>&nbsp; Content Tag </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF CONTENT TAG --}}
 
                             @can('course_exam')
@@ -353,6 +381,7 @@
                             @endcan
 
                             {{-- START OF BATCH EXAM --}}
+                                @can('course_batch_exam')
                             <li class="nav-item {{ request()->is('admin/batch-exam') ? 'menu-open' : '' }}">
                                 <a href="{{ route('batch-exam.index') }}"
                                    class="nav-link {{ request()->is('admin/batch-exam') ? 'active' : '' }}
@@ -363,9 +392,11 @@
                                     <p>&nbsp; Batch Exam </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BATCH EXAM --}}
 
                             {{-- START OF COURSE LECTURE --}}
+                                @can('course_lecture')
                             <li class="nav-item {{ request()->is('admin/course-lecture')? 'menu-open': '' }}">
                                 <a href="{{ route('course-lecture.index') }}"
                                    class="nav-link {{ request()->is('admin/course-lecture')? 'active': '' }}
@@ -376,6 +407,7 @@
                                     <p>&nbsp; Course Lecture </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF COURSE LECTURE --}}
 
 
@@ -391,7 +423,7 @@
                     </li> --}}
                         </ul>
 
-                @endcan
+                @endcanany
 
                 @can('payment')
                     {{-- START OF PAYMENTS --}}
