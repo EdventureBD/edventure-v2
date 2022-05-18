@@ -8,16 +8,16 @@
                   <!-- general form elements disabled -->
                   <div class="card card-warning">
                      <div class="card-header">
-                           <h3 class="card-title">Create Topic</h3>
+                           <h3 class="card-title">Create Island</h3>
                      </div>
                      <!-- /.card-header -->
                      <div class="card-body">
                            <form role="form" wire:submit.prevent="saveCourseTopic">
                               <div class="form-group">
-                                 <label class="col-form-label" for="courseTitle"> Course Topic Title <span class="must-filled">*</span> </label>
+                                 <label class="col-form-label" for="courseTitle"> Island Title <span class="must-filled">*</span> </label>
                                  <input type="text" wire:model="title"
                                        class="form-control @error('title') is-invalid @enderror"
-                                       id="courseTitle" placeholder="Enter your course topic title">
+                                       id="courseTitle" placeholder="Enter your island title">
                                  @error('title')
                                        <p style="color: red;">{{ $message }}</p>
                                  @enderror

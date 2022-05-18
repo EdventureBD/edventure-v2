@@ -59,19 +59,19 @@
 									</div>
 									<div class="col-md-4">
 											<div class="form-group">
-											<label for="exampleInputFile" class="col-form-label">Course
-												Banner</label>
-											<div class="input-group">
-												<div class="custom-file">
-														<input type="file" wire:model="banner"
-														class="custom-file-input hidden" id="exampleInputFile">
-														<label class="custom-file-label"
-														for="exampleInputFile">Course Banner (576px*642px)</label>
+												<label for="exampleInputFile" class="col-form-label">Course
+													Banner</label>
+												<div class="input-group">
+													<div class="custom-file">
+															<input type="file" wire:model="banner"
+															class="custom-file-input hidden" id="exampleInputFile">
+															<label class="custom-file-label"
+															for="exampleInputFile">Course Banner (576px*642px)</label>
+													</div>
 												</div>
-											</div>
-											@error('banner')
-												<p style="color: red;">{{ $message }}</p>
-											@enderror
+												@error('banner')
+													<p style="color: red;">{{ $message }}</p>
+												@enderror
 											</div>
 											@if ($banner)
 												<img style="width: 200px;" src="{{ $banner->temporaryUrl() }}">
@@ -85,6 +85,35 @@
 													<p style="color: indigo">Uploading banner ....</p>
 													</div>
 											</div> --}}
+									</div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="intermediaryLevels">Program <span
+                                                    class="must-filled">*</span></label>
+                                            <select class="form-control" wire:model="intermediaryLevelId">
+                                                <option value="" selected>Select Program</option>
+                                                @foreach ($intermediary_levels as $intermediary)
+                                                    <option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('intermediaryLevelId')
+                                        <p style="color: red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="col-form-label" for="status"> Status <span class="must-filled">*</span></label>
+											<select class="form-control @error('status') is-invalid @enderror" wire:model="status">
+												<option value="" selected disabled>Select Status</option>
+												<option value="1">Active</option>
+												<option value="0">Inactive</option>
+											</select>
+											@error('status')
+												<p style="color: red;">{{ $message }}</p>
+											@enderror
+										</div>
 									</div>
 
 									@if($show_island_image)
@@ -121,22 +150,6 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="col-form-label" for="intermediaryLevels">Program <span
-													class="must-filled">*</span></label>
-											<select class="form-control" wire:model="intermediaryLevelId">
-												<option value="" selected>Select Program</option>
-												@foreach ($intermediary_levels as $intermediary)
-												<option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
-												@endforeach
-											</select>
-										</div>
-										@error('intermediaryLevelId')
-											<p style="color: red;">{{ $message }}</p>
-										@enderror
-									</div>
-
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="col-form-label" for="bundles"> Bundle </label>
@@ -196,7 +209,8 @@
 											<label class="col-form-label" for="courseDuration">Course Duration <span
 													class="must-filled">*</span></label>
 											<input type="number" min="1" max="36" wire:model="duration"
-													class="form-control @error('duration') is-invalid @enderror"
+													class="form-control
+                                                    @error('duration') is-invalid @enderror"
 													id="courseDuration" placeholder="Enter your course duration (month)">
 											<small id="passwordHelpBlock" class="form-text text-secondary">
 													Enter an aproximate month to finish this course.
@@ -207,6 +221,95 @@
 										</div>
 									</div>
 								</div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="time_allotted">Time Allotted <span
+                                                    class="must-filled">*</span></label>
+                                            <input type="text" wire:model="time_allotted"
+                                                   class="form-control
+                                                    @error('time_allotted') is-invalid @enderror"
+                                                   value="0"
+                                                   id="timeAlloted" placeholder="Enter time allocation for this course (Hour)">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Enter time allocation for displaying in course preview page
+                                            </small>
+                                            @error('time_allotted')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="video_lecture">Video Lecture</label>
+                                            <input type="text" wire:model="video_lecture"
+                                                   class="form-control
+                                                    @error('video_lecture') is-invalid @enderror"
+                                                   value="0"
+                                                   id="videoLecture" placeholder="Enter video lecture count">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Enter given video lecture count for displaying in course preview page
+                                            </small>
+                                            @error('video_lecture')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="given_notes"> Notes </label>
+                                            <input type="text" wire:model="given_notes"
+                                                   class="form-control
+                                                    @error('given_notes') is-invalid @enderror"
+                                                   value="0"
+                                                   id="given_notes" placeholder="Enter given notes count">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Enter given notes count for displaying in course preview page
+                                            </small>
+                                            @error('given_notes')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="quiz">Quizes</label>
+                                            <input type="text" wire:model="quiz"
+                                                   class="form-control
+                                                    @error('quiz') is-invalid @enderror"
+                                                   value="0"
+                                                   id="quiz" placeholder="Enter taken quiz count for this course">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Enter taken quiz count for displaying in course preview page
+                                            </small>
+                                            @error('quiz')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="mind_map"> Mind map </label>
+                                            <input type="text" wire:model="mind_map"
+                                                   class="form-control
+                                                    @error('mind_map') is-invalid @enderror"
+                                                   value="0"
+                                                   id="mind_map" placeholder="Enter mind map count for this course">
+                                            <small id="passwordHelpBlock" class="form-text text-secondary">
+                                                Enter mind map count for displaying in course preview page
+                                            </small>
+                                            @error('quiz')
+                                            <p style="color: red;">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
 								<div class="form-group">
 										<label class="col-form-label" for="courseDescription"> Course Description <span
 											class="must-filled">*</span>
@@ -221,6 +324,21 @@
 										<p style="color: red;">{{ $message }}</p>
 										@enderror
 								</div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label" for="course_for_whom"> Course For Whom <span
+                                            class="must-filled">*</span>
+                                    </label>
+                                    <textarea rows="5" type="text" wire:model="course_for_whom"
+                                              class="form-control @error('course_for_whom') is-invalid @enderror"
+                                              id="courseDescription" placeholder="Enter your course description"></textarea>
+                                    <small id="passwordHelpBlock" class="form-text text-secondary">
+                                        Enter some details about, for whom this course will be needed.
+                                    </small>
+                                    @error('course_for_whom')
+                                    <p style="color: red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
 								<div>
 										<label class="col-form-label" for="courseurl">Trailer </label> <br>
 										<div class="input-group">
@@ -238,7 +356,7 @@
 								<div class="input-group">
 										@if ($url)
 										<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ $url }}"
-										title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+										title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
 										clipboard-write; encrypted-media; gyroscope;
 										picture-in-picture" allowfullscreen></iframe>
 										{{-- vimeo player

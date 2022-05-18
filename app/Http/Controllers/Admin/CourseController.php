@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\BatchLecture;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\CourseTopic;
@@ -32,16 +33,9 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $lectures = [];
-        $course_topics = CourseTopic::where('course_id', $course->id)->get();
-        foreach ($course_topics as $course_topic) {
-            $lectures = CourseLecture::join('course_topics', 'course_lectures.topic_id', 'course_topics.id')
-                ->where('course_lectures.course_id', $course->id)
-                ->select('course_topics.*', 'course_lectures.title as lectureTitle', 'course_lectures.url as url')
-                ->get();
-            break;
-        }
-        return view('admin.pages.course.details', compact('course', 'course_topics', 'lectures'));
+        $batch_lectures = BatchLecture::where('course_id', $course->id)->with(['courseTopic.CourseLecture'])->get();
+
+        return view('admin.pages.course.details', compact('course', 'batch_lectures'));
     }
 
     public function edit(Course $course)
@@ -49,8 +43,22 @@ class CourseController extends Controller
         return view('admin.pages.course.edit', compact('course'));
     }
 
-    public function destroy(Course $course)
+    public function destroy($course)
     {
+        $course = Course::where('slug', $course)->with(['CourseTopic', 'Batch', 'Exam'])->firstOrFail();
+
+        if(count($course->CourseTopic) > 0){
+            return redirect()->route('course.index')->with('failed', 'Course cannot be deleted. It has islands associated to it.');
+        }
+
+        if(count($course->Batch) > 0){
+            return redirect()->route('course.index')->with('failed', 'Course cannot be deleted. It has batches associated to it.');
+        }
+
+        if(count($course->Exam) > 0){
+            return redirect()->route('course.index')->with('failed', 'Course cannot be deleted. It has exams associated to it.');
+        }
+
         $delete = $course->delete();
         if ($delete) {
             return redirect()->route('course.index')->with('status', 'Course successfully deleted!');

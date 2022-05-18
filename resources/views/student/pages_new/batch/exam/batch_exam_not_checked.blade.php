@@ -36,7 +36,7 @@
                                     You are about to attempt a Topic End Exam. Are you sure you wish to continue ?
                                  </div>
                                  <div class="modal-footer d-flex justify-content-between">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                                     <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
                                  </div>
                               </div>

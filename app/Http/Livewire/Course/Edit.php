@@ -44,6 +44,13 @@ class Edit extends Component
     public $show_price;
     public $show_teachers;
     public $show_island_image = false;
+    public $time_allotted;
+    public $quiz;
+    public $given_notes;
+    public $video_lecture;
+    public $course_for_whom;
+    public $mind_map;
+    public $status;
 
     public function updatedTitle()
     {
@@ -60,6 +67,13 @@ class Edit extends Component
     public function updatedBanner()
     {
         $this->tempBanner = $this->banner;
+    }
+
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer|between:0,1',
+        ]);
     }
 
     public function updatedIslandImage()
@@ -133,6 +147,13 @@ class Edit extends Component
         'intermediaryLevelId' => 'required|numeric|integer',
         'bundleId' => 'nullable|numeric|integer',
         'duration' => 'required|numeric|between:1,36',
+        'time_allotted' => 'required',
+        'video_lecture' => 'nullable',
+        'given_notes' => 'nullable',
+        'quiz' => 'nullable',
+        'mind_map' => 'nullable',
+        'course_for_whom' => 'required',
+        'status' => 'required|numeric|integer|between:0,1',
     ];
 
     protected $messages = [
@@ -145,6 +166,7 @@ class Edit extends Component
 
     public function updateCourse()
     {
+
         if($this->bundleId){
             $this->rules['teacherId'] = 'required|integer|numeric';
             $this->rules['price'] = 'nullable|integer|numeric';
@@ -155,7 +177,6 @@ class Edit extends Component
         }
 
         $data = $this->validate();
-
         // dd($this->tempImage, $this->tempBanner, $this->tempIslandImage, $this->deleteImage, $this->deleteBanner, $this->deleteIslandImage);
 
         // if($this->deleteImage && file_exists(public_path($this->deleteImage))){
@@ -165,7 +186,7 @@ class Edit extends Component
         //     $imageUrl = $this->image->store('public/course');
         //     $this->image = Storage::url($imageUrl);
         // }
-        
+
         // if($this->deleteBanner && file_exists(public_path($this->deleteBanner))){
         //     unlink(public_path($this->deleteBanner));
         // }
@@ -212,7 +233,7 @@ class Edit extends Component
             $course->banner = $this->banner;
         }
 
-        if($this->tempIslandImage){
+        if($this->islandImage){
             // if ($this->tempIslandImage){
                 $imageUrl3 = $this->islandImage->store('public/course');
                 $this->islandImage = Storage::url($imageUrl3);
@@ -232,7 +253,14 @@ class Edit extends Component
       //   }
         $course->description = $data['description'];
         $course->duration = $data['duration'];
+        $course->status = $data['status'];
         $course->trailer = $data['url'];
+        $course->video_lecture = $data['video_lecture'];
+        $course->time_allotted = $data['time_allotted'];
+        $course->given_notes = $data['given_notes'];
+        $course->quiz = $data['quiz'];
+        $course->mind_map = $data['mind_map'];
+        $course->course_for_whom = $data['course_for_whom'];
         if($this->bundleId){
            // set price to free
             $course->price = 0;
@@ -258,6 +286,7 @@ class Edit extends Component
 
     public function mount()
     {
+
         $this->title = $this->course->title;
         $this->description = $this->course->description;
         $this->price = $this->course->price;
@@ -265,12 +294,19 @@ class Edit extends Component
         $this->bundleId = $this->course->bundle_id;
         $this->duration = $this->course->duration;
         $this->url = $this->course->trailer;
-        $this->tempImage = $this->course->logo;
+        $this->tempImage = $this->course->icon;
         $this->tempBanner = $this->course->banner;
         $this->tempIslandImage = $this->course->island_image;
         $this->deleteImage = $this->course->icon;
         $this->deleteBanner = $this->course->banner;
         $this->deleteIslandImage = $this->course->island_image;
+        $this->time_allotted = $this->course->time_allotted;
+        $this->given_notes = $this->course->given_notes;
+        $this->quiz = $this->course->quiz;
+        $this->mind_map = $this->course->mind_map;
+        $this->course_for_whom = $this->course->course_for_whom;
+        $this->video_lecture = $this->course->video_lecture;
+        $this->status = $this->course->status;
 
         $this->teachers = User::where('user_type', 2)->get();
         $batch = Batch::where('course_id', $this->course->id)->first();

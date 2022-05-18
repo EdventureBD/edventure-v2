@@ -7,6 +7,7 @@ use App\Models\Admin\BatchLecture;
 use App\Models\Admin\CourseLecture;
 use App\Models\Admin\IntermediaryLevel;
 use App\Models\Admin\Bundle;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Admin\BatchStudentEnrollment;
@@ -15,6 +16,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Course extends Model
 {
     use HasFactory;
+
+//    protected $appends = [
+//        'teacher_lists'
+//    ];
 
     public function getRouteKeyName()
     {
@@ -73,4 +78,31 @@ class Course extends Model
         if ($random) return $courses->inRandomOrder()->take(2)->get();
         else return $courses->get();
     }
+
+    public function getTeacherListsAttribute()
+    {
+        $teachers = null;
+        $batches = $this->Batch()->get();
+        if(count($batches) > 0) {
+            foreach ($batches as $batch) {
+                $ids[] = $batch->teacher_id;
+            }
+            $userId = array_values($ids);
+            $teachers = User::query()->whereIn('id',$userId)->with('teacherDetails')->get();
+        }
+
+        return $teachers;
+    }
+
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function totalCourseEnrolled()
+    {
+        $count  = $this->payment()->count();
+        return $count < 93 ?  93 : $count;
+    }
+
 }

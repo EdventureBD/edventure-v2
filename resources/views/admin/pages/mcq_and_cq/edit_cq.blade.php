@@ -356,33 +356,33 @@
                                        @enderror
                                  </div>
                                  <div class="col-md-6">
-                                       <div class="row">
-                                          <div class="col-md-8">
-                                             <div class="form-group">
-                                                   <label for="exampleInputFile" class="col-form-label">Choose
-                                                      Image</label>
-                                                   <div class="input-group">
-                                                      <div class="custom-file">
-                                                         <input type="file" name="ucchotorimage"
-                                                               class="custom-file-input hidden" id="exampleInputFile"
-                                                               onchange="previewFile(this);">
-                                                         <label class="custom-file-label" for="exampleInputFile">Choose
-                                                               image</label>
-                                                      </div>
+                                    <div class="row">
+                                       <div class="col-md-8">
+                                          <div class="form-group">
+                                                <label for="exampleInputFile" class="col-form-label">Choose
+                                                   Image</label>
+                                                <div class="input-group">
+                                                   <div class="custom-file">
+                                                      <input type="file" name="ucchotorimage"
+                                                            class="custom-file-input hidden" id="exampleInputFile"
+                                                            onchange="previewFile(this);">
+                                                      <label class="custom-file-label" for="exampleInputFile">Choose
+                                                            image</label>
                                                    </div>
-                                                   @error('ucchotorimage')
-                                                      <p style="color: red;">{{ $message }}</p>
-                                                   @enderror
-                                             </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                             @if ($cquestion4->image)
-                                                   <img class="product-image"
-                                                      src="{{ Storage::url($cquestion4->image) }}" id="previewImg"
-                                                      class="avatar" alt="...">
-                                             @endif
+                                                </div>
+                                                @error('ucchotorimage')
+                                                   <p style="color: red;">{{ $message }}</p>
+                                                @enderror
                                           </div>
                                        </div>
+                                       <div class="col-md-4">
+                                          @if ($cquestion4->image)
+                                                <img class="product-image"
+                                                   src="{{ Storage::url($cquestion4->image) }}" id="previewImg"
+                                                   class="avatar" alt="...">
+                                          @endif
+                                       </div>
+                                    </div>
                                  </div>
 
                                  <div class="row">
@@ -425,37 +425,52 @@
 
                               <fieldset class="border p-2 mt-4">
                                  <div class="row">
-                                       <div class="col-md-6">
+
+                                    @if($exam->exam_type == "Topic End Exam")
+                                       <div class="col-md-12">
                                           <div class="form-group">
-                                             <label for="exampleInputFile" class="col-form-label">Choose anser pdf file
-                                                   <span class="must-filled">*</span></label>
-                                             <div class="input-group">
-                                                   <div class="custom-file">
-                                                      <input type="file" name="answer" class="custom-file-input hidden"
-                                                         id="exampleInputFile">
-                                                      <label class="custom-file-label" for="exampleInputFile">Choose
-                                                         answer
-                                                         pdf</label>
-                                                   </div>
-                                             </div>
-                                             @error('answer')
-                                                   <p style="color: red;">{{ $message }}</p>
+                                             <label class="col-form-label" for="question_set"> Question Set <span class="must-filled">*</span></label>
+                                                <select class="form-control" name="question_set"  value="{{ $cq->question_set }}">
+                                                      <option value="" disabled> Select Set </option>
+                                                      <option value="1" @if ($cq->question_set == 1) selected @endif> Set 1 </option>
+                                                      <option value="2" @if ($cq->question_set == 2) selected @endif> Set 2 </option>
+                                                      <option value="3" @if ($cq->question_set == 3) selected @endif> Set 3 </option>
+                                                </select>
+                                             @error('question_set')
+                                                <p style="color: red;">{{ $message }}</p>
                                              @enderror
                                           </div>
                                        </div>
-                                       <div class="col-md-6">
-                                          <div class="form-group">
-                                             <label class="col-form-label" for="examId">Exam <span
-                                                      class="must-filled">*</span></label>
-                                             <select class="form-control" name="examId" disabled>
-                                                   <option value="{{ $exam->id }}" selected>{{ $exam->title }} ->
-                                                      {{ $exam->id }}</option>
-                                             </select>
-                                             @error('examId')
-                                                   <p style="color: red;">{{ $message }}</p>
-                                             @enderror
+                                    @endif
+
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label for="exampleInputFile" class="col-form-label">Choose anser pdf file</label>
+                                          <div class="input-group">
+                                                <div class="custom-file">
+                                                   <input type="file" name="answer" class="custom-file-input hidden"
+                                                      id="exampleInputFile">
+                                                   <label class="custom-file-label" for="exampleInputFile">Choose answer pdf</label>
+                                                </div>
                                           </div>
+                                          @error('answer')
+                                                <p style="color: red;">{{ $message }}</p>
+                                          @enderror
                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label class="col-form-label" for="examId">Exam <span
+                                                   class="must-filled">*</span></label>
+                                          <select class="form-control" name="examId" disabled>
+                                                <option value="{{ $exam->id }}" selected>{{ $exam->title }} ->
+                                                   {{ $exam->id }}</option>
+                                          </select>
+                                          @error('examId')
+                                                <p style="color: red;">{{ $message }}</p>
+                                          @enderror
+                                       </div>
+                                    </div>
                                  </div>
                               </fieldset>
 

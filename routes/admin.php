@@ -60,75 +60,98 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
         Route::get('/allTeacher', [UserController::class, 'allTeacher'])->name('allTeacher');
         Route::get('/allStudent', [UserController::class, 'allStudent'])->name('allStudent');
     });
-
+    Route::get('/lockedStudents', [UserController::class, 'locked_students'])->name('locked_students');
+    Route::get('/unlockStudent/{student_tee_attempt_id}', [UserController::class, 'unlock_student'])->name('unlock_student');
 
     // START OF USER SETTINGS
     Route::get('/settings', [SettingsController::class, 'settings'])->name('admin.settings');
     Route::get('/changePassword', [SettingsController::class, 'changePassword'])->name('admin.changePassword');
 
-    Route::group(['middleware' => ['permission:course']], function () {
-        // START OF COURSE
-        Route::resource('/course', CourseController::class, ['except' => ['store', 'update']]);
-        Route::get('/changeCourseStatus', [CourseController::class, 'changeCourseStatus']);
-        Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
-        // END OF COURSE
+    Route::group([], function () {
 
-        // START OF COURSE
-        Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
-        Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus']);
-        // END OF COURSE
+        Route::group(['middleware' => ['permission:course']], function () {
+            // START OF COURSE
+            Route::resource('/course', CourseController::class, ['except' => ['store', 'update']]);
+            Route::get('/changeCourseStatus', [CourseController::class, 'changeCourseStatus']);
+            Route::get('course/{course}/add-course-lecture', [CourseController::class, 'addCourseLecture'])->name('addCourseLecture');
+            // END OF COURSE
+        });
 
-        // START OF COURSE CATEGORY
-        Route::resource('/course-category', CourseCategoryController::class, ['except' => ['store', 'update']]);
-        Route::get('/changeCoursCategoryStatus', [CourseCategoryController::class, 'changeCourseCategoryStatus']);
-        // END OF COURSE CATEGORY
+        Route::group(['middleware' => ['permission:course_program']], function () {
+            // START OF INTERMEDIARY LEVEL
+            Route::resource('/intermediary_level', IntermediaryLevelController::class, ['except' => ['show', 'store', 'update']]);
+            Route::get('/changeIntermediaryLevelStatus', [IntermediaryLevelController::class, 'changeIntermediaryLevelStatus'])->name('changeIntermediaryLevelStatus');
+            // END OF INTERMEDIARY LEVEL
+        });
 
-        // START OF COURSE TOPIC
-        Route::resource('/course-topic', CourseTopicController::class, ['except' => ['show', 'store', 'update']]);
-        Route::get('/changeCourseTopicStatus', [CourseTopicController::class, 'changeCourseTopicStatus']);
-        Route::get('/customCourseTopic/{course_category}/{course}', [CourseTopicController::class, 'customCourseTopic'])->name('showcustomcoursetopic');
-        // END OF COURSE TOPIC
 
-        // START OF COURSE LECTURE
-        Route::resource('/course-lecture', CourseLectureController::class, ['except' => ['store', 'update']]);
-        Route::get('/changeCourseLectureStatus', [CourseLectureController::class, 'changeCourseLectureStatus']);
-        // END OF COURSE LECTURE
+        Route::group(['middleware' => ['permission:course_category']], function () {
+            // START OF COURSE CATEGORY
+            Route::resource('/course-category', CourseCategoryController::class, ['except' => ['store', 'update']]);
+            Route::get('/changeCoursCategoryStatus', [CourseCategoryController::class, 'changeCourseCategoryStatus']);
+            // END OF COURSE CATEGORY
+        });
 
-        // START OF BATCH
-        Route::resource('/batch', BatchController::class, ['except' => ['store', 'update']]);
-        Route::get('/changeBatchStatus', [BatchController::class, 'changeBatchStatus']);
-        Route::get('/changeStudentStatus', [BatchController::class, 'changeStudentStatus'])->name('changeStudentStatus');
-        Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
-        Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
-        Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
-        Route::get('/batch-rank-update', function () {
-            Artisan::call("update:batch-rank");
-            Session::put('status', 'Batch rank updated successful!');
-            return redirect()->back();
-        })->name('batch-rank');
-        // END OF BATCH
+        Route::group(['middleware' => ['permission:course_island']], function () {
+            // START OF COURSE TOPIC or COURSE ISLAND
+            Route::resource('/course-topic', CourseTopicController::class, ['except' => ['show', 'store', 'update']]);
+            Route::get('/changeCourseTopicStatus', [CourseTopicController::class, 'changeCourseTopicStatus']);
+            Route::get('/customCourseTopic/{course_category}/{course}', [CourseTopicController::class, 'customCourseTopic'])->name('showcustomcoursetopic');
+            // END OF COURSE TOPIC or COURSE ISLAND
+        });
 
-        // START OF BATCH LECTURE
-        Route::resource('/batch-lecture', BatchLectureController::class, ['except' => ['show', 'update']]);
-        Route::get('/changeBatchLectureStatus', [BatchLectureController::class, 'changeBatchLectureStatus']);
-        // END OF BATCH LECTURE
+        Route::group(['middleware' => ['permission:course_lecture']], function () {
+            // START OF COURSE LECTURE
+            Route::resource('/course-lecture', CourseLectureController::class, ['except' => ['store', 'update']]);
+            Route::get('/changeCourseLectureStatus', [CourseLectureController::class, 'changeCourseLectureStatus']);
+            // END OF COURSE LECTURE
+        });
+
+
+        Route::group(['middleware' => ['permission:course_batch']], function () {
+            // START OF BATCH
+            Route::resource('/batch', BatchController::class, ['except' => ['store', 'update']]);
+            Route::get('/changeBatchStatus', [BatchController::class, 'changeBatchStatus']);
+            Route::get('/changeStudentStatus', [BatchController::class, 'changeStudentStatus'])->name('changeStudentStatus');
+            Route::get('batch-student', [BatchController::class, 'batchStudent'])->name('batch-student.index');
+            Route::post('/add-student-to-batch/{course}/{batch}', [BatchController::class, 'addStudentToBatch'])->name('addStudentToBatch');
+            Route::delete('/delete-student-from-batch/{course}/{batch}/{batchStudentEnrollment}', [BatchController::class, 'deleteStudentFromBatch'])->name('deleteStudentFromBatch');
+            Route::get('/batch-rank-update', function () {
+                Artisan::call("update:batch-rank");
+                Session::put('status', 'Batch rank updated successful!');
+                return redirect()->back();
+            })->name('batch-rank');
+            // END OF BATCH
+        });
+
+
+        Route::group(['middleware' => ['permission:course_add_batch_to_island']], function () {
+            // START OF BATCH LECTURE or ADD BATCH TO ISLAND
+            Route::resource('/batch-lecture', BatchLectureController::class, ['except' => ['show', 'update']]);
+            Route::get('/changeBatchLectureStatus', [BatchLectureController::class, 'changeBatchLectureStatus']);
+            // END OF BATCH LECTURE or ADD BATCH TO ISLAND
+        });
 
         // START OF LIVE CLASS
         Route::resource('/live-class', LiveClassController::class, ['except' => ['show', 'store', 'update']]);
         Route::get('/changeLiveClassStatus', [LiveClassController::class, 'changeLiveClassStatus']);
         // END OF LIVE CLASS
 
-        // START OF LIVE CLASS
-        Route::resource('/content-tag', ContentTagController::class, ['except' => ['show', 'store', 'update']]);
-        Route::get('/changeContentTagStatus', [ContentTagController::class, 'changeContentTagStatus']);
-        Route::resource('/question-content-tag', QuestionContentTagController::class, ['except' => ['show', 'store', 'update']]);
-        Route::get('/changeQuestionContentTagStatus', [QuestionContentTagController::class, 'changeQuestionContentTagStatus']);
-        // END OF LIVE CLASS
+        Route::group(['middleware' => ['permission:course_content_tag']], function () {
+            // START OF CONTENT TAG
+            Route::resource('/content-tag', ContentTagController::class, ['except' => ['show', 'store', 'update']]);
+            Route::get('/changeContentTagStatus', [ContentTagController::class, 'changeContentTagStatus']);
+            Route::resource('/question-content-tag', QuestionContentTagController::class, ['except' => ['show', 'store', 'update']]);
+            Route::get('/changeQuestionContentTagStatus', [QuestionContentTagController::class, 'changeQuestionContentTagStatus']);
+            // END OF CONTENT TAG
+        });
 
-        // START OF BUNDLES
-        Route::resource('/bundle', BundleController::class, ['except' => ['show', 'store', 'update']]);
-        Route::get('/changeBundleStatus', [BundleController::class, 'changeBundleStatus']);
-        // END OF BUNDLES
+        Route::group(['middleware' => ['permission:course_bundle']], function () {
+            // START OF BUNDLES
+            Route::resource('/bundle', BundleController::class, ['except' => ['show', 'store', 'update']]);
+            Route::get('/changeBundleStatus', [BundleController::class, 'changeBundleStatus']);
+            // END OF BUNDLES
+        });
     });
 
     // START OF PAYMENT
@@ -150,11 +173,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
         Route::get('/all-pop-quiz', [ExamController::class, 'allPQ'])->name('showAllPQ');
         Route::get('/all-topic-end-exam', [ExamController::class, 'allTEE'])->name('showAllTEE');
         // END OF EXAM
+    });
 
+    Route::group(['middleware' => ['permission:course_batch_exam']], function () {
         // START OF BATCH EXAM
         Route::resource('/batch-exam', BatchExamController::class, ['except' => ['show', 'store', 'update']]);
         Route::get('/changeBatchExamStatus', [BatchExamController::class, 'changeBatchExamStatus']);
         // END OF  BATCH EXAM
+    });
+
 
         // START OF EXAM ATTEMPT
         Route::resource('/student-exam-attempt', StudentExamAttemptController::class, ['except' => ['show', 'store', 'update']]);
@@ -201,7 +228,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin']], functi
         // START OF ASSIGNMENT
         Route::resource('/request', RequestController::class, ['except' => ['store', 'update']]);
         // END OF ASSIGNMENT
-    });
 
 
     // START OF BLOG

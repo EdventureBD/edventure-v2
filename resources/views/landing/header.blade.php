@@ -12,12 +12,12 @@
             <li class="nav-item has-dot">
             </li>
 
-{{--            <li class="nav-item has-dot  {{ request()->is('course') ? 'active' : '' }}--}}
-{{--                                            {{ request()->is('course/course-preview/*') ? 'active' : '' }}--}}
-{{--                                            {{ request()->is('batch/*') ? 'active' : '' }}"--}}
-{{--            >--}}
-{{--            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>--}}
-{{--            </li>--}}
+            <li class="nav-item has-dot {{ request()->is('course') ? 'active' : '' }}--}}
+                                        {{ request()->is('course/course-preview/*') ? 'active' : '' }}
+                                        {{ request()->is('batch/*') ? 'active' : '' }}"
+            >
+            <a class="nav-link text-white" href="{{route('course')}}">COURSES</a>
+            </li>
 
             <li class="nav-item has-dot {{ request()->is('model-exam') ? 'active' : '' }}">
                 <a class="nav-link text-white"
@@ -61,7 +61,7 @@
         @guest
         <div class="my-2 my-lg-0" id="login-signup-btn-parent-div">
             <a class="nav-item active my-2 my-sm-0 pr-3" href="{{route('register')}}">SIGN UP</a>
-            <a class="btn my-2 my-sm-0 btn-orange-customed" href="{{route('login')}}">LOG IN</a>
+            <a class="btn text-white fw-800 my-2 my-sm-0 custom-submit-btn" href="{{route('login')}}">LOG IN</a>
         </div>
         @endguest
     </div>

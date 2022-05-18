@@ -1,150 +1,413 @@
-{{--previous student/pages/course/course_preview.blade.php--}}
-
 <x-landing-layout headerBg="white">
-    <div class="page-section course-info bg-gradient-purple py-5 px-3 px-md-0">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="text-white">{{ $bundle->bundle_name }}</h1>
-                    <p class="lead text-white-50 measure-hero-lead">{{ $bundle->description }}</p>
-                </div>
-                <div class="col-md-4">
-                    <div class="d-flex align-items-center justify-content-start">
-                        @if(!empty($bundle->trailer))<a href="student-lesson.html" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2"  data-toggle="modal" data-target="#showTrailer">Watch
-                            trailer <i class="fas fa-play ml-2"></i>
-                        </a>@endif
-                        <div class="modal fade" id="showTrailer" tabindex="-1" role="dialog" aria-labelledby="showTrailer" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="text-right">
-                                <button type="button" class="close pr-2 text-sm" data-dismiss="modal" aria-label="Close" onclick="closeVideo()">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                    
-                                    <iframe  src="https://www.youtube.com/embed/{{$bundle->trailer ? $bundle->trailer : 'xcJtL7QggTI'}}" title="YouTube video player" width="100%" height="420px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        
-                                </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- custom css link  --}}
+    <link rel="stylesheet" href="/css/bundle-detail.css">
+    {{-- custom css link ends  --}}
+<div class="page-section">
+    <div class="container">
+        @if(Session::has('message'))
+            <div style="border-radius: 25px" class="alert alert-warning">{{ Session::get('message') }}</div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger" style="border-radius: 25px">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="d-flex mb-3" id="parent-div">
+            <div class="w-100  mt-5">
+                <h2 class="bold-header" id="bundle-title-1">
+                    {{ $bundle->bundle_name }}
+                </h2>
+
+                <div class="includes">
+                    <div class="row">
+                        <div class="col-md-6 d-flex my-2">
+                            <div class="col-4 p-0 my-auto">
+                                <img class="img-fluid" src="/img/category_details/participant.png" alt="participant's photo"/>
                             </div>
+                            <div class="col-8 d-flex flex-column p-0 my-auto">
+                                <div class="text-nowrap detail-parts-font">কোর্সটি করছেন </div>
+                                <div class="text-nowrap detail-parts-font">
+                                    {{\App\Enum\Converter::en2bn($bundle->totalBundleEnrolled()).' জন'}}
+                                </div>
                             </div>
                         </div>
-                        <a href="{{ route('bundle_enroll', $bundle->slug) }}" class="d-inline-block text-dark bg-light-gray bradius-15 bshadow px-3 fw-600 py-2 ml-3">@if ($bundle->price > 0) Enroll Now @else Enroll Now (free) @endif</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navbar navbar-expand-sm navbar-light bg-white border-bottom-2 navbar-list p-0 m-0 align-items-center">
-        <div class="container page__container">
-            <ul class="flex align-items-sm-center my-3 ">
-                <li class="nav-item navbar-list__item d-inline-block">
-                    <i class="far fa-clock"></i>
-                    {{ $bundle->duration }} month
-                </li>
-                <li class="nav-item navbar-list__item ml-4 d-inline-block">
-                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M18.09,10.5V9H9.59V4.5A1.5,1.5 0 0,0 8.09,3A1.5,1.5 0 0,0 6.59,4.5A1.5,1.5 0 0,0 8.09,6V9H5.09V10.5H8.09V16.7C8.09,19.06 10,20.97 12.34,21C14.68,20.96 16.54,19.04 16.5,16.7C16.5,15.11 15.75,13.61 14.5,12.62C14.28,12.44 14.05,12.28 13.8,12.15C13.58,12.05 13.34,12 13.1,12C12.39,12 11.74,12.39 11.39,13C11.2,13.3 11.1,13.65 11.1,14C11.11,15.1 12,16 13.11,16C13.73,16 14.31,15.69 14.69,15.2C14.9,15.67 15,16.18 15,16.7C15.04,18.2 13.86,19.45 12.34,19.5C10.81,19.5 9.58,18.23 9.59,16.7V10.5H18.09Z" />
-                    </svg>
-                    {{ $bundle->price }}
-                </li>
 
-            </ul>
-        </div>
-    </div>
-
-
-    <div class="border-bottom-2 py-5 bg-light-gray">
-        <div class="container page__container max-w-50 w-100">
-            @if(Session::has('message'))
-                <div class="alert alert-warning">{{ Session::get('message') }}</div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="pb-0 mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <div class="page-separator">
-                <div class="page-separator__text bg-purple-light text-center bradius-10 py-3 d-inline-block w-100 text-gray text-sm"><span class="fw-700">Solution Of The Exams</span>
-                    <p class="text-gray text-xxsm fw-200  lh-5">Solution videos and PDFs will appear here after everyone has completed all the exams</p>
-                </div>
-            </div>
-            
-            <h1 class="text-center mt-3" style="font-weight: 600;"> Courses </h1>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
-                        @forelse ($bundle->courses as $course)
-                            <div class="accordion__item">
-                                <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $course->id }} " data-parent="#parent">
-                                    <div class="col-11 title text-md-left text-center">
-                                        <span class="pl-4">{{ $course->title }} </span>
+                        @if($bundle->time_allotted)
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/timer.png" alt="timers">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">সময় লাগবে </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($bundle->time_allotted) ?? 0}} ঘন্টা
                                     </div>
                                 </div>
                             </div>
-                        @empty
-                            No Courses found
-                        @endforelse
-                    </div>
-                </div>
-            </div>
+                        @endif
 
-            <h1 class="text-center mt-3" style="font-weight: 600;"> Lectures </h1>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="accordion js-accordion accordion--boxed list-group-flush" id="parent">
-                        @php
-                            $show = true;
-                        @endphp
-                        @forelse ($bundle->courses as $course)
-                            @forelse ($course->courseTopic as $course_topic)
-                                @forelse ($course_topic->CourseLecture as $lecture)
-                                    <div class="accordion__item">
-                                        <div class="row no-gutters accordion__toggle bg-light-gray mt-3 py-3 px-3 bradius-15 bshadow text-dark fw-600" data-toggle="collapse" data-target="#course-toc-{{ $lecture->id }} " data-parent="#parent">
-                                            <div class="col-11 title text-md-left text-center">
-                                                <span class="pl-4">{{ $lecture->title }} </span>
+                        @if($bundle->video_lecture)
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/completeSolution.png" alt="video lectures">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">ভিডিও লেকচার </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($bundle->video_lecture) ?? 0}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($bundle->given_notes)
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/category_details/paperFinal.png" alt="notes">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">নোটস</div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($bundle->given_notes) ?? 0}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
+                        @if($bundle->quiz)
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/quiz-mindmap-img/Quiz.png" alt="quiz">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">কুইজ</div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($bundle->quiz) ?? 0}} টি
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
+                        @if($bundle->mind_map)
+                            <div class="col-md-6 d-flex my-2">
+                                <div class="col-4 p-0 my-auto">
+                                    <img class="img-fluid" src="/img/quiz-mindmap-img/Mindmap.png" alt="mindmap">
+                                </div>
+                                <div class="col-8 d-flex flex-column p-0 my-auto">
+                                    <div class="text-nowrap detail-parts-font">মাইন্ড ম্যাপ  </div>
+                                    <div class="text-nowrap detail-parts-font">
+                                        {{\App\Enum\Converter::en2bn($bundle->mind_map) ?? 0}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+
+                </div>
+                @php($teachers = $bundle->teacher_lists)
+                @if($teachers)
+                    <div class="teachers mt-5">
+                        <h5 class="bold-header">শিক্ষক</h5>
+                        <div class="d-flex overflow-x-scroll"
+                             style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
+                             @foreach($teachers as $teacher)
+                                <div class="teachers-parent text-center {{count($teachers) == 1 ? 'col-12' : 'col-6'}} d-flex flex-column justify-content-center align-items-center">
+                                    @if($teacher->image)
+                                        <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="" class="teachers-image">
+                                    @else
+                                        <img height="80" width="80" src="/img/category_details/teacher.png" alt="" class="teachers-image">
+                                    @endif
+                                    <span class="teachers-name"><b>{{$teacher->name}}</b></span>
+                                        <small class="teachers-education">{{$teacher->teacherDetails->education ?? ''}}</small>
+                                        <small class="teachers-detail">
+                                            @if($teacher->teacherDetails && $teacher->teacherDetails->year_of_experience && $teacher->teacherDetails->expertise)
+                                                {{$teacher->teacherDetails->year_of_experience}} years of teaching experience in {{$teacher->teacherDetails->expertise}}
+                                            @endif
+                                        </small>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                <div class="exam-details mt-5">
+                    <nav>
+                        <div class="nav custom-shadow nav-tabs d-flex justify-content-center align-items-center" id="nav-tab" role="tablist">
+                            <a class="nav-link active"
+                               data-toggle="tab"
+                               href="#examDetails"
+                               role="tab"
+                               aria-controls="examDetails"
+                               aria-selected="true"
+                               style="border-top-right-radius: 0px !important; padding:15px">বিস্তারিত</a>
+
+                            <a class="nav-link"
+                               data-toggle="tab"
+                               href="#examRoutine"
+                               role="tab"
+                               aria-controls="examRoutine"
+                               aria-selected="false"
+                               style="border-top-left-radius: 0px !important; padding: 15px">সিলেবাস</a>
+
+                        </div>
+                    </nav>
+                    <div style="border: 5px solid #eeeeee; border-radius: 15px; background-color: #eeeeee" class="tab-content mt-5" id="nav-tabContent">
+                        <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade active show"
+                             id="examDetails"
+                             role="tabpanel"
+                             aria-labelledby="video-tab">
+                            @if($bundle->description)
+                                <div class="my-3">
+                                    <h5 class="bold-header my-3">কোর্স সম্পর্কে</h5>
+                                    <div class="p-3 course-detail-single-unit">
+                                        {{$bundle->description}}
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if($bundle->bundle_for_whom)
+                                <div class="my-3">
+                                    <h5 class="bold-header my-3">কোর্সটি কাদের জন্য?</h5>
+                                    <div class="p-3 course-detail-single-unit">
+                                        {{$bundle->bundle_for_whom}}
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="my-3">
+                                <h5 class="bold-header my-3">কোর্সের জন্য কী কী লাগবে?</h5>
+                                <div class="p-3 course-detail-single-unit">
+                                    শুধু ল্যাপটপ/মোবাইল ফোনে ইন্টারনেট কানেকশন এবং যেকোনো ব্রাউজার হলেই কোর্সটি করা যাবে। আমাদের এখনো কোনো অ্যাপ নেই, তাই আলাদা কোনো অ্যাপ ইনস্টল করার দরকারও নেই!
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding: 20px;overflow-y:scroll;word-break: break-word;" class="tab-pane text-justify col-md-12 fade"
+                             id="examRoutine"
+                             role="tabpanel"
+                             aria-labelledby="examRoutine-tab">
+                            @if(true)
+                                <div class="faq my-3">
+                                    @if(count($bundle->courses) > 0)
+                                        <h5 class="bold-header">কোর্সে কী কী লার্নিং ম্যাটেরিয়াল পাচ্ছেন?</h5>
+                                        <div class="d-flex justify-content-between align-items-center my-4">
+                                            <div class="bold-header">
+                                                Course Content
                                             </div>
                                         </div>
-                                    </div>
-                                @empty
-                                    @if($show)
-                                        <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
                                     @endif
-                                    @php
-                                        $show = false;
-                                    @endphp
-                                @endforelse
-                            @empty
-                                @if($show)
-                                    <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
-                                @endif
-                                @php
-                                    $show = false;
-                                @endphp
-                            @endforelse
-                        @empty
-                            @if($show)
-                                <p class="text-center mt-2" style="font-weight: 600;"> No Lectures Found </p>
+                                    <div class="accordion mt-5" id="accordionExample">
+                                         @forelse ($bundle->courses as $course)
+                                            <div class="tabtab" style="margin-bottom: 20px">
+                                                <div style="background-color: #FFFFFF; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                                    <h2 class="mb-0">
+                                                        <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
+                                                                class="course-tab btn btn-block text-left panel-heading focus-boxShadow-none"
+                                                                type="button"
+                                                                data-toggle="collapse"
+                                                                aria-expanded="true"
+                                                                aria-controls="courseTab{{$course->id}}"
+                                                                data-target="#courseTab{{$course->id}}">
+                                                            {{ $course->title }}
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="courseTab{{$course->id}}"
+                                                     class="panel-collapse collapse mt-2 one text-justify py-2"
+                                                     aria-labelledby="headingOne">
+                                                    <ul style="color: #6400C8">
+                                                        @forelse($course->courseTopic as $courseTopic)
+                                                            <li class="fw-600">{{$courseTopic->title}}</li>
+                                                        @empty
+                                                            <div class="text-center">
+                                                               <h5 class="font-weight-bold">No Topics uploaded yet</h5>
+                                                            </div>
+                                                        @endforelse
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <div class="d-flex justify-content-center">
+                                                <h5 style="color: #6400C8" class="font-weight-bold">No Course uploaded yet</h5>
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            @else
+                                <div class="text-center">
+                                    <img style="width: 100%; height: 100%" src="/img/category_details/exam_routine.svg"/>
+                                    <span style="color: grey">এক্সামের রুটিন এখানে দেয়া হবে</span>
+                                </div>
                             @endif
-                            @php
-                                $show = false;
-                            @endphp
-                        @endforelse
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq mt-5">
+                    <h5 class="bold-header">সচারচর জিজ্ঞাসা</h5>
+                    <div class="accordion mt-5" id="accordionExample">
+                        <div class="tabtab">
+                            <div style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                <h2 class="mb-0">
+                                    <button style="color: #6400c8; font-weight: bold;text-shadow: 2px 1px 4px white;"
+                                            class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                            type="button"
+                                            data-toggle="collapse"
+                                            data-target="#itemOne"
+                                            aria-expanded="true"
+                                            id="headingOne"
+                                            aria-controls="itemOne">
+                                        কোনো টেকনিক্যাল সমস্যা কিভাবে রিপোর্ট করবো?
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="itemOne"
+                                 class="panel-collapse collapse mt-2 one text-justify py-2"
+                                 aria-labelledby="headingOne">
+                                আমাদের ওয়েবসাইট পরিচালনায় অথবা আমাদের কোর্স সম্পর্কে কোন জিজ্ঞাসা থাকলে সরাসরি ক্লিক করো ফেইসবুক মেসেঞ্জার আইকনে (স্ক্রীনের নিচে ডানদিকে) আর লগ ইন করে আমাদের কাছে লিখে পাঠাও তোমার সম্মুখীন হওয়া সমস্যাগুলো। দ্রুততম সময়ে সমস্যা সমাধানে আমরা আছি তোমাদের সাথে।
+                            </div>
+                        </div>
+
+                        <div class="tabtab">
+                            <div class="mt-4" style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                                <h2 class="mb-0">
+                                    <button
+                                        style="color: #6400c8; font-weight: bold; text-shadow: 2px 1px 4px white;"
+                                        class="btn btn-block text-left panel-heading focus-boxShadow-none"
+                                        type="button"
+                                        data-toggle="collapse"
+                                        data-target="#itemTwo"
+                                        aria-expanded="true"
+                                        id="headingTwo"
+                                        aria-controls="itemTwo">
+                                        কোর্সটি কিভাবে কিনবো?
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="itemTwo"
+                                 class="panel-collapse collapse mt-2 two text-justify py-2"
+                                 aria-labelledby="headingTwo">
+                                কোর্সটি কিনতে প্রথমেই লগ ইন করো আমাদের Edventure প্ল্যাটফর্মে, প্রোমো কোড থাকলে তা অ্যাপ্লাই করে তারপর “এক্সামটি কিনুন” বাটনটিতে ক্লিক করো। SurjoPay দিয়ে বিকাশ, নগদ, রকেট সহ অন্যান্য ব্যাংক একাউন্টের মাধ্যমে তোমার সুবিধামতো পেমেন্ট করে সহজেই এনরোল করো  আমাদের কোর্সে।
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <div class="w-100 ml-lg-5 mt-5">
+                <h2 class="bold-header d-none" id="bundle-title-2">
+                    {{ $bundle->bundle_name }}
+                </h2>
+                <div class="test">
+                    <iframe
+                        id="iframe"
+                        src="https://www.youtube.com/embed/{{$bundle->trailer ? $bundle->trailer : 'xcJtL7QggTI'}}"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+
+
+                    <div class="payment-btn text-center">
+                        @php($href = auth()->check() ? route('bundle_enroll', $bundle->slug)   : 'javascript:void(0)')
+                        @php($loginAlert = auth()->check() ? '' : 'loginAlert')
+                        @php($paidCourse = !empty($bundle->price) && !is_null($bundle->price))
+
+                        <div id="payment_section">
+                                <div class="d-flex justify-content-around">
+                                    @if($paidCourse)
+                                        <span class="actual-price">{{$bundle->price}}</span>
+                                    @endif
+
+                                </div>
+                                <a class="{{$loginAlert}} btn category-details-action-btn" href="{{$href}}">
+                                    {{$paidCourse ? 'কোর্সটি কিনুন' : 'কোর্সটি এনরোল করুন'}}
+                                </a>
+                        </div>
+
+                    </div>
+
+                    <div class="payment-info text-center mt-2">
+                        <span style="font-size: 13px; color: grey">কোর্সটি কিনুন, বাটনটিতে ক্লিক করলে আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। </span><br>
+                        <span style="font-size: 13px; color: grey">পেমেন্ট প্রক্রিয়া বিস্তারিত জানতে এই </span> <a style="text-decoration: none; font-size: 13px; margin-left: 2px" href="/">ভিডিও দেখুন </a>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <script>
-    function closeVideo(){
-        var modalIframe = document.querySelector("#showTrailer iframe");
-        modalIframe.src = modalIframe.src;
-    }
-    </script>
+</div>
 </x-landing-layout>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 300){
+            $('.payment-btn').addClass('sticky')
+        } else{
+            $('.payment-btn').removeClass('sticky')
+        }
+    });
+    $('.loginAlert').on('click', function () {
+        Swal.fire({
+            icon: 'info',
+            title: 'Please login to continue',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    })
+
+
+
+    $('.one').on('show.bs.collapse', function () {
+        $('#headingOne').addClass('active');
+    });
+
+    $('.one').on('hide.bs.collapse', function () {
+        $('#headingOne').removeClass('active');
+    });
+
+    $('.two').on('show.bs.collapse', function () {
+        $('#headingTwo').addClass('active');
+    });
+
+    $('.two').on('hide.bs.collapse', function () {
+        $('#headingTwo').removeClass('active');
+    });
+
+    $('.course-tab').on('show.bs.collapse',function() {
+        $('.course-tab').addClass('active');
+    });
+</script>
+
+<script>
+    var tab = $('.course-tab');
+
+    for(var i = 0; i < tab.length; i++) {
+        (function(index) {
+            tab[index].addEventListener("click", function() {
+                if(!tab[index].classList.contains("active")) {
+                    tab[index].classList.add('active')
+                } else {
+                    tab[index].classList.remove('active')
+                }
+            })
+        })(i);
+    }
+</script>
+
+
+
+{{-- +++++++++++++++++++++++++new design starts====================================== --}}

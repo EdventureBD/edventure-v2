@@ -21,7 +21,10 @@ class Create extends Component
     {
         $courseId = Batch::find($value);
         $previousExamID=BatchExam::where('batch_id',$value)->pluck('exam_id')->toArray();
-        $this->exams = Exam::where('course_id', $courseId->course_id)->whereNotIn('id', $previousExamID)->get();
+        $this->exams = Exam::query()->with('topic')->where('course_id', $courseId->course_id)
+                            ->whereNotIn('id', $previousExamID)
+                            ->get();
+//        dd($this->exams);
     }
 
     protected $rules = [

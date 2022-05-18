@@ -1,4 +1,15 @@
 <x-landing-layout headerBg="white">
+    <style>
+        .table td.fit,
+        .table th.fit {
+            white-space: nowrap;
+            width: 1%;
+            background-color: #6400c8
+        }
+        thead tr td {
+            font-weight: 800;
+        }
+    </style>
     <div class="page-section ">
         @if ($exam->exam_type == 'MCQ' || 'Aptitude Test')
             @php 
@@ -9,29 +20,28 @@
                     $total_gain_marks += $result->gain_marks;
                 }
             @endphp
-            <div class="container">
-                <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-                <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
+            <div class="mx-md-5">
+                <h4 class=" text-sm fw-800">Marks : {{$total_gain_marks." out of ".$total_marks}}</h4>
 
                 <div class="d-flex justify-content-between">
                     <div class="text-right">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
+                        <a class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}" style="background: #6400c8"> Go Back <i class="fas fa-arrow-up ml-2"> </i></a>
                     </div>
                     <div class="text-right">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{ $next_link }}"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a>
+                        <a class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3" href="{{ $next_link }}" style="background: #6400c8"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a>
                     </div>
                 </div>
 
                 <div class="result-sheet-table overflow-x-scroll">
-                    <table class="table table-bordered">
+                    <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
                             <tr>
-                                <th class="bg-purple text-white">Sl</th>
-                                <th class="bg-purple text-white">Question</th>
-                                <th class="bg-purple text-white">Your Answer</th>
-                                <th class="bg-purple text-white">Correct Answer</th>
-                                <th class="bg-purple text-white">Explanation</th>
-                                <th class="bg-purple text-white">% got it right</th>
+                                <th class="bg-purple text-white text-center fit">Sl</th>
+                                <th class="bg-purple text-white text-center fit">Question</th>
+                                <th class="bg-purple text-white text-center fit">Answer</th>
+                                <th class="bg-purple text-white text-center fit">Your Answer</th>
+                                <th class="bg-purple text-white text-center fit">Explanation</th>
+                                <th class="bg-purple text-white text-center fit">Success Rate</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,15 +50,16 @@
                             @php
                                 $field = 'field'.$result->mcq_ans;
                                 $cfield = 'field'.$result->atQuestion->answer;
-                                $cellcolor = $result->mcq_ans == $result->atQuestion->answer ? 'bg-green' : 'bg-red';
+                                $cellcolor = $result->mcq_ans == $result->atQuestion->answer ? '#9DCA7B' : '#DD7575';
                             @endphp
-                            <tr>
-                                <td class="{{$cellcolor}}">{{$n}}</td>
-                                <td class="{{$cellcolor}}">{!! $result->atQuestion->question !!}</td>
-                                <td class="{{$cellcolor}}">{!! $result->atQuestion->$field !!}</td>
-                                <td class="{{$cellcolor}}">{!! $result->atQuestion->$cfield !!}</td>
-                                <td class="{{$cellcolor}}">{!! $result->atQuestion->explanation !!}</td>
-                                <td class="{{$cellcolor}}">{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
+                            <tr style="color: black" class="text-center">
+                                <td>{{$n}}</td>
+                                <td>{!! $result->atQuestion->question !!}</td>
+                                <td>{!! $result->atQuestion->$cfield !!}</td>
+                                <td style="background: {{$cellcolor}}; color: black; font-weight: 600">{!! $result->atQuestion->$field !!}</td>
+                                <td>{!! $result->atQuestion->explanation !!}</td>
+                                {{-- @dd($result, $result->atQuestion->gain_marks, $result->atQuestion->number_of_attempt) --}}
+                                <td>{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
                             </tr>
                             @php $n++; @endphp
                             @endforeach

@@ -82,6 +82,3 @@
         </li>
     </ul>
 </li>
-
-education
-___ years of teaching experience in Expertise

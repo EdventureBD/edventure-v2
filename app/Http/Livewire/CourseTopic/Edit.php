@@ -49,11 +49,11 @@ class Edit extends Component
         'courseCategoryId' => ['required'],
         'intermediaryLevelId' => ['required'],
         'courseId' => ['required'],
-        'zeroStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
-        'oneStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
-        'twoStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
-        'threeStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
-        'disabledIslandImage' => ['required', 'file', 'image', 'max:5000'],
+        'zeroStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
+        'oneStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
+        'twoStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
+        'threeStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
+        'disabledIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
     ];
 
     public function updatedTitle(){
@@ -76,35 +76,35 @@ class Edit extends Component
     public function updatedZeroStarIslandImage()
     {
         $this->validate([
-            'zeroStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
+            'zeroStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
         ]);
     }
 
     public function updatedOneStarIslandImage()
     {
         $this->validate([
-            'oneStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
+            'oneStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
         ]);
     }
 
     public function updatedTwoStarIslandImage()
     {
         $this->validate([
-            'twoStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
+            'twoStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
         ]);
     }
 
     public function updatedThreeStarIslandImage()
     {
         $this->validate([
-            'threeStarIslandImage' => ['required', 'file', 'image', 'max:5000'],
+            'threeStarIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
         ]);
     }
 
     public function updatedDisabledIslandImage()
     {
         $this->validate([
-            'disabledIslandImage' => ['required', 'file', 'image', 'max:5000'],
+            'disabledIslandImage' => ['nullable', 'file', 'image', 'max:5000'],
         ]);
     }
 
@@ -152,10 +152,10 @@ class Edit extends Component
         $save = $course_topic->save();
 
         if ($save) {
-            session()->flash('status', 'Course topic successfully updated!');
+            session()->flash('status', 'Island successfully updated!');
             return redirect()->route('course-topic.index');
         } else {
-            session()->flash('failed', 'Course topic update failed!');
+            session()->flash('failed', 'Island update failed!');
             return redirect()->route('course-topic.edit', $this->course_topic->slug);
         }
     }

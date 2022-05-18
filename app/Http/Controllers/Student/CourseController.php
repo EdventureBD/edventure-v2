@@ -32,6 +32,15 @@ class CourseController extends Controller
 
         if(isset($category_slug) && !empty($category_slug)){
             $category = CourseCategory::where('status',1)->where('slug', $category_slug)->first();
+            if(!$category){
+                $category = CourseCategory::where('slug', $category_slug)->first();
+                if($category && $category->status == 0){
+                    return redirect()->route('course')->withErrors(['status_false' => 'This course category is unavailable right now. Please check later.']);
+                }
+                else{
+                    return redirect()->route('course')->withErrors(['not_found' => 'This course category doesn\'t exist.']);
+                }
+            }
             $selected_category_slug = $category->slug;
         }
         else{
@@ -51,22 +60,30 @@ class CourseController extends Controller
         }
 
         if(isset($intermediary_level_slug) && !empty($intermediary_level_slug)){
-            $selected_intermediary_level = IntermediaryLevel::where('status',1)
-                                            ->where('slug', $intermediary_level_slug)
-                                            ->first();
+            $selected_intermediary_level = IntermediaryLevel::where('status',1)->where('slug', $intermediary_level_slug)->first();
+
+            if(!$selected_intermediary_level){
+                $selected_intermediary_level = IntermediaryLevel::where('slug', $intermediary_level_slug)->first();
+                if($selected_intermediary_level && $selected_intermediary_level->status == 0){
+                    return redirect()->route('course')->withErrors(['status_false' => 'This program is unavailable right now. Please check later.']);
+                }
+                else{
+                    return redirect()->route('course')->withErrors(['not_found' => 'This program doesn\'t exist.']);
+                }
+            }
         }
         else{
             $selected_intermediary_level = null;
-        } 
+        }
 
         if($selected_intermediary_level){
             $courses = Course::where('intermediary_level_id', $selected_intermediary_level->id)
                                 ->where('status', 1)
                                 ->where('bundle_id', null)
-                                ->paginate(8)
-                                ->fragment('intermediary_levels');
+                                ->get();
 
             $bundles = Bundle::where('intermediary_level_id', $selected_intermediary_level->id)
+                                ->where('status', 1)
                                 ->get();
         }
         else{
@@ -90,11 +107,18 @@ class CourseController extends Controller
 
     public function coursePreview(Course $course)
     {
+        if($course->status == 0){
+            return redirect()->route('course')->withErrors(['status_false' => 'This course category is unavailable right now. Please check later.']);
+        }
+
         if($course->bundle_id != null){
             // checks if bundle exists. Else, will throw not found error
             $bundle = Bundle::where('id', $course->bundle_id)->firstOrFail();
-            if(Auth::check()){
-                $enrollment = BundleStudentEnrollment::where('bundle_id', $bundle->id)->where('student_id', auth()->user()->id)->first();
+            if(auth()->check()){
+                $enrollment = BundleStudentEnrollment::query()
+                                                    ->where('bundle_id', $bundle->id)
+                                                    ->where('student_id', auth()->user()->id)
+                                                    ->first();
                 // check if this dude is enrolled in this bundle or not
                 if($enrollment == null){
                     return redirect()->route('bundle-preview', ['bundle_slug' => $bundle->slug])->withErrors(['not_enrolled' => 'Access Denied! You are not enrolled in this bundle.']);
@@ -107,52 +131,32 @@ class CourseController extends Controller
 
         $batch = '';
         $enrolled = '';
-        $lectures = [];
-        $course_topic_lectures = array();
-        $course_topics = CourseTopic::where('course_id', $course->id)->get();
-        foreach ($course_topics as $course_topic) {
-            $course_topic_lectures[$course_topic->id] = array();
-        }
-        $course_lectures = CourseLecture::where('course_id', $course->id)->get();
-        foreach ($course_lectures as $course_lecture) {
-            //dd($course_lecture->topic_id,$course_lecture);
-            if (!empty($course_lecture->topic_id) && !empty($course_lecture) && !isset($course_lecture->topic_id) && !isset($course_lecture)) {
-                array_push($course_topic_lectures[$course_lecture->topic_id], $course_lecture);
-            }
-        }
+        $course_topics = $course->load('CourseTopic');
 
-        if (Auth::check()) {
-            $enrolled = BatchStudentEnrollment::where('course_id', $course->id)
-                ->where('student_id', auth()->user()->id)
-                ->first();
-                // dd($enrolled);
-            if ($enrolled && $enrolled->status == 1) {
+        if (auth()->check()) {
+            $enrolled = BatchStudentEnrollment::query()
+                                                ->where('course_id', $course->id)
+                                                ->where('student_id', auth()->user()->id)
+                                                ->first();
+            if ($enrolled && $enrolled->status) {
 
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
 
                 return redirect()->route('batch-lecture', $batch->slug);
-            }
-            else
-            {
-                if ($enrolled && $enrolled->status == 0 ) {
+            } else {
+                if ($enrolled && !$enrolled->status)
                     Session::flash('message', 'Please contact admin to access your course!');
-                }
 
                 return view('student.pages_new.course.preview_guest', compact(
                     'course',
                     'course_topics',
-                    'course_lectures',
-                    'course_topic_lectures',
                     'enrolled'
                 ));
             }
-        }
-        else {
+        } else {
             return view('student.pages_new.course.preview_guest', compact(
                 'course',
                 'course_topics',
-                'course_lectures',
-                'course_topic_lectures',
                 'enrolled',
                 'batch'
             ));
@@ -166,7 +170,7 @@ class CourseController extends Controller
             ->where('batch_student_enrollments.student_id', auth()->user()->id)
             ->where('payments.student_id', auth()->user()->id)
             ->first();
-        
+
         // if a student is enrolled and status is 0
         if ($enrolled && $enrolled->status == 0) {
             return redirect()->route('course-preview', $course->slug);
@@ -218,7 +222,7 @@ class CourseController extends Controller
         else {
             if ($enrolled) {
                 $batch = Batch::where('id', $enrolled->batch_id)->first();
-                
+
                 if (($enrolled->accepted == 1 && $batch->batch_running_days <= $enrolled->accessed_days) || $enrolled->status == 0) {
                     return redirect()->route('course-preview', $course->slug);
                 }
@@ -253,16 +257,16 @@ class CourseController extends Controller
 
             $enroll_months = $this->calculateEnrolMonths($batch->batch_running_days);
         }
-        
+
         request()->validate([
             'months'=>'numeric|min:'.$enroll_months
         ]);
-        
+
         $price = $course->price * request()->months;
         // dd($price);
         $days = request()->months * 30;
         $shurjopay_service = new ShurjopayService();
-        $trx_id = $shurjopay_service->generateTxId(); 
+        $trx_id = $shurjopay_service->generateTxId();
 
         //Creating payment with accepted =0 ;
         $payOpt = ['batch_id'=>$batch->id, 'accepted'=> 0, "trx"=>$trx_id, "payment_type"=>Payment::SHURJO_PAY, "days"=>$days, 'price'=>$price];

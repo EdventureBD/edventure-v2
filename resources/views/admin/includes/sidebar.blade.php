@@ -128,129 +128,142 @@
                 {{-- End Role Section--}}
 
                 {{-- START OF COURSE CATEGORY --}}
-                @can('course')
+                @canany([
+                        'course_category',
+                        'course_program',
+                        'course_bundle',
+                        'course',
+                        'course_batch',
+                        'course_island',
+                        'course_add_batch_to_island',
+                        'course_content_tag',
+                        'course_exam',
+                        'course_batch_exam',
+                        'course_lecture',
+                        ])
                     <li class="nav-item has-treeview
                             {{ request()->is('admin/course-category') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/course-category/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/course-category/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/intermediary_level') ? 'menu-open': '' }}
-                            {{ request()->is('admin/intermediary_level/create') ? 'menu-open': '' }}
-                            {{ request()->is('admin/intermediary_level/*/edit') ? 'menu-open': '' }}
-                            {{ request()->is('admin/bundle') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/bundle/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/bundle/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/course')? 'menu-open': '' }}
-                            {{ request()->is('admin/course/*')? 'menu-open': '' }}
-                            {{ request()->is('admin/course/*/edit')? 'menu-open': '' }}
-                            {{ request()->is('admin/course-topic')? 'menu-open': '' }}
-                            {{ request()->is('admin/course-topic/create')? 'menu-open': '' }}
-                            {{ request()->is('admin/course-topic/*/edit')? 'menu-open': '' }}
-                            {{ request()->is('admin/batch') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch/*/edit') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-exam') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-exam/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-exam/*/edit') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-exam/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/course-lecture')? 'menu-open': '' }}
-                            {{ request()->is('admin/course-lecture/create')? 'menu-open': '' }}
-                            {{ request()->is('admin/course-lecture/*/edit')? 'menu-open': '' }}
-                            {{ request()->is('admin/course-lecture/*')? 'menu-open': '' }}
-                            {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-lecture/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-lecture/*/edit') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/exam') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/exam/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/exam/*/edit') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/exam/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/add-mcq/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/student-exam-attempt') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/cq/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/mcq/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-cq') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/course-category/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/course-category/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/intermediary_level') ? 'menu-open': '' }}
+                    {{ request()->is('admin/intermediary_level/create') ? 'menu-open': '' }}
+                    {{ request()->is('admin/intermediary_level/*/edit') ? 'menu-open': '' }}
+                    {{ request()->is('admin/bundle') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/bundle/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/bundle/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/course')? 'menu-open': '' }}
+                    {{ request()->is('admin/course/*')? 'menu-open': '' }}
+                    {{ request()->is('admin/course/*/edit')? 'menu-open': '' }}
+                    {{ request()->is('admin/course-topic')? 'menu-open': '' }}
+                    {{ request()->is('admin/course-topic/create')? 'menu-open': '' }}
+                    {{ request()->is('admin/course-topic/*/edit')? 'menu-open': '' }}
+                    {{ request()->is('admin/batch') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch/*/edit') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-exam') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-exam/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-exam/*/edit') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-exam/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/course-lecture')? 'menu-open': '' }}
+                    {{ request()->is('admin/course-lecture/create')? 'menu-open': '' }}
+                    {{ request()->is('admin/course-lecture/*/edit')? 'menu-open': '' }}
+                    {{ request()->is('admin/course-lecture/*')? 'menu-open': '' }}
+                    {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-lecture/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-lecture/*/edit') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/exam') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/exam/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/exam/*/edit') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/exam/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/add-mcq/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/student-exam-attempt') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/cq/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/mcq/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-mcq') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-cq') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-assignment') ? 'menu-open' : '' }}
 
-                            {{-- NEW --}}
-                            {{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
+                    {{-- NEW --}}
+                    {{ request()->is('admin/all-aptitude-test/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-pop-quiz/*') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-topic-end-exam/*') ? 'menu-open' : '' }}
 
-                            {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/live-class') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/live-class/create') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/live-class/*/edit') ? 'menu-open' : '' }}
-                            {{ request()->is('admin/batch-student') ? 'menu-open' : '' }}">
+                    {{ request()->is('admin/all-aptitude-test') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-pop-quiz') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/all-topic-end-exam') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/live-class') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/live-class/create') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/live-class/*/edit') ? 'menu-open' : '' }}
+                    {{ request()->is('admin/batch-student') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link
                             {{ request()->is('admin/course-category') ? 'active' : '' }}
-                            {{ request()->is('admin/course-category/create') ? 'active' : '' }}
-                            {{ request()->is('admin/course-category/*') ? 'active' : '' }}
-                           {{ request()->is('admin/intermediary_level') ? 'active': '' }}
-                           {{ request()->is('admin/intermediary_level/create') ? 'active': '' }}
-                           {{ request()->is('admin/intermediary_level/*/edit') ? 'active': '' }}
-                           {{ request()->is('admin/bundle') ? 'active' : '' }}
-                           {{ request()->is('admin/bundle/create') ? 'active' : '' }}
-                           {{ request()->is('admin/bundle/*') ? 'active' : '' }}
-                           {{ request()->is('admin/course')? 'active': '' }}
-                           {{ request()->is('admin/course/*')? 'active': '' }}
-                           {{ request()->is('admin/course/*/edit')? 'active': '' }}
-                           {{ request()->is('admin/course-topic')? 'active': '' }}
-                           {{ request()->is('admin/course-topic/create')? 'active': '' }}
-                           {{ request()->is('admin/course-topic/*/edit')? 'active': '' }}
-                           {{ request()->is('admin/batch') ? 'active' : '' }}
-                           {{ request()->is('admin/batch/create') ? 'active' : '' }}
-                           {{ request()->is('admin/batch/*/edit') ? 'active' : '' }}
-                           {{ request()->is('admin/batch/*') ? 'active' : '' }}
-                           {{ request()->is('admin/content-tag') ? 'active' : '' }}
-                           {{ request()->is('admin/content-tag/create') ? 'active' : '' }}
-                           {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-exam') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-exam/create') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-exam/*/edit') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-exam/*') ? 'active' : '' }}
-                           {{ request()->is('admin/course-lecture')? 'active': '' }}
-                           {{ request()->is('admin/course-lecture/create')? 'active': '' }}
-                           {{ request()->is('admin/course-lecture/*/edit')? 'active': '' }}
-                           {{ request()->is('admin/course-lecture/*')? 'active': '' }}
-                           {{ request()->is('admin/batch-lecture') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}
-                           {{ request()->is('admin/exam') ? 'active' : '' }}
-                           {{ request()->is('admin/exam/create') ? 'active' : '' }}
-                           {{ request()->is('admin/exam/*/edit') ? 'active' : '' }}
-                           {{ request()->is('admin/exam/*') ? 'active' : '' }}
-                           {{ request()->is('admin/add-mcq/*') ? 'active' : '' }}
-                           {{ request()->is('admin/student-exam-attempt') ? 'active' : '' }}
-                           {{ request()->is('admin/cq/*') ? 'active' : '' }}
-                           {{ request()->is('admin/mcq/*') ? 'active' : '' }}
-                           {{ request()->is('admin/all-mcq') ? 'active' : '' }}
-                           {{ request()->is('admin/all-cq') ? 'active' : '' }}
-                           {{ request()->is('admin/all-assignment') ? 'active' : '' }}
+                        {{ request()->is('admin/course-category/create') ? 'active' : '' }}
+                        {{ request()->is('admin/course-category/*') ? 'active' : '' }}
+                        {{ request()->is('admin/intermediary_level') ? 'active': '' }}
+                        {{ request()->is('admin/intermediary_level/create') ? 'active': '' }}
+                        {{ request()->is('admin/intermediary_level/*/edit') ? 'active': '' }}
+                        {{ request()->is('admin/bundle') ? 'active' : '' }}
+                        {{ request()->is('admin/bundle/create') ? 'active' : '' }}
+                        {{ request()->is('admin/bundle/*') ? 'active' : '' }}
+                        {{ request()->is('admin/course')? 'active': '' }}
+                        {{ request()->is('admin/course/*')? 'active': '' }}
+                        {{ request()->is('admin/course/*/edit')? 'active': '' }}
+                        {{ request()->is('admin/course-topic')? 'active': '' }}
+                        {{ request()->is('admin/course-topic/create')? 'active': '' }}
+                        {{ request()->is('admin/course-topic/*/edit')? 'active': '' }}
+                        {{ request()->is('admin/batch') ? 'active' : '' }}
+                        {{ request()->is('admin/batch/create') ? 'active' : '' }}
+                        {{ request()->is('admin/batch/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/batch/*') ? 'active' : '' }}
+                        {{ request()->is('admin/content-tag') ? 'active' : '' }}
+                        {{ request()->is('admin/content-tag/create') ? 'active' : '' }}
+                        {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-exam') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-exam/create') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-exam/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-exam/*') ? 'active' : '' }}
+                        {{ request()->is('admin/course-lecture')? 'active': '' }}
+                        {{ request()->is('admin/course-lecture/create')? 'active': '' }}
+                        {{ request()->is('admin/course-lecture/*/edit')? 'active': '' }}
+                        {{ request()->is('admin/course-lecture/*')? 'active': '' }}
+                        {{ request()->is('admin/batch-lecture') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/exam') ? 'active' : '' }}
+                        {{ request()->is('admin/exam/create') ? 'active' : '' }}
+                        {{ request()->is('admin/exam/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/exam/*') ? 'active' : '' }}
+                        {{ request()->is('admin/add-mcq/*') ? 'active' : '' }}
+                        {{ request()->is('admin/student-exam-attempt') ? 'active' : '' }}
+                        {{ request()->is('admin/cq/*') ? 'active' : '' }}
+                        {{ request()->is('admin/mcq/*') ? 'active' : '' }}
+                        {{ request()->is('admin/all-mcq') ? 'active' : '' }}
+                        {{ request()->is('admin/all-cq') ? 'active' : '' }}
+                        {{ request()->is('admin/all-assignment') ? 'active' : '' }}
 
-                           {{-- NEW --}}
-                           {{ request()->is('admin/all-aptitude-test/*') ? 'active' : '' }}
-                           {{ request()->is('admin/all-pop-quiz/*') ? 'active' : '' }}
-                           {{ request()->is('admin/all-topic-end-exam/*') ? 'active' : '' }}
+                        {{-- NEW --}}
+                        {{ request()->is('admin/all-aptitude-test/*') ? 'active' : '' }}
+                        {{ request()->is('admin/all-pop-quiz/*') ? 'active' : '' }}
+                        {{ request()->is('admin/all-topic-end-exam/*') ? 'active' : '' }}
 
-                           {{ request()->is('admin/all-aptitude-test') ? 'active' : '' }}
-                           {{ request()->is('admin/all-pop-quiz') ? 'active' : '' }}
-                           {{ request()->is('admin/all-topic-end-exam') ? 'active' : '' }}
-                           {{ request()->is('admin/live-class') ? 'active' : '' }}
-                           {{ request()->is('admin/live-class/create') ? 'active' : '' }}
-                           {{ request()->is('admin/live-class/*/edit') ? 'active' : '' }}
-                           {{ request()->is('admin/batch-student') ? 'active' : '' }}">
+                        {{ request()->is('admin/all-aptitude-test') ? 'active' : '' }}
+                        {{ request()->is('admin/all-pop-quiz') ? 'active' : '' }}
+                        {{ request()->is('admin/all-topic-end-exam') ? 'active' : '' }}
+                        {{ request()->is('admin/live-class') ? 'active' : '' }}
+                        {{ request()->is('admin/live-class/create') ? 'active' : '' }}
+                        {{ request()->is('admin/live-class/*/edit') ? 'active' : '' }}
+                        {{ request()->is('admin/batch-student') ? 'active' : '' }}">
 
                             <i class="fas fa-list-ol"></i>
                             <p>&nbsp; Course Section <i class="right fas fa-angle-left"></i></p>
                         </a>
 
                         <ul style="margin-left: 10px;" class="nav nav-treeview">
+                            @can('course_category')
                             <li class="nav-item {{ request()->is('admin/course-category') ? 'menu-open' : '' }}">
                                 <a href="{{ route('course-category.index') }}"
 
@@ -259,13 +272,15 @@
                                    {{ request()->is('admin/course-category/*') ? 'active' : '' }}">
 
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Course Category</p>
+                                    <p> Course Category </p>
                                 </a>
                             </li>
+                            @endcan
                             {{-- END OF COURSE CATEGORY --}}
 
 
                             {{-- START OF PROGRAMS/INTERMEDIARY LEVEL --}}
+                                @can('course_program')
                             <li class="nav-item {{ request()->is('admin/intermediary_level') ? 'menu-open': '' }}">
                                 <a href="{{ route('intermediary_level.index') }}"
                                    class="nav-link {{ request()->is('admin/intermediary_level') ? 'active': '' }}
@@ -275,9 +290,11 @@
                                     <p>Program</p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF PROGRAMS/INTERMEDIARY LEVEL --}}
 
                             {{-- START OF BUNDLE --}}
+                                @can('course_bundle')
                             <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">
                                 <a href="{{ route('bundle.index') }}"
                                    class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }}
@@ -287,9 +304,11 @@
                                     <p>&nbsp; Bundle </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BUNDLE --}}
 
                             {{-- START OF COURSE --}}
+                                @can('course')
                             <li class="nav-item {{ request()->is('admin/course')? 'menu-open': '' }}">
                                 <a href="{{ route('course.index') }}"
                                    class="nav-link {{ request()->is('admin/course')? 'active': '' }}
@@ -299,9 +318,11 @@
                                     <p>&nbsp; Course </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF COURSE --}}
 
                             {{-- START OF BATCH --}}
+                                @can('course_batch')
                             <li class="nav-item {{ request()->is('admin/batch')? 'menu-open': '' }}">
                                 <a href="{{ route('batch.index') }}"
                                    class="nav-link {{ request()->is('admin/batch/create') ? 'active' : '' }}
@@ -312,21 +333,35 @@
                                     <p>&nbsp; Batch </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BATCH --}}
 
                             {{-- START OF COURSE TOPIC --}}
+                                @can('course_island')
                             <li class="nav-item {{ request()->is('admin/course-topic') ? 'menu-open' : '' }}">
                                 <a href="{{ route('course-topic.index') }}"
                                    class="nav-link {{ request()->is('admin/course-topic')? 'active': '' }}
                                    {{ request()->is('admin/course-topic/create')? 'active': '' }}
                                    {{ request()->is('admin/course-topic/*/edit')? 'active': '' }}">
                                     <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Course Topic </p>
+                                    <p>&nbsp; Island </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF COURSE TOPIC --}}
-
+                            {{-- START OF BATCH LECTURE --}}
+                                @can('course_add_batch_to_island')
+                            <li class="nav-item">
+                                <a href="{{ route('batch-lecture.index') }}"
+                                    class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }} {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>&nbsp; Add Batch to Island </p>
+                                </a>
+                            </li>
+                                @endcan
+                            {{-- END OF BATCH LECTURE --}}
                             {{-- START OF CONTENT TAG --}}
+                                @can('course_content_tag')
                             <li class="nav-item {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}">
                                 <a href="{{ route('content-tag.index') }}"
                                    class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }}
@@ -336,6 +371,7 @@
                                     <p>&nbsp; Content Tag </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF CONTENT TAG --}}
 
                             @can('course_exam')
@@ -345,6 +381,7 @@
                             @endcan
 
                             {{-- START OF BATCH EXAM --}}
+                                @can('course_batch_exam')
                             <li class="nav-item {{ request()->is('admin/batch-exam') ? 'menu-open' : '' }}">
                                 <a href="{{ route('batch-exam.index') }}"
                                    class="nav-link {{ request()->is('admin/batch-exam') ? 'active' : '' }}
@@ -355,9 +392,11 @@
                                     <p>&nbsp; Batch Exam </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF BATCH EXAM --}}
 
                             {{-- START OF COURSE LECTURE --}}
+                                @can('course_lecture')
                             <li class="nav-item {{ request()->is('admin/course-lecture')? 'menu-open': '' }}">
                                 <a href="{{ route('course-lecture.index') }}"
                                    class="nav-link {{ request()->is('admin/course-lecture')? 'active': '' }}
@@ -368,19 +407,8 @@
                                     <p>&nbsp; Course Lecture </p>
                                 </a>
                             </li>
+                                @endcan
                             {{-- END OF COURSE LECTURE --}}
-
-                            {{-- START OF BATCH LECTURE --}}
-                            <li class="nav-item {{ request()->is('admin/batch-lecture') ? 'menu-open' : '' }}">
-                                <a href="{{ route('batch-lecture.index') }}"
-                                   class="nav-link {{ request()->is('admin/batch-lecture') ? 'active' : '' }}
-                                   {{ request()->is('admin/batch-lecture/create') ? 'active' : '' }}
-                                   {{ request()->is('admin/batch-lecture/*/edit') ? 'active' : '' }}">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>&nbsp; Batch Lecture </p>
-                                </a>
-                            </li>
-                            {{-- END OF BATCH LECTURE --}}
 
 
                             {{-- START OF COURSE --}}
@@ -389,12 +417,13 @@
 
 
                             {{-- START OF BATCH --}}
-                            @include('admin.includes.sidebar_content.batch')
+                            {{-- @include('admin.includes.sidebar_content.batch') --}}
                             {{-- END OF BATCH --}}
+                        {{-- </ul>
+                    </li> --}}
                         </ul>
-                    </li>
 
-                @endcan
+                @endcanany
 
                 @can('payment')
                     {{-- START OF PAYMENTS --}}
@@ -432,58 +461,6 @@
                     </li>
                     {{-- END OF PAYMENTS --}}
                 @endcan
-
-{{--                @can('course')--}}
-{{--                    --}}{{-- START OF CONTENT TAGS --}}
-{{--                    <li--}}
-{{--                        class="nav-item has-treeview {{ request()->is('admin/content-tag') ? 'menu-open' : '' }}--}}
-{{--                        {{ request()->is('admin/content-tag/create') ? 'menu-open' : '' }}--}}
-{{--                        {{ request()->is('admin/content-tag/*/edit') ? 'menu-open' : '' }}--}}
-{{--                        {{ request()->is('admin/question-content-tag') ? 'menu-open' : '' }}--}}
-{{--                        {{ request()->is('admin/question-content-tag/create') ? 'menu-open' : '' }}--}}
-{{--                        {{ request()->is('admin/question-content-tag/*/edit') ? 'menu-open' : '' }}--}}
-{{--                            ">--}}
-{{--                        <a href="#"--}}
-{{--                           class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }}--}}
-{{--                           {{ request()->is('admin/content-tag/create') ? 'active' : '' }}--}}
-{{--                           {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}--}}
-{{--                           {{ request()->is('admin/question-content-tag') ? 'active' : '' }}--}}
-{{--                           {{ request()->is('admin/question-content-tag/create') ? 'active' : '' }}--}}
-{{--                           {{ request()->is('admin/question-content-tag/*/edit') ? 'active' : '' }}--}}
-{{--                               ">--}}
-{{--                            <i class="fas fa-chart-bar"></i>--}}
-{{--                            <p>&nbsp; Tags<i class="right fas fa-angle-left"></i></p>--}}
-{{--                        </a>--}}
-{{--                        <ul style="margin-left: 10px;" class="nav nav-treeview">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('content-tag.index') }}"--}}
-{{--                                   class="nav-link {{ request()->is('admin/content-tag') ? 'active' : '' }} {{ request()->is('admin/content-tag/create') ? 'active' : '' }} {{ request()->is('admin/content-tag/*/edit') ? 'active' : '' }}">--}}
-{{--                                    <i class="fas fa-clipboard-list"></i>--}}
-{{--                                    <p>&nbsp; Content Tag</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            --}}{{-- <li class="nav-item">--}}
-{{--                                <a href="{{ route('question-content-tag.index') }}" class="nav-link {{ request()->is('admin/question-content-tag')? 'active': '' }} {{ request()->is('admin/question-content-tag/create')? 'active': '' }} {{ request()->is('admin/question-content-tag/*/edit')? 'active': '' }}">--}}
-{{--                                    <i class="fas fa-question-circle"></i>--}}
-{{--                                    <p>&nbsp; Ques-Content Tag</p>--}}
-{{--                                </a>--}}
-{{--                            </li> --}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-{{--                    --}}{{-- END OF CONTENT TAG --}}
-{{--                @endcan--}}
-
-{{--                @can('course')--}}
-{{--                    --}}{{-- START OF COURSE CATEGORY --}}
-{{--                    <li class="nav-item {{ request()->is('admin/bundle') ? 'menu-open' : '' }}">--}}
-{{--                        <a href="{{ route('bundle.index') }}"--}}
-{{--                           class="nav-link {{ request()->is('admin/bundle') ? 'active' : '' }} {{ request()->is('admin/bundle/create') ? 'active' : '' }}  {{ request()->is('admin/bundle/*') ? 'active' : '' }}">--}}
-{{--                            <i class="fas fa-list-ol"></i>--}}
-{{--                            <p>&nbsp; Bundles </p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    --}}{{-- END OF COURSE CATEGORY --}}
-{{--                @endcan--}}
 
                 {{----------------------- START OF MODEL EXAM SIDEBAR ------------------------------------}}
                 @canany([

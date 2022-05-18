@@ -27,7 +27,7 @@
                                 You are about to attempt a Topic End Exam. Are you sure you wish to continue ?
                             </div>
                             <div class="modal-footer d-flex justify-content-between">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                                 <a href="{{ $next_link }}" class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
                             </div>
                         </div>
@@ -66,16 +66,16 @@
                                             <a class="nav-link h3 text-purple" id="liveClass" data-toggle="pill" href="#custom-tabs-one-liveClass" role="tab" aria-controls="custom-tabs-one-liveClass" aria-selected="false">Live Class</a>
                                         </li> --}}
                                         <li class="nav-item mr-md-5 mr-2">
-                                            <a class="nav-link active h3 text-purple" id="markdownText" data-toggle="pill" href="#custom-tabs-one-note" role="tab" aria-controls="custom-tabs-one-note" aria-selected="true">Solution pdf</a>
+                                            <a class="nav-link active h3 text-purple" id="markdownText" data-toggle="pill" href="#custom-tabs-one-note" role="tab" aria-controls="custom-tabs-one-note" aria-selected="true">Lecture PDF</a>
                                         </li>
                                         <li class="nav-item mx-md-5 mx-2">
-                                            <a class="nav-link h3 text-purple" id="lecture" data-toggle="pill" href="#custom-tabs-one-lecture" role="tab" aria-controls="custom-tabs-one-lecture" aria-selected="false">Solution Video</a>
+                                            <a class="nav-link h3 text-purple" id="lecture" data-toggle="pill" href="#custom-tabs-one-lecture" role="tab" aria-controls="custom-tabs-one-lecture" aria-selected="false">Lecture Video</a>
                                         </li>
                                         <li class="nav-item ml-md-5 ml-2">
                                             <a class="nav-link h3 text-purple" id="liveClass" data-toggle="pill" href="#custom-tabs-one-liveClass" role="tab" aria-controls="custom-tabs-one-liveClass" aria-selected="false">Relevant Notes</a>
                                         </li>
                                     </ul>
-                                    
+
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-one-tabContent">
@@ -98,6 +98,7 @@
                                                             <span class="material-icons">play_arrow</span>
                                                         </a>
                                                     </div> --}}
+                                                    @if($courseLecture->url)
                                                     <div class="player__embed ">
                                                         <iframe width="100%" height="315"
                                                             src="https://www.youtube-nocookie.com/embed/{{ $courseLecture->url }}"
@@ -109,6 +110,13 @@
                                                                 src="https://player.vimeo.com/video/{{ $courseLecture->url }}"
                                                                 allowfullscreen=""></iframe> --}}
                                                     </div>
+                                                    @else
+                                                        <div class="mx-auto mt-5 mb-5 text-center">
+                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">
+                                                                There is no video associated with this topic.
+                                                            </p>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -119,13 +127,13 @@
                                                         @if(isset($liveClass) && !empty($liveClass))
                                                         <div class="mx-auto mt-5 mb-5 text-center">
                                                             <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">{{$liveClass->title}}</p>
-                                                            
+
                                                             <div id="countdownTimer" class="text-center text-gray-50 count-timer my-4 font-arial"></div>
                                                             <a class="btn text-xxxsm text-white bg-purple fw-800 px-3 py-2 w-20" target="blank" href="{{$liveClass->live_link}}">View Content </a>
                                                         </div>
-                                                        @else 
+                                                        @else
                                                         <div class="mx-auto mt-5 mb-5 text-center">
-                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">When live class will be scheduled, you will get the class link here</p>                                                            
+                                                            <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">When live class will be scheduled, you will get the class link here</p>
                                                         </div>
                                                         @endif
                                                     </div>
@@ -188,7 +196,7 @@
             }
         });
     });
-    
+
     // function enable_cb() {
     //     if (this.checked) {
     //         $("#lecture_viewed").attr("disabled", true);

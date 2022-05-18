@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\CourseCategory;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Course;
+use App\Models\Admin\IntermediaryLevel;
 
 class CourseCategoryController extends Controller
 {
@@ -23,9 +24,9 @@ class CourseCategoryController extends Controller
 
     public function show(CourseCategory $courseCategory)
     {
-        $courses = Course::where('course_category_id', $courseCategory->id)->get();
-        $total = Course::where('course_category_id', $courseCategory->id)->count();
-        return view('admin.pages.course_category.details', compact('courseCategory', 'courses', 'total'));
+        $intermediary_levels = IntermediaryLevel::where('course_category_id', $courseCategory->id)->get();
+        $total = $intermediary_levels->count();
+        return view('admin.pages.course_category.details', compact('courseCategory', 'intermediary_levels', 'total'));
     }
 
     public function edit(CourseCategory $courseCategory)
@@ -33,8 +34,12 @@ class CourseCategoryController extends Controller
         return view('admin.pages.course_category.edit', compact('courseCategory'));
     }
 
-    public function destroy(CourseCategory $courseCategory)
+    public function destroy($courseCategory)
     {
+        $courseCategory = CourseCategory::where('slug', $courseCategory)->with(['intermediary_level'])->firstOrFail();
+        if(count($courseCategory->intermediary_level) > 0){
+            return redirect()->route('course-category.index')->with('failed', 'Course category cannot be deleted. It has programs associated to it.');
+        }
         $delete = $courseCategory->delete();
         if ($delete) {
             return redirect()->route('course-category.index')->with('status', 'Course category successfully deleted!');

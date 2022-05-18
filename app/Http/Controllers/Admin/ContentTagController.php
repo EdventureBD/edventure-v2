@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ContentTag;
+use App\Models\Admin\QuestionContentTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,8 +32,14 @@ class ContentTagController extends Controller
         return view('admin.pages.content_tag.edit', compact('contentTag'));
     }
 
-    public function destroy(ContentTag $contentTag)
+    public function destroy($contentTag)
     {
+        $contentTag = ContentTag::where('slug', $contentTag)->with(['questionContentTags'])->firstOrFail();
+
+        if(count($contentTag->questionContentTags) > 0){
+            return redirect()->route('content-tag.index')->with('failed', 'This content tag is assocaited to an exam question! Please delete the question before deleting this tag.');
+        }
+
         $fileName = "public/content_tags/pdf/" . substr($contentTag->solution_pdf, 26);
         Storage::delete($fileName);
         $delete = $contentTag->delete();

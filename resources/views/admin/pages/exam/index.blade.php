@@ -44,7 +44,7 @@
                                         <th class="text-center">SL. No</th>
                                         <th class="text-center">Title</th>
                                         <th class="text-center">Course</th>
-                                        <th class="text-center">Topic</th>
+                                        <th class="text-center">Island</th>
                                         <th class="text-center">Exam Type</th>
                                         <th class="text-center">Threshold Marks</th>
                                         <th class="text-center">MCQ Limit</th>
@@ -203,7 +203,7 @@
                                         <th class="text-center">SL. No</th>
                                         <th class="text-center">Title</th>
                                         <th class="text-center">Course</th>
-                                        <th class="text-center">Topic</th>
+                                        <th class="text-center">Island</th>
                                         <th class="text-center">Exam Type</th>
                                         <th class="text-center">Threshold Marks</th>
                                         <th class="text-center">MCQ Limit</th>

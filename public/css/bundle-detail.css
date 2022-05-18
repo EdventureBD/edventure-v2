@@ -90,6 +90,15 @@
 .detail-parts-font {
     font-size: 12.1525px;
 }
+.course-detail-single-unit {
+    background: #FFFFFF;
+    box-shadow: 0px -7.84502px 30.2594px rgba(0, 0, 0, 0.045),
+                0px -0.982319px 3.78894px rgba(0, 0, 0, 0.09);
+    border-radius: 15.69px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    max-height:150px;
+}
 @media screen and (width: 1366px){
     .sticky {
         top: 12% !important;
@@ -203,26 +212,33 @@
     font-size: 20px;
     margin-right: 5px;
 }
+.focus-boxShadow-none:focus {
+    box-shadow: none !important;
+}
 /* customised slim scroll bar part  */
     /* width */
     div#examDetails::-webkit-scrollbar,div#examRoutine::-webkit-scrollbar,div.teachers div::-webkit-scrollbar {
     width: 1px;
     height: 10px;
 }
+div.course-detail-single-unit::-webkit-scrollbar {
+    width: 1px;
+
+}
 
 /* Track */
-div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track,div.teachers div::-webkit-scrollbar-track {
+div#examDetails::-webkit-scrollbar-track,div#examRoutine::-webkit-scrollbar-track,div.teachers div::-webkit-scrollbar-track,div.course-detail-single-unit::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
 /* Handle */
-div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb,div.teachers div::-webkit-scrollbar-thumb {
+div#examDetails::-webkit-scrollbar-thumb,div#examRoutine::-webkit-scrollbar-thumb,div.teachers div::-webkit-scrollbar-thumb,div.course-detail-single-unit::-webkit-scrollbar-thumb {
     background: #6400C8;
     border-radius: 15pt;
 }
 
 /* Handle on hover */
-div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover,div.teachers div::-webkit-scrollbar-thumb:hover {
+div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollbar-thumb:hover,div.teachers div::-webkit-scrollbar-thumb:hover,div.course-detail-single-unit::-webkit-scrollbar-thumb:hover {
     background: #8315f1;
 }
 /* customised slim scroll bar part  */
@@ -252,16 +268,46 @@ div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollba
     -webkit-box-shadow: none;
     box-shadow: 11px 2px 14px rgba(231, 128, 108, 0.4);
 }
-@media screen and (max-width:768px) {
-    #category-title-2 {
+
+
+.course-tab:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f107";
+    float: right;
+    transition: all 0.5s;
+}
+.course-tab.active:before{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.teachers-parent {
+    padding: 0 10px;
+    align-content: center;
+    border-right: 1px solid lightgrey;
+    height: 175px;
+}
+@media screen and (max-width: 768px) {
+    #bundle-title-2 {
         display: block !important;
+        text-align: center;
     }
-    #category-title-1 {
+    #bundle-title-1 {
         display: none !important;
     }
 }
-@media screen and (max-width:576px) {
-    #category-title-2 {
+@media  screen and (max-width:576px) {
+    .teachers-image {
+        width: 45px;
+        height: 45px;
+    }
+    .teachers-parent {
+        grid-template-columns: 1fr !important;
+    }
+    .teachers-name,.teachers-detail,.teachers-education {
+        font-size: .75em;
+    }
+    #bundle-title-2 {
         font-size: 20px;
     }
 }

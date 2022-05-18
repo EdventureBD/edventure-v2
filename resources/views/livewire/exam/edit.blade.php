@@ -72,7 +72,7 @@
                                     @if ($show)
                                         <div class="col-md-4 {{ $show ? '' : 'd-none' }}">
                                             <div class="form-group">
-                                                <label class="col-form-label" for="topicName">Topic <span
+                                                <label class="col-form-label" for="topicName"> Island <span
                                                         class="must-filled">*</span></label>
                                                 <select class="form-control" wire:model="topicId" disabled>
                                                     <option value="{{ $topic->id }}">{{ $topic->title }}</option>

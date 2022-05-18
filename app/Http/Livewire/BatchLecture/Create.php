@@ -75,14 +75,14 @@ class Create extends Component
         $save = $batchLecture->save();
 
         if ($save) {
-            session()->flash('status', 'Batch lecture successfully added!');
+            session()->flash('status', 'Batch Added to Island Successfully!');
             if ($route == "batch.show") {
                 return redirect()->route('batch.show', $slug);
             } else {
                 return redirect()->route('batch-lecture.index');
             }
         } else {
-            session()->flash('failed', 'Batch lecture created failed!');
+            session()->flash('failed', 'Failed to Added Batch to Island!');
             return redirect()->route('batch-lecture.create');
         }
     }

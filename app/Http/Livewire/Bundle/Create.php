@@ -23,6 +23,8 @@ class Create extends Component
     public $tempImage;
     public $tempBanner;
     public $url;
+    public $bundle_for_whom;
+    public $status = ""; // initializing with empty string so disabled selected option works properly
 
     public function updatedbundle_name()
     {
@@ -61,7 +63,7 @@ class Create extends Component
             'intermediaryLevelId' => 'required'
         ]);
     }
-    
+
     public function updatedPrice()
     {
         $this->validate([
@@ -76,6 +78,13 @@ class Create extends Component
         ]);
     }
 
+    public function updatedStatus()
+    {
+        $this->validate([
+            'status' => 'required|numeric|integer||between:0,1'
+        ]);
+    }
+
     protected $rules = [
         'bundle_name' => ['required', 'string', 'max:100', 'unique:bundles'],
         'banner' => 'nullable|image|mimes:jpeg,jpg,png',
@@ -85,6 +94,8 @@ class Create extends Component
         'price' => 'required|integer|numeric|gt:-1',
         'intermediaryLevelId' => 'required',
         'duration' => 'required|numeric|between:1,36',
+        'bundle_for_whom' => 'required',
+        'status' => 'required|numeric|integer||between:0,1',
     ];
 
     public function saveBundle()
@@ -110,7 +121,8 @@ class Create extends Component
         $bundle->duration = $data['duration'];
         $bundle->trailer = $data['url'];
         $bundle->price = $data['price'];
-        $bundle->status = 1;
+        $bundle->bundle_for_whom = $data['bundle_for_whom'];
+        $bundle->status = $data['status'];
         $save = $bundle->save();
 
         if ($save) {
