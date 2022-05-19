@@ -1,4 +1,5 @@
 <x-landing-layout headerBg="white">
+    <link rel="stylesheet" href="/css/tooltip.css">
     <style>
         .table td.fit,
         .table th.fit {
@@ -35,13 +36,20 @@
                 <div class="result-sheet-table overflow-x-scroll">
                     <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
-                            <tr>
-                                <th class="bg-purple text-white text-center fit">Sl</th>
-                                <th class="bg-purple text-white text-center fit">Question</th>
-                                <th class="bg-purple text-white text-center fit">Answer</th>
-                                <th class="bg-purple text-white text-center fit">Your Answer</th>
-                                <th class="bg-purple text-white text-center fit">Explanation</th>
-                                <th class="bg-purple text-white text-center fit">Success Rate</th>
+                            <tr class="bg-purple text-white text-center">
+                                <td class="fit">Sl</td>
+                                <td class="fit">Question</td>
+                                <td class="fit">Answer</td>
+                                <td class="fit">Your Answer</td>
+                                <td class="fit">Explanation</td>
+                                <td class="fit">Success Rate
+                                    <span style="color: #fa9632"
+                                          class=""
+                                          data-toggle="tooltip"
+                                          data-placement="auto"
+                                          title="This value shows the percentage  of students who got this particular question right"><i class="fa fa-info-circle"></i>
+                                    </span>
+                                </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -198,3 +206,8 @@
     </div>
 </x-landing-layout>
 
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+ </script>
