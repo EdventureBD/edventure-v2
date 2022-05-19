@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Student;
 
 // use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;

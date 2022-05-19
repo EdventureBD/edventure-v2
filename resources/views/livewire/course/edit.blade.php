@@ -119,6 +119,8 @@
                                         <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label class="col-form-label" for="status"> Status <span class="must-filled">*</span></label>
 											<select class="form-control @error('status') is-invalid @enderror" wire:model="status">
@@ -129,7 +131,7 @@
 												<p style="color: red;">{{ $message }}</p>
 											@enderror
 										</div>
-									</div>
+                                    </div>
 
 									@if($show_island_image)
 										<div class="col-md-4">
@@ -173,7 +175,7 @@
                                             <label class="col-form-label" for="courseName">Bundle <span
                                                     class="must-filled">*</span></label>
                                             <select class="form-control" wire:model="bundleId" disabled>
-                                                <option value="" selected>Select Bundle</option>
+                                                <option value="" selected>No Bundle</option>
                                                 @foreach ($bundles as $bundle)
                                                     <option value="{{ $bundle->id }}">{{ $bundle->bundle_name }}</option>
                                                 @endforeach
