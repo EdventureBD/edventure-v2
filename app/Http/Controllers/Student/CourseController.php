@@ -4,20 +4,13 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
-// use Illuminate\Http\Request;
 use App\Models\Admin\Payment;
-use App\Models\Admin\CourseTopic;
-use App\Models\Admin\CourseLecture;
-// use App\Models\Admin\PaymentNumber;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-// use App\Models\Student\StudentDetails;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\CourseCategory;
 use App\Models\Admin\IntermediaryLevel;
 use App\Models\Admin\Bundle;
 use App\Models\BundleStudentEnrollment;
-// use App\Utils\Payment as UtilsPayment;
 use Illuminate\Support\Facades\Session;
 use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
@@ -246,7 +239,6 @@ class CourseController extends Controller
 
     public function processPayment(Course $course)
     {
-        // dd('processPayment method');
         $enrolled = (new BatchStudentEnrollment())->getEnrollment($course->id, auth()->user()->id);
         if ($enrolled) {
             $batch = (new Batch())->getById($enrolled->batch_id);

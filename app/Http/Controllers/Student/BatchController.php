@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Student;
 
 // use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 use App\Models\Admin\Batch;
 use App\Models\Admin\Course;
@@ -54,31 +53,6 @@ class BatchController extends Controller
         else{
             $back_url = route('course') . "/" . $course->intermediaryLevel->courseCategory->slug . "/" . $course->intermediaryLevel->slug;
         }
-
-        // $batchTopics = BatchLecture::select('id', 'topic_id')
-        // ->with([
-        // 'courseTopic' => function($query){
-        //     return $query->select('id', 'title', 'slug', 'zero_star_island_image', 'one_star_island_image', 'two_star_island_image', 'three_star_island_image', 'disabled_island_image');
-        // },
-        // 'courseTopic.exams' => function($query){
-        //     return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order')
-        //     ->select('id', 'title', 'slug', 'topic_id', 'exam_type', 'threshold_marks');
-        // },
-        // 'courseTopic.exams.details_results' => function($query){
-        //     return $query->where('student_id', auth()->user()->id)
-        //     ->select('id', 'exam_id', 'exam_type', 'gain_marks');
-        // },
-        // 'courseTopic.exams.course_lectures' => function($query){
-        //     return $query->select('id', 'title', 'slug', 'exam_id');
-        // },
-        // 'courseTopic.exams.course_lectures.completed_lectures' => function($query){
-        //     return $query->where('student_id', auth()->user()->id)
-        //     ->select('id', 'lecture_id');
-        // }
-        // ])
-        // ->where('batch_id', $batch->id)
-        // ->where('course_id', $course->id)
-        // ->get();
 
         $batchTopics = BatchLecture::select('id', 'topic_id')
         ->with([

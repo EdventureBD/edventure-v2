@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExamTag;
 use App\Models\ModelExam;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 class ModelMcqTagAnalysisController extends Controller
 {
@@ -94,11 +94,11 @@ class ModelMcqTagAnalysisController extends Controller
         $selectedExam = null;
         $studentCount = null;
         if(request()->input('query.exam')) {
-             $examId = request()->input('query.exam');
-             $tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($examId) {
+                $examId = request()->input('query.exam');
+                $tags =  ExamTag::query()->whereHas('modelMcqTagAnalysis', function ($q) use ($examId) {
                 $q->where('model_exam_id',$examId);
             })->with('modelMcqTagAnalysis')->get();
-             $selectedExam = ModelExam::query()->find($examId);
+                $selectedExam = ModelExam::query()->find($examId);
 
             foreach($tags as $tag){
                 $individual = $this->individual($tag->modelMcqTagAnalysis);

@@ -11,11 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function sendResponse($response, $message = null)
     {
         $cresponse['status'] = 'success';
@@ -24,12 +19,6 @@ class Controller extends BaseController
         return response()->json($cresponse, 200);
     }
 
-
-    /**
-     * return error response.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function sendError($error, $code = 404)
     {
         $response = [

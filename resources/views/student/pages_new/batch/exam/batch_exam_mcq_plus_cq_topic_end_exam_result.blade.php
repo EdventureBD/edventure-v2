@@ -1,4 +1,16 @@
 <x-landing-layout headerBg="white">
+   <link rel="stylesheet" href="/css/tooltip.css">
+   <style>
+      .table td.fit,
+      .table th.fit {
+          white-space: nowrap;
+          width: 1%;
+          background-color: #6400c8
+      }
+      thead tr td {
+          font-weight: 800;
+      }
+  </style>
 <div class="page-section ">
          <div>
             <div class="course-info bg-gradient-purple py-5">
@@ -14,7 +26,7 @@
             </div>
          </div>
 
-         <div class="container">
+         <div class="mx-md-5">
             {{-- @if(session('exam_exists_message'))
                <div class="alert alert-danger mt-3 text-center">
                   <h1> {{ session('exam_exists_message') }} </h1>
@@ -27,17 +39,16 @@
                </div>
             @enderror
 
-            <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-            <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
+            <h4 class="text-left fw-800 mt-4">Total Marks : {{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</h4>
 
             <div class="d-flex justify-content-left">
                <div class="text-right">
-                  <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
+                  <a style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3" href="{{route('batch-lecture', $batch->slug)}}"> Go Back to Journey <i class="fas fa-arrow-up ml-2"> </i></a>
                </div>
                @if( ($mcq_marks_scored + $cq_marks_scored) < $exam->threshold_marks )
                   @if( $topic_end_exam_attempt && $topic_end_exam_attempt->attempts < 3 )
                      <div class="text-right ml-2">
-                        <a class="btn text-xxsm text-white bg-purple fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync ml-2"></i></a>
+                        <a style="background-color: #6400c8" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3" href="{{route('reattempt-batch-test', [$course_topic->slug, $batch->slug, $exam->id, $exam->exam_type ] )}}"> Repeat Exam <i class="fas fa-sync ml-2"></i></a>
                      </div>
                   @endif
                @endif
@@ -51,28 +62,35 @@
 
             <div class="result-sheet-table overflow-x-scroll">
                @if($mcqs_exist)
-                  <div class="">
-                     <p class="text-center text-sm">MCQ Marks : <b>{{$mcq_marks_scored." out of ".$mcq_total_marks}}</b></p>
-                     <table class="table table-bordered">
+                  <div>
+                     <h4 class="text-left fw-800 mt-4">MCQ Marks : {{$mcq_marks_scored." out of ".$mcq_total_marks}}</h4>
+                     <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
-                           <tr>
-                                 <th class="bg-purple text-white">Sl</th>
-                                 <th class="bg-purple text-white">Question</th>
-                                 <th class="bg-purple text-white">Your Answer</th>
-                                 <th class="bg-purple text-white">Correct Answer</th>
-                                 <th class="bg-purple text-white">Explanation</th>
-                                 <th class="bg-purple text-white">% got it right</th>
+                           <tr class="text-white text-center">
+                                 <td class="fit">Sl</td>
+                                 <td class="fit">Question</td>
+                                 <td class="fit">Correct Answer</td>
+                                 <td class="fit">Your Answer</td>
+                                 <td class="fit">Explanation</td>
+                                 <td class="fit">Success Rate 
+                                    <span style="color: #fa9632"
+                                          class=""
+                                          data-toggle="tooltip"
+                                          data-placement="auto"
+                                          title="This value shows the percentage  of students who got this particular question right"><i class="fa fa-info-circle"></i>
+                                    </span>
+                                 </td>
                            </tr>
                         </thead>
                         <tbody>
                            @foreach ($mcq_details_results as $key => $mcq_details_result)
-                              <tr>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $key }}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->question !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->mcq_ans }}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->answer !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{!! $mcq_details_result->topicEndExamMCQ->explanation !!}</td>
-                                 <td class="@if($mcq_details_result->gain_marks) bg-green @else bg-red @endif">{{ $mcq_details_result->success_percent }}%</td>
+                              <tr class="text-center">
+                                 <td>{{ $key }}</td>
+                                 <td>{!! $mcq_details_result->topicEndExamMCQ->question !!}</td>
+                                 <td>{!! $mcq_details_result->topicEndExamMCQ->answer !!}</td>
+                                 <td style="@if($mcq_details_result->gain_marks) background-color: #9DCA7B  @else background-color: #DD7575 @endif; color: black; font-weight: 600">{{ $mcq_details_result->mcq_ans }}</td>
+                                 <td>{!! $mcq_details_result->topicEndExamMCQ->explanation !!}</td>
+                                 <td>{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
                            @endforeach
                         </tbody>
@@ -82,24 +100,23 @@
 
                @if($cqs_exist)
                   <div class="@if($mcqs_exist) mt-5 @endif">
-                     <p class="text-center text-sm mt-3">CQ Marks : <b>{{$cq_marks_scored." out of ".$cq_total_marks}}</b></p>
-                     <table class="table table-bordered">
+                     <h4 class="text-left fw-800 mt-4">CQ Marks : {{$cq_marks_scored." out of ".$cq_total_marks}}</h4>
+                     <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
-                           <tr>
-                                 <th class="bg-purple text-white text-center">Stem</th>
-                                 <th class="bg-purple text-white text-center">Question</th>
-                                 <th class="bg-purple text-white text-center">Your<br/> Score</th>
-                                 <th class="bg-purple text-white text-center">Ave<br/> Score</th>
-                                 <th class="bg-purple text-white text-center">Your Answer</th>
-                                 <th class="bg-purple text-white text-center">Correct Answer</th>
+                           <tr class="text-white text-center">
+                                 <td class="fit">Stem</td>
+                                 <td class="fit">Question</td>
+                                 <td class="fit">Your Score</td>
+                                 <td class="fit">Avg Score</td>
+                                 <td class="fit">Your Answer</td>
+                                 <td class="fit">Correct Answer</td>
                            </tr>
                         </thead>
                         <tbody>
-
                            @foreach ($exam->topicEndExamCreativeQuestions as $key => $creative_question)
                               @foreach ($creative_question->question as $key2 => $question)
                                  @if ($creative_question->exam_papers)
-                                    <tr>
+                                    <tr class="text-center">
                                        @if ($key2 == 0)
                                           <td rowspan="4" class="bg-purple2 text-white">{!! $creative_question->creative_question !!}</td>
                                        @endif
@@ -175,4 +192,8 @@
 
 </div>
 </x-landing-layout>
-
+<script>
+   $(function () {
+       $('[data-toggle="tooltip"]').tooltip()
+   })
+</script>

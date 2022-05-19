@@ -4,19 +4,9 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ModelExamController;
 use App\Http\Controllers\SinglePaymentController;
-use App\Models\User;
-use App\Models\Admin\Exam;
-use App\Models\Admin\Course;
-use App\Models\Admin\CourseCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\BundleController;
-use App\Utils\Payment;
-use smasif\ShurjopayLaravelPackage\ShurjopayService;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------

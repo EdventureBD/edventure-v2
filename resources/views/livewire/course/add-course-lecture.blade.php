@@ -38,8 +38,8 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="courseName">Course <span
                                                     class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="courseId">
-                                                <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}" selected disabled>{{ $course->title }}</option>
+                                            <select class="form-control" wire:model="courseId" disabled>
+                                                <option wire:key="{{ $course->slug.$course->id }}" value="{{ $course->id }}" selected>{{ $course->title }}</option>
                                             </select>
                                             <div>
                                                 @error('courseId')

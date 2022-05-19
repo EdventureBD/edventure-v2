@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMcqQuestionRequest;
 use App\Http\Requests\UpdateMcqQuestionRequest;
 use App\Models\ExamTag;
-use App\Models\ExamTopic;
 use App\Models\McqQuestion;
 use App\Models\ModelExam;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class McqQuestionController extends Controller
