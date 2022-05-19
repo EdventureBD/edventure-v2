@@ -11,6 +11,7 @@ use App\Models\McqMarkingDetail;
 use App\Models\McqQuestion;
 use App\Models\McqTotalResult;
 use App\Models\ModelExam;
+use App\Models\ModelMcqQuestionAnalysis;
 use App\Models\ModelMcqTagAnalysis;
 use App\Models\PaymentOfCategory;
 use App\Models\PaymentOfExams;
@@ -155,6 +156,7 @@ class ModelExamController extends Controller
         McqMarkingDetail::query()->where('model_exam_id', $id)->delete();
         ModelMcqTagAnalysis::query()->where('model_exam_id', $id)->delete();
         PaymentOfExams::query()->where('model_exam_id', $id)->delete();
+        ModelMcqQuestionAnalysis::query()->where('model_exam_id', $id)->delete();
 
         return redirect()->back()->with('status','Exam Deleted Successfully');
     }
