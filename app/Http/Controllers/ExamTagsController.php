@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\ExamTag;
 use App\Models\ExamTopic;
-use App\Models\ModelExam;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

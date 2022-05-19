@@ -12,7 +12,6 @@ use App\Http\Controllers\Student\ProgressController;
 use App\Http\Controllers\Student\AccountDetailsController;
 use App\Http\Controllers\Student\BundleController;
 use App\Http\Controllers\Student\BundlePaymentController;
-use App\Utils\Payment;
 
 Route::group(['middleware' => ['auth', 'is_student']], function () {
     Route::get('/profile', [AccountDetailsController::class, 'index'])->name('profile');

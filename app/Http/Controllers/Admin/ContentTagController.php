@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ContentTag;
-use App\Models\Admin\QuestionContentTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

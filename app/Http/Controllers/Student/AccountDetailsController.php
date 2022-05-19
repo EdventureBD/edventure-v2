@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\ExamCategory;
-// use App\Models\ExamTag;
 use App\Models\ExamTopic;
-// use App\Models\McqMarkingDetail;
 use App\Models\McqTotalResult;
-// use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,17 +17,13 @@ use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\Course;
 use App\Models\Admin\CourseTopic;
 use App\Models\Student\StudentDetails;
-use App\Models\Admin\Bundle;
 use App\Models\BundleStudentEnrollment;
-// use App\Models\Student\exam\DetailsResult;
 use App\Models\Student\exam\ExamResult;
 use App\Models\Admin\ContentTag;
-// use App\Models\Admin\QuestionContentTag;
 use App\Models\Student\exam\QuestionContentTagAnalysis;
 
 use App\Models\Admin\PopQuizCQ;
 use App\Models\Admin\TopicEndExamCQ;
-use Illuminate\Support\Facades\Response;
 
 class AccountDetailsController extends Controller
 {
@@ -240,19 +233,12 @@ class AccountDetailsController extends Controller
         abort(401);
     }
 
-    /**
-     * Tag analysis report
-     *
-     */
+    //  Tag analysis report
 
     public function tagAnalysisReport(Course $course)
     {
-        // dd($course);
-        // $course->topic;
         $course_topics = (new CourseTopic())->where("course_id", $course->id)->get();
-        // dd($course_topics);
         $tag_details = (new QuestionContentTagAnalysis())->getTagAnalysisReport(Auth::user()->id, null, $course->id);
-        // dd($tag_details);
         return view('student.pages_new.user.analysis', compact('course', 'course_topics', 'tag_details'));
     }
 

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\canAccess;
 use App\Utils\Edvanture;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 // models
 use App\Models\Admin\CQ;
