@@ -27,6 +27,7 @@
 										</div>
 										</div>
 								</div>
+
 								<div class="row">
 									<div class="col-md-4">
 											<div class="form-group">
@@ -57,6 +58,7 @@
 													</div>
 											</div> --}}
 									</div>
+
 									<div class="col-md-4">
 											<div class="form-group">
 												<label for="exampleInputFile" class="col-form-label">Course
@@ -86,21 +88,22 @@
 													</div>
 											</div> --}}
 									</div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="intermediaryLevels">Program <span
-                                                    class="must-filled">*</span></label>
-                                            <select class="form-control" wire:model="intermediaryLevelId">
-                                                <option value="" selected>Select Program</option>
-                                                @foreach ($intermediary_levels as $intermediary)
-                                                    <option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @error('intermediaryLevelId')
-                                        <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+
+									<div class="col-md-4">
+											<div class="form-group">
+												<label class="col-form-label" for="intermediaryLevels">Program <span
+															class="must-filled">*</span></label>
+												<select class="form-control" wire:model="intermediaryLevelId">
+													<option value="" selected>Select Program</option>
+													@foreach ($intermediary_levels as $intermediary)
+															<option value="{{ $intermediary->id }}">{{ $intermediary->title }}</option>
+													@endforeach
+												</select>
+											</div>
+											@error('intermediaryLevelId')
+											<p style="color: red;">{{ $message }}</p>
+											@enderror
+									</div>
 
 									<div class="col-md-4">
 										<div class="form-group">
