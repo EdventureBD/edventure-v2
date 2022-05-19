@@ -1,4 +1,5 @@
 <x-landing-layout headerBg="white">
+   <link rel="stylesheet" href="/css/tooltip.css">
    <style>
       .table td.fit,
       .table th.fit {
@@ -32,8 +33,7 @@
                </div>
             @endif
 
-            <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-            <p class="text-center text-sm">Total Marks : <b>{{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</b></p>
+            <h4 class="text-left fw-800 mt-4">Total Marks : {{ ($mcq_marks_scored + $cq_marks_scored) ." out of ". ($mcq_total_marks + $cq_total_marks) }}</h4>
 
             <div class="d-flex justify-content-between">
                <div class="d-flex justify-content-left">
@@ -78,17 +78,24 @@
 
             <div class="result-sheet-table overflow-x-scroll">
                @if($mcqs_exist)
-                  <div class="">
-                     <p class="text-center text-sm">MCQ Marks : <b>{{$mcq_marks_scored." out of ".$mcq_total_marks}}</b></p>
+                  <div>
+                     <h4 class="text-left mt-4 fw-800">MCQ Marks : {{$mcq_marks_scored." out of ".$mcq_total_marks}}</h4>
                      <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
-                           <tr class="bg-purple text-white text-center">
-                                 <th class="fit">Sl</th>
-                                 <th class="fit">Question</th>
-                                 <th class="fit">Correct Answer</th>
-                                 <th class="fit">Your Answer</th>
-                                 <th class="fit">Explanation</th>
-                                 <th class="fit">Success Rate</th>
+                           <tr class="text-white text-center">
+                                 <td class="fit">Sl</td>
+                                 <td class="fit">Question</td>
+                                 <td class="fit">Correct Answer</td>
+                                 <td class="fit">Your Answer</td>
+                                 <td class="fit">Explanation</td>
+                                 <td class="fit">Success Rate
+                                    <span style="color: #fa9632"
+                                          class=""
+                                          data-toggle="tooltip"
+                                          data-placement="auto"
+                                          title="This value shows the percentage  of students who got this particular question right"><i class="fa fa-info-circle"></i>
+                                    </span>
+                                 </td>
                            </tr>
                         </thead>
                         <tbody>
@@ -109,16 +116,16 @@
 
                @if($cqs_exist)
                   <div class="@if($mcqs_exist) mt-5 @endif">
-                     <p class="text-center text-sm mt-3">CQ Marks : <b>{{$cq_marks_scored." out of ".$cq_total_marks}}</b></p>
-                     <table class="table table-bordered">
+                     <h4 class="text-left mt-4 fw-800">CQ Marks : {{$cq_marks_scored." out of ".$cq_total_marks}}</h4>
+                     <table class="table table-responsive table-striped table-bordered max-w-100">
                         <thead>
-                           <tr class="bg-purple text-white text-center">
-                                 <th>Stem</th>
-                                 <th>Question</th>
-                                 <th>Your<br/> Score</th>
-                                 <th>Ave<br/> Score</th>
-                                 <th>Your Answer</th>
-                                 <th>Correct Answer</th>
+                           <tr class="text-white text-center">
+                                 <td class="fit">Stem</td>
+                                 <td class="fit">Question</td>
+                                 <td class="fit">Your Score</td>
+                                 <td class="fit">Avg Score</td>
+                                 <td class="fit">Your Answer</td>
+                                 <td class="fit">Correct Answer</td>
                            </tr>
                         </thead>
                         <tbody>
@@ -126,7 +133,7 @@
                            @foreach ($exam->popQuizCreativeQuestions as $key => $creative_question)
                               @foreach ($creative_question->question as $key2 => $question)
                                  @if ($creative_question->exam_papers)
-                                    <tr>
+                                    <tr class="text-center">
                                        @if ($key2 == 0)
                                           <td rowspan="4" class="bg-purple2 text-white">{!! $creative_question->creative_question !!}</td>
                                        @endif
@@ -202,4 +209,8 @@
 
 </div>
 </x-landing-layout>
-
+<script>
+   $(function () {
+       $('[data-toggle="tooltip"]').tooltip()
+   })
+</script>
