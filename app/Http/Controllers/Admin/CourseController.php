@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BatchLecture;
 use App\Models\Admin\Course;
-use App\Models\Admin\CourseLecture;
-use App\Models\Admin\CourseTopic;
 use App\Models\Admin\IntermediaryLevel;
 use Illuminate\Http\Request;
 

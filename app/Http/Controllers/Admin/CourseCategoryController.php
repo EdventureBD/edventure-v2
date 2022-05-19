@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Admin\CourseCategory;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Course;
 use App\Models\Admin\IntermediaryLevel;
 
 class CourseCategoryController extends Controller

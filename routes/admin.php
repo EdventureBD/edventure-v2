@@ -14,7 +14,6 @@ use App\Http\Controllers\ExamTopicController;
 use App\Http\Controllers\McqQuestionController;
 use App\Http\Controllers\ModelExamController;
 use App\Http\Controllers\RequestController;
-use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\CSVController;
 
 use App\Http\Controllers\Admin\BundleController;

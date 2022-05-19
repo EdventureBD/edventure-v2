@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Student;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Admin\Payment;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Batch;
 use App\Models\Admin\BatchStudentEnrollment;
 use App\Models\Admin\Course;
-use App\Utils\Payment as UtilsPayment;
-use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller
 {
