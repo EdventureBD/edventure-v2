@@ -31,17 +31,16 @@
         }
         @endphp
         <div class="container">
-            <h2 class="text-purple text-lg text-center mt-4">Result Sheet</h2>
-            <p class="text-center text-sm">Marks : <b>{{$total_gain_marks." out of ".$total_marks}}</b></p>
+            <h4 class="text-left mt-4">Marks : {{$total_gain_marks." out of ".$total_marks}}</h4>
             <div class="result-sheet-table overflow-x-scroll">
-                <table class="table table-bordered">
+                <table class="table table-responsive table-striped table-bordered max-w-100">
                     <thead>
-                        <tr>
+                        <tr class="text-white text-center">
                             {{-- <th class="bg-purple text-white text-center">Stem</th> --}}
-                            <th class="bg-purple text-white text-center">Question</th>
-                            <th class="bg-purple text-white text-center">Score</th>
-                            <th class="bg-purple text-white text-center">Your Answer</th>
-                            <th class="bg-purple text-white text-center">Correct Answer</th>
+                            <th class="fit">Question</th>
+                            <th class="fit">Score</th>
+                            <th class="fit">Your Answer</th>
+                            <th class="fit">Correct Answer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +57,7 @@
                             // }
                             
                         @endphp
-                        <tr>
+                        <tr class="text-center">
                             {{-- @if ($n==1 || $creative != $result->cqQuestion->creativeQuestion->creative_question)
                             <td rowSpan="4" class="{{$cellcolor}} text-white">{!! $result->cqQuestion->creativeQuestion->creative_question !!}</td>
                             @php $cretive = $result->cqQuestion->creativeQuestion->creative_question; @endphp
