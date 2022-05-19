@@ -141,7 +141,7 @@
                                role="tab"
                                aria-controls="examDetails"
                                aria-selected="true"
-                               style="border-top-right-radius: 0px !important; padding:15px">এক্সাম বিস্তারিত</a>
+                               style="border-top-right-radius: 0px !important; padding:15px">বিস্তারিত</a>
 
                             <a class="nav-link"
                                data-toggle="tab"
