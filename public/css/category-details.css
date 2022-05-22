@@ -264,4 +264,11 @@ div#examDetails::-webkit-scrollbar-thumb:hover,div#examRoutine::-webkit-scrollba
     #category-title-2 {
         font-size: 20px;
     }
+    .teachers-image {
+        height: 40px;
+        width: 40px;
+    }
+    .teachers-name,.teachers-detail,.teachers-education {
+        font-size: .75em;
+    }
 }
