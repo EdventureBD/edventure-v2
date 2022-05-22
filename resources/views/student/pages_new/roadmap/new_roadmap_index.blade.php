@@ -1,6 +1,7 @@
 <x-landing-layout headerBg="white">
    {{-- css linked --}}
    <link rel="stylesheet" href="{{ asset('/css/roadmap.css') }}">
+    <link rel="stylesheet" href="/css/tooltip.css">
    {{-- css linked part ends  --}}
    <div class="d-flex flex-column position-relative pb-5" id="roadmapParentContainer">
       <div class="d-flex fixed-top" id="roadmap-nav">
@@ -58,7 +59,7 @@
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-bottom: -0.5rem; opacity: 1 !important;">
                         <span aria-hidden="true" style="font-size: 3rem; font-weight:600; color:#8c00ff !important;">&times;</span>
                      </button>
-                  </div> 
+                  </div>
                   <div class="modal-body" style="padding-top: 25px; padding-bottom: 25px;">
                      {{-- @if($batchTopic->courseTopic->exams->last()->exam_attempts->count() > 0 && $batchTopic->courseTopic->exams->last()->exam_attempts->last()->attempts < 3) --}}
                         <ul class="remove_padding">
@@ -98,7 +99,7 @@
 
                               <li>
                                  @if($exam->exam_type == "Aptitude Test")
-                                    <a 
+                                    <a
                                        data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey; height: 20px;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
@@ -109,7 +110,7 @@
 
                                        @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted)
                                           <div style="height:50px;"></div>
-                                       @else 
+                                       @else
                                           <img src="/img/road_map/rightSign.png" alt="" class="px-md-4 px-sm-3 pt-md-2 img-fluid" id="aptitute-test">
                                        @endif
 
@@ -197,7 +198,7 @@
                <div class="modal-header border">
                   <h5 class="modal-title mx-auto fw-800" id="exampleModalLabel"> Exams for {{ $batchTopic->courseTopic->title }}</h5>
                   </button>
-               </div> 
+               </div>
                <div class="modal-body">
                   <ul>
                      @forelse ($batchTopic->courseTopic->exams as $exam)
@@ -275,7 +276,7 @@
    @empty
    @endforelse --}}
 
-   
+
    {{-- modal part ends  --}}
    {{-- script part --}}
 
@@ -302,17 +303,17 @@
                   if(j%2==0){
                      let div = document.createElement("div");
                      div.classList.add("px-lg-3","px-sm-0");
-                     // Iland image part 
+                     // Iland image part
                      let divIland = document.createElement("div");
                      if(ilandImageDisabled[landCounter])
-                        divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
+                        divIland.innerHTML = `<span data-toggle="tooltip" x-placement="top" title="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                      else
                         divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                      // modal part
                      divIland.setAttribute("data-toggle","modal");
                      divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                      div.appendChild(divIland);
-                     // Iland down star's part 
+                     // Iland down star's part
                      let divstars = document.createElement("div");
                      divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
                      divstars.innerHTML = ``;
@@ -358,8 +359,8 @@
                break;
             }
          }
-         // onStream design ends 
-         
+         // onStream design ends
+
          // reverseStream design starts
          for(let i = 0; i < 5; i++){
             for(let j = 0; j < 5; j++){
@@ -372,18 +373,18 @@
                   else{
                      if(i===j){
                         div.classList.add("px-lg-3","px-sm-0","mx-sm-0");
-                        // Iland image part 
+                        // Iland image part
                         let divIland = document.createElement("div");
                         if(ilandImageDisabled[landCounter])
                            // divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
-                           divIland.innerHTML = `<span data-tooltip="Please go through the previous content to unlock this island" class="top tooltip_center"> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
+                           divIland.innerHTML = `<span data-toggle="tooltip" x-placement="top" title="Please go through the previous content to unlock this island" class=""> <img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid"> </span>`;
                         else
                            divIland.innerHTML = `<img src="${ilandImages[landCounter]}" alt="Iland image" class="img-fluid" style="cursor: pointer;">`;
                         // modal part
                         divIland.setAttribute("data-toggle","modal");
                         divIland.setAttribute("data-target", "#courseTopicModal-" + allLands[landCounter].course_topic.id);
                         div.appendChild(divIland);
-                        // Iland down star's part 
+                        // Iland down star's part
                         let divstars = document.createElement("div");
                         divstars.classList.add("row","row-cols-3","w-md-75","mx-auto","w-sm-100");
                         divstars.innerHTML = ``;
@@ -428,9 +429,14 @@
                break;
             }
          }
-         // reverseStream design ends 
+         // reverseStream design ends
       }
    </script>
    {{-- script part ends  --}}
 
 </x-landing-layout>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
