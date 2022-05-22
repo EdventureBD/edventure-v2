@@ -293,7 +293,7 @@ class ModelExamController extends Controller
                                 ->where('exam_category_id', $category->id)
                                 ->where('visibility',1)
                                 ->has('mcqQuestions')
-                                ->orderByDesc('created_at')
+                                ->orderBy('created_at')
                                 ->paginate(4);
         }
         return view('student.pages_new.model-exam.index', compact('category','exam_topics','exams'));
