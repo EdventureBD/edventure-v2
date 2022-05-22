@@ -161,12 +161,36 @@ class BatchController extends Controller
                 }
                 
                 if($scored_marks >= $exam->threshold_marks){
-                    if($exam->exam_type !== "Aptitude Test" ){
-                        $number_of_completed_nodes++;
+
+                    if($exam->threshold_marks == 0 && $exam->has_been_attempted){
+                        $result_checked = 0;
+                        foreach($exam->exam_results as $result){
+                            if($result->checked == true){
+                                $exam->test_passed = true;
+                                if($exam->exam_type === "Topic End Exam"){
+                                    $topic_end_exam_passed = true;
+                                }
+                                $result_checked++;
+                            }
+                            else{
+                                $exam->test_passed = false;
+                                if($exam->exam_type === "Topic End Exam"){
+                                    $topic_end_exam_passed = false;
+                                }
+                            }
+                        }
+                        
+                        if($exam->exam_type != "Aptitude Test"){
+                            if($result_checked == count($exam->exam_results)){
+                                $number_of_completed_nodes++;
+                            }
+                        }
                     }
-                    $exam->test_passed = true;
-                    if($exam->exam_type === "Topic End Exam"){
-                        $topic_end_exam_passed = true;
+                    else{
+                        $exam->test_passed = false;
+                        if($exam->exam_type === "Topic End Exam"){
+                            $topic_end_exam_passed = false;
+                        }
                     }
                 }
                 else{

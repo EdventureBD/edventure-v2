@@ -512,6 +512,7 @@ class ExamController extends Controller
                 $exam_result->batch_id = $batch->id;
                 $exam_result->student_id = auth()->user()->id;
                 $exam_result->gain_marks = $total;
+                $exam_result->checked = 1;
                 $exam_result->status = 1;
                 $exam_result->save();
             }
