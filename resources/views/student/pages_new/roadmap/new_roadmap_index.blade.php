@@ -68,11 +68,11 @@
                                  @foreach ($exam->course_lectures as $course_lecture)
                                     <li>
                                        <a
-                                          data-toggle="tooltip" data-placement="top" title="{{ $course_lecture->title }}"
+                                          data-toggle="tooltip" x-placement="top" title="{{ $course_lecture->title }}"
                                           @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                           href="{{ route('topic_lecture', [$batch->slug, $course_lecture->slug]) }}"
                                           class="reduce_padding fw-800 @if($disabled2) modal-items-disabled @elseif (!$course_lecture->completed) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                          <span data-tooltip="{{ $course_lecture->title }}" class="top tooltip_center"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
+                                          <span class="top"> {{ Str::limit($course_lecture->title, 23, '...') }} </span>
                                        </a>
                                        <div class="w-25">
 
@@ -100,11 +100,11 @@
                               <li>
                                  @if($exam->exam_type == "Aptitude Test")
                                     <a
-                                       data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
+                                       data-toggle="tooltip" x-placement="top" title="{{ $exam->title }}"
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey; height: 20px;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
                                        class="reduce_padding fw-800 @if ($exam->exam_type == "Aptitude Test" && !$exam->has_been_attempted) modal-items-next @else modal-items @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 23, '...') }} </span>
+                                       <span class="top"> {{ Str::limit($exam->title, 23, '...') }} </span>
                                     </a>
                                     <div class="w-25">
 
@@ -122,11 +122,11 @@
                                     </div>
                                  @else
                                     <a
-                                       data-toggle="tooltip" data-placement="top" title="{{ $exam->title }}"
+                                       data-toggle="tooltip" x-placement="top" title="{{ $exam->title }}"
                                        @if($disabled2) style="pointer-events: none; cursor: default; color: grey;" @endif
                                        href="{{ route('batch-test', [$batchTopic->courseTopic->slug, $batch->slug, $exam->id, $exam->exam_type]) }}"
                                        class="reduce_padding fw-800 @if ((!$disabled2 && $exam->exam_type == "Topic End Exam" && !$exam->has_been_attempted) || (!$disabled2 && $exam->exam_type == 'Pop Quiz' && !$exam->has_been_attempted)) modal-items-next @elseif (!$disabled2) modal-items @else modal-items-disabled @endif text-white d-flex justify-content-center rounded ml-5 p-1">
-                                       <span data-tooltip="{{ $exam->title }}" class="top tooltip_center"> {{ Str::limit($exam->title, 23, '...') }} </span>
+                                       <span class="top"> {{ Str::limit($exam->title, 23, '...') }} </span>
                                     </a>
                                     <div class="w-25">
 
