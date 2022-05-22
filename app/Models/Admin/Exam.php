@@ -62,6 +62,11 @@ class Exam extends Model
         return $this->hasMany(ExamResult::class, 'exam_id');
     }
 
+    public function normal_exam_attempts()
+    {
+        return $this->hasMany(StudentExamAttempt::class, 'exam_id');
+    }
+
     public function exam_attempts()
     {
         return $this->hasMany(StudentTopicEndExamAttempt::class, 'topic_end_exam_id');
