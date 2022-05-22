@@ -121,9 +121,10 @@
                     </div>
                 </td>
                 <td>
-                    @if($category->teacher_lists)
+                    @php($all_teachers = $category->teacher_lists)
+                    @if(count($all_teachers) > 0)
                         <ul>
-                        @foreach($category->teacher_lists as $teacher)
+                        @foreach($all_teachers as $teacher)
                                 <li>{{$teacher->name}}</li>
                         @endforeach
                         </ul>
@@ -184,6 +185,14 @@
     <script>
         $(function () {
             $('.select2').select2()
+            $("select").on("select2:select", function (evt) {
+                var element = evt.params.data.element;
+                var $element = $(element);
+
+                $element.detach();
+                $(this).append($element);
+                $(this).trigger("change");
+            });
         })
         $('#details').summernote({
             placeholder: 'Details',

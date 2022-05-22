@@ -132,7 +132,7 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $loop->iteration }} ({{'id: '.$user->id}})</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}<br> {{ $user->phone }}</td>
                                             <td>

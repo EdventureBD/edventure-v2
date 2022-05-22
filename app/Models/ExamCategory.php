@@ -61,13 +61,28 @@ class ExamCategory extends Model
     public function getTeacherListsAttribute()
     {
         $ids = !empty($this->attributes['teachers']) ? json_decode($this->attributes['teachers']) : null;
-        $teachers = null;
+        $teachers = [];
+
 
         if($ids) {
-            $userId = array_values($ids);
-            $teachers = User::query()->whereIn('id',$userId)->with('teacherDetails')->get();
+            foreach ($ids as $data) {
+                $data = json_decode($data,true);
+                    $userId[] = $data['id'];
+                    $order_wise[] = [
+                        'id' => $data['id'],
+                        'order' => (int)$data['order']
+                    ];
+                logger($order_wise);
+            }
+            $all_teachers = User::query()->whereIn('id',$userId)->with('teacherDetails')->get();
+
+            foreach ($order_wise as $teacher) {
+
+                $data = $all_teachers->where('id',$teacher['id'])->first();
+                array_push($teachers,$data);
+            }
         }
 
-        return $teachers;
+        return collect($teachers)->sortBy('order')->values()->all();
     }
 }
