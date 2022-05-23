@@ -81,8 +81,10 @@ class ExamCategory extends Model
                 $data = $all_teachers->where('id',$teacher['id'])->first();
                 array_push($teachers,$data);
             }
+
+            $teachers = collect($teachers)->sortBy('order')->values()->all();
         }
 
-        return collect($teachers)->sortBy('order')->values()->all();
+        return $teachers;
     }
 }
