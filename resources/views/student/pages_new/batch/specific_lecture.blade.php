@@ -105,7 +105,7 @@
                                                             <span class="material-icons">play_arrow</span>
                                                         </a>
                                                     </div> --}}
-                                                    @if($courseLecture->url && !$courseLecture->url == '...')
+                                                    @if($courseLecture->url && $courseLecture->url != '...')
                                                     <div class="player__embed ">
                                                         <iframe width="100%" height="315"
                                                             src="https://www.youtube-nocookie.com/embed/{{ $courseLecture->url }}"
