@@ -82,8 +82,15 @@
                                         <div class="tab-pane fade show active" id="custom-tabs-one-note" role="tabpanel" aria-labelledby="markdownText">
                                             @if ($courseLecture->pdf != null)
                                                 <iframe src="{{ $courseLecture->pdf }}" frameborder="0" width="100%" height="600px"></iframe>
-                                            @else
+                                            @elseif($courseLecture->markdown_text)
                                                 {!! $courseLecture->markdown_text !!}
+                                            @else
+                                                <div class="mx-auto mt-5 mb-5 text-center">
+                                                    <p class="h2 text-xsm text-gray-50 text-purple font-weight-light m-0 text-center">
+                                                        Please look into the lecture video section.
+                                                    </p>
+                                                </div>
+
                                             @endif
                                         </div>
                                         <div class="tab-pane fade" id="custom-tabs-one-lecture" role="tabpanel" aria-labelledby="lecture">
@@ -98,7 +105,7 @@
                                                             <span class="material-icons">play_arrow</span>
                                                         </a>
                                                     </div> --}}
-                                                    @if($courseLecture->url)
+                                                    @if($courseLecture->url && !$courseLecture->url == '...')
                                                     <div class="player__embed ">
                                                         <iframe width="100%" height="315"
                                                             src="https://www.youtube-nocookie.com/embed/{{ $courseLecture->url }}"
