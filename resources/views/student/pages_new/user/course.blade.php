@@ -17,6 +17,16 @@
         
         box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
     }
+    
+    @media screen and (max-width:768px) {
+       .strength-weakness-title-common h2 {
+            font-size: .6em
+        }
+        #day-count {
+            font-size: .8em;
+        }
+
+    }
 </style>
 
 @section('mini-header')
@@ -41,17 +51,18 @@
 @endsection
 @section('content')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
-    <div id="info-detail" class="row mx-auto my-5">
-        <div id="info-left-option" class="d-flex flex-column justify-content-center my-3 col-md-3 mx-md-5 px-0">
-            <div class="d-flex flex-column justify-content-center mx-auto border px-4 py-2 my-4" id="journey-cart" style="height: auto !important;">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
+        <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
+            <div class="d-flex flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart" style="height: auto !important;">
                 {{-- <h5 class="mx-auto">Select a course to view Strengths and Weaknesses</h5> --}}
                 <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
-                <p class="fw-500 mx-auto" id="day-count">
+                <p class="fw-500 mx-auto text-justify" id="day-count">
                     Select a course to view Strengths and Weaknesses
                 </p>
             </div>
 
-            <div class="mb-3">
+            <div>
                 <select
                     class="select2 form-control"
                     name="bundle"
@@ -70,7 +81,7 @@
                 </select>
             </div>
 
-            <div>
+            <div class="mt-3">
                 <select
                     class="select2 form-control"
                     name="course"
@@ -88,15 +99,18 @@
 
                 <div id="SelectedCourse" class="d-none mx-auto category-progress text-white">
                     <div class="course-name">
-                        <div class="d-flex justify-content-between" id="course_display">
+                        <div class="d-flex">
                             <h5 id="courseName" class="fw-400 pl-4"></h5>
                         </div>
+                    </div>
+                    <div>
+                        <div id="course_display"></div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div id="info-middle-option" class=" my-3 col-md-3 px-0">
+        <div id="info-middle-option" class="my-3 w-100 px-0">
             <div id="strength-title" class="strength-weakness-title-common">
                 <h2 class="my-auto">Strength</h2>
                 {{-- <div>
@@ -104,7 +118,7 @@
                 </div> --}}
             </div>
             <div class="p-3" id="strength-body">
-                <div class="strength-weakness-cq-mcq" id="">
+                <div class="strength-weakness-cq-mcq">
                     <div>
                         <h5 class="fw-600">MCQ</h5>
                     </div>
@@ -132,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <div id="info-right-option" class="my-3 col-md-3 mx-md-5 px-0">
+        <div id="info-right-option" class="my-3 w-100 mx-md-5 px-0">
             <div id="weakness-title" class="strength-weakness-title-common">
                 <h2 class="my-auto">Weakness</h2>
                 {{-- <div>
@@ -140,7 +154,7 @@
                 </div> --}}
             </div>
             <div class="p-3" id="weakness-body">
-                <div class="strength-weakness-cq-mcq" id="">
+                <div class="strength-weakness-cq-mcq">
                     <h5 class="fw-600">MCQ</h5>
                 </div>
                 <div class="text-black" id="mcq_weakness">
@@ -152,7 +166,7 @@
                     </a>
                 </div>
                 <div class="w-100 h-0 border border-gray my-3 py-0 px-5" id="horizontal-line"></div>
-                <div class="strength-weakness-cq-mcq" id="">
+                <div class="strength-weakness-cq-mcq">
                     <h5 class="fw-600">CQ</h5>
                 </div>
                 <div class="text-black" id="cq_weakness">
@@ -281,7 +295,7 @@
                 var cq_tags = response.cq_content_tags;
                 var batch_slug = response.batch_slug;
 
-                $('#course_display').append('<a id="course_link" href="/batch/' + batch_slug + '/"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>');
+                $('#course_display').append('<a id="course_link" href="/batch/' + batch_slug + '/" style="margin-left:-2%; padding: 22px;background-color: #FA9632 ;border-radius: 10px;"><span class="iconify" data-icon="bi:arrow-down-right-square-fill" style="color: white;" data-flip="vertical"></span></a>');
 
                 // console.log(mcq_tags);
                 // console.log(cq_tags);

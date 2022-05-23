@@ -108,7 +108,7 @@
 
                 </div>
                 @php($teachers = $category->teacher_lists)
-                @if($teachers)
+                @if(count($teachers) > 0)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষকবৃন্দ</h5>
                         <div class="d-flex overflow-x-scroll" style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">

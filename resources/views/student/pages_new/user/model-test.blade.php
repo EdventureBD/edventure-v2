@@ -17,6 +17,14 @@
     #journey-cart:hover {
         box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
     }
+    @media screen and (max-width:768px) {
+       .strength-weakness-title-common h2 {
+            font-size: .6em
+        }
+        #day-count {
+            font-size: .8em;
+        }
+    }
 </style>
 @section('mini-header')
     <div class="d-flex justify-content-between">
@@ -36,7 +44,7 @@
     <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
         <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
             <a href="{{route('student.model.test.result')}}">
-                <div class="d-flex flex-column justify-content-center mx-auto border p-5 my-3" id="journey-cart">
+                <div class="d-flex flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart">
                     <h5 class="fw-800 mx-auto">Diagnosis</h5>
                     <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
                     <p class="fw-500 mx-auto">
@@ -99,7 +107,7 @@
 {{--                </div>--}}
             </div>
             <div class="p-3" id="strength-body">
-                <div class="strength-weakness-cq-mcq" id="">
+                <div class="strength-weakness-cq-mcq">
                     <div>
                         <h5 class="fw-600">MCQ</h5>
                     </div>
@@ -125,7 +133,7 @@
 {{--                </div>--}}
             </div>
             <div class="p-3" id="weakness-body">
-                <div class="strength-weakness-cq-mcq" id="">
+                <div class="strength-weakness-cq-mcq">
                     <h5 class="fw-600">MCQ</h5>
                 </div>
                 <div class="text-black" id="mcq_weakness">
