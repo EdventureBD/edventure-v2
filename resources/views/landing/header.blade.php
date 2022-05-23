@@ -12,7 +12,7 @@
             <li class="nav-item has-dot">
             </li>
 
-            <li class="nav-item has-dot {{ request()->is('course') ? 'active' : '' }}--}}
+            <li class="nav-item has-dot {{ request()->is('course') ? 'active' : '' }}
                                         {{ request()->is('course/course-preview/*') ? 'active' : '' }}
                                         {{ request()->is('batch/*') ? 'active' : '' }}"
             >
