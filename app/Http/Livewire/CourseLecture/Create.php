@@ -26,7 +26,7 @@ class Create extends Component
     public $course_topics;
     public $topicId;
     public $title;
-    public $url;
+    public $url = '...';
     public $markdownText;
     public $pdf;
 
