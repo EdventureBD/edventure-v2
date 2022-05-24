@@ -54,9 +54,10 @@
                                 data-placeholder="Choose Teachers"
                                 data-dropdown-css-class="select2-purple"
                                 style="width: 100%; margin-top: -8px !important;">
-                                @foreach ($teachers as $teacher)
+                                @foreach ($teachers as $key => $teacher)
+                                    @php($value = json_encode(['id' =>$teacher->id, 'order' => $key]))
                                     <option value=""></option>
-                                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                    <option value="{{$value}}">{{ $teacher->name }}</option>
                                 @endforeach
                             </select>
                         </div>

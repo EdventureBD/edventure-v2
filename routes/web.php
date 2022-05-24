@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ModelExamController;
 use App\Http\Controllers\SinglePaymentController;
+use App\Jobs\testEMail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\BundleController;
@@ -99,7 +100,7 @@ Route::get('/blogs', [BlogController::class,'allBlogs'])->name('all-blogs');
 
 Route::get('/test', function() {
 
-    return view('slider');
+    dispatch(new testEMail());
 });
 
 

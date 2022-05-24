@@ -108,20 +108,20 @@
 
                 </div>
                 @php($teachers = $category->teacher_lists)
-                @if($teachers)
+                @if(count($teachers) > 0)
                     <div class="teachers mt-5">
                         <h5 class="bold-header">শিক্ষকবৃন্দ</h5>
                         <div class="d-flex overflow-x-scroll" style="border-radius: 25px 25px 0 0; background-color: #eeeeee; padding: 10px">
                             @foreach($teachers as $teacher)
                                 <div class="text-center {{count($teachers) == 1 ? 'col-12' : 'col-6'}} d-flex flex-column justify-content-center align-items-center" style="padding: 0 10px; align-content: center; border-right: 1px solid lightgrey;height: 175px">
                                     @if($teacher->image)
-                                        <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="">
+                                        <img style="border-radius: 50%" height="80" width="80" src="{{$teacher->image}}" alt="teacher's image" class="teachers-image">
                                     @else
-                                        <img height="80" width="80" src="/img/category_details/teacher.png" alt="">
+                                        <img height="80" width="80" src="/img/category_details/teacher.png" alt="teacher's image" class="teachers-image">
                                     @endif
-                                    <span><b>{{$teacher->name}}</b></span>
-                                        <small>{{$teacher->teacherDetails->education ?? ''}}</small>
-                                        <small>
+                                    <span class="teachers-name"><b>{{$teacher->name}}</b></span>
+                                        <small class="teachers-education">{{$teacher->teacherDetails->education ?? ''}}</small>
+                                        <small class="teachers-detail">
                                             @if($teacher->teacherDetails && $teacher->teacherDetails->year_of_experience && $teacher->teacherDetails->expertise)
                                             {{$teacher->teacherDetails->year_of_experience}} years of teaching experience in {{$teacher->teacherDetails->expertise}}
                                             @endif
@@ -141,7 +141,7 @@
                                role="tab"
                                aria-controls="examDetails"
                                aria-selected="true"
-                               style="border-top-right-radius: 0px !important; padding:15px">এক্সাম বিস্তারিত</a>
+                               style="border-top-right-radius: 0px !important; padding:15px">বিস্তারিত</a>
 
                             <a class="nav-link"
                                data-toggle="tab"
