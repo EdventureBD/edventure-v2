@@ -13,7 +13,7 @@
     </style>
     <div class="page-section ">
         @if ($exam->exam_type == 'MCQ' || 'Aptitude Test')
-            @php 
+            @php
                 $total_marks = 0;
                 $total_gain_marks = 0;
                 foreach($detailsResults as $result){
@@ -64,7 +64,9 @@
                                 <td>{{$n}}</td>
                                 <td>{!! $result->atQuestion->question !!}</td>
                                 <td>{!! $result->atQuestion->$cfield !!}</td>
-                                <td style="background: {{$cellcolor}}; color: black; font-weight: 600">{!! $result->atQuestion->$field !!}</td>
+                                <td style="background: {{$cellcolor}}; color: black; font-weight: 600">
+                                    {!! $result->atQuestion->$field !!}
+                                </td>
                                 <td>{!! $result->atQuestion->explanation !!}</td>
                                 {{-- @dd($result, $result->atQuestion->gain_marks, $result->atQuestion->number_of_attempt) --}}
                                 <td>{{number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2)}}%</td>
@@ -123,15 +125,15 @@
                             @php $n = 1; @endphp
                             @foreach($detailsResult as $result)
                             @php
-                                
+
                                 $cellcolor = "bg-purple2";
                                 if ($n == 1) $creative = $result->cqQuestion->creativeQuestion->creative_question;
                                 $avg = 0;
-                                
+
                                 if (!empty($result->atQuestion) && $result->atQuestion->gain_marks > 0) {
                                     $avg = number_format(($result->atQuestion->gain_marks * 100 )/ $result->atQuestion->number_of_attempt, 2);
                                 }
-                                
+
                             @endphp
                             <tr>
                                 @if ($n==1 || $creative != $result->cqQuestion->creativeQuestion->creative_question)
@@ -149,8 +151,8 @@
                                 </td>
                                 @endif
                             </tr>
-                            @php 
-                                $n++; 
+                            @php
+                                $n++;
                                 if ($n == 5) {
                                     $n = 1;
                                 }
@@ -158,7 +160,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+
                     <div class="modal fade" id="yourAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                           <div class="modal-content">
@@ -202,7 +204,7 @@
             </div>
             @endif
         @endif
-        
+
     </div>
 </x-landing-layout>
 
