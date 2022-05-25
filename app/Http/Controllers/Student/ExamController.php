@@ -279,7 +279,7 @@ class ExamController extends Controller
         $course_topic = CourseTopic::find($exam->topic_id);
 
         $student_exam_attempt = StudentExamAttempt::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->first();
-            
+
         // redirect if exam result already exists
         if($student_exam_attempt){
             return redirect()->route('batch-test', [$course_topic, $batch, $exam->id, $exam->exam_type]);
@@ -310,7 +310,7 @@ class ExamController extends Controller
         // }
 
         if ($exam->exam_type == Edvanture::APTITUDETEST) {
-            
+
             $validateData = $request->validate([
                 'mcq_ques' => 'required',
             ]);
@@ -321,7 +321,7 @@ class ExamController extends Controller
 
                 $total_marks = count($request->mcq_ques);
                 $scored_marks = 0;
-                
+
                 foreach($request->mcq_ques as $key => $mcq){
                     $mcq_question = AptitudeTestMCQ::where('id', $key)->select('id', 'answer', 'number_of_attempt', 'gain_marks', 'exam_id')->first();
                     $mcq_question->number_of_attempt += 1;
@@ -373,7 +373,7 @@ class ExamController extends Controller
                 $exam_result->status = 1;
                 $exam_result->checked = 1;
                 $exam_result->save();
-    
+
                 return $this->batchTest($course_topic, $batch, $exam->id, $exam->exam_type);
             }
             else{
@@ -430,7 +430,7 @@ class ExamController extends Controller
         //         ));
         //     }
         // }
-        
+
         if ($exam->exam_type == Edvanture::TOPICENDEXAM || $exam->exam_type == Edvanture::POPQUIZ) {
 
             if ($exam->exam_type == Edvanture::TOPICENDEXAM){
@@ -479,7 +479,7 @@ class ExamController extends Controller
                     $content_tag_analysis->status = 1;
                     $content_tag_analysis->save();
 
-                    
+
                     $details_result = new DetailsResult();
                     $details_result->exam_id = $exam->id;
                     $details_result->exam_type = $exam->exam_type;
@@ -766,7 +766,7 @@ class ExamController extends Controller
 
         if($exam_type == "Topic End Exam"){
             $student_exam_attempt = StudentTopicEndExamAttempt::where('topic_end_exam_id', $exam_id)->where('student_id', auth()->user()->id)->first();
-    
+
             if($student_exam_attempt->attempts >= 3){
                 return back()->withErrors(['not_authorized' => 'No more reattempts allowed !']);
             }
@@ -874,6 +874,7 @@ class ExamController extends Controller
         // dd($course, $course_topic, $batch, $exam_id, $exam_type);
 
         if ($exam_type == Edvanture::APTITUDETEST) {
+
                 $exam = Exam::where('id', $exam_id)->where('exam_type', $exam_type)->where('topic_id', $course_topic->id)->firstOrFail();
 
                 $canAttempt = ExamResult::where('exam_id', $exam_id)->where('exam_type', 'Aptitude Test')->where('batch_id', $batch->id)->where('student_id', auth()->user()->id)->first();
@@ -890,21 +891,22 @@ class ExamController extends Controller
                     // return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'exam', 'batch'));
                 }
                 else{
+
                     $total_marks = 0;
                     $detailsResults = DetailsResult::where('student_id', auth()->user()->id)
                         ->where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
                         ->with('atQuestion')
                         ->get();
-            
+
                     $max = ExamResult::where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
                         ->max('gain_marks');
-            
+
                     $min = ExamResult::where('exam_id', $exam->id)
                         ->where('batch_id', $batch->id)
                         ->min('gain_marks');
-    
+
                     $analysis = DetailsResult::join('question_content_tags', 'details_results.question_id', 'question_content_tags.question_id')
                     ->join('content_tags', 'content_tags.id', 'question_content_tags.content_tag_id')
                     ->where('question_content_tags.exam_type', "MCQ")
@@ -913,7 +915,7 @@ class ExamController extends Controller
                     ->where('details_results.exam_id', $exam->id)
                     ->select('question_content_tags.*', 'details_results.*', 'content_tags.title as contentTag')
                     ->get();
-    
+
                     $weakAnalysis = $analysis;
 
                     // get next pop quiz
@@ -935,7 +937,7 @@ class ExamController extends Controller
                         $next_link = route('topic_lecture', [$batch->slug, $next_exam->course_lectures[0]]);
                         $next_link_btn_text = "Next Lecture";
                     }
-                
+
                     return view('student.pages_new.batch.exam.canAttemp',
                                 compact('canAttempt',
                                         'exam',
@@ -1013,7 +1015,7 @@ class ExamController extends Controller
                 ->where('details_results.exam_type', 'Topic End Exam')
                 ->whereNotNull('details_results.mcq_ans')
                 ->get();
-                
+
                 $mcq_attempts = collect();
                 $mcq_corrects = collect();
                 foreach($all_analysis_mcqs as $analysis_mcq){
@@ -1073,7 +1075,7 @@ class ExamController extends Controller
                 $total_mcqs = 0;
                 $total_right_ans_for_mcqs = 0;
             }
-            
+
             if($cq_exam_result){
                 if($cq_exam_result->checked == 0) {
                     // Paper Checking Pending
@@ -1307,7 +1309,7 @@ class ExamController extends Controller
                     ->where('details_results.exam_type', 'Pop Quiz')
                     ->whereNotNull('details_results.mcq_ans')
                     ->get();
-                    
+
                     $mcq_attempts = collect();
                     $mcq_corrects = collect();
                     foreach($all_analysis_mcqs as $analysis_mcq){
@@ -1367,7 +1369,7 @@ class ExamController extends Controller
                     $total_mcqs = 0;
                     $total_right_ans_for_mcqs = 0;
                 }
-                
+
                 if($cq_exam_result){
                     if($cq_exam_result->checked == 0) {
                         // Paper Checking Pending
@@ -1472,11 +1474,11 @@ class ExamController extends Controller
                     if (!$canAttempt) {
                         $mcq_questions = PopQuizMCQ::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit)->get();
                         $cq_questions = PopQuizCreativeQuestion::where('exam_id', $exam->id)->inRandomOrder()->take($exam->question_limit_2)->get();
-                        
+
                         if($mcq_questions->count() < $exam->question_limit || $cq_questions->count() < $exam->question_limit_2){
                             return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                         }
-                        
+
                         return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
                     }
                 }

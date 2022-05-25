@@ -72,7 +72,7 @@
                                  <td class="fit">Correct Answer</td>
                                  <td class="fit">Your Answer</td>
                                  <td class="fit">Explanation</td>
-                                 <td class="fit">Success Rate 
+                                 <td class="fit">Success Rate
                                     <span style="color: #fa9632"
                                           class=""
                                           data-toggle="tooltip"
@@ -84,11 +84,17 @@
                         </thead>
                         <tbody>
                            @foreach ($mcq_details_results as $key => $mcq_details_result)
+                               @php
+                                   $field = 'field'.$mcq_details_result->mcq_ans;
+                                   $cfield = 'field'.$mcq_details_result->topicEndExamMCQ->answer;
+                               @endphp
                               <tr class="text-center">
                                  <td>{{ $key }}</td>
                                  <td>{!! $mcq_details_result->topicEndExamMCQ->question !!}</td>
-                                 <td>{!! $mcq_details_result->topicEndExamMCQ->answer !!}</td>
-                                 <td style="@if($mcq_details_result->gain_marks) background-color: #9DCA7B  @else background-color: #DD7575 @endif; color: black; font-weight: 600">{{ $mcq_details_result->mcq_ans }}</td>
+                                 <td>{!! $mcq_details_result->topicEndExamMCQ->$cfield !!}</td>
+                                 <td style="@if($mcq_details_result->gain_marks) background-color: #9DCA7B  @else background-color: #DD7575 @endif; color: black; font-weight: 600">
+                                     {!! $mcq_details_result->topicEndExamMCQ->$field !!}
+                                 </td>
                                  <td>{!! $mcq_details_result->topicEndExamMCQ->explanation !!}</td>
                                  <td>{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
@@ -128,7 +134,7 @@
                                        <td class="text-center bg-purple2 text-white text-sm fw-600 bshadow">
                                           {{ $question->avg_score }}
                                        </td>
-                                       
+
                                        @if ($key2 == 0)
                                           <td rowspan="4" class="text-center bg-purple2 v-align-middle">
                                              <a href="" class="btn text-xxsm text-white bg-purple px-3 py-2 " data-toggle="modal" data-target="#yourAnswerModal">View Answer</a>
@@ -157,7 +163,7 @@
                                                 </div>
                                              </div>
                                           </div>
-                        
+
                                           <div class="modal fade" id="correctAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                              <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
