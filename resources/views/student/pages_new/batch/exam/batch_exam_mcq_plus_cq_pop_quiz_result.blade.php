@@ -100,11 +100,18 @@
                         </thead>
                         <tbody>
                            @foreach ($mcq_details_results as $mcq_details_result)
+                               @php
+                                   $field = 'field'.$mcq_details_result->mcq_ans;
+                                   $cfield = 'field'.$mcq_details_result->popQuizMCQ->answer;
+                                   $cellcolor = $mcq_details_result->mcq_ans == $mcq_details_result->popQuizMCQ->answer ? '#9DCA7B' : '#DD7575';
+                               @endphp
                               <tr class="text-center">
                                  <td>{{ $loop->iteration }}</td>
                                  <td>{!! $mcq_details_result->popQuizMCQ->question !!}</td>
-                                 <td>{!! $mcq_details_result->popQuizMCQ->answer !!}</td>
-                                 <td style="@if($mcq_details_result->gain_marks) background-color: #9DCA7B @else background-color : #DD7575 @endif; color: black; font-weight: 600">{{ $mcq_details_result->mcq_ans }}</td>
+                                 <td>{!! $mcq_details_result->popQuizMCQ->$cfield !!}</td>
+                                 <td style="background-color : {{$cellcolor}}; color: black; font-weight: 600">
+                                     {!! $mcq_details_result->popQuizMCQ->$field !!}
+                                 </td>
                                  <td>{!! $mcq_details_result->popQuizMCQ->explanation !!}</td>
                                  <td>{{ $mcq_details_result->success_percent }}%</td>
                               </tr>
@@ -174,7 +181,7 @@
                                                 </div>
                                              </div>
                                           </div>
-                        
+
                                           <div class="modal fade" id="correctAnswerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                              <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">

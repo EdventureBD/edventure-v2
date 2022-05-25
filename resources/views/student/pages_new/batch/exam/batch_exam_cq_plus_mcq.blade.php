@@ -4,12 +4,12 @@
         <div class="container pt-5">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="text-gray d-flex justify-content-center m-0 fw-800">Course : {{ $batch->course->title }}</h3>
+                    <h3 class="text-gray d-flex justify-content-center m-0 fw-800">Exam : {{ $exam->title }}</h3>
                     {{-- <span style="color: red" class="mx-auto d-flex justify-content-center mt-3 fw-800">
                         {{$exam->negative_marking ?  'Caution: This exam contains '.$exam->negative_marking_value.' negative marking for every wrong answer. Please be careful while answering' : ''}}
                     </span> --}}
-                    <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Batch : {{ $batch->title }}</h6>
-                    <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Exam : {{ $exam->title }}</h6>
+                    {{-- <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Batch : {{ $batch->title }}</h6> --}}
+                    <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center"> Course : {{ $batch->course->title }}</h6>
                 </div>
             </div>
         </div>
