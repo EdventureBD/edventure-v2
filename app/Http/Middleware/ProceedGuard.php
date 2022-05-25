@@ -78,8 +78,27 @@ class ProceedGuard
                     $scored_marks = $scored_marks + $exam_result->gain_marks;
                 }
 
+                // if($scored_marks >= $exam->threshold_marks){
+                //     $exam->test_passed = true;
+                // }
+                // else{
+                //     $exam->test_passed = false;
+                // }
+
                 if($scored_marks >= $exam->threshold_marks){
-                    $exam->test_passed = true;
+                    if($exam->threshold_marks == 0 && $exam->has_been_attempted){
+                        foreach($exam->exam_results as $result){
+                            if($result->checked == true){
+                                $exam->test_passed = true;
+                            }
+                            else{
+                                $exam->test_passed = false;
+                            }
+                        }
+                    }
+                    else{
+                        $exam->test_passed = false;
+                    }
                 }
                 else{
                     $exam->test_passed = false;
