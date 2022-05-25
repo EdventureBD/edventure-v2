@@ -23,7 +23,7 @@ class ProceedGuard
         // $batchTopics = BatchLecture::with([
         //                 'courseTopic.exams' => function($query){
         //                     return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order');
-        //                 }, 
+        //                 },
         //                     'courseTopic.exams.course_lectures'
         //                 ])
         //                 ->where('batch_id', $batch->id)
@@ -73,7 +73,7 @@ class ProceedGuard
                         $exam->has_been_attempted = false;
                     }
                 }
-                
+
                 foreach($exam->exam_results as $exam_result){
                     $scored_marks = $scored_marks + $exam_result->gain_marks;
                 }
@@ -86,19 +86,20 @@ class ProceedGuard
                 // }
 
                 if($scored_marks >= $exam->threshold_marks){
-                    if($exam->threshold_marks == 0 && $exam->has_been_attempted){
-                        foreach($exam->exam_results as $result){
-                            if($result->checked == true){
-                                $exam->test_passed = true;
-                            }
-                            else{
-                                $exam->test_passed = false;
-                            }
-                        }
-                    }
-                    else{
-                        $exam->test_passed = false;
-                    }
+                    $exam->test_passed = true;
+//                    if($exam->threshold_marks == 0 && $exam->has_been_attempted){
+//                        foreach($exam->exam_results as $result){
+//                            if($result->checked == true){
+//                                $exam->test_passed = true;
+//                            }
+//                            else{
+//                                $exam->test_passed = false;
+//                            }
+//                        }
+//                    }
+//                    else{
+//                        $exam->test_passed = false;
+//                    }
                 }
                 else{
                     $exam->test_passed = false;
@@ -136,7 +137,7 @@ class ProceedGuard
                         }
                     }
                 }
-                
+
                 if (!$disabled2 && $request->route('exam_id') && $exam->id == $request->route('exam_id')) return $next($request);
                 elseif ($exam->exam_type === "Aptitude Test" && !$exam->has_been_attempted) {
                     $disabled = true;
