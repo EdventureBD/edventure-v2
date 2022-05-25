@@ -8,8 +8,8 @@
                 {{-- <span style="color: red" class="mx-auto d-flex justify-content-center mt-3 fw-800">
                     {{$exam->negative_marking ?  'Caution: This exam contains '.$exam->negative_marking_value.' negative marking for every wrong answer. Please be careful while answering' : ''}}
                 </span> --}}
-                {{-- <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Batch : {{ $batch->title }}</h6> --}}
                 <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center"> Course : {{ $batch->course->title }}</h6>
+                <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Topic : {{ $course_topic->title }}</h6>
             </div>
         </div>
     </div>
