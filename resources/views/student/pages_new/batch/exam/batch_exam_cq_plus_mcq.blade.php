@@ -8,8 +8,8 @@
                     {{-- <span style="color: red" class="mx-auto d-flex justify-content-center mt-3 fw-800">
                         {{$exam->negative_marking ?  'Caution: This exam contains '.$exam->negative_marking_value.' negative marking for every wrong answer. Please be careful while answering' : ''}}
                     </span> --}}
-                    {{-- <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Batch : {{ $batch->title }}</h6> --}}
-                    <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center"> Course : {{ $batch->course->title }}</h6>
+                    <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Course : {{ $batch->course->title }}</h6>
+                    <h6 class="hero__lead measure-hero-lead text-gray my-3 fw-800 d-flex justify-content-center">Topic : {{ $course_topic->title }}</h6>
                 </div>
             </div>
         </div>
@@ -60,7 +60,14 @@
                 @if($mcq_questions->count() > 0)
                     @foreach($mcq_questions as $mcq)
                         <div class="question mb-5 popUpMcqParentDiv" id="q_{{$mcq->id}}">
-                            <div class="bg-purple-light d-flex justify-content-start align-items-middle popUpExamMcqTitle"><b class="ml-2 my-auto px-2" style="word-break: initial !important">{{ $loop->iteration }}</b> <span class="mr-2 px-2 text-wrap">{!! $mcq->question !!} </span></div>
+                            <div class="bg-purple-light d-flex justify-content-start align-items-middle popUpExamMcqTitle">
+                                <b class="ml-2 my-auto px-2" style="word-break: initial !important">
+                                    {{ $loop->iteration }}
+                                </b> 
+                                <span class="mr-2 px-2 text-wrap">
+                                    {!! $mcq->question !!} 
+                                </span>
+                            </div>
                                 @if($mcq->image)
                                     <div class="col-md-6 d-block d-md-none">
                                         <img class="img-fluid bradius-15 mb-2" src="{{ $mcq->image }}" alt="mcq-question's image" />
@@ -95,11 +102,14 @@
                 @endif
 
                 @foreach($cq_questions as $key => $question)
-                    <div class="page-separator pt-4">
-                        <div class="bg-purple-light rounded p-3 popUpExamCqTitle">
-                            <span class="badge badge-primary">
-                                Question {{ $key + 1 }}:
-                            </span> {!! $question->creative_question !!}
+                    <div class="question page-separator pt-4">
+                        <span class="badge badge-pill mb-3 badge-info">
+                            Question {{ $key + 1 }}
+                        </span>
+                        <div class="bg-purple-light d-flex justify-content-start align-items-middle  popUpExamCqTitle"> 
+                            <span class="mr-2 p-3 text-wrap">
+                                {!! $question->creative_question !!}
+                            </span>
                         </div>
                         @if ($question->image)
                             <div class="avatar avatar-xxl avatar-4by3 bg-purple-light">
@@ -111,8 +121,8 @@
                     </div>
                     @foreach ($question->question as $key => $cq)
                         <div class="page-separator mt-3">
-                            <div class="page-separator__text bg-light-gray bradius-15 bshadow p-3 single-question">
-                                <span class="">
+                            <div class="page-separator__text p-3 cq-options single-question">
+                                <span>
                                     {{ $key + 1 }}:
                                 </span> <div class="d-inline-block"> {!!$cq->question !!}</div>
                             </div>

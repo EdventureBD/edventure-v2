@@ -1196,7 +1196,7 @@ class ExamController extends Controller
                         return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                     }
 
-                    return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                    return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch','course_topic'));
                 }
             }
         }
@@ -1479,7 +1479,7 @@ class ExamController extends Controller
                             return redirect()->route('batch-lecture', [$batch->slug])->withErrors([ 'not_enough_questions' => 'Question Count is less than question limit !! Please contact admin and notify.' ]);
                         }
 
-                        return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch'));
+                        return view('student.pages_new.batch.exam.batch_exam_cq_plus_mcq', compact('mcq_questions', 'cq_questions', 'exam', 'batch','course_topic'));
                     }
                 }
         }
