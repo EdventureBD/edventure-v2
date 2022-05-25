@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth', 'is_student']], function () {
         Route::get('/profile/model-test/tag-details', [ModelMcqTagAnalysisController::class, 'index'])->name('tag.analysis,index');
         Route::get('/model-test/tag-details/{id}', [ModelMcqTagAnalysisController::class, 'getAjaxTagAnalysis'])->name('tag.analysis.ajax');
         Route::get('/profile/model-test/tag-solutions/{tagId}', [ModelMcqTagAnalysisController::class, 'solutions'])->name('tag.solution');
+        Route::get('/course-section/tag-details', [AccountDetailsController::class, 'courseTagAnalysis'])->name('course.tag.analysis,index');
     });
 
     Route::get('/profile/ajax_get_courses_for_bundle', [AccountDetailsController::class, 'ajax_get_courses_for_bundle'])->name('ajax-get-courses-for-bundle');

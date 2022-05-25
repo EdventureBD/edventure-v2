@@ -14,10 +14,10 @@
         color: #6400c8 !important;
     }
     #journey-cart:hover {
-        
+
         box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
     }
-    
+
     @media screen and (max-width:768px) {
        .strength-weakness-title-common h2 {
             font-size: .6em
@@ -74,7 +74,7 @@
                     <option value="" disabled selected>Choose Bundle</option>
 
                     <option value="0">Non Bundle Courses</option>
-                    
+
                     @foreach ($enrolled_bundles as $enrolled_bundle)
                         <option value="{{ $enrolled_bundle->bundle->id }}"> {{ $enrolled_bundle->bundle->bundle_name }} </option>
                     @endforeach
@@ -125,7 +125,7 @@
                     <div class=" text-black" id="mcq_strength">
                     </div>
                     <div>
-                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                        <a target="_blank" id="mcq_strength_link" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                             See More
                         </a>
                     </div>
@@ -139,7 +139,7 @@
                         {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p> --}}
                     </div>
                     <div>
-                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                        <a id="cq_strength_link" target="_blank" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                             See More
                         </a>
                     </div>
@@ -161,7 +161,7 @@
                     {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p> --}}
                 </div>
                 <div>
-                    <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                    <a id="mcq_weakness_link" target="_blank" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                         See More
                     </a>
                 </div>
@@ -173,7 +173,7 @@
                     {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p> --}}
                 </div>
                 <div>
-                    <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                    <a id="cq_weakness_link" target="_blank" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                         See More
                     </a>
                 </div>
@@ -279,6 +279,10 @@
         $('#cq_strength').html('');
         $('#mcq_weakness').html('');
         $('#cq_weakness').html('');
+        $('#mcq_strength_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_strength');
+        $('#mcq_weakness_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_weakness');
+        $('#cq_strength_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_strength');
+        $('#cq_weakness_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_weakness');
 
         // console.log("SELECT HIT");
         // console.log( course_id );
@@ -307,10 +311,10 @@
                     jQuery.each(mcq_tags, function(index, mcq_tag)
                     {
                         if(mcq_tag.percentage_scored != "no data"){
-                            if(mcq_tag.percentage_scored > 80){
+                            if(mcq_tag.percentage_scored >= 80){
                                 mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
                             }
-                            else if(mcq_tag.percentage_scored < 20){
+                            else if(mcq_tag.percentage_scored < 80){
                                 mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
                             }
                         }
@@ -327,10 +331,10 @@
                     jQuery.each(cq_tags, function(index, cq_tag)
                     {
                         if(cq_tag.percentage_scored != "no data"){
-                            if(cq_tag.percentage_scored > 80){
+                            if(cq_tag.percentage_scored >= 80){
                                 cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
-                            else if(cq_tag.percentage_scored < 20){
+                            else if(cq_tag.percentage_scored < 80){
                                 cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
                         }
