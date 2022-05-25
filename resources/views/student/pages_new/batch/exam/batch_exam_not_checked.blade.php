@@ -136,11 +136,11 @@
                </div>
 
                <div class="d-flex mx-auto">
-                  <a href="{{ route('batch-lecture', ['batch' => $batch->slug]) }}" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1 btn-orange-customed"> Back to Journey <i class="fas fa-arrow-up ml-2"></i></a>
+                  <a href="{{ route('batch-lecture', ['batch' => $batch->slug]) }}" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1 custom-submit-btn"> Back to Journey <i class="fas fa-arrow-up ml-2"></i></a>
                   
                   {{-- If next exam type is TEE generate a confirmation modal with button --}}
                   @if(isset($next_exam_type_TEE) && $next_exam_type_TEE)
-                     <button type="button" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1 btn-orange-customed" data-toggle="modal" data-target="#exampleModalLong">  {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i> </button>
+                     <button type="button" class="btn text-xxsm text-white fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1 custom-submit-btn" data-toggle="modal" data-target="#exampleModalLong">  {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i> </button>
                      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -155,14 +155,14 @@
                            </div>
                            <div class="modal-footer d-flex justify-content-between">
                               <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                              <a href="{{ $next_link }}" class="btn text-xxsm text-white btn-orange-customed fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
+                              <a href="{{ $next_link }}" class="btn text-xxsm text-white custom-submit-btn fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> Continue <i class="fas fa-angle-double-right ml-1"></i></a>
                            </div>
                         </div>
                         </div>
                      </div>
                   {{-- Else generate a normal btn --}}
                   @else
-                     @if(!empty($next_link)) <a href="{{ $next_link }}" class="btn text-xxsm text-white btn-orange-customed fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a> @endif
+                     @if(!empty($next_link)) <a href="{{ $next_link }}" class="btn text-xxsm text-white custom-submit-btn fw-800 px-3 py-2 w-20 mb-3 mt-3 mx-1"> {{ $next_link_btn_text }} <i class="fas fa-angle-double-right ml-1"></i></a> @endif
                   @endif
 
                </div>
