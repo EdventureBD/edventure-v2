@@ -169,7 +169,7 @@
                                 <div class="my-3">
                                     <h5 class="bold-header my-3">কোর্স সম্পর্কে</h5>
                                     <div class="p-3 course-detail-single-unit">
-                                        {{$course->description}}
+                                        {!! $course->description !!}
                                     </div>
                                 </div>
                             @endif
@@ -236,7 +236,7 @@
                 </div>
 
                 <div class="faq mt-5">
-                    <h5 class="bold-header">সচারচর জিজ্ঞাসা</h5>
+                    <h5 class="bold-header">সচরাচর জিজ্ঞাসা</h5>
                     <div class="accordion mt-5" id="accordionExample">
                         <div class="tabtab">
                             <div style="background-color: #eeeeee; border-radius: 15px; padding: 10px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">

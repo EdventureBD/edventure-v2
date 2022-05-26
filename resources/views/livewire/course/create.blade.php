@@ -314,12 +314,15 @@
                                 </div>
 
 								<div class="form-group">
-										<label class="col-form-label" for="courseDescription"> Course Description <span
+										<label class="col-form-label" for="description"> Course Description <span
 											class="must-filled">*</span>
 										</label>
-										<textarea rows="5" type="text" wire:model="description"
-										class="form-control @error('description') is-invalid @enderror"
-										id="courseDescription" placeholder="Enter your course description"></textarea>
+										<div wire:ignore>
+											<textarea rows="5" type="text" wire:model="description"
+												class="form-control @error('description') is-invalid @enderror"
+												id="description">
+											</textarea>
+										</div>
 										<small id="passwordHelpBlock" class="form-text text-secondary">
 										Enter some details about this course. Remember not more than 500 characters.
 										</small>
@@ -334,7 +337,7 @@
                                     </label>
                                     <textarea rows="5" type="text" wire:model="course_for_whom"
                                               class="form-control @error('course_for_whom') is-invalid @enderror"
-                                              id="courseDescription" placeholder="Enter your course description"></textarea>
+                                              id="courseForWhom" placeholder="Enter the name for whom the course is"></textarea>
                                     <small id="passwordHelpBlock" class="form-text text-secondary">
                                         Enter some details about, for whom this course will be needed.
                                     </small>
@@ -387,3 +390,18 @@
 </section>
 <!-- /.content -->
 </div>
+@section('js2')
+<script>
+    $(function(){
+        $('#description').summernote({
+            placeholder:"Enter your course description",
+            height: 150,
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    @this.set('description', contents)
+                }
+            }
+        })
+    })
+</script>
+@endsection
