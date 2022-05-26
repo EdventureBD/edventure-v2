@@ -25,6 +25,20 @@
             font-size: .8em;
         }
     }
+
+    .glowing-circle {
+        -webkit-animation: glowing 1s ease-in-out infinite alternate;
+        -moz-animation: glowing 1s ease-in-out infinite alternate;
+        animation: glowing 1s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes glowing {
+        from {
+            box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #8d17fa, 0 0 20px #ead6ff, 0 0 25px #ead6ff, 0 0 30px #ead6ff, 0 0 35px #ead6ff;
+        }
+        to {
+            box-shadow: 0 0 10px #fff, 0 0 15px #d8b2fc, 0 0 20px #d8b2fc, 0 0 25px #d8b2fc, 0 0 30px #d8b2fc, 0 0 35px #d8b2fc, 0 0 40px #d8b2fc;
+        }
+    }
 </style>
 @section('mini-header')
     <div class="d-flex justify-content-between">
@@ -43,15 +57,27 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
         <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
+{{--            <div class="d-flex align-items-center flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart">--}}
+{{--                <a href="{{route('student.model.test.result')}}">--}}
+{{--                    <div>--}}
+{{--                        --}}
+{{--                    </div>--}}
+{{--                </a>--}}
+
+{{--            </div>--}}
+
             <a href="{{route('student.model.test.result')}}">
-                <div class="d-flex flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart">
-                    <h5 class="fw-800 mx-auto">Diagnosis</h5>
-                    <span style="height: 100px; width: 100px" class="iconify-inline mx-auto" data-icon="emojione:open-book" data-width="64" data-height="64"></span>
-{{--                    <p class="fw-500 mx-auto">--}}
-{{--                        <i style="font-size: 70px" class="fas fa-diagnoses"></i>--}}
-{{--                    </p>--}}
+                <div class="d-flex align-items-center flex-column justify-content-center mx-auto border p-lg-3 p-3 my-3" id="journey-cart" style="height: auto !important;">
+
+                    <img class="img-fluid" src="/img/profileExamDetails.png" alt="">
+                    <p class="fw-800 mx-auto">Exams report card</p>
                 </div>
             </a>
+
+{{--            <div class="glowing-circle"></div>--}}
+
+
+
 
             {{-- subject selection part --}}
             <div>
