@@ -56,9 +56,9 @@
         <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
             <div class="d-flex flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart" style="height: auto !important;">
                 {{-- <h5 class="mx-auto">Select a course to view Strengths and Weaknesses</h5> --}}
-                <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
-                <p class="fw-500 mx-auto text-justify" id="day-count">
-                    Select a course to view Strengths and Weaknesses
+                <span class="iconify-inline mx-auto" data-icon="emojione:blue-book" data-width="64" data-height="64"></span>
+                <p class="fw-500 mx-auto" id="day-count">
+                    Select a course from below
                 </p>
             </div>
 
@@ -265,11 +265,18 @@
 </script>
 
 <script>
+    let mcqStrengthLink = $('#mcq_strength_link');
+    let mcqWeaknessLink = $('#mcq_weakness_link');
+    let cqStrengthLink = $('#cq_strength_link');
+    let cqWeaknessLink = $('#cq_weakness_link');
+
+    mcqStrengthLink.css('display','none')
+    mcqWeaknessLink.css('display','none')
+    cqStrengthLink.css('display','none')
+    cqWeaknessLink.css('display','none')
     $(document).on('change', '#course_selecting', function(){
         var course_id = $( this ).val();
         var course_name = $( this ).find('option:selected').text();
-
-        console.log(course_id, course_name)
 
         $("#course_link").remove();
         $('#SelectedCourse').removeClass('d-none');
@@ -279,10 +286,15 @@
         $('#cq_strength').html('');
         $('#mcq_weakness').html('');
         $('#cq_weakness').html('');
-        $('#mcq_strength_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_strength');
-        $('#mcq_weakness_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_weakness');
-        $('#cq_strength_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_strength');
-        $('#cq_weakness_link').attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_weakness');
+        mcqStrengthLink.css('display','none')
+        mcqWeaknessLink.css('display','none')
+        cqStrengthLink.css('display','none')
+        cqWeaknessLink.css('display','none')
+
+        mcqStrengthLink.attr('href','Javascript:void(0)');
+        mcqWeaknessLink.attr('href','Javascript:void(0)');
+        cqStrengthLink.attr('href','Javascript:void(0)');
+        cqWeaknessLink.attr('href','Javascript:void(0)');
 
         // console.log("SELECT HIT");
         // console.log( course_id );
@@ -312,9 +324,15 @@
                     {
                         if(mcq_tag.percentage_scored != "no data"){
                             if(mcq_tag.percentage_scored >= 80){
+                                mcqStrengthLink.css('display','block')
+                                mcqStrengthLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_strength');
+
                                 mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
                             }
                             else if(mcq_tag.percentage_scored < 80){
+                                mcqWeaknessLink.css('display','block')
+                                mcqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_weakness');
+
                                 mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
                             }
                         }
@@ -322,6 +340,9 @@
 
                     $('#mcq_strength').append(mcq_strength_tags_html);
                     $('#mcq_weakness').append(mcq_weakness_tags_html);
+                } else {
+                    $('#mcq_strength').append("No analysis found");
+                    $('#mcq_weakness').append("No analysis found");
                 }
 
                 if (cq_tags.length > 0){
@@ -332,9 +353,15 @@
                     {
                         if(cq_tag.percentage_scored != "no data"){
                             if(cq_tag.percentage_scored >= 80){
+                                cqStrengthLink.css('display','block')
+                                cqStrengthLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_strength');
+
                                 cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
                             else if(cq_tag.percentage_scored < 80){
+                                cqWeaknessLink.css('display','block')
+                                cqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_weakness');
+
                                 cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
                         }
@@ -342,6 +369,9 @@
 
                     $('#cq_strength').append(cq_strength_tags_html);
                     $('#cq_weakness').append(cq_weakness_tags_html);
+                } else {
+                    $('#cq_strength').append("No analysis found");
+                    $('#cq_weakness').append("No analysis found");
                 }
 
             }

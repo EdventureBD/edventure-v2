@@ -46,10 +46,10 @@
             <a href="{{route('student.model.test.result')}}">
                 <div class="d-flex flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart">
                     <h5 class="fw-800 mx-auto">Diagnosis</h5>
-                    <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
-                    <p class="fw-500 mx-auto">
-                        <i style="font-size: 70px" class="fas fa-diagnoses"></i>
-                    </p>
+                    <span style="height: 100px; width: 100px" class="iconify-inline mx-auto" data-icon="emojione:open-book" data-width="64" data-height="64"></span>
+{{--                    <p class="fw-500 mx-auto">--}}
+{{--                        <i style="font-size: 70px" class="fas fa-diagnoses"></i>--}}
+{{--                    </p>--}}
                 </div>
             </a>
 

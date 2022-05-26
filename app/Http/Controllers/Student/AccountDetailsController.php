@@ -134,7 +134,7 @@ class AccountDetailsController extends Controller
 
 //        if($request->ajax()){
 
-            $enrollment = BatchStudentEnrollment::where('course_id', $request->course_id)->where('student_id', auth()->user()->id)->first();
+            $enrollment = BatchStudentEnrollment::where('course_id', $request->course_id)->where('student_id', auth()->user()->id)->firstOrfail();
             $batch = Batch::where('id', $enrollment->batch_id)->first();
 
             $mcq_content_tags = ContentTag::where('course_id', $request->course_id)->has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
@@ -314,7 +314,11 @@ class AccountDetailsController extends Controller
 
     public function getExamResult()
     {
-        $exam_results = McqTotalResult::query()->with('modelExam:id,title')->where('student_id',auth()->user()->id)->paginate(10);
+        $exam_results = McqTotalResult::query()
+                                        ->with(['modelExam' => function($q) {
+                                            $q->select('id','title','exam_category_id')->with('category');
+                                        }])
+                                        ->where('student_id',auth()->user()->id)->paginate(10);
 
         return view('student.pages_new.user.exam-result', compact('exam_results'));
     }
