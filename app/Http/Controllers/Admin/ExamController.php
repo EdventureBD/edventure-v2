@@ -31,7 +31,7 @@ class ExamController extends Controller
         //     ->select('exams.*', 'courses.title as courseName', 'course_topics.title as topicName')
         //     ->orderby('id', 'DESC')->get();
 
-        $exams = Exam::all();
+        $exams = Exam::query()->with('course')->with('topic')->get();
         return view('admin.pages.exam.index', compact('exams'));
     }
 
