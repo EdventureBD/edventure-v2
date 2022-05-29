@@ -54,12 +54,12 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
         <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
-            <div class="d-flex align-items-center flex-column justify-content-center mx-auto border p-lg-3 p-3 my-3" id="journey-cart" style="height: auto !important;">
+            <div class="d-flex align-items-center flex-column justify-content-center mx-auto border p-lg-3 p-3 my-3" style="height: auto !important; width: 100%">
                 {{-- <h5 class="mx-auto">Select a course to view Strengths and Weaknesses</h5> --}}
 {{--                <span class="iconify-inline mx-auto" data-icon="emojione:blue-book" data-width="64" data-height="64"></span>--}}
                 <img class="img-fluid" src="/img/profileExamDetails.png" alt="">
-                <p class="fw-800 mx-auto" id="day-count">
-                    Select a course from below
+                <p style="color: #6400c8" class="fw-800 mt-3 mx-auto" id="day-count">
+                    Select a course from below:
                 </p>
             </div>
 

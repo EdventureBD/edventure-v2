@@ -70,7 +70,7 @@
                 <div class="d-flex align-items-center flex-column justify-content-center mx-auto border p-lg-3 p-3 my-3" id="journey-cart" style="height: auto !important;">
 
                     <img class="img-fluid" src="/img/profileExamDetails.png" alt="">
-                    <p class="fw-800 mx-auto">Exams report card</p>
+                    <p class="fw-800 mt-3 mx-auto">Exams Report Card</p>
                 </div>
             </a>
 
