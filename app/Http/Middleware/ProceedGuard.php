@@ -21,42 +21,35 @@ class ProceedGuard
         $course = Course::where('id', $batch->course_id)->first();
 
         // $batchTopics = BatchLecture::with([
-        //                 'courseTopic.exams' => function($query){
-        //                     return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order');
-        //                 }, 
-        //                     'courseTopic.exams.course_lectures'
-        //                 ])
-        //                 ->where('batch_id', $batch->id)
-        //                 ->where('course_id', $course->id)
-        //                 ->get();
-
+        //                 'courseTopic.exams' => function($query){ //                     return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order'); //                 },        //                     'courseTopic.exams.course_lectures'
+        //                 ]) //                 ->where('batch_id', $batch->id) //                 ->where('course_id', $course->id) //                 ->get();
         $batchTopics = BatchLecture::select('id', 'topic_id')
-                        ->with([
-                        'courseTopic' => function($query){
-                            return $query->select('id', 'title', 'slug');
-                        },
-                        'courseTopic.exams' => function($query){
-                            return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order')
-                            ->select('id', 'title', 'slug', 'topic_id', 'exam_type', 'threshold_marks');
-                        },
-                        'courseTopic.exams.exam_results' => function($query){
-                            return $query->where('student_id', auth()->user()->id)
-                            ->select('id', 'exam_id', 'exam_type', 'gain_marks', 'checked');
-                        },
-                        'courseTopic.exams.course_lectures' => function($query){
-                            return $query->select('id', 'title', 'slug', 'exam_id');
-                        },
-                        'courseTopic.exams.course_lectures.completed_lectures' => function($query){
-                            return $query->where('student_id', auth()->user()->id)
-                            ->select('id', 'lecture_id');
-                        },
-                        'courseTopic.exams.exam_attempts' => function($query){
-                            return $query->where('student_id', auth()->user()->id)->select('id', 'topic_end_exam_id', 'student_id', 'attempts', 'unlocked');
-                        },
-                        ])
-                        ->where('batch_id', $batch->id)
-                        ->where('course_id', $course->id)
-                        ->get();
+            ->with([
+                'courseTopic' => function($query){
+                    return $query->select('id', 'title', 'slug');
+                },
+                'courseTopic.exams' => function($query){
+                    return $query->where('exam_type', 'Aptitude Test')->orWhere('exam_type', 'Pop Quiz')->orWhere('exam_type', 'Topic End Exam')->orderBy('exam_type')->orderBy('order')
+                        ->select('id', 'title', 'slug', 'topic_id', 'exam_type', 'threshold_marks');
+                },
+                'courseTopic.exams.exam_results' => function($query){
+                    return $query->where('student_id', auth()->user()->id)
+                        ->select('id', 'exam_id', 'exam_type', 'gain_marks', 'checked');
+                },
+                'courseTopic.exams.course_lectures' => function($query){
+                    return $query->select('id', 'title', 'slug', 'exam_id');
+                },
+                'courseTopic.exams.course_lectures.completed_lectures' => function($query){
+                    return $query->where('student_id', auth()->user()->id)
+                        ->select('id', 'lecture_id');
+                },
+                'courseTopic.exams.exam_attempts' => function($query){
+                    return $query->where('student_id', auth()->user()->id)->select('id', 'topic_end_exam_id', 'student_id', 'attempts', 'unlocked');
+                },
+            ])
+            ->where('batch_id', $batch->id)
+            ->where('course_id', $course->id)
+            ->get();
 
         // $topics = [];
         foreach($batchTopics as $batchTopic){
@@ -64,7 +57,6 @@ class ProceedGuard
                 $scored_marks = 0;
                 // $details_results = DetailsResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->get();
                 // $details_results = DetailsResult::where('exam_id', $exam->id)->where('exam_type', $exam->exam_type)->where('student_id', auth()->user()->id)->get();
-
                 if($exam->exam_type === "Aptitude Test" || $exam->exam_type === "Pop Quiz"){
                     if(count($exam->exam_results)){
                         $exam->has_been_attempted = true;
@@ -73,7 +65,7 @@ class ProceedGuard
                         $exam->has_been_attempted = false;
                     }
                 }
-                
+
                 foreach($exam->exam_results as $exam_result){
                     $scored_marks = $scored_marks + $exam_result->gain_marks;
                 }
@@ -117,7 +109,7 @@ class ProceedGuard
                         }
                     }
                 }
-                
+
                 if (!$disabled2 && $request->route('exam_id') && $exam->id == $request->route('exam_id')) return $next($request);
                 elseif ($exam->exam_type === "Aptitude Test" && !$exam->has_been_attempted) {
                     $disabled = true;

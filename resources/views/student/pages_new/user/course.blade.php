@@ -14,10 +14,10 @@
         color: #6400c8 !important;
     }
     #journey-cart:hover {
-        
+
         box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
     }
-    
+
     @media screen and (max-width:768px) {
        .strength-weakness-title-common h2 {
             font-size: .6em
@@ -54,11 +54,12 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <div id="info-detail" class="d-flex justify-content-center my-5 mx-auto">
         <div id="info-left-option" class="d-flex flex-column justify-content-center w-100  my-3 mx-md-5 px-0">
-            <div class="d-flex flex-column justify-content-center mx-auto border p-lg-5 p-3 my-3" id="journey-cart" style="height: auto !important;">
+            <div class="d-flex align-items-center flex-column justify-content-center mx-auto border p-lg-3 p-3 my-3" style="height: auto !important; width: 100%">
                 {{-- <h5 class="mx-auto">Select a course to view Strengths and Weaknesses</h5> --}}
-                <span class="iconify-inline mx-auto" data-icon="openmoji:man-mountain-biking" data-width="36" data-height="36"></span>
-                <p class="fw-500 mx-auto text-justify" id="day-count">
-                    Select a course to view Strengths and Weaknesses
+{{--                <span class="iconify-inline mx-auto" data-icon="emojione:blue-book" data-width="64" data-height="64"></span>--}}
+                <img class="img-fluid" src="/img/profileExamDetails.png" alt="">
+                <p style="color: #6400c8" class="fw-800 mt-3 mx-auto" id="day-count">
+                    Select a course from below:
                 </p>
             </div>
 
@@ -74,7 +75,7 @@
                     <option value="" disabled selected>Choose Bundle</option>
 
                     <option value="0">Non Bundle Courses</option>
-                    
+
                     @foreach ($enrolled_bundles as $enrolled_bundle)
                         <option value="{{ $enrolled_bundle->bundle->id }}"> {{ $enrolled_bundle->bundle->bundle_name }} </option>
                     @endforeach
@@ -125,7 +126,7 @@
                     <div class=" text-black" id="mcq_strength">
                     </div>
                     <div>
-                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                        <a target="_blank" id="mcq_strength_link" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                             See More
                         </a>
                     </div>
@@ -139,7 +140,7 @@
                         {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Maxwell</p> --}}
                     </div>
                     <div>
-                        <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                        <a id="cq_strength_link" target="_blank" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                             See More
                         </a>
                     </div>
@@ -161,7 +162,7 @@
                     {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Plunk</p> --}}
                 </div>
                 <div>
-                    <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                    <a id="mcq_weakness_link" target="_blank" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                         See More
                     </a>
                 </div>
@@ -173,7 +174,7 @@
                     {{-- <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">Pythagoras</p> --}}
                 </div>
                 <div>
-                    <a href="#" style="text-decoration: none; color: black; font-weight:600;">
+                    <a id="cq_weakness_link" target="_blank" href="Javascript:void(0)" style="text-decoration: none; color: black; font-weight:600;">
                         See More
                     </a>
                 </div>
@@ -265,11 +266,18 @@
 </script>
 
 <script>
+    let mcqStrengthLink = $('#mcq_strength_link');
+    let mcqWeaknessLink = $('#mcq_weakness_link');
+    let cqStrengthLink = $('#cq_strength_link');
+    let cqWeaknessLink = $('#cq_weakness_link');
+
+    mcqStrengthLink.css('display','none')
+    mcqWeaknessLink.css('display','none')
+    cqStrengthLink.css('display','none')
+    cqWeaknessLink.css('display','none')
     $(document).on('change', '#course_selecting', function(){
         var course_id = $( this ).val();
         var course_name = $( this ).find('option:selected').text();
-
-        console.log(course_id, course_name)
 
         $("#course_link").remove();
         $('#SelectedCourse').removeClass('d-none');
@@ -279,6 +287,15 @@
         $('#cq_strength').html('');
         $('#mcq_weakness').html('');
         $('#cq_weakness').html('');
+        mcqStrengthLink.css('display','none')
+        mcqWeaknessLink.css('display','none')
+        cqStrengthLink.css('display','none')
+        cqWeaknessLink.css('display','none')
+
+        mcqStrengthLink.attr('href','Javascript:void(0)');
+        mcqWeaknessLink.attr('href','Javascript:void(0)');
+        cqStrengthLink.attr('href','Javascript:void(0)');
+        cqWeaknessLink.attr('href','Javascript:void(0)');
 
         // console.log("SELECT HIT");
         // console.log( course_id );
@@ -304,40 +321,82 @@
 
                     mcq_strength_tags_html = '';
                     mcq_weakness_tags_html = '';
+                    let mcqStrengthCount = 0;
+                    let mcqWeaknessCount = 0;
                     jQuery.each(mcq_tags, function(index, mcq_tag)
                     {
-                        if(mcq_tag.percentage_scored != "no data"){
-                            if(mcq_tag.percentage_scored > 80){
-                                mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
-                            }
-                            else if(mcq_tag.percentage_scored < 20){
-                                mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
+
+                        if(mcq_tag.percentage_scored >= 80){
+                            mcqStrengthCount++;
+                            if(mcqStrengthCount <= 6) {
+                                mcqStrengthLink.css('display','block')
+                                mcqStrengthLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_strength');
+                                mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> ' +
+                                                            '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> ' +
+                                                            '</a>';
                             }
                         }
+                        else if(mcq_tag.percentage_scored < 80){
+                            mcqWeaknessCount++;
+                            if(mcqWeaknessCount <= 6) {
+                                mcqWeaknessLink.css('display','block')
+                                mcqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_weakness');
+                                mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> ' +
+                                                            '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> ' +
+                                                            '</a>';
+                            }
+
+                        }
+
                     });
 
                     $('#mcq_strength').append(mcq_strength_tags_html);
                     $('#mcq_weakness').append(mcq_weakness_tags_html);
+                } else {
+                    $('#mcq_strength').append("No analysis found");
+                    $('#mcq_weakness').append("No analysis found");
                 }
 
                 if (cq_tags.length > 0){
 
                     cq_strength_tags_html = '';
                     cq_weakness_tags_html = '';
+                    let cqStrengthCount = 0;
+                    let cqWeaknessCount = 0;
                     jQuery.each(cq_tags, function(index, cq_tag)
                     {
-                        if(cq_tag.percentage_scored != "no data"){
-                            if(cq_tag.percentage_scored > 80){
-                                cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
+
+                        if(cq_tag.percentage_scored >= 80){
+                            cqStrengthCount++;
+                            if(cqStrengthCount <= 6) {
+                                cqStrengthLink.css('display','block')
+                                cqStrengthLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_strength');
+                                cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> ' +
+                                    '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> ' +
+                                    '</a>';
+
                             }
-                            else if(cq_tag.percentage_scored < 20){
-                                cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
-                            }
+
                         }
+                        else if(cq_tag.percentage_scored < 80){
+                            cqWeaknessCount++;
+                            if(cqWeaknessCount <= 6) {
+                                cqWeaknessLink.css('display','block')
+                                cqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_weakness');
+                                cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> ' +
+                                    '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> ' +
+                                    '</a>';
+                            }
+
+                        }
+
                     });
 
                     $('#cq_strength').append(cq_strength_tags_html);
                     $('#cq_weakness').append(cq_weakness_tags_html);
+                } else {
+                    $('#cq_strength').append("No analysis found");
+                    $('#cq_weakness').append("No analysis found");
                 }
 
             }

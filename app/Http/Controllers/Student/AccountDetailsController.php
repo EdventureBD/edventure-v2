@@ -68,6 +68,7 @@ class AccountDetailsController extends Controller
         // Start counting how many courses the user completed
         $enrolled_course_count = 0;
         $completed_course_count = 0;
+        $exam_results = ExamResult::query()->where('student_id', auth()->user()->id)->get();
         foreach($batch_student_enrollment as $enrollment){
             $enrolled_course_count += 1;
 
@@ -75,8 +76,9 @@ class AccountDetailsController extends Controller
             $completed_tests = 0;
             foreach($enrollment->course->Exam as $exam){
                 $test_count += 1;
-                $results = ExamResult::where('exam_id', $exam->id)->where('student_id', auth()->user()->id)->where('batch_id', $enrollment->batch_id)->get();
-                if($results->count() > 0){
+                $results = $exam_results->where('exam_id', $exam->id)->where('batch_id', $enrollment->batch_id)->all();
+
+                if(count($results) > 0){
                     $total_scored = 0;
                     foreach($results as $result){
                         $total_scored += $result->gain_marks;
@@ -130,9 +132,9 @@ class AccountDetailsController extends Controller
 
     public function ajax_get_strengths_and_weaknesses(Request $request){
 
-        if($request->ajax()){
+//        if($request->ajax()){
 
-            $enrollment = BatchStudentEnrollment::where('course_id', $request->course_id)->where('student_id', auth()->user()->id)->first();
+            $enrollment = BatchStudentEnrollment::where('course_id', $request->course_id)->where('student_id', auth()->user()->id)->firstOrfail();
             $batch = Batch::where('id', $enrollment->batch_id)->first();
 
             $mcq_content_tags = ContentTag::where('course_id', $request->course_id)->has('questionContentTagAnalysis')->with(['questionContentTagAnalysis' => function($query){
@@ -178,7 +180,7 @@ class AccountDetailsController extends Controller
                 }
                 $cq_content_tag->tag_scored_marks = $cq_tag_scored_marks;
                 $cq_content_tag->tag_total_marks = $cq_tag_total_marks;
-                $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 'no data';
+                $cq_content_tag->percentage_scored = $cq_tag_total_marks > 0 ? round((($cq_tag_scored_marks/$cq_tag_total_marks)*100), 2) : 0;
             }
 
             return  [
@@ -186,7 +188,7 @@ class AccountDetailsController extends Controller
                         'cq_content_tags'  => $cq_content_tags,
                         'batch_slug'         => $batch->slug
                     ];
-        }
+//        }
     }
 
     public function profileData()
@@ -312,7 +314,11 @@ class AccountDetailsController extends Controller
 
     public function getExamResult()
     {
-        $exam_results = McqTotalResult::query()->with('modelExam:id,title')->where('student_id',auth()->user()->id)->paginate(10);
+        $exam_results = McqTotalResult::query()
+                                        ->with(['modelExam' => function($q) {
+                                            $q->select('id','title','exam_category_id')->with('category');
+                                        }])
+                                        ->where('student_id',auth()->user()->id)->paginate(10);
 
         return view('student.pages_new.user.exam-result', compact('exam_results'));
     }
@@ -333,5 +339,16 @@ class AccountDetailsController extends Controller
         );
         $user->image  = $filename;
         return $user->save();
+    }
+
+    public function courseTagAnalysis(Request $request)
+    {
+        abort_if(!in_array($request->type,['mcq_strength','mcq_weakness','cq_strength','cq_weakness']),404);
+
+        $request->course_id = $request->course_tag;
+        $tags = $this->ajax_get_strengths_and_weaknesses($request);
+         $type = $request->type;
+
+        return view('student.pages_new.user.course-tag-analysis',compact('tags','type'));
     }
 }
