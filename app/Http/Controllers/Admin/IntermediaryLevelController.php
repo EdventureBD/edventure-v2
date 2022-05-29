@@ -15,10 +15,10 @@ class IntermediaryLevelController extends Controller
         $intermediary_levels = IntermediaryLevel::with(['courseCategory'])->get();
         return view('admin.pages.intermediary_level.index', compact('intermediary_levels'));
     }
-    
+
     public function create(){
         $categories = CourseCategory::all();
-        
+
         return view('admin.pages.intermediary_level.create', compact('categories'));
     }
 
@@ -29,9 +29,10 @@ class IntermediaryLevelController extends Controller
         return view('admin.pages.intermediary_level.edit', compact('categories', 'intermediary_level_slug'));
     }
 
-    public function destroy($intermediaryLevel){
+    public function destroy(IntermediaryLevel $intermediary_level){
 
-        $intermediary_level = IntermediaryLevel::where('slug', $intermediaryLevel)->with(['course', 'bundles'])->firstOrFail();
+
+//        $intermediary_level = IntermediaryLevel::where('slug', $intermediary_level)->with(['course', 'bundles'])->firstOrFail();
         if(count($intermediary_level->course) > 0){
             return redirect()->route('intermediary_level.index')->with('failed', 'Program cannot be deleted. It has courses associated to it.');
         }
@@ -39,8 +40,8 @@ class IntermediaryLevelController extends Controller
         if(count($intermediary_level->bundles) > 0){
             return redirect()->route('intermediary_level.index')->with('failed', 'Program cannot be deleted. It has bundles associated to it.');
         }
-
-        $delete = $intermediaryLevel->delete();
+//        return $intermediary_level;
+        $delete = $intermediary_level->delete();
         if ($delete) {
             return redirect()->back()->with('status', 'Program successfully deleted!');
         } else {

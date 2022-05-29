@@ -19,6 +19,7 @@
                 <table class="table table-striped table-responsive align-content-center">
                     <thead>
                     <tr>
+                        <td class="fit col">Category</td>
                         <td class="fit col">Exams</td>
                         <td class="fit col">Gain Marks</td>
                         <td class="fit col">Details</td>
@@ -27,6 +28,7 @@
                     <tbody>
                     @forelse($exam_results as $result)
                     <tr>
+                        <td>{{$result->modelExam->category->name}}</td>
                         <td>{{$result->modelExam->title}}</td>
                         <td>{{$result->total_marks > 0 ? $result->total_marks : 0}}</td>
                         <td>
