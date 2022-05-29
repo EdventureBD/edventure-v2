@@ -321,22 +321,33 @@
 
                     mcq_strength_tags_html = '';
                     mcq_weakness_tags_html = '';
+                    let mcqStrengthCount = 0;
+                    let mcqWeaknessCount = 0;
                     jQuery.each(mcq_tags, function(index, mcq_tag)
                     {
-                        if(mcq_tag.percentage_scored != "no data"){
-                            if(mcq_tag.percentage_scored >= 80){
+
+                        if(mcq_tag.percentage_scored >= 80){
+                            mcqStrengthCount++;
+                            if(mcqStrengthCount <= 6) {
                                 mcqStrengthLink.css('display','block')
                                 mcqStrengthLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_strength');
-
-                                mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
-                            }
-                            else if(mcq_tag.percentage_scored < 80){
-                                mcqWeaknessLink.css('display','block')
-                                mcqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_weakness');
-
-                                mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> </a>';
+                                mcq_strength_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> ' +
+                                                            '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> ' +
+                                                            '</a>';
                             }
                         }
+                        else if(mcq_tag.percentage_scored < 80){
+                            mcqWeaknessCount++;
+                            if(mcqWeaknessCount <= 6) {
+                                mcqWeaknessLink.css('display','block')
+                                mcqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=mcq_weakness');
+                                mcq_weakness_tags_html += ' <a  href="/profile/course/pdf_and_video/'+ mcq_tag.id +'"> ' +
+                                                            '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + mcq_tag.title + '</p> ' +
+                                                            '</a>';
+                            }
+
+                        }
+
                     });
 
                     $('#mcq_strength').append(mcq_strength_tags_html);
@@ -350,22 +361,35 @@
 
                     cq_strength_tags_html = '';
                     cq_weakness_tags_html = '';
+                    let cqStrengthCount = 0;
+                    let cqWeaknessCount = 0;
                     jQuery.each(cq_tags, function(index, cq_tag)
                     {
-                        if(cq_tag.percentage_scored != "no data"){
-                            if(cq_tag.percentage_scored >= 80){
+
+                        if(cq_tag.percentage_scored >= 80){
+                            cqStrengthCount++;
+                            if(cqStrengthCount <= 6) {
                                 cqStrengthLink.css('display','block')
                                 cqStrengthLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_strength');
+                                cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> ' +
+                                    '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> ' +
+                                    '</a>';
 
-                                cq_strength_tags_html += '<a href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
                             }
-                            else if(cq_tag.percentage_scored < 80){
+
+                        }
+                        else if(cq_tag.percentage_scored < 80){
+                            cqWeaknessCount++;
+                            if(cqWeaknessCount <= 6) {
                                 cqWeaknessLink.css('display','block')
                                 cqWeaknessLink.attr('href',window.location.origin+'/course-section/tag-details?course_tag='+course_id+'&type=cq_weakness');
-
-                                cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> <p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> </a>';
+                                cq_weakness_tags_html += '<a  href="/profile/course/pdf_and_video/'+ cq_tag.id +'"> ' +
+                                    '<p class="mx-2 badge rounded-pill text-wrap max-w-100" style="background: #DEDEDE;">' + cq_tag.title + '</p> ' +
+                                    '</a>';
                             }
+
                         }
+
                     });
 
                     $('#cq_strength').append(cq_strength_tags_html);
